@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema for BIM Collaboration Format REST API",
+    "type": "object",
+	"definitions": {
+		"guid":{
+		   "type": "string",
+		   "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+		}
+	},
+    "properties": {
+        "reference_link": { "type": "string" },
+		"title": { "type": "string" },
+		"index": { 
+			"type": "integer", 
+			"minimum": 0
+		},
+		"label": { "$ref": "extensions.json#/definitions/topic_label" },
+		"creation_date": { "type": "string", "format": "date-time" },
+		"modified_date": { "type": "string", "format": "date-time" },
+		"assigned_to": { "$ref": "extensions.json#/definitions/user_id_type" },
+		"guid": { "$ref": "#/definitions/guid" },
+		"topic_type": { "$ref": "extensions.json#/definitions/topic_type" },
+		"topic_status": { "$ref": "extensions.json#/definitions/topic_status" },		
+    },
+	"required" : ["title", "guid"]
+}
+
+/*
+
+Can be extended with the following to support json hyper schema:
+
+"links":[
+	{
+		"rel": "document_references",
+		"href": "{guid}/document_references"
+	},
+	{
+		"rel": "bim_snippet",
+		"href": "{guid}/bim_snippet"
+	},
+	{
+		"rel": "related_topics",
+		"href": "{guid}/related_topics"
+	},
+	{
+		"rel": "comments",
+		"href": "{guid}/comments"
+	}		
+]
+
+*/
