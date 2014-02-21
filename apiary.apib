@@ -9,9 +9,28 @@ Topics related resources of the **BCF-API**
 ### List all Topics [GET]
 + Response 200 (application/json)
 
+
         [{
           "guid": "bbe8a313-d576-4c8e-b88d-065988bc855a", "title": "Wrong Window"
         }, {
           "guid": "ab770b4f-b590-4056-83a6-683c5e226a7d", "title": "Clash Architecture/Heating"
         }]
+        
+        + Schema
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "definitions": {
+        "guid":{
+        "type": "string",
+        "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+        }
+            },
+         "properties": {
+        "title": { "type": "string" },
+        "guid": { "$ref": "#/definitions/guid" },
+        },
+            "required" : ["title", "guid"]
+            }
+        
+
 
