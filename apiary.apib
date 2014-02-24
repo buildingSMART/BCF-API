@@ -31,6 +31,7 @@ Topics related resources of the **BCF-API**
         }]
         
         + Schema
+        {
         "$schema": "http://json-schema.org/draft-04/schema#",
         "type": "object",
         "definitions": {
@@ -41,7 +42,7 @@ Topics related resources of the **BCF-API**
             },
          "properties": {
         "title": { "type": "string" },
-        "guid": { "$ref": "#/definitions/guid" },
+        "guid": { "$ref": "#/definitions/guid" }
         },
         "required" : ["title", "guid"],
         "links":[
