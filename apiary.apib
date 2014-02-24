@@ -11,9 +11,23 @@ Topics related resources of the **BCF-API**
 
 
         [{
-          "guid": "bbe8a313-d576-4c8e-b88d-065988bc855a", "title": "Wrong Window"
+          "guid": "bbe8a313-d576-4c8e-b88d-065988bc855a",
+          "title": "Wrong Window",
+          "links": [
+            {"rel": "document_references","href": "bbe8a313-d576-4c8e-b88d-065988bc855a/document_references"},
+            {"rel": "bim_snippet", "href": "bbe8a313-d576-4c8e-b88d-065988bc855a/bim_snippet"},
+            {"rel": "related_topics","href": "bbe8a313-d576-4c8e-b88d-065988bc855a/related_topics"},
+            {"rel": "comments","href": "bbe8a313-d576-4c8e-b88d-065988bc855a/comments"}
+            ]
         }, {
-          "guid": "ab770b4f-b590-4056-83a6-683c5e226a7d", "title": "Clash Architecture/Heating"
+          "guid": "ab770b4f-b590-4056-83a6-683c5e226a7d",
+          "title": "Clash Architecture/Heating",
+          "links": [
+            {"rel": "document_references","href": "ab770b4f-b590-4056-83a6-683c5e226a7d/document_references"},
+            {"rel": "bim_snippet", "href": "ab770b4f-b590-4056-83a6-683c5e226a7d/bim_snippet"},
+            {"rel": "related_topics","href": "ab770b4f-b590-4056-83a6-683c5e226a7d/related_topics"},
+            {"rel": "comments","href": "ab770b4f-b590-4056-83a6-683c5e226a7d/comments"}
+            ]
         }]
         
         + Schema
@@ -29,7 +43,12 @@ Topics related resources of the **BCF-API**
         "title": { "type": "string" },
         "guid": { "$ref": "#/definitions/guid" },
         },
-            "required" : ["title", "guid"]
+        "required" : ["title", "guid"],
+        "links":[
+        {"rel": "document_references","href": "{guid}/document_references"},
+        {"rel": "bim_snippet", "href": "{guid}/bim_snippet"},
+        {"rel": "related_topics","href": "{guid}/related_topics"},
+        {"rel": "comments","href": "{guid}/comments"}]
             }
         
 
