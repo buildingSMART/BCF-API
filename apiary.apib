@@ -32,25 +32,24 @@ Topics related resources of the **BCF-API**
         
         + Schema
         {
-        "$schema": "http://json-schema.org/draft-04/schema#",
-        "type": "object",
-        "definitions": {
-        "guid":{
-        "type": "string",
-        "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
-        }
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "type": "object",
+            "definitions": {
+               "guid": {
+                "type": "string",
+                "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"}
+                 },
+            "properties": {
+                 "title": {"type": "string"},
+                 "guid": {"$ref": "#/definitions/guid"}
             },
-         "properties": {
-        "title": { "type": "string" },
-        "guid": { "$ref": "#/definitions/guid" }
-        },
-        "required" : ["title", "guid"],
-        "links":[
-        {"rel": "document_references","href": "{guid}/document_references"},
-        {"rel": "bim_snippet", "href": "{guid}/bim_snippet"},
-        {"rel": "related_topics","href": "{guid}/related_topics"},
-        {"rel": "comments","href": "{guid}/comments"}]
-            }
+            "required": ["title","guid"],
+            "links": [
+            {"rel": "document_references","href": "{guid}/document_references"},
+            {"rel": "bim_snippet","href": "{guid}/bim_snippet"},
+            {"rel": "related_topics","href": "{guid}/related_topics"},
+            {"rel": "comments","href": "{guid}/comments"}]
+        }
         
 
 
