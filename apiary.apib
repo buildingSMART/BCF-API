@@ -54,24 +54,29 @@ Topics related resources of the **BCF-API**
 
 ### Create a Topic [POST]
 
++ Request (application/json)
+
+        { 
+        "title": "PfV Architecture/Heating",
+        "guid": "cc880b4f-b650-3044-83a6-683c5e226aaa"
+        }
+
 + Response 201 (application/json)
 
-        -- JSON Schema Validations --
-
-            POST /topics
-            { "request" :
-            { "type": "object",
-          "properties": {
-            "title": { "type": "string","required": true},
-            "guid": { "type": "string" }
-          }
-        },
-        "response" :
-          { "type": "object",
-          "properties": {
-           "status": { "type": "string", "format": "alphanumeric" }
+        {"guid": "cc880b4f-b650-3044-83a6-683c5e226aaa","title": "PfV Architecture/Heating"}
+        
+        + Schema
+        {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "type": "object",
+            "definitions": {
+               "guid": {
+                "type": "string",
+                "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"}
+                 },
+            "properties": {
+                 "title": {"type": "string"},
+                 "guid": {"$ref": "#/definitions/guid"}
+            },
+            "required": ["title","guid"]
         }
-         }
-            }
-
-
