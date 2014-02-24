@@ -51,25 +51,28 @@ Topics related resources of the **BCF-API**
             {"rel": "comments","href": "{guid}/comments"}]
         }
         
-### Create a Topic [POST]
-+ Request (application/json)
 
-        { 
-        "reference_link": "http://www.buildingmart....",
-        "title": "PfV Architecture/Heating",
-        "index": 1,
-        "label": "Architecture",
-        "creation_date": "2012-04-23T18:25:43.511Z",
-        "modified_date": "2012-04-23T18:25:43.511Z",
-        "assigned_to": "karl@mustermann.de",
-        "guid": "cc880b4f-b650-3044-83a6-683c5e226aaa",
-        "topic_type": "Request",
-        "topic_status": "Open"
-        }
+### Create a Topic [POST]
 
 + Response 201 (application/json)
 
-        {"guid": "cc880b4f-b650-3044-83a6-683c5e226aaa","title": "PfV Architecture/Heating"}
-        
+        -- JSON Schema Validations --
+
+            POST /topics
+            { "request" :
+            { "type": "object",
+          "properties": {
+            "title": { "type": "string"},
+            "guid": { "type": "string" }
+          }
+        },
+         "response" :
+            { "type": "object",
+        "properties": {
+           "title": { "type": "string"},
+            "guid": { "type": "string" }
+        }
+          }
+        }
 
 
