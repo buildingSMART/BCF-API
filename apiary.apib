@@ -5,78 +5,117 @@ BCF-API is a service to exchange BCF-Topics
 # Group Topics
 Topics related resources of the **BCF-API**
 
-## Topics Collection [/topics]
+## Topics [/topics]
 ### List all Topics [GET]
 + Response 200 (application/json)
 
 
-        [{
-          "guid": "bbe8a313-d576-4c8e-b88d-065988bc855a",
-          "title": "Wrong Window",
-          "links": [
-            {"rel": "document_references","href": "bbe8a313-d576-4c8e-b88d-065988bc855a/document_references"},
-            {"rel": "bim_snippet", "href": "bbe8a313-d576-4c8e-b88d-065988bc855a/bim_snippet"},
-            {"rel": "related_topics","href": "bbe8a313-d576-4c8e-b88d-065988bc855a/related_topics"},
-            {"rel": "comments","href": "bbe8a313-d576-4c8e-b88d-065988bc855a/comments"}
-            ]
-        }, {
-          "guid": "ab770b4f-b590-4056-83a6-683c5e226a7d",
-          "title": "Clash Architecture/Heating",
-          "links": [
-            {"rel": "document_references","href": "ab770b4f-b590-4056-83a6-683c5e226a7d/document_references"},
-            {"rel": "bim_snippet", "href": "ab770b4f-b590-4056-83a6-683c5e226a7d/bim_snippet"},
-            {"rel": "related_topics","href": "ab770b4f-b590-4056-83a6-683c5e226a7d/related_topics"},
-            {"rel": "comments","href": "ab770b4f-b590-4056-83a6-683c5e226a7d/comments"}
-            ]
-        }]
+        [
+            {
+            "guid": "bbe8a313-d576-4c8e-b88d-065988bc855a",
+            "title": "Wrong Window",
+            "label": "Specfications"
+             },
+             {
+           "guid": "ab770b4f-b590-4056-83a6-683c5e226a7d",
+            "title": "PfV Architecture/Heating"
+            "label": "Architecture"
+            }
+        ]
         
-        + Schema
-        {
-            "$schema": "http://json-schema.org/draft-04/schema#",
-            "type": "object",
-            "definitions": {
-               "guid": {
-                "type": "string",
-                "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"}
-                 },
-            "properties": {
-                 "title": {"type": "string"},
-                 "guid": {"$ref": "#/definitions/guid"}
-            },
-            "required": ["title","guid"],
+## Topic [/topics/{guid}]
+A single Topic object with all its details
+
++ Parameters
+    + guid (required, string, `ab770b4f-b590-4056-83a6-683c5e226a7d`) ... `guid` of the Topic.
+    
+### Retrieve a Topic [GET]
++ Response 200 (application/json)
+            
+     + Body
+         
+            {
+            "reference_link": "http://www.buildingmart....",
+            "title": "PfV Architecture/Heating",
+            "index": 1,
+            "label": "Architecture",
+            "creation_date": "2012-04-23T18:25:43.511Z",
+            "modified_date": "2012-04-23T18:25:43.511Z",
+            "assigned_to": "karl@mustermann.de",
+            "guid": "ab770b4f-b590-4056-83a6-683c5e226a7d",
+            "topic_type": "Request",
+            "topic_status": "Open",
             "links": [
-            {"rel": "document_references","href": "{guid}/document_references"},
-            {"rel": "bim_snippet","href": "{guid}/bim_snippet"},
-            {"rel": "related_topics","href": "{guid}/related_topics"},
-            {"rel": "comments","href": "{guid}/comments"}]
-        }
-        
+            {"rel": "header", "href": "ab770b4f-b590-4056-83a6-683c5e226a7d/header"},
+            {"rel": "document_references", "href": "ab770b4f-b590-4056-83a6-683c5e226a7d/document_references"},
+            {"rel": "bim_snippet","href": "ab770b4f-b590-4056-83a6-683c5e226a7d/bim_snippet"},
+            {"rel": "related_topics", "href": "ab770b4f-b590-4056-83a6-683c5e226a7d/related_topics"},
+            {"rel": "comments","href": "ab770b4f-b590-4056-83a6-683c5e226a7d/comments"},
+            {"rel": "viewpoints","href": "ab770b4f-b590-4056-83a6-683c5e226a7d/viewpoints"},
+            {"rel": "visinfo","href": "ab770b4f-b590-4056-83a6-683c5e226a7d/visinfo"}]
+            }
 
-### Create a Topic [POST]
+## Comments [/topics/{guid}/comments]
+All Comments related to a topic
 
++ Parameters
+    + guid (required, string, `ab770b4f-b590-4056-83a6-683c5e226a7d`) ... `guid` of the Topic.
+    
+### Retrieve all Comments related to a Topic [GET]
++ Response 200 (application/json)
+            
+    + Body
+    
+            [
+            {
+            "guid": "ca440b4f-b110-4056-83d6-338c5e226a4a",
+            "verbalstatus": "Open",
+            "status": "unknown",
+            "date": "2012-04-23T18:25:44.511Z",
+            "author": "fritz@domain1.com",
+            "comment": "this is a comment",
+            "topic": {
+            "guid": "ab770b4f-b590-4056-83a6-683c5e226a7d"
+            },
+            "modifieddate": "2012-04-23T18:25:44.511Z",
+            "priority": "2"
+            },
+            {
+            "guid": "dd550b4f-b110-4056-83d6-337c5e226a22",
+            "verbalstatus": "In Progress",
+            "status": "unknown",
+            "date": "2012-04-23T18:25:44.511Z",
+            "author": "karl@mustermann.de",
+            "comment": "this is the answer to a comment",
+            "topic": {
+            "guid": "ab770b4f-b590-4056-83a6-683c5e226a7d"
+            },
+            "modifieddate": "2012-05-14T17:22:44.511Z",
+            "priority": "2"
+            }
+            ]
+
+### Create a Comment [POST]
 + Request (application/json)
 
-        { 
-        "title": "PfV Architecture/Heating",
-        "guid": "cc880b4f-b650-3044-83a6-683c5e226aaa"
-        }
+            {
+            "guid": "dd550b4f-b110-4056-83d6-337c5e226a22",
+            "verbalstatus": "In Progress",
+            "status": "unknown",
+            "date": "2012-04-23T18:25:44.511Z",
+            "author": "karl@mustermann.de",
+            "comment": "this is the answer to a comment",
+            "topic": {
+            "guid": "ab770b4f-b590-4056-83a6-683c5e226a7d"
+            },
+            "modifieddate": "2012-05-14T17:22:44.511Z",
+            "priority": "2"
+            }
 
 + Response 201 (application/json)
 
-        {"guid": "cc880b4f-b650-3044-83a6-683c5e226aaa","title": "PfV Architecture/Heating"}
-        
-        + Schema
-        {
-            "$schema": "http://json-schema.org/draft-04/schema#",
-            "type": "object",
-            "definitions": {
-               "guid": {
-                "type": "string",
-                "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"}
-                 },
-            "properties": {
-                 "title": {"type": "string"},
-                 "guid": {"$ref": "#/definitions/guid"}
-            },
-            "required": ["title","guid"]
+        { "guid": "dd550b4f-b110-4056-83d6-337c5e226a22", 
+          "comment": "this is the answer to a comment",
+          "topic": 
+          {"guid": "ab770b4f-b590-4056-83a6-683c5e226a7d"}
         }
