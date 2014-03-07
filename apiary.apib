@@ -2,11 +2,76 @@ FORMAT: 1A
 
 # BCF-API
 BCF-API is a service to exchange BCF-Topics
-# Group Topics
+
+### Group Version
+Version related resources of the **BCF-API**
+
+### topic.json [/V0.99/topic.json]
+Schema "topic.json"
+
+    
+#### Retrieve json.topic [GET]
++ Response 200 (application/json)
+            
+     + Body
+         
+            {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "description": "Schema for Topic BCF REST API",
+            "type": "object",
+            "definitions": {
+            "guid": {
+            "type": "string",
+            "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"}
+            },
+            "properties": {
+            "reference_link": {"type": "string"},
+            "title": {"type": "string"},
+            "index": {"type": "integer","minimum": 0},
+            "label": {"$ref": "extensions.json#/definitions/topic_label"},
+            "creation_date": {"type": "string","format": "date-time"},
+            "modified_date": {"type": "string","format": "date-time"},
+            "assigned_to": {"$ref": "extensions.json#/definitions/user_id_type"},
+            "guid": {"$ref": "#/definitions/guid"},"topic_type": {
+            "$ref": "extensions.json#/definitions/topic_type"},
+            "topic_status": {"$ref": "extensions.json#/definitions/topic_status"}
+            },
+            "required": ["title","guid"],
+            "links": [
+                {"rel": "document_references","href": "{guid}/document_references"},
+                {"rel": "bim_snippet","href": "{guid}/bim_snippet"},
+                {"rel": "related_topics","href": "{guid}/related_topics"},
+                {"rel": "comments","href": "{guid}/comments"}
+                    ]
+            }
+
+
+### Group Authentication
+Authentication related resources of the **BCF-API**
+
+### Group User
+User Rights and Roles related resources of the **BCF-API**
+
+### Group Team
+Team related resources of the **BCF-API**
+
+### Group Project
+Project related resources of the **BCF-API**
+
+### Group Discipline
+Descipline related resources of the **BCF-API**
+
+### Group Revision
+Revision related resources of the **BCF-API**
+
+### Group Object
+Object related resources of the **BCF-API**
+
+### Group Topics
 Topics related resources of the **BCF-API**
 
-## Topics [/topics]
-### List all Topics [GET]
+### Topics [/V0.99/teams/{id}/projects/{id}/topics]
+#### List all Topics [GET]
 + Response 200 (application/json)
 
 
@@ -23,13 +88,13 @@ Topics related resources of the **BCF-API**
             }
         ]
         
-## Topic [/topics/{guid}]
+### Topic [/V0.99/teams/{id}/projects/{id}/topics/{guid}]
 A single Topic object with all its details
 
 + Parameters
     + guid (required, string, `ab770b4f-b590-4056-83a6-683c5e226a7d`) ... `guid` of the Topic.
     
-### Retrieve a Topic [GET]
+#### Retrieve a Topic [GET]
 + Response 200 (application/json)
             
      + Body
@@ -44,24 +109,16 @@ A single Topic object with all its details
             "assigned_to": "karl@mustermann.de",
             "guid": "ab770b4f-b590-4056-83a6-683c5e226a7d",
             "topic_type": "Request",
-            "topic_status": "Open",
-            "links": [
-            {"rel": "header", "href": "ab770b4f-b590-4056-83a6-683c5e226a7d/header"},
-            {"rel": "document_references", "href": "ab770b4f-b590-4056-83a6-683c5e226a7d/document_references"},
-            {"rel": "bim_snippet","href": "ab770b4f-b590-4056-83a6-683c5e226a7d/bim_snippet"},
-            {"rel": "related_topics", "href": "ab770b4f-b590-4056-83a6-683c5e226a7d/related_topics"},
-            {"rel": "comments","href": "ab770b4f-b590-4056-83a6-683c5e226a7d/comments"},
-            {"rel": "viewpoints","href": "ab770b4f-b590-4056-83a6-683c5e226a7d/viewpoints"},
-            {"rel": "visinfo","href": "ab770b4f-b590-4056-83a6-683c5e226a7d/visinfo"}]
+            "topic_status": "Open"
             }
 
-## Comments [/topics/{guid}/comments]
+### Comments [/V0.99/teams/{id}/projects/{id}/topics/{guid}/comments]
 All Comments related to a topic
 
 + Parameters
     + guid (required, string, `ab770b4f-b590-4056-83a6-683c5e226a7d`) ... `guid` of the Topic.
     
-### Retrieve all Comments related to a Topic [GET]
+#### Retrieve all Comments related to a Topic [GET]
 + Response 200 (application/json)
             
     + Body
@@ -119,3 +176,4 @@ All Comments related to a topic
           "topic": 
           {"guid": "ab770b4f-b590-4056-83a6-683c5e226a7d"}
         }
+        
