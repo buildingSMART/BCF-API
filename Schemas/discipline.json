@@ -1,0 +1,17 @@
+        {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "type": "object",
+            "properties": {
+                 "id": {"type": "string"},
+                 "name": {"type": "string"},
+                 "shortDescr": {"type": "string"},
+                 "creator": {"$ref": "#/definitions/guid"},
+                 "created": { "type": "string", "format": "date-time" },
+                 "changed": { "type": "string", "format": "date-time" },
+	"projectID": {"type": "string"}    
+            },
+            "required": ["id","name","creator","created","projectId"],
+            "links": [
+            {"rel": "revisions","href": "{id}/revisions"}
+	       ]
+             }
