@@ -1,0 +1,23 @@
+        {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "type": "object",
+               "definitions": {
+               "guid": {
+                "type": "string",
+                "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"}
+                 },
+            "properties": {
+                 "id": {"type": "string"},
+                 "name": {"type": "string"},
+                 "shortDescr": {"type": "string"},
+                 "creator": {"$ref": "#/definitions/guid"},
+                 "created": { "type": "string", "format": "date-time" },
+                 "changed": { "type": "string", "format": "date-time" },
+	"teamSlug": {"type": "string"}    
+            },
+            "required": ["id","name","creator","created","teamSlug"],
+            "links": [
+            {"rel": "disciplines","href": "{id}/disciplines"},
+            {"rel": "thumbnail", "href": "{id}/thumbnail","mediaType": "image/*"}
+	       ]
+             }

@@ -1,0 +1,23 @@
+        {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "type": "object",
+               "definitions": {
+               "guid": {
+                "type": "string",
+                "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"}
+                 },
+            "properties": {
+                 "slug": {"type": "string"},
+                 "name": {"type": "string"},
+                 "displayname": {"type": "string"},
+                 "owner": {"$ref": "#/definitions/guid"},
+                 "totalStorage": {"type": "integer"},
+	"storageStats": {"type": "integer"},
+	"status": {"type": "string"},
+	"projectCreate": {"type": "boolean"}         
+            },
+            "required": ["slug","name","displayname","owner","totalStorage"],
+            "links": [
+            {"rel": "projects","href": "{slug}/projects"}
+	       ]
+        }
