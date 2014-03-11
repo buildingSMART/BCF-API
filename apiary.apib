@@ -6,11 +6,42 @@ BCF-API is a service to exchange BCF-Topics
 ### Group Version
 Version related resources of the **BCF-API**
 
-### topic.json [/V0.99/topic.json]
-Schema "topic.json"
+### Schemas [/V0.99/schemas]
+List all schemas
+
+#### Link Schema [GET]
++ Response 200 (application/json)
+         
+            {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "description": "Link schema BCF REST API",
+            "links": [
+                {"rel": "topic", "href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/topic.json"},
+                {"rel": "topic/bim_snippet","href": "href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/bim_snippet.json"},
+                {"rel": "topic/document_references","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/document_references.json"},
+                {"rel": "topic/related_topics","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/related_topics.json"},
+                {"rel": "topic/comments","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/comments.json"},
+                {"rel": "topic/viewpoints","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/viewpoints.json"},
+                {"rel": "topic/visinfo","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/visinfo.json"},
+                {"rel": "topic/components","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/components.json"}
+                {"rel": "team","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/team.json"},
+                {"rel": "team/project","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/project.json"},
+                {"rel": "team/project/thumbnail","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/thumbnail.json"},
+                {"rel": "team/project/discipline","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/discipline.json"},
+                {"rel": "team/project/discipline/revision","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/revision.json"},
+                {"rel": "team/project/discipline/revision/object","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/object.json"}
+                    ]
+            }
+
+
+### Schema [/V0.99/schemas/{rel}]
+A single schema
+
++ Parameters
+    + rel (required, string, `topic`) ... `relation` of the schema.
 
     
-#### Retrieve json.topic [GET]
+#### Retrieve schema [GET]
 + Response 200 (application/json)
             
      + Body
@@ -44,6 +75,7 @@ Schema "topic.json"
                 {"rel": "comments","href": "{guid}/comments"}
                     ]
             }
+
 
 
 ### Group Authentication
