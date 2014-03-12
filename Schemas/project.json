@@ -9,11 +9,11 @@
             "properties": {
                  "id": {"type": "string"},
                  "name": {"type": "string"},
-                 "shortDescr": {"type": "string"},
+                 "short_descr": {"type": "string"},
                  "creator": {"$ref": "#/definitions/guid"},
                  "created": { "type": "string", "format": "date-time" },
                  "changed": { "type": "string", "format": "date-time" },
-	"teamSlug": {"type": "string"}    
+	"team_slug": {"type": "string"}    
             },
             "required": ["id","name","creator","created","teamSlug"],
             "links": [
