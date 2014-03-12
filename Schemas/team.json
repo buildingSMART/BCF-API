@@ -9,14 +9,14 @@
             "properties": {
                  "slug": {"type": "string"},
                  "name": {"type": "string"},
-                 "displayname": {"type": "string"},
+                 "display_name": {"type": "string"},
                  "owner": {"$ref": "#/definitions/guid"},
-                 "totalStorage": {"type": "integer"},
-	"storageStats": {"type": "integer"},
+                 "total_storage": {"type": "integer"},
+	"storage_stats": {"type": "integer"},
 	"status": {"type": "string"},
-	"projectCreate": {"type": "boolean"}         
+	"project_create": {"type": "boolean"}         
             },
-            "required": ["slug","name","displayname","owner","totalStorage"],
+            "required": ["slug","name","display_name","owner","total_storage"],
             "links": [
             {"rel": "projects","href": "{slug}/projects"}
 	       ]
