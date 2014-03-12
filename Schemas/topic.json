@@ -9,35 +9,32 @@
 		}
 	},
     "properties": {
-        "reference_link": { "type": "string" },
+        		"guid": { "$ref": "#/definitions/guid" },
+		"topic_type": { "$ref": "extensions.json#/definitions/topic_type" },
+		"topic_status": { "$ref": "extensions.json#/definitions/topic_status" },	
+                                    "reference_link": { "type": "string" },
 		"title": { "type": "string" },
-		"index": { 
-			"type": "integer", 
-			"minimum": 0
-		},
+		"index": { "type": "integer", "minimum": 0},
 		"label": { "$ref": "extensions.json#/definitions/topic_label" },
 		"creation_date": { "type": "string", "format": "date-time" },
 		"modified_date": { "type": "string", "format": "date-time" },
 		"assigned_to": { "$ref": "extensions.json#/definitions/user_id_type" },
-		"guid": { "$ref": "#/definitions/guid" },
-		"topic_type": { "$ref": "extensions.json#/definitions/topic_type" },
-		"topic_status": { "$ref": "extensions.json#/definitions/topic_status" },		
+		"bim_snippet": {
+            			"type": "object",
+            				"properties": {
+                					"snippet_type": { "$ref": "extensions.json#/definitions/snippet_type" },
+               					 "is_external": {"type": "boolean"},
+               					 "reference": { "type": "string" },
+                 					 "reference_schema": { "type": "string" }
+                                  				     }
+                           		         }
+	
     },
-	"required" : ["title", "guid"]
-}
-
-/*
-
-Can be extended with the following to support json hyper schema:
-
+	"required" : ["title", "guid"],
 "links":[
 	{
 		"rel": "document_references",
 		"href": "{guid}/document_references"
-	},
-	{
-		"rel": "bim_snippet",
-		"href": "{guid}/bim_snippet"
 	},
 	{
 		"rel": "related_topics",
@@ -46,7 +43,11 @@ Can be extended with the following to support json hyper schema:
 	{
 		"rel": "comments",
 		"href": "{guid}/comments"
+	},
+	{
+		"rel": "viewpoints",
+		"href": "{guid}/viewpoints"
 	}		
 ]
+}
 
-*/
