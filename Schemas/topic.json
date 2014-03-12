@@ -32,6 +32,11 @@
     },
 	"required" : ["title", "guid"],
 "links":[
+	
+	{
+		"rel": "header",
+		"href": "{guid}/header"
+	},
 	{
 		"rel": "document_references",
 		"href": "{guid}/document_references"
