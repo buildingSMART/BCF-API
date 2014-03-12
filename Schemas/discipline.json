@@ -4,11 +4,11 @@
             "properties": {
                  "id": {"type": "string"},
                  "name": {"type": "string"},
-                 "shortDescr": {"type": "string"},
+                 "short_descr": {"type": "string"},
                  "creator": {"$ref": "#/definitions/guid"},
                  "created": { "type": "string", "format": "date-time" },
                  "changed": { "type": "string", "format": "date-time" },
-	"projectID": {"type": "string"}    
+	"project_id": {"type": "string"}    
             },
             "required": ["id","name","creator","created","projectId"],
             "links": [
