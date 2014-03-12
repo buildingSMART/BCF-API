@@ -7,10 +7,10 @@
             "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"}},
     "properties": {
         "guid": {"$ref": "#/definitions/guid"},
-        "OrthogonalCamera": {
+        "orthogonal_camera": {
             "type": "object",
             "properties": {
-                "CameraViewPoint": {
+                "camera_view_point": {
                     "type": "object",
                     "properties": {
                         "x": {"type": "number"},
@@ -18,7 +18,7 @@
                         "z": {"type": "number"}
                     }
                 },
-                "CameraDirection": {
+                "camera_direction": {
                     "type": "object",
                     "properties": {
                         "x": {"type": "number"},
@@ -26,7 +26,7 @@
                         "z": {"type": "number"}
                     }
                 },
-                "CameraUpVector": {
+                "camera_up_vector": {
                     "type": "object",
                     "properties": {
                         "x": {"type": "number"},
@@ -34,13 +34,13 @@
                         "z": {"type": "number"}
                     }
                 },
-                "ViewToWorldScale": {"type": "number"}
+                "view_to_world_scale": {"type": "number"}
             }
         },
-        "PerspectiveCamera": {
+        "perspective_camera": {
             "type": "object",
             "properties": {
-                "CameraViewPoint": {
+                "camera_viewPoint": {
                     "type": "object",
                     "properties": {
                         "x": {"type": "number"},
@@ -48,7 +48,7 @@
                         "z": {"type": "number"}
                     }
                 },
-                "CameraDirection": {
+                "camera_direction": {
                     "type": "object",
                     "properties": {
                         "x": {"type": "number"},
@@ -56,7 +56,7 @@
                         "z": {"type": "number"}
                     }
                 },
-                "CameraUpVector": {
+                "camera_up_vector": {
                     "type": "object",
                     "properties": {
                         "x": {"type": "number"},
@@ -64,8 +64,46 @@
                         "z": {"type": "number"}
                     }
                 },
-                "FieldOfView": {"type": "number", "minimum": 45, "maximum": 60}
-            }
+                "field_of_view": {"type": "number", "minimum": 45, "maximum": 60}
+            },
+           "lines": {
+             "type": "object",
+             "line": {
+            "type": "array",
+            "items": [
+                {"type": "object",
+                    "properties": {
+                        "start_point": {"type": "object",
+                            "properties": {"x": {"type": "number"},"y": {"type": "number"},"z": {"type": "number"}}
+                        },
+                        "end_point": {
+                            "type": "object",
+                            "properties": {"x": {"type": "number"},"y": {"type": "number"},"z": {"type": "number"}}
+                        }
+                    }
+                }
+            ]
+        }
+    },
+             "clipping_planes": {
+              "type": "object",
+              "clipping_plane": {
+              "type": "array",
+              "items": [
+                {"type": "object",
+                    "properties": {
+                        "location": {"type": "object",
+                            "properties": {"x": {"type": "number"},"y": {"type": "number"},"z": {"type": "number"}}
+                        },
+                        "direction": {
+                            "type": "object",
+                            "properties": {"x": {"type": "number"},"y": {"type": "number"},"z": {"type": "number"}}
+                        }
+                    }
+                }
+            ]
+        }
+    }
         },
         "required": ["guid"],
         "links": [
