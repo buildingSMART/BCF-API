@@ -10,7 +10,7 @@
                  "changed": { "type": "string", "format": "date-time" },
 	"project_id": {"type": "string"}    
             },
-            "required": ["id","name","creator","created","projectId"],
+            "required": ["id","name","creator","created","project_id"],
             "links": [
             {"rel": "revisions","href": "{id}/revisions"}
 	       ]
