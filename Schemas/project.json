@@ -15,7 +15,7 @@
                  "changed": { "type": "string", "format": "date-time" },
 	"team_slug": {"type": "string"}    
             },
-            "required": ["id","name","creator","created","teamSlug"],
+            "required": ["id","name","creator","created","team_slug"],
             "links": [
             {"rel": "disciplines","href": "{id}/disciplines"},
             {"rel": "thumbnail", "href": "{id}/thumbnail","mediaType": "image/*"}
