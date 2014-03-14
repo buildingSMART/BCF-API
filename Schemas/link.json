@@ -1,0 +1,18 @@
+            {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "description": "Link schema BCF REST API",
+            "links": [
+                {"rel": "topic", "href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/topic.json"},
+                {"rel": "topic/header", "href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/header.json"},
+                {"rel": "topic/document_references","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/document_references.json"},
+                {"rel": "topic/related_topics","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/related_topics.json"},
+                {"rel": "topic/comments","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/comments.json"},
+                {"rel": "topic/viewpoints","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/viewpoints.json"},
+                {"rel": "topic/components","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/components.json"},
+                {"rel": "team","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/team.json"},
+                {"rel": "team/project","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/project.json"},
+                {"rel": "team/project/discipline","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/discipline.json"},
+                {"rel": "team/project/discipline/revision","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/revision.json"},
+                {"rel": "team/project/discipline/revision/object","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/object.json"}
+                    ]
+            }
