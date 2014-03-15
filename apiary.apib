@@ -17,16 +17,14 @@ List all schemas
             "description": "Link schema BCF REST API",
             "links": [
                 {"rel": "topic", "href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/topic.json"},
-                {"rel": "topic/bim_snippet","href": "href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/bim_snippet.json"},
+                {"rel": "topic/header", "href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/header.json"},
                 {"rel": "topic/document_references","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/document_references.json"},
                 {"rel": "topic/related_topics","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/related_topics.json"},
                 {"rel": "topic/comments","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/comments.json"},
                 {"rel": "topic/viewpoints","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/viewpoints.json"},
-                {"rel": "topic/visinfo","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/visinfo.json"},
-                {"rel": "topic/components","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/components.json"}
+                {"rel": "topic/components","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/components.json"},
                 {"rel": "team","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/team.json"},
                 {"rel": "team/project","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/project.json"},
-                {"rel": "team/project/thumbnail","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/thumbnail.json"},
                 {"rel": "team/project/discipline","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/discipline.json"},
                 {"rel": "team/project/discipline/revision","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/revision.json"},
                 {"rel": "team/project/discipline/revision/object","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/object.json"}
@@ -102,7 +100,13 @@ Object related resources of the **BCF-API**
 ### Group Topics
 Topics related resources of the **BCF-API**
 
-### Topics [/V0.99/teams/{id}/projects/{id}/topics]
+### Topics [/V0.99/teams/{slug}/projects/{id}/topics]
+
++ Parameters
+
+    + slug (required, string `best-company`) ... `slug` of the Team.
+    + id (required, string, `0d2ce2cc-3588-45d6-a59a-f6b89ebed34e`) ... `id` of the Project.
+
 #### List all Topics [GET]
 + Response 200 (application/json)
 
@@ -120,10 +124,13 @@ Topics related resources of the **BCF-API**
             }
         ]
         
-### Topic [/V0.99/teams/{id}/projects/{id}/topics/{guid}]
+### Topic [/V0.99/teams/{slug}/projects/{id}/topics/{guid}]
 A single Topic object with all its details
 
 + Parameters
+
+    + slug (required, string `best-company`) ... `slug` of the Team.
+    + id (required, string, `0d2ce2cc-3588-45d6-a59a-f6b89ebed34e`) ... `id` of the Project.
     + guid (required, string, `ab770b4f-b590-4056-83a6-683c5e226a7d`) ... `guid` of the Topic.
     
 #### Retrieve a Topic [GET]
@@ -144,10 +151,13 @@ A single Topic object with all its details
             "topic_status": "Open"
             }
 
-### Comments [/V0.99/teams/{id}/projects/{id}/topics/{guid}/comments]
+### Comments [/V0.99/teams/{slug}/projects/{id}/topics/{guid}/comments]
 All Comments related to a topic
 
 + Parameters
+
+    + slug (required, string `best-company`) ... `slug` of the Team.
+    + id (required, string, `0d2ce2cc-3588-45d6-a59a-f6b89ebed34e`) ... `id` of the Project.
     + guid (required, string, `ab770b4f-b590-4056-83a6-683c5e226a7d`) ... `guid` of the Topic.
     
 #### Retrieve all Comments related to a Topic [GET]
@@ -208,4 +218,5 @@ All Comments related to a topic
           "topic": 
           {"guid": "ab770b4f-b590-4056-83a6-683c5e226a7d"}
         }
+        
         
