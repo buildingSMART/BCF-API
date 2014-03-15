@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "definitions": {
+        "guid": {
+            "type": "string",
+            "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"}
+    },
+    "properties": {
+        "revision_id": {"type": "string"},
+        "ifc_project": {"type": "string"},
+        "ifc_spatial_structure_element": {"type": "string"},
+        "file_name": {"type": "string"},
+        "date": {"type": "string", "format": "date-time"},
+         "reference": {"type": "string"}
+    },
+    "required": ["revision_id"]
+}
