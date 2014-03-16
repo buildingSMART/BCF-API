@@ -1,5 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Header",
+    "description": "Schema for Header, BCF REST API. A topic can be related to multiple revisions.",
     "type": "object",
     "definitions": {
         "guid": {
@@ -16,3 +18,8 @@
     },
     "required": ["revision_id"]
 }
+
+
+/*
+"revision_id" is not defined in markup.xsd topic/header
+*/
