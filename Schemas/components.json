@@ -1,5 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Component",
+    "description": "Schema for Component, BCF REST API. A viewpoint can have multiple components.",
     "type": "object",
     "definitions": {
         "guid": {
@@ -16,3 +18,8 @@
     },
     "required": ["guid"]
 }
+
+
+/*
+"guid"  for component is not jet defined in visinfo.xsd
+*/
