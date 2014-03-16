@@ -1,5 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
+     "title": "Viewpoints",
+    "description": "Schema for viewpoints. A topic can have multiple viewpoints in BCF REST API.",
     "type": "object",
     "definitions": {
         "guid": {
