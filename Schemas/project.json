@@ -1,5 +1,7 @@
         {
             "$schema": "http://json-schema.org/draft-04/schema#",
+            "title": "Project",
+             "description": "Schema for project, BCF REST API. A team can have multiple projects.",
             "type": "object",
                "definitions": {
                "guid": {
