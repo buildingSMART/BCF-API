@@ -1,6 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Schema for BIM Collaboration Format REST API",
+    "title": "Topic",
+    "description": "Schema for Topic, BCF REST API",
     "type": "object",
 	"definitions": {
 		"guid":{
