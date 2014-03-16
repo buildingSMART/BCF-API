@@ -1,6 +1,7 @@
             {
             "$schema": "http://json-schema.org/draft-04/schema#",
-            "description": "Link schema BCF REST API",
+            "title": "Link",
+            "description": "Link schema. Links to available schemas in BCF REST API.",
             "links": [
                 {"rel": "topic", "href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/topic.json"},
                 {"rel": "topic/header", "href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/header.json"},
