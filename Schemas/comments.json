@@ -1,5 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Comment",
+    "description": "Schema for Comment, BCF REST API. A topic can have multiple comments.",
     "type": "object",
     "definitions": {
         "guid": {
