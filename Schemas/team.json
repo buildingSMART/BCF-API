@@ -1,5 +1,7 @@
         {
             "$schema": "http://json-schema.org/draft-04/schema#",
+            "title": "Team",
+             "description": "Schema for team. A team is the root node in BCF REST API .",
             "type": "object",
                "definitions": {
                "guid": {
