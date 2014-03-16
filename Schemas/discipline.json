@@ -1,5 +1,7 @@
         {
             "$schema": "http://json-schema.org/draft-04/schema#",
+            "title": "Discipline",
+            "description": "Schema for Discipline, BCF REST API. A project can have multiple disciplines.",
             "type": "object",
             "properties": {
                  "id": {"type": "string"},
