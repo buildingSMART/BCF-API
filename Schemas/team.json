@@ -9,17 +9,40 @@
                 "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"}
                  },
             "properties": {
+                 "guid": {"$ref": "#/definitions/guid"},
                  "slug": {"type": "string"},
                  "name": {"type": "string"},
                  "display_name": {"type": "string"},
                  "owner": {"$ref": "#/definitions/guid"},
                  "total_storage": {"type": "integer"},
-	"storage_stats": {"type": "integer"},
+	"storage_stats": {
+            		 "type": "object",
+             			"properties": {
+               				 "used_space": {"type": "integer"},
+               				  "number_of_projects": { "type": "integer" },
+                 				  "number_of_members": { "type": "integer" },
+                 				  "total_space": { "type": "integer" },
+                 				  "total_number_of_projects": { "type": "integer" },
+                 				  "total_number_of_members": { "type": "integer" }
+                              			     }
+                          	            },
 	"status": {"type": "string"},
-	"project_create": {"type": "boolean"}         
+	"public": {
+            		 "type": "object",
+             			"properties": {
+                 				  "read": { "type": "boolean" },
+                 				  "write": { "type": "boolean" }
+                              			     }
+                                 },
+	"rights": {
+            		 "type": "object",
+             			"properties": {
+                 				  "project_create": { "type": "boolean" }
+                              			     }
+                                  }     
             },
-            "required": ["slug","name","display_name","owner","total_storage"],
+            "required": ["guid","name","display_name","owner","total_storage"],
             "links": [
-            {"rel": "projects","href": "{slug}/projects"}
+            {"rel": "projects","href": "{guid}/projects"}
 	       ]
         }
