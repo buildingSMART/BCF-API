@@ -9,17 +9,26 @@
                 "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"}
                  },
             "properties": {
-                 "id": {"type": "string"},
+                 "guid": {"$ref": "#/definitions/guid"},
                  "name": {"type": "string"},
                  "short_descr": {"type": "string"},
                  "creator": {"$ref": "#/definitions/guid"},
                  "created": { "type": "string", "format": "date-time" },
                  "changed": { "type": "string", "format": "date-time" },
-	"team_slug": {"type": "string"}    
+	"team_guid": {"type": "string"},
+	"rights": {
+             		"type": "object",
+             			 "properties": {
+                 				 "project_admin": { "type": "boolean" },
+                                                                         "project_delete": { "type": "boolean" },
+                                                                         "project_edit": { "type": "boolean" },
+                                                                         "discipline_create": { "type": "boolean" }
+                               			      }
+                                  } 
             },
-            "required": ["id","name","creator","created","team_slug"],
+            "required": ["guid","name","team_guid"],
             "links": [
-            {"rel": "disciplines","href": "{id}/disciplines"},
-            {"rel": "thumbnail", "href": "{id}/thumbnail","mediaType": "image/*"}
+            {"rel": "disciplines","href": "{guid}/disciplines"},
+            {"rel": "thumbnail", "href": "{guid}/thumbnail","mediaType": "image/*"}
 	       ]
              }
