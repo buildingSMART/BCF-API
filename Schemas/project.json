@@ -24,7 +24,27 @@
                                                                          "project_edit": { "type": "boolean" },
                                                                          "discipline_create": { "type": "boolean" }
                                			      }
-                                  } 
+                                  } ,
+                "disciplines": {
+             		 "type": "array",
+             			 "items": [
+            	           		       {"type": "object",
+             	                			"properties": {
+                                      			"guid": {"$ref": "#/definitions/guid"},
+		   			"name": {"type": "string"},
+		  			"rights": {
+             		          			"type": "object",
+             			 		          "properties": {
+                 				 		"revision_add": { "type": "boolean" },
+                                                                        		"revision_delete": { "type": "boolean" },
+                                                                         		"revision_edit": { "type": "boolean" },
+                                                                         		"revision_view": { "type": "boolean" }
+                               			                		                }
+                                                          			}                            
+                                                        		     }
+                              				}
+                                                                        ]
+                                                                }
             },
             "required": ["guid","name","team_guid"],
             "links": [
