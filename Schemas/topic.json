@@ -35,8 +35,8 @@
 "links":[
 	
 	{
-		"rel": "header",
-		"href": "{guid}/header"
+		"rel": "revisions",
+		"href": "{guid}/revisions"
 	},
 	{
 		"rel": "document_references",
