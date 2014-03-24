@@ -19,5 +19,5 @@
         "date": {"type": "string", "format": "date-time"},
         "reference": {"type": "string"}
     },
-    "required": ["guid", "]
+    "required": ["guid", "discipline_guid"]
 }
