@@ -9,26 +9,15 @@
             "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"}
     },
     "properties": {
-        "revision_guid": {"$ref": "#/definitions/guid"},
-        "topology_guid": {"$ref": "#/definitions/guid"},
-        "descipline_guid": {"$ref": "#/definitions/guid"},
-        "descipline_name": {"type": "string"},
-        "disciplines_revision": {
-              		"type": "array",
-            		  "items": [
-                	         		    {"type": "object",
-             	 		     "properties": {
-                                      	     "name_guid": {"$ref": "#/definitions/guid"},
-		   	      "name": {"type": "string"}
-                                    	                            }
-                                                           }
-                                                     ]
-                                  },
+        "guid": {"$ref": "#/definitions/guid"},
+        "topology": {"$ref": "#/definitions/guid"},
+        "discipline_guid": {"$ref": "#/definitions/guid"},
+        "discipline_name": {"type": "string"},
         "ifc_project": {"type": "string"},
         "ifc_spatial_structure_element": {"type": "string"},
         "file_name": {"type": "string"},
         "date": {"type": "string", "format": "date-time"},
         "reference": {"type": "string"}
     },
-    "required": ["revision_guid"]
+    "required": ["guid", "]
 }
