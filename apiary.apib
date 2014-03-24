@@ -16,18 +16,17 @@ List all schemas
             "$schema": "http://json-schema.org/draft-04/schema#",
             "description": "Link schema BCF REST API",
             "links": [
-                {"rel": "topic", "href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/topic.json"},
-                {"rel": "topic/header", "href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/header.json"},
-                {"rel": "topic/document_references","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/document_references.json"},
-                {"rel": "topic/related_topics","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/related_topics.json"},
-                {"rel": "topic/comments","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/comments.json"},
-                {"rel": "topic/viewpoints","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/viewpoints.json"},
-                {"rel": "topic/components","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/components.json"},
-                {"rel": "team","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/team.json"},
-                {"rel": "team/project","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/project.json"},
-                {"rel": "team/project/discipline","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/discipline.json"},
-                {"rel": "team/project/discipline/revision","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/revision.json"},
-                {"rel": "team/project/discipline/revision/object","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/object.json"}
+                {"rel": "teams","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/team.json"},
+                {"rel": "teams/projects","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/project.json"},
+                {"rel": "teams/projects/disciplines","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/discipline.json"},
+                {"rel": "teams/projects/disciplines/revisions","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/revision.json"},
+                {"rel": "teams/projects/topic", "href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/topic.json"},
+                {"rel": "teams/projects/topics/revisions", "href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/revision.json"},
+                {"rel": "teams/projects/topics/document_references","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/document_reference.json"},
+                {"rel": "teams/projects/topics/related_topics","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/related_topic.json"},
+                {"rel": "teams/projects/topics/comments","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/comment.json"},
+                {"rel": "teams/projects/topics/viewpoints","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/viewpoint.json"},
+                {"rel": "teams/projects/topics/viewpoints/components","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/component.json"}
                     ]
             }
 
@@ -46,34 +45,46 @@ A single schema
          
             {
             "$schema": "http://json-schema.org/draft-04/schema#",
-            "description": "Schema for Topic BCF REST API",
+            "title": "Topic",
+            "description": "Schema for Topic, BCF REST API",
             "type": "object",
             "definitions": {
-            "guid": {
+            "guid":{
             "type": "string",
-            "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"}
+            "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+            }
             },
             "properties": {
-            "reference_link": {"type": "string"},
-            "title": {"type": "string"},
-            "index": {"type": "integer","minimum": 0},
-            "label": {"$ref": "extensions.json#/definitions/topic_label"},
-            "creation_date": {"type": "string","format": "date-time"},
-            "modified_date": {"type": "string","format": "date-time"},
-            "assigned_to": {"$ref": "extensions.json#/definitions/user_id_type"},
-            "guid": {"$ref": "#/definitions/guid"},"topic_type": {
-            "$ref": "extensions.json#/definitions/topic_type"},
-            "topic_status": {"$ref": "extensions.json#/definitions/topic_status"}
-            },
-            "required": ["title","guid"],
-            "links": [
-                {"rel": "document_references","href": "{guid}/document_references"},
-                {"rel": "bim_snippet","href": "{guid}/bim_snippet"},
-                {"rel": "related_topics","href": "{guid}/related_topics"},
-                {"rel": "comments","href": "{guid}/comments"}
-                    ]
-            }
+            "guid": {"$ref": "#/definitions/guid" },
+            "topic_type": {"$ref": "extensions.json#/definitions/topic_type" },
+            "topic_status": {"$ref": "extensions.json#/definitions/topic_status" },
+            "reference_link": { "type": "string" },
+            "title": { "type": "string" },
+            "index": { "type": "integer", "minimum": 0},
+            "label": { "$ref": "extensions.json#/definitions/topic_label" },
+            "creation_date": { "type": "string", "format": "date-time" },
+            "modified_date": { "type": "string", "format": "date-time" },
+            "assigned_to": { "$ref": "extensions.json#/definitions/user_id_type" },
+            "bim_snippet": {
+             "type": "object",
+                "properties": {
+                    "snippet_type": {"$ref": "extensions.json#/definitions/snippet_type" },
+                    "is_external": {"type": "boolean"},
+                    "reference": { "type": "string" },
+                    "reference_schema": { "type": "string" }
+                                   }
+                            }
 
+                 },
+                "required" : ["title", "guid"],
+                "links":[
+                    {"rel": "revisions","href": "{guid}/revisions"},
+                    {"rel": "document_references","href": "{guid}/document_references"},
+                    {"rel": "related_topics","href": "{guid}/related_topics"},
+                    {"rel": "comments","href": "{guid}/comments"},
+                    {"rel": "viewpoints","href": "{guid}/viewpoints"}
+                ]
+            }
 
 
 ### Group Authentication
@@ -100,12 +111,12 @@ Object related resources of the **BCF-API**
 ### Group Topics
 Topics related resources of the **BCF-API**
 
-### Topics [/V0.99/teams/{slug}/projects/{id}/topics]
+### Topics [/V0.99/teams/{guid}/projects/{guid}/topics]
+### Topics [/V0.99/projects/{guid}/topics]
 
 + Parameters
 
-    + slug (required, string `best-company`) ... `slug` of the Team.
-    + id (required, string, `0d2ce2cc-3588-45d6-a59a-f6b89ebed34e`) ... `id` of the Project.
+    + guid (required, string, `0d2ce2cc-3588-45d6-a59a-f6b89ebed34e`) ... `guid` of the Project.
 
 #### List all Topics [GET]
 + Response 200 (application/json)
@@ -124,13 +135,12 @@ Topics related resources of the **BCF-API**
             }
         ]
         
-### Topic [/V0.99/teams/{slug}/projects/{id}/topics/{guid}]
+### Topic [/V0.99/teams/{guid}/projects/{guid}/topics/{guid}]
+### Topic [/V0.99/topics/{guid}]
 A single Topic object with all its details
 
 + Parameters
 
-    + slug (required, string `best-company`) ... `slug` of the Team.
-    + id (required, string, `0d2ce2cc-3588-45d6-a59a-f6b89ebed34e`) ... `id` of the Project.
     + guid (required, string, `ab770b4f-b590-4056-83a6-683c5e226a7d`) ... `guid` of the Topic.
     
 #### Retrieve a Topic [GET]
@@ -151,13 +161,12 @@ A single Topic object with all its details
             "topic_status": "Open"
             }
 
-### Comments [/V0.99/teams/{slug}/projects/{id}/topics/{guid}/comments]
+### Comments [/V0.99/teams/{guid}/projects/{guid}/topics/{guid}/comments]
+### Comments [/V0.99/topics/{guid}/comments]
 All Comments related to a topic
 
 + Parameters
 
-    + slug (required, string `best-company`) ... `slug` of the Team.
-    + id (required, string, `0d2ce2cc-3588-45d6-a59a-f6b89ebed34e`) ... `id` of the Project.
     + guid (required, string, `ab770b4f-b590-4056-83a6-683c5e226a7d`) ... `guid` of the Topic.
     
 #### Retrieve all Comments related to a Topic [GET]
