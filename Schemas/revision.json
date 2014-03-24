@@ -13,6 +13,17 @@
         "topology": {"$ref": "#/definitions/guid"},
         "discipline_guid": {"$ref": "#/definitions/guid"},
         "discipline_name": {"type": "string"},
+        "disciplines_revision": {
+              		"type": "array",
+            		  "items": [
+                	         		    {"type": "object",
+             	 		     "properties": {
+                                      	     "name_guid": {"$ref": "#/definitions/guid"},
+		   	     "name": {"type": "string"}
+                                    	                            }
+                                                           }
+                                                     ]
+                                  },
         "ifc_project": {"type": "string"},
         "ifc_spatial_structure_element": {"type": "string"},
         "file_name": {"type": "string"},
