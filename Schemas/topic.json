@@ -16,7 +16,10 @@
                                     "reference_link": { "type": "string" },
 		"title": { "type": "string" },
 		"index": { "type": "integer", "minimum": 0},
-		"label": { "$ref": "extensions.json#/definitions/topic_label" },
+		"label": {
+                		         "type": "array",
+               			 "items": {"type": "extensions.json#/definitions/topic_label"}
+             		               },
 		"creation_date": { "type": "string", "format": "date-time" },
 		"modified_date": { "type": "string", "format": "date-time" },
 		"assigned_to": { "$ref": "extensions.json#/definitions/user_id_type" },
