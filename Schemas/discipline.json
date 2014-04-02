@@ -1,7 +1,7 @@
         {
             "$schema": "http://json-schema.org/draft-04/schema#",
             "title": "Discipline",
-            "description": "Schema for Discipline, BCF REST API. A project can have multiple disciplines.",
+            "description": "Schema for Discipline, BCF REST API. A division can have multiple disciplines.",
             "type": "object",
             "definitions": {
                "guid": {
@@ -15,20 +15,11 @@
                  "creator": {"$ref": "#/definitions/guid"},
                  "created": { "type": "string", "format": "date-time" },
                  "changed": { "type": "string", "format": "date-time" },
-                 "project_guid": {"$ref": "#/definitions/guid"},
-                 "rights": {
-             		          "type": "object",
-             			 "properties": {
-                 				 "revision_add": { "type": "boolean" },
-                                                                         "revision_delete": { "type": "boolean" },
-                                                                         "revision_edit": { "type": "boolean" },
-                                                                         "revision_view": { "type": "boolean" }
-                               			      }
-                                                       } 
+                 "division_guid": {"$ref": "#/definitions/guid"}
             },
-            "required": ["guid","name","project_guid"],
+            "required": ["guid","name","division_guid"],
             "links": [
-            {"rel": "revisions","href": "{guid}/revisions"}
+            {"rel": "topics","href": "{guid}/topics"}
 	       ]
              }
 
