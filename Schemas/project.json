@@ -22,10 +22,10 @@
                  				 "project_admin": { "type": "boolean" },
                                                                          "project_delete": { "type": "boolean" },
                                                                          "project_edit": { "type": "boolean" },
-                                                                         "division_create": { "type": "boolean" }
+                                                                         "domain_create": { "type": "boolean" }
                                			      }
                                   } ,
-                "divisions": {
+                "domains": {
              		 "type": "array",
              			 "items": [
             	           		       {"type": "object",
@@ -48,7 +48,7 @@
             },
             "required": ["guid","name","team_guid"],
             "links": [
-            {"rel": "divisions","href": "{guid}/divisions"},
+            {"rel": "domains","href": "{guid}/domains"},
             {"rel": "thumbnail", "href": "{guid}/thumbnail","mediaType": "image/*"}
 	       ]
              }

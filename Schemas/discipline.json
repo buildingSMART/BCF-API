@@ -1,7 +1,7 @@
         {
             "$schema": "http://json-schema.org/draft-04/schema#",
             "title": "Discipline",
-            "description": "Schema for Discipline, BCF REST API. A division can have multiple disciplines.",
+            "description": "Schema for Discipline, BCF REST API. A domain can have multiple disciplines.",
             "type": "object",
             "definitions": {
                "guid": {
@@ -15,9 +15,9 @@
                  "creator": {"$ref": "#/definitions/guid"},
                  "created": { "type": "string", "format": "date-time" },
                  "changed": { "type": "string", "format": "date-time" },
-                 "division_guid": {"$ref": "#/definitions/guid"}
+                 "domain_guid": {"$ref": "#/definitions/guid"}
             },
-            "required": ["guid","name","division_guid"],
+            "required": ["guid","name","domain_guid"],
             "links": [
             {"rel": "topics","href": "{guid}/topics"}
 	       ]

@@ -1,7 +1,7 @@
         {
             "$schema": "http://json-schema.org/draft-04/schema#",
-            "title": "Division",
-            "description": "Schema for Division, BCF REST API. A project can have multiple divisions.",
+            "title": "Domain",
+            "description": "Schema for Domain, BCF REST API. A project can have multiple domains.",
             "type": "object",
             "definitions": {
                "guid": {
