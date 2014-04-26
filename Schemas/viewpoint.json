@@ -72,7 +72,7 @@
              "type": "object",
              "line": {
             "type": "array",
-            "items": [
+            "items":
                 {"type": "object",
                     "properties": {
                         "start_point": {"type": "object",
@@ -84,14 +84,13 @@
                         }
                     }
                 }
-            ]
         }
     },
              "clipping_planes": {
               "type": "object",
               "clipping_plane": {
               "type": "array",
-              "items": [
+              "items": 
                 {"type": "object",
                     "properties": {
                         "location": {"type": "object",
@@ -103,7 +102,6 @@
                         }
                     }
                 }
-            ]
         }
     }
         },
