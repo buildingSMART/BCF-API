@@ -12,7 +12,10 @@
         "guid": {"$ref": "#/definitions/guid"},
         "ifc_guid": {"type": "string"},
         "selected": {"type": "boolean"},
-        "color": {"type": "string"},
+        "color": {
+           "type": "string",
+           "pattern": "^(([0-9]|[a-f]|[A-F]){2})?(([0-9]|[a-f]|[A-F]){2})?(([0-9]|[a-f]|[A-F]){2})?$”
+        },
         "orginating_system": {"type": "string"},
         "authoring_tool_id": {"type": "string"}
     },
