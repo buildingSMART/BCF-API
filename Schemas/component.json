@@ -16,7 +16,7 @@
            "type": "string",
            "pattern": "^(([0-9]|[a-f]|[A-F]){2})?(([0-9]|[a-f]|[A-F]){2})?(([0-9]|[a-f]|[A-F]){2})?$”
         },
-        "orginating_system": {"type": "string"},
+        "originating_system": {"type": "string"},
         "authoring_tool_id": {"type": "string"}
     },
     "required": ["guid"]
