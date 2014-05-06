@@ -16,6 +16,8 @@
         "author": {"$ref": "#/definitions/guid"},
         "comment": {"type": "string"},
         "topic_guid": {"$ref": "#/definitions/guid"},
+        "viewpoint_guid": {"$ref": "#/definitions/guid"},
+        "reply_to_guid": {"$ref": "#/definitions/guid"},
         "modified_date": {"type": "string","format": "date-time"},
         "priority": {"$ref": "extensions.json#/definitions/priority"}
     },
