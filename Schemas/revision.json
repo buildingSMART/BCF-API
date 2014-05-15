@@ -11,18 +11,16 @@
     "properties": {
         "guid": {"$ref": "#/definitions/guid"},
         "topology": {"$ref": "#/definitions/guid"},
-        "discipline_guid": {"$ref": "#/definitions/guid"},
+        "domain_guid": {"$ref": "#/definitions/guid"},
         "discipline_name": {"type": "string"},
         "disciplines_revision": {
               		"type": "array",
-            		  "items": [
-                	         		    {"type": "object",
+            		  "items":       {"type": "object",
              	 		     "properties": {
                                       	     "name_guid": {"$ref": "#/definitions/guid"},
 		   	     "name": {"type": "string"}
                                     	                            }
                                                            }
-                                                     ]
                                   },
         "ifc_project": {"type": "string"},
         "ifc_spatial_structure_element": {"type": "string"},
@@ -30,5 +28,5 @@
         "date": {"type": "string", "format": "date-time"},
         "reference": {"type": "string"}
     },
-    "required": ["guid", "discipline_guid"]
+    "required": ["guid", "domain_guid"]
 }
