@@ -70,6 +70,7 @@
             },
            "lines": {
              "type": "object",
+             "properties": {
              "line": {
             "type": "array",
             "items":
@@ -84,10 +85,12 @@
                         }
                     }
                 }
+                }
         }
     },
              "clipping_planes": {
               "type": "object",
+              "properties": {
               "clipping_plane": {
               "type": "array",
               "items": 
@@ -102,6 +105,7 @@
                         }
                     }
                 }
+               }
         }
     }
         },
