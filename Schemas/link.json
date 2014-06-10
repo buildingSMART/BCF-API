@@ -7,7 +7,6 @@
                 {"rel": "teams/projects","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/project.json"},
                 {"rel": "teams/projects/domains","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/domains.json"},
                 {"rel": "teams/projects/domains/revisions","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/revision.json"},
-                {"rel": "teams/projects/domains/disciplines","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/discipline.json"},
                 {"rel": "teams/projects/topics", "href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/topic.json"},
                 {"rel": "teams/projects/topics/revisions", "href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/revision.json"},
                 {"rel": "teams/projects/topics/document_references","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/document_reference.json"},
