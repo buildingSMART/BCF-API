@@ -5,9 +5,6 @@
     "type": "object",
     "properties": {
         "name": {"type": "string"},
-        "color": {
-           "type": "string",
-           "pattern": "^(([0-9]|[a-f]|[A-F]){2})?(([0-9]|[a-f]|[A-F]){2})?(([0-9]|[a-f]|[A-F]){2})?$"
-        }
+        "color": {"type": "integer"}
     }
 }
