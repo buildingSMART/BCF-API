@@ -13,6 +13,8 @@
                 {"rel": "teams/projects/topics/related_topics","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/related_topic.json"},
                 {"rel": "teams/projects/topics/comments","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/comment.json"},
                 {"rel": "teams/projects/topics/viewpoints","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/viewpoint.json"},
-                {"rel": "teams/projects/topics/viewpoints/components","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/component.json"}
+                {"rel": "teams/projects/topics/viewpoints/components","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/component.json"},
+                {"rel": "colours","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/colours.json"},
+                {"rel": "attachments","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/attachment.json"}
                     ]
             }
