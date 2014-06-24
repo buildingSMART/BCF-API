@@ -42,7 +42,7 @@
         "perspective_camera": {
             "type": "object",
             "properties": {
-                "camera_viewPoint": {
+                "camera_view_point": {
                     "type": "object",
                     "properties": {
                         "x": {"type": "number"},
@@ -107,7 +107,40 @@
                 }
                }
         }
-    }
+    },
+
+        "bitmap": {
+            "type": "object",
+            "properties": {
+	        "bitmap":{ "enum": ["PNG", "JPG"]},
+                 "reference": {"type": "string"},
+                "location": {
+                    "type": "object",
+                    "properties": {
+                        "x": {"type": "number"},
+                        "y": {"type": "number"},
+                        "z": {"type": "number"}
+                                       }
+                                                },
+                 "normal": {
+                    "type": "object",
+                    "properties": {
+                        "x": {"type": "number"},
+                        "y": {"type": "number"},
+                        "z": {"type": "number"}
+                                       }
+                                                },
+                 "up": {
+                    "type": "object",
+                    "properties": {
+                        "x": {"type": "number"},
+                        "y": {"type": "number"},
+                        "z": {"type": "number"}
+                                       }
+                                                },
+                  "hight": {"type": "integer"}
+}}
+
         },
         "required": ["guid"],
         "links": [
