@@ -23,6 +23,7 @@
 		"creation_date": { "type": "string", "format": "date-time" },
 		"modified_date": { "type": "string", "format": "date-time" },
 		"assigned_to": { "$ref": "extensions.json#/definitions/user_id_type" },
+                                    "description": { "type": "string" },
 		"bim_snippet": {
             			"type": "object",
             				"properties": {
