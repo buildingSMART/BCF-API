@@ -112,7 +112,7 @@
         "bitmap": {
             "type": "object",
             "properties": {
-	        "bitmap":{ "enum": ["PNG", "JPG"]},
+	        "bitmap":{ "enum": ["PNG", "JPG", "BMP"]},
                  "reference": {"type": "string"},
                 "location": {
                     "type": "object",
@@ -138,7 +138,7 @@
                         "z": {"type": "number"}
                                        }
                                                 },
-                  "hight": {"type": "integer"}
+                  "height": {"type": "integer"}
 }}
 
         },
@@ -146,6 +146,7 @@
         "links": [
             {"rel": "comments","href": "{guid}/comments"},
             {"rel": "components","href": "{guid}/components"},
+            {"rel": "attachments","href": "{guid}/attachments"},
             {"rel": "bitmap","href": "{guid}/bitmap"}
         ]
     }
