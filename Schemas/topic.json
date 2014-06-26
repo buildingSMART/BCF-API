@@ -57,7 +57,12 @@
 	{
 		"rel": "viewpoints",
 		"href": "{guid}/viewpoints"
-	}		
+	},
+
+                  {
+                                    "rel": "attachments",
+                                    "href": "{guid}/attachments"
+                  }		
 ]
 }
 

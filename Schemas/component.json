@@ -19,10 +19,9 @@
         "originating_system": {"type": "string"},
         "authoring_tool_id": {"type": "string"}
     },
-    "required": ["guid"]
+    "required": ["guid"],
+    "links": [
+            {"rel": "attachments","href": "{guid}/attachments"}
+                 ]
 }
 
-
-/*
-"guid"  for component is not jet defined in visinfo.xsd
-*/

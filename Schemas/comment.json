@@ -23,6 +23,7 @@
     },
     "required": ["guid","status","date","author","comment","topic_guid"],
     "links": [
-        {"rel": "viewpoints","href": "{guid}/viewpoints"}
+        {"rel": "viewpoints","href": "{guid}/viewpoints"},
+        {"rel": "attachments","href": "{guid}/attachments"}
     ]
 }
