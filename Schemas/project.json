@@ -49,6 +49,7 @@
             "required": ["guid","name","team_guid"],
             "links": [
             {"rel": "domains","href": "{guid}/domains"},
-            {"rel": "thumbnail", "href": "{guid}/thumbnail","mediaType": "image/*"}
+            {"rel": "attachments","href": "{guid}/attachments"},
+            {"rel": "thumbnail", "href": "{guid}/bitmap","mediaType": "image/*"}
 	       ]
              }
