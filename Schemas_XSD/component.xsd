@@ -4,8 +4,8 @@
 	<xs:element name="component" type="component"/>
 	<xs:complexType name="component">
 		<xs:sequence>
-			<xs:element name="guid" type="guid"/>
 			<xs:element name="ifc_guid" type="ifc_guid" minOccurs="0"/>
+			<xs:element name="guid" type="guid" minOccurs="0"/>
 			<xs:element name="selected" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="colour" type="xs:hexBinary" minOccurs="0"/>
 			<xs:element name="originating_system" type="xs:string" minOccurs="0"/>
