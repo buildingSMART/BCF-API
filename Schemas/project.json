@@ -15,7 +15,7 @@
                  "creator": {"$ref": "#/definitions/guid"},
                  "created": { "type": "string", "format": "date-time" },
                  "changed": { "type": "string", "format": "date-time" },
-	"team_guid": {"type": "string"},
+	"team_guid":  {"$ref": "#/definitions/guid"},
 	"rights": {
              		"type": "object",
              			 "properties": {
