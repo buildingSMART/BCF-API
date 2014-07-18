@@ -12,12 +12,13 @@
         "guid": {"$ref": "#/definitions/guid"},
         "verbal_status": {"type": "string"},
         "date": {"type": "string","format": "date-time"},
-        "author": {"$ref": "#/definitions/guid"},
+        "author": { "$ref": "extensions.json#/definitions/user_id_type" },
         "comment": {"type": "string"},
         "topic_guid": {"$ref": "#/definitions/guid"},
         "viewpoint_guid": {"$ref": "#/definitions/guid"},
         "reply_to_comment_guid": {"$ref": "#/definitions/guid"},
-        "modified_date": {"type": "string","format": "date-time"}
+        "modified_date": {"type": "string","format": "date-time"},
+        "modified_author": { "$ref": "extensions.json#/definitions/user_id_type" }
     },
     "required": ["guid","status","date","author","comment","topic_guid"],
     "links": [
