@@ -15,6 +15,7 @@
 		"topic_status": { "$ref": "extensions.json#/definitions/topic_status" },	
                                     "reference_link": { "type": "string" },
 		"title": { "type": "string" },
+                                    "priority": {"$ref": "extensions.json#/definitions/priority"},
 		"index": { "type": "integer", "minimum": 0},
 		"label": {
                 		         "type": "array",
