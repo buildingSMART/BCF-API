@@ -22,7 +22,9 @@
                			 "items": {"type": "extensions.json#/definitions/topic_label"}
              		               },
 		"creation_date": { "type": "string", "format": "date-time" },
+                                    "creation_author": { "$ref": "extensions.json#/definitions/user_id_type" },
 		"modified_date": { "type": "string", "format": "date-time" },
+                                    "modified_author": { "$ref": "extensions.json#/definitions/user_id_type" },
 		"assigned_to": { "$ref": "extensions.json#/definitions/user_id_type" },
                                     "description": { "type": "string" },
 		"bim_snippet": {
