@@ -6,15 +6,14 @@
 		<xs:sequence>
 			<xs:element name="guid" type="guid"/>
 			<xs:element name="verbal_status" type="topic_status" minOccurs="0"/>
-			<xs:element name="status" type="xs:string"/>
 			<xs:element name="date" type="xs:dateTime"/>
-			<xs:element name="author" type="guid"/>
+			<xs:element name="author" type="user_id_type"/>
 			<xs:element name="comment" type="xs:string"/>
 			<xs:element name="topic_guid" type="guid"/>
 			<xs:element name="viewpoint_guid" type="guid" minOccurs="0"/>
 			<xs:element name="reply_to_guid" type="guid" minOccurs="0"/>
 			<xs:element name="modified_date" type="xs:dateTime" minOccurs="0"/>
-			<xs:element name="priority" type="priority" minOccurs="0"/>
+			<xs:element name="modified_author" type="user_id_type" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:simpleType name="guid">
@@ -28,7 +27,7 @@
 	<xs:simpleType name="topic_status">
 		<xs:restriction base="xs:string"/>
 	</xs:simpleType>
-	<xs:simpleType name="priority">
+	<xs:simpleType name="user_id_type">
 		<xs:restriction base="xs:string"/>
 	</xs:simpleType>
 </xs:schema>

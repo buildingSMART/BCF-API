@@ -8,10 +8,13 @@
 			<xs:element name="topic_type" type="topic_type" minOccurs="0"/>
 			<xs:element name="topic_status" type="topic_status" minOccurs="0"/>
 			<xs:element name="title" type="xs:string"/>
+			<xs:element name="priority" type="priority" minOccurs="0"/>
 			<xs:element name="index" type="xs:integer" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="label" type="topic_label" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="creation_date" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="creation_author" type="user_id_type" minOccurs="0"/>
 			<xs:element name="modified_date" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="modified_author" type="user_id_type" minOccurs="0"/>
 			<xs:element name="assigned_to" type="user_id_type" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="description" type="xs:string" minOccurs="0"/>
 			<xs:element name="bim_snippet" type="bim_snippet" minOccurs="0" maxOccurs="1"/>
@@ -43,6 +46,9 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:simpleType name="snippet_type">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="priority">
 		<xs:restriction base="xs:string"/>
 	</xs:simpleType>
 </xs:schema>
