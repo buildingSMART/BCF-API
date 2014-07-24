@@ -1,0 +1,10 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Version",
+    "description": "Schema for Version",
+    "type": "object",
+    "properties": {
+        "version_id": {"type": "string"},
+        "detailed_version": {"type": "integer"}
+    }
+}
