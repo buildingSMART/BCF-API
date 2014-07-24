@@ -11,6 +11,7 @@
     "properties": {
         "guid": {"$ref": "#/definitions/guid"},
         "verbal_status": {"type": "string"},
+        "status": {"type": "string"},
         "date": {"type": "string","format": "date-time"},
         "author": { "$ref": "extensions.json#/definitions/user_id_type" },
         "comment": {"type": "string"},
