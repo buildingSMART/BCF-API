@@ -6,6 +6,7 @@
 		<xs:sequence>
 			<xs:element name="guid" type="guid"/>
 			<xs:element name="verbal_status" type="topic_status" minOccurs="0"/>
+            <xs:element name="status" type="xs:string" default="Unknown"/>
 			<xs:element name="date" type="xs:dateTime"/>
 			<xs:element name="author" type="user_id_type"/>
 			<xs:element name="comment" type="xs:string"/>
