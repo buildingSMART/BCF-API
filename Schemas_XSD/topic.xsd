@@ -10,7 +10,7 @@
 			<xs:element name="title" type="xs:string"/>
 			<xs:element name="priority" type="priority" minOccurs="0"/>
 			<xs:element name="index" type="xs:integer" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="label" type="topic_label" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="labels" type="topic_label" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="creation_date" type="xs:dateTime" minOccurs="0"/>
 			<xs:element name="creation_author" type="user_id_type" minOccurs="0"/>
 			<xs:element name="modified_date" type="xs:dateTime" minOccurs="0"/>

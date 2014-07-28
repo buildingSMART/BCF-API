@@ -17,7 +17,7 @@
 		"title": { "type": "string" },
                                     "priority": {"$ref": "extensions.json#/definitions/priority"},
 		"index": { "type": "integer", "minimum": 0},
-		"label": {
+		"labels": {
                 		         "type": "array",
                			 "items": {"type": "extensions.json#/definitions/topic_label"}
              		               },
