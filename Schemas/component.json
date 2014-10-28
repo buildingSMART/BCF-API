@@ -3,14 +3,8 @@
     "title": "Component",
     "description": "Schema for Component, BCF REST API. A viewpoint can have multiple components.",
     "type": "object",
-    "definitions": {
-        "guid": {
-            "type": "string",
-            "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"}
-    },
     "properties": {
         "ifc_guid": {"type": "string"},
-        "guid": {"$ref": "#/definitions/guid"},
         "selected": {"type": "boolean"},
         "color": {
            "type": "string",
@@ -18,10 +12,6 @@
         },
         "originating_system": {"type": "string"},
         "authoring_tool_id": {"type": "string"}
-    },
-    "required": ["guid"],
-    "links": [
-            {"rel": "attachments","href": "{guid}/attachments"}
-                 ]
+    }
 }
 

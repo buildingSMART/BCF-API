@@ -42,8 +42,8 @@
 "links":[
 	
 	{
-		"rel": "revisions",
-		"href": "{guid}/revisions"
+		"rel": "files",
+		"href": "{guid}/files"
 	},
 	{
 		"rel": "document_references",
@@ -60,12 +60,7 @@
 	{
 		"rel": "viewpoints",
 		"href": "{guid}/viewpoints"
-	},
-
-                  {
-                                    "rel": "attachments",
-                                    "href": "{guid}/attachments"
-                  }		
+	}		
 ]
 }
 

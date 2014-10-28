@@ -1,18 +1,9 @@
-## BIM REST API 
+## BCF	 REST API 
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
-**Version 0.99** based on BCFv2.
+**Version 1.0** based on BCFv2.
 [GitHub repository](https://github.com/BuildingSMART/BCF-API)
 
-
-Services:
-
-- Information
-- Team, Project, Domain
-- Revision
-- BCF
-- Attachment
-- User
 
 
 ----------
@@ -21,6 +12,7 @@ Services:
 
 # 1. Introduction #
 
+BCF is a format for managing issues on a BIM project. RESTful BCF-API supports the exchange of BCFv2 issues between software applications.
 
 All API access is over HTTPS. Data is sent as query parameters and received as JSON. Every resource has a corresponding Json Schema. (There are also XSD-Schemas available but XML support ist optionally). Json Hyper Schema is used for link definition. Authentication method is OAuth2.
 
@@ -102,13 +94,35 @@ The server has  a web config file .. "*" means the server allow the resources fo
      </httpProtocol>
 
 
+## 1.4 Http status codes ##
+
+-   200 OK (Data is returned)
+-   201 No content (Data has been deleted)
+-   302 Redirect (Returning a redirect to the GET-resource for the data that has been created/updated)
+-   400 BadRequest (Input data is invalid)
+-   401 Unauthorized (User don’t have access to the requested resource)
+-   403 Forbidden
+-   404 Not found (It must be discussed if the user should get “unauthorized” to resources he don’t have access to, or “not found")
+-   422 Unprocessable entity (Input data is well formed, but the semantic is wrong; Example: Resource define that a value cannot be “null”, but the value is “null”)
+
+## 1.5 Error response body format ##
+
+BCF-API has a specified error response body format [error.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/error.json).
+
+----------
 
 
-# 2. Services #
+
+
+# Topology 1 - BCF-Server only#
+
+Model collaboration is managed through a shared file server or a network file sharing service like Dropbox. The BCF-Server handels the Authentication and the BCF-Issues. 
+
+![Topology1](Images/Topology1.png)
 
 
 
-## 2.1 Information Services ##
+## Information Services (Topology 1) ##
 
 [version.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/version.json), [link.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/link.json), [colors.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/colors.json)
 
@@ -121,34 +135,34 @@ Services:
 ---------- 
 
 
-    GET /V0.99/schemas
+    GET /{version}/schemas
 
-- GET - Retrieve link schema that contains all available schemas in BIM-API
+- GET - Retrieve link schema that contains all available schemas for Topolgy1	
 
 ---------- 
 
 
-    GET /V0.99/schemas/{rel}
+    GET /{version}/schemas/{rel}
 
 - GET - Retrieve a specific schema.
 
 ----------
 
 
-`GET /V0.99/colors` 
+`GET /{version}/colors` 
 
 - GET - Retrieve ARGB values for colours
 
 
 ----------
 
-## 2.2 Authentication ##
+## Authentication (Topology 1) ##
 
-Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/draft-ietf-oauth-v2-22).
+The Authentication server is the BCF-Server. Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/draft-ietf-oauth-v2-22).
 
 Services:
 
-    GET /V0.99/oauth/authorize
+    GET /{version}/oauth2/authorize
 
 Open a browser window or redirect the user to this resource.
 
@@ -164,7 +178,7 @@ Redirects back to the specified redirect URI with the provided state as a query 
 Long Url: -
 
 
-    POST /V0.99/oauth/access_token
+    POST /{version}/oauth2/access_token
 
 After you have received the authorization code you can request an access token. The access token will be returned as JSON in the response body.
 
@@ -173,160 +187,121 @@ The access token is an arbitrary string, guarantied to fit in a varchar(255) fie
 When requesting other resources the access token must be passed via the Authorization header using the Bearer scheme *(e.g. Authorization: Bearer T9UNRV4sC9vr7ga)*.
 
 
-## 2.3 Team, Project, Domain Services ##
+## Project Services (Topology 1) ##
 
-#### *2.3.1 Team* ####
-
-[team.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/team.json)
-
-Services:
-
-    GET, POST /V0.99/teams
-- GET - Retrieve a list of teams where the currently logged on user is assigne to with his specific role
-- Post - Add a new team
-
-Long Url: - 
-
-    GET, PUT, DELETE /V0.99/teams/{guid}
-
-
-- GET - Retrieve a specific team
-- PUT - Modify a specific team
-- DELETE - Delete a specific team
-
-Long Url: -
-
-#### *2.3.2 Project* ####
 
 [project.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/project.json), [extensions.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/extensions.json)
 
 Services:
 
-    GET, POST /V0.99/ teams/{guid}/projects
+    GET, POST /{version}/projects
 
 - GET - Retrieve a list of projects where the currently logged on user is assigned to with his specific roles.
 - POST - Add a new project
 
 Long Url: -
 
-    GET, PUT, DELETE /V0.99/projects/{guid}
+    GET, PUT, DELETE /{version}/projects/{project_id}
 
 - GET - Retrieve a specific project
 - PUT - Modify a specific project
 - DELETE - Delete a specific project
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}
-
-    GET, POST, PUT, DELETE /V0.99/projects/{guid}/thumbnail
+Long URL: -
 
 
-- GET - Retrieve the project thumbnail (blob)
-- POST - Upload the project thumbnail (blob)
-- DELETE – Delete the project thumbnail
-
-Long URL:  /V0.99/teams/{guid}/projects/{guid}/thumbnail
-
-
-    GET, POST, PUT, DELETE /V0.99/projects/{guid}/extension
+    GET, POST, PUT, DELETE /V0.99/projects/{project_id}/extension
 
 - GET - Retrieve the project extension schema
 - POST - Add the project extension schema
 - PUT - Change the project extension schema
 - DELETE – Delete the project extension schema
 
-Long URL:  /V0.99/teams/{guid}/projects/{guid}/extensions
+Long URL:  /V0.99/teams/{guid}/projects/{project_id}/extensions
 
 
-#### *2.3.3 Domain* ####
-[domain.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/domain.json)
-
-Services:
-
-    GET, POST /V0.99/projects/{guid}/domains
-
-- GET - Retrieve a list of domains within a project where the currently logged on user is assigned to with his specific roles
-- POST - Add a new domain to a project
-
-Long URL: /V0.99/ teams/{ guid }/projects/{guid}/domains
-
-    GET, PUT, DELETE /V0.99/domains/{guid}
-
-- GET - Retrieve a specific domain
-- PUT - Change a specific domain
-- DELETE – Delete a specific domain
-
-Long URL: /V0.99/ teams/{ guid }/projects/{guid}/domains/{guid}
+----------
 
 
-## 2.4 Revision Services ##
+# Topology 2 - Connected BCF-Server and Model Server#
 
-[revision.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/revision.json)
-
-Services:
-
-    GET, POST /V0.99/domains/{guid}/revisions
-
-- GET - Retrieve revisions of a domain 
-- POST - Add a new revision to a domain; Multipart -> all informations retrieved from header
-
-Long URL: /V0.99/ teams/{guid }/projects/{guid}/domains/{guid}/revisions
+BCF and Model server are aware of each other but are running independently (e.g. BCF Server is provided by vendor A while model server is provided by vendor B)
 
 
-    GET, DELETE /V0.99/revisions/{guid}
-
-- GET - Download a specific revision
-- DELETE - Delete a specific revision
-
-Long URL: /V0.99/ teams/{guid }/projects/{guid}/domains/{guid}/revisions/{guid}
+![Topology2](Images/Topology2.png)
 
 
-## 2.5 BCF Services ##
+----------
 
-#### *2.5.1 Topic* ####
-[topic.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/topic.json), [revision.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/revision.json)
+# Topology 3 - Co-Located BCF-Server and Model Server#
 
-Services:
+BCF and model server are co located on the same hosts.
 
-    GET, POST /V0.99/projects/{guid}/topics
+
+![Topology3](Images/Topology3.png)
+
+
+----------
+
+
+
+
+## BCF Services (Toplogy 1, Topology 2, Topology3)  ##
+
+#### *Topic* ####
+[topic.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/topic.json)
+
+
+    GET, POST /{version}/projects/{project_id}/topics
 
 - GET - Retrieve topics of a project (default sort = CreationDate)
 - POST - Add a new topic to a project
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics
+Long URL: -
 
-    GET, PUT, DELETE /V0.99/topics/{guid}
+    GET, PUT, DELETE /{version}/topics/{guid}
 
 - GET - Retrieve a specific topic
 - PUT - Update a specific topic
 - DELETE - Delete a specific topic
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}
-
-    GET /V0.99/topics/{guid}/revisions
-
-- GET - Retrieve all revisions related to a topic
-- POST - Assign a revision to a topic
-
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/revisions
-
-    DELETE /V0.99/topics/{guid}/revisions/{guid}
-
-- DELETE - Delete a revison to topic assignment
-
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/revisions/{guid}
+Long URL: /{version}/projects/{project_id}/topics/{guid}
 
 
-#### *2.5.2 Comment* ####
+----------
+
+
+
+#### *File* ####
+ [file.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/file.json)
+
+`GET /{version}/topics/{guid}/files`
+
+- GET - Retrieve the header of a topic
+- POST - Assign a file to a topic
+
+Long URL: /{version}/projects/{project_id}/topics/{guid}/files
+
+`DELETE /{version}/topic/{guid}/files/{reference}`
+
+- DELETE - Remove a file from topic header
+
+Long URL: /{version}/projects/{project_id}/topics/{guid}/revisions/{reference}
+
+
+----------
+
+
+#### *Comment* ####
  [comment.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/comment.json)
 
-Services:
 
-    GET, POST /V0.99/topics/{guid}/comments
+    GET, POST /{version}/topics/{guid}/comments
 
 - GET - Retrieve comments of a topic
 - POST - Add a new comment to a topic
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/comments
+Long URL: /{version}/projects/{project_id}/topics/{guid}/comments
 
     GET, PUT, DELETE /V0.99/comments/{guid}
 
@@ -334,7 +309,7 @@ Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/comments
 - PUT - Update a specific comment
 - DELETE - Delete a specific comment
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/comments/{guid}
+Long URL: /{version}/projects/{project_id}/topics/{guid}/comments/{guid}
 
     GET, POST, DELETE /V0.99/comments/{guid}/viewpoint
 
@@ -342,7 +317,7 @@ Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/comments/{guid}
 - POST - Assign a viewpoint to a comment
 - DELETE - Delete the viewpoint assigned to a comment
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/comments/{guid}/viewpoint
+Long URL: /{version}/projects/{project_id}/topics/{guid}/comments/{guid}/viewpoint
 
     GET, POST, DELETE /V0.99/comments/{guid}/reply_to
 
@@ -350,278 +325,103 @@ Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/comments/{guid}/view
 - POST - Add a replyTo comment relation to a comment
 - DELETE - Delete the replyTo comment relation on a comment
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/comments/{guid}/reply_to
+Long URL: /{version}/projects/{project_id}/topics/{guid}/comments/{guid}/reply_to
 
-    GET, POST /V0.99/comments/{guid}/attachments
 
-- GET - Retrieve the list of attachments on a comment
-- POST - Add a new attachment to a comment
+----------
 
-Long URL:  /V0.99/ teams/{guid}/projects/{guid}/topics/{guid}/comments/{guid}/attachments
 
-    GET, PUT, DELETE /V0.99/attachments/{guid}
-
-- GET - Retrieve a specific attachment
-- PUT - Change a specific attachment
-- DELETE – Delete a specific attachment
-
-Long URL:  /V0.99/ teams/{guid}/projects/{guid}/topics/{guid}/comments/{guid}/attachments/{guid}
-
-#### *2.5.3 Viewpoint* ####
+#### *Viewpoint* ####
  [viewpoint.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/viewpoint.json)
 
-Services:
 
-    GET, POST /V0.99/topics/{guid}/viewpoints
+    GET, POST /{version}/topics/{guid}/viewpoints
 
 
 - GET - Retrieve viewpoints of a topic
 - POST - Add a new viewpoint to a topic
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/viewpoints
+Long URL: /{version}/projects/{project_id}/topics/{guid}/viewpoints
 
-    GET, PUT, DELETE /V0.99/viewpoints/{guid}
+
+    GET, PUT, DELETE /{version}/viewpoints/{guid}
 
 - GET - Retrieve a specific viewpoint
 - PUT - Modify a specific viewpoint
 - DELETE – Delete a specific viewpoint
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/viewpoints/{guid}
+Long URL: /{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}
 
 
-    GET, POST, DELETE /V0.99/viewpoints/{guid}/bitmap
+    GET, POST, DELETE /{version}/viewpoints/{guid}/bitmap
 
 - GET - Retrieve the bitmap related to a viewpoint
 - PUT - Add a bitmap to the viewpoint
 - DELETE – Delete the bitmap of the viewpoint
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmap
+Long URL: /{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/bitmap
 
-#### *2.5.4 Component* ####
+#### *Component* ####
  [component.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/component.json)
 
-Services:
 
-    GET, POST /V0.99/viewpoints/{guid}/components
+    GET, POST /{version}/viewpoints/{guid}/components
 
 - GET - Retrieve components of a viewpoint
 - POST - Add a new component to a viewpoint
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/viewpoints/{guid}/components
+Long URL: /{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
-    GET, PUT, DELETE /V0.99/components/{ifc_guid}
+    GET, PUT, DELETE /{version}/components/{ifc_guid}
 
 - GET - Retrieve a specific component
 - PUT - Modify a specific component
 - DELETE – Delete a specific component
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/viewpoints/{guid}/components/{ifcguid}
+Long URL: /{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components/{ifc_guid}
 
-#### *2.5.5 Related Topic* ####
+
+----------
+
+
+#### *Related Topic* ####
  [related_topic.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/related_topic.json)
 
-Services:
-
-    GET, POST /V0.99/topics/{guid}/related_topics
+    GET, POST /{version}/topics/{guid}/related_topics
 
 - GET - Retrieve related topics to a topic
 - POST - Add a new related_topic to a topic
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/related_topics
+Long URL: /{version}/projects/{project_id}/topics/{guid}/related_topics
 
-    DELETE /V0.99/topics/{guid}/related_topics/{guid}
+    DELETE /{version}/topics/{guid}/related_topics/{guid}
 
-- DELETE – Delete a topic to topic relation
+- DELETE – Delete related topic
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/related_topics/{guid}
+Long URL: /{version}/projects/{project_id}/topics/{guid}/related_topics/{guid}
 
 
-#### *2.5.6 Document Reference* ####
+----------
+
+
+
+#### *Document Reference* ####
  [document_reference.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/document_reference.json)
 
-Services:
 
-    GET, POST /V0.99/topics/{guid}/document_references
+    GET, POST /{version}/topics/{guid}/document_references
 
 - GET - Retrieve documents referenced on a topic
 - POST - Add a new document reference to a topic
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/document_references
+Long URL: /{version}/projects/{project_id}/topics/{guid}/document_references
 
-    DELETE /V0.99/topics/{guid}/document_references/{guid}
+    DELETE /{version}/topics/{guid}/document_references/{guid}
 
 - GET - Retrieve a document referenced on a topic
 - DELETE – Delete a document reference
 
-Long URL: /V0.99/teams/{guid}/projects/{guid}/topics/{guid}/document_references/{guid} 
-
-## 2.6 Attachment Services ##
-
-[attachment.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/attachment.json)
-
-List of resources where a file can be attached:
-
-- project
-- domain
-- revision
-- comment
-- viewpoint
-
-Services:
-
-    GET, POST /V0.99/...RESOURCE.../{guid}/attachments
-
-- GET - Retrieve the list of attachments on a resource
-- POST - Add a new attachment to a resource
-
-Long URL:  /V0.99/...RESOURCE.../{guid}/...RESOURCE.../{guid}/...../attachments
-
-    GET, PUT, DELETE /V0.99/attachments/{guid}
-
-- GET - Retrieve a specific attachment
-- PUT - Change a specific attachment
-- DELETE – Delete a specific attachment
-
-Long URL:  /V0.99/...RESOURCE.../{guid}/...RESOURCE.../{guid}/...../attachments/{guid}
-
-
-## 2.7 User Services ##
-
-#### *2.7.1 Registration* ####
-
-To register a user, use the webplatform of the BIM – API server.
-
-#### *2.7.2 Roles* ####
-
-**Team-Owner:** Has all rights within a “Team and its “Projects” and “Domains”
-
-**BIM-Manager:** Has all rights within a “Project” and its “Domains”
-
-**Domain-Manager:** Has all rights within a “Domain”
-
-**Domain-User:** Has specific rights within a “Domain”
-
-
-#### *2.7.2 Rights* ####
-
-
-<table border="1">
-  <tr>
-    <th></th>
-    <th>Team-Owner</th>
-    <th>BIM-Manager</th>
-    <th>Domain-Manager</th>
-    <th>Domain-User</th>
-  </tr>
-  <tr>
-    <td>assign, remove team user</td>
-    <td align="center">X</td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>create, edit, delete project</td>
-    <td align="center">X</td>
-    <td align="center">X</td>
-    <td align="center"></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>invite user to project</td>
-    <td align="center">X</td>
-    <td align="center">X</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>view project (attachments)</td>
-    <td align="center">X</td>
-    <td align="center">X</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>create, edit, delete domain</td>
-    <td align="center">X</td>
-    <td align="center">X</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>view all domains</td>
-    <td align="center">X</td>
-    <td align="center">X</td>
-    <td></td>
-    <td></td>
-  </tr>
- <tr>
-    <td>assign user to domain</td>
-    <td align="center">X</td>
-    <td align="center">X</td>
-    <td></td>
-    <td></td>
-  </tr>
- <tr>
-    <td>upload revision to domain</td>
-    <td align="center">X</td>
-    <td align="center">X</td>
-    <td align="center">X</td>
-    <td></td>
-  </tr>
- <tr>
-    <td>view domain</td>
-    <td align="center">X</td>
-    <td align="center">X</td>
-    <td align="center">X</td>
-    <td align="center">X</td>
-  </tr>
- <tr>
-    <td>add BCF</td>
-    <td align="center">X</td>
-    <td align="center">X</td>
-    <td align="center">X</td>
-    <td align="center">X</td>
-  </tr>
- <tr>
-    <td>edit BCF</td>
-    <td align="center">X</td>
-    <td align="center">Author</td>
-    <td align="center">Author</td>
-    <td align="center">Author</td>
-  </tr>
- <tr>
-    <td>delete BCF</td>
-    <td align="center">X</td>
-    <td align="center">Author & only last comment</td>
-    <td align="center">Author & only last comment</td>
-    <td align="center">Author & only last comment</td>
-  </tr>
-</table>
-
-#### *2.7.3 Membership* ####
-
-A user can be assigned to a *Team*, *Project* or *Domain*.
-
-    GET, POST /V0.99/objects/{guid}/users
-
-- GET - Retrieve the list of users assigned to an object with their specific roles
-- POST - Assign a user with its role to an object
-
-Long Url: -
-
-    PUT, DELETE /V0.99/objects/{guid}/users/{user_id}
-
-- PUT - Change a user role on an object
-- DELETE - Remove a user from an object
-
-Long Url: -
-
-    GET /V0.99/users/{user_id}
-
-- GET - Retrieve a list of objects wher a user is assigned to with his specific roles
-
-Long Url: - 
+Long URL: /{version}/projects/{project_id}/topics/{guid}/document_references/{guid} 
 
 
 ----------

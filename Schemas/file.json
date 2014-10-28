@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "File",
+    "description": "File in BCF REST API. A topic can be related to multiple files.",
+    "type": "object",
+    "properties": {
+        "ifc_project": {"type": "string"},
+        "ifc_spatial_structure_element": {"type": "string"},
+        "file_name": {"type": "string"},
+        "date": {"type": "string", "format": "date-time"},
+        "reference": {"type": "string"}
+    }
+}

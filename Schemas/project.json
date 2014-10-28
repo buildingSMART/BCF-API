@@ -1,55 +1,15 @@
-        {
-            "$schema": "http://json-schema.org/draft-04/schema#",
-            "title": "Project",
-             "description": "Schema for project, BCF REST API. A team can have multiple projects.",
-            "type": "object",
-               "definitions": {
-               "guid": {
-                "type": "string",
-                "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"}
-                 },
-            "properties": {
-                 "guid": {"$ref": "#/definitions/guid"},
-                 "name": {"type": "string"},
-                 "short_descr": {"type": "string"},
-                 "creator": {"$ref": "#/definitions/guid"},
-                 "created": { "type": "string", "format": "date-time" },
-                 "changed": { "type": "string", "format": "date-time" },
-	"team_guid":  {"$ref": "#/definitions/guid"},
-	"rights": {
-             		"type": "object",
-             			 "properties": {
-                 				 "project_admin": { "type": "boolean" },
-                                                                         "project_delete": { "type": "boolean" },
-                                                                         "project_edit": { "type": "boolean" },
-                                                                         "domain_create": { "type": "boolean" }
-                               			      }
-                                  } ,
-                "domains": {
-             		 "type": "array",
-             			 "items": [
-            	           		       {"type": "object",
-             	                			"properties": {
-                                      			"guid": {"$ref": "#/definitions/guid"},
-		   			"name": {"type": "string"},
-		  			"rights": {
-             		          			"type": "object",
-             			 		          "properties": {
-                 				 		"revision_add": { "type": "boolean" },
-                                                                        		"revision_delete": { "type": "boolean" },
-                                                                         		"revision_edit": { "type": "boolean" },
-                                                                         		"revision_view": { "type": "boolean" }
-                               			                		                }
-                                                          			}                            
-                                                        		     }
-                              				}
-                                                                        ]
-                                                                }
-            },
-            "required": ["guid","name","team_guid"],
-            "links": [
-            {"rel": "domains","href": "{guid}/domains"},
-            {"rel": "attachments","href": "{guid}/attachments"},
-            {"rel": "thumbnail", "href": "{guid}/bitmap","mediaType": "image/*"}
-	       ]
-             }
+   {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Project",
+    "description": "Schema for project, BCF REST API.",
+    "type": "object",
+    "properties": {
+        "project_id": {"type": "string"},
+        "name": {"type": "string"},
+        "extension_schema": {"type": "string"},
+        "links": [
+            {"rel": "topics", "href": "{guid}/topics"},
+            {"rel": "extension", "href": "{guid}/extension"}
+        ]
+    }
+}
