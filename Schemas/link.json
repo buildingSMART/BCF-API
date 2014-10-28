@@ -11,6 +11,7 @@
                 {"rel": "projects/topics/comments","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/comment.json"},
                 {"rel": "projects/topics/viewpoints","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/viewpoint.json"},
                 {"rel": "projects/topics/viewpoints/components","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/component.json"},
-                {"rel": "colours","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/colours.json"}
+                {"rel": "colours","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/colours.json"},
+                {"rel": "errors","href": "https://raw.github.com/BuildingSMART/BCF-API/master/Schemas/error.json"}
                     ]
             }
