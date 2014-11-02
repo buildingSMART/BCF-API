@@ -12,7 +12,6 @@
 		<xs:sequence>
 			<xs:element name="DetailedVersion" type="xs:string" minOccurs="0"/>
 			<xs:element name="LinkSchemas" type="xs:string" minOccurs="0"/>
-			<xs:element name="Colors" type="xs:string" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="VersionId" type="xs:string"/>
 	</xs:complexType>

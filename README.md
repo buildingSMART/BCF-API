@@ -41,11 +41,11 @@ if descending=false -> ascending
 Example 1:
 
 
-    .../v0.99/projects/{guid}/topics?page=1&page_size=5&sort=priority&descending=true
+    .../bcf/{version}/projects/{guid}/topics?page=1&page_size=5&sort=priority&descending=true
 
 Example 2:
 
-    .../v0.99/projects/{guid}/topics?page=1&page_size=5&sort=priority&descending=true&filter=(label%3DArchitecture%7Clabel%3DStructural)%26topicstatus%21%3DClosed
+    .../bcf/{version}/projects/{guid}/topics?page=1&page_size=5&sort=priority&descending=true&filter=(label%3DArchitecture%7Clabel%3DStructural)%26topicstatus%21%3DClosed
 
 
 
@@ -139,7 +139,7 @@ BCF and model server are co located on the same hosts.
 
 **Recource URL**
 
-`GET /version` 
+`GET /bcf/version` 
 
 
 **Parameters**
@@ -149,8 +149,6 @@ version_id |	string	| ID of the version
 detailed_version	|	string | URL to version on Github
 
 link_schemas	| string	| URL to schemas on Github
-
-colors	| string	| URL to color schema on Github
 
 
 ---------- 
@@ -162,7 +160,7 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 
 Services:
 
-    GET /{version}/oauth2/authorize
+    GET /bcf/{version}/oauth2/authorize
 
 Open a browser window or redirect the user to this resource.
 
@@ -178,7 +176,7 @@ Redirects back to the specified redirect URI with the provided state as a query 
 Long Url: -
 
 
-    POST /{version}/oauth2/access_token
+    POST /bcf/{version}/oauth2/access_token
 
 After you have received the authorization code you can request an access token. The access token will be returned as JSON in the response body.
 
@@ -194,14 +192,14 @@ When requesting other resources the access token must be passed via the Authoriz
 
 Services:
 
-    GET, POST /{version}/projects
+    GET, POST /bcf/{version}/projects
 
 - GET - Retrieve a list of projects where the currently logged on user is assigned to with his specific roles.
 - POST - Add a new project
 
 Long Url: -
 
-    GET, PUT, DELETE /{version}/projects/{project_id}
+    GET, PUT, DELETE /bcf/{version}/projects/{project_id}
 
 - GET - Retrieve a specific project
 - PUT - Modify a specific project
@@ -210,14 +208,14 @@ Long Url: -
 Long URL: -
 
 
-    GET, POST, PUT, DELETE /V0.99/projects/{project_id}/extension
+    GET, POST, PUT, DELETE /bcf/{version}/projects/{project_id}/extension
 
 - GET - Retrieve the project extension schema
 - POST - Add the project extension schema
 - PUT - Change the project extension schema
 - DELETE – Delete the project extension schema
 
-Long URL:  /V0.99/teams/{guid}/projects/{project_id}/extensions
+Long URL:  /bcf/{version}/teams/{guid}/projects/{project_id}/extensions
 
 
 ---------
@@ -229,20 +227,20 @@ Long URL:  /V0.99/teams/{guid}/projects/{project_id}/extensions
 [topic.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/topic.json)
 
 
-    GET, POST /{version}/projects/{project_id}/topics
+    GET, POST /bcf/{version}/projects/{project_id}/topics
 
 - GET - Retrieve topics of a project (default sort = CreationDate)
 - POST - Add a new topic to a project
 
 Long URL: -
 
-    GET, PUT, DELETE /{version}/topics/{guid}
+    GET, PUT, DELETE /bcf/{version}/topics/{guid}
 
 - GET - Retrieve a specific topic
 - PUT - Update a specific topic
 - DELETE - Delete a specific topic
 
-Long URL: /{version}/projects/{project_id}/topics/{guid}
+Long URL: /bcf/{version}/projects/{project_id}/topics/{guid}
 
 
 ----------
@@ -252,18 +250,18 @@ Long URL: /{version}/projects/{project_id}/topics/{guid}
 #### *File* ####
  [file.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/file.json)
 
-`GET /{version}/topics/{guid}/files`
+`GET /bcf/{version}/topics/{guid}/files`
 
 - GET - Retrieve the header of a topic
 - POST - Assign a file to a topic
 
 Long URL: /{version}/projects/{project_id}/topics/{guid}/files
 
-`DELETE /{version}/topic/{guid}/files/{reference}`
+`DELETE /bcf/{version}/topic/{guid}/files/{reference}`
 
 - DELETE - Remove a file from topic header
 
-Long URL: /{version}/projects/{project_id}/topics/{guid}/revisions/{reference}
+Long URL: /bcf/{version}/projects/{project_id}/topics/{guid}/revisions/{reference}
 
 
 ----------
@@ -273,36 +271,36 @@ Long URL: /{version}/projects/{project_id}/topics/{guid}/revisions/{reference}
  [comment.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/comment.json)
 
 
-    GET, POST /{version}/topics/{guid}/comments
+    GET, POST /bcf/{version}/topics/{guid}/comments
 
 - GET - Retrieve comments of a topic
 - POST - Add a new comment to a topic
 
-Long URL: /{version}/projects/{project_id}/topics/{guid}/comments
+Long URL: /bcf/{version}/projects/{project_id}/topics/{guid}/comments
 
-    GET, PUT, DELETE /V0.99/comments/{guid}
+    GET, PUT, DELETE /bcf/{version}/comments/{guid}
 
 - GET - Retrieve a specific comment
 - PUT - Update a specific comment
 - DELETE - Delete a specific comment
 
-Long URL: /{version}/projects/{project_id}/topics/{guid}/comments/{guid}
+Long URL: /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
 
-    GET, POST, DELETE /V0.99/comments/{guid}/viewpoint
+    GET, POST, DELETE /bcf/{version}/comments/{guid}/viewpoint
 
 - GET - Retrieve the viewpoint assigned to a comment
 - POST - Assign a viewpoint to a comment
 - DELETE - Delete the viewpoint assigned to a comment
 
-Long URL: /{version}/projects/{project_id}/topics/{guid}/comments/{guid}/viewpoint
+Long URL: /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}/viewpoint
 
-    GET, POST, DELETE /V0.99/comments/{guid}/reply_to
+    GET, POST, DELETE /bcf/{version}/comments/{guid}/reply_to
 
 - GET - Retrieve the replyTo comment related to a comment
 - POST - Add a replyTo comment relation to a comment
 - DELETE - Delete the replyTo comment relation on a comment
 
-Long URL: /{version}/projects/{project_id}/topics/{guid}/comments/{guid}/reply_to
+Long URL: /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}/reply_to
 
 
 ----------
