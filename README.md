@@ -122,43 +122,43 @@ Model collaboration is managed through a shared file server or a network file sh
 
 
 
-## Information Services (Topology 1) ##
+# Topology 2 - Colocated BCF-Server and Model Server#
 
-[version.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/version.json), [link.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/link.json), [colors.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/colors.json)
+BCF and model server are co located on the same hosts.
 
-Services:
+
+![Topology3](Images/Topology3.png)
+
+
+----------
+
+
+## Information Services ##
+
+[version.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/version.json)
+
+**Recource URL**
 
 `GET /version` 
 
-- GET - Retrieve BCF-Version
+
+**Parameters**
+
+version_id |	string	| ID of the version
+
+detailed_version	|	string | URL to version on Github
+
+link_schemas	| string	| URL to schemas on Github
+
+colors	| string	| URL to color schema on Github
+
 
 ---------- 
 
 
-    GET /{version}/schemas
+## Authentication ##
 
-- GET - Retrieve link schema that contains all available schemas for Topolgy1	
-
----------- 
-
-
-    GET /{version}/schemas/{rel}
-
-- GET - Retrieve a specific schema.
-
-----------
-
-
-`GET /{version}/colors` 
-
-- GET - Retrieve ARGB values for colours
-
-
-----------
-
-## Authentication (Topology 1) ##
-
-The Authentication server is the BCF-Server. Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/draft-ietf-oauth-v2-22).
+Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/draft-ietf-oauth-v2-22).
 
 Services:
 
@@ -187,7 +187,7 @@ The access token is an arbitrary string, guarantied to fit in a varchar(255) fie
 When requesting other resources the access token must be passed via the Authorization header using the Bearer scheme *(e.g. Authorization: Bearer T9UNRV4sC9vr7ga)*.
 
 
-## Project Services (Topology 1) ##
+## Project Services ##
 
 
 [project.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/project.json), [extensions.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/extensions.json)
@@ -220,33 +220,10 @@ Long URL: -
 Long URL:  /V0.99/teams/{guid}/projects/{project_id}/extensions
 
 
-----------
+---------
 
 
-# Topology 2 - Connected BCF-Server and Model Server#
-
-BCF and Model server are aware of each other but are running independently (e.g. BCF Server is provided by vendor A while model server is provided by vendor B)
-
-
-![Topology2](Images/Topology2.png)
-
-
-----------
-
-# Topology 3 - Co-Located BCF-Server and Model Server#
-
-BCF and model server are co located on the same hosts.
-
-
-![Topology3](Images/Topology3.png)
-
-
-----------
-
-
-
-
-## BCF Services (Toplogy 1, Topology 2, Topology3)  ##
+## BCF Services ##
 
 #### *Topic* ####
 [topic.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/topic.json)

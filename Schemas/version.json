@@ -5,6 +5,8 @@
     "type": "object",
     "properties": {
         "version_id": {"type": "string"},
-        "detailed_version": {"type": "integer"}
+        "detailed_version": {"type": "string"},
+		"link_schemas":{"type": "string"},
+		"colors":{"type": "string"}
     }
 }
