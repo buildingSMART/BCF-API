@@ -144,11 +144,24 @@ BCF and model server are co located on the same hosts.
 
 **Parameters**
 
-version_id |	string	| ID of the version
 
-detailed_version	|	string | URL to version on Github
-
-link_schemas	| string	| URL to schemas on Github
+<table border="1">
+  <tr>
+    <td>version_id</td>
+    <td>string</td>
+    <td>ID of the version</td>
+  </tr>
+  <tr>
+    <td>detailed_version</td>
+    <td>string</td>
+    <td>URL to version on Github</td>
+  </tr>
+  <tr>
+    <td>link_schemas</td>
+    <td>string</td>
+    <td>URL to schemas on Github</td>
+  </tr>
+</table>
 
 
 ---------- 
@@ -158,9 +171,9 @@ link_schemas	| string	| URL to schemas on Github
 
 Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/draft-ietf-oauth-v2-22).
 
-Services:
+**Recource URL**
 
-    GET /bcf/{version}/oauth2/authorize
+    GET /bcf/oauth2/authorize
 
 Open a browser window or redirect the user to this resource.
 
@@ -170,13 +183,11 @@ Redirects back to the specified redirect URI with the provided state as a query 
 
 
 
-- an authorization code as a query parameter if the user allows your app to access the account.
-- the value "access_denied" in the error query parameter if the user denies access.
-
-Long Url: -
+an authorization code as a query parameter if the user allows your app to access the account.
+the value "access_denied" in the error query parameter if the user denies access.
 
 
-    POST /bcf/{version}/oauth2/access_token
+    POST /bcf/oauth2/access_token
 
 After you have received the authorization code you can request an access token. The access token will be returned as JSON in the response body.
 
@@ -190,14 +201,82 @@ When requesting other resources the access token must be passed via the Authoriz
 
 [project.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/project.json), [extensions.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/extensions.json)
 
-Services:
+**Recource URL**
 
-    GET, POST /bcf/{version}/projects
+    GET /bcf/{version}/projects
 
-- GET - Retrieve a list of projects where the currently logged on user is assigned to with his specific roles.
-- POST - Add a new project
+Retrieve a list of projects where the currently logged on user is assigned to.
 
-Long Url: -
+**Example Request**
+
+    https://.../bcf/1.0/projects
+
+**Example Response**
+
+
+    [{
+        "project_id": "9a1e6b9a668740b88b076a08fcca2b53",
+		"name": "Example project 1"
+    },
+    {
+        "project_id": "4950fb76d0bd4b98b3a7c2152bd62b79"
+		"name": "Example project 2"
+    }]
+
+
+----------
+**Recource URL**
+
+    POST /bcf/{version}/projects
+
+Add a new project
+
+**Parameters**
+
+JSON encoded body using the "application/x-www-form-urlencoded" content type.
+
+<table border="1">
+
+  <tr>
+    <td>name</td>
+    <td>string</td>
+    <td>The project name</td>
+  </tr>
+</table>
+
+
+**Example Request**
+
+    https://.../bcf/1.0/projects
+	{
+    "name": "Example project 3"
+	}
+
+**Example Response**
+
+
+    {
+      "name": "Example project 3",
+      "id": "dabc6dfce6e849bfada976d9fa9e294a"
+    }
+
+
+
+----------
+
+**Recource URL**
+
+    GET /bcf/{version}/projects/{project_id}
+
+Retrieve a specific project
+
+**Example Request**
+
+    https://.../bcf/1.0/projects/dabc6dfce6e849bfada976d9fa9e294a
+
+
+----------
+
 
     GET, PUT, DELETE /bcf/{version}/projects/{project_id}
 
@@ -205,7 +284,7 @@ Long Url: -
 - PUT - Modify a specific project
 - DELETE - Delete a specific project
 
-Long URL: -
+
 
 
     GET, POST, PUT, DELETE /bcf/{version}/projects/{project_id}/extension
