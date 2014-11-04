@@ -137,7 +137,7 @@ BCF and model server are co located on the same hosts.
 
 [version.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/version.json)
 
-**Recource URL**
+**Recource URL (public resource)**
 
 `GET /bcf/version` 
 
@@ -169,31 +169,103 @@ BCF and model server are co located on the same hosts.
 
 ## Authentication ##
 
+[auth.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/auth.json)
+
 Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/draft-ietf-oauth-v2-22).
 
-**Recource URL**
+**Recource URL (public resource)**
 
-    GET /bcf/oauth2/authorize
+    GET /bcf/auth	
 
-Open a browser window or redirect the user to this resource.
+**Parameters**
 
-Redirects back to the specified redirect URI with the provided state as a query parameter or either...
+<table border="1">
+  <tr>
+    <td>oauth2_auth_url</td>
+    <td>string</td>
+    <td>URL to authorisation page</td>
+  </tr>
+  <tr>
+    <td>oauth2_token_url</td>
+    <td>string</td>
+    <td>URL for token requests</td>
+  </tr>
+</table>
+
+
+**Example Request**
+
+    https://.../bcf/auth	
+
+**Example Response**
+
+	{
+	"oauth2_auth_url": "https://bim--it.net/bcf/oauth2/auth", 
+	"oauth2_token_url": "https://bim--it.net/bcf/oauth2/token" 
+	}
+
+
+**Oauth2 protocol flow - Client Request -**
+
+The Client uses the **"oauth2\_auth_url"** and adds the following parameters to it.
+
+
+1. response_type -> code
+2. client_id -> your client\_id
+3. state -> unique user defined value
+
+Example Url:
+
+	https://bim--it.net/bcf/oauth2/auth?response_type=code&client_id=<YourClientID>&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
+
+
+Tip:
+You can use the state parameter to transport custom information. 
+
+Open a browser window or redirect the user to this resource. This redirects back to the specified redirect URI with the provided state and the authorization code as a query parameter if the user allows your app to access the account, the value "access_denied" in the error query parameter if the user denies access.
+
+**Oauth2 protocol flow - Token Request -**
+
+[token.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/token.json)
+
+The Client uses the **"oauth2\_token_url"** to request a token.
+
+	POST https://bim--it.net/bcf/oauth2/token
+
+Content type: application/x-www-form-urlencoded. 
+
+The POST request has to be done via HTTP Basic Authorization. Your "ClientID" is the username, your "ClientSecret" is the password.
+
+Post Request Body: 
+
+	grant_type=authorization_code&code=<YourAccessCode>
+
+
+The access token will be returned as JSON in the response body and is an arbitrary string, guarantied to fit in a varchar(255) field.
 
 
 
 
+**Oauth2 protocol flow - Refresh Token Request -**
 
-an authorization code as a query parameter if the user allows your app to access the account.
-the value "access_denied" in the error query parameter if the user denies access.
+[token.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/token.json)
 
 
-    POST /bcf/oauth2/access_token
+The process to retrieve a refresh token is exactly the same as retrieving a token except the Post Request Body.
 
-After you have received the authorization code you can request an access token. The access token will be returned as JSON in the response body.
+Post Request Body:
 
-The access token is an arbitrary string, guarantied to fit in a varchar(255) field.
+	grant_type=refresh_token&refresh_token=<YourRefreshToken>
+
+The refresh token can only be used once to retrieve a token and a new refresh token. 
+
+
+**Oauth2 protocol flow - Requesting Resources -**
 
 When requesting other resources the access token must be passed via the Authorization header using the Bearer scheme *(e.g. Authorization: Bearer T9UNRV4sC9vr7ga)*.
+
+----------
+
 
 
 ## Project Services ##
