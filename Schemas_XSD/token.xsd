@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mit XMLSpy v2011 rel. 3 (http://www.altova.com) von Klaus Linhard (IABI e.V.) bearbeitet -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="Token">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Token" type="Token"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="Token">
+		<xs:sequence>
+			<xs:element name="AccessToken" type="xs:string" minOccurs="0"/>
+			<xs:element name="TokenType" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExpiresIn" type="xs:string" minOccurs="0"/>
+			<xs:element name="RefreshToken" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
