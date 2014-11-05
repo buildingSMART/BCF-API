@@ -8,8 +8,8 @@
         "name": {"type": "string"},
         "extension_schema": {"type": "string"},
         "links": [
-            {"rel": "topics", "href": "{guid}/topics"},
-            {"rel": "extension", "href": "{guid}/extension"}
+            {"rel": "topics", "href": "{project_id}/topics"},
+            {"rel": "extension", "href": "{project_id}/extension"}
         ]
     }
 }
