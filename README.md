@@ -277,7 +277,10 @@ When requesting other resources the access token must be passed via the Authoriz
 
     GET /bcf/{version}/projects
 
+[GET_project.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/GET_project.json)
+
 Retrieve a list of projects where the currently logged on user is assigned to.
+
 
 **Example Request**
 
