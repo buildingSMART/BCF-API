@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mit XMLSpy v2011 rel. 3 (http://www.altova.com) von Klaus Linhard (IABI e.V.) bearbeitet -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="Auth">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Auth" type="Auth"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="Auth">
+		<xs:sequence>
+			<xs:element name="Oauth2AuthUrl" type="xs:string" minOccurs="0"/>
+			<xs:element name="Oauth2TokenUrl" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
