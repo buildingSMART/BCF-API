@@ -24,6 +24,7 @@ All API access is over HTTPS. Data is sent as query parameters and received as J
 - Link header introduced by RFC 5988
 - custom HTTP header  X-Total-Count (HEAD)
 
+
 ***page, page_size, sort***
 
 Only „descending“ if property exits.
