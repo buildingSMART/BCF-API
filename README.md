@@ -14,7 +14,7 @@
 
 BCF is a format for managing issues on a BIM project. RESTful BCF-API supports the exchange of BCFv2 issues between software applications.
 
-All API access is over HTTPS. Data is sent as query parameters and received as JSON. Every resource has a corresponding Json Schema. (There are also XSD-Schemas available but XML support ist optionally). Json Hyper Schema is used for link definition. Authentication method is OAuth2.
+All API access is over HTTPS. Data is sent as query parameters and received as JSON. Every resource has a corresponding Json Schema (Draft 03). Json Hyper Schema is used for link definition. Authentication method is OAuth2.
 
 
 
@@ -290,11 +290,11 @@ Retrieve a list of projects where the currently logged on user is assigned to.
 
 
     [{
-        "project_id": "9a1e6b9a668740b88b076a08fcca2b53",
+        "project_id": "F445F4F2-4D02-4B2A-B612-5E456BEF9137",
 		"name": "Example project 1"
     },
     {
-        "project_id": "4950fb76d0bd4b98b3a7c2152bd62b79"
+        "project_id": "A233FBB2-3A3B-EFF4-C123-DE22ABC8414",
 		"name": "Example project 2"
     }]
 
@@ -331,8 +331,8 @@ JSON encoded body using the "application/x-www-form-urlencoded" content type.
 
 
     {
+      "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414"
       "name": "Example project 3",
-      "id": "dabc6dfce6e849bfada976d9fa9e294a"
     }
 
 
