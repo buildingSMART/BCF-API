@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-03/schema#",
     "title": "projects_GET",
-    "description": "Schema for GET_projects where the currently logged on user has access rights on.",
+    "description": "Schema for GET projects where the currently logged on user has access rights on.",
     "type": "array",
     "items": [
         {
