@@ -136,7 +136,7 @@ BCF and model server are co located on the same hosts.
 
 ## Information Services ##
 
-[version.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/version.json)
+[version.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/version.json)
 
 **Recource URL (public resource)**
 
@@ -170,7 +170,7 @@ BCF and model server are co located on the same hosts.
 
 ## Authentication ##
 
-[auth.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/auth.json)
+[auth.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/auth.json)
 
 Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/draft-ietf-oauth-v2-22).
 
@@ -227,7 +227,7 @@ Open a browser window or redirect the user to this resource. This redirects back
 
 **Oauth2 protocol flow - Token Request -**
 
-[token.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/token.json)
+[token.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/token.json)
 
 The Client uses the **"oauth2\_token_url"** to request a token.
 
@@ -249,7 +249,7 @@ The access token will be returned as JSON in the response body and is an arbitra
 
 **Oauth2 protocol flow - Refresh Token Request -**
 
-[token.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/token.json)
+[token.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/token.json)
 
 
 The process to retrieve a refresh token is exactly the same as retrieving a token except the Post Request Body.
@@ -272,13 +272,11 @@ When requesting other resources the access token must be passed via the Authoriz
 ## Project Services ##
 
 
-[project.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/project.json), [extensions.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/extensions.json)
-
 **Recource URL**
 
     GET /bcf/{version}/projects
 
-[GET_project.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/GET_project.json)
+[projects_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/projects_GET.json)
 
 Retrieve a list of projects where the currently logged on user is assigned to.
 
@@ -304,6 +302,8 @@ Retrieve a list of projects where the currently logged on user is assigned to.
 **Recource URL**
 
     POST /bcf/{version}/projects
+
+[project_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/project_POST.json)
 
 Add a new project
 
@@ -344,6 +344,8 @@ JSON encoded body using the "application/x-www-form-urlencoded" content type.
 
     GET /bcf/{version}/projects/{project_id}
 
+[project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/project_GET.json)
+
 Retrieve a specific project
 
 **Example Request**
@@ -355,6 +357,8 @@ Retrieve a specific project
 
 
     GET, PUT, DELETE /bcf/{version}/projects/{project_id}
+
+[project_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/project_PUT.json)
 
 - GET - Retrieve a specific project
 - PUT - Modify a specific project
@@ -370,7 +374,7 @@ Retrieve a specific project
 - PUT - Change the project extension schema
 - DELETE – Delete the project extension schema
 
-Long URL:  /bcf/{version}/teams/{guid}/projects/{project_id}/extensions
+Long URL:  -
 
 
 ---------
