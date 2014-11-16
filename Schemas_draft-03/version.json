@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-03/schema#",
+    "title": "version",
+    "description": "Schema for Version",
+    "type": "object",
+    "properties": {
+        "version_id": {
+            "type": "string",
+            "required": true
+        },
+        "detailed_version": {
+            "type": "string",
+            "required": false
+        },
+        "link_schemas": {
+            "type": "string",
+            "required": true
+        }
+    },
+    "links": [
+        {
+            "rel": "projects",
+            "href": "{version_id}/projects"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+  {
+    "$schema": "http://json-schema.org/draft-03/schema#",
+    "title": "project_POST",
+    "description": "Schema for project POST, BCF REST API.",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "required": true
+        },
+        "extension_schema": {
+            "type": "string",
+            "required": false
+        }
+    }
+}
