@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-03/schema#",
-    "title": "token",
+    "title": "token_GET",
     "description": "Access Token in BCF REST API.",
     "type": "object",
     "properties": {

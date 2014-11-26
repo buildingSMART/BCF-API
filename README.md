@@ -173,7 +173,7 @@ BCF and model server are co located on the same hosts.
 
 ## Authentication ##
 
-[auth_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/auth_GET.json)
+[auth_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/auth_GET.json)
 
 Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/draft-ietf-oauth-v2-22).
 
@@ -239,7 +239,7 @@ Open a browser window or redirect the user to this resource. This redirects back
 
 **Oauth2 protocol flow - Token Request -**
 
-[token_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/token_GET.json)
+[token_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/token_GET.json)
 
 The Client uses the **"oauth2\_token_url"** to request a token.
 
@@ -261,7 +261,7 @@ The access token will be returned as JSON in the response body and is an arbitra
 
 **Oauth2 protocol flow - Refresh Token Request -**
 
-[token_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/token_GET.json)
+[token_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/token_GET.json)
 
 
 The process to retrieve a refresh token is exactly the same as retrieving a token except the Post Request Body.
@@ -276,9 +276,9 @@ The refresh token can only be used once to retrieve a token and a new refresh to
 
 **Oauth2 protocol flow - dynamic client registration -**
 
-[dynRegClient\_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/dyn_reg_client_POST.json)
+[dynRegClient\_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/dyn_reg_client_POST.json)
 
-[dynRegClient\_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/dyn_reg_client_GET.json) 
+[dynRegClient\_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/dyn_reg_client_GET.json) 
 
  The following describes the optional dynamic registration process of a client. BCF-Servers may offer additional processes registering clients. 
 
@@ -347,7 +347,7 @@ When requesting other resources the access token must be passed via the Authoriz
 
     GET /bcf/{version}/projects
 
-[project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/project_GET.json)
+[project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Administration/project_GET.json)
 
 Retrieve a **list** of projects where the currently logged on user is assigned to.
 
@@ -374,7 +374,7 @@ Retrieve a **list** of projects where the currently logged on user is assigned t
 
     POST /bcf/{version}/projects
 
-[project_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/project_POST.json)
+[project_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Administration/project_POST.json)
 
 Add a new project
 
@@ -415,7 +415,7 @@ JSON encoded body using the "application/json" content type.
 
     GET /bcf/{version}/projects/{project_id}
 
-[project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/project_GET.json)
+[project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Administration/project_GET.json)
 
 Retrieve a specific project
 
@@ -429,7 +429,7 @@ Retrieve a specific project
 
     GET, PUT, DELETE /bcf/{version}/projects/{project_id}
 
-[project_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/project_PUT.json)
+[project_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Administration/project_PUT.json)
 
 - GET - Retrieve a specific project
 - PUT - Modify a specific project
