@@ -1,14 +1,14 @@
 {
     "$schema": "http://json-schema.org/draft-03/schema#",
-    "title": "Authorisation",
-    "description": "Authorisation in BCF REST API.",
+    "title": "dyn_reg_client_GET",
+    "description": "Dynamic Client Meta Data",
     "type": "object",
     "properties": {
-        "oauth2_auth_url": {
+        "client_id": {
             "type": "string",
             "required": true
         },
-        "oauth2_token_url": {
+        "client_secret": {
             "type": "string",
             "required": true
         }

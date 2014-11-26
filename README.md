@@ -136,7 +136,7 @@ BCF and model server are co located on the same hosts.
 
 ## Information Services ##
 
-[version.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/version.json)
+[version_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/version_GET.json)
 
 **Recource URL (public resource)**
 
@@ -151,16 +151,19 @@ BCF and model server are co located on the same hosts.
     <td>version_id</td>
     <td>string</td>
     <td>ID of the version</td>
+    <td>mandatory</td>
   </tr>
   <tr>
     <td>detailed_version</td>
     <td>string</td>
     <td>URL to version on Github</td>
+    <td>optional</td>
   </tr>
   <tr>
     <td>link_schemas</td>
     <td>string</td>
     <td>URL to schemas on Github</td>
+    <td>mandatory</td>
   </tr>
 </table>
 
@@ -170,7 +173,7 @@ BCF and model server are co located on the same hosts.
 
 ## Authentication ##
 
-[auth.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/auth.json)
+[auth_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/auth_GET.json)
 
 Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/draft-ietf-oauth-v2-22).
 
@@ -185,24 +188,33 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
     <td>oauth2_auth_url</td>
     <td>string</td>
     <td>URL to authorisation page</td>
+    <td>mandatory</td>
   </tr>
   <tr>
     <td>oauth2_token_url</td>
     <td>string</td>
     <td>URL for token requests</td>
+    <td>mandatory</td>
+  </tr>
+  <tr>
+    <td>oauth2_dynamic_client_reg_url</td>
+    <td>string</td>
+    <td>URL for automated client registration</td>
+    <td>optional</td>
   </tr>
 </table>
 
 
 **Example Request**
 
-    https://.../bcf/auth	
+    https://example.com/bcf/auth	
 
 **Example Response**
 
 	{
-	"oauth2_auth_url": "https://bim--it.net/bcf/oauth2/auth", 
-	"oauth2_token_url": "https://bim--it.net/bcf/oauth2/token" 
+	"oauth2_auth_url": "https://example.com/bcf/oauth2/auth", 
+	"oauth2_token_url": "https://example.com/bcf/oauth2/token",
+    "oauth2_dynamic_client_reg_url": "https://example.com/bcf/oauth2/reg" 
 	}
 
 
@@ -217,7 +229,7 @@ The Client uses the **"oauth2\_auth_url"** and adds the following parameters to 
 
 Example Url:
 
-	https://bim--it.net/bcf/oauth2/auth?response_type=code&client_id=<YourClientID>&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
+	https://example.com/bcf/oauth2/auth?response_type=code&client_id=<YourClientID>&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
 
 
 Tip:
@@ -227,13 +239,13 @@ Open a browser window or redirect the user to this resource. This redirects back
 
 **Oauth2 protocol flow - Token Request -**
 
-[token.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/token.json)
+[token_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/token_GET.json)
 
 The Client uses the **"oauth2\_token_url"** to request a token.
 
-	POST https://bim--it.net/bcf/oauth2/token
-
-Content type: application/x-www-form-urlencoded. 
+	POST https://example.com/bcf/oauth2/token
+	Content type: application/x-www-form-urlencoded.
+ 
 
 The POST request has to be done via HTTP Basic Authorization. Your "ClientID" is the username, your "ClientSecret" is the password.
 
@@ -242,14 +254,14 @@ Post Request Body:
 	grant_type=authorization_code&code=<YourAccessCode>
 
 
-The access token will be returned as JSON in the response body and is an arbitrary string, guarantied to fit in a varchar(255) field.
+The access token will be returned as JSON in the response body and is an arbitrary string, guaranteed to fit in a varchar(255) field.
 
 
 
 
 **Oauth2 protocol flow - Refresh Token Request -**
 
-[token.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/token.json)
+[token_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/token_GET.json)
 
 
 The process to retrieve a refresh token is exactly the same as retrieving a token except the Post Request Body.
@@ -259,6 +271,65 @@ Post Request Body:
 	grant_type=refresh_token&refresh_token=<YourRefreshToken>
 
 The refresh token can only be used once to retrieve a token and a new refresh token. 
+
+
+
+**Oauth2 protocol flow - dynamic client registration -**
+
+[dynRegClient\_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/dyn_reg_client_POST.json)
+
+[dynRegClient\_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/dyn_reg_client_GET.json) 
+
+ The following describes the optional dynamic registration process of a client. BCF-Servers may offer additional processes registering clients. 
+
+**Recource URL**
+
+    POST <oauth2_dynamic_client_reg_url> (obtained from auth_GET)
+
+Register a new client :
+
+**Parameters**
+
+JSON encoded body using the "application/json" content type.
+
+<table border="1">
+
+  <tr>
+    <td>client_name</td>
+    <td>string (max. 60)</td>
+    <td>The client name</td>
+  </tr>
+  <tr>
+    <td>client_description</td>
+    <td>string (max. 4000)</td>
+    <td>The client description</td>
+  </tr>
+  <tr>
+    <td>client_url</td>
+    <td>string</td>
+    <td>An URL providing additional information about the client</td>
+  </tr>
+</table>
+
+
+**Example Request**
+
+    https://example.com/bcf/oauth2/reg
+	{
+    "client_name": "Example Application",
+	"client_description": "Example CAD desktop application",
+	"client_url": "http://exampleinfo@cad.com"
+	}
+
+
+**Example Response**
+
+
+    {
+      "client_id": "cGxlYXN1cmUu"
+      "client_secret": "ZWFzdXJlLg==",
+    }
+
 
 
 **Oauth2 protocol flow - Requesting Resources -**
@@ -276,14 +347,14 @@ When requesting other resources the access token must be passed via the Authoriz
 
     GET /bcf/{version}/projects
 
-[projects_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/projects_GET.json)
+[project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/project_GET.json)
 
-Retrieve a list of projects where the currently logged on user is assigned to.
+Retrieve a **list** of projects where the currently logged on user is assigned to.
 
 
 **Example Request**
 
-    https://.../bcf/1.0/projects
+    https://example.com/bcf/1.0/projects
 
 **Example Response**
 
@@ -309,7 +380,7 @@ Add a new project
 
 **Parameters**
 
-JSON encoded body using the "application/x-www-form-urlencoded" content type.
+JSON encoded body using the "application/json" content type.
 
 <table border="1">
 
@@ -323,7 +394,7 @@ JSON encoded body using the "application/x-www-form-urlencoded" content type.
 
 **Example Request**
 
-    https://.../bcf/1.0/projects
+    https://example.com/bcf/1.0/projects
 	{
     "name": "Example project 3"
 	}
@@ -350,7 +421,7 @@ Retrieve a specific project
 
 **Example Request**
 
-    https://.../bcf/1.0/projects/dabc6dfce6e849bfada976d9fa9e294a
+    https://example.com/bcf/1.0/projects/dabc6dfce6e849bfada976d9fa9e294a
 
 
 ----------
