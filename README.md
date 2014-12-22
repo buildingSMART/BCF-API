@@ -18,14 +18,23 @@ All API access is over HTTPS. Data is sent as query parameters and received as J
 
 
 
-## 1.1 Paging, Sorting, Filtering ##
+## 1.1 Paging ##
+
+When issuing a GET request for a collection, the client may state a desired range of items to be returned via the http header "Range".
+
+Example:
+Range: items=1-25
+
+The response for a collection must include the http header "Content-Range", even when the request did not specify a range. 
+
+Example:
+Content-Range: items 1-25/37
+
+The returned Content-Range does not have to conform to the requested range, p.e. when the server responds with fewer items than requested.
 
 
-- Link header introduced by RFC 5988
-- custom HTTP header  X-Total-Count (HEAD)
+## 1.2 Sorting, Filtering ##
 
-
-***page, page_size, sort***
 
 Only „descending“ if property exits.
  
@@ -42,11 +51,11 @@ if descending=false -> ascending
 Example 1:
 
 
-    .../bcf/{version}/projects/{guid}/topics?page=1&page_size=5&sort=priority&descending=true
+    .../bcf/{version}/projects/{guid}/topics?sort=priority&descending=true
 
 Example 2:
 
-    .../bcf/{version}/projects/{guid}/topics?page=1&page_size=5&sort=priority&descending=true&filter=(label%3DArchitecture%7Clabel%3DStructural)%26topicstatus%21%3DClosed
+    .../bcf/{version}/projects/{guid}/topics?sort=priority&descending=true&filter=(label%3DArchitecture%7Clabel%3DStructural)%26topicstatus%21%3DClosed
 
 
 
@@ -56,7 +65,7 @@ Example 2:
 
 
 
-## 1.2 Caching ##
+## 1.3 Caching ##
 
 ETags, or entity-tags, are an important part of HTTP, being a critical part of caching, and also used in "conditional" requests.
 The ETag response-header field value, an entity tag, provides for an "opaque" cache validator.
@@ -80,7 +89,7 @@ ETags are returned in a response to a GET:
     …..
   
 
-## 1.3 Cross origin resource sharing (Cors) ##
+## 1.4 Cross origin resource sharing (Cors) ##
 
 The server will put the "Access-Control-Allow-Headers" in the response header and specify who can access the server(json) resources. The client can look for this value and proceed with accessing the resources. 
 
@@ -95,7 +104,7 @@ The server has  a web config file .. "*" means the server allow the resources fo
      </httpProtocol>
 
 
-## 1.4 Http status codes ##
+## 1.5 Http status codes ##
 
 -   200 OK (Data is returned)
 -   201 No content (Data has been deleted)
@@ -106,7 +115,7 @@ The server has  a web config file .. "*" means the server allow the resources fo
 -   404 Not found (It must be discussed if the user should get “unauthorized” to resources he don’t have access to, or “not found")
 -   422 Unprocessable entity (Input data is well formed, but the semantic is wrong; Example: Resource define that a value cannot be “null”, but the value is “null”)
 
-## 1.5 Error response body format ##
+## 1.6 Error response body format ##
 
 BCF-API has a specified error response body format [error.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/error.json).
 
@@ -158,12 +167,6 @@ BCF and model server are co located on the same hosts.
     <td>string</td>
     <td>URL to version on Github</td>
     <td>optional</td>
-  </tr>
-  <tr>
-    <td>link_schemas</td>
-    <td>string</td>
-    <td>URL to schemas on Github</td>
-    <td>mandatory</td>
   </tr>
 </table>
 
@@ -309,6 +312,11 @@ JSON encoded body using the "application/json" content type.
     <td>string</td>
     <td>An URL providing additional information about the client</td>
   </tr>
+  <tr>
+    <td>redirect_url</td>
+    <td>string</td>
+    <td>An URL where users are redirected after granting access to the client</td>
+  </tr>
 </table>
 
 
@@ -318,7 +326,8 @@ JSON encoded body using the "application/json" content type.
 	{
     "client_name": "Example Application",
 	"client_description": "Example CAD desktop application",
-	"client_url": "http://exampleinfo@cad.com"
+	"client_url": "http://example.com",
+	"redirect_url": "http://localhost:8080"
 	}
 
 
@@ -349,7 +358,7 @@ When requesting other resources the access token must be passed via the Authoriz
 
 [project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Administration/project_GET.json)
 
-Retrieve a **list** of projects where the currently logged on user is assigned to.
+Retrieve a **collection** of projects where the currently logged on user is assigned to.
 
 
 **Example Request**
@@ -421,31 +430,64 @@ Retrieve a specific project
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/dabc6dfce6e849bfada976d9fa9e294a
+    https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
 
+
+**Example Response**
+
+
+    {
+      "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
+      "name": "Example project 3"
+    }
 
 ----------
+**Recource URL**
 
-
-    GET, PUT, DELETE /bcf/{version}/projects/{project_id}
+    PUT /bcf/{version}/projects/{project_id}
 
 [project_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Administration/project_PUT.json)
 
-- GET - Retrieve a specific project
-- PUT - Modify a specific project
-- DELETE - Delete a specific project
+Modify a specific project (only the project name may be updated).
 
 
+**Example Request**
+
+    https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
+	{
+    "name": "Example project 3 modified"
+	}
+
+**Example Response**
+
+
+    {
+      "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
+      "name": "Example project 3 modified"
+    }
+
+----------
+**Recource URL**
+
+    DELETE /bcf/{version}/projects/{project_id}
+
+Delete a specific project
+
+**Example Request**
+
+    https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
+
+------------
+**Recource URL**
 
 
     GET, POST, PUT, DELETE /bcf/{version}/projects/{project_id}/extension
 
 - GET - Retrieve the project extension schema
-- POST - Add the project extension schema
-- PUT - Change the project extension schema
+- PUT - Modify the project extension schema
 - DELETE – Delete the project extension schema
 
-Long URL:  -
+
 
 
 ---------
