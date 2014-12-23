@@ -1,0 +1,35 @@
+{
+"$schema": "http://json-schema.org/draft-03/schema#",  
+  "title": "component_GET",
+ "description": "Schema for single component GET, BCF REST API.",
+  "type": "object",
+  "properties": {
+    "ifc_guid": {
+      "type": [
+      "required": true,
+      "type": "string"
+      ]
+    },
+    "selected": {
+      "type": "boolean"
+    },
+    "color": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "originating": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "authoring_tool_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

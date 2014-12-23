@@ -1,0 +1,344 @@
+{
+"$schema": "http://json-schema.org/draft-03/schema#",  
+"title": "viewpoint_GET",
+"description": "Schema for single viewpoint GET, BCF REST API.",
+  "type": "object",
+  "properties": {
+    "guid": {
+      "required": true,
+      "type": "string"
+    },
+    "orthogonal_camera": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "camera_view_point": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          }
+        },
+        "camera_direction": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          }
+        },
+        "camera_up_vector": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          }
+        },
+        "view_to_world_scale": {
+          "type": "number"
+        }
+      }
+    },
+    "perspective_camera": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "camera_view_point": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          }
+        },
+        "camera_direction": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          }
+        },
+        "camera_up_vector": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          }
+        },
+        "field_of_view": {
+          "type": "number"
+        }
+      }
+    },
+    "lines": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "line": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "start_point": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                }
+              },
+              "end_point": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "clipping_planes": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "clipping_plane": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "location": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                }
+              },
+              "direction": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "bitmap": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "bitmap": {
+          "type": "integer",
+          "enum": [
+            0,
+            1,
+            2
+          ],
+          "options": [
+            {
+              "value": 0,
+              "label": "PNG"
+            },
+            {
+              "value": 1,
+              "label": "JPG"
+            },
+            {
+              "value": 2,
+              "label": "BMP"
+            }
+          ]
+        },
+        "reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "location": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          }
+        },
+        "normal": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          }
+        },
+        "up": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          }
+        },
+        "height": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+"links": [
+        {
+            "rel": "bitmap",
+            "href": "{guid}/bitmap"
+        }
+    ]
+}

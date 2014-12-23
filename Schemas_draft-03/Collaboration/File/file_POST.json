@@ -1,0 +1,35 @@
+{
+"$schema": "http://json-schema.org/draft-03/schema#",    
+"title": "file_POST",
+"description": "Schema for file POST, BCF REST API.",
+  "type": "object",
+  "properties": {
+    "ifc_project": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ifc_spatial_structure_element": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "file_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "date": {
+      "type": "string"
+    },
+    "reference": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

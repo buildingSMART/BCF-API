@@ -1,0 +1,24 @@
+{
+"$schema": "http://json-schema.org/draft-03/schema#",     
+"title": "document_reference_GET",
+"description": "Schema for a single document reference GET, BCF REST API.",
+  "type": "object",
+  "properties": {
+    "guid": {
+      "required": true,
+      "type": "string"
+    },
+    "referenced_document": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

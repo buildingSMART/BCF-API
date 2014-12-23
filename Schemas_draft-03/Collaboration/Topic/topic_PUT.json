@@ -1,0 +1,20 @@
+{
+"$schema": "http://json-schema.org/draft-03/schema#",   
+"title": "topic_PUT",
+"description": "Schema for topic PUT, BCF REST API.",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

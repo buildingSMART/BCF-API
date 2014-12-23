@@ -1,0 +1,20 @@
+{
+"$schema": "http://json-schema.org/draft-03/schema#",       
+"title": "document_reference_POST",
+"description": "Schema for document reference POST, BCF REST API.",
+  "type": "object",
+  "properties": {
+    "referenced_document": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}
