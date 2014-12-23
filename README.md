@@ -145,7 +145,7 @@ BCF and model server are co located on the same hosts.
 
 ## Information Services ##
 
-[version_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/version_GET.json)
+[version_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Public/version_GET.json)
 
 **Recource URL (public resource)**
 
