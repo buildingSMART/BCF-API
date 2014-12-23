@@ -11,10 +11,6 @@
         "detailed_version": {
             "type": "string",
             "required": false
-        },
-        "link_schemas": {
-            "type": "string",
-            "required": true
         }
     },
     "links": [

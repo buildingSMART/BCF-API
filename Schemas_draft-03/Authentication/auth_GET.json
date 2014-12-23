@@ -1,17 +1,21 @@
 {
-    "$schema": "http://json-schema.org/draft-03/schema#",
-    "title": "auth_GET",
-    "description": "Authorisation in BCF REST API.",
-    "type": "object",
-    "properties": {
-        "oauth2_auth_url": {
-            "type": "string",
-            "required": true
-        },
-        "oauth2_token_url": {
-            "type": "string",
-            "required": true
-        }
+  "title": "auth_GET",
+  "type": "object",
+  "properties": {
+    "oauth2_auth_url": {
+      "required": true,
+      "type": "string"
+    },
+    "oauth2_token_url": {
+      "required": true,
+      "type": "string"
+    },
+    "oauth2_dynamic_client_reg_url": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
+  }
 }
 

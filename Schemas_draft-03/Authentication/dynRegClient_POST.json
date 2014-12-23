@@ -17,6 +17,10 @@
         "client_url": {
             "type": "string",
             "required": false
+        },
+        "redirect_url": {
+            "type": "string",
+            "required": true
         }
     }
 }

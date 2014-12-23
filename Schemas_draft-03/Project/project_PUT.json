@@ -6,11 +6,7 @@
     "properties": {
         "name": {
             "type": "string",
-            "required": false
-        },
-        "extension_schema": {
-            "type": "string",
-            "required": false
+            "required": true
         }
     }
 }

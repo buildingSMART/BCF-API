@@ -356,7 +356,7 @@ When requesting other resources the access token must be passed via the Authoriz
 
     GET /bcf/{version}/projects
 
-[project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Administration/project_GET.json)
+[project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_GET.json)
 
 Retrieve a **collection** of projects where the currently logged on user is assigned to.
 
@@ -383,7 +383,7 @@ Retrieve a **collection** of projects where the currently logged on user is assi
 
     POST /bcf/{version}/projects
 
-[project_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Administration/project_POST.json)
+[project_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_POST.json)
 
 Add a new project
 
@@ -424,7 +424,7 @@ JSON encoded body using the "application/json" content type.
 
     GET /bcf/{version}/projects/{project_id}
 
-[project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Administration/project_GET.json)
+[project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_GET.json)
 
 Retrieve a specific project
 
@@ -446,7 +446,7 @@ Retrieve a specific project
 
     PUT /bcf/{version}/projects/{project_id}
 
-[project_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Administration/project_PUT.json)
+[project_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_PUT.json)
 
 Modify a specific project (only the project name may be updated).
 

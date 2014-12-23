@@ -11,10 +11,6 @@
         "name": {
             "type": "string",
             "required": true
-        },
-        "extension_schema": {
-            "type": "string",
-            "required": false
         }
     },
     "links": [
