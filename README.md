@@ -279,9 +279,9 @@ The refresh token can only be used once to retrieve a token and a new refresh to
 
 **Oauth2 protocol flow - dynamic client registration -**
 
-[dynRegClient\_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/dyn_reg_client_POST.json)
+[dynRegClient\_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/dynRegClient_POST.json)
 
-[dynRegClient\_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/dyn_reg_client_GET.json) 
+[dynRegClient\_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/dynRegClient_GET.json) 
 
  The following describes the optional dynamic registration process of a client. BCF-Servers may offer additional processes registering clients. 
 
