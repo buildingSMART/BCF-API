@@ -496,13 +496,163 @@ Delete a specific project
 ## BCF Services ##
 
 #### *Topic* ####
-[topic.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/topic.json)
 
 
-    GET, POST /bcf/{version}/projects/{project_id}/topics
+**Recource URL**
 
-- GET - Retrieve topics of a project (default sort = CreationDate)
-- POST - Add a new topic to a project
+    GET /bcf/{version}/projects/{project_id}/topics
+
+[topic_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_GET.json)
+
+Retrieve a collection of topics related to a project (default sort = creation_date).
+
+**Example Request**
+
+
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
+
+**Example Response**
+
+    [
+    {
+        "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "title": "Example topic 1",
+        "labels": [
+            "Architecture",
+            "Structural"
+        ],
+    	"creation_date": "2013-10-21T17:34:22.409Z"
+    },
+    {
+        "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+        "title": "Example topic 2",
+        "labels": [
+            "Architecture",
+            "Heating",
+            "Electrical"
+        ],
+    	"creation_date": "2014-11-19T14:24:11.316Z"
+    }
+	]
+
+
+**Recource URL**
+
+    POST /bcf/{version}/projects/{project_id}/topics
+
+[topic_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_POST.json)
+
+Add a new topic
+
+**Parameters**
+
+JSON encoded body using the "application/json" content type.
+
+
+<table border="1">
+  <tr>
+    <td>topic_type</td>
+    <td>string</td>
+    <td>The type of a topic (value from extension.xsd)</td>
+    <td>optional</td>
+  </tr>
+  <tr>
+    <td>topic_status</td>
+    <td>string</td>
+    <td>The status of a topic (value from extension.xsd)</td>
+    <td>optional</td>
+  </tr>
+  <tr>
+    <td>reference_link</td>
+    <td>string</td>
+    <td>Reference link</td>
+    <td>optional</td>
+  </tr>
+  <tr>
+    <td>title</td>
+    <td>string</td>
+    <td>The title of a topic</td>
+    <td>mandatory</td>
+  </tr>
+  <tr>
+    <td>priority</td>
+    <td>string</td>
+    <td>The priority of a topic (value from extension.xsd)</td>
+    <td>optional</td>
+  </tr>
+  <tr>
+    <td>index</td>
+    <td>integer</td>
+    <td>The index of a topic</td>
+    <td>optional</td>
+  </tr>
+  <tr>
+    <td>labels</td>
+    <td>string</td>
+    <td>The collection of labels of a topic (values from extension.xsd)</td>
+    <td>optional</td>
+  </tr>
+  <tr>
+    <td>assigned_to</td>
+    <td>string</td>
+    <td>UserID assigned to a topic (value from extension.xsd)</td>
+    <td>optional</td>
+  </tr>
+  <tr>
+    <td>description</td>
+    <td>string</td>
+    <td>Description of a topic</td>
+    <td>optional</td>
+  </tr>
+  <tr>
+    <td>snippet_type</td>
+    <td>string</td>
+    <td>Type of a BIM-Snippet of a topic (value from extension.xsd)</td>
+    <td>mandatory if BIM-Snippet exists</td>
+  </tr>
+  <tr>
+    <td>is_external</td>
+    <td>boolean</td>
+    <td>Is the BIM-Snippet external (default = false)</td>
+    <td>optional</td>
+  </tr>
+  <tr>
+    <td>reference</td>
+    <td>string</td>
+    <td>Reference of a BIM-Snippet of a topic</td>
+    <td>mandatory if BIM-Snippet exists</td>
+  </tr>
+  <tr>
+    <td>reference_schema</td>
+    <td>string</td>
+    <td>Schema of a BIM-Snippet of a topic</td>
+    <td>mandatory if BIM-Snippet exists</td>
+  </tr>
+</table>
+
+**Example Request**
+
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
+	    {
+		"topic_type": "Clash",
+		"topic_status": "open",
+        "title": "Example topic 3",
+		"priority": "high",
+        "labels": [
+            "Architecture",
+            "Heating"],
+		"assigned_to": "harry.muster@example.com",
+        "bim_snippet":
+				{
+				"snippet_type": "clash",
+				"is_external": true},
+				"reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
+				"reference_schema": "https://example.com/bcf/1.0/clash.xsd"	
+    	}
+
+-------------
+ 
+
 
 Long URL: -
 
