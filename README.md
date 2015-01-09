@@ -420,9 +420,11 @@ JSON encoded body using the "application/json" content type.
 
 ----------
 
-**Recource URL**
+**Recource URL	**
 
     GET /bcf/{version}/projects/{project_id}
+
+
 
 [project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_GET.json)
 
@@ -651,6 +653,7 @@ JSON encoded body using the "application/json" content type.
     	}
 
 **Recource URL**
+**<div style="color:#E0E">test</div>**
 
     GET /bcf/{version}/topics/{guid}
     GET /bcf/{version}/projects/{guid}/topics/{guid}
