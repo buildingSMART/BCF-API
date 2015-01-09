@@ -653,7 +653,6 @@ JSON encoded body using the "application/json" content type.
     	}
 
 **Recource URL**
-**<div style="color:#E0E">test</div>**
 
     GET /bcf/{version}/topics/{guid}
     GET /bcf/{version}/projects/{guid}/topics/{guid}
