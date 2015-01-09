@@ -650,8 +650,74 @@ JSON encoded body using the "application/json" content type.
 				"reference_schema": "https://example.com/bcf/1.0/clash.xsd"	
     	}
 
--------------
+**Recource URL**
+
+    GET /bcf/{version}/topics/{guid}
+    GET /bcf/{version}/projects/{guid}/topics/{guid}
+
+[topic_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_GET.json)
+
+
+Retrieve a specific topic.
+
+**Example Request**
+
+
+    https://example.com/bcf/1.0/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+
+
+**Example Response**
+
+   
+    {
+		"guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+		"topic_type": "Clash",
+		"topic_status": "open",
+        "title": "Example topic 3",
+		"priority": "high",
+        "labels": [
+            "Architecture",
+            "Heating"],
+		"assigned_to": "harry.muster@example.com",
+        "bim_snippet":
+				{
+				"snippet_type": "clash",
+				"is_external": true},
+				"reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
+				"reference_schema": "https://example.com/bcf/1.0/clash.xsd"	
+    	}
  
+**Recource URL**
+
+    PUT /bcf/{version}/topics/{guid}
+    PUT /bcf/{version}/projects/{guid}/topics/{guid}
+
+[topic_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_PUT.json)
+
+Modify a specific topic (only title and description may be updated).
+
+
+**Example Request**
+    
+	https://example.com/bcf/1.0/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+	{
+    "title": "Example topic 3 modified",
+	"description": "Clash between Architecture and Heating"
+	}
+
+**Example Response**
+
+
+    {
+      "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+      "title": "Example topic 3 modified",
+	  "description": "Clash between Architecture and Heating"
+    }
+
+
+-------------
+------------------
+
 
 
 Long URL: -
