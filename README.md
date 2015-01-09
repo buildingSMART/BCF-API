@@ -663,7 +663,7 @@ Retrieve a specific topic.
 **Example Request**
 
 
-    https://example.com/bcf/1.0/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
 
 
 **Example Response**
@@ -690,7 +690,7 @@ Retrieve a specific topic.
 **Recource URL**
 
     PUT /bcf/{version}/topics/{guid}
-    PUT /bcf/{version}/projects/{guid}/topics/{guid}
+    PUT /bcf/{version}/projects/{project_id}/topics/{guid}
 
 [topic_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_PUT.json)
 
@@ -699,7 +699,7 @@ Modify a specific topic (only title and description may be updated).
 
 **Example Request**
     
-	https://example.com/bcf/1.0/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
 	{
     "title": "Example topic 3 modified",
 	"description": "Clash between Architecture and Heating"
@@ -714,6 +714,16 @@ Modify a specific topic (only title and description may be updated).
 	  "description": "Clash between Architecture and Heating"
     }
 
+**Recource URL**
+
+    DELETE /bcf/{version}/topics/{guid}
+    DELETE /bcf/{version}/projects/{project_id}/topics/{guid}
+
+Delete a specific topic
+
+**Example Request**
+
+	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
 
 -------------
 ------------------
