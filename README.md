@@ -2,7 +2,7 @@
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
 **Version 1.0** based on BCFv2.
-[GitHub repository](https://github.com/BuildingSMART/BCF-API)
+[GitHub repository](https://github.com/BuildingSMART/BCF)
 
 
 
@@ -14,7 +14,7 @@
 
 BCF is a format for managing issues on a BIM project. RESTful BCF-API supports the exchange of BCFv2 issues between software applications.
 
-All API access is over HTTPS. Data is sent as query parameters and received as JSON. Every resource has a corresponding Json Schema (Draft 03). Json Hyper Schema is used for link definition. Authentication method is OAuth2.
+All API access is over HTTPS. Data is sent as query parameters and received as JSON. Every resource has a corresponding Json Schema (Draft 03). Json Hyper Schema is used for link definition. Authentication method is OAuth2. URL schemas in this readme are relational the base server URL.
 
 
 
@@ -60,7 +60,7 @@ Example 2:
 
 
 
-[Filter use escape characters](http://www.december.com/html/spec/esccodes.html)
+[Filter uses escape characters](http://www.december.com/html/spec/esccodes.html)
   
 
 
@@ -122,9 +122,9 @@ BCF-API has a specified error response body format [error.json](https://raw.gith
 ----------
 
 
+# 2. Topologies #
 
-
-# Topology 1 - BCF-Server only#
+## 2.1 Topology 1 - BCF-Server only##
 
 Model collaboration is managed through a shared file server or a network file sharing service like Dropbox. The BCF-Server handels the Authentication and the BCF-Issues. 
 
@@ -132,7 +132,7 @@ Model collaboration is managed through a shared file server or a network file sh
 
 
 
-# Topology 2 - Colocated BCF-Server and Model Server#
+# 2.2 Topology 2 - Colocated BCF-Server and Model Server#
 
 BCF and model server are co located on the same hosts.
 
@@ -141,15 +141,15 @@ BCF and model server are co located on the same hosts.
 
 
 ----------
+# 3. Public Services #
 
-
-## Information Services ##
+## 3.1 Information Services ##
 
 [version_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Public/version_GET.json)
 
 **Recource URL (public resource)**
 
-`GET /bcf/version` 
+	GET /bcf/version 
 
 
 **Parameters**
@@ -170,11 +170,23 @@ BCF and model server are co located on the same hosts.
   </tr>
 </table>
 
+**Example Request**
+
+	https://example.com/bcf/version
+
+**Example Response**
+
+	{
+	"version_id": "1.0", 
+	"detailed_version": "https://github.com/BuildingSMART/BCF-API", 
+	}	
 
 ---------- 
 
 
-## Authentication ##
+## 3.2 Authentication Services ##
+
+### 3.2.1 Obtaining Authentication Information ###
 
 [auth_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/auth_GET.json)
 
@@ -221,48 +233,86 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 	}
 
 
-**Oauth2 protocol flow - Client Request -**
+### 3.2.2 Oauth2 protocol flow - Client Request -###
 
 The Client uses the **"oauth2\_auth_url"** and adds the following parameters to it.
 
 
-1. response_type -> code
+1. response_type -> "code"
 2. client_id -> your client\_id
 3. state -> unique user defined value
 
-Example Url:
+Example URL:
 
 	https://example.com/bcf/oauth2/auth?response_type=code&client_id=<YourClientID>&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
 
+
+Example redirected URL:
+	
+	https://YourWebsite.com/retrieveCode?code=ABC1234567890XYZ&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
 
 Tip:
 You can use the state parameter to transport custom information. 
 
 Open a browser window or redirect the user to this resource. This redirects back to the specified redirect URI with the provided state and the authorization code as a query parameter if the user allows your app to access the account, the value "access_denied" in the error query parameter if the user denies access.
 
-**Oauth2 protocol flow - Token Request -**
+### 3.2.3 Oauth2 protocol flow - Token Request -###
 
 [token_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/token_GET.json)
 
-The Client uses the **"oauth2\_token_url"** to request a token.
+The Client uses the **"oauth2\_token_url"** to request a token. Example:
 
 	POST https://example.com/bcf/oauth2/token
 	Content type: application/x-www-form-urlencoded.
  
+**Parameters**
+<table>
+	<tr>
+		<td>access_token</td>
+		<td>string</td>
+		<td>The issued OAuth2 token</td>
+		<td>mandatory</td>
+	</tr>
+	<tr>
+		<td>token_type</td>
+		<td>string</td>
+		<td>Always "bearer"</td>
+		<td>mandatory</td>
+	</tr>
+	<tr>
+		<td>expires_in</td>
+		<td>integer</td>
+		<td>The lifetime of the access token in seconds</td>
+		<td>mandatory</td>
+	</tr>
+	<tr>
+		<td>refresh_token</td>
+		<td>string</td>
+		<td>The issued OAuth2 refresh token, one-time-usable only</td>
+		<td>mandatory</td>
+	</tr>
+</table>
 
-The POST request has to be done via HTTP Basic Authorization. Your "ClientID" is the username, your "ClientSecret" is the password.
+The POST request has to be done via HTTP Basic Authorization. Your applications "ClientID" is the username, your "ClientSecret" is the password.
 
-Post Request Body: 
+**Post Request Body:** 
 
 	grant_type=authorization_code&code=<YourAccessCode>
 
 
 The access token will be returned as JSON in the response body and is an arbitrary string, guaranteed to fit in a varchar(255) field.
 
+**Example Response**
+
+	{
+		"access_token":"Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh",
+		"token_type":"bearer",
+		"expires_in":"3600",
+		"refresh_token":"MTRiMjkzZTYtOTgwNC0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh"
+	}
 
 
-
-**Oauth2 protocol flow - Refresh Token Request -**
+### 3.2.4 Oauth2 protocol flow - Refresh Token Request -###
 
 [token_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/token_GET.json)
 
@@ -277,13 +327,13 @@ The refresh token can only be used once to retrieve a token and a new refresh to
 
 
 
-**Oauth2 protocol flow - dynamic client registration -**
+### 3.2.5 Oauth2 protocol flow - dynamic client registration -###
 
 [dynRegClient\_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/dynRegClient_POST.json)
 
 [dynRegClient\_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/dynRegClient_GET.json) 
 
- The following describes the optional dynamic registration process of a client. BCF-Servers may offer additional processes registering clients. 
+ The following describes the optional dynamic registration process of a client. BCF-Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
 
 **Recource URL**
 
@@ -341,16 +391,17 @@ JSON encoded body using the "application/json" content type.
 
 
 
-**Oauth2 protocol flow - Requesting Resources -**
+### 3.2.6 Oauth2 protocol flow - Requesting Resources -###
 
 When requesting other resources the access token must be passed via the Authorization header using the Bearer scheme *(e.g. Authorization: Bearer T9UNRV4sC9vr7ga)*.
 
 ----------
 
+# 4. BCF Services #
 
+## 4.1 Project Services ##
 
-## Project Services ##
-
+### 4.1.1 GET Project Services ###
 
 **Recource URL**
 
@@ -378,7 +429,9 @@ Retrieve a **collection** of projects where the currently logged on user is assi
     }]
 
 
-----------
+
+### 4.1.2 POST Project Services ###
+
 **Recource URL**
 
     POST /bcf/{version}/projects
@@ -416,15 +469,12 @@ JSON encoded body using the "application/json" content type.
       "name": "Example project 3",
     }
 
+### 4.1.3 GET Single Project Services ###
 
 
-----------
-
-**Recource URL	**
+**Recource URL**
 
     GET /bcf/{version}/projects/{project_id}
-
-
 
 [project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_GET.json)
 
@@ -443,7 +493,9 @@ Retrieve a specific project
       "name": "Example project 3"
     }
 
-----------
+
+### 4.1.4 PUT Single Project Services ###
+
 **Recource URL**
 
     PUT /bcf/{version}/projects/{project_id}
@@ -468,7 +520,10 @@ Modify a specific project (only the project name may be updated).
       "name": "Example project 3 modified"
     }
 
-----------
+
+
+### 4.1.5 DELETE Single Project Services ###
+
 **Recource URL**
 
     DELETE /bcf/{version}/projects/{project_id}
@@ -479,9 +534,8 @@ Delete a specific project
 
     https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
 
-------------
-**Recource URL**
 
+### 4.1.6 Project Extension Services ###
 
     GET, POST, PUT, DELETE /bcf/{version}/projects/{project_id}/extension
 
@@ -494,11 +548,9 @@ Delete a specific project
 
 ---------
 
+## 4.2 Topic Services ##
 
-## BCF Services ##
-
-#### *Topic* ####
-
+### 4.2.1 GET Topic Services ###
 
 **Recource URL**
 
@@ -537,6 +589,7 @@ Retrieve a collection of topics related to a project (default sort = creation_da
     }
 	]
 
+### 4.2.2 POST Topic Services ###
 
 **Recource URL**
 
@@ -652,6 +705,8 @@ JSON encoded body using the "application/json" content type.
 				"reference_schema": "https://example.com/bcf/1.0/clash.xsd"	
     	}
 
+### 4.2.3 GET Single Topic Services ###
+
 **Recource URL**
 
     GET /bcf/{version}/topics/{guid}
@@ -689,6 +744,8 @@ Retrieve a specific topic.
 				"reference_schema": "https://example.com/bcf/1.0/clash.xsd"	
     	}
  
+### 4.2.4 PUT Single Topic Services ###
+
 **Recource URL**
 
     PUT /bcf/{version}/topics/{guid}
@@ -716,6 +773,9 @@ Modify a specific topic (only title and description may be updated).
 	  "description": "Clash between Architecture and Heating"
     }
 
+
+### 4.2.5 DELETE Single Topic Services ###
+
 **Recource URL**
 
     DELETE /bcf/{version}/topics/{guid}
@@ -727,44 +787,138 @@ Delete a specific topic
 
 	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
 
--------------
-------------------
 
 
+### 4.3.1 GET File (Header) Services ###
 
-Long URL: -
+**Recource URL**
 
-    GET, PUT, DELETE /bcf/{version}/topics/{guid}
+    GET /bcf/{version}/topics/{guid}/files
+	GET /bcf/{version}/projects/{project_id}/topics/{guid}/files
 
-- GET - Retrieve a specific topic
-- PUT - Update a specific topic
-- DELETE - Delete a specific topic
+[file_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/File/file_GET.json)
 
-Long URL: /bcf/{version}/projects/{project_id}/topics/{guid}
+Retrieve a collection of file references as topic header
 
+**Example Request**
 
-----------
-
-
-
-#### *File* ####
- [file.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/file.json)
-
-`GET /bcf/{version}/topics/{guid}/files`
-
-- GET - Retrieve the header of a topic
-- POST - Assign a file to a topic
-
-Long URL: /{version}/projects/{project_id}/topics/{guid}/files
-
-`DELETE /bcf/{version}/topic/{guid}/files/{reference}`
-
-- DELETE - Remove a file from topic header
-
-Long URL: /bcf/{version}/projects/{project_id}/topics/{guid}/revisions/{reference}
+	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
 
 
-----------
+**Example Response**
+
+   	[
+    	{
+		"ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+		"file_name": "OfficeBuilding_Architecture_0001",
+		"reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+    	},
+	    {
+		"ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+		"file_name": "OfficeBuilding_Heating_0003",
+		"reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
+    	}
+	]
+
+### 4.3.2 POST File (Header) Services ###
+
+**Recource URL**
+
+    POST /bcf/{version}/topics/{guid}/files
+	POST /bcf/{version}/projects/{project_id}/topics/{guid}/files
+
+[file_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/File/file_POST.json)
+
+Add a collection of file references to the topic header.
+
+**Example Request**
+
+	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
+
+    [
+    	{
+		"ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+		"file_name": "OfficeBuilding_Architecture_0001",
+		"reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+    	},
+	    {
+		"ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+		"file_name": "OfficeBuilding_Heating_0003",
+		"reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
+    	}
+	]
+
+**Example Response**
+
+    [
+    	{
+		"ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+		"file_name": "OfficeBuilding_Architecture_0001",
+		"reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+    	},
+	    {
+		"ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+		"file_name": "OfficeBuilding_Heating_0003",
+		"reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
+    	}
+	]
+
+### 4.3.3 DELETE File (Header) Services ###
+
+**Recource URL**
+
+    DELETE /bcf/{version}/topics/{guid}/files
+	DELETE /bcf/{version}/projects/{project_id}/topics/{guid}/files
+
+Delete all topic header file references.
+
+**Example Request**
+
+	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
+
+
+### 4.4.1 GET Comment Services ###
+
+**Recource URL**
+
+    GET /bcf/{version}/topics/{guid}/comments
+	GET /bcf/{version}/projects/{project_id}/topics/{guid}/comments
+
+[comment_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Comment/comment_GET.json)
+
+Retrieve a collection of all comments related to a topic.
+
+**Example Request**
+
+	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
+
+**Example Response**
+
+    [
+    {
+        "guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+		"status": "open",
+    	"date": "2013-10-21T17:34:22.409Z",
+		"author": "max.muster@example.com",
+		"comment": "Clash found",
+		"topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
+		
+    },
+    {
+        "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+		"status": "closed",
+    	"date": "2013-11-19T14:24:11.316Z",
+		"author": "bob.heater@example.com",		
+		"comment": "will rework the heating model",
+		"topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
+    }
+	]
+
+
+----------------------
+-----------------------
+
+
 
 
 #### *Comment* ####
