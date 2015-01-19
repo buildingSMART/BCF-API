@@ -1,7 +1,5 @@
 {
-"$schema": "http://json-schema.org/draft-03/schema#",  
-"title": "comment_GET",
- "description": "Schema for single comment GET, BCF REST API.",
+  "title": "comment_GET",
   "type": "object",
   "properties": {
     "guid": {
@@ -55,11 +53,5 @@
         "null"
       ]
     }
-  },
-    "links": [
-        {
-            "rel": "viewpoints",
-            "href": "{guid}/viewpoints"
-        }
-    ]
+  }
 }

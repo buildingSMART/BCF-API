@@ -1,7 +1,5 @@
 {
-"$schema": "http://json-schema.org/draft-03/schema#",  
-"title": "comment_PUT",
- "description": "Schema for comment PUT, BCF REST API.",
+  "title": "comment_PUT",
   "type": "object",
   "properties": {
     "verbal_status": {
@@ -17,18 +15,6 @@
     "comment": {
       "required": true,
       "type": "string"
-    },
-    "viewpoint_guid": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "reply_to_comment_guid": {
-      "type": [
-        "string",
-        "null"
-      ]
     }
   }
 }

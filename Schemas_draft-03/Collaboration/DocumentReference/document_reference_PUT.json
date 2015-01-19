@@ -1,0 +1,18 @@
+{
+  "title": "document_reference_PUT",
+  "type": "object",
+  "properties": {
+    "referenced_document": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

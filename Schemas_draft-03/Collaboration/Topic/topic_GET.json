@@ -1,7 +1,5 @@
 {
-"$schema": "http://json-schema.org/draft-03/schema#",  
-"title": "topic_GET",
- "description": "Schema for single topic GET, BCF REST API.",
+  "title": "topic_GET",
   "type": "object",
   "properties": {
     "guid": {
@@ -52,13 +50,12 @@
       }
     },
     "creation_date": {
+      "required": true,
       "type": "string"
     },
     "creation_author": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "required": true,
+      "type": "string"
     },
     "modified_date": {
       "type": "string"
@@ -107,30 +104,28 @@
       }
     }
   },
- "links": [
-	{
-		"rel": "files",
-		"href": "{guid}/files"
-	},
-	{
-		"rel": "document_references",
-		"href": "{guid}/document_references"
-	},
-	{
-		"rel": "related_topics",
-		"href": "{guid}/related_topics"
-	},
-	{
-		"rel": "comments",
-		"href": "{guid}/comments"
-	},
-	{
-		"rel": "components",
-		"href": "{guid}/components"
-	},
-	{
-		"rel": "viewpoints",
-		"href": "{guid}/viewpoints"
-	}		
-    ]
+"links": [
+	   	{
+			"rel": "files",
+			"href": "{guid}/files"
+	   	},
+        	{
+            	"rel": "document_references",
+            	"href": "{guid}/document_references"
+        	},
+        	{
+            	"rel": "related_topics",
+            	"href": "{guid}/related_topics"
+        	},
+        	{
+            	"rel": "comments",
+            	"href": "{guid}/comments"
+        	},
+        	{
+            	"rel": "viewpoints",
+            	"href": "{guid}/viewpoints"
+        	}
+
+    	]
+
 }

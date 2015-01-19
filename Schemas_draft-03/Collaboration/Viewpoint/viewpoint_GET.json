@@ -336,9 +336,13 @@
     }
   },
 "links": [
-        {
-            "rel": "bitmap",
-            "href": "{guid}/bitmap"
-        }
-    ]
+	   	{
+			"rel": "components",
+			"href": "{guid}/components"
+	   	},
+        	{
+            	"rel": "bitmap",
+            	"href": "{guid}/bitmap"
+        	}
+    	]
 }

@@ -1,7 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-03/schema#",
   "title": "comment_POST",
- "description": "Schema for comment POST, BCF REST API.",
   "type": "object",
   "properties": {
     "verbal_status": {
@@ -15,6 +13,10 @@
       "type": "string"
     },
     "comment": {
+      "required": true,
+      "type": "string"
+    },
+    "topic_guid": {
       "required": true,
       "type": "string"
     },

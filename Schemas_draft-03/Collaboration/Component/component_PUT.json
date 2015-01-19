@@ -13,13 +13,16 @@
     "selected": {
       "type": "boolean"
     },
+    "visible": {
+      "type": "boolean"
+    },
     "color": {
       "type": [
         "string",
         "null"
       ]
     },
-    "originating": {
+    "originating_system": {
       "type": [
         "string",
         "null"
