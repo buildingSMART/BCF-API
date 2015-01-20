@@ -1,7 +1,5 @@
 {
-"$schema": "http://json-schema.org/draft-03/schema#",    
-"title": "file_POST",
-"description": "Schema for file POST, BCF REST API.",
+  "title": "file_PUT",
   "type": "object",
   "properties": {
     "ifc_project": {

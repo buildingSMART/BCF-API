@@ -8,6 +8,8 @@
 
 **Table of Contents**
 
+**Table of Contents**
+
 - [BCF REST API](#bcf-rest-api)
 - [1. Introduction](#1-introduction)
 - [1.1 Paging](#11-paging)
@@ -16,7 +18,7 @@
 - [1.2 Sorting](#12-sorting)
 - [1.3 Filtering](#13-filtering)
 - [1.4 Caching](#14-caching)
-- [1.5 Cross origin resource sharing (Cors)](#15-cross-origin-resource-sharing-(cors))
+- [1.5 Cross origin resource sharing (Cors)](#15-cross-origin-resource-sharing-cors)
 - [1.6 Http status codes](#16-http-status-codes)
 - [1.7 Error response body format](#17-error-response-body-format)
 - [2. Topologies](#2-topologies)
@@ -46,8 +48,8 @@
 - [4.2.4 PUT Single Topic Services](#424-put-single-topic-services)
 - [4.2.5 DELETE Single Topic Services](#425-delete-single-topic-services)
 - [4.3 File Services](#43-file-services)
-- [4.3.1 GET File (Header) Services](#431-get-file-(header)-services)
-- [4.3.2 PUT File (Header) Services](#432-put-file-(header)-services)
+- [4.3.1 GET File (Header) Services](#431-get-file-header-services)
+- [4.3.2 PUT File (Header) Services](#432-put-file-header-services)
 - [4.4 Comment Services](#44-comment-services)
 - [4.4.1 GET Comment Services](#441-get-comment-services)
 - [4.4.2 POST Comment Services](#442-post-comment-services)
@@ -1763,7 +1765,7 @@ Add a **collection** of all components related to a viewpoint.
     GET /bcf/{version}/topics/{guid}/related_topics
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
 
-[related_topic_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Related_Topic/related_topic_GET.json)
+[related_topic_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/RelatedTopic/related_topic_GET.json)
 
 Retrieve a **collection** of all related topics to a topic.
 
@@ -1789,7 +1791,7 @@ Retrieve a **collection** of all related topics to a topic.
     POST /bcf/{version}/topics/{guid}/related_topics
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
 
-[related_topic_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Related_Topic/related_topic_POST.json)
+[related_topic_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/RelatedTopic/related_topic_POST.json)
 
 Retrieve a **collection** of all related topics to a topic.
 
@@ -1824,7 +1826,7 @@ Retrieve a **collection** of all related topics to a topic.
     GET /bcf/{version}/topics/{guid}/document_references
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
 
-[document_reference_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Document_Reference/document_reference_GET.json)
+[document_reference_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_GET.json)
 
 Retrieve a **collection** of all document references to a topic.
 
@@ -1854,7 +1856,7 @@ Retrieve a **collection** of all document references to a topic.
     POST /bcf/{version}/topics/{guid}/document_references
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
 
-[document_reference_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Document_Reference/document_reference_POST.json)
+[document_reference_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_POST.json)
 
 Add a document reference to a topic.
 
@@ -1882,7 +1884,7 @@ Add a document reference to a topic.
     GET /bcf/{version}/document_references/{guid}
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/document_references/{guid}
 
-[document_reference_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Document_Reference/document_reference_GET.json)
+[document_reference_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_GET.json)
 
 Retrieve a single document reference.
 
@@ -1905,7 +1907,7 @@ Retrieve a single document reference.
     PUT /bcf/{version}/document_references/{guid}
 	PUT /bcf/{version}/projects/{project_id}/topics/{guid}/document_references/{guid}
 
-[document_reference_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Document_Reference/document_reference_PUT.json)
+[document_reference_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
 Update a single document reference.
 
