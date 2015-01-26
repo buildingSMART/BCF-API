@@ -21,7 +21,7 @@
 	- [1.7 Error response body format](#17-error-response-body-format)
 - [2. Topologies](#2-topologies)
 	- [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
-- [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
+	- [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
 - [3. Public Services](#3-public-services)
 	- [3.1 Information Services](#31-information-services)
 	- [3.2 Authentication Services](#32-authentication-services)
@@ -272,7 +272,7 @@ Model collaboration is managed through a shared file server or a network file sh
 
 
 
-# 2.2 Topology 2 - Colocated BCF-Server and Model Server#
+## 2.2 Topology 2 - Colocated BCF-Server and Model Server##
 
 BCF and model server are co located on the same hosts.
 
