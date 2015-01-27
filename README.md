@@ -238,7 +238,7 @@ The server has a web config file .. "*" means the server allow the resources for
 
 ## 1.7 Error response body format ##
 
-BCF-API has a specified error response body format [error.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/error.json).
+BCF-API has a specified error response body format [error.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/error.json).
 
 ----------
 
