@@ -1763,7 +1763,7 @@ Retrieve a viewpoints image (png, jpg or bmp).
 
 HTTP-response header:
 
-Content-Type: image/png
+	Content-Type: image/png
 
 
 ### 4.5.6 POST bitmap of a Viewpoint Service ###
@@ -1782,7 +1782,7 @@ Add a viewpoints image (png, jpg or bmp).
 
 HTTP post request header:
 
-Content-Type: image/png
+	Content-Type: image/png
 
 POST Body contains binary image data
 
@@ -1842,16 +1842,16 @@ Retrieve a **collection** of all components related to a viewpoint.
  	}
 	]
 
-### 4.6.2 POST Component Services ###
+### 4.6.2 PUT Component Services ###
 
 **Recource URL**
 
     POST /bcf/{version}/viewpoints/{guid}/components
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
-[component_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Component/component_POST.json)
+[component_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Component/component_PUT.json)
 
-Add a **collection** of all components related to a viewpoint.
+Add or update a **collection** of all components related to a viewpoint.
 
 **Example Request**
 
