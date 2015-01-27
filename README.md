@@ -1,5 +1,4 @@
 
-
 # BCF REST API #
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
@@ -8,16 +7,13 @@
 
 **Table of Contents**
 
-- [BCF REST API](#bcf-rest-api)
 - [1. Introduction](#1-introduction)
 	- [1.1 Paging](#11-paging)
-		- [1.1.1 Paging with URL parameters](#111-paging-with-url-parameters)
-		- [1.1.2 Paging with Range Header](#112-paging-with-range-header)
 	- [1.2 Sorting](#12-sorting)
 	- [1.3 Filtering](#13-filtering)
 	- [1.4 Caching](#14-caching)
 	- [1.5 Cross origin resource sharing (Cors)](#15-cross-origin-resource-sharing-cors)
-	- [1.6 Http status codes](#16-http-status-codes)
+	- [1.6 HTTP status codes](#16-http-status-codes)
 	- [1.7 Error response body format](#17-error-response-body-format)
 - [2. Topologies](#2-topologies)
 	- [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
@@ -26,11 +22,11 @@
 	- [3.1 Information Services](#31-information-services)
 	- [3.2 Authentication Services](#32-authentication-services)
 		- [3.2.1 Obtaining Authentication Information](#321-obtaining-authentication-information)
-		- [3.2.2 Oauth2 protocol flow - Client Request -](#322-oauth2-protocol-flow---client-request--)
-		- [3.2.3 Oauth2 protocol flow - Token Request -](#323-oauth2-protocol-flow---token-request--)
-		- [3.2.4 Oauth2 protocol flow - Refresh Token Request -](#324-oauth2-protocol-flow---refresh-token-request--)
-		- [3.2.5 Oauth2 protocol flow - dynamic client registration -](#325-oauth2-protocol-flow---dynamic-client-registration--)
-		- [3.2.6 Oauth2 protocol flow - Requesting Resources -](#326-oauth2-protocol-flow---requesting-resources--)
+		- [3.2.2 OAuth2 protocol flow - Client Request -](#322-oauth2-protocol-flow---client-request--)
+		- [3.2.3 OAuth2 protocol flow - Token Request -](#323-oauth2-protocol-flow---token-request--)
+		- [3.2.4 OAuth2 protocol flow - Refresh Token Request -](#324-oauth2-protocol-flow---refresh-token-request--)
+		- [3.2.5 OAuth2 protocol flow - Dynamic Client Registration -](#325-oauth2-protocol-flow---dynamic-client-registration--)
+		- [3.2.6 OAuth2 protocol flow - Requesting Resources -](#326-oauth2-protocol-flow---requesting-resources--)
 - [4. BCF Services](#4-bcf-services)
 	- [4.1 Project Services](#41-project-services)
 		- [4.1.1 GET Project Services](#411-get-project-services)
@@ -38,7 +34,9 @@
 		- [4.1.3 GET Single Project Services](#413-get-single-project-services)
 		- [4.1.4 PUT Single Project Services](#414-put-single-project-services)
 		- [4.1.5 DELETE Single Project Services](#415-delete-single-project-services)
-		- [4.1.6 Project Extension Services](#416-project-extension-services)
+		- [4.1.6 GET Project Extension Services](#416-get-project-extension-services)
+		- [4.1.7 POST Project Extension Services](#417-post-project-extension-services)
+		- [4.1.8 PUT Project Extension Services](#418-put-project-extension-services)
 	- [4.2 Topic Services](#42-topic-services)
 		- [4.2.1 GET Topic Services](#421-get-topic-services)
 		- [4.2.2 POST Topic Services](#422-post-topic-services)
@@ -57,19 +55,24 @@
 		- [4.5.1 GET Viewpoint Services](#451-get-viewpoint-services)
 		- [4.5.2 POST Viewpoint Services](#452-post-viewpoint-services)
 		- [4.5.3 GET Single Viewpoint Services](#453-get-single-viewpoint-services)
-		- [4.5.4 GET bitmap of a Viewpoint Service](#454-get-bitmap-of-a-viewpoint-service)
-		- [4.5.5 POST bitmap of a Viewpoint Service](#455-post-bitmap-of-a-viewpoint-service)
+		- [4.5.4 PUT Single Viewpoint Services](#454-put-single-viewpoint-services)
+		- [4.5.5 GET bitmap of a Viewpoint Service](#455-get-bitmap-of-a-viewpoint-service)
+		- [4.5.6 POST bitmap of a Viewpoint Service](#456-post-bitmap-of-a-viewpoint-service)
+		- [4.5.7 PUT bitmap of a Viewpoint Service](#457-put-bitmap-of-a-viewpoint-service)
 	- [4.6 Component Services](#46-component-services)
 		- [4.6.1 GET Component Services](#461-get-component-services)
 		- [4.6.2 POST Component Services](#462-post-component-services)
 	- [4.7 Related Topics Services](#47-related-topics-services)
 		- [4.7.1 GET Related Topics Services](#471-get-related-topics-services)
 		- [4.7.2 POST Related Topics Services](#472-post-related-topics-services)
+		- [4.7.3 PUT Related Topics Services](#473-put-related-topics-services)
 	- [4.8 Document Reference Services](#48-document-reference-services)
 		- [4.8.1 GET Document Reference Services](#481-get-document-reference-services)
 		- [4.8.2 POST Document Reference Services](#482-post-document-reference-services)
 		- [4.8.3 GET a single Document Reference Service](#483-get-a-single-document-reference-service)
 		- [4.8.4 PUT a single Document Reference Service](#484-put-a-single-document-reference-service)
+
+
 
 
 
@@ -82,7 +85,7 @@
 
 BCF is a format for managing issues on a BIM project. RESTful BCF-API supports the exchange of BCFv2 issues between software applications.
 
-All API access is over HTTPS. Data is sent as query parameters and received as JSON. Every resource has a corresponding Json Schema (Draft 03). Json Hyper Schema is used for link definition. Authentication method is OAuth2. URL schemas in this readme are relational to the base server URL.
+All API access is transmitted over HTTPS. Data is sent as URL encoded query parameters and JSON POST bodies and received as JSON. Every resource has a corresponding JSON Schema (Draft 03). JSON Hyper Schema is used for link definition. The authentication method is OAuth2. URL schemas in this readme are relational to the base server URL.
 
 
 
@@ -94,62 +97,42 @@ An example of a client implementation in C# can be found here:
 
 ## 1.1 Paging
 
-BCF-API offers two different methods of paging:
+When requesting collections of items, BCF-API offers the possibility of paging via URL parameters.
 
-- URL parameters
-- Range Header
-
-When both methods are used, "URL parameters" overwrite the "Range Header".
-
-The response for a collection must include the http header "Content-Range", even when the request did not specify a range. 
-
-
-###1.1.1 Paging with URL parameters
-
-start: inclusive, first item to be returned
-
-end: inclusive, last item to be returned
+<table border="1">
+  <tr>
+    <td>page</td>
+    <td>The current page in the paginated collection.</td>
+  </tr>
+  <tr>
+    <td>page_size</td>
+    <td>The number of items per page. Defaults to 100 if not given, maximum is 1000 items per page.</td>
+  </tr>
+</table>
 
 Example:
 
-	GET /bcf/{version}/projects/{guid}/topics?start=11&end=20
+	GET /bcf/{version}/projects/{guid}/topics?page=11&page_size=20
 
-Returns topic #11 to #20
-
-###1.1.2 Paging with Range Header###
-
-
-When issuing a GET request for a collection, the client may state a desired range of items to be returned via the http header "Range". The numbering of items is one based, meaning item #1 is the first item in a collection.
-
-Example:
-Range: items=1-25
-
-
-Example:
-Content-Range: items 1-25/37
-
-The returned Content-Range does not have to conform to the requested range, p.e. when the server responds with fewer items than requested.
-
+Returns topics #201 to #220.
 
 ## 1.2 Sorting ##
 
-GET requests for collections offer sorting of results via the "sort" URL parameter. Every json element can be a sort parameter. Default sort order is ascending. Descending order is indicated with an unary minus sign "-" in front of an element.
+GET requests for collections offer sorting of results via the "sort" URL parameter. Every JSON element can be used as a sorting parameter. Default sort order is ascending. Descending order is indicated with an unary minus sign "-" in front of an element.
 
-Multiple sort parameters are possible and separated with comma.
-
-
+Multiple sort parameters are possible and separated with commas.
 
 Example:
 
 
-   	/bcf/{version}/projects/{guid}/topics?sort=-priority,labels
+   	/bcf/{version}/projects/{guid}/topics?sort=-priority,label
 
-
+Would return a collection of topics sorted by priority (descending) then by label (ascending).
 
 
 ## 1.3 Filtering ##
 
-GET requests returning a collection can be filtered with the "filter" URL parameter.
+GET requests returning a collection can be filtered with the "filter" URL parameter. The syntax is based on the ODATA protocol. Wildcard operator is allowed as the star sign (*).
 
 Filter operators:
 
@@ -202,15 +185,14 @@ Filter operators:
 </table>
 
 
-
 ## 1.4 Caching ##
 
 ETags, or entity-tags, are an important part of HTTP, being a critical part of caching, and also used in "conditional" requests.
+
 The ETag response-header field value, an entity tag, provides for an "opaque" cache validator.
 The easiest way to think of an etag is as an MD5 or SHA1 hash of all the bytes in a representation. If just one byte in the representation changes, the etag will change.
 
 ETags are returned in a response to a GET:
-
 
     
     joe@joe-laptop:~$ curl --include http://bitworking.org/news/
@@ -226,14 +208,14 @@ ETags are returned in a response to a GET:
     Content-Length: 23081
     …..
   
-The client may send an "If-None-Match" Http Header containing the last retrieved etag. If the content has not changed the server returns a status code 304 (not modified) and no response body.
+The client may send an "If-None-Match" HTTP Header containing the last retrieved etag. If the content has not changed the server returns a status code 304 (not modified) and no response body.
 
 
 ## 1.5 Cross origin resource sharing (Cors) ##
 
-The server will put the "Access-Control-Allow-Headers" in the response header and specify who can access the server(json) resources. The client can look for this value and proceed with accessing the resources. 
+The server will put the "Access-Control-Allow-Headers" in the response header and specify who can access the servers (JSON) resources. The client can look for this value and proceed with accessing the resources. 
 
-The server has  a web config file .. "*" means the server allow the resources for all domains.
+The server has a web config file .. "*" means the server allow the resources for all domains.
 
     <httpProtocol>
       <customHeaders>
@@ -244,7 +226,7 @@ The server has  a web config file .. "*" means the server allow the resources fo
      </httpProtocol>
 
 
-## 1.6 Http status codes ##
+## 1.6 HTTP status codes ##
 
 -   200 OK (Data is returned)
 -   201 No content (Data has been deleted)
@@ -266,7 +248,7 @@ BCF-API has a specified error response body format [error.json](https://raw.gith
 
 ## 2.1 Topology 1 - BCF-Server only##
 
-Model collaboration is managed through a shared file server or a network file sharing service like Dropbox. The BCF-Server handels the Authentication and the BCF-Issues. 
+Model collaboration is managed through a shared file server or a network file sharing service like Dropbox. The BCF-Server handles the authentication and the BCF-Issues. 
 
 ![Topology1](Images/Topology1.png)
 
@@ -274,7 +256,7 @@ Model collaboration is managed through a shared file server or a network file sh
 
 ## 2.2 Topology 2 - Colocated BCF-Server and Model Server##
 
-BCF and model server are co located on the same hosts.
+BCF and model server are co-located on the same hosts.
 
 
 ![Topology3](Images/Topology3.png)
@@ -373,14 +355,25 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 	}
 
 
-### 3.2.2 Oauth2 protocol flow - Client Request -###
+### 3.2.2 OAuth2 protocol flow - Client Request -###
 
 The Client uses the **"oauth2\_auth_url"** and adds the following parameters to it.
 
+<table border="1">
+  <tr>
+    <td>response_type</td>
+    <td>"code"</td>
+  </tr>
+  <tr>
+    <td>client_id</td>
+    <td>your client_id</td>
+  </tr>
+  <tr>
+    <td>state</td>
+    <td>unique user defined value</td>
+  </tr>
+</table>
 
-1. response_type -> "code"
-2. client_id -> your client\_id
-3. state -> unique user defined value
 
 Example URL:
 
@@ -396,7 +389,7 @@ You can use the state parameter to transport custom information.
 
 Open a browser window or redirect the user to this resource. This redirects back to the specified redirect URI with the provided state and the authorization code as a query parameter if the user allows your app to access the account, the value "access_denied" in the error query parameter if the user denies access.
 
-### 3.2.3 Oauth2 protocol flow - Token Request -###
+### 3.2.3 OAuth2 protocol flow - Token Request -###
 
 [token_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/token_GET.json)
 
@@ -452,28 +445,27 @@ The access token will be returned as JSON in the response body and is an arbitra
 	}
 
 
-### 3.2.4 Oauth2 protocol flow - Refresh Token Request -###
+### 3.2.4 OAuth2 protocol flow - Refresh Token Request -###
 
 [token_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/token_GET.json)
 
 
-The process to retrieve a refresh token is exactly the same as retrieving a token except the Post Request Body.
+The process to retrieve a refresh token is exactly the same as retrieving a token except the POST Request Body.
 
-Post Request Body:
+POST Request Body:
 
 	grant_type=refresh_token&refresh_token=<YourRefreshToken>
 
 The refresh token can only be used once to retrieve a token and a new refresh token. 
 
 
-
-### 3.2.5 Oauth2 protocol flow - dynamic client registration -###
+### 3.2.5 OAuth2 protocol flow - Dynamic Client Registration -###
 
 [dynRegClient\_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/dynRegClient_POST.json)
 
 [dynRegClient\_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/dynRegClient_GET.json) 
 
- The following describes the optional dynamic registration process of a client. BCF-Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
+ The following part describes the optional dynamic registration process of a client. BCF-Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
 
 **Recource URL**
 
@@ -531,7 +523,7 @@ JSON encoded body using the "application/json" content type.
 
 
 
-### 3.2.6 Oauth2 protocol flow - Requesting Resources -###
+### 3.2.6 OAuth2 protocol flow - Requesting Resources -###
 
 When requesting other resources the access token must be passed via the Authorization header using the Bearer scheme *(e.g. Authorization: Bearer T9UNRV4sC9vr7ga)*.
 
@@ -549,7 +541,7 @@ When requesting other resources the access token must be passed via the Authoriz
 
 [project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_GET.json)
 
-Retrieve a **collection** of projects where the currently logged on user is assigned to.
+Retrieve a **collection** of projects where the currently logged on user has access to.
 
 
 **Example Request**
@@ -578,7 +570,7 @@ Retrieve a **collection** of projects where the currently logged on user is assi
 
 [project_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_POST.json)
 
-Add a new project
+Add a new project.
 
 **Parameters**
 
@@ -618,7 +610,7 @@ JSON encoded body using the "application/json" content type.
 
 [project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_GET.json)
 
-Retrieve a specific project
+Retrieve a specific project.
 
 **Example Request**
 
@@ -642,24 +634,7 @@ Retrieve a specific project
 
 [project_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_PUT.json)
 
-Modify a specific project (only the project name may be updated).
-
-
-**Example Request**
-
-    https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
-	{
-    "name": "Example project 3 modified"
-	}
-
-**Example Response**
-
-
-    {
-      "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
-      "name": "Example project 3 modified"
-    }
-
+Modify a specific project, description similar to POST.
 
 
 ### 4.1.5 DELETE Single Project Services ###
@@ -668,22 +643,209 @@ Modify a specific project (only the project name may be updated).
 
     DELETE /bcf/{version}/projects/{project_id}
 
-Delete a specific project
+Delete a specific project.
 
 **Example Request**
 
     https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
 
 
-### 4.1.6 Project Extension Services ###
+### 4.1.6 GET Project Extension Services ###
 
-    GET, POST, PUT, DELETE /bcf/{version}/projects/{project_id}/extension
+**Recource URL**
 
-- GET - Retrieve the project extension schema
-- PUT - Modify the project extension schema
-- DELETE – Delete the project extension schema
+	GET /bcf/{version}/projects/{project_id}/extensions
+
+[extensions_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/extensions_GET.json)
+
+Retrieve a specific projects extensions.
+
+**Example Request**
+
+    https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
 
 
+**Example Response**
+
+
+    {
+	"topic_type":
+		[
+			"Information",
+			"Error"
+		],
+	"topic_status":
+		[
+			"Open",
+			"Closed",
+			"ReOpened"
+		],
+	"topic_label":
+		[
+			"Architecture",
+			"Structural",
+			"MEP"
+		],
+	"snippet_type":
+		[
+			".ifc",
+			".csv"
+		],
+	"priority":
+		[
+			"Low",
+			"Medium",
+			"High"
+		],
+	"user_id_type":
+		[
+			"Architect@example.com",
+			"BIM-Manager@example.com",
+			"bob_heater@example.com"
+		]
+	}
+
+### 4.1.7 POST Project Extension Services
+
+**Recource URL**
+
+	POST /bcf/{version}/projects/{project_id}/extensions
+
+[extensions_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/extensions_POST.json)
+
+Create a specific projects extensions.
+
+Project extensions are used to define possible values that can be used in topics and comments, for example topic labels and priorities. They may change during the course of a project. The most recent extensions state which values are valid at a given moment for newly created topics and comments.
+
+**Parameters**
+
+JSON encoded body using the "application/json" content type.
+
+<table border="1">
+  <tr>
+    <td>topic_type</td>
+    <td>string array</td>
+    <td>Enumeration of allowed values</td>
+  </tr>
+  <tr>
+    <td>topic_status</td>
+    <td>string array</td>
+    <td>Enumeration of allowed values</td>
+  </tr>
+  <tr>
+    <td>topic_label</td>
+    <td>string array</td>
+    <td>Enumeration of allowed values</td>
+  </tr>
+  <tr>
+    <td>snippet_type</td>
+    <td>string array</td>
+    <td>Enumeration of allowed values</td>
+  </tr>
+  <tr>
+    <td>priority</td>
+    <td>string array</td>
+    <td>Enumeration of allowed values</td>
+  </tr>
+  <tr>
+    <td>user_id_type</td>
+    <td>string array</td>
+    <td>Enumeration of allowed values</td>
+  </tr>
+</table>
+
+**Example Request**
+
+    https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
+
+	{
+	"topic_type":
+		[
+			"Information",
+			"Error"
+		],
+	"topic_status":
+		[
+			"Open",
+			"Closed",
+			"ReOpened"
+		],
+	"topic_label":
+		[
+			"Architecture",
+			"Structural",
+			"MEP"
+		],
+	"snippet_type":
+		[
+			".ifc",
+			".csv"
+		],
+	"priority":
+		[
+			"Low",
+			"Medium",
+			"High"
+		],
+	"user_id_type":
+		[
+			"Architect@example.com",
+			"BIM-Manager@example.com",
+			"bob_heater@example.com"
+		]
+	}
+
+
+**Example Response**
+
+
+    {
+	"topic_type":
+		[
+			"Information",
+			"Error"
+		],
+	"topic_status":
+		[
+			"Open",
+			"Closed",
+			"ReOpened"
+		],
+	"topic_label":
+		[
+			"Architecture",
+			"Structural",
+			"MEP"
+		],
+	"snippet_type":
+		[
+			".ifc",
+			".csv"
+		],
+	"priority":
+		[
+			"Low",
+			"Medium",
+			"High"
+		],
+	"user_id_type":
+		[
+			"Architect@example.com",
+			"BIM-Manager@example.com",
+			"bob_heater@example.com"
+		]
+	}
+
+
+### 4.1.8 PUT Project Extension Services
+
+**Recource URL**
+
+	PUT /bcf/{version}/projects/{project_id}/extensions
+
+[extensions_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/extensions_PUT.json)
+
+Modify a specific projects extensions, description similar to POST.
 
 
 ---------
@@ -698,7 +860,7 @@ Delete a specific project
 
 [topic_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_GET.json)
 
-Retrieve a **collection** of topics related to a project (default sort = creation_date).
+Retrieve a **collection** of topics related to a project (default sort order is creation_date).
 
 **Example Request**
 
@@ -737,7 +899,7 @@ Retrieve a **collection** of topics related to a project (default sort = creatio
 
 [topic_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_POST.json)
 
-Add a new topic
+Add a new topic.
 
 **Parameters**
 
@@ -893,25 +1055,7 @@ Retrieve a specific topic.
 
 [topic_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_PUT.json)
 
-Modify a specific topic (only title and description may be updated).
-
-
-**Example Request**
-    
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
-	{
-    "title": "Example topic 3 modified",
-	"description": "Clash between Architecture and Heating"
-	}
-
-**Example Response**
-
-
-    {
-      "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
-      "title": "Example topic 3 modified",
-	  "description": "Clash between Architecture and Heating"
-    }
+Modify a specific topic, description similar to POST.
 
 
 ### 4.2.5 DELETE Single Topic Services ###
@@ -939,7 +1083,7 @@ Delete a specific topic
 
 [file_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/File/file_GET.json)
 
-Retrieve a **collection** of file references as topic header
+Retrieve a **collection** of file references as topic header.
 
 **Example Request**
 
@@ -1159,31 +1303,7 @@ Get a single comment.
 
 [comment_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Comment/comment_PUT.json)
 
-Update a single comment.
-
-**Example Request**
-
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
-
-    {		
-		"verbal_status": "in_progress",
-		"status": "in_progress",	
-		"comment": "will rework the heating model a.s.a.p."
-    }
-
-**Example Response**
-
-    {
-        "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
-		"verbal_status": "in_progress",
-		"status": "in_progress",
-    	"date": "2014-11-19T14:24:11.316Z",
-		"author": "bob.heater@example.com",		
-		"comment": "will rework the heating model a.s.a.p.",
-		"topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
-		"modified_date": "2014-11-19T15:24:11.316Z",
-		"modified_author": "bob.heater@example.com"
-    }
+Update a single comment, description similar to POST.
 
 ## 4.5 Viewpoint Services ##
 
@@ -1611,7 +1731,20 @@ Retrieve a specific viewpoint.
    				}
 			}
 
-### 4.5.4 GET bitmap of a Viewpoint Service ###
+
+### 4.5.4 PUT Single Viewpoint Services
+
+**Recource URL**
+
+    PUT /bcf/{version}/viewpoints/{guid}
+    PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}
+
+[viewpoint_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Viewpoint/viewpoint_PUT.json)
+
+Update a single viewpoint, description similar to POST.
+
+
+### 4.5.5 GET bitmap of a Viewpoint Service ###
 
 **Recource URL**
 
@@ -1619,7 +1752,7 @@ Retrieve a specific viewpoint.
     GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmap
 
 
-Retrieve a viewpoints bitmap (png, jpg or bmp).
+Retrieve a viewpoints image (png, jpg or bmp).
 
 **Example Request**
 
@@ -1628,12 +1761,12 @@ Retrieve a viewpoints bitmap (png, jpg or bmp).
 
 **Example Response**
 
-http-response header:
+HTTP-response header:
 
 Content-Type: image/png
 
 
-### 4.5.5 POST bitmap of a Viewpoint Service ###
+### 4.5.6 POST bitmap of a Viewpoint Service ###
 
 **Recource URL**
 
@@ -1641,13 +1774,13 @@ Content-Type: image/png
     POST /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmap
 
 
-Add a viewpoints bitmap (png, jpg or bmp).
+Add a viewpoints image (png, jpg or bmp).
 
 **Example Request**
 
     https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmap
 
-http-request header:
+HTTP post request header:
 
 Content-Type: image/png
 
@@ -1656,9 +1789,20 @@ POST Body contains binary image data
 
 **Example Response**
 
-http-response status code:
+HTTP-response status code:
 
 201 created (empty response body)
+
+
+### 4.5.7 PUT bitmap of a Viewpoint Service
+
+**Recource URL**
+
+    PUT /bcf/{version}/viewpoints/{guid}/bitmap
+    PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmap
+
+Update a single viewpoints image, description similar to POST.
+
 
 ## 4.6 Component Services ##
 
@@ -1815,6 +1959,18 @@ Retrieve a **collection** of all related topics to a topic.
  	}
 	]
 
+### 4.7.3 PUT Related Topics Services
+
+**Recource URL**
+
+    PUT /bcf/{version}/topics/{guid}/related_topics
+    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
+
+[related_topic_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PUT.json)
+
+Update a topics related topics, description similar to POST.
+
+
 ## 4.8 Document Reference Services ##
 
 ### 4.8.1 GET Document Reference Services ###
@@ -1907,22 +2063,6 @@ Retrieve a single document reference.
 
 [document_reference_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
-Update a single document reference.
-
-**Example Request**
-
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references/472ab37a-6122-448e-86fc-86503183b520
-
- 	{
-  		"referenced_document":"http://example.com/files/v2.0/LegalRequirements.pdf",
-  		"description":"The legal requirements for buildings - new version."
- 	}
+Update a single document reference, description similar to POST.
 
 
-**Example Response**
-
- 	{
-  		"guid":"472ab37a-6122-448e-86fc-86503183b520",
-  		"referenced_document":"http://example.com/files/v2.0/LegalRequirements.pdf",
-  		"description":"The legal requirements for buildings - new version."
- 	}
