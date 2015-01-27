@@ -61,11 +61,10 @@
 		- [4.5.7 PUT bitmap of a Viewpoint Service](#457-put-bitmap-of-a-viewpoint-service)
 	- [4.6 Component Services](#46-component-services)
 		- [4.6.1 GET Component Services](#461-get-component-services)
-		- [4.6.2 POST Component Services](#462-post-component-services)
+		- [4.6.2 PUT Component Services](#462-post-component-services)
 	- [4.7 Related Topics Services](#47-related-topics-services)
 		- [4.7.1 GET Related Topics Services](#471-get-related-topics-services)
-		- [4.7.2 POST Related Topics Services](#472-post-related-topics-services)
-		- [4.7.3 PUT Related Topics Services](#473-put-related-topics-services)
+		- [4.7.2 PUT Related Topics Services](#472-post-related-topics-services)
 	- [4.8 Document Reference Services](#48-document-reference-services)
 		- [4.8.1 GET Document Reference Services](#481-get-document-reference-services)
 		- [4.8.2 POST Document Reference Services](#482-post-document-reference-services)
@@ -239,7 +238,7 @@ The server has a web config file .. "*" means the server allow the resources for
 
 ## 1.7 Error response body format ##
 
-BCF-API has a specified error response body format [error.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas/error.json).
+BCF-API has a specified error response body format [error.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/error.json).
 
 ----------
 
@@ -1763,7 +1762,7 @@ Retrieve a viewpoints image (png, jpg or bmp).
 
 HTTP-response header:
 
-Content-Type: image/png
+	Content-Type: image/png
 
 
 ### 4.5.6 POST bitmap of a Viewpoint Service ###
@@ -1782,7 +1781,7 @@ Add a viewpoints image (png, jpg or bmp).
 
 HTTP post request header:
 
-Content-Type: image/png
+	Content-Type: image/png
 
 POST Body contains binary image data
 
@@ -1842,16 +1841,16 @@ Retrieve a **collection** of all components related to a viewpoint.
  	}
 	]
 
-### 4.6.2 POST Component Services ###
+### 4.6.2 PUT Component Services ###
 
 **Recource URL**
 
     POST /bcf/{version}/viewpoints/{guid}/components
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
-[component_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Component/component_POST.json)
+[component_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Component/component_PUT.json)
 
-Add a **collection** of all components related to a viewpoint.
+Add or update a **collection** of all components related to a viewpoint.
 
 **Example Request**
 
@@ -1926,24 +1925,32 @@ Retrieve a **collection** of all related topics to a topic.
  	}
 	]
 
-### 4.7.2 POST Related Topics Services ###
+### 4.7.2 PUT Related Topics Services ###
 
 **Recource URL**
 
     POST /bcf/{version}/topics/{guid}/related_topics
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
 
-[related_topic_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/RelatedTopic/related_topic_POST.json)
+[related_topic_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PUT.json)
 
-Retrieve a **collection** of all related topics to a topic.
+Add or update a **collection** of all related topics to a topic.
 
 **Example Request**
 
 	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
 
+	[
+ 	{
+  		"related_topic_guid":"db49df2b-0e42-473b-a3ee-f7b785d783c4"
+ 	},
+ 	{
+  		"related_topic_guid":"6963a846-54d1-4050-954d-607cd5e48aa3"
+ 	},
 	{
   		"related_topic_guid":"bac66ab4-331e-4f21-a28e-083d2cf2e796"
  	}
+	]
 
 **Example Response**
 
@@ -1958,18 +1965,6 @@ Retrieve a **collection** of all related topics to a topic.
   		"related_topic_guid":"bac66ab4-331e-4f21-a28e-083d2cf2e796"
  	}
 	]
-
-### 4.7.3 PUT Related Topics Services
-
-**Recource URL**
-
-    PUT /bcf/{version}/topics/{guid}/related_topics
-    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
-
-[related_topic_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PUT.json)
-
-Update a topics related topics, description similar to POST.
-
 
 ## 4.8 Document Reference Services ##
 
