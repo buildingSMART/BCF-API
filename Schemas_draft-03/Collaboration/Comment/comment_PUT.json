@@ -15,22 +15,6 @@
     "comment": {
       "required": true,
       "type": "string"
-    },
-    "topic_guid": {
-      "required": true,
-      "type": "string"
-    },
-    "viewpoint_guid": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "reply_to_comment_guid": {
-      "type": [
-        "string",
-        "null"
-      ]
     }
   }
 }
