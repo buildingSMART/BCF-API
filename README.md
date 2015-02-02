@@ -43,6 +43,8 @@
 		- [4.2.3 GET Single Topic Services](#423-get-single-topic-services)
 		- [4.2.4 PUT Single Topic Services](#424-put-single-topic-services)
 		- [4.2.5 DELETE Single Topic Services](#425-delete-single-topic-services)
+		- [4.2.6 GET Topic BIM Snippet](#426-put-topic-bim-snippet)
+		- [4.2.7 PUT Topic BIM Snippet](#426-put-topic-bim-snippet)
 	- [4.3 File Services](#43-file-services)
 		- [4.3.1 GET File (Header) Services](#431-get-file-header-services)
 		- [4.3.2 PUT File (Header) Services](#432-put-file-header-services)
@@ -1069,6 +1071,34 @@ Delete a specific topic
 **Example Request**
 
 	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+
+### 4.2.6 GET Topic BIM Snippet
+
+**Resource URL**
+
+	GET /bcf/{version}/topics/{guid}/snippet
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
+
+Retrieves a topics BIM-Snippet as binary file. Will use the following HTTP headers to deliver additional information:
+
+	Content-Type: application/octet-stream;
+	Content-Length: {Size of file in bytes};
+	Content-Disposition: attachment; filename="{Filename.extension}";
+
+
+### 4.2.7 PUT Topic BIM Snippet
+
+**Resource URL**
+
+	PUT /bcf/{version}/topics/{guid}/snippet
+    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
+
+Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property must be set to "is_external"=false and the "reference" must be the file name with extension. The following HTTP headers are used for the upload:
+
+	Content-Type: application/octet-stream;
+	Content-Length: {Size of file in bytes};
+
+
 
 ## 4.3 File Services ##
 
