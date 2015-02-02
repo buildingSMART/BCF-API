@@ -43,6 +43,8 @@
 		- [4.2.3 GET Single Topic Services](#423-get-single-topic-services)
 		- [4.2.4 PUT Single Topic Services](#424-put-single-topic-services)
 		- [4.2.5 DELETE Single Topic Services](#425-delete-single-topic-services)
+		- [4.2.6 GET Topic BIM Snippet](#426-put-topic-bim-snippet)
+		- [4.2.7 PUT Topic BIM Snippet](#426-put-topic-bim-snippet)
 	- [4.3 File Services](#43-file-services)
 		- [4.3.1 GET File (Header) Services](#431-get-file-header-services)
 		- [4.3.2 PUT File (Header) Services](#432-put-file-header-services)
@@ -57,8 +59,7 @@
 		- [4.5.3 GET Single Viewpoint Services](#453-get-single-viewpoint-services)
 		- [4.5.4 PUT Single Viewpoint Services](#454-put-single-viewpoint-services)
 		- [4.5.5 GET bitmap of a Viewpoint Service](#455-get-bitmap-of-a-viewpoint-service)
-		- [4.5.6 POST bitmap of a Viewpoint Service](#456-post-bitmap-of-a-viewpoint-service)
-		- [4.5.7 PUT bitmap of a Viewpoint Service](#457-put-bitmap-of-a-viewpoint-service)
+		- [4.5.6 PUT bitmap of a Viewpoint Service](#456-put-bitmap-of-a-viewpoint-service)
 	- [4.6 Component Services](#46-component-services)
 		- [4.6.1 GET Component Services](#461-get-component-services)
 		- [4.6.2 PUT Component Services](#462-post-component-services)
@@ -1070,6 +1071,34 @@ Delete a specific topic
 
 	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
 
+### 4.2.6 GET Topic BIM Snippet
+
+**Resource URL**
+
+	GET /bcf/{version}/topics/{guid}/snippet
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
+
+Retrieves a topics BIM-Snippet as binary file. Will use the following HTTP headers to deliver additional information:
+
+	Content-Type: application/octet-stream;
+	Content-Length: {Size of file in bytes};
+	Content-Disposition: attachment; filename="{Filename.extension}";
+
+
+### 4.2.7 PUT Topic BIM Snippet
+
+**Resource URL**
+
+	PUT /bcf/{version}/topics/{guid}/snippet
+    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
+
+Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property must be set to "is_external"=false and the "reference" must be the file name with extension. The following HTTP headers are used for the upload:
+
+	Content-Type: application/octet-stream;
+	Content-Length: {Size of file in bytes};
+
+
+
 ## 4.3 File Services ##
 
 
@@ -1765,25 +1794,24 @@ HTTP-response header:
 	Content-Type: image/png
 
 
-### 4.5.6 POST bitmap of a Viewpoint Service ###
+### 4.5.6 PUT bitmap of a Viewpoint Service
 
 **Recource URL**
 
-    POST /bcf/{version}/viewpoints/{guid}/bitmap
-    POST /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmap
+    PUT /bcf/{version}/viewpoints/{guid}/bitmap
+    PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmap
 
-
-Add a viewpoints image (png, jpg or bmp).
+Add or update a viewpoints image (png, jpg or bmp).
 
 **Example Request**
 
     https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmap
 
-HTTP post request header:
+HTTP PUT request header:
 
 	Content-Type: image/png
 
-POST Body contains binary image data
+PUT Body contains binary image data
 
 
 **Example Response**
@@ -1791,17 +1819,6 @@ POST Body contains binary image data
 HTTP-response status code:
 
 201 created (empty response body)
-
-
-### 4.5.7 PUT bitmap of a Viewpoint Service
-
-**Recource URL**
-
-    PUT /bcf/{version}/viewpoints/{guid}/bitmap
-    PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmap
-
-Update a single viewpoints image, description similar to POST.
-
 
 ## 4.6 Component Services ##
 
