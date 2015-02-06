@@ -1251,12 +1251,6 @@ JSON encoded body using the "application/json" content type.
     <td>mandatory</td>
   </tr>
   <tr>
-    <td>topic_guid</td>
-    <td>string</td>
-    <td>The GUID of the related topic</td>
-    <td>mandatory</td>
-  </tr>
-  <tr>
     <td>viewpoint_guid</td>
     <td>string</td>
     <td>The GUID of the related viewpoint</td>
@@ -1276,11 +1270,8 @@ JSON encoded body using the "application/json" content type.
 
     {
 		"verbal_status": "closed",
-		"status": "closed",
-    	"date": "2013-11-19T14:24:11.316Z",
-		"author": "bob.heater@example.com",		
+		"status": "closed",	
 		"comment": "will rework the heating model",
-		"topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }
 
 **Example Response**

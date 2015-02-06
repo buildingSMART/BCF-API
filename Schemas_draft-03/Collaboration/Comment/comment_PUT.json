@@ -16,10 +16,6 @@
       "required": true,
       "type": "string"
     },
-    "topic_guid": {
-      "required": true,
-      "type": "string"
-    },
     "viewpoint_guid": {
       "type": [
         "string",
