@@ -1270,9 +1270,7 @@ JSON encoded body using the "application/json" content type.
 
     {
 		"verbal_status": "closed",
-		"status": "closed",
-    	"date": "2013-11-19T14:24:11.316Z",
-		"author": "bob.heater@example.com",		
+		"status": "closed",	
 		"comment": "will rework the heating model",
     }
 
