@@ -33,10 +33,9 @@
 		- [4.1.2 POST Project Services](#412-post-project-services)
 		- [4.1.3 GET Single Project Services](#413-get-single-project-services)
 		- [4.1.4 PUT Single Project Services](#414-put-single-project-services)
-		- [4.1.5 DELETE Single Project Services](#415-delete-single-project-services)
-		- [4.1.6 GET Project Extension Services](#416-get-project-extension-services)
-		- [4.1.7 POST Project Extension Services](#417-post-project-extension-services)
-		- [4.1.8 PUT Project Extension Services](#418-put-project-extension-services)
+		- [4.1.5 GET Project Extension Services](#415-get-project-extension-services)
+		- [4.1.6 POST Project Extension Services](#416-post-project-extension-services)
+		- [4.1.7 PUT Project Extension Services](#417-put-project-extension-services)
 	- [4.2 Topic Services](#42-topic-services)
 		- [4.2.1 GET Topic Services](#421-get-topic-services)
 		- [4.2.2 POST Topic Services](#422-post-topic-services)
@@ -633,20 +632,7 @@ Retrieve a specific project.
 Modify a specific project, description similar to POST.
 
 
-### 4.1.5 DELETE Single Project Services ###
-
-**Recource URL**
-
-    DELETE /bcf/{version}/projects/{project_id}
-
-Delete a specific project.
-
-**Example Request**
-
-    https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
-
-
-### 4.1.6 GET Project Extension Services ###
+### 4.1.5 GET Project Extension Services ###
 
 **Recource URL**
 
@@ -701,7 +687,7 @@ Retrieve a specific projects extensions.
 		]
 	}
 
-### 4.1.7 POST Project Extension Services
+### 4.1.6 POST Project Extension Services
 
 **Recource URL**
 
@@ -833,7 +819,7 @@ JSON encoded body using the "application/json" content type.
 	}
 
 
-### 4.1.8 PUT Project Extension Services
+### 4.1.7 PUT Project Extension Services
 
 **Recource URL**
 
