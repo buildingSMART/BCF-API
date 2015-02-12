@@ -42,7 +42,6 @@
 		- [4.2.2 POST Topic Services](#422-post-topic-services)
 		- [4.2.3 GET Single Topic Services](#423-get-single-topic-services)
 		- [4.2.4 PUT Single Topic Services](#424-put-single-topic-services)
-		- [4.2.5 DELETE Single Topic Services](#425-delete-single-topic-services)
 		- [4.2.6 GET Topic BIM Snippet](#426-get-topic-bim-snippet)
 		- [4.2.7 PUT Topic BIM Snippet](#427-put-topic-bim-snippet)
 	- [4.3 File Services](#43-file-services)
@@ -1053,20 +1052,6 @@ Retrieve a specific topic.
 [topic_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_PUT.json)
 
 Modify a specific topic, description similar to POST.
-
-
-### 4.2.5 DELETE Single Topic Services ###
-
-**Recource URL**
-
-    DELETE /bcf/{version}/topics/{guid}
-    DELETE /bcf/{version}/projects/{project_id}/topics/{guid}
-
-Delete a specific topic
-
-**Example Request**
-
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
 
 ### 4.2.6 GET Topic BIM Snippet
 
