@@ -67,9 +67,9 @@
 	- [4.8 Document Reference Services](#48-document-reference-services)
 		- [4.8.1 GET Document Reference Services](#481-get-document-reference-services)
 		- [4.8.2 PUT Document Reference Services](#482-put-document-reference-services)
-
-
-
+	- [4.9 Document Services](#49-document-services)
+		- [4.9.1 POST Document Services](#491-post-document-services)
+		- [4.9.2 GET Document Services](#492-get-document-services)
 
 
 ----------
@@ -1984,6 +1984,7 @@ Retrieve a **collection** of all document references to a topic.
 [document_reference_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
 Add or update document references to a topic.
+The PUT object may either contain the property "guid" to reference a document stored on the BCF server (see section 4.9) OR the property "referenced_document" to point to an external resource.
 
 **Example Request**
 
@@ -2006,5 +2007,38 @@ Add or update document references to a topic.
  	}
 	]
 
+## 4.9 Document Services
+
+### 4.9.1 POST Document Services
+
+[document_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Document/document_GET.json)
+
+**Recource URL**
+
+	POST /bcf/{version}/projects/{project_id}/documents
+
+Upload a document (binary file) to a project. The following HTTP headers are used for the upload:
+
+	Content-Type: application/octet-stream;
+	Content-Length: {Size of file in bytes};
+	Content-Disposition: attachment; filename="{Filename.extension}";
+
+**Example Response**
+
+ 	{
+  		"guid":"472ab37a-6122-448e-86fc-86503183b520"
+ 	}
+
+### 4.9.2 GET Document Services
+
+**Recource URL**
+
+	GET /bcf/{version}/projects/{project_id}/documents/{guid}
+
+Retrieves a document as binary file. Will use the following HTTP headers to deliver additional information:
+
+	Content-Type: application/octet-stream;
+	Content-Length: {Size of file in bytes};
+	Content-Disposition: attachment; filename="{Filename.extension}";
 
 

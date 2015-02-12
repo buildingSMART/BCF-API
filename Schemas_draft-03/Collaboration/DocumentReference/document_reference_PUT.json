@@ -2,6 +2,12 @@
   "title": "document_reference_PUT",
   "type": "object",
   "properties": {
+      "guid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "referenced_document": {
       "type": [
         "string",
