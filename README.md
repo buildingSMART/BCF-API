@@ -68,10 +68,7 @@
 		- [4.7.2 PUT Related Topics Services](#472-post-related-topics-services)
 	- [4.8 Document Reference Services](#48-document-reference-services)
 		- [4.8.1 GET Document Reference Services](#481-get-document-reference-services)
-		- [4.8.2 POST Document Reference Services](#482-post-document-reference-services)
-		- [4.8.3 GET a single Document Reference Service](#483-get-a-single-document-reference-service)
-		- [4.8.4 PUT a single Document Reference Service](#484-put-a-single-document-reference-service)
-
+		- [4.8.2 PUT Document Reference Services](#482-put-document-reference-services)
 
 
 
@@ -2006,66 +2003,37 @@ Retrieve a **collection** of all document references to a topic.
  	}
 	]
 
-### 4.8.2 POST Document Reference Services ###
+### 4.8.2 PUT Document Reference Services ###
 
 **Recource URL**
 
     POST /bcf/{version}/topics/{guid}/document_references
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
 
-[document_reference_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_POST.json)
+[document_reference_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
-Add a document reference to a topic.
+Add or update document references to a topic.
 
 **Example Request**
 
 	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
 
+	[
  	{
   		"referenced_document":"http://example.com/files/LegalRequirements.pdf",
   		"description":"The legal requirements for buildings."
  	}
+	]
 
 **Example Response**
 
+	[
  	{
   		"guid":"472ab37a-6122-448e-86fc-86503183b520",
   		"referenced_document":"http://example.com/files/LegalRequirements.pdf",
   		"description":"The legal requirements for buildings."
  	}
+	]
 
-### 4.8.3 GET a single Document Reference Service ###
-
-**Recource URL**
-
-    GET /bcf/{version}/document_references/{guid}
-	GET /bcf/{version}/projects/{project_id}/topics/{guid}/document_references/{guid}
-
-[document_reference_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_GET.json)
-
-Retrieve a single document reference.
-
-**Example Request**
-
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references/472ab37a-6122-448e-86fc-86503183b520
-
-**Example Response**
-
- 	{
-  		"guid":"472ab37a-6122-448e-86fc-86503183b520",
-  		"referenced_document":"http://example.com/files/LegalRequirements.pdf",
-  		"description":"The legal requirements for buildings."
- 	}
-
-### 4.8.4 PUT a single Document Reference Service ###
-
-**Recource URL**
-
-    PUT /bcf/{version}/document_references/{guid}
-	PUT /bcf/{version}/projects/{project_id}/topics/{guid}/document_references/{guid}
-
-[document_reference_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
-
-Update a single document reference, description similar to POST.
 
 
