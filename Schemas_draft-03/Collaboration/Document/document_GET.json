@@ -5,6 +5,10 @@
     "guid": {
       "required": true,
       "type": "string"
+    },
+    "filename": {
+      "required": true,
+      "type": "string"
     }
   }
 }
