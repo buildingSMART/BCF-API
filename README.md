@@ -33,16 +33,14 @@
 		- [4.1.2 POST Project Services](#412-post-project-services)
 		- [4.1.3 GET Single Project Services](#413-get-single-project-services)
 		- [4.1.4 PUT Single Project Services](#414-put-single-project-services)
-		- [4.1.5 DELETE Single Project Services](#415-delete-single-project-services)
-		- [4.1.6 GET Project Extension Services](#416-get-project-extension-services)
-		- [4.1.7 POST Project Extension Services](#417-post-project-extension-services)
-		- [4.1.8 PUT Project Extension Services](#418-put-project-extension-services)
+		- [4.1.5 GET Project Extension Services](#415-get-project-extension-services)
+		- [4.1.6 POST Project Extension Services](#416-post-project-extension-services)
+		- [4.1.7 PUT Project Extension Services](#417-put-project-extension-services)
 	- [4.2 Topic Services](#42-topic-services)
 		- [4.2.1 GET Topic Services](#421-get-topic-services)
 		- [4.2.2 POST Topic Services](#422-post-topic-services)
 		- [4.2.3 GET Single Topic Services](#423-get-single-topic-services)
 		- [4.2.4 PUT Single Topic Services](#424-put-single-topic-services)
-		- [4.2.5 DELETE Single Topic Services](#425-delete-single-topic-services)
 		- [4.2.6 GET Topic BIM Snippet](#426-get-topic-bim-snippet)
 		- [4.2.7 PUT Topic BIM Snippet](#427-put-topic-bim-snippet)
 	- [4.3 File Services](#43-file-services)
@@ -68,13 +66,10 @@
 		- [4.7.2 PUT Related Topics Services](#472-post-related-topics-services)
 	- [4.8 Document Reference Services](#48-document-reference-services)
 		- [4.8.1 GET Document Reference Services](#481-get-document-reference-services)
-		- [4.8.2 POST Document Reference Services](#482-post-document-reference-services)
-		- [4.8.3 GET a single Document Reference Service](#483-get-a-single-document-reference-service)
-		- [4.8.4 PUT a single Document Reference Service](#484-put-a-single-document-reference-service)
-
-
-
-
+		- [4.8.2 PUT Document Reference Services](#482-put-document-reference-services)
+	- [4.9 Document Services](#49-document-services)
+		- [4.9.1 POST Document Services](#491-post-document-services)
+		- [4.9.2 GET Document Services](#492-get-document-services)
 
 
 ----------
@@ -637,20 +632,7 @@ Retrieve a specific project.
 Modify a specific project, description similar to POST.
 
 
-### 4.1.5 DELETE Single Project Services ###
-
-**Recource URL**
-
-    DELETE /bcf/{version}/projects/{project_id}
-
-Delete a specific project.
-
-**Example Request**
-
-    https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
-
-
-### 4.1.6 GET Project Extension Services ###
+### 4.1.5 GET Project Extension Services ###
 
 **Recource URL**
 
@@ -705,7 +687,7 @@ Retrieve a specific projects extensions.
 		]
 	}
 
-### 4.1.7 POST Project Extension Services
+### 4.1.6 POST Project Extension Services
 
 **Recource URL**
 
@@ -837,7 +819,7 @@ JSON encoded body using the "application/json" content type.
 	}
 
 
-### 4.1.8 PUT Project Extension Services
+### 4.1.7 PUT Project Extension Services
 
 **Recource URL**
 
@@ -1056,20 +1038,6 @@ Retrieve a specific topic.
 [topic_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_PUT.json)
 
 Modify a specific topic, description similar to POST.
-
-
-### 4.2.5 DELETE Single Topic Services ###
-
-**Recource URL**
-
-    DELETE /bcf/{version}/topics/{guid}
-    DELETE /bcf/{version}/projects/{project_id}/topics/{guid}
-
-Delete a specific topic
-
-**Example Request**
-
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
 
 ### 4.2.6 GET Topic BIM Snippet
 
@@ -2006,66 +1974,71 @@ Retrieve a **collection** of all document references to a topic.
  	}
 	]
 
-### 4.8.2 POST Document Reference Services ###
+### 4.8.2 PUT Document Reference Services ###
 
 **Recource URL**
 
     POST /bcf/{version}/topics/{guid}/document_references
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
 
-[document_reference_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_POST.json)
+[document_reference_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
-Add a document reference to a topic.
+Add or update document references to a topic.
+The PUT object may either contain the property "guid" to reference a document stored on the BCF server (see section 4.9) OR the property "referenced_document" to point to an external resource.
 
 **Example Request**
 
 	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
 
+	[
  	{
   		"referenced_document":"http://example.com/files/LegalRequirements.pdf",
   		"description":"The legal requirements for buildings."
  	}
+	]
 
 **Example Response**
 
+	[
  	{
   		"guid":"472ab37a-6122-448e-86fc-86503183b520",
   		"referenced_document":"http://example.com/files/LegalRequirements.pdf",
   		"description":"The legal requirements for buildings."
  	}
+	]
 
-### 4.8.3 GET a single Document Reference Service ###
+## 4.9 Document Services
+
+### 4.9.1 POST Document Services
+
+[document_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Document/document_GET.json)
 
 **Recource URL**
 
-    GET /bcf/{version}/document_references/{guid}
-	GET /bcf/{version}/projects/{project_id}/topics/{guid}/document_references/{guid}
+	POST /bcf/{version}/projects/{project_id}/documents
 
-[document_reference_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_GET.json)
+Upload a document (binary file) to a project. The following HTTP headers are used for the upload:
 
-Retrieve a single document reference.
-
-**Example Request**
-
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references/472ab37a-6122-448e-86fc-86503183b520
+	Content-Type: application/octet-stream;
+	Content-Length: {Size of file in bytes};
+	Content-Disposition: attachment; filename="{Filename.extension}";
 
 **Example Response**
 
  	{
-  		"guid":"472ab37a-6122-448e-86fc-86503183b520",
-  		"referenced_document":"http://example.com/files/LegalRequirements.pdf",
-  		"description":"The legal requirements for buildings."
+  		"guid":"472ab37a-6122-448e-86fc-86503183b520"
  	}
 
-### 4.8.4 PUT a single Document Reference Service ###
+### 4.9.2 GET Document Services
 
 **Recource URL**
 
-    PUT /bcf/{version}/document_references/{guid}
-	PUT /bcf/{version}/projects/{project_id}/topics/{guid}/document_references/{guid}
+	GET /bcf/{version}/projects/{project_id}/documents/{guid}
 
-[document_reference_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
+Retrieves a document as binary file. Will use the following HTTP headers to deliver additional information:
 
-Update a single document reference, description similar to POST.
+	Content-Type: application/octet-stream;
+	Content-Length: {Size of file in bytes};
+	Content-Disposition: attachment; filename="{Filename.extension}";
 
 
