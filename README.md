@@ -68,8 +68,9 @@
 		- [4.8.1 GET Document Reference Services](#481-get-document-reference-services)
 		- [4.8.2 PUT Document Reference Services](#482-put-document-reference-services)
 	- [4.9 Document Services](#49-document-services)
-		- [4.9.1 POST Document Services](#491-post-document-services)
-		- [4.9.2 GET Document Services](#492-get-document-services)
+		- [4.9.1 GET Documents Services](#491-get-documents-services)
+		- [4.9.2 POST Document Services](#492-post-document-services)
+		- [4.9.3 GET Document Services](#493-get-document-services)
 
 
 ----------
@@ -2009,9 +2010,35 @@ The PUT object may either contain the property "guid" to reference a document st
 
 ## 4.9 Document Services
 
-### 4.9.1 POST Document Services
+### 4.9.1 GET Documents Services
 
 [document_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Document/document_GET.json)
+
+**Recource URL**
+
+	GET /bcf/{version}/projects/{project_id}/documents
+
+Retrieve a **collection** of all documents uploaded to a project.
+
+**Example Request**
+
+	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
+
+**Example Response**
+
+	[
+ 	{
+  		"guid":"472ab37a-6122-448e-86fc-86503183b520",
+  		"filename":"LegalRequirements.pdf"
+ 	},
+ 	{
+	  	"guid":"6cbfe31d-95c3-4f4d-92a6-420c23698721",
+	  	"filename":"DesignParameters.pdf"
+ 	}
+	]
+
+### 4.9.2 POST Document Services
+
 
 **Recource URL**
 
@@ -2026,10 +2053,11 @@ Upload a document (binary file) to a project. The following HTTP headers are use
 **Example Response**
 
  	{
-  		"guid":"472ab37a-6122-448e-86fc-86503183b520"
+  		"guid":"472ab37a-6122-448e-86fc-86503183b520",
+		"filename":"Official_Building_Permission.pdf"
  	}
 
-### 4.9.2 GET Document Services
+### 4.9.3 GET Document Services
 
 **Recource URL**
 
