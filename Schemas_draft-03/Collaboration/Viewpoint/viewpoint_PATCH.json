@@ -238,13 +238,13 @@
         }
       }
     },
-    "bitmap": {
+    "snapshot": {
       "type": [
         "object",
         "null"
       ],
       "properties": {
-        "bitmap": {
+        "snapshot_type": {
           "type": "integer",
           "enum": [
             0,

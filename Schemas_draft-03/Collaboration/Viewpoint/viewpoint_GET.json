@@ -1,7 +1,5 @@
 {
-"$schema": "http://json-schema.org/draft-03/schema#",  
-"title": "viewpoint_GET",
-"description": "Schema for single viewpoint GET, BCF REST API.",
+  "title": "viewpoint_GET",
   "type": "object",
   "properties": {
     "guid": {
@@ -244,32 +242,18 @@
         }
       }
     },
-    "bitmap": {
+    "snapshot": {
       "type": [
         "object",
         "null"
       ],
       "properties": {
-        "bitmap": {
+        "snapshot_type": {
           "type": "integer",
           "enum": [
             0,
             1,
             2
-          ],
-          "options": [
-            {
-              "value": 0,
-              "label": "PNG"
-            },
-            {
-              "value": 1,
-              "label": "JPG"
-            },
-            {
-              "value": 2,
-              "label": "BMP"
-            }
           ]
         },
         "reference": {
@@ -334,15 +318,5 @@
         }
       }
     }
-  },
-"links": [
-	   	{
-			"rel": "components",
-			"href": "{guid}/components"
-	   	},
-        	{
-            	"rel": "bitmap",
-            	"href": "{guid}/bitmap"
-        	}
-    	]
+  }
 }

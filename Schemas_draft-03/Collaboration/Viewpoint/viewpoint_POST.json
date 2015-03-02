@@ -1,7 +1,5 @@
 {
-"$schema": "http://json-schema.org/draft-03/schema#",  
-"title": "viewpoint_POST",
-"description": "Schema for viewpoint POST, BCF REST API.",
+  "title": "viewpoint_POST",
   "type": "object",
   "properties": {
     "orthogonal_camera": {
@@ -240,32 +238,18 @@
         }
       }
     },
-    "bitmap": {
+    "snapshot": {
       "type": [
         "object",
         "null"
       ],
       "properties": {
-        "bitmap": {
+        "snapshot_type": {
           "type": "integer",
           "enum": [
             0,
             1,
             2
-          ],
-          "options": [
-            {
-              "value": 0,
-              "label": "PNG"
-            },
-            {
-              "value": 1,
-              "label": "JPG"
-            },
-            {
-              "value": 2,
-              "label": "BMP"
-            }
           ]
         },
         "reference": {
