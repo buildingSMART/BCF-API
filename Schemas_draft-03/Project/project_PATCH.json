@@ -1,0 +1,12 @@
+{
+  "title": "project_PATCH",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

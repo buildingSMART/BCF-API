@@ -12,9 +12,10 @@
 	- [1.2 Sorting](#12-sorting)
 	- [1.3 Filtering](#13-filtering)
 	- [1.4 Caching](#14-caching)
-	- [1.5 Cross origin resource sharing (Cors)](#15-cross-origin-resource-sharing-cors)
-	- [1.6 HTTP status codes](#16-http-status-codes)
-	- [1.7 Error response body format](#17-error-response-body-format)
+	- [1.5 Updating Resources](#15-updating-resources)
+	- [1.6 Cross origin resource sharing (Cors)](#16-cross-origin-resource-sharing-cors)
+	- [1.7 HTTP status codes](#17-http-status-codes)
+	- [1.8 Error response body format](#18-error-response-body-format)
 - [2. Topologies](#2-topologies)
 	- [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
 	- [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
@@ -56,8 +57,8 @@
 		- [4.5.2 POST Viewpoint Services](#452-post-viewpoint-services)
 		- [4.5.3 GET Single Viewpoint Services](#453-get-single-viewpoint-services)
 		- [4.5.4 PUT Single Viewpoint Services](#454-put-single-viewpoint-services)
-		- [4.5.5 GET bitmap of a Viewpoint Service](#455-get-bitmap-of-a-viewpoint-service)
-		- [4.5.6 PUT bitmap of a Viewpoint Service](#456-put-bitmap-of-a-viewpoint-service)
+		- [4.5.5 GET snapshot of a Viewpoint Service](#455-get-snapshot-of-a-viewpoint-service)
+		- [4.5.6 PUT snapshot of a Viewpoint Service](#456-put-snapshot-of-a-viewpoint-service)
 	- [4.6 Component Services](#46-component-services)
 		- [4.6.1 GET Component Services](#461-get-component-services)
 		- [4.6.2 PUT Component Services](#462-post-component-services)
@@ -128,7 +129,7 @@ Would return a collection of topics sorted by priority (descending) then by labe
 
 ## 1.3 Filtering ##
 
-GET requests returning a collection can be filtered with the "filter" URL parameter. The syntax is based on the ODATA protocol. Wildcard operator is allowed as the star sign (*).
+GET requests returning a collection can be filtered with the "filter" URL parameter. The syntax is based on the ODATA protocol. Wildcard operator is allowed as the star sign (*). Doubel quotes (") in string literals are escaped by a backslash (\) character, for example: "Hotel \"Mountain Inn\" Reconstruction".
 
 Filter operators:
 
@@ -206,8 +207,12 @@ ETags are returned in a response to a GET:
   
 The client may send an "If-None-Match" HTTP Header containing the last retrieved etag. If the content has not changed the server returns a status code 304 (not modified) and no response body.
 
+## 1.5 Updating Resources
 
-## 1.5 Cross origin resource sharing (Cors) ##
+Whenever a resource offers the HTTP PUT method to be updated as a whole, the resource may also partially updated with a HTTP PATCH query that only transports the changed properties of the entity.
+
+
+## 1.6 Cross origin resource sharing (Cors) ##
 
 The server will put the "Access-Control-Allow-Headers" in the response header and specify who can access the servers (JSON) resources. The client can look for this value and proceed with accessing the resources. 
 
@@ -222,7 +227,7 @@ The server has a web config file .. "*" means the server allow the resources for
      </httpProtocol>
 
 
-## 1.6 HTTP status codes ##
+## 1.7 HTTP status codes ##
 
 -   200 OK (Data is returned)
 -   201 No content (Data has been deleted)
@@ -233,7 +238,7 @@ The server has a web config file .. "*" means the server allow the resources for
 -   404 Not found (It must be discussed if the user should get “unauthorized” to resources he don’t have access to, or “not found")
 -   422 Unprocessable entity (Input data is well formed, but the semantic is wrong; Example: Resource define that a value cannot be “null”, but the value is “null”)
 
-## 1.7 Error response body format ##
+## 1.8 Error response body format ##
 
 BCF-API has a specified error response body format [error.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/error.json).
 
@@ -630,6 +635,8 @@ Retrieve a specific project.
 
 [project_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_PUT.json)
 
+[project_PATCH.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_PATCH.json)
+
 Modify a specific project, description similar to POST.
 
 
@@ -827,6 +834,8 @@ JSON encoded body using the "application/json" content type.
 	PUT /bcf/{version}/projects/{project_id}/extensions
 
 [extensions_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/extensions_PUT.json)
+
+[extensions_PATCH.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/extensions_PATCH.json)
 
 Modify a specific projects extensions, description similar to POST.
 
@@ -1038,6 +1047,8 @@ Retrieve a specific topic.
 
 [topic_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_PUT.json)
 
+[topic_PATCH.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_PATCH.json)
+
 Modify a specific topic, description similar to POST.
 
 ### 4.2.6 GET Topic BIM Snippet
@@ -1110,6 +1121,8 @@ Retrieve a **collection** of file references as topic header.
 	PUT /bcf/{version}/projects/{project_id}/topics/{guid}/files
 
 [file_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/File/file_PUT.json)
+
+[file_PATCH.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/File/file_PATCH.json)
 
 Update a **collection** of file references on the topic header.
 
@@ -1290,6 +1303,8 @@ Get a single comment.
 	PUT /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
 
 [comment_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Comment/comment_PUT.json)
+
+[comment_PATCH.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Comment/comment_PATCH.json)
 
 Update a single comment, description similar to POST.
 
@@ -1523,7 +1538,7 @@ JSON encoded body using the "application/json" content type.
     <td>optional</td>
   </tr>
   <tr>
-    <td>bitmap</td>
+    <td>snapshot</td>
     <td>element</td>
     <td>Picture of the viewpoint</td>
     <td>optional</td>
@@ -1729,15 +1744,17 @@ Retrieve a specific viewpoint.
 
 [viewpoint_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Viewpoint/viewpoint_PUT.json)
 
+[viewpoint_PATCH.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Viewpoint/viewpoint_PATCH.json)
+
 Update a single viewpoint, description similar to POST.
 
 
-### 4.5.5 GET bitmap of a Viewpoint Service ###
+### 4.5.5 GET snapshot of a Viewpoint Service ###
 
 **Recource URL**
 
-    GET /bcf/{version}/viewpoints/{guid}/bitmap
-    GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmap
+    GET /bcf/{version}/viewpoints/{guid}/snapshot
+    GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
 
 
 Retrieve a viewpoints image (png, jpg or bmp).
@@ -1745,7 +1762,7 @@ Retrieve a viewpoints image (png, jpg or bmp).
 **Example Request**
 
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmap
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
 **Example Response**
 
@@ -1754,18 +1771,18 @@ HTTP-response header:
 	Content-Type: image/png
 
 
-### 4.5.6 PUT bitmap of a Viewpoint Service
+### 4.5.6 PUT snapshot of a Viewpoint Service
 
 **Recource URL**
 
-    PUT /bcf/{version}/viewpoints/{guid}/bitmap
-    PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmap
+    PUT /bcf/{version}/viewpoints/{guid}/snapshot
+    PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
 
 Add or update a viewpoints image (png, jpg or bmp).
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmap
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
 HTTP PUT request header:
 
@@ -1826,6 +1843,8 @@ Retrieve a **collection** of all components related to a viewpoint.
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
 [component_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Component/component_PUT.json)
+
+[component_PATCH.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Component/component_PATCH.json)
 
 Add or update a **collection** of all components related to a viewpoint.
 
@@ -1911,6 +1930,8 @@ Retrieve a **collection** of all related topics to a topic.
 
 [related_topic_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PUT.json)
 
+[related_topic_PATCH.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PATCH.json)
+
 Add or update a **collection** of all related topics to a topic.
 
 **Example Request**
@@ -1983,6 +2004,8 @@ Retrieve a **collection** of all document references to a topic.
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
 
 [document_reference_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
+
+[document_reference_PATCH.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_PATCH.json)
 
 Add or update document references to a topic.
 The PUT object may either contain the property "guid" to reference a document stored on the BCF server (see section 4.9) OR the property "referenced_document" to point to an external resource.

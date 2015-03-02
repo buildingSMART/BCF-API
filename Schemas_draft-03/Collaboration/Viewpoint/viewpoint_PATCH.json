@@ -1,5 +1,5 @@
 {
-  "title": "viewpoint_POST",
+  "title": "viewpoint_PATCH",
   "type": "object",
   "properties": {
     "orthogonal_camera": {
