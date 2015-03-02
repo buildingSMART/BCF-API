@@ -129,7 +129,7 @@ Would return a collection of topics sorted by priority (descending) then by labe
 
 ## 1.3 Filtering ##
 
-GET requests returning a collection can be filtered with the "filter" URL parameter. The syntax is based on the ODATA protocol. Wildcard operator is allowed as the star sign (*).
+GET requests returning a collection can be filtered with the "filter" URL parameter. The syntax is based on the ODATA protocol. Wildcard operator is allowed as the star sign (*). Doubel quotes (") in string literals are escaped by a backslash (\) character, for example: "Hotel \"Mountain Inn\" Reconstruction".
 
 Filter operators:
 
