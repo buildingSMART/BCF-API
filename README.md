@@ -994,9 +994,10 @@ JSON encoded body using the "application/json" content type.
         "bim_snippet":
 				{
 				"snippet_type": "clash",
-				"is_external": true},
+				"is_external": true,
 				"reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
 				"reference_schema": "https://example.com/bcf/1.0/clash.xsd"	
+				}
     	}
 
 ### 4.2.3 GET Single Topic Services ###
@@ -1033,9 +1034,10 @@ Retrieve a specific topic.
         "bim_snippet":
 				{
 				"snippet_type": "clash",
-				"is_external": true},
+				"is_external": true,
 				"reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
 				"reference_schema": "https://example.com/bcf/1.0/clash.xsd"	
+				}
     	}
  
 ### 4.2.4 PUT Single Topic Services ###
