@@ -1004,7 +1004,6 @@ JSON encoded body using the "application/json" content type.
 
 **Recource URL**
 
-    GET /bcf/{version}/topics/{guid}
     GET /bcf/{version}/projects/{guid}/topics/{guid}
 
 [topic_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_GET.json)
@@ -1044,7 +1043,6 @@ Retrieve a specific topic.
 
 **Recource URL**
 
-    PUT /bcf/{version}/topics/{guid}
     PUT /bcf/{version}/projects/{project_id}/topics/{guid}
 
 [topic_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_PUT.json)
@@ -1057,7 +1055,6 @@ Modify a specific topic, description similar to POST.
 
 **Resource URL**
 
-	GET /bcf/{version}/topics/{guid}/snippet
     GET /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
 
 Retrieves a topics BIM-Snippet as binary file. Will use the following HTTP headers to deliver additional information:
@@ -1071,7 +1068,6 @@ Retrieves a topics BIM-Snippet as binary file. Will use the following HTTP heade
 
 **Resource URL**
 
-	PUT /bcf/{version}/topics/{guid}/snippet
     PUT /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
 
 Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property must be set to "is_external"=false and the "reference" must be the file name with extension. The following HTTP headers are used for the upload:
@@ -1088,7 +1084,6 @@ Puts a new BIM Snippet binary file to a topic. If this is used, the parent topic
 
 **Recource URL**
 
-    GET /bcf/{version}/topics/{guid}/files
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/files
 
 [file_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/File/file_GET.json)
@@ -1119,7 +1114,6 @@ Retrieve a **collection** of file references as topic header.
 
 **Recource URL**
 
-    PUT /bcf/{version}/topics/{guid}/files
 	PUT /bcf/{version}/projects/{project_id}/topics/{guid}/files
 
 [file_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/File/file_PUT.json)
@@ -1166,7 +1160,6 @@ Update a **collection** of file references on the topic header.
 
 **Recource URL**
 
-    GET /bcf/{version}/topics/{guid}/comments
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/comments
 
 [comment_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Comment/comment_GET.json)
@@ -1203,7 +1196,6 @@ Retrieve a **collection** of all comments related to a topic.
 
 **Recource URL**
 
-    POST /bcf/{version}/topics/{guid}/comments
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/comments
 
 [comment_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Comment/comment_POST.json)
@@ -1274,7 +1266,6 @@ JSON encoded body using the "application/json" content type.
 
 **Recource URL**
 
-    GET /bcf/{version}/comments/{guid}
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
 
 [comment_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Comment/comment_GET.json)
@@ -1301,7 +1292,6 @@ Get a single comment.
 
 **Recource URL**
 
-    PUT /bcf/{version}/comments/{guid}
 	PUT /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
 
 [comment_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Comment/comment_PUT.json)
@@ -1316,7 +1306,6 @@ Update a single comment, description similar to POST.
 
 **Recource URL**
 
-    GET /bcf/{version}/topics/{guid}/viewpoints
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints
 
 [viewpoint_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Viewpoint/viewpoint_GET.json)
@@ -1424,7 +1413,6 @@ Retrieve a **collection** of all viewpoints related to a topic.
 
 **Recource URL**
 
-    POST /bcf/{version}/topics/{guid}/viewpoints
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints
 
 [viewpoint_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Viewpoint/viewpoint_POST.json)
@@ -1675,7 +1663,6 @@ JSON encoded body using the "application/json" content type.
 
 **Recource URL**
 
-    GET /bcf/{version}/viewpoints/{guid}
     GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}
 
 [viewpoint_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Viewpoint/viewpoint_GET.json)
@@ -1741,7 +1728,6 @@ Retrieve a specific viewpoint.
 
 **Recource URL**
 
-    PUT /bcf/{version}/viewpoints/{guid}
     PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}
 
 [viewpoint_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Viewpoint/viewpoint_PUT.json)
@@ -1755,7 +1741,6 @@ Update a single viewpoint, description similar to POST.
 
 **Recource URL**
 
-    GET /bcf/{version}/viewpoints/{guid}/snapshot
     GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
 
 
@@ -1777,7 +1762,6 @@ HTTP-response header:
 
 **Recource URL**
 
-    PUT /bcf/{version}/viewpoints/{guid}/snapshot
     PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
 
 Add or update a viewpoints image (png, jpg or bmp).
@@ -1805,7 +1789,6 @@ HTTP-response status code:
 
 **Recource URL**
 
-    GET /bcf/{version}/viewpoints/{guid}/components
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
 [component_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Component/component_GET.json)
@@ -1841,7 +1824,6 @@ Retrieve a **collection** of all components related to a viewpoint.
 
 **Recource URL**
 
-    POST /bcf/{version}/viewpoints/{guid}/components
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
 [component_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Component/component_PUT.json)
@@ -1901,7 +1883,6 @@ Add or update a **collection** of all components related to a viewpoint.
 
 **Recource URL**
 
-    GET /bcf/{version}/topics/{guid}/related_topics
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
 
 [related_topic_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/RelatedTopic/related_topic_GET.json)
@@ -1927,7 +1908,6 @@ Retrieve a **collection** of all related topics to a topic.
 
 **Recource URL**
 
-    POST /bcf/{version}/topics/{guid}/related_topics
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
 
 [related_topic_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PUT.json)
@@ -1972,7 +1952,6 @@ Add or update a **collection** of all related topics to a topic.
 
 **Recource URL**
 
-    GET /bcf/{version}/topics/{guid}/document_references
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
 
 [document_reference_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_GET.json)
@@ -2002,7 +1981,6 @@ Retrieve a **collection** of all document references to a topic.
 
 **Recource URL**
 
-    POST /bcf/{version}/topics/{guid}/document_references
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
 
 [document_reference_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
