@@ -59,6 +59,8 @@
 		- [4.5.4 PUT Single Viewpoint Services](#454-put-single-viewpoint-services)
 		- [4.5.5 GET snapshot of a Viewpoint Service](#455-get-snapshot-of-a-viewpoint-service)
 		- [4.5.6 PUT snapshot of a Viewpoint Service](#456-put-snapshot-of-a-viewpoint-service)
+		- [4.5.7 GET bitmap of a Viewpoint Service](#457-get-bitmap-of-a-viewpoint-service)
+		- [4.5.8 PUT bitmap of a Viewpoint Service](#458-put-bitmap-of-a-viewpoint-service)
 	- [4.6 Component Services](#46-component-services)
 		- [4.6.1 GET Component Services](#461-get-component-services)
 		- [4.6.2 PUT Component Services](#462-post-component-services)
@@ -1528,23 +1530,24 @@ JSON encoded body using the "application/json" content type.
     <td>optional</td>
   </tr>
   <tr>
-    <td>snapshot</td>
-    <td>element</td>
-    <td>Picture of the viewpoint</td>
+    <td>bitmaps</td>
+    <td>array</td>
+    <td>Array of embedded pictures in the viewpoint</td>
     <td>optional</td>
   </tr>
   <tr>
+    <td>guid</td>
+    <td>string</td>
+    <td>Guid for the bitmap</td>
+    <td>mandatory</td>
+  </tr>
+  <tr>
+    <td>bitmap_type</td>
     <td>enum</td>
-    <td>string</td>
-    <td>Format of the bitmap. Predefined values "png", "jpg", "bmp"</td>
-    <td>optional</td>
+    <td>Format of the bitmap. Predefined values "png" = 0, "jpg" = 1, "bmp" = 2</td>
+    <td>mandatory</td>
   </tr>
-  <tr>
-    <td>reference</td>
-    <td>string</td>
-    <td>Url to image</td>
-    <td>optional</td>
-  </tr>
+
   <tr>
     <td>location</td>
     <td>element</td>
@@ -1739,12 +1742,12 @@ Update a single viewpoint, description similar to POST.
 
 ### 4.5.5 GET snapshot of a Viewpoint Service ###
 
-**Recource URL**
+**Resource URL**
 
     GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
 
 
-Retrieve a viewpoints image (png, jpg or bmp).
+Retrieve a viewpoints snapshot (png, jpg or bmp).
 
 **Example Request**
 
@@ -1764,7 +1767,7 @@ HTTP-response header:
 
     PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
 
-Add or update a viewpoints image (png, jpg or bmp).
+Add or update a viewpoints snapshot (png, jpg or bmp).
 
 **Example Request**
 
@@ -1776,6 +1779,47 @@ HTTP PUT request header:
 
 PUT Body contains binary image data
 
+
+**Example Response**
+
+HTTP-response status code:
+
+201 created (empty response body)
+
+### 4.5.7 GET bitmap of a Viewpoint Service
+
+**Resource URL**
+
+	GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
+
+Retrieve a specific viewpoint bitmaps image file (png, jpg or bmp).
+
+**Example Request**
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
+
+**Example Response**
+
+HTTP-response header:
+	
+	Content-Type: image/png
+
+### 4.5.8 PUT bitmap of a Viewpoint Service
+
+**Resource URL**
+
+	PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
+
+Add or update a specific bitmap in a viewpoint (png, jpg or bmp).
+
+**Example Request**
+
+	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
+
+HTTP-PUT request header:
+
+	Content-Type: image/png
+
+PUT Body contains binary image data
 
 **Example Response**
 
