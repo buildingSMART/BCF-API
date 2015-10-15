@@ -5,7 +5,10 @@
   "type": "object",
   "properties": {
     "ifc_guid": {
+      "type": [
+      "required": true,
       "type": "string"
+      ]
     },
     "selected": {
       "type": "boolean"
