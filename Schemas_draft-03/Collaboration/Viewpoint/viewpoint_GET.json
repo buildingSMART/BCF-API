@@ -242,6 +242,9 @@
         }
       }
     },
+	"snapshot_available": {
+		"type": "boolean"
+	},
     "bitmaps": {
       "type": [
         "array",
