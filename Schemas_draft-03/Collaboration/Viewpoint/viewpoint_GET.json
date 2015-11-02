@@ -242,79 +242,89 @@
         }
       }
     },
-    "snapshot": {
+    "snapshot_available": {
+        "type": "boolean"
+    },
+    "bitmaps": {
       "type": [
-        "object",
+        "array",
         "null"
       ],
       "properties": {
-        "snapshot_type": {
-          "type": "integer",
-          "enum": [
-            0,
-            1,
-            2
-          ]
-        },
-        "reference": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "location": {
+        "bitmap": {
           "type": [
             "object",
             "null"
           ],
           "properties": {
-            "x": {
-              "type": "number"
+            "guid": {
+              "type": [
+                "string"
+              ]
             },
-            "y": {
-              "type": "number"
+            "bitmap_type": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2
+              ]
             },
-            "z": {
-              "type": "number"
+            "location": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                },
+                "z": {
+                  "type": "number"
+                }
+              }
+            },
+            "normal": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                },
+                "z": {
+                  "type": "number"
+                }
+              }
+            },
+            "up": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                },
+                "z": {
+                  "type": "number"
+                }
+              }
+            },
+            "height": {
+              "type": "integer"
             }
           }
-        },
-        "normal": {
-          "type": [
-            "object",
-            "null"
-          ],
-          "properties": {
-            "x": {
-              "type": "number"
-            },
-            "y": {
-              "type": "number"
-            },
-            "z": {
-              "type": "number"
-            }
-          }
-        },
-        "up": {
-          "type": [
-            "object",
-            "null"
-          ],
-          "properties": {
-            "x": {
-              "type": "number"
-            },
-            "y": {
-              "type": "number"
-            },
-            "z": {
-              "type": "number"
-            }
-          }
-        },
-        "height": {
-          "type": "integer"
         }
       }
     }
