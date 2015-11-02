@@ -8,12 +8,12 @@
 **Table of Contents**
 
 - [1. Introduction](#1-introduction)
-	- [1.1 Paging, Sorting and Filtering](#11-paging-sorting-and-Filtering)
-	- [1.2 Caching](#14-caching)
-	- [1.3 Updating Resources](#15-updating-resources)
-	- [1.4 Cross origin resource sharing (Cors)](#16-cross-origin-resource-sharing-cors)
-	- [1.5 HTTP status codes](#17-http-status-codes)
-	- [1.6 Error response body format](#18-error-response-body-format)
+	- [1.1 Paging, Sorting and Filtering](#11-paging-sorting-and-filtering)
+	- [1.2 Caching](#12-caching)
+	- [1.3 Updating Resources](#13-updating-resources)
+	- [1.4 Cross origin resource sharing (Cors)](#14-cross-origin-resource-sharing-cors)
+	- [1.5 HTTP status codes](#15-http-status-codes)
+	- [1.6 Error response body format](#16-error-response-body-format)
 - [2. Topologies](#2-topologies)
 	- [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
 	- [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
@@ -153,7 +153,7 @@ The server has a web config file .. "*" means the server allow the resources for
 
 ## 1.6 Error response body format ##
 
-BCF-API has a specified error response body format [error.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/error.json).
+BCF-API has a specified error response body format [error.json](Schemas_draft-03/error.json).
 
 ----------
 
