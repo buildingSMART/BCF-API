@@ -238,7 +238,7 @@
         }
       }
     },
-	"bitmaps": {
+    "bitmaps": {
       "type": [
         "array",
         "null"
