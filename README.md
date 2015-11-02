@@ -8,14 +8,12 @@
 **Table of Contents**
 
 - [1. Introduction](#1-introduction)
-	- [1.1 Paging](#11-paging)
-	- [1.2 Sorting](#12-sorting)
-	- [1.3 Filtering](#13-filtering)
-	- [1.4 Caching](#14-caching)
-	- [1.5 Updating Resources](#15-updating-resources)
-	- [1.6 Cross origin resource sharing (Cors)](#16-cross-origin-resource-sharing-cors)
-	- [1.7 HTTP status codes](#17-http-status-codes)
-	- [1.8 Error response body format](#18-error-response-body-format)
+	- [1.1 Paging, Sorting and Filtering](#11-paging-sorting-and-Filtering)
+	- [1.2 Caching](#14-caching)
+	- [1.3 Updating Resources](#15-updating-resources)
+	- [1.4 Cross origin resource sharing (Cors)](#16-cross-origin-resource-sharing-cors)
+	- [1.5 HTTP status codes](#17-http-status-codes)
+	- [1.6 Error response body format](#18-error-response-body-format)
 - [2. Topologies](#2-topologies)
 	- [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
 	- [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
@@ -92,99 +90,12 @@ An example of a client implementation in C# can be found here:
 [https://github.com/rvestvik/BcfApiExampleClient](https://github.com/rvestvik/BcfApiExampleClient)
 
 
+## 1.1 Paging, Sorting and Filtering
+
+When requesting collections of items, the BCF-API should offer URL parameters according to the OData specification. It can be found at [http://www.odata.org/documentation/](http://www.odata.org/documentation/).
 
 
-## 1.1 Paging
-
-When requesting collections of items, BCF-API offers the possibility of paging via URL parameters.
-
-<table border="1">
-  <tr>
-    <td>page</td>
-    <td>The current page in the paginated collection.</td>
-  </tr>
-  <tr>
-    <td>page_size</td>
-    <td>The number of items per page. Defaults to 100 if not given, maximum is 1000 items per page.</td>
-  </tr>
-</table>
-
-Example:
-
-	GET /bcf/{version}/projects/{guid}/topics?page=11&page_size=20
-
-Returns topics #201 to #220.
-
-## 1.2 Sorting ##
-
-GET requests for collections offer sorting of results via the "sort" URL parameter. Every JSON element can be used as a sorting parameter. Default sort order is ascending. Descending order is indicated with an unary minus sign "-" in front of an element.
-
-Multiple sort parameters are possible and separated with commas.
-
-Example:
-
-
-   	/bcf/{version}/projects/{guid}/topics?sort=-priority,label
-
-Would return a collection of topics sorted by priority (descending) then by label (ascending).
-
-
-## 1.3 Filtering ##
-
-GET requests returning a collection can be filtered with the "filter" URL parameter. The syntax is based on the ODATA protocol. Wildcard operator is allowed as the star sign (*). Doubel quotes (") in string literals are escaped by a backslash (\) character, for example: "Hotel \"Mountain Inn\" Reconstruction".
-
-Filter operators:
-
-<table border="1">
-  <tr>
-    <td>eq</td>
-    <td>equals</td>
-	<td>/topics?filter=label eq Architecture</td>
-  </tr>
-  <tr>
-    <td>ne</td>
-    <td>not equals</td>
-	<td>/topics?filter=topic_status ne closed</td>
-  </tr>
-  <tr>
-    <td>gt</td>
-    <td>greater than</td>
-	<td>/topics?filter=creation_date gt 2013*</td>
-  </tr>
-  <tr>
-    <td>ge</td>
-    <td>greater than or equal</td>
-	<td>/topics?filter=creation_date ge 2013*</td>
-  </tr>
-   <tr>
-    <td>lt</td>
-    <td>less than</td>
-	<td>/topics?filter=creation_date lt 2013*</td>
-  </tr>
-   <tr>
-    <td>le</td>
-    <td>less than or equal</td>
-	<td>/topics?filter=creation_date le 2013*</td>
-  </tr>
-   <tr>
-    <td>and</td>
-    <td>logical and</td>
-	<td>/topics?filter=label eq Architecture and priority eq high</td>
-  </tr>
-   <tr>
-    <td>or</td>
-    <td>logical or</td>
-	<td>/topics?filter=label eq Architecture or label eq Structural</td>
-  </tr>
-   <tr>
-    <td>( )</td>
-    <td>grouping parentheses</td>
-	<td>/topics?filter=(label eq Architecture or label eq Structural) and priority eq high</td>
-  </tr>
-</table>
-
-
-## 1.4 Caching ##
+## 1.2 Caching ##
 
 ETags, or entity-tags, are an important part of HTTP, being a critical part of caching, and also used in "conditional" requests.
 
@@ -209,12 +120,12 @@ ETags are returned in a response to a GET:
   
 The client may send an "If-None-Match" HTTP Header containing the last retrieved etag. If the content has not changed the server returns a status code 304 (not modified) and no response body.
 
-## 1.5 Updating Resources
+## 1.3 Updating Resources
 
 Whenever a resource offers the HTTP PUT method to be updated as a whole, the resource may also partially updated with a HTTP PATCH query that only transports the changed properties of the entity.
 
 
-## 1.6 Cross origin resource sharing (Cors) ##
+## 1.4 Cross origin resource sharing (Cors) ##
 
 The server will put the "Access-Control-Allow-Headers" in the response header and specify who can access the servers (JSON) resources. The client can look for this value and proceed with accessing the resources. 
 
@@ -229,7 +140,7 @@ The server has a web config file .. "*" means the server allow the resources for
      </httpProtocol>
 
 
-## 1.7 HTTP status codes ##
+## 1.5 HTTP status codes ##
 
 -   200 OK (Data is returned)
 -   201 No content (Data has been deleted)
@@ -240,7 +151,7 @@ The server has a web config file .. "*" means the server allow the resources for
 -   404 Not found (It must be discussed if the user should get “unauthorized” to resources he don’t have access to, or “not found")
 -   422 Unprocessable entity (Input data is well formed, but the semantic is wrong; Example: Resource define that a value cannot be “null”, but the value is “null”)
 
-## 1.8 Error response body format ##
+## 1.6 Error response body format ##
 
 BCF-API has a specified error response body format [error.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/error.json).
 
