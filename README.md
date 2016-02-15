@@ -767,8 +767,68 @@ Modify a specific projects extensions, description similar to POST.
 
 Retrieve a **collection** of topics related to a project (default sort order is creation_date).
 
-**Example Request**
+**Odata filter parameters**
+<table>
+  <tr>
+    <td>creation_author</td>
+    <td>string</td>
+    <td>UserID of the creation author (value from extension.xsd)</td>
+  </tr>
+  <tr>
+    <td>modified_author</td>
+    <td>string</td>
+    <td>UserID of the modified author (value from extension.xsd)</td>
+  </tr>
+  <tr>
+    <td>assigned_to</td>
+    <td>string</td>
+    <td>UserID of the assigned author (value from extension.xsd)</td>
+  </tr>
+  <tr>
+    <td>topic_status</td>
+    <td>string</td>
+    <td>The status of a topic (value from extension.xsd)</td>
+  </tr>
+  <tr>
+    <td>topic_type</td>
+    <td>string</td>
+    <td>The type of a topic (value from extension.xsd)</td>
+  </tr>
+  <tr>
+    <td>creation_date</td>
+    <td>datetime</td>
+    <td>The creation date of a topic</td>
+  </tr>
+  <tr>
+    <td>modified_date</td>
+    <td>datetime</td>
+    <td>The modification date of a topic</td>
+  </tr>
+</table>
 
+**Odata sort parameters**
+<table>
+  <tr>
+    <td>creation_date</td>
+    <td>The creation date of a topic</td>
+  </tr>
+  <tr>
+    <td>modified_date</td>
+    <td>The modification date of a topic</td>
+  </tr>
+  <tr>
+    <td>index</td>
+    <td>The index of a topic</td>
+  </tr>
+</table>
+
+**Example Request with odata**
+
+Get topics that are open, assigned to Architect@example.com and created after December 5 2015. Sort the result on last modified
+
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and status eq 'Open' and creation_date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=modified_date desc
+
+**Example Request**
 
     https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
 
