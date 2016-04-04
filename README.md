@@ -1137,7 +1137,44 @@ Update a **collection** of file references on the topic header.
 
 [comment_GET.json](Schemas_draft-03/Collaboration/Comment/comment_GET.json)
 
-Retrieve a **collection** of all comments related to a topic.
+Retrieve a **collection** of all comments related to a topic (default ordering is date).
+
+**Odata filter parameters**
+<table>
+  <tr>
+    <td>author</td>
+    <td>string</td>
+    <td>UserID of the author (value from extension.xsd)</td>
+  </tr>
+  <tr>
+    <td>status</td>
+    <td>string</td>
+    <td>The status of a comment (value from extension.xsd)</td>
+  </tr>
+  <tr>
+    <td>date</td>
+    <td>datetime</td>
+    <td>The creation date of a comment</td>
+  </tr>
+</table>
+
+**Odata sort parameters**
+<table>
+  <tr>
+    <td>date</td>
+    <td>The creation date of a comment</td>
+  </tr>
+</table>
+
+**Example Request with odata**
+
+Get comments that are closed and created after December 5 2015. Sort the result on first created
+
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments?$filter=status eq 'Closed' and date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=date asc
+
+**Example Request**
+
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
 
 **Example Request**
 
