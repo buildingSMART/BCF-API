@@ -72,6 +72,8 @@
 		- [4.9.1 GET Documents Services](#491-get-documents-services)
 		- [4.9.2 POST Document Services](#492-post-document-services)
 		- [4.9.3 GET Document Services](#493-get-document-services)
+    - [4.10 BIM Snippets](#410-bim-snippets)
+        - [4.10.1 POST BIM Snippet](#4101-post-bim-snippet)
 
 
 ----------
@@ -2027,4 +2029,38 @@ Retrieves a document as binary file. Will use the following HTTP headers to deli
 	Content-Length: {Size of file in bytes};
 	Content-Disposition: attachment; filename="{Filename.extension}";
 
+## 4.10 BIM Snippets
+
+BIM Snippets are sub resources attached to a specific topic. They are used as defined data containers for specified exchange scenarios. For example, an MEP application could communicate its intent to create wall openings via a BIM Snippet that contains the geometric information about the desired change.
+
+This resource complemements section [4.2 Topic Services](#42-topic-services) (4.2.6 and 4.2.7) which does have resources for binary up- and download of BIM Snippets. However, using the topic resource, there are always two requests required to upload BIM snippets. By using the `Content-Type: application/json` Http header when uploading a snippet it's possible to wrap this in a single request that contains the metadata as well as a Base64 representation of the actual data.
+
+### 4.10.1 POST BIM Snippet
+
+[snippet_POST.json](Schemas_draft-03/Collaboration/Topic/snippet_POST.json)
+
+|Parameter|Type|Description|Required|
+|---------|----|-----------|--------|
+|snippet_type|string|Type of the BIM Snippet as defined in the project extensions|true|
+|reference_schema|string|Url to schema for the BIM Snippet|true|
+|file_name|string|Original file name of the snippet|true|
+|base64_content|string|Base64 string of the actual snippet data|true|
+
+**Resource Url**
+
+	POST /bcf/{version}/projects/{project_id}/topics/{topic_id}/snippet
+
+Upload a BIM Snippet with metadata to a topic.
+
+**Example Request**
+
+	Content-Type: application/json;
+
+    POST Body:
+    {
+      "snippet_type": "ChangeRequest",
+      "reference_schema": "http://example.com",
+      "file_name": "SimpleIfc.ifcxml",
+      "base64_content": "...",
+    }
 
