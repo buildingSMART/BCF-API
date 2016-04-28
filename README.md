@@ -230,43 +230,29 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 
 **Recource URL (public resource)**
 
-    GET /bcf/auth	
+    GET /bcf/auth
 
 **Parameters**
 
-<table border="1">
-  <tr>
-    <td>oauth2_auth_url</td>
-    <td>string</td>
-    <td>URL to authorisation page</td>
-    <td>mandatory</td>
-  </tr>
-  <tr>
-    <td>oauth2_token_url</td>
-    <td>string</td>
-    <td>URL for token requests</td>
-    <td>mandatory</td>
-  </tr>
-  <tr>
-    <td>oauth2_dynamic_client_reg_url</td>
-    <td>string</td>
-    <td>URL for automated client registration</td>
-    <td>optional</td>
-  </tr>
-</table>
-
+|Parameter|Type|Description|Required|
+|---------|----|-----------|--------|
+|oauth2_auth_url|string|URL to authorisation page|true|
+|oauth2_token_url|string|URL for token requests|true|
+|oauth2_dynamic_client_reg_url|string|URL for automated client registration|true|
+|http_basic_supported|boolean|Indicates if Http Basic Authentication is supported|true|
 
 **Example Request**
 
-    https://example.com/bcf/auth	
+    https://example.com/bcf/auth
 
 **Example Response**
 
-	{
-	"oauth2_auth_url": "https://example.com/bcf/oauth2/auth", 
-	"oauth2_token_url": "https://example.com/bcf/oauth2/token",
-    "oauth2_dynamic_client_reg_url": "https://example.com/bcf/oauth2/reg" 
-	}
+    {
+      "oauth2_auth_url": "https://example.com/bcf/oauth2/auth",
+      "oauth2_token_url": "https://example.com/bcf/oauth2/token",
+      "oauth2_dynamic_client_reg_url": "https://example.com/bcf/oauth2/reg",
+      "http_basic_supported": true
+    }
 
 
 ### 3.2.2 OAuth2 protocol flow - Client Request -###
