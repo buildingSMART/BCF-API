@@ -21,7 +21,10 @@
       ]
     },
     "date": {
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "reference": {
       "type": [
