@@ -142,14 +142,7 @@ The server has a web config file .. "*" means the server allow the resources for
 
 ## 1.5 HTTP status codes ##
 
--   200 OK (Data is returned)
--   201 No content (Data has been deleted)
--   302 Redirect (Returning a redirect to the GET-resource for the data that has been created/updated)
--   400 BadRequest (Input data is invalid)
--   401 Unauthorized (User don’t have access to the requested resource)
--   403 Forbidden
--   404 Not found (It must be discussed if the user should get “unauthorized” to resources he don’t have access to, or “not found")
--   422 Unprocessable entity (Input data is well formed, but the semantic is wrong; Example: Resource define that a value cannot be “null”, but the value is “null”)
+The BCF API relies on the regular Http Status Code definitions. Good sources are [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) or the [HTTP/1.1 Specification](https://tools.ietf.org/html/rfc7231).
 
 ## 1.6 Error response body format ##
 
