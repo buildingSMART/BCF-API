@@ -1943,27 +1943,28 @@ Retrieve a **collection** of all document references to a topic.
 [document_reference_PATCH.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PATCH.json)
 
 Add or update document references to a topic.
-The PUT object may either contain the property "guid" to reference a document stored on the BCF server (see section 4.9) OR the property "referenced_document" to point to an external resource.
+The PUT object may either contain the property "document_guid" to reference a document stored on the BCF server (see section 4.9) OR the property "referenced_document" to point to an external resource.
 
 **Example Request**
 
 	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
 
 	[
- 	{
+ 	  {
+        "guid":"7ad9838b-1a69-47d7-a485-d993a6db1925",
   		"referenced_document":"http://example.com/files/LegalRequirements.pdf",
   		"description":"The legal requirements for buildings."
- 	}
+ 	  }
 	]
 
 **Example Response**
 
 	[
- 	{
+ 	  {
   		"guid":"472ab37a-6122-448e-86fc-86503183b520",
-  		"referenced_document":"http://example.com/files/LegalRequirements.pdf",
+  		"document_guid":"1e0f496b-0ac1-4e7a-8c76-8f1214c75993",
   		"description":"The legal requirements for buildings."
- 	}
+ 	  }
 	]
 
 ## 4.9 Document Services
