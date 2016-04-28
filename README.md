@@ -490,29 +490,30 @@ Add a new project.
 
 JSON encoded body using the "application/json" content type.
 
-<table border="1">
+|Parameter|Type|Description|Required|
+|---------|----|-----------|--------|
+|name|string|The project name|true|
+|project_id|string|The id of the project|false|
 
-  <tr>
-    <td>name</td>
-    <td>string</td>
-    <td>The project name</td>
-  </tr>
-</table>
+The value of `project_id` must not necessarily be a Guid. This is to support existing project structures and their identification schemes.
 
+**Please note that servers are free to support user defined project_id values.**
+**Servers must auto generate a project_id value when none is supplied.**
 
 **Example Request**
 
     https://example.com/bcf/1.0/projects
-	{
-    "name": "Example project 3"
-	}
+    {
+      "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
+      "name": "Example project 3"
+    }
 
 **Example Response**
 
 
     {
-      "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414"
-      "name": "Example project 3",
+      "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
+      "name": "Example project 3"
     }
 
 ### 4.1.3 GET Single Project Services ###
