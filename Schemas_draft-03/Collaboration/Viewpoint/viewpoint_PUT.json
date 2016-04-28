@@ -8,6 +8,12 @@
         "null"
       ],
       "properties": {
+	    "index": {
+		  "type": [
+		    "number",
+			"null"
+		  ]
+		},
         "camera_view_point": {
           "type": [
             "object",
