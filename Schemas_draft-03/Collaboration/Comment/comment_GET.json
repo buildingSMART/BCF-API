@@ -45,7 +45,10 @@
       ]
     },
     "modified_date": {
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "modified_author": {
       "type": [
