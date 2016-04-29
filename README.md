@@ -40,8 +40,9 @@
 		- [4.2.2 POST Topic Services](#422-post-topic-services)
 		- [4.2.3 GET Single Topic Services](#423-get-single-topic-services)
 		- [4.2.4 PUT Single Topic Services](#424-put-single-topic-services)
-		- [4.2.6 GET Topic BIM Snippet](#426-get-topic-bim-snippet)
-		- [4.2.7 PUT Topic BIM Snippet](#427-put-topic-bim-snippet)
+		- [4.2.5 GET Topic BIM Snippets](#425-get-topic-bim-snippets)
+		- [4.2.6 GET Single BIM Snippet](#426-get-single-bim-snippet)
+		- [4.2.7 PUT Single BIM Snippet](#427-put-single-bim-snippet)
 	- [4.3 File Services](#43-file-services)
 		- [4.3.1 GET File (Header) Services](#431-get-file-header-services)
 		- [4.3.2 PUT File (Header) Services](#432-put-file-header-services)
@@ -72,6 +73,8 @@
 		- [4.9.1 GET Documents Services](#491-get-documents-services)
 		- [4.9.2 POST Document Services](#492-post-document-services)
 		- [4.9.3 GET Document Services](#493-get-document-services)
+    - [4.10 BIM Snippets](#410-bim-snippets)
+        - [4.10.1 POST BIM Snippet](#4101-post-bim-snippet)
 
 
 ----------
@@ -810,108 +813,55 @@ Add a new topic.
 
 JSON encoded body using the "application/json" content type.
 
+|Parameter|Type|Description|Required|
+|---------|----|-----------|--------|
+|topic_type|string|The type of a topic (value from extension.xsd)|false|
+|topic_status|string|The status of a topic (value from extension.xsd)|false|
+|reference_link|string|Reference link|false|
+|title|string|The title of a topic|true|
+|priority|string|The priority of a topic (value from extension.xsd)|false|
+|index|integer|The index of a topic|false|
+|labels|array (string)|The collection of labels of a topic (values from extension.xsd)|false|
+|assigned_to|string|UserID assigned to a topic (value from extension.xsd)|false|
+|description|string|Description of a topic|false|
+|bim_snippet.guid|string|GUID of a BIM-Snippet. Set by the client when included in the topic object|false|
+|bim_snippet.snippet_type|string|Type of a BIM-Snippet of a topic (value from extension.xsd)|false|
+|bim_snippet.is_external|boolean|Is the BIM-Snippet external (default = false)|false|
+|bim_snippet.reference|string|Reference of a BIM-Snippet of a topic|false|
+|bim_snippet.reference_schema|string|Schema of a BIM-Snippet of a topic|false|
 
-<table border="1">
-  <tr>
-    <td>topic_type</td>
-    <td>string</td>
-    <td>The type of a topic (value from extension.xsd)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>topic_status</td>
-    <td>string</td>
-    <td>The status of a topic (value from extension.xsd)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>reference_link</td>
-    <td>string</td>
-    <td>Reference link</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>title</td>
-    <td>string</td>
-    <td>The title of a topic</td>
-    <td>mandatory</td>
-  </tr>
-  <tr>
-    <td>priority</td>
-    <td>string</td>
-    <td>The priority of a topic (value from extension.xsd)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>index</td>
-    <td>integer</td>
-    <td>The index of a topic</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>labels</td>
-    <td>string</td>
-    <td>The collection of labels of a topic (values from extension.xsd)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>assigned_to</td>
-    <td>string</td>
-    <td>UserID assigned to a topic (value from extension.xsd)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>description</td>
-    <td>string</td>
-    <td>Description of a topic</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>snippet_type</td>
-    <td>string</td>
-    <td>Type of a BIM-Snippet of a topic (value from extension.xsd)</td>
-    <td>mandatory if BIM-Snippet exists</td>
-  </tr>
-  <tr>
-    <td>is_external</td>
-    <td>boolean</td>
-    <td>Is the BIM-Snippet external (default = false)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>reference</td>
-    <td>string</td>
-    <td>Reference of a BIM-Snippet of a topic</td>
-    <td>mandatory if BIM-Snippet exists</td>
-  </tr>
-  <tr>
-    <td>reference_schema</td>
-    <td>string</td>
-    <td>Schema of a BIM-Snippet of a topic</td>
-    <td>mandatory if BIM-Snippet exists</td>
-  </tr>
-</table>
+_Note: If "bim_snippet" is present, then all five properties (`guid`, `snippet_type`, `is_external`, `reference` and `reference_schema`) are mandatory._
 
 **Example Request**
 
     https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
-	    {
-		"topic_type": "Clash",
-		"topic_status": "open",
-        "title": "Example topic 3",
-		"priority": "high",
-        "labels": [
-            "Architecture",
-            "Heating"],
-		"assigned_to": "harry.muster@example.com",
-        "bim_snippet":
-				{
-				"snippet_type": "clash",
-				"is_external": true,
-				"reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-				"reference_schema": "https://example.com/bcf/1.0/clash.xsd"	
-				}
-    	}
+    {
+      "topic_type": "Clash",
+      "topic_status": "open",
+      "title": "Example topic 3",
+      "priority": "high",
+      "labels": [
+        "Architecture",
+        "Heating"
+      ],
+      "assigned_to": "harry.muster@example.com",
+      "bim_snippets": [
+        {
+          "guid": "6d448fe1-8810-4e09-8858-0056dc1b9f09",
+          "snippet_type": "clash",
+          "is_external": true,
+          "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
+          "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
+        },
+        {
+          "guid": "42503f3e-7018-45c7-b579-df4309ca54be",
+          "snippet_type": "clash",
+          "is_external": true,
+          "reference": "https://example.com/bcf/1.0/DG345DFABBC893849BBBBD",
+          "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
+        }
+      ]
+    }
 
 ### 4.2.3 GET Single Topic Services ###
 
@@ -932,26 +882,36 @@ Retrieve a specific topic.
 
 **Example Response**
 
-   
+
     {
-		"guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
-		"topic_type": "Clash",
-		"topic_status": "open",
-        "title": "Example topic 3",
-		"priority": "high",
-        "labels": [
-            "Architecture",
-            "Heating"],
-		"assigned_to": "harry.muster@example.com",
-        "bim_snippet":
-				{
-				"snippet_type": "clash",
-				"is_external": true,
-				"reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-				"reference_schema": "https://example.com/bcf/1.0/clash.xsd"	
-				}
-    	}
- 
+      "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+      "topic_type": "Clash",
+      "topic_status": "open",
+      "title": "Example topic 3",
+      "priority": "high",
+      "labels": [
+        "Architecture",
+        "Heating"
+      ],
+      "assigned_to": "harry.muster@example.com",
+      "bim_snippets": [
+        {
+          "guid": "6d448fe1-8810-4e09-8858-0056dc1b9f09",
+          "snippet_type": "clash",
+          "is_external": true,
+          "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
+          "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
+        },
+        {
+          "guid": "42503f3e-7018-45c7-b579-df4309ca54be",
+          "snippet_type": "clash",
+          "is_external": true,
+          "reference": "https://example.com/bcf/1.0/DG345DFABBC893849BBBBD",
+          "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
+        }
+      ]
+    }
+
 ### 4.2.4 PUT Single Topic Services ###
 
 **Recource URL**
@@ -964,11 +924,40 @@ Retrieve a specific topic.
 
 Modify a specific topic, description similar to POST.
 
-### 4.2.6 GET Topic BIM Snippet
+### 4.2.5 GET Topic BIM Snippets
+
+**Resource Url**
+
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/snippets
+
+[snippets_GET.json](Schemas_draft-03/Collaboration/Topic/snippets_GET.json)
+
+Retrieves a **collection** of BIM Snippets attached to a specific topic.
+
+**Example Response**
+
+    [
+      {
+        "guid": "6d448fe1-8810-4e09-8858-0056dc1b9f09",
+        "snippet_type": "clash",
+        "is_external": true,
+        "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
+        "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
+      },
+      {
+        "guid": "42503f3e-7018-45c7-b579-df4309ca54be",
+        "snippet_type": "clash",
+        "is_external": true,
+        "reference": "https://example.com/bcf/1.0/DG345DFABBC893849BBBBD",
+        "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
+      }
+    ]
+
+### 4.2.6 GET Single BIM Snippet
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/snippets/{snippet_guid}
 
 Retrieves a topics BIM-Snippet as binary file. Will use the following HTTP headers to deliver additional information:
 
@@ -977,11 +966,11 @@ Retrieves a topics BIM-Snippet as binary file. Will use the following HTTP heade
 	Content-Disposition: attachment; filename="{Filename.extension}";
 
 
-### 4.2.7 PUT Topic BIM Snippet
+### 4.2.7 PUT Single BIM Snippet
 
 **Resource URL**
 
-    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
+    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/snippets/{snippet_guid}
 
 Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property must be set to "is_external"=false and the "reference" must be the file name with extension. The following HTTP headers are used for the upload:
 
@@ -2027,4 +2016,44 @@ Retrieves a document as binary file. Will use the following HTTP headers to deli
 	Content-Length: {Size of file in bytes};
 	Content-Disposition: attachment; filename="{Filename.extension}";
 
+## 4.10 BIM Snippets
+
+BIM Snippets are sub resources attached to a specific topic. They are used as defined data containers for specified exchange scenarios. For example, an MEP application could communicate its intent to create wall openings via a BIM Snippet that contains the geometric information about the desired change.
+
+This resource complemements section [4.2 Topic Services](#42-topic-services) (4.2.6 and 4.2.7) which does have resources for binary up- and download of BIM Snippets. However, using the topic resource, there are always two requests required to upload BIM snippets. By using the `Content-Type: application/json` Http header when uploading a snippet it's possible to wrap this in a single request that contains the metadata as well as a Base64 representation of the actual data.
+
+### 4.10.1 POST BIM Snippet
+
+[snippet_POST.json](Schemas_draft-03/Collaboration/Topic/snippet_POST.json)
+
+|Parameter|Type|Description|Required|
+|---------|----|-----------|--------|
+|snippet_type|string|Type of the BIM Snippet as defined in the project extensions|true|
+|reference_schema|string|Url to schema for the BIM Snippet|true|
+|file_name|string|Original file name of the snippet|true|
+|base64_content|string|Base64 string of the actual snippet data|true|
+
+**Resource Url**
+
+	POST /bcf/{version}/projects/{project_id}/topics/{topic_id}/snippets
+
+Upload a signle BIM Snippet with metadata to a topic. The snippets guid will be assigned by the server and returned in the response.
+
+**Example Request**
+
+	Content-Type: application/json;
+
+    POST Body:
+    {
+      "snippet_type": "ChangeRequest",
+      "reference_schema": "http://example.com",
+      "file_name": "SimpleIfc.ifcxml",
+      "base64_content": "...",
+    }
+
+**Example Response**
+
+    {
+      "guid": "38fca451-363c-4e81-a0fa-b8441e9b1602"
+    }
 

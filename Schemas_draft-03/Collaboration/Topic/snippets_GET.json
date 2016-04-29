@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-03/schema#", 
+  "title": "snippets_GET",
+  "description": "Schema for snippets GET, BCF REST API.",
+  "type": "object",
+  "properties": {
+    "guid": {
+	  "type": "string"
+	},
+    "snippet_type": {
+      "type": "string"
+    },
+    "reference_schema": {
+      "type": "string"
+    },
+    "file_name": {
+      "type": "string"
+    },
+    "base64_content": {
+      "type": "string"
+    }
+  }
+}
