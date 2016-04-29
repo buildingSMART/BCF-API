@@ -1,12 +1,23 @@
 {
-"$schema": "http://json-schema.org/draft-03/schema#",    
-"title": "related_topic_GET",
-"description": "Schema for single related topic GET, BCF REST API.",
+  "$schema": "http://json-schema.org/draft-03/schema#",    
+  "title": "related_topic_GET",
+  "description": "Schema for single related topic GET, BCF REST API.",
   "type": "object",
   "properties": {
-    "related_topic_guid": {
-      "required": true,
-      "type": "string"
-    }
+    "related_topic_guids" : {
+      "type": "array",
+	  "items": {
+	    "type": "string"
+	  }
+	},
+    "is_related_from_topic_guids" : {
+      "type": [
+	    "array",
+		"null"
+	  ],
+	  "items": {
+	    "type": "string"
+	  }
+	}
   }
 }
