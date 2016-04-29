@@ -814,7 +814,7 @@ JSON encoded body using the "application/json" content type.
 |---------|----|-----------|--------|
 |topic_type|string|The type of a topic (value from extension.xsd)|false|
 |topic_status|string|The status of a topic (value from extension.xsd)|false|
-|reference_links|string|Reference links, i.e. links to referenced resources|false|
+|reference_links|array (string)|Reference links, i.e. links to referenced resources|false|
 |title|string|The title of a topic|true|
 |priority|string|The priority of a topic (value from extension.xsd)|false|
 |index|integer|The index of a topic|false|
