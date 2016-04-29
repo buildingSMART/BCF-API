@@ -1336,188 +1336,76 @@ Add a new viewpoint.
 
 JSON encoded body using the "application/json" content type.
 
-
-<table border="1">
-  <tr>
-    <td>x, y, z</td>
-    <td>number</td>
-    <td>Numbers defining ether a point or a vector </td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>orthogonal camera</td>
-    <td>element</td>
-    <td>Orthogonal camera view</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>camera_view_point</td>
-    <td>element</td>
-    <td>Viewpoint of the camera</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>camera_directiont</td>
-    <td>element</td>
-    <td>Direction of the camera</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>camera_up_vector</td>
-    <td>element</td>
-    <td>Direction of camera up</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>view_to_world_scale</td>
-    <td>element</td>
-    <td>Proportion of camera view to model</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>perspective camera</td>
-    <td>element</td>
-    <td>Perspective view of the camera</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>camera_view_point</td>
-    <td>element</td>
-    <td>Viewpoint of the camera</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>camera_directiont</td>
-    <td>element</td>
-    <td>Direction of the camera</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>camera_up_vector</td>
-    <td>element</td>
-    <td>Direction of camera up</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>field_of_view</td>
-    <td>element</td>
-    <td>Field of view</td>
-    <td>optional</td>
-  </tr>
- <tr>
-    <td>line</td>
-    <td>element</td>
-    <td>A graphical line</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>start_point</td>
-    <td>element</td>
-    <td>Start point of the line</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>end_point</td>
-    <td>element</td>
-    <td>end point of the line</td>
-    <td>optional</td>
-  </tr>
- <tr>
-    <td>clipping_plane</td>
-    <td>element</td>
-    <td>Clipping plane for the model view</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>location</td>
-    <td>element</td>
-    <td>Origin of the clipping plane</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>direction</td>
-    <td>element</td>
-    <td>direction of the clipping plane</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>bitmaps</td>
-    <td>array</td>
-    <td>Array of embedded pictures in the viewpoint</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>guid</td>
-    <td>string</td>
-    <td>Guid for the bitmap</td>
-    <td>mandatory</td>
-  </tr>
-  <tr>
-    <td>bitmap_type</td>
-    <td>enum</td>
-    <td>Format of the bitmap. Predefined values "png" = 0, "jpg" = 1, "bmp" = 2</td>
-    <td>mandatory</td>
-  </tr>
-
-  <tr>
-    <td>location</td>
-    <td>element</td>
-    <td>Location of the center of the bitmap in world coordinates (point)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>normal</td>
-    <td>element</td>
-    <td>Normal vector of the bitmap (vector)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>up</td>
-    <td>element</td>
-    <td>Up vector of the bitmap (vector)</td>
-    <td>optional</td>
-  </tr>
-</table>
+|Parameter|Type|Description|Required|
+|---------|----|-----------|--------|
+|\*.x, \*.y, \*.z|number|Numbers defining ether a point or a vector|true|
+|guid|string|Guid of the viewpoint|true|
+|snapshot_available|boolean|Indicator if there exists a snapshot for this viewpoint|true|
+|index|number|Parameter for sorting viewpoints|false|
+|orthogonal\_camera|object|Orthogonal camera view|false|
+|**orthogonal\_camera**.camera\_view\_point|object|Viewpoint of the camera|true|
+|**orthogonal\_camera**.camera\_direction|object|Direction of the camera|true|
+|**orthogonal\_camera**.camera\_up\_vector|object|Direction of camera up|true|
+|**orthogonal\_camera**.view_to_world_scale|number|Proportion of camera view to model|true|
+|perspective_camera|object|Perspective view of the camera|false|
+|**perspective\_camera**.camera_view_point|object|Viewpoint of the camera|false|
+|**perspective\_camera**.camera_directiont|object|Direction of the camera|false|
+|**perspective\_camera**.camera_up_vector|object|Direction of camera up|false|
+|**perspective\_camera**.field_of_view|number|Field of view|false|
+|lines|array (object)|Array of embedded lines in the viewpoint|false|
+|**lines**.line|object|A graphical line|true|
+|**lines.line**.start_point|object|Start point of the line|true|
+|**lines.line**.end_point|object|End point of the line|true|
+|clipping_plane|object|Clipping plane for the model view|false|
+|**clipping_plane**.location|object|Origin of the clipping plane|true|
+|**clipping_plane**.direction|object|Direction of the clipping plane|true|
+|bitmaps|array (object)|Array of embedded pictures in the viewpoint|false|
+|**bitmaps**.bitmap|object|Embedded picture in the viewpoint|false|
+|**bitmaps.bitmap**.guid|string|Guid for the bitmap|true|
+|**bitmaps.bitmap**.bitmap_type|enumeration|Format of the bitmap. Values "png" = 0, "jpg" = 1|true|
+|**bitmaps.bitmap**.location|object|Location of the center of the bitmap in world coordinates (point)|false|
+|**bitmaps.bitmap**.normal|object|Normal vector of the bitmap (vector)|false|
+|**bitmaps.bitmap**.up|object|Up vector of the bitmap (vector)|false|
 
 **Example Request**
 
 	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
-	{  
+	{
    		"perspective_camera":{
-     		"camera_view_point":{  
+     		"camera_view_point":{
         		"x":0.0,
         		"y":0.0,
-         		"z":0.0},  
-     		"camera_direction":{  
+         		"z":0.0},
+     		"camera_direction":{
         		"x":1.0,
         		"y":1.0,
          		"z":2.0},
-      		"camera_up_vector":{  
+      		"camera_up_vector":{
 	    		"x":0.0,
 	    		"y":0.0,
           		"z":1.0},
       		"field_of_view":90.0},
-   		"lines":{  
-      		"line":[  
-         			{  
-            		"start_point":{  
+   		"lines":{
+      		"line":[
+         			{
+            		"start_point":{
               	 		"x":1.0,
                			"y":1.0,
                			"z":1.0},
-           			"end_point":{  
+           			"end_point":{
                			"x":0.0,
 			   			"y":0.0,
 			   			"z":0.0}
          			}
       			   ]},
-   		"clipping_planes":{  
-      		"clipping_plane":[  
-         			{  
-            		"location":{  
+   		"clipping_planes":{
+      		"clipping_plane":[
+         			{
+            		"location":{
                			"x":0.5,
                			"y":0.5,
                			"z":0.5},
-            		"direction":{  
+            		"direction":{
                			"x":1.0,
 			   			"y":0.0,
 			   			"z":0.0}
