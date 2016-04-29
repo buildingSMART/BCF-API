@@ -1811,7 +1811,7 @@ Add or update a **collection** of all components related to a viewpoint.
 	]
 
 **Example Response**
-	
+
 	[
  	{
   		"ifc_guid":"2MF28NhmDBiRVyFakgdbCT",
@@ -1846,18 +1846,35 @@ Retrieve a **collection** of all related topics to a topic.
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
 
 **Example Response**
 
-	[
- 	{
-  		"related_topic_guid":"db49df2b-0e42-473b-a3ee-f7b785d783c4",
- 	},
- 	{
-  		"related_topic_guid":"6963a846-54d1-4050-954d-607cd5e48aa3",
- 	}
-	]
+    {
+      "related_topic_guids":
+      [
+        "db49df2b-0e42-473b-a3ee-f7b785d783c4",
+        "6963a846-54d1-4050-954d-607cd5e48aa3"
+      ]
+    }
+
+Additionally, by supplying the query parameter `IncludeInverse` it's possible to include the guids of all topics in the response that do relate to the requested topic.
+
+**Example Request**
+
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics?IncludeReverse=true
+
+**Example Response**
+
+    {
+      "related_topic_guids": [
+          "db49df2b-0e42-473b-a3ee-f7b785d783c4",
+          "6963a846-54d1-4050-954d-607cd5e48aa3"
+      ],
+      "is_related_from_topic_guids": [
+          "76cc5340-b8a4-4ea0-9548-99b8855e6b36"
+      ]
+    }
 
 ### 4.7.2 PUT Related Topics Services ###
 
@@ -1875,31 +1892,25 @@ Add or update a **collection** of all related topics to a topic.
 
 	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
 
-	[
- 	{
-  		"related_topic_guid":"db49df2b-0e42-473b-a3ee-f7b785d783c4"
- 	},
- 	{
-  		"related_topic_guid":"6963a846-54d1-4050-954d-607cd5e48aa3"
- 	},
-	{
-  		"related_topic_guid":"bac66ab4-331e-4f21-a28e-083d2cf2e796"
- 	}
-	]
+    {
+      "related_topic_guids":
+      [
+        "db49df2b-0e42-473b-a3ee-f7b785d783c4",
+        "6963a846-54d1-4050-954d-607cd5e48aa3",
+        "bac66ab4-331e-4f21-a28e-083d2cf2e796"
+      ]
+    }
 
 **Example Response**
 
-	[
- 	{
-  		"related_topic_guid":"db49df2b-0e42-473b-a3ee-f7b785d783c4"
- 	},
- 	{
-  		"related_topic_guid":"6963a846-54d1-4050-954d-607cd5e48aa3"
- 	},
-	{
-  		"related_topic_guid":"bac66ab4-331e-4f21-a28e-083d2cf2e796"
- 	}
-	]
+    {
+      "related_topic_guids":
+      [
+        "db49df2b-0e42-473b-a3ee-f7b785d783c4",
+        "6963a846-54d1-4050-954d-607cd5e48aa3",
+        "bac66ab4-331e-4f21-a28e-083d2cf2e796"
+      ]
+    }
 
 ## 4.8 Document Reference Services ##
 

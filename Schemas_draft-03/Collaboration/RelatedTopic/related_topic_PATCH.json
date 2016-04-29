@@ -2,11 +2,11 @@
   "title": "related_topic_PATCH",
   "type": "object",
   "properties": {
-    "related_topic_guid": {
-      "type": [
-        "string",
-        "null"
-      ]
-    }
+    "related_topic_guids" : {
+      "type": "array",
+	  "items": {
+	    "type": "string"
+	  }
+	}
   }
 }
