@@ -19,6 +19,12 @@
         "string",
         "null"
       ]
-    }
+    },
+	"document_guid":{
+		"type": [
+			"string",
+			"null"
+		]
+	}
   }
 }
