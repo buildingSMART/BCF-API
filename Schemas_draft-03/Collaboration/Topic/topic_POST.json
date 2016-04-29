@@ -59,28 +59,34 @@
         "null"
       ]
     },
-    "bim_snippet": {
-      "title": "bim_snippet",
+    "bim_snippets": {
       "type": [
-        "object",
+        "array",
         "null"
       ],
-      "properties": {
-        "snippet_type": {
-          "required": true,
-          "type": "string"
-        },
-        "is_external": {
-          "required": true,
-          "type": "boolean"
-        },
-        "reference": {
-          "required": true,
-          "type": "string"
-        },
-        "reference_schema": {
-          "required": true,
-          "type": "string"
+      "items": {
+        "type": "object",
+        "properties": {
+          "guid": {
+            "required": true,
+            "type": "string"
+          },
+          "snippet_type": {
+            "required": true,
+            "type": "string"
+          },
+          "is_external": {
+            "required": true,
+            "type": "boolean"
+          },
+          "reference": {
+            "required": true,
+            "type": "string"
+          },
+          "reference_schema": {
+            "required": true,
+            "type": "string"
+          }
         }
       }
     }
