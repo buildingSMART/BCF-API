@@ -32,11 +32,14 @@
       "required": true,
       "type": "string"
     },
-    "viewpoint_guid": {
+    "viewpoint_guids": {
       "type": [
-        "string",
+        "array",
         "null"
-      ]
+      ],
+	  "items": {
+	    "type": "string"
+	  }
     },
     "reply_to_comment_guid": {
       "type": [

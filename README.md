@@ -1086,24 +1086,23 @@ Retrieve a **collection** of all comments related to a topic.
 **Example Response**
 
     [
-    {
+      {
         "guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
-		"status": "open",
-    	"date": "2013-10-21T17:34:22.409Z",
-		"author": "max.muster@example.com",
-		"comment": "Clash found",
-		"topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
-		
-    },
-    {
+        "status": "open",
+        "date": "2013-10-21T17:34:22.409Z",
+        "author": "max.muster@example.com",
+        "comment": "Clash found",
+        "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
+      },
+      {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
-		"status": "closed",
-    	"date": "2013-11-19T14:24:11.316Z",
-		"author": "bob.heater@example.com",		
-		"comment": "will rework the heating model",
-		"topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
-    }
-	]
+        "status": "closed",
+        "date": "2013-11-19T14:24:11.316Z",
+        "author": "bob.heater@example.com",
+        "comment": "will rework the heating model",
+        "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
+      }
+    ]
 
 ### 4.4.2 POST Comment Services ###
 
@@ -1119,39 +1118,13 @@ Add a new comment to a topic.
 
 JSON encoded body using the "application/json" content type.
 
-
-<table border="1">
-  <tr>
-    <td>verbal_status</td>
-    <td>string</td>
-    <td>The verbal status of a comment (possible values from extension.xsd)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>status</td>
-    <td>string</td>
-    <td>The status of a comment (default unknown)</td>
-    <td>mandatory</td>
-  </tr>
-  <tr>
-    <td>comment</td>
-    <td>string</td>
-    <td>The comment</td>
-    <td>mandatory</td>
-  </tr>
-  <tr>
-    <td>viewpoint_guid</td>
-    <td>string</td>
-    <td>The GUID of the related viewpoint</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>reply_to_comment_guid</td>
-    <td>string</td>
-    <td>GUID of the comment to which this comment replies to</td>
-    <td>optional</td>
-  </tr>
-</table>
+|Parameter|Type|Description|Required|
+|---------|----|-----------|--------|
+|verbal_status|string|The verbal status of a comment (possible values from extension.xsd)|false|
+|status|string|The status of a comment (default unknown)|true|
+|comment|string|The comment text|true|
+|viewpoint_guids|array (string)|Array of GUIDs of related viewpoints|false|
+|reply_to_comment_guid|string|GUID of the comment to which this comment replies to|false|
 
 **Example Request**
 
@@ -1159,7 +1132,7 @@ JSON encoded body using the "application/json" content type.
 
     {
 		"verbal_status": "closed",
-		"status": "closed",	
+		"status": "closed",
 		"comment": "will rework the heating model",
     }
 
@@ -1170,7 +1143,7 @@ JSON encoded body using the "application/json" content type.
 		"verbal_status": "closed",
 		"status": "closed",
     	"date": "2013-11-19T14:24:11.316Z",
-		"author": "bob.heater@example.com",		
+		"author": "bob.heater@example.com",
 		"comment": "will rework the heating model",
 		"topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }
@@ -1196,7 +1169,7 @@ Get a single comment.
 		"verbal_status": "closed",
 		"status": "closed",
     	"date": "2013-11-19T14:24:11.316Z",
-		"author": "bob.heater@example.com",		
+		"author": "bob.heater@example.com",
 		"comment": "will rework the heating model",
 		"topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }
