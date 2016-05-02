@@ -804,6 +804,11 @@ Retrieve a **collection** of topics related to a project (default sort order is 
     <td>datetime</td>
     <td>The modification date of a topic</td>
   </tr>
+  <tr>
+    <td>labels</td>
+    <td>collection of strings</td>
+    <td>The labels of a topic (value from extension.xsd)</td>
+  </tr>
 </table>
 
 **Odata sort parameters**
@@ -827,6 +832,11 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 Get topics that are open, assigned to Architect@example.com and created after December 5 2015. Sort the result on last modified
 
     https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and status eq 'Open' and creation_date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=modified_date desc
+
+Odata does not support list operators. To achieve list query, use the 'or' operator. 
+Get topics that have at least one of the labels 'Architecture', 'Structural' or 'Heating'
+
+     https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=contains(labels, 'Architecture') or contains(labels, 'Structural') or contains(labels, 'Heating')
 
 **Example Request**
 
