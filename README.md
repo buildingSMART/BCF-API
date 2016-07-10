@@ -14,6 +14,9 @@
     - [1.4 Cross origin resource sharing (Cors)](#14-cross-origin-resource-sharing-cors)
     - [1.5 HTTP status codes](#15-http-status-codes)
     - [1.6 Error response body format](#16-error-response-body-format)
+    - [1.7 Authorization](#17-authorization)
+        - [1.7.1 Per-entity authorization](#171-per-entity-authorization)
+        - [1.7.2 Determining authorized entity actions](#172-determining-authorized-entity-actions)
 - [2. Topologies](#2-topologies)
     - [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
     - [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
@@ -161,6 +164,63 @@ BCF-API has a specified error response body format [error.json](Schemas_draft-03
 
 ----------
 
+## 1.7 Authorization ##
+
+API implementors can optionally choose to restrict the actions a user is allowed to perform on the BCF entities
+via the API. The global default authorizations for all entities are expressed in the project extensions schema and can
+be locally overridden in the entities themselves.
+
+### 1.7.1 Per-entity authorization ###
+
+Whenever a user requests an update-able entity with the request parameter "includeAuthorization" equal to "true" the
+server should include an "authorization" field in the entity containing any local variations from the global
+authorization defaults for that entity. Using this information clients can decide whether to, for example, include an
+"Edit" button in the UI displaying the entity depending on the actions permitted for the user.
+
+### 1.7.2 Determining authorized entity actions ###
+
+The client can calculate the available set of actions for a particular entity by taking the project-wide defaults from
+the project extensions, then replacing any keys defined in the entity's "authorization" map with the values specified
+locally. The meaning of each of the authorization keys is outlined in outlined in
+[4.1.8 Expressing user authorization through Project Extensions](#418-expressing-user-authorization-through-project-extensions).
+
+**Example Scenario (Topic)**
+
+_In the Project Extensions_
+
+    {
+        "topic_actions": [],
+        "topic_status": [
+            "open",
+            "closed",
+            "confirmed"
+        ]
+    }
+
+Indicating that by default:
+
+* no modifications can be made to Topics
+* Topics can be placed in 'open', 'closed' or 'confirmed' status
+
+_In the Topic_
+
+    {
+        "authorization": {
+            "topic_actions": [
+                "update",
+                "createComment",
+                "createViewpoint"
+            ],
+            "topic_status": [
+                "closed"
+            ]
+        }
+    }
+
+Indicating that for this topic, the current user can:
+
+* update the Topic, or add comments or viewpoints
+* place the Topic into 'closed' status
 
 # 2. Topologies #
 
@@ -781,8 +841,7 @@ Modify a specific projects extensions, description similar to POST.
 
 ### 4.1.8 Expressing user authorization through Project Extensions
 
-API implementors can optionally choose to restrict the actions a user is allowed to perform on the various entities
-via the API. The global default authorizations are be expressed in the project extensions schema. The actions authorized
+Global default authorizations for the requesting user can be expressed in the project schema. The actions authorized
 here will apply to any entities that do not override them locally. The complete set of options for the BCF entities are
 listed below.
 
@@ -1069,51 +1128,9 @@ Puts a new BIM Snippet binary file to a topic. If this is used, the parent topic
 
 ### 4.2.8 Determining allowed Topic modifications ###
 
-BCF API server implementors may choose to restrict the actions that users are allowed to perform on a Topic.
-The project-wide default permissions are located in the Project Extensions
-(as outlined in [4.1.8 Expressing user authorization through Project Extensions](#418-expressing-user-authorization-through-project-extensions)) 
-and can optionally be overriden for individual Topics by populating the Topic's "authorization" field.
-
-The client should calculate the available set of actions for a particular Topic by taking the project-wide defaults from the project extensions,
-then replacing any keys defined in the Topic's "authorization" map with the values specified for the Topic.
-
-**Example Scenario**
-
-_In the Project Extensions_
-
-    {
-        "topic_actions": [],
-        "topic_status": [
-            "open",
-            "closed",
-            "confirmed"
-        ]
-    }
-
-Indicating that by default:
-
-* no modifications can be made to Topics
-* Topics can be placed in 'open', 'closed' or 'confirmed' status 
-
-_In the Topic_
-
-    {
-        "authorization": {
-            "topic_actions": [
-                "update",
-                "createComment",
-                "createViewpoint"
-            ],
-            "topic_status": [
-                "closed"
-            ]
-        }
-    }
-
-Indicating that for this topic, the current user can:
-
-* update the Topic, or add comments or viewpoints
-* place the Topic into 'closed' status
+The global default Topic authorizations are expressed in the project schema and when Topic(s) are requested with the
+parameter "includeAuthorization" equal to "true" Topics will include an "authorization" field containing any local
+overrides for each Topic.
 
 ## 4.3 File Services ##
 
@@ -1344,37 +1361,9 @@ Update a single comment, description similar to POST.
 
 ### 4.4.5 Determining allowed Comment modifications ###
 
-BCF API server implementors may choose to restrict the actions that users are allowed to perform on a Comment.
-The project-wide default permissions are located in the Project Extensions,
-as outlined in [4.1.8 Expressing user authorization through Project Extensions](#418-expressing-user-authorization-through-project-extensions),
-and can optionally be overriden for individual Comments by populating the Comment's "authorization" field.
-
-The client should calculate the available set of actions for a particular Comment by taking the project-wide defaults from the project extensions,
-then replacing any keys defined in the Comment's "authorization" map with the values specified for the Comment.
-
-**Example Scenario**
-
-_In the Project Extensions_
-
-    {
-        "comment_actions": []
-    }
-
-Indicating that by default:
-
-* no modifications can be made to Comments
-
-_In the Comment_
-
-    {
-        "authorization": {
-            "comment_actions": ["update"]
-        }
-    }
-
-Indicating that for this comment, the current user can:
-
-* update the Comment
+The global default Comment authorizations are expressed in the project schema and when Comment(s) are requested with the
+parameter "includeAuthorization" equal to "true" Comments will include an "authorization" field containing any local
+overrides for each Comment.
 
 ## 4.5 Viewpoint Services ##
 
@@ -1967,37 +1956,9 @@ HTTP-response status code:
 
 ### 4.5.9 Determining allowed Viewpoint modifications ###
 
-BCF API server implementors may choose to restrict the actions that users are allowed to perform on a Viewpoint.
-The project-wide default permissions are located in the Project Extensions
-(as outlined in [4.1.8 Expressing user authorization through Project Extensions](#418-expressing-user-authorization-through-project-extensions))
-and can optionally be overriden for individual Viewpoints by populating the Viewpoint's "authorization" field.
-
-The client should calculate the available set of actions for a particular Viewpoint by taking the project-wide defaults from the project extensions,
-then replacing any keys defined in the Viewpoint's "authorization" map with the values specified for the Viewpoint.
-
-**Example Scenario**
-
-_In the Project Extensions_
-
-    {
-        "viewpoint_actions": ["update", "updateBitmap", "updateSnapshot", "updateComponent"]
-    }
-
-Indicating that by default:
-
-* Viewpoints and their bitmaps, snapshots and components are able to be updated
-
-_In the Viewpoint_
-
-    {
-        "authorization": {
-            "viewpoint_actions": []
-        }
-    }
-
-Indicating that for this topic, the current user can:
-
-* not update this Viewpoint or its bitmap, snapshot or component
+The global default Viewpoint authorizations are expressed in the project schema and when Viewpoint(s) are requested with the
+parameter "includeAuthorization" equal to "true" Viewpoints will include an "authorization" field containing any local
+overrides for each Viewpoint.
 
 ## 4.6 Component Services ##
 
