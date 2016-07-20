@@ -795,12 +795,11 @@ Add a new topic.
 
 JSON encoded body using the "application/json" content type.
 
-
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
 |topic_type|string|The type of a topic (value from extension.xsd)|false|
 |topic_status|string|The status of a topic (value from extension.xsd)|false|
-|reference_link|string|Reference link|false|
+|reference_links|array (string)|Reference links, i.e. links to referenced resources|false|
 |title|string|The title of a topic|true|
 |priority|string|The priority of a topic (value from extension.xsd)|false|
 |index|integer|The index of a topic|false|
@@ -818,23 +817,25 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
 **Example Request**
 
     https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
-	    {
-		"topic_type": "Clash",
-		"topic_status": "open",
-        "title": "Example topic 3",
-		"priority": "high",
-        "labels": [
-            "Architecture",
-            "Heating"],
-		"assigned_to": "harry.muster@example.com",
-        "bim_snippet":
-				{
-				"snippet_type": "clash",
-				"is_external": true,
-				"reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-				"reference_schema": "https://example.com/bcf/1.0/clash.xsd"	
-				}
-    	}
+
+    POST Body:
+    {
+      "topic_type": "Clash",
+      "topic_status": "open",
+      "title": "Example topic 3",
+      "priority": "high",
+      "labels": [
+        "Architecture",
+        "Heating"
+      ],
+      "assigned_to": "harry.muster@example.com",
+      "bim_snippet": {
+        "snippet_type": "clash",
+        "is_external": true,
+        "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
+        "reference_schema": "https://example.com/bcf/1.0/clash.xsd"	
+      }
+    }
 
 ### 4.2.3 GET Single Topic Services ###
 

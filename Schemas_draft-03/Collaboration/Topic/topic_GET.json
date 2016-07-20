@@ -18,11 +18,14 @@
         "null"
       ]
     },
-    "reference_link": {
+    "reference_links": {
       "type": [
-        "string",
+        "array",
         "null"
-      ]
+      ],
+      "items": {
+        "type": "string"
+      }
     },
     "title": {
       "required": true,
