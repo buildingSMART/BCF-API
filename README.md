@@ -913,31 +913,18 @@ Update a **collection** of file references on the topic header.
 Retrieve a **collection** of all comments related to a topic (default ordering is date).
 
 **Odata filter parameters**
-<table>
-  <tr>
-    <td>author</td>
-    <td>string</td>
-    <td>UserID of the author (value from extension.xsd)</td>
-  </tr>
-  <tr>
-    <td>status</td>
-    <td>string</td>
-    <td>The status of a comment (value from extension.xsd)</td>
-  </tr>
-  <tr>
-    <td>date</td>
-    <td>datetime</td>
-    <td>The creation date of a comment</td>
-  </tr>
-</table>
+
+|parameter|type|description|
+|---------|----|-----------|
+|author|string|userId of the author (value from extensions)|
+|status|string|status of a comment (value from extensions)|
+|date|datetime|creation date of a comment|
 
 **Odata sort parameters**
-<table>
-  <tr>
-    <td>date</td>
-    <td>The creation date of a comment</td>
-  </tr>
-</table>
+
+|parameter|description|
+|---------|-----------|
+|date|creation date of a comment|
 
 **Example Request with odata**
 
