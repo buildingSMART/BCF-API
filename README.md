@@ -1329,8 +1329,7 @@ PUT Body contains binary image data
 **Example Response**
 
 HTTP-response status code:
-
-201 created (empty response body)
+`201 - Created` **empty response body**
 
 ### 4.5.7 GET bitmap of a Viewpoint Service
 
@@ -1370,8 +1369,7 @@ PUT Body contains binary image data
 **Example Response**
 
 HTTP-response status code:
-
-201 created (empty response body)
+`201 - Created` **empty response body**
 
 ## 4.6 Component Services
 
