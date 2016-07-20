@@ -6,16 +6,6 @@
       "required": true,
       "type": "string"
     },
-    "verbal_status": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "status": {
-      "required": true,
-      "type": "string"
-    },
     "date": {
       "required": true,
       "type": "string"

@@ -2,16 +2,6 @@
   "title": "comment_POST",
   "type": "object",
   "properties": {
-    "verbal_status": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "status": {
-      "required": true,
-      "type": "string"
-    },
     "comment": {
       "required": true,
       "type": "string"

@@ -1,10 +1,12 @@
 {
-  "title": "comment_PUT",
+  "title": "comment_PATCH",
   "type": "object",
   "properties": {
     "comment": {
-      "required": true,
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "viewpoint_guid": {
       "type": [
