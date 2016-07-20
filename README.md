@@ -1,7 +1,7 @@
 # BCF REST API
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
-**Version 1.0** based on BCFv2.
+**Version 2.1** based on BCFv2.1.
 [GitHub repository](https://github.com/BuildingSMART/BCF)
 
 **Table of Contents**
@@ -138,7 +138,7 @@ BCF-API has a specified error response body format [error.json](Schemas_draft-03
 
 ## 1.7 DateTime format
 
-DateTime values in this API are supposed to be in ISO 8601 compliant `YYYY-MM-DDThh:mm:ss` format with optional time zone indicators. This is the same format as defined in the Xml `xs:dateTime` type as well as the resolt of JavaScripts Date.toJson() output.
+DateTime values in this API are supposed to be in ISO 8601 compliant `YYYY-MM-DDThh:mm:ss` format with optional time zone indicators. This is the same format as defined in the Xml `xs:dateTime` type as well as the result of JavaScripts Date.toJson() output.
 
 For example, `2016-04-28-16:31.27+2:00` would represent _Thursday, April 28th, 2016, 16:31 (270ms) with a time zone offset of +2 hours relative to UTC._
 
@@ -457,103 +457,11 @@ Modify a specific project.
 [extensions_GET.json](Schemas_draft-03/Project/extensions_GET.json)
 
 Retrieve a specific projects extensions.
-
-**Example Request**
-
-    https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
-
-**Example Response**
-
-    {
-        "topic_type": [
-            "Information",
-            "Error"
-        ],
-        "topic_status": [
-            "Open",
-            "Closed",
-            "ReOpened"
-        ],
-        "topic_label": [
-            "Architecture",
-            "Structural",
-            "MEP"
-        ],
-        "snippet_type": [
-            ".ifc",
-            ".csv"
-        ],
-        "priority": [
-            "Low",
-            "Medium",
-            "High"
-        ],
-        "user_id_type": [
-            "Architect@example.com",
-            "BIM-Manager@example.com",
-            "bob_heater@example.com"
-        ]
-    }
-
-### 4.1.5 POST Project Extension Services
-
-**Resource URL**
-
-    POST /bcf/{version}/projects/{project_id}/extensions
-
-[extensions_POST.json](Schemas_draft-03/Project/extensions_POST.json)
-
-Create a specific projects extensions.
-
 Project extensions are used to define possible values that can be used in topics and comments, for example topic labels and priorities. They may change during the course of a project. The most recent extensions state which values are valid at a given moment for newly created topics and comments.
 
-**Parameters**
-
-JSON encoded body using the "application/json" content type.
-
-|parameter|type|description|
-|---------|----|-----------|
-|topic_type|array (string)|enumeration of allowed values|
-|topic_status|array (string)|enumeration of allowed values|
-|topic_label|array (string)|enumeration of allowed values|
-|snippet_type|array (string)|enumeration of allowed values|
-|priority|array (string)|enumeration of allowed values|
-|user_id_type|array (string)|enumeration of allowed values|
-
 **Example Request**
 
     https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
-
-    {
-        "topic_type": [
-            "Information",
-            "Error"
-        ],
-        "topic_status": [
-            "Open",
-            "Closed",
-            "ReOpened"
-        ],
-        "topic_label": [
-            "Architecture",
-            "Structural",
-            "MEP"
-        ],
-        "snippet_type": [
-            ".ifc",
-            ".csv"
-        ],
-        "priority": [
-            "Low",
-            "Medium",
-            "High"
-        ],
-        "user_id_type": [
-            "Architect@example.com",
-            "BIM-Manager@example.com",
-            "bob_heater@example.com"
-        ]
-    }
 
 **Example Response**
 
@@ -587,16 +495,6 @@ JSON encoded body using the "application/json" content type.
             "bob_heater@example.com"
         ]
     }
-
-### 4.1.6 PUT Project Extension Services
-
-**Resource URL**
-
-    PUT /bcf/{version}/projects/{project_id}/extensions
-
-[extensions_PUT.json](Schemas_draft-03/Project/extensions_PUT.json)
-
-Modify a specific projects extensions, description similar to POST.
 
 ---------
 
