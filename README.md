@@ -138,7 +138,7 @@ BCF-API has a specified error response body format [error.json](Schemas_draft-03
 
 ## 1.7 DateTime format
 
-DateTime values in this API are supposed to be in ISO 8601 compliant `YYYY-MM-DDThh:mm:ss` format with optional time zone indicators. This is the same format as defined in the Xml `xs:dateTime` type as well as the resolt of JavaScripts Date.toJson() output.
+DateTime values in this API are supposed to be in ISO 8601 compliant `YYYY-MM-DDThh:mm:ss` format with optional time zone indicators. This is the same format as defined in the Xml `xs:dateTime` type as well as the result of JavaScripts Date.toJson() output.
 
 For example, `2016-04-28-16:31.27+2:00` would represent _Thursday, April 28th, 2016, 16:31 (270ms) with a time zone offset of +2 hours relative to UTC._
 
