@@ -102,20 +102,20 @@ The easiest way to think of an etag is as an MD5 or SHA1 hash of all the bytes i
 
 ETags are returned in a response to a GET:
 
-    
+
     joe@joe-laptop:~$ curl --include http://bitworking.org/news/
-    
+
     HTTP/1.1 200 Ok
-    
+
     Date: Wed, 21 Mar 2007 15:06:15 GMT
-    
+
     Server: Apache
-    
+
     ETag: "078de59b16c27119c670e63fa53e5b51"
-    
+
     Content-Length: 23081
     …..
-  
+
 The client may send an "If-None-Match" HTTP Header containing the last retrieved etag. If the content has not changed the server returns a status code 304 (not modified) and no response body.
 
 ## 1.3 Updating Resources via HTTP PUT
@@ -273,7 +273,7 @@ Example URL:
 
 
 Example redirected URL:
-	
+
 	https://YourWebsite.com/retrieveCode?code=ABC1234567890XYZ&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
 
 Tip:
@@ -289,7 +289,7 @@ The Client uses the **"oauth2\_token_url"** to request a token. Example:
 
 	POST https://example.com/bcf/oauth2/token
 	Content type: application/x-www-form-urlencoded.
- 
+
 **Parameters**
 <table>
 	<tr>
@@ -698,7 +698,7 @@ Modify a specific projects extensions, description similar to POST.
 ### 4.2.1 GET Topic Services ###
 
 **Resource URL**
- 
+
 	GET /bcf/{version}/projects/{project_id}/topics
 
 [topic_GET.json](Schemas_draft-03/Collaboration/Topic/topic_GET.json)
@@ -879,7 +879,7 @@ Retrieve a specific topic.
 
 **Example Response**
 
-   
+
     {
 		"guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
 		"topic_type": "Clash",
@@ -898,7 +898,7 @@ Retrieve a specific topic.
 				"reference_schema": "https://example.com/bcf/1.0/clash.xsd"	
 				}
     	}
- 
+
 ### 4.2.4 PUT Single Topic Services ###
 
 **Resource URL**
@@ -1652,7 +1652,7 @@ Retrieve a specific viewpoint bitmaps image file (png, jpg or bmp).
 **Example Response**
 
 HTTP-response header:
-	
+
 	Content-Type: image/png
 
 ### 4.5.8 PUT bitmap of a Viewpoint Service
@@ -1750,7 +1750,7 @@ Add or update a **collection** of all components related to a viewpoint.
 	]
 
 **Example Response**
-	
+
 	[
  	{
   		"ifc_guid":"2MF28NhmDBiRVyFakgdbCT",
