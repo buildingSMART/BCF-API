@@ -281,32 +281,13 @@ The Client uses the **"oauth2\_token_url"** to request a token. Example:
     Content type: application/x-www-form-urlencoded.
 
 **Parameters**
-<table>
-    <tr>
-        <td>access_token</td>
-        <td>string</td>
-        <td>The issued OAuth2 token</td>
-        <td>mandatory</td>
-    </tr>
-    <tr>
-        <td>token_type</td>
-        <td>string</td>
-        <td>Always "bearer"</td>
-        <td>mandatory</td>
-    </tr>
-    <tr>
-        <td>expires_in</td>
-        <td>integer</td>
-        <td>The lifetime of the access token in seconds</td>
-        <td>mandatory</td>
-    </tr>
-    <tr>
-        <td>refresh_token</td>
-        <td>string</td>
-        <td>The issued OAuth2 refresh token, one-time-usable only</td>
-        <td>mandatory</td>
-    </tr>
-</table>
+
+|parameter|type|description|
+|---------|----|-----------|
+|access_token|string|The issued OAuth2 token|
+|token_type|string|Always `bearer`|
+|expires_in|integer|The lifetime of the access token in seconds|
+|refresh_token|string|The issued OAuth2 refresh token, one-time-usable only|
 
 The POST request can be done via HTTP Basic Authorization with your applications "ClientID" as the username and your "ClientSecret" as the password.
 
