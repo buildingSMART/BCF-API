@@ -99,17 +99,12 @@ The easiest way to think of an etag is as an MD5 or SHA1 hash of all the bytes i
 ETags are returned in a response to a GET:
 
     joe@joe-laptop:~$ curl --include http://bitworking.org/news/
-
     HTTP/1.1 200 Ok
-
     Date: Wed, 21 Mar 2007 15:06:15 GMT
-
     Server: Apache
-
     ETag: "078de59b16c27119c670e63fa53e5b51"
-
     Content-Length: 23081
-    …..
+    …
 
 The client may send an "If-None-Match" HTTP Header containing the last retrieved etag. If the content has not changed the server returns a status code 304 (not modified) and no response body.
 
