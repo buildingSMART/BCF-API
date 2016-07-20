@@ -638,14 +638,14 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 
 |parameter|type|description|
 |---------|----|------------|
-|creation_author|string|UserID of the creation author (value from extension.xsd)|
-|modified_author|string|UserID of the modified author (value from extension.xsd)|
-|assigned_to|string|UserID of the assigned author (value from extension.xsd)|
-|topic_status|string|The status of a topic (value from extension.xsd)|
-|topic_type|string|The type of a topic (value from extension.xsd)|
-|creation_date|datetime|The creation date of a topic|
-|modified_date|datetime|The modification date of a topic|
-|labels|array (string)|The labels of a topic (value from extension.xsd)|
+|creation_author|string|userId of the creation author (value from extensions)|
+|modified_author|string|userId of the modified author (value from extensions)|
+|assigned_to|string|userId of the assigned person (value from extensions)|
+|topic_status|string|status of a topic (value from extensions)|
+|topic_type|string|type of a topic (value from extensions)|
+|creation_date|datetime|creation date of a topic|
+|modified_date|datetime|modification date of a topic|
+|labels|array (string)|labels of a topic (value from extensions)|
 
 **Odata sort parameters**
 <table>
