@@ -648,20 +648,12 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 |labels|array (string)|labels of a topic (value from extensions)|
 
 **Odata sort parameters**
-<table>
-  <tr>
-    <td>creation_date</td>
-    <td>The creation date of a topic</td>
-  </tr>
-  <tr>
-    <td>modified_date</td>
-    <td>The modification date of a topic</td>
-  </tr>
-  <tr>
-    <td>index</td>
-    <td>The index of a topic</td>
-  </tr>
-</table>
+
+|parameter|description|
+|---------|-----------|
+|creation_date|creation date of a topic|
+|modified_date|modification date of a topic|
+|index|index of a topic|
 
 **Example Request with odata**
 
