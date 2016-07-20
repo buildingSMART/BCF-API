@@ -345,30 +345,12 @@ Register a new client :
 
 JSON encoded body using the "application/json" content type.
 
-<table border="1">
-
-  <tr>
-    <td>client_name</td>
-    <td>string (max. 60)</td>
-    <td>The client name</td>
-  </tr>
-  <tr>
-    <td>client_description</td>
-    <td>string (max. 4000)</td>
-    <td>The client description</td>
-  </tr>
-  <tr>
-    <td>client_url</td>
-    <td>string</td>
-    <td>An URL providing additional information about the client</td>
-  </tr>
-  <tr>
-    <td>redirect_url</td>
-    <td>string</td>
-    <td>An URL where users are redirected after granting access to the client</td>
-  </tr>
-</table>
-
+|parameter|type|description|
+|---------|----|-----------|
+|client_name|string (max. length 60)|The client name|
+|client_description|string (max. length 4000)|The client description|
+|client_url|string|An URL providing additional information about the client|
+|redirect_url|string|An URL where users are redirected after granting access to the client|
 
 **Example Request**
 
