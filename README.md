@@ -872,86 +872,24 @@ Add a new topic.
 JSON encoded body using the "application/json" content type.
 
 
-<table border="1">
-  <tr>
-    <td>topic_type</td>
-    <td>string</td>
-    <td>The type of a topic (value from extension.xsd)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>topic_status</td>
-    <td>string</td>
-    <td>The status of a topic (value from extension.xsd)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>reference_link</td>
-    <td>string</td>
-    <td>Reference link</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>title</td>
-    <td>string</td>
-    <td>The title of a topic</td>
-    <td>mandatory</td>
-  </tr>
-  <tr>
-    <td>priority</td>
-    <td>string</td>
-    <td>The priority of a topic (value from extension.xsd)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>index</td>
-    <td>integer</td>
-    <td>The index of a topic</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>labels</td>
-    <td>string</td>
-    <td>The collection of labels of a topic (values from extension.xsd)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>assigned_to</td>
-    <td>string</td>
-    <td>UserID assigned to a topic (value from extension.xsd)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>description</td>
-    <td>string</td>
-    <td>Description of a topic</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>snippet_type</td>
-    <td>string</td>
-    <td>Type of a BIM-Snippet of a topic (value from extension.xsd)</td>
-    <td>mandatory if BIM-Snippet exists</td>
-  </tr>
-  <tr>
-    <td>is_external</td>
-    <td>boolean</td>
-    <td>Is the BIM-Snippet external (default = false)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>reference</td>
-    <td>string</td>
-    <td>Reference of a BIM-Snippet of a topic</td>
-    <td>mandatory if BIM-Snippet exists</td>
-  </tr>
-  <tr>
-    <td>reference_schema</td>
-    <td>string</td>
-    <td>Schema of a BIM-Snippet of a topic</td>
-    <td>mandatory if BIM-Snippet exists</td>
-  </tr>
-</table>
+|Parameter|Type|Description|Required|
+|---------|----|-----------|--------|
+|topic_type|string|The type of a topic (value from extension.xsd)|false|
+|topic_status|string|The status of a topic (value from extension.xsd)|false|
+|reference_link|string|Reference link|false|
+|title|string|The title of a topic|true|
+|priority|string|The priority of a topic (value from extension.xsd)|false|
+|index|integer|The index of a topic|false|
+|labels|array (string)|The collection of labels of a topic (values from extension.xsd)|false|
+|assigned_to|string|UserID assigned to a topic (value from extension.xsd)|false|
+|description|string|Description of a topic|false|
+|bim_snippet.snippet_type|string|Type of a BIM-Snippet of a topic (value from extension.xsd)|false|
+|bim_snippet.is_external|boolean|Is the BIM-Snippet external (default = false)|false|
+|bim_snippet.reference|string|Reference of a BIM-Snippet of a topic|false|
+|bim_snippet.reference_schema|string|Schema of a BIM-Snippet of a topic|false|
+|due_date|string|Until when the topics issue needs to be resolved|false|
+
+_Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `is_external`, `reference` and `reference_schema`) are mandatory._
 
 **Example Request**
 
