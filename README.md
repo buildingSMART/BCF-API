@@ -1156,148 +1156,31 @@ Add a new viewpoint.
 
 JSON encoded body using the "application/json" content type.
 
-
-<table border="1">
-  <tr>
-    <td>x, y, z</td>
-    <td>number</td>
-    <td>Numbers defining ether a point or a vector </td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>orthogonal camera</td>
-    <td>element</td>
-    <td>Orthogonal camera view</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>camera_view_point</td>
-    <td>element</td>
-    <td>Viewpoint of the camera</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>camera_directiont</td>
-    <td>element</td>
-    <td>Direction of the camera</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>camera_up_vector</td>
-    <td>element</td>
-    <td>Direction of camera up</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>view_to_world_scale</td>
-    <td>element</td>
-    <td>Proportion of camera view to model</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>perspective camera</td>
-    <td>element</td>
-    <td>Perspective view of the camera</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>camera_view_point</td>
-    <td>element</td>
-    <td>Viewpoint of the camera</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>camera_directiont</td>
-    <td>element</td>
-    <td>Direction of the camera</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>camera_up_vector</td>
-    <td>element</td>
-    <td>Direction of camera up</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>field_of_view</td>
-    <td>element</td>
-    <td>Field of view</td>
-    <td>optional</td>
-  </tr>
- <tr>
-    <td>line</td>
-    <td>element</td>
-    <td>A graphical line</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>start_point</td>
-    <td>element</td>
-    <td>Start point of the line</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>end_point</td>
-    <td>element</td>
-    <td>end point of the line</td>
-    <td>optional</td>
-  </tr>
- <tr>
-    <td>clipping_plane</td>
-    <td>element</td>
-    <td>Clipping plane for the model view</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>location</td>
-    <td>element</td>
-    <td>Origin of the clipping plane</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>direction</td>
-    <td>element</td>
-    <td>direction of the clipping plane</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>bitmaps</td>
-    <td>array</td>
-    <td>Array of embedded pictures in the viewpoint</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>guid</td>
-    <td>string</td>
-    <td>Guid for the bitmap</td>
-    <td>mandatory</td>
-  </tr>
-  <tr>
-    <td>bitmap_type</td>
-    <td>enum</td>
-    <td>Format of the bitmap. Predefined values "png" = 0, "jpg" = 1, "bmp" = 2</td>
-    <td>mandatory</td>
-  </tr>
-
-  <tr>
-    <td>location</td>
-    <td>element</td>
-    <td>Location of the center of the bitmap in world coordinates (point)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>normal</td>
-    <td>element</td>
-    <td>Normal vector of the bitmap (vector)</td>
-    <td>optional</td>
-  </tr>
-  <tr>
-    <td>up</td>
-    <td>element</td>
-    <td>Up vector of the bitmap (vector)</td>
-    <td>optional</td>
-  </tr>
-</table>
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| x, y, z | number | numbers defining either a point or a vector | optional |
+| orthogonal camera | object | orthogonal camera view | optional |
+| camera_view_point | object | viewpoint of the camera | optional |
+| camera_directiont | object | direction of the camera | optional |
+| camera_up_vector | object | direction of camera up | optional |
+| view_to_world_scale | object | proportion of camera view to model | optional |
+| perspective camera | object | perspective view of the camera | optional |
+| camera_view_point | object | viewpoint of the camera | optional |
+| camera_directiont | object | direction of the camera | optional |
+| camera_up_vector | object | direction of camera up | optional |
+| field_of_view | object | field of view | optional |
+| line | object | graphical line | optional |
+| start_point | object | start point of the line | optional |
+| end_point | object | end point of the line | optional |
+| clipping_plane | object | clipping plane for the model view | optional |
+| location | object | origin of the clipping plane | optional |
+| direction | object | direction of the clipping plane | optional |
+| bitmaps | array | array of embedded pictures in the viewpoint | optional |
+| guid | string | guid for the bitmap | mandatory |
+| bitmap_type | enum | format of the bitmap. Predefined values `png` = 0, `jpg` = 1, `bmp` = 2 | mandatory |
+| location | object | location of the center of the bitmap in world coordinates (point) | optional |
+| normal | object | normal vector of the bitmap (vector) | optional |
+| up | object | up vector of the bitmap (vector) | optional |
 
 **Example Request**
 
