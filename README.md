@@ -82,16 +82,12 @@ BCF is a format for managing issues on a BIM project. RESTful BCF-API supports t
 
 All API access is transmitted over HTTPS. Data is sent as URL encoded query parameters and JSON POST bodies and received as JSON. Every resource has a corresponding JSON Schema (Draft 03). JSON Hyper Schema is used for link definition. The authentication method is OAuth2. URL schemas in this readme are relational to the base server URL.
 
-
-
 An example of a client implementation in C# can be found here:
 [https://github.com/rvestvik/BcfApiExampleClient](https://github.com/rvestvik/BcfApiExampleClient)
-
 
 ## 1.1 Paging, Sorting and Filtering
 
 When requesting collections of items, the BCF-API should offer URL parameters according to the OData specification. It can be found at [http://www.odata.org/documentation/](http://www.odata.org/documentation/).
-
 
 ## 1.2 Caching
 
@@ -101,7 +97,6 @@ The ETag response-header field value, an entity tag, provides for an "opaque" ca
 The easiest way to think of an etag is as an MD5 or SHA1 hash of all the bytes in a representation. If just one byte in the representation changes, the etag will change.
 
 ETags are returned in a response to a GET:
-
 
     joe@joe-laptop:~$ curl --include http://bitworking.org/news/
 
@@ -138,7 +133,6 @@ The server has a web config file .. "*" means the server allow the resources for
       </customHeaders>
      </httpProtocol>
 
-
 ## 1.5 HTTP status codes
 
 The BCF API relies on the regular Http Status Code definitions. Good sources are [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) or the [HTTP/1.1 Specification](https://tools.ietf.org/html/rfc7231).
@@ -155,7 +149,6 @@ For example, `2016-04-28-16:31.27+2:00` would represent _Thursday, April 28th, 2
 
 ----------
 
-
 # 2. Topologies
 
 ## 2.1 Topology 1 - BCF-Server only
@@ -164,15 +157,11 @@ Model collaboration is managed through a shared file server or a network file sh
 
 ![Topology1](Images/Topology1.png)
 
-
-
 ## 2.2 Topology 2 - Colocated BCF-Server and Model Server
 
 BCF and model server are co-located on the same hosts.
 
-
 ![Topology3](Images/Topology3.png)
-
 
 ----------
 # 3. Public Services
@@ -211,7 +200,6 @@ Returns a list of all supported BCF API versions of the server.
 
 ----------
 
-
 ## 3.2 Authentication Services
 
 ### 3.2.1 Obtaining Authentication Information
@@ -246,7 +234,6 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
       "http_basic_supported": true
     }
 
-
 ### 3.2.2 OAuth2 protocol flow - Client Request -
 
 The Client uses the **"oauth2\_auth_url"** and adds the following parameters to it.
@@ -260,7 +247,6 @@ The Client uses the **"oauth2\_auth_url"** and adds the following parameters to 
 Example URL:
 
     https://example.com/bcf/oauth2/auth?response_type=code&client_id=<YourClientID>&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
-
 
 Example redirected URL:
 
@@ -312,11 +298,9 @@ The access token will be returned as JSON in the response body and is an arbitra
         "refresh_token":"MTRiMjkzZTYtOTgwNC0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh"
     }
 
-
 ### 3.2.4 OAuth2 protocol flow - Refresh Token Request -
 
 [token_GET.json](Schemas_draft-03/Authentication/token_GET.json)
-
 
 The process to retrieve a refresh token is exactly the same as retrieving a token except the POST Request Body.
 
@@ -325,7 +309,6 @@ POST Request Body:
     grant_type=refresh_token&refresh_token=<YourRefreshToken>
 
 The refresh token can only be used once to retrieve a token and a new refresh token.
-
 
 ### 3.2.5 OAuth2 protocol flow - Dynamic Client Registration -
 
@@ -362,16 +345,12 @@ JSON encoded body using the "application/json" content type.
     "redirect_url": "http://localhost:8080"
     }
 
-
 **Example Response**
-
 
     {
       "client_id": "cGxlYXN1cmUu"
       "client_secret": "ZWFzdXJlLg==",
     }
-
-
 
 ### 3.2.6 OAuth2 protocol flow - Requesting Resources -
 
@@ -393,13 +372,11 @@ When requesting other resources the access token must be passed via the Authoriz
 
 Retrieve a **collection** of projects where the currently logged on user has access to.
 
-
 **Example Request**
 
     https://example.com/bcf/1.0/projects
 
 **Example Response**
-
 
     [{
         "project_id": "F445F4F2-4D02-4B2A-B612-5E456BEF9137",
@@ -411,7 +388,6 @@ Retrieve a **collection** of projects where the currently logged on user has acc
     }]
 
 ### 4.1.2 GET Single Project Services
-
 
 **Resource URL**
 
@@ -425,15 +401,12 @@ Retrieve a specific project.
 
     https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
 
-
 **Example Response**
-
 
     {
       "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
       "name": "Example project 3"
     }
-
 
 ### 4.1.3 PUT Single Project Services
 
@@ -444,7 +417,6 @@ Retrieve a specific project.
 [project_PUT.json](Schemas_draft-03/Project/project_PUT.json)
 
 Modify a specific project, description similar to POST.
-
 
 ### 4.1.4 GET Project Extension Services
 
@@ -460,9 +432,7 @@ Retrieve a specific projects extensions.
 
     https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
 
-
 **Example Response**
-
 
     {
     "topic_type":
@@ -567,9 +537,7 @@ JSON encoded body using the "application/json" content type.
         ]
     }
 
-
 **Example Response**
-
 
     {
     "topic_type":
@@ -608,7 +576,6 @@ JSON encoded body using the "application/json" content type.
         ]
     }
 
-
 ### 4.1.6 PUT Project Extension Services
 
 **Resource URL**
@@ -618,7 +585,6 @@ JSON encoded body using the "application/json" content type.
 [extensions_PUT.json](Schemas_draft-03/Project/extensions_PUT.json)
 
 Modify a specific projects extensions, description similar to POST.
-
 
 ---------
 
@@ -758,17 +724,13 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
 
 [topic_GET.json](Schemas_draft-03/Collaboration/Topic/topic_GET.json)
 
-
 Retrieve a specific topic.
 
 **Example Request**
 
-
     https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
 
-
 **Example Response**
-
 
     {
         "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
@@ -811,7 +773,6 @@ Retrieves a topics BIM-Snippet as binary file. Will use the following HTTP heade
     Content-Length: {Size of file in bytes};
     Content-Disposition: attachment; filename="{Filename.extension}";
 
-
 ### 4.2.7 PUT Topic BIM Snippet
 
 **Resource URL**
@@ -823,10 +784,7 @@ Puts a new BIM Snippet binary file to a topic. If this is used, the parent topic
     Content-Type: application/octet-stream;
     Content-Length: {Size of file in bytes};
 
-
-
 ## 4.3 File Services
-
 
 ### 4.3.1 GET File (Header) Services
 
@@ -841,7 +799,6 @@ Retrieve a **collection** of file references as topic header.
 **Example Request**
 
     https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
-
 
 **Example Response**
 
@@ -1284,14 +1241,11 @@ JSON encoded body using the "application/json" content type.
 
 [viewpoint_GET.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_GET.json)
 
-
 Retrieve a specific viewpoint.
 
 **Example Request**
 
-
     https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
-
 
 **Example Response**
 
@@ -1340,7 +1294,6 @@ Retrieve a specific viewpoint.
                    }
             }
 
-
 ### 4.5.4 PUT Single Viewpoint Services
 
 **Resource URL**
@@ -1351,18 +1304,15 @@ Retrieve a specific viewpoint.
 
 Update a single viewpoint, description similar to POST.
 
-
 ### 4.5.5 GET snapshot of a Viewpoint Service
 
 **Resource URL**
 
     GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
 
-
 Retrieve a viewpoints snapshot (png, jpg or bmp).
 
 **Example Request**
-
 
     https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
@@ -1371,7 +1321,6 @@ Retrieve a viewpoints snapshot (png, jpg or bmp).
 HTTP-response header:
 
     Content-Type: image/png
-
 
 ### 4.5.6 PUT snapshot of a Viewpoint Service
 
@@ -1390,7 +1339,6 @@ HTTP PUT request header:
     Content-Type: image/png
 
 PUT Body contains binary image data
-
 
 **Example Response**
 
@@ -1529,7 +1477,6 @@ Add or update a **collection** of all components related to a viewpoint.
           "authoring_tool_id":"EXCAD/v1.0"
      }
     ]
-
 
 ## 4.7 Related Topics Services
 
@@ -1691,7 +1638,6 @@ Retrieve a **collection** of all documents uploaded to a project.
     ]
 
 ### 4.9.2 POST Document Services
-
 
 **Resource URL**
 
