@@ -637,7 +637,7 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 **Odata filter parameters**
 
 |parameter|type|description|
-|---------|----|------------|
+|---------|----|-----------|
 |creation_author|string|userId of the creation author (value from extensions)|
 |modified_author|string|userId of the modified author (value from extensions)|
 |assigned_to|string|userId of the assigned person (value from extensions)|
