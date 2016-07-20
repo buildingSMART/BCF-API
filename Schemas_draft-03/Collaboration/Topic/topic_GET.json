@@ -1,140 +1,114 @@
 {
-  "title": "topic_GET",
-  "type": "object",
-  "properties": {
-    "guid": {
-      "required": true,
-      "type": "string"
-    },
-    "topic_type": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "topic_status": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "reference_links": {
-      "type": [
-        "array",
-        "null"
-      ],
-      "items": {
-        "type": "string"
-      }
-    },
-    "title": {
-      "required": true,
-      "type": "string"
-    },
-    "priority": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "index": {
-      "type": "integer"
-    },
-    "labels": {
-      "type": [
-        "array",
-        "null"
-      ],
-      "items": {
-        "type": [
-          "string",
-          "null"
-        ]
-      }
-    },
-    "creation_date": {
-      "required": true,
-      "type": "string"
-    },
-    "creation_author": {
-      "required": true,
-      "type": "string"
-    },
-    "modified_date": {
-      "type": "string"
-    },
-    "modified_author": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "assigned_to": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "description": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "bim_snippet": {
-      "title": "bim_snippet",
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "snippet_type": {
-          "required": true,
-          "type": "string"
+    "title": "topic_GET",
+    "type": "object",
+    "properties": {
+        "guid": {
+            "required": true,
+            "type": "string"
         },
-        "is_external": {
-          "required": true,
-          "type": "boolean"
+        "topic_type": {
+            "type": ["string",
+            "null"]
         },
-        "reference": {
-          "required": true,
-          "type": "string"
+        "topic_status": {
+            "type": ["string",
+            "null"]
         },
-        "reference_schema": {
-          "required": true,
-          "type": "string"
+        "reference_links": {
+            "type": ["array",
+            "null"],
+            "items": {
+                "type": "string"
+            }
+        },
+        "title": {
+            "required": true,
+            "type": "string"
+        },
+        "priority": {
+            "type": ["string",
+            "null"]
+        },
+        "index": {
+            "type": "integer"
+        },
+        "labels": {
+            "type": ["array",
+            "null"],
+            "items": {
+                "type": ["string",
+                "null"]
+            }
+        },
+        "creation_date": {
+            "required": true,
+            "type": "string"
+        },
+        "creation_author": {
+            "required": true,
+            "type": "string"
+        },
+        "modified_date": {
+            "type": "string"
+        },
+        "modified_author": {
+            "type": ["string",
+            "null"]
+        },
+        "assigned_to": {
+            "type": ["string",
+            "null"]
+        },
+        "description": {
+            "type": ["string",
+            "null"]
+        },
+        "bim_snippet": {
+            "title": "bim_snippet",
+            "type": ["object",
+            "null"],
+            "properties": {
+                "snippet_type": {
+                    "required": true,
+                    "type": "string"
+                },
+                "is_external": {
+                    "required": true,
+                    "type": "boolean"
+                },
+                "reference": {
+                    "required": true,
+                    "type": "string"
+                },
+                "reference_schema": {
+                    "required": true,
+                    "type": "string"
+                }
+            }
+        },
+        "due_date": {
+            "type": ["string",
+            "null"]
         }
-      }
     },
-	"due_date": {
-	  "type": [
-	    "string",
-        "null"
-	  ]
-	}
-  },
-"links": [
-	   	{
-			"rel": "files",
-			"href": "{guid}/files"
-	   	},
-        	{
-            	"rel": "document_references",
-            	"href": "{guid}/document_references"
-        	},
-        	{
-            	"rel": "related_topics",
-            	"href": "{guid}/related_topics"
-        	},
-        	{
-            	"rel": "comments",
-            	"href": "{guid}/comments"
-        	},
-        	{
-            	"rel": "viewpoints",
-            	"href": "{guid}/viewpoints"
-        	}
-
-    	]
-
+    "links": [{
+        "rel": "files",
+        "href": "{guid}/files"
+    },
+    {
+        "rel": "document_references",
+        "href": "{guid}/document_references"
+    },
+    {
+        "rel": "related_topics",
+        "href": "{guid}/related_topics"
+    },
+    {
+        "rel": "comments",
+        "href": "{guid}/comments"
+    },
+    {
+        "rel": "viewpoints",
+        "href": "{guid}/viewpoints"
+    }]
 }

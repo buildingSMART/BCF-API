@@ -1,24 +1,18 @@
 {
-  "title": "comment_PATCH",
-  "type": "object",
-  "properties": {
-    "comment": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "viewpoint_guid": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "reply_to_comment_guid": {
-      "type": [
-        "string",
-        "null"
-      ]
+    "title": "comment_PATCH",
+    "type": "object",
+    "properties": {
+        "comment": {
+            "type": ["string",
+            "null"]
+        },
+        "viewpoint_guid": {
+            "type": ["string",
+            "null"]
+        },
+        "reply_to_comment_guid": {
+            "type": ["string",
+            "null"]
+        }
     }
-  }
 }

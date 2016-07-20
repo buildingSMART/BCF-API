@@ -1,22 +1,22 @@
 {
-  "$schema": "http://json-schema.org/draft-03/schema#",
-  "title": "version_GET",
-  "description": "Schema for Version",
-  "type": "object",
-  "properties": {	
-    "versions": {
-      "required": true,
-      "type": "array",
-      "items": {
-        "version_id": {
-          "type": "string",
-          "required": true
-        },
-        "detailed_version": {
-          "type": "string",
-          "required": false
+    "$schema": "http://json-schema.org/draft-03/schema#",
+    "title": "version_GET",
+    "description": "Schema for Version",
+    "type": "object",
+    "properties": {
+        "versions": {
+            "required": true,
+            "type": "array",
+            "items": {
+                "version_id": {
+                    "type": "string",
+                    "required": true
+                },
+                "detailed_version": {
+                    "type": "string",
+                    "required": false
+                }
+            }
         }
-      }
     }
-  }
 }

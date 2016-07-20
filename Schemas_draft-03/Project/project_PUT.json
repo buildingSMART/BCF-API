@@ -1,4 +1,4 @@
-  {
+{
     "$schema": "http://json-schema.org/draft-03/schema#",
     "title": "project_PUT",
     "description": "Schema for project PUT, BCF REST API.",

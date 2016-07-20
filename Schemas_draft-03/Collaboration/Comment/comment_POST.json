@@ -1,22 +1,18 @@
 {
-  "title": "comment_POST",
-  "type": "object",
-  "properties": {
-    "comment": {
-      "required": true,
-      "type": "string"
-    },
-    "viewpoint_guid": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "reply_to_comment_guid": {
-      "type": [
-        "string",
-        "null"
-      ]
+    "title": "comment_POST",
+    "type": "object",
+    "properties": {
+        "comment": {
+            "required": true,
+            "type": "string"
+        },
+        "viewpoint_guid": {
+            "type": ["string",
+            "null"]
+        },
+        "reply_to_comment_guid": {
+            "type": ["string",
+            "null"]
+        }
     }
-  }
 }

@@ -1,4 +1,4 @@
-  {
+{
     "$schema": "http://json-schema.org/draft-03/schema#",
     "title": "project_GET",
     "description": "Schema for single project GET, BCF REST API.",
@@ -13,14 +13,12 @@
             "required": true
         }
     },
-    "links": [
-        {
-            "rel": "topics",
-            "href": "{project_id}/topics"
-        },
-        {
-            "rel": "extension",
-            "href": "{project_id}/extension"
-        }
-    ]
+    "links": [{
+        "rel": "topics",
+        "href": "{project_id}/topics"
+    },
+    {
+        "rel": "extension",
+        "href": "{project_id}/extension"
+    }]
 }

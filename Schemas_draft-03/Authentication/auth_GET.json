@@ -1,24 +1,21 @@
 {
-  "title": "auth_GET",
-  "type": "object",
-  "properties": {
-    "oauth2_auth_url": {
-      "required": true,
-      "type": "string"
-    },
-    "oauth2_token_url": {
-      "required": true,
-      "type": "string"
-    },
-    "oauth2_dynamic_client_reg_url": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-	"http_basic_supported":{
-	  "type": "boolean"
-	}
-  }
+    "title": "auth_GET",
+    "type": "object",
+    "properties": {
+        "oauth2_auth_url": {
+            "required": true,
+            "type": "string"
+        },
+        "oauth2_token_url": {
+            "required": true,
+            "type": "string"
+        },
+        "oauth2_dynamic_client_reg_url": {
+            "type": ["string",
+            "null"]
+        },
+        "http_basic_supported": {
+            "type": "boolean"
+        }
+    }
 }
-

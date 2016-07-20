@@ -6,12 +6,12 @@
     "properties": {
         "client_name": {
             "type": "string",
-			"maxLength": 60,
+            "maxLength": 60,
             "required": true
         },
         "client_description": {
             "type": "string",
-			"maxLength": 4000,
+            "maxLength": 4000,
             "required": false
         },
         "client_url": {
@@ -24,4 +24,3 @@
         }
     }
 }
-
