@@ -461,7 +461,7 @@ Project extensions are used to define possible values that can be used in topics
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
+    GET https://example.com/bcf/2.1/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
 
 **Example Response**
 
