@@ -132,6 +132,12 @@ The server has a web config file .. "*" means the server allow the resources for
 
 The BCF API relies on the regular Http Status Code definitions. Good sources are [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) or the [HTTP/1.1 Specification](https://tools.ietf.org/html/rfc7231).
 
+Generally, these response codes shall be used in the API:
+* `200 - OK` for `GET` requests that return data or `PUT` requests that update data
+* `201 - Created` for `POST` requests that create data
+
+`POST` and `PUT` requests do usually include the created resource in the response body. Exceptions to this rule are described in the specific section for the resource.
+
 ## 1.6 Error response body format
 
 BCF-API has a specified error response body format [error.json](Schemas_draft-03/error.json).
