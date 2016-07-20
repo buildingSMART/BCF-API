@@ -1,7 +1,7 @@
 # BCF REST API
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
-**Version 1.0** based on BCFv2.
+**Version 2.1** based on BCFv2.1.
 [GitHub repository](https://github.com/BuildingSMART/BCF)
 
 **Table of Contents**
