@@ -188,6 +188,9 @@ Returns a list of all supported BCF API versions of the server.
         "versions": [{
             "version_id": "1.0",
             "detailed_version": "https://github.com/BuildingSMART/BCF-API"
+        }, {
+            "version_id": "2.1",
+            "detailed_version": "https://github.com/BuildingSMART/BCF-API"
         }]
     }
 
