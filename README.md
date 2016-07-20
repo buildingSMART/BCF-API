@@ -1,4 +1,4 @@
-# BCF REST API #
+# BCF REST API
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
 **Version 1.0** based on BCFv2.
@@ -93,7 +93,7 @@ An example of a client implementation in C# can be found here:
 When requesting collections of items, the BCF-API should offer URL parameters according to the OData specification. It can be found at [http://www.odata.org/documentation/](http://www.odata.org/documentation/).
 
 
-## 1.2 Caching ##
+## 1.2 Caching
 
 ETags, or entity-tags, are an important part of HTTP, being a critical part of caching, and also used in "conditional" requests.
 
@@ -124,7 +124,7 @@ Whenever a resource offers the HTTP PUT method to be updated as a whole.
 
 This means that there is no partial update mechanism for objects but every PUT request is sending the whole object representation. PUT schemas may exclude server generated values that cannot be edited, such as creation dates or authors.
 
-## 1.4 Cross origin resource sharing (Cors) ##
+## 1.4 Cross origin resource sharing (Cors)
 
 The server will put the "Access-Control-Allow-Headers" in the response header and specify who can access the servers (JSON) resources. The client can look for this value and proceed with accessing the resources.
 
@@ -139,11 +139,11 @@ The server has a web config file .. "*" means the server allow the resources for
      </httpProtocol>
 
 
-## 1.5 HTTP status codes ##
+## 1.5 HTTP status codes
 
 The BCF API relies on the regular Http Status Code definitions. Good sources are [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) or the [HTTP/1.1 Specification](https://tools.ietf.org/html/rfc7231).
 
-## 1.6 Error response body format ##
+## 1.6 Error response body format
 
 BCF-API has a specified error response body format [error.json](Schemas_draft-03/error.json).
 
@@ -156,9 +156,9 @@ For example, `2016-04-28-16:31.27+2:00` would represent _Thursday, April 28th, 2
 ----------
 
 
-# 2. Topologies #
+# 2. Topologies
 
-## 2.1 Topology 1 - BCF-Server only##
+## 2.1 Topology 1 - BCF-Server only
 
 Model collaboration is managed through a shared file server or a network file sharing service like Dropbox. The BCF-Server handles the authentication and the BCF-Issues.
 
@@ -166,7 +166,7 @@ Model collaboration is managed through a shared file server or a network file sh
 
 
 
-## 2.2 Topology 2 - Colocated BCF-Server and Model Server##
+## 2.2 Topology 2 - Colocated BCF-Server and Model Server
 
 BCF and model server are co-located on the same hosts.
 
@@ -175,9 +175,9 @@ BCF and model server are co-located on the same hosts.
 
 
 ----------
-# 3. Public Services #
+# 3. Public Services
 
-## 3.1 Information Services ##
+## 3.1 Information Services
 
 [version_GET.json](Schemas_draft-03/Public/version_GET.json)
 
@@ -212,9 +212,9 @@ Returns a list of all supported BCF API versions of the server.
 ----------
 
 
-## 3.2 Authentication Services ##
+## 3.2 Authentication Services
 
-### 3.2.1 Obtaining Authentication Information ###
+### 3.2.1 Obtaining Authentication Information
 
 [auth_GET.json](Schemas_draft-03/Authentication/auth_GET.json)
 
@@ -247,7 +247,7 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
     }
 
 
-### 3.2.2 OAuth2 protocol flow - Client Request -###
+### 3.2.2 OAuth2 protocol flow - Client Request -
 
 The Client uses the **"oauth2\_auth_url"** and adds the following parameters to it.
 
@@ -281,7 +281,7 @@ You can use the state parameter to transport custom information.
 
 Open a browser window or redirect the user to this resource. This redirects back to the specified redirect URI with the provided state and the authorization code as a query parameter if the user allows your app to access the account, the value "access_denied" in the error query parameter if the user denies access.
 
-### 3.2.3 OAuth2 protocol flow - Token Request -###
+### 3.2.3 OAuth2 protocol flow - Token Request -
 
 [token_GET.json](Schemas_draft-03/Authentication/token_GET.json)
 
@@ -342,7 +342,7 @@ The access token will be returned as JSON in the response body and is an arbitra
     }
 
 
-### 3.2.4 OAuth2 protocol flow - Refresh Token Request -###
+### 3.2.4 OAuth2 protocol flow - Refresh Token Request -
 
 [token_GET.json](Schemas_draft-03/Authentication/token_GET.json)
 
@@ -356,7 +356,7 @@ POST Request Body:
 The refresh token can only be used once to retrieve a token and a new refresh token.
 
 
-### 3.2.5 OAuth2 protocol flow - Dynamic Client Registration -###
+### 3.2.5 OAuth2 protocol flow - Dynamic Client Registration -
 
 [dynRegClient\_POST.json](Schemas_draft-03/Authentication/dynRegClient_POST.json)
 
@@ -420,17 +420,17 @@ JSON encoded body using the "application/json" content type.
 
 
 
-### 3.2.6 OAuth2 protocol flow - Requesting Resources -###
+### 3.2.6 OAuth2 protocol flow - Requesting Resources -
 
 When requesting other resources the access token must be passed via the Authorization header using the Bearer scheme *(e.g. Authorization: Bearer T9UNRV4sC9vr7ga)*.
 
 ----------
 
-# 4. BCF Services #
+# 4. BCF Services
 
-## 4.1 Project Services ##
+## 4.1 Project Services
 
-### 4.1.1 GET Project Services ###
+### 4.1.1 GET Project Services
 
 **Resource URL**
 
@@ -457,7 +457,7 @@ Retrieve a **collection** of projects where the currently logged on user has acc
         "name": "Example project 2"
     }]
 
-### 4.1.2 GET Single Project Services ###
+### 4.1.2 GET Single Project Services
 
 
 **Resource URL**
@@ -482,7 +482,7 @@ Retrieve a specific project.
     }
 
 
-### 4.1.3 PUT Single Project Services ###
+### 4.1.3 PUT Single Project Services
 
 **Resource URL**
 
@@ -493,7 +493,7 @@ Retrieve a specific project.
 Modify a specific project, description similar to POST.
 
 
-### 4.1.4 GET Project Extension Services ###
+### 4.1.4 GET Project Extension Services
 
 **Resource URL**
 
@@ -693,9 +693,9 @@ Modify a specific projects extensions, description similar to POST.
 
 ---------
 
-## 4.2 Topic Services ##
+## 4.2 Topic Services
 
-### 4.2.1 GET Topic Services ###
+### 4.2.1 GET Topic Services
 
 **Resource URL**
 
@@ -804,7 +804,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
     }
     ]
 
-### 4.2.2 POST Topic Services ###
+### 4.2.2 POST Topic Services
 
 **Resource URL**
 
@@ -860,7 +860,7 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
       }
     }
 
-### 4.2.3 GET Single Topic Services ###
+### 4.2.3 GET Single Topic Services
 
 **Resource URL**
 
@@ -899,7 +899,7 @@ Retrieve a specific topic.
                 }
         }
 
-### 4.2.4 PUT Single Topic Services ###
+### 4.2.4 PUT Single Topic Services
 
 **Resource URL**
 
@@ -935,10 +935,10 @@ Puts a new BIM Snippet binary file to a topic. If this is used, the parent topic
 
 
 
-## 4.3 File Services ##
+## 4.3 File Services
 
 
-### 4.3.1 GET File (Header) Services ###
+### 4.3.1 GET File (Header) Services
 
 **Resource URL**
 
@@ -968,7 +968,7 @@ Retrieve a **collection** of file references as topic header.
         }
     ]
 
-### 4.3.2 PUT File (Header) Services ###
+### 4.3.2 PUT File (Header) Services
 
 **Resource URL**
 
@@ -1010,9 +1010,9 @@ Update a **collection** of file references on the topic header.
         }
     ]
 
-## 4.4 Comment Services ##
+## 4.4 Comment Services
 
-### 4.4.1 GET Comment Services ###
+### 4.4.1 GET Comment Services
 
 **Resource URL**
 
@@ -1082,7 +1082,7 @@ Get comments that are closed and created after December 5 2015. Sort the result 
       }
     ]
 
-### 4.4.2 POST Comment Services ###
+### 4.4.2 POST Comment Services
 
 **Resource URL**
 
@@ -1122,7 +1122,7 @@ JSON encoded body using the "application/json" content type.
       "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }
 
-### 4.4.3 GET Single Comment Services ###
+### 4.4.3 GET Single Comment Services
 
 **Resource URL**
 
@@ -1146,7 +1146,7 @@ Get a single comment.
       "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }
 
-### 4.4.4 PUT Single Comment Services ###
+### 4.4.4 PUT Single Comment Services
 
 **Resource URL**
 
@@ -1156,9 +1156,9 @@ Get a single comment.
 
 Update a single comment, description similar to POST.
 
-## 4.5 Viewpoint Services ##
+## 4.5 Viewpoint Services
 
-### 4.5.1 GET Viewpoint Services ###
+### 4.5.1 GET Viewpoint Services
 
 **Resource URL**
 
@@ -1265,7 +1265,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
             }
     ]
 
-### 4.5.2 POST Viewpoint Services ###
+### 4.5.2 POST Viewpoint Services
 
 **Resource URL**
 
@@ -1516,7 +1516,7 @@ JSON encoded body using the "application/json" content type.
                    }
             }
 
-### 4.5.3 GET Single Viewpoint Services ###
+### 4.5.3 GET Single Viewpoint Services
 
 **Resource URL**
 
@@ -1592,7 +1592,7 @@ Retrieve a specific viewpoint.
 Update a single viewpoint, description similar to POST.
 
 
-### 4.5.5 GET snapshot of a Viewpoint Service ###
+### 4.5.5 GET snapshot of a Viewpoint Service
 
 **Resource URL**
 
@@ -1679,9 +1679,9 @@ HTTP-response status code:
 
 201 created (empty response body)
 
-## 4.6 Component Services ##
+## 4.6 Component Services
 
-### 4.6.1 GET Component Services ###
+### 4.6.1 GET Component Services
 
 **Resource URL**
 
@@ -1716,7 +1716,7 @@ Retrieve a **collection** of all components related to a viewpoint.
      }
     ]
 
-### 4.6.2 PUT Component Services ###
+### 4.6.2 PUT Component Services
 
 **Resource URL**
 
@@ -1771,9 +1771,9 @@ Add or update a **collection** of all components related to a viewpoint.
     ]
 
 
-## 4.7 Related Topics Services ##
+## 4.7 Related Topics Services
 
-### 4.7.1 GET Related Topics Services ###
+### 4.7.1 GET Related Topics Services
 
 **Resource URL**
 
@@ -1798,7 +1798,7 @@ Retrieve a **collection** of all related topics to a topic.
      }
     ]
 
-### 4.7.2 PUT Related Topics Services ###
+### 4.7.2 PUT Related Topics Services
 
 **Resource URL**
 
@@ -1838,9 +1838,9 @@ Add or update a **collection** of all related topics to a topic.
      }
     ]
 
-## 4.8 Document Reference Services ##
+## 4.8 Document Reference Services
 
-### 4.8.1 GET Document Reference Services ###
+### 4.8.1 GET Document Reference Services
 
 **Resource URL**
 
@@ -1869,7 +1869,7 @@ Retrieve a **collection** of all document references to a topic.
      }
     ]
 
-### 4.8.2 PUT Document Reference Services ###
+### 4.8.2 PUT Document Reference Services
 
 **Resource URL**
 
