@@ -419,103 +419,11 @@ Modify a specific project, description similar to POST.
 [extensions_GET.json](Schemas_draft-03/Project/extensions_GET.json)
 
 Retrieve a specific projects extensions.
-
-**Example Request**
-
-    https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
-
-**Example Response**
-
-    {
-        "topic_type": [
-            "Information",
-            "Error"
-        ],
-        "topic_status": [
-            "Open",
-            "Closed",
-            "ReOpened"
-        ],
-        "topic_label": [
-            "Architecture",
-            "Structural",
-            "MEP"
-        ],
-        "snippet_type": [
-            ".ifc",
-            ".csv"
-        ],
-        "priority": [
-            "Low",
-            "Medium",
-            "High"
-        ],
-        "user_id_type": [
-            "Architect@example.com",
-            "BIM-Manager@example.com",
-            "bob_heater@example.com"
-        ]
-    }
-
-### 4.1.5 POST Project Extension Services
-
-**Resource URL**
-
-    POST /bcf/{version}/projects/{project_id}/extensions
-
-[extensions_POST.json](Schemas_draft-03/Project/extensions_POST.json)
-
-Create a specific projects extensions.
-
 Project extensions are used to define possible values that can be used in topics and comments, for example topic labels and priorities. They may change during the course of a project. The most recent extensions state which values are valid at a given moment for newly created topics and comments.
 
-**Parameters**
-
-JSON encoded body using the "application/json" content type.
-
-|parameter|type|description|
-|---------|----|-----------|
-|topic_type|array (string)|enumeration of allowed values|
-|topic_status|array (string)|enumeration of allowed values|
-|topic_label|array (string)|enumeration of allowed values|
-|snippet_type|array (string)|enumeration of allowed values|
-|priority|array (string)|enumeration of allowed values|
-|user_id_type|array (string)|enumeration of allowed values|
-
 **Example Request**
 
     https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
-
-    {
-        "topic_type": [
-            "Information",
-            "Error"
-        ],
-        "topic_status": [
-            "Open",
-            "Closed",
-            "ReOpened"
-        ],
-        "topic_label": [
-            "Architecture",
-            "Structural",
-            "MEP"
-        ],
-        "snippet_type": [
-            ".ifc",
-            ".csv"
-        ],
-        "priority": [
-            "Low",
-            "Medium",
-            "High"
-        ],
-        "user_id_type": [
-            "Architect@example.com",
-            "BIM-Manager@example.com",
-            "bob_heater@example.com"
-        ]
-    }
 
 **Example Response**
 
@@ -549,16 +457,6 @@ JSON encoded body using the "application/json" content type.
             "bob_heater@example.com"
         ]
     }
-
-### 4.1.6 PUT Project Extension Services
-
-**Resource URL**
-
-    PUT /bcf/{version}/projects/{project_id}/extensions
-
-[extensions_PUT.json](Schemas_draft-03/Project/extensions_PUT.json)
-
-Modify a specific projects extensions, description similar to POST.
 
 ---------
 
