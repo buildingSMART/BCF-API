@@ -251,21 +251,11 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 
 The Client uses the **"oauth2\_auth_url"** and adds the following parameters to it.
 
-<table border="1">
-  <tr>
-    <td>response_type</td>
-    <td>"code"</td>
-  </tr>
-  <tr>
-    <td>client_id</td>
-    <td>your client_id</td>
-  </tr>
-  <tr>
-    <td>state</td>
-    <td>unique user defined value</td>
-  </tr>
-</table>
-
+|parameter|value|
+|-------------|------|
+|response_type|`code` as string literal|
+|client_id|your client id|
+|state|unique user defined value|
 
 Example URL:
 
