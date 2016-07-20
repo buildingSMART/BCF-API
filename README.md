@@ -11,7 +11,7 @@
 - [1. Introduction](#1-introduction)
   * [1.1 Paging, Sorting and Filtering](#11-paging-sorting-and-filtering)
   * [1.2 Caching](#12-caching)
-  * [1.3 Updating Resources](#13-updating-resources)
+  * [1.3 Updating Resources via HTTP PUT](#13-updating-resources-via-http-put)
   * [1.4 Cross origin resource sharing (Cors)](#14-cross-origin-resource-sharing-cors)
   * [1.5 HTTP status codes](#15-http-status-codes)
   * [1.6 Error response body format](#16-error-response-body-format)
@@ -118,10 +118,11 @@ ETags are returned in a response to a GET:
   
 The client may send an "If-None-Match" HTTP Header containing the last retrieved etag. If the content has not changed the server returns a status code 304 (not modified) and no response body.
 
-## 1.3 Updating Resources
+## 1.3 Updating Resources via HTTP PUT
 
 Whenever a resource offers the HTTP PUT method to be updated as a whole.
 
+This means that there is no partial update mechanism for objects but every PUT request is sending the whole object representation. PUT schemas may exclude server generated values that cannot be edited, such as creation dates or authors.
 
 ## 1.4 Cross origin resource sharing (Cors) ##
 
