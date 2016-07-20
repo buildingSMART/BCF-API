@@ -187,24 +187,14 @@ BCF and model server are co-located on the same hosts.
 
 	GET /bcf/version 
 
-
 **Parameters**
 
+|Parameter|Type|Description|Required|
+|---------|----|-----------|--------|
+|version|string|Identifier of the version|true|
+|detailed_version|string|Url to specification on GitHub|false|
 
-<table border="1">
-  <tr>
-    <td>version_id</td>
-    <td>string</td>
-    <td>ID of the version</td>
-    <td>mandatory</td>
-  </tr>
-  <tr>
-    <td>detailed_version</td>
-    <td>string</td>
-    <td>URL to version on Github</td>
-    <td>optional</td>
-  </tr>
-</table>
+Returns a list of all supported BCF API versions of the server.
 
 **Example Request**
 
@@ -213,11 +203,15 @@ BCF and model server are co-located on the same hosts.
 **Example Response**
 
 	{
-	"version_id": "1.0", 
-	"detailed_version": "https://github.com/BuildingSMART/BCF-API", 
-	}	
+      "versions": [
+        {
+	      "version_id": "1.0",
+	      "detailed_version": "https://github.com/BuildingSMART/BCF-API"
+        }
+      ]
+	}
 
----------- 
+----------
 
 
 ## 3.2 Authentication Services ##
