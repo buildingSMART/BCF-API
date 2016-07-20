@@ -31,12 +31,11 @@
 - [4. BCF Services](#4-bcf-services)
   * [4.1 Project Services](#41-project-services)
     + [4.1.1 GET Project Services](#411-get-project-services)
-    + [4.1.2 POST Project Services](#412-post-project-services)
-    + [4.1.3 GET Single Project Services](#413-get-single-project-services)
-    + [4.1.4 PUT Single Project Services](#414-put-single-project-services)
-    + [4.1.5 GET Project Extension Services](#415-get-project-extension-services)
-    + [4.1.6 POST Project Extension Services](#416-post-project-extension-services)
-    + [4.1.7 PUT Project Extension Services](#417-put-project-extension-services)
+    + [4.1.2 GET Single Project Services](#412-get-single-project-services)
+    + [4.1.3 PUT Single Project Services](#413-put-single-project-services)
+    + [4.1.4 GET Project Extension Services](#414-get-project-extension-services)
+    + [4.1.5 POST Project Extension Services](#415-post-project-extension-services)
+    + [4.1.6 PUT Project Extension Services](#416-put-project-extension-services)
   * [4.2 Topic Services](#42-topic-services)
     + [4.2.1 GET Topic Services](#421-get-topic-services)
     + [4.2.2 POST Topic Services](#422-post-topic-services)
@@ -457,48 +456,7 @@ Retrieve a **collection** of projects where the currently logged on user has acc
 		"name": "Example project 2"
     }]
 
-
-
-### 4.1.2 POST Project Services ###
-
-**Resource URL**
-
-    POST /bcf/{version}/projects
-
-[project_POST.json](Schemas_draft-03/Project/project_POST.json)
-
-Add a new project.
-
-**Parameters**
-
-JSON encoded body using the "application/json" content type.
-
-<table border="1">
-
-  <tr>
-    <td>name</td>
-    <td>string</td>
-    <td>The project name</td>
-  </tr>
-</table>
-
-
-**Example Request**
-
-    https://example.com/bcf/1.0/projects
-	{
-    "name": "Example project 3"
-	}
-
-**Example Response**
-
-
-    {
-      "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414"
-      "name": "Example project 3",
-    }
-
-### 4.1.3 GET Single Project Services ###
+### 4.1.2 GET Single Project Services ###
 
 
 **Resource URL**
@@ -523,7 +481,7 @@ Retrieve a specific project.
     }
 
 
-### 4.1.4 PUT Single Project Services ###
+### 4.1.3 PUT Single Project Services ###
 
 **Resource URL**
 
@@ -534,7 +492,7 @@ Retrieve a specific project.
 Modify a specific project, description similar to POST.
 
 
-### 4.1.5 GET Project Extension Services ###
+### 4.1.4 GET Project Extension Services ###
 
 **Resource URL**
 
@@ -589,7 +547,7 @@ Retrieve a specific projects extensions.
 		]
 	}
 
-### 4.1.6 POST Project Extension Services
+### 4.1.5 POST Project Extension Services
 
 **Resource URL**
 
@@ -721,7 +679,7 @@ JSON encoded body using the "application/json" content type.
 	}
 
 
-### 4.1.7 PUT Project Extension Services
+### 4.1.6 PUT Project Extension Services
 
 **Resource URL**
 
