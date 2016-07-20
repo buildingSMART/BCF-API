@@ -390,7 +390,7 @@ Retrieve a **collection** of projects where the currently logged on user has acc
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects
+    GET https://example.com/bcf/2.1/projects
 
 **Example Response**
 
@@ -414,7 +414,7 @@ Retrieve a specific project.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
+    GET https://example.com/bcf/2.1/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
 
 **Example Response**
 
@@ -431,7 +431,22 @@ Retrieve a specific project.
 
 [project_PUT.json](Schemas_draft-03/Project/project_PUT.json)
 
-Modify a specific project, description similar to POST.
+Modify a specific project.
+
+**Example Request**
+
+    PUT https://example.com/bcf/2.1/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
+    Body:
+    {
+        "name": "Example project 3 - Second Section"
+    }
+
+**Example Response**
+
+    {
+        "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
+        "name": "Example project 3 - Second Section"
+    }
 
 ### 4.1.4 GET Project Extension Services
 
