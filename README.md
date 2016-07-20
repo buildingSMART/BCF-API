@@ -183,7 +183,7 @@ BCF and model server are co-located on the same hosts.
 
 [version_GET.json](Schemas_draft-03/Public/version_GET.json)
 
-**Recource URL (public resource)**
+**Resource URL (public resource)**
 
 	GET /bcf/version 
 
@@ -228,7 +228,7 @@ BCF and model server are co-located on the same hosts.
 
 Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/draft-ietf-oauth-v2-22).
 
-**Recource URL (public resource)**
+**Resource URL (public resource)**
 
     GET /bcf/auth	
 
@@ -381,7 +381,7 @@ The refresh token can only be used once to retrieve a token and a new refresh to
 
  The following part describes the optional dynamic registration process of a client. BCF-Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
 
-**Recource URL**
+**Resource URL**
 
     POST <oauth2_dynamic_client_reg_url> (obtained from auth_GET)
 
@@ -449,7 +449,7 @@ When requesting other resources the access token must be passed via the Authoriz
 
 ### 4.1.1 GET Project Services ###
 
-**Recource URL**
+**Resource URL**
 
     GET /bcf/{version}/projects
 
@@ -478,7 +478,7 @@ Retrieve a **collection** of projects where the currently logged on user has acc
 
 ### 4.1.2 POST Project Services ###
 
-**Recource URL**
+**Resource URL**
 
     POST /bcf/{version}/projects
 
@@ -518,7 +518,7 @@ JSON encoded body using the "application/json" content type.
 ### 4.1.3 GET Single Project Services ###
 
 
-**Recource URL**
+**Resource URL**
 
     GET /bcf/{version}/projects/{project_id}
 
@@ -542,7 +542,7 @@ Retrieve a specific project.
 
 ### 4.1.4 PUT Single Project Services ###
 
-**Recource URL**
+**Resource URL**
 
     PUT /bcf/{version}/projects/{project_id}
 
@@ -555,7 +555,7 @@ Modify a specific project, description similar to POST.
 
 ### 4.1.5 GET Project Extension Services ###
 
-**Recource URL**
+**Resource URL**
 
 	GET /bcf/{version}/projects/{project_id}/extensions
 
@@ -610,7 +610,7 @@ Retrieve a specific projects extensions.
 
 ### 4.1.6 POST Project Extension Services
 
-**Recource URL**
+**Resource URL**
 
 	POST /bcf/{version}/projects/{project_id}/extensions
 
@@ -742,7 +742,7 @@ JSON encoded body using the "application/json" content type.
 
 ### 4.1.7 PUT Project Extension Services
 
-**Recource URL**
+**Resource URL**
 
 	PUT /bcf/{version}/projects/{project_id}/extensions
 
@@ -759,7 +759,7 @@ Modify a specific projects extensions, description similar to POST.
 
 ### 4.2.1 GET Topic Services ###
 
-**Recource URL**
+**Resource URL**
  
 	GET /bcf/{version}/projects/{project_id}/topics
 
@@ -798,7 +798,7 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 
 ### 4.2.2 POST Topic Services ###
 
-**Recource URL**
+**Resource URL**
 
     POST /bcf/{version}/projects/{project_id}/topics
 
@@ -915,7 +915,7 @@ JSON encoded body using the "application/json" content type.
 
 ### 4.2.3 GET Single Topic Services ###
 
-**Recource URL**
+**Resource URL**
 
     GET /bcf/{version}/projects/{guid}/topics/{guid}
 
@@ -954,7 +954,7 @@ Retrieve a specific topic.
  
 ### 4.2.4 PUT Single Topic Services ###
 
-**Recource URL**
+**Resource URL**
 
     PUT /bcf/{version}/projects/{project_id}/topics/{guid}
 
@@ -995,7 +995,7 @@ Puts a new BIM Snippet binary file to a topic. If this is used, the parent topic
 
 ### 4.3.1 GET File (Header) Services ###
 
-**Recource URL**
+**Resource URL**
 
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/files
 
@@ -1025,7 +1025,7 @@ Retrieve a **collection** of file references as topic header.
 
 ### 4.3.2 PUT File (Header) Services ###
 
-**Recource URL**
+**Resource URL**
 
 	PUT /bcf/{version}/projects/{project_id}/topics/{guid}/files
 
@@ -1071,7 +1071,7 @@ Update a **collection** of file references on the topic header.
 
 ### 4.4.1 GET Comment Services ###
 
-**Recource URL**
+**Resource URL**
 
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/comments
 
@@ -1107,7 +1107,7 @@ Retrieve a **collection** of all comments related to a topic.
 
 ### 4.4.2 POST Comment Services ###
 
-**Recource URL**
+**Resource URL**
 
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/comments
 
@@ -1177,7 +1177,7 @@ JSON encoded body using the "application/json" content type.
 
 ### 4.4.3 GET Single Comment Services ###
 
-**Recource URL**
+**Resource URL**
 
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
 
@@ -1203,7 +1203,7 @@ Get a single comment.
 
 ### 4.4.4 PUT Single Comment Services ###
 
-**Recource URL**
+**Resource URL**
 
 	PUT /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
 
@@ -1217,7 +1217,7 @@ Update a single comment, description similar to POST.
 
 ### 4.5.1 GET Viewpoint Services ###
 
-**Recource URL**
+**Resource URL**
 
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints
 
@@ -1324,7 +1324,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
 
 ### 4.5.2 POST Viewpoint Services ###
 
-**Recource URL**
+**Resource URL**
 
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints
 
@@ -1575,7 +1575,7 @@ JSON encoded body using the "application/json" content type.
 
 ### 4.5.3 GET Single Viewpoint Services ###
 
-**Recource URL**
+**Resource URL**
 
     GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}
 
@@ -1640,7 +1640,7 @@ Retrieve a specific viewpoint.
 
 ### 4.5.4 PUT Single Viewpoint Services
 
-**Recource URL**
+**Resource URL**
 
     PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}
 
@@ -1674,7 +1674,7 @@ HTTP-response header:
 
 ### 4.5.6 PUT snapshot of a Viewpoint Service
 
-**Recource URL**
+**Resource URL**
 
     PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
 
@@ -1742,7 +1742,7 @@ HTTP-response status code:
 
 ### 4.6.1 GET Component Services ###
 
-**Recource URL**
+**Resource URL**
 
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
@@ -1777,7 +1777,7 @@ Retrieve a **collection** of all components related to a viewpoint.
 
 ### 4.6.2 PUT Component Services ###
 
-**Recource URL**
+**Resource URL**
 
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
@@ -1836,7 +1836,7 @@ Add or update a **collection** of all components related to a viewpoint.
 
 ### 4.7.1 GET Related Topics Services ###
 
-**Recource URL**
+**Resource URL**
 
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
 
@@ -1861,7 +1861,7 @@ Retrieve a **collection** of all related topics to a topic.
 
 ### 4.7.2 PUT Related Topics Services ###
 
-**Recource URL**
+**Resource URL**
 
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
 
@@ -1905,7 +1905,7 @@ Add or update a **collection** of all related topics to a topic.
 
 ### 4.8.1 GET Document Reference Services ###
 
-**Recource URL**
+**Resource URL**
 
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
 
@@ -1934,7 +1934,7 @@ Retrieve a **collection** of all document references to a topic.
 
 ### 4.8.2 PUT Document Reference Services ###
 
-**Recource URL**
+**Resource URL**
 
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
 
@@ -1972,7 +1972,7 @@ The PUT object may either contain the property "guid" to reference a document st
 
 [document_GET.json](Schemas_draft-03/Collaboration/Document/document_GET.json)
 
-**Recource URL**
+**Resource URL**
 
 	GET /bcf/{version}/projects/{project_id}/documents
 
@@ -1998,7 +1998,7 @@ Retrieve a **collection** of all documents uploaded to a project.
 ### 4.9.2 POST Document Services
 
 
-**Recource URL**
+**Resource URL**
 
 	POST /bcf/{version}/projects/{project_id}/documents
 
@@ -2017,7 +2017,7 @@ Upload a document (binary file) to a project. The following HTTP headers are use
 
 ### 4.9.3 GET Document Services
 
-**Recource URL**
+**Resource URL**
 
 	GET /bcf/{version}/projects/{project_id}/documents/{guid}
 
