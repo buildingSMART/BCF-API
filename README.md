@@ -517,38 +517,14 @@ Project extensions are used to define possible values that can be used in topics
 
 JSON encoded body using the "application/json" content type.
 
-<table border="1">
-  <tr>
-    <td>topic_type</td>
-    <td>string array</td>
-    <td>Enumeration of allowed values</td>
-  </tr>
-  <tr>
-    <td>topic_status</td>
-    <td>string array</td>
-    <td>Enumeration of allowed values</td>
-  </tr>
-  <tr>
-    <td>topic_label</td>
-    <td>string array</td>
-    <td>Enumeration of allowed values</td>
-  </tr>
-  <tr>
-    <td>snippet_type</td>
-    <td>string array</td>
-    <td>Enumeration of allowed values</td>
-  </tr>
-  <tr>
-    <td>priority</td>
-    <td>string array</td>
-    <td>Enumeration of allowed values</td>
-  </tr>
-  <tr>
-    <td>user_id_type</td>
-    <td>string array</td>
-    <td>Enumeration of allowed values</td>
-  </tr>
-</table>
+|parameter|type|description|
+|---------|----|-----------|
+|topic_type|array (string)|enumeration of allowed values|
+|topic_status|array (string)|enumeration of allowed values|
+|topic_label|array (string)|enumeration of allowed values|
+|snippet_type|array (string)|enumeration of allowed values|
+|priority|array (string)|enumeration of allowed values|
+|user_id_type|array (string)|enumeration of allowed values|
 
 **Example Request**
 
