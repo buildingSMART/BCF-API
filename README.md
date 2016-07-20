@@ -53,7 +53,7 @@ The client may send an "If-None-Match" HTTP Header containing the last retrieved
 
 ## 1.3 Updating Resources
 
-Whenever a resource offers the HTTP PUT method to be updated as a whole, the resource may also partially updated with a HTTP PATCH query that only transports the changed properties of the entity.
+Whenever a resource offers the HTTP PUT method to be updated as a whole.
 
 
 ## 1.4 Cross origin resource sharing (Cors) ##
@@ -463,8 +463,6 @@ Retrieve a specific project.
 
 [project_PUT.json](Schemas_draft-03/Project/project_PUT.json)
 
-[project_PATCH.json](Schemas_draft-03/Project/project_PATCH.json)
-
 Modify a specific project, description similar to POST.
 
 
@@ -662,8 +660,6 @@ JSON encoded body using the "application/json" content type.
 	PUT /bcf/{version}/projects/{project_id}/extensions
 
 [extensions_PUT.json](Schemas_draft-03/Project/extensions_PUT.json)
-
-[extensions_PATCH.json](Schemas_draft-03/Project/extensions_PATCH.json)
 
 Modify a specific projects extensions, description similar to POST.
 
@@ -884,8 +880,6 @@ Retrieve a specific topic.
 
 [topic_PUT.json](Schemas_draft-03/Collaboration/Topic/topic_PUT.json)
 
-[topic_PATCH.json](Schemas_draft-03/Collaboration/Topic/topic_PATCH.json)
-
 Modify a specific topic, description similar to POST.
 
 ### 4.2.6 GET Topic BIM Snippet
@@ -954,8 +948,6 @@ Retrieve a **collection** of file references as topic header.
 	PUT /bcf/{version}/projects/{project_id}/topics/{guid}/files
 
 [file_PUT.json](Schemas_draft-03/Collaboration/File/file_PUT.json)
-
-[file_PATCH.json](Schemas_draft-03/Collaboration/File/file_PATCH.json)
 
 Update a **collection** of file references on the topic header.
 
@@ -1169,8 +1161,6 @@ Get a single comment.
 	PUT /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
 
 [comment_PUT.json](Schemas_draft-03/Collaboration/Comment/comment_PUT.json)
-
-[comment_PATCH.json](Schemas_draft-03/Collaboration/Comment/comment_PATCH.json)
 
 Update a single comment, description similar to POST.
 
@@ -1607,8 +1597,6 @@ Retrieve a specific viewpoint.
 
 [viewpoint_PUT.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_PUT.json)
 
-[viewpoint_PATCH.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_PATCH.json)
-
 Update a single viewpoint, description similar to POST.
 
 
@@ -1744,8 +1732,6 @@ Retrieve a **collection** of all components related to a viewpoint.
 
 [component_PUT.json](Schemas_draft-03/Collaboration/Component/component_PUT.json)
 
-[component_PATCH.json](Schemas_draft-03/Collaboration/Component/component_PATCH.json)
-
 Add or update a **collection** of all components related to a viewpoint.
 
 **Example Request**
@@ -1828,8 +1814,6 @@ Retrieve a **collection** of all related topics to a topic.
 
 [related_topic_PUT.json](Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PUT.json)
 
-[related_topic_PATCH.json](Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PATCH.json)
-
 Add or update a **collection** of all related topics to a topic.
 
 **Example Request**
@@ -1900,8 +1884,6 @@ Retrieve a **collection** of all document references to a topic.
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
 
 [document_reference_PUT.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
-
-[document_reference_PATCH.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PATCH.json)
 
 Add or update document references to a topic.
 The PUT object may either contain the property "guid" to reference a document stored on the BCF server (see section 4.9) OR the property "referenced_document" to point to an external resource.
