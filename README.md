@@ -126,7 +126,7 @@ This means that there is no partial update mechanism for objects but every PUT r
 
 ## 1.4 Cross origin resource sharing (Cors) ##
 
-The server will put the "Access-Control-Allow-Headers" in the response header and specify who can access the servers (JSON) resources. The client can look for this value and proceed with accessing the resources. 
+The server will put the "Access-Control-Allow-Headers" in the response header and specify who can access the servers (JSON) resources. The client can look for this value and proceed with accessing the resources.
 
 The server has a web config file .. "*" means the server allow the resources for all domains.
 
@@ -160,7 +160,7 @@ For example, `2016-04-28-16:31.27+2:00` would represent _Thursday, April 28th, 2
 
 ## 2.1 Topology 1 - BCF-Server only##
 
-Model collaboration is managed through a shared file server or a network file sharing service like Dropbox. The BCF-Server handles the authentication and the BCF-Issues. 
+Model collaboration is managed through a shared file server or a network file sharing service like Dropbox. The BCF-Server handles the authentication and the BCF-Issues.
 
 ![Topology1](Images/Topology1.png)
 
@@ -183,7 +183,7 @@ BCF and model server are co-located on the same hosts.
 
 **Resource URL (public resource)**
 
-    GET /bcf/version 
+    GET /bcf/version
 
 **Parameters**
 
@@ -277,7 +277,7 @@ Example redirected URL:
     https://YourWebsite.com/retrieveCode?code=ABC1234567890XYZ&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
 
 Tip:
-You can use the state parameter to transport custom information. 
+You can use the state parameter to transport custom information.
 
 Open a browser window or redirect the user to this resource. This redirects back to the specified redirect URI with the provided state and the authorization code as a query parameter if the user allows your app to access the account, the value "access_denied" in the error query parameter if the user denies access.
 
@@ -320,13 +320,13 @@ The Client uses the **"oauth2\_token_url"** to request a token. Example:
 
 The POST request can be done via HTTP Basic Authorization with your applications "ClientID" as the username and your "ClientSecret" as the password.
 
-**Post Request Body:** 
+**Post Request Body:**
 
     grant_type=authorization_code&code=<YourAccessCode>
 
 Alternatively all parameters may be passed in the token request body
 
-**Post Request Body:** 
+**Post Request Body:**
 
     grant_type=authorization_code&code=<YourAccessCode>&client_id=<ClientID>&client_secret=<ClientSecret>
 
@@ -353,14 +353,14 @@ POST Request Body:
 
     grant_type=refresh_token&refresh_token=<YourRefreshToken>
 
-The refresh token can only be used once to retrieve a token and a new refresh token. 
+The refresh token can only be used once to retrieve a token and a new refresh token.
 
 
 ### 3.2.5 OAuth2 protocol flow - Dynamic Client Registration -###
 
 [dynRegClient\_POST.json](Schemas_draft-03/Authentication/dynRegClient_POST.json)
 
-[dynRegClient\_GET.json](Schemas_draft-03/Authentication/dynRegClient_GET.json) 
+[dynRegClient\_GET.json](Schemas_draft-03/Authentication/dynRegClient_GET.json)
 
  The following part describes the optional dynamic registration process of a client. BCF-Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
 
@@ -771,7 +771,7 @@ Get topics that are open, assigned to Architect@example.com and created after De
 
     https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and status eq 'Open' and creation_date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=modified_date desc
 
-Odata does not support list operators. To achieve list query, use the 'or' operator. 
+Odata does not support list operators. To achieve list query, use the 'or' operator.
 Get topics that have at least one of the labels 'Architecture', 'Structural' or 'Heating'
 
      https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=contains(labels, 'Architecture') or contains(labels, 'Structural') or contains(labels, 'Heating')
@@ -856,7 +856,7 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
         "snippet_type": "clash",
         "is_external": true,
         "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-        "reference_schema": "https://example.com/bcf/1.0/clash.xsd"    
+        "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
       }
     }
 
@@ -895,7 +895,7 @@ Retrieve a specific topic.
                 "snippet_type": "clash",
                 "is_external": true,
                 "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-                "reference_schema": "https://example.com/bcf/1.0/clash.xsd"    
+                "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
                 }
         }
 
@@ -1175,43 +1175,43 @@ Retrieve a **collection** of all viewpoints related to a topic.
 **Example Response**
 
     [
-        {  
+        {
            "guid":"b24a82e9-f67b-43b8-bda0-4946abf39624",
            "perspective_camera":{
-             "camera_view_point":{  
+             "camera_view_point":{
                 "x":0.0,
                 "y":0.0,
-                 "z":0.0},  
-             "camera_direction":{  
+                 "z":0.0},
+             "camera_direction":{
                 "x":1.0,
                 "y":1.0,
                  "z":2.0},
-              "camera_up_vector":{  
+              "camera_up_vector":{
                 "x":0.0,
                 "y":0.0,
                   "z":1.0},
               "field_of_view":90.0},
-           "lines":{  
-              "line":[  
-                     {  
-                    "start_point":{  
+           "lines":{
+              "line":[
+                     {
+                    "start_point":{
                            "x":2.0,
                            "y":1.0,
                            "z":1.0},
-                       "end_point":{  
+                       "end_point":{
                            "x":0.0,
                            "y":1.0,
                            "z":0.7}
                      }
                      ]},
-           "clipping_planes":{  
-              "clipping_plane":[  
-                     {  
-                    "location":{  
+           "clipping_planes":{
+              "clipping_plane":[
+                     {
+                    "location":{
                            "x":0.7,
                            "y":0.3,
                            "z":-0.2},
-                    "direction":{  
+                    "direction":{
                            "x":1.0,
                            "y":0.4,
                            "z":0.1}
@@ -1219,43 +1219,43 @@ Retrieve a **collection** of all viewpoints related to a topic.
                       ]
                    }
             },
-        {  
+        {
            "guid":"a11a82e7-e66c-34b4-ada1-5846abf39133",
            "perspective_camera":{
-             "camera_view_point":{  
+             "camera_view_point":{
                 "x":0.0,
                 "y":0.0,
-                 "z":0.0},  
-             "camera_direction":{  
+                 "z":0.0},
+             "camera_direction":{
                 "x":1.0,
                 "y":1.0,
                  "z":2.0},
-              "camera_up_vector":{  
+              "camera_up_vector":{
                 "x":0.0,
                 "y":0.0,
                   "z":1.0},
               "field_of_view":90.0},
-           "lines":{  
-              "line":[  
-                     {  
-                    "start_point":{  
+           "lines":{
+              "line":[
+                     {
+                    "start_point":{
                            "x":1.0,
                            "y":1.0,
                            "z":1.0},
-                       "end_point":{  
+                       "end_point":{
                            "x":0.0,
                            "y":0.0,
                            "z":0.0}
                      }
                      ]},
-           "clipping_planes":{  
-              "clipping_plane":[  
-                     {  
-                    "location":{  
+           "clipping_planes":{
+              "clipping_plane":[
+                     {
+                    "location":{
                            "x":0.5,
                            "y":0.5,
                            "z":0.5},
-                    "direction":{  
+                    "direction":{
                            "x":1.0,
                            "y":0.0,
                            "z":0.0}
@@ -1425,42 +1425,42 @@ JSON encoded body using the "application/json" content type.
 **Example Request**
 
     https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
-    {  
+    {
            "perspective_camera":{
-             "camera_view_point":{  
+             "camera_view_point":{
                 "x":0.0,
                 "y":0.0,
-                 "z":0.0},  
-             "camera_direction":{  
+                 "z":0.0},
+             "camera_direction":{
                 "x":1.0,
                 "y":1.0,
                  "z":2.0},
-              "camera_up_vector":{  
+              "camera_up_vector":{
                 "x":0.0,
                 "y":0.0,
                   "z":1.0},
               "field_of_view":90.0},
-           "lines":{  
-              "line":[  
-                     {  
-                    "start_point":{  
+           "lines":{
+              "line":[
+                     {
+                    "start_point":{
                            "x":1.0,
                            "y":1.0,
                            "z":1.0},
-                       "end_point":{  
+                       "end_point":{
                            "x":0.0,
                            "y":0.0,
                            "z":0.0}
                      }
                      ]},
-           "clipping_planes":{  
-              "clipping_plane":[  
-                     {  
-                    "location":{  
+           "clipping_planes":{
+              "clipping_plane":[
+                     {
+                    "location":{
                            "x":0.5,
                            "y":0.5,
                            "z":0.5},
-                    "direction":{  
+                    "direction":{
                            "x":1.0,
                            "y":0.0,
                            "z":0.0}
@@ -1471,43 +1471,43 @@ JSON encoded body using the "application/json" content type.
 
 **Example Response**
 
-    {  
+    {
            "guid":"a11a82e7-e66c-34b4-ada1-5846abf39133",
            "perspective_camera":{
-             "camera_view_point":{  
+             "camera_view_point":{
                 "x":0.0,
                 "y":0.0,
-                 "z":0.0},  
-             "camera_direction":{  
+                 "z":0.0},
+             "camera_direction":{
                 "x":1.0,
                 "y":1.0,
                  "z":2.0},
-              "camera_up_vector":{  
+              "camera_up_vector":{
                 "x":0.0,
                 "y":0.0,
                   "z":1.0},
               "field_of_view":90.0},
-           "lines":{  
-              "line":[  
-                     {  
-                    "start_point":{  
+           "lines":{
+              "line":[
+                     {
+                    "start_point":{
                            "x":1.0,
                            "y":1.0,
                            "z":1.0},
-                       "end_point":{  
+                       "end_point":{
                            "x":0.0,
                            "y":0.0,
                            "z":0.0}
                      }
                      ]},
-           "clipping_planes":{  
-              "clipping_plane":[  
-                     {  
-                    "location":{  
+           "clipping_planes":{
+              "clipping_plane":[
+                     {
+                    "location":{
                            "x":0.5,
                            "y":0.5,
                            "z":0.5},
-                    "direction":{  
+                    "direction":{
                            "x":1.0,
                            "y":0.0,
                            "z":0.0}
@@ -1535,43 +1535,43 @@ Retrieve a specific viewpoint.
 
 **Example Response**
 
-    {  
+    {
            "guid":"a11a82e7-e66c-34b4-ada1-5846abf39133",
            "perspective_camera":{
-             "camera_view_point":{  
+             "camera_view_point":{
                 "x":0.0,
                 "y":0.0,
-                 "z":0.0},  
-             "camera_direction":{  
+                 "z":0.0},
+             "camera_direction":{
                 "x":1.0,
                 "y":1.0,
                  "z":2.0},
-              "camera_up_vector":{  
+              "camera_up_vector":{
                 "x":0.0,
                 "y":0.0,
                   "z":1.0},
               "field_of_view":90.0},
-           "lines":{  
-              "line":[  
-                     {  
-                    "start_point":{  
+           "lines":{
+              "line":[
+                     {
+                    "start_point":{
                            "x":1.0,
                            "y":1.0,
                            "z":1.0},
-                       "end_point":{  
+                       "end_point":{
                            "x":0.0,
                            "y":0.0,
                            "z":0.0}
                      }
                      ]},
-           "clipping_planes":{  
-              "clipping_plane":[  
-                     {  
-                    "location":{  
+           "clipping_planes":{
+              "clipping_plane":[
+                     {
+                    "location":{
                            "x":0.5,
                            "y":0.5,
                            "z":0.5},
-                    "direction":{  
+                    "direction":{
                            "x":1.0,
                            "y":0.0,
                            "z":0.0}
