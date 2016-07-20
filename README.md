@@ -635,48 +635,17 @@ Modify a specific projects extensions, description similar to POST.
 Retrieve a **collection** of topics related to a project (default sort order is creation_date).
 
 **Odata filter parameters**
-<table>
-  <tr>
-    <td>creation_author</td>
-    <td>string</td>
-    <td>UserID of the creation author (value from extension.xsd)</td>
-  </tr>
-  <tr>
-    <td>modified_author</td>
-    <td>string</td>
-    <td>UserID of the modified author (value from extension.xsd)</td>
-  </tr>
-  <tr>
-    <td>assigned_to</td>
-    <td>string</td>
-    <td>UserID of the assigned author (value from extension.xsd)</td>
-  </tr>
-  <tr>
-    <td>topic_status</td>
-    <td>string</td>
-    <td>The status of a topic (value from extension.xsd)</td>
-  </tr>
-  <tr>
-    <td>topic_type</td>
-    <td>string</td>
-    <td>The type of a topic (value from extension.xsd)</td>
-  </tr>
-  <tr>
-    <td>creation_date</td>
-    <td>datetime</td>
-    <td>The creation date of a topic</td>
-  </tr>
-  <tr>
-    <td>modified_date</td>
-    <td>datetime</td>
-    <td>The modification date of a topic</td>
-  </tr>
-  <tr>
-    <td>labels</td>
-    <td>collection of strings</td>
-    <td>The labels of a topic (value from extension.xsd)</td>
-  </tr>
-</table>
+
+|parameter|type|description|
+|---------|----|------------|
+|creation_author|string|UserID of the creation author (value from extension.xsd)|
+|modified_author|string|UserID of the modified author (value from extension.xsd)|
+|assigned_to|string|UserID of the assigned author (value from extension.xsd)|
+|topic_status|string|The status of a topic (value from extension.xsd)|
+|topic_type|string|The type of a topic (value from extension.xsd)|
+|creation_date|datetime|The creation date of a topic|
+|modified_date|datetime|The modification date of a topic|
+|labels|array (string)|The labels of a topic (value from extension.xsd)|
 
 **Odata sort parameters**
 <table>
