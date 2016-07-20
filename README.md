@@ -180,7 +180,7 @@ Returns a list of all supported BCF API versions of the server.
 
 **Example Request**
 
-    https://example.com/bcf/version
+    GET https://example.com/bcf/version
 
 **Example Response**
 
@@ -216,7 +216,7 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 
 **Example Request**
 
-    https://example.com/bcf/auth
+    GET https://example.com/bcf/auth
 
 **Example Response**
 
@@ -239,16 +239,16 @@ The Client uses the **"oauth2\_auth_url"** and adds the following parameters to 
 
 Example URL:
 
-    https://example.com/bcf/oauth2/auth?response_type=code&client_id=<YourClientID>&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
+    GET https://example.com/bcf/oauth2/auth?response_type=code&client_id=<your_client_id>&state=<user_defined_string>
 
 Example redirected URL:
 
-    https://YourWebsite.com/retrieveCode?code=ABC1234567890XYZ&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
+    https://YourWebsite.com/retrieveCode?code=<server_generated_code>&state=<user_defined_string>
 
 Tip:
 You can use the state parameter to transport custom information.
 
-Open a browser window or redirect the user to this resource. This redirects back to the specified redirect URI with the provided state and the authorization code as a query parameter if the user allows your app to access the account, the value "access_denied" in the error query parameter if the user denies access.
+**Open a browser window or redirect the user to this resource.** This redirects back to the specified redirect URI with the provided state and the authorization code as a query parameter if the user allows your app to access the account, the value "access_denied" in the error query parameter if the user denies access.
 
 ### 3.2.3 OAuth2 protocol flow - Token Request -
 
@@ -268,19 +268,21 @@ The Client uses the **"oauth2\_token_url"** to request a token. Example:
 |expires_in|integer|The lifetime of the access token in seconds|
 |refresh_token|string|The issued OAuth2 refresh token, one-time-usable only|
 
-The POST request can be done via HTTP Basic Authorization with your applications "ClientID" as the username and your "ClientSecret" as the password.
+The POST request can be done via HTTP Basic Authorization with your applications `client_id` as the username and your `client_secret` as the password.
 
-**Post Request Body:**
+**Example Request**
 
-    grant_type=authorization_code&code=<YourAccessCode>
+    POST https://example.com/bcf/oauth2/token?grant_type=authorization_code&code=<your_access_code>
+    Headers:
+    Authorization: Basic <client_id:client_secret>
 
-Alternatively all parameters may be passed in the token request body
+Alternatively all parameters may be passed in the token request body instead of using Url parameters.
 
-**Post Request Body:**
+    POST https://example.com/bcf/oauth2/token
+    Body:
+    grant_type=authorization_code&code=<your_access_code>&client_id=<client_id>&client_secret=<client_secret>
 
-    grant_type=authorization_code&code=<YourAccessCode>&client_id=<ClientID>&client_secret=<ClientSecret>
-
-The access token will be returned as JSON in the response body and is an arbitrary string, guaranteed to fit in a varchar(255) field.
+The access token will be returned as JSON in the response body and is an arbitrary string, guaranteed to not exceed 255 characters length.
 
 **Example Response**
 
@@ -295,11 +297,30 @@ The access token will be returned as JSON in the response body and is an arbitra
 
 [token_GET.json](Schemas_draft-03/Authentication/token_GET.json)
 
-The process to retrieve a refresh token is exactly the same as retrieving a token except the POST Request Body.
+The process to retrieve a refresh token is exactly the same as retrieving a token via the code workflow except the `refresh_token` is sent instead of the `code` parameter and the `refresh_token` grant type is used.
 
-POST Request Body:
+**Example Request**
 
-    grant_type=refresh_token&refresh_token=<YourRefreshToken>
+    POST https://example.com/bcf/oauth2/token?grant_type=refresh_token&refresh_token=<your_refresh_token>
+    Headers:
+    Authorization: Basic <client_id:client_secret>
+
+Alternatively all parameters may be passed in the token request body instead of using Url parameters.
+
+    POST https://example.com/bcf/oauth2/token
+    Body:
+    grant_type=refresh_token&refresh_token=<your_refresh_token>&client_id=<client_id>&client_secret=<client_secret>
+
+The access token will be returned as JSON in the response body and is an arbitrary string, guaranteed to not exceed 255 characters length.
+
+**Example Response**
+
+    {
+        "access_token": "Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh",
+        "token_type": "bearer",
+        "expires_in": "3600",
+        "refresh_token": "MTRiMjkzZTYtOTgwNC0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh"
+    }
 
 The refresh token can only be used once to retrieve a token and a new refresh token.
 
@@ -309,11 +330,9 @@ The refresh token can only be used once to retrieve a token and a new refresh to
 
 [dynRegClient\_GET.json](Schemas_draft-03/Authentication/dynRegClient_GET.json)
 
- The following part describes the optional dynamic registration process of a client. BCF-Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
+The following part describes the optional dynamic registration process of a client. BCF-Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
 
-**Resource URL**
-
-    POST <oauth2_dynamic_client_reg_url> (obtained from auth_GET)
+The resource Url for this service is server specific and is returned as `oauth2_dynamic_client_reg_url` in the `GET /bcf/auth` resource.
 
 Register a new client :
 
@@ -330,7 +349,8 @@ JSON encoded body using the "application/json" content type.
 
 **Example Request**
 
-    https://example.com/bcf/oauth2/reg
+    POST https://example.com/bcf/oauth2/reg
+    Body:
     {
         "client_name": "Example Application",
         "client_description": "Example CAD desktop application",
@@ -347,7 +367,7 @@ JSON encoded body using the "application/json" content type.
 
 ### 3.2.6 OAuth2 protocol flow - Requesting Resources -
 
-When requesting other resources the access token must be passed via the Authorization header using the Bearer scheme *(e.g. Authorization: Bearer T9UNRV4sC9vr7ga)*.
+When requesting other resources the access token must be passed via the `Authorization` header using the Bearer scheme (e.g. `Authorization: Bearer Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh`).
 
 ----------
 
