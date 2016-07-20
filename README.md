@@ -132,9 +132,9 @@ The server has a web config file .. "*" means the server allow the resources for
 
     <httpProtocol>
       <customHeaders>
-    	<add name="Access-Control-Allow-Headers" value="Content-Type, Accept, X-Requested-With,  Authorization" />
-    	<add name="Access-Control-Allow-Methods" value="GET, POST, PUT, DELETE, OPTIONS" />
-    	<add name="Access-Control-Allow-Origin" value="*" />
+        <add name="Access-Control-Allow-Headers" value="Content-Type, Accept, X-Requested-With,  Authorization" />
+        <add name="Access-Control-Allow-Methods" value="GET, POST, PUT, DELETE, OPTIONS" />
+        <add name="Access-Control-Allow-Origin" value="*" />
       </customHeaders>
      </httpProtocol>
 
@@ -183,7 +183,7 @@ BCF and model server are co-located on the same hosts.
 
 **Resource URL (public resource)**
 
-	GET /bcf/version 
+    GET /bcf/version 
 
 **Parameters**
 
@@ -196,18 +196,18 @@ Returns a list of all supported BCF API versions of the server.
 
 **Example Request**
 
-	https://example.com/bcf/version
+    https://example.com/bcf/version
 
 **Example Response**
 
-	{
+    {
       "versions": [
         {
-	      "version_id": "1.0",
-	      "detailed_version": "https://github.com/BuildingSMART/BCF-API"
+          "version_id": "1.0",
+          "detailed_version": "https://github.com/BuildingSMART/BCF-API"
         }
       ]
-	}
+    }
 
 ----------
 
@@ -269,12 +269,12 @@ The Client uses the **"oauth2\_auth_url"** and adds the following parameters to 
 
 Example URL:
 
-	https://example.com/bcf/oauth2/auth?response_type=code&client_id=<YourClientID>&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
+    https://example.com/bcf/oauth2/auth?response_type=code&client_id=<YourClientID>&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
 
 
 Example redirected URL:
 
-	https://YourWebsite.com/retrieveCode?code=ABC1234567890XYZ&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
+    https://YourWebsite.com/retrieveCode?code=ABC1234567890XYZ&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
 
 Tip:
 You can use the state parameter to transport custom information. 
@@ -287,59 +287,59 @@ Open a browser window or redirect the user to this resource. This redirects back
 
 The Client uses the **"oauth2\_token_url"** to request a token. Example:
 
-	POST https://example.com/bcf/oauth2/token
-	Content type: application/x-www-form-urlencoded.
+    POST https://example.com/bcf/oauth2/token
+    Content type: application/x-www-form-urlencoded.
 
 **Parameters**
 <table>
-	<tr>
-		<td>access_token</td>
-		<td>string</td>
-		<td>The issued OAuth2 token</td>
-		<td>mandatory</td>
-	</tr>
-	<tr>
-		<td>token_type</td>
-		<td>string</td>
-		<td>Always "bearer"</td>
-		<td>mandatory</td>
-	</tr>
-	<tr>
-		<td>expires_in</td>
-		<td>integer</td>
-		<td>The lifetime of the access token in seconds</td>
-		<td>mandatory</td>
-	</tr>
-	<tr>
-		<td>refresh_token</td>
-		<td>string</td>
-		<td>The issued OAuth2 refresh token, one-time-usable only</td>
-		<td>mandatory</td>
-	</tr>
+    <tr>
+        <td>access_token</td>
+        <td>string</td>
+        <td>The issued OAuth2 token</td>
+        <td>mandatory</td>
+    </tr>
+    <tr>
+        <td>token_type</td>
+        <td>string</td>
+        <td>Always "bearer"</td>
+        <td>mandatory</td>
+    </tr>
+    <tr>
+        <td>expires_in</td>
+        <td>integer</td>
+        <td>The lifetime of the access token in seconds</td>
+        <td>mandatory</td>
+    </tr>
+    <tr>
+        <td>refresh_token</td>
+        <td>string</td>
+        <td>The issued OAuth2 refresh token, one-time-usable only</td>
+        <td>mandatory</td>
+    </tr>
 </table>
 
 The POST request can be done via HTTP Basic Authorization with your applications "ClientID" as the username and your "ClientSecret" as the password.
 
 **Post Request Body:** 
 
-	grant_type=authorization_code&code=<YourAccessCode>
+    grant_type=authorization_code&code=<YourAccessCode>
 
 Alternatively all parameters may be passed in the token request body
 
 **Post Request Body:** 
 
-	grant_type=authorization_code&code=<YourAccessCode>&client_id=<ClientID>&client_secret=<ClientSecret>
+    grant_type=authorization_code&code=<YourAccessCode>&client_id=<ClientID>&client_secret=<ClientSecret>
 
 The access token will be returned as JSON in the response body and is an arbitrary string, guaranteed to fit in a varchar(255) field.
 
 **Example Response**
 
-	{
-		"access_token":"Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh",
-		"token_type":"bearer",
-		"expires_in":"3600",
-		"refresh_token":"MTRiMjkzZTYtOTgwNC0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh"
-	}
+    {
+        "access_token":"Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh",
+        "token_type":"bearer",
+        "expires_in":"3600",
+        "refresh_token":"MTRiMjkzZTYtOTgwNC0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh"
+    }
 
 
 ### 3.2.4 OAuth2 protocol flow - Refresh Token Request -###
@@ -351,7 +351,7 @@ The process to retrieve a refresh token is exactly the same as retrieving a toke
 
 POST Request Body:
 
-	grant_type=refresh_token&refresh_token=<YourRefreshToken>
+    grant_type=refresh_token&refresh_token=<YourRefreshToken>
 
 The refresh token can only be used once to retrieve a token and a new refresh token. 
 
@@ -402,12 +402,12 @@ JSON encoded body using the "application/json" content type.
 **Example Request**
 
     https://example.com/bcf/oauth2/reg
-	{
+    {
     "client_name": "Example Application",
-	"client_description": "Example CAD desktop application",
-	"client_url": "http://example.com",
-	"redirect_url": "http://localhost:8080"
-	}
+    "client_description": "Example CAD desktop application",
+    "client_url": "http://example.com",
+    "redirect_url": "http://localhost:8080"
+    }
 
 
 **Example Response**
@@ -450,11 +450,11 @@ Retrieve a **collection** of projects where the currently logged on user has acc
 
     [{
         "project_id": "F445F4F2-4D02-4B2A-B612-5E456BEF9137",
-		"name": "Example project 1"
+        "name": "Example project 1"
     },
     {
         "project_id": "A233FBB2-3A3B-EFF4-C123-DE22ABC8414",
-		"name": "Example project 2"
+        "name": "Example project 2"
     }]
 
 ### 4.1.2 GET Single Project Services ###
@@ -497,7 +497,7 @@ Modify a specific project, description similar to POST.
 
 **Resource URL**
 
-	GET /bcf/{version}/projects/{project_id}/extensions
+    GET /bcf/{version}/projects/{project_id}/extensions
 
 [extensions_GET.json](Schemas_draft-03/Project/extensions_GET.json)
 
@@ -512,47 +512,47 @@ Retrieve a specific projects extensions.
 
 
     {
-	"topic_type":
-		[
-			"Information",
-			"Error"
-		],
-	"topic_status":
-		[
-			"Open",
-			"Closed",
-			"ReOpened"
-		],
-	"topic_label":
-		[
-			"Architecture",
-			"Structural",
-			"MEP"
-		],
-	"snippet_type":
-		[
-			".ifc",
-			".csv"
-		],
-	"priority":
-		[
-			"Low",
-			"Medium",
-			"High"
-		],
-	"user_id_type":
-		[
-			"Architect@example.com",
-			"BIM-Manager@example.com",
-			"bob_heater@example.com"
-		]
-	}
+    "topic_type":
+        [
+            "Information",
+            "Error"
+        ],
+    "topic_status":
+        [
+            "Open",
+            "Closed",
+            "ReOpened"
+        ],
+    "topic_label":
+        [
+            "Architecture",
+            "Structural",
+            "MEP"
+        ],
+    "snippet_type":
+        [
+            ".ifc",
+            ".csv"
+        ],
+    "priority":
+        [
+            "Low",
+            "Medium",
+            "High"
+        ],
+    "user_id_type":
+        [
+            "Architect@example.com",
+            "BIM-Manager@example.com",
+            "bob_heater@example.com"
+        ]
+    }
 
 ### 4.1.5 POST Project Extension Services
 
 **Resource URL**
 
-	POST /bcf/{version}/projects/{project_id}/extensions
+    POST /bcf/{version}/projects/{project_id}/extensions
 
 [extensions_POST.json](Schemas_draft-03/Project/extensions_POST.json)
 
@@ -601,90 +601,90 @@ JSON encoded body using the "application/json" content type.
 
     https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
 
-	{
-	"topic_type":
-		[
-			"Information",
-			"Error"
-		],
-	"topic_status":
-		[
-			"Open",
-			"Closed",
-			"ReOpened"
-		],
-	"topic_label":
-		[
-			"Architecture",
-			"Structural",
-			"MEP"
-		],
-	"snippet_type":
-		[
-			".ifc",
-			".csv"
-		],
-	"priority":
-		[
-			"Low",
-			"Medium",
-			"High"
-		],
-	"user_id_type":
-		[
-			"Architect@example.com",
-			"BIM-Manager@example.com",
-			"bob_heater@example.com"
-		]
-	}
+    {
+    "topic_type":
+        [
+            "Information",
+            "Error"
+        ],
+    "topic_status":
+        [
+            "Open",
+            "Closed",
+            "ReOpened"
+        ],
+    "topic_label":
+        [
+            "Architecture",
+            "Structural",
+            "MEP"
+        ],
+    "snippet_type":
+        [
+            ".ifc",
+            ".csv"
+        ],
+    "priority":
+        [
+            "Low",
+            "Medium",
+            "High"
+        ],
+    "user_id_type":
+        [
+            "Architect@example.com",
+            "BIM-Manager@example.com",
+            "bob_heater@example.com"
+        ]
+    }
 
 
 **Example Response**
 
 
     {
-	"topic_type":
-		[
-			"Information",
-			"Error"
-		],
-	"topic_status":
-		[
-			"Open",
-			"Closed",
-			"ReOpened"
-		],
-	"topic_label":
-		[
-			"Architecture",
-			"Structural",
-			"MEP"
-		],
-	"snippet_type":
-		[
-			".ifc",
-			".csv"
-		],
-	"priority":
-		[
-			"Low",
-			"Medium",
-			"High"
-		],
-	"user_id_type":
-		[
-			"Architect@example.com",
-			"BIM-Manager@example.com",
-			"bob_heater@example.com"
-		]
-	}
+    "topic_type":
+        [
+            "Information",
+            "Error"
+        ],
+    "topic_status":
+        [
+            "Open",
+            "Closed",
+            "ReOpened"
+        ],
+    "topic_label":
+        [
+            "Architecture",
+            "Structural",
+            "MEP"
+        ],
+    "snippet_type":
+        [
+            ".ifc",
+            ".csv"
+        ],
+    "priority":
+        [
+            "Low",
+            "Medium",
+            "High"
+        ],
+    "user_id_type":
+        [
+            "Architect@example.com",
+            "BIM-Manager@example.com",
+            "bob_heater@example.com"
+        ]
+    }
 
 
 ### 4.1.6 PUT Project Extension Services
 
 **Resource URL**
 
-	PUT /bcf/{version}/projects/{project_id}/extensions
+    PUT /bcf/{version}/projects/{project_id}/extensions
 
 [extensions_PUT.json](Schemas_draft-03/Project/extensions_PUT.json)
 
@@ -699,7 +699,7 @@ Modify a specific projects extensions, description similar to POST.
 
 **Resource URL**
 
-	GET /bcf/{version}/projects/{project_id}/topics
+    GET /bcf/{version}/projects/{project_id}/topics
 
 [topic_GET.json](Schemas_draft-03/Collaboration/Topic/topic_GET.json)
 
@@ -790,7 +790,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
             "Architecture",
             "Structural"
         ],
-    	"creation_date": "2013-10-21T17:34:22.409Z"
+        "creation_date": "2013-10-21T17:34:22.409Z"
     },
     {
         "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
@@ -800,9 +800,9 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
             "Heating",
             "Electrical"
         ],
-    	"creation_date": "2014-11-19T14:24:11.316Z"
+        "creation_date": "2014-11-19T14:24:11.316Z"
     }
-	]
+    ]
 
 ### 4.2.2 POST Topic Services ###
 
@@ -856,7 +856,7 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
         "snippet_type": "clash",
         "is_external": true,
         "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-        "reference_schema": "https://example.com/bcf/1.0/clash.xsd"	
+        "reference_schema": "https://example.com/bcf/1.0/clash.xsd"    
       }
     }
 
@@ -881,23 +881,23 @@ Retrieve a specific topic.
 
 
     {
-		"guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
-		"topic_type": "Clash",
-		"topic_status": "open",
+        "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+        "topic_type": "Clash",
+        "topic_status": "open",
         "title": "Example topic 3",
-		"priority": "high",
+        "priority": "high",
         "labels": [
             "Architecture",
             "Heating"],
-		"assigned_to": "harry.muster@example.com",
+        "assigned_to": "harry.muster@example.com",
         "bim_snippet":
-				{
-				"snippet_type": "clash",
-				"is_external": true,
-				"reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-				"reference_schema": "https://example.com/bcf/1.0/clash.xsd"	
-				}
-    	}
+                {
+                "snippet_type": "clash",
+                "is_external": true,
+                "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
+                "reference_schema": "https://example.com/bcf/1.0/clash.xsd"    
+                }
+        }
 
 ### 4.2.4 PUT Single Topic Services ###
 
@@ -917,9 +917,9 @@ Modify a specific topic, description similar to POST.
 
 Retrieves a topics BIM-Snippet as binary file. Will use the following HTTP headers to deliver additional information:
 
-	Content-Type: application/octet-stream;
-	Content-Length: {Size of file in bytes};
-	Content-Disposition: attachment; filename="{Filename.extension}";
+    Content-Type: application/octet-stream;
+    Content-Length: {Size of file in bytes};
+    Content-Disposition: attachment; filename="{Filename.extension}";
 
 
 ### 4.2.7 PUT Topic BIM Snippet
@@ -930,8 +930,8 @@ Retrieves a topics BIM-Snippet as binary file. Will use the following HTTP heade
 
 Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property must be set to "is_external"=false and the "reference" must be the file name with extension. The following HTTP headers are used for the upload:
 
-	Content-Type: application/octet-stream;
-	Content-Length: {Size of file in bytes};
+    Content-Type: application/octet-stream;
+    Content-Length: {Size of file in bytes};
 
 
 
@@ -942,7 +942,7 @@ Puts a new BIM Snippet binary file to a topic. If this is used, the parent topic
 
 **Resource URL**
 
-	GET /bcf/{version}/projects/{project_id}/topics/{guid}/files
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/files
 
 [file_GET.json](Schemas_draft-03/Collaboration/File/file_GET.json)
 
@@ -950,29 +950,29 @@ Retrieve a **collection** of file references as topic header.
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
 
 
 **Example Response**
 
-   	[
-    	{
-		"ifc_project": "0J$yPqHBD12v72y4qF6XcD",
-		"file_name": "OfficeBuilding_Architecture_0001.ifc",
-		"reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
-    	},
-	    {
-		"ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
-		"file_name": "OfficeBuilding_Heating_0003.ifc",
-		"reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
-    	}
-	]
+       [
+        {
+        "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+        "file_name": "OfficeBuilding_Architecture_0001.ifc",
+        "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+        },
+        {
+        "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+        "file_name": "OfficeBuilding_Heating_0003.ifc",
+        "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
+        }
+    ]
 
 ### 4.3.2 PUT File (Header) Services ###
 
 **Resource URL**
 
-	PUT /bcf/{version}/projects/{project_id}/topics/{guid}/files
+    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/files
 
 [file_PUT.json](Schemas_draft-03/Collaboration/File/file_PUT.json)
 
@@ -980,35 +980,35 @@ Update a **collection** of file references on the topic header.
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
 
     [
-    	{
-		"ifc_project": "0J$yPqHBD12v72y4qF6XcD",
-		"file_name": "OfficeBuilding_Architecture_0001.ifc",
-		"reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
-    	},
-	    {
-		"ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
-		"file_name": "OfficeBuilding_Heating_0003.ifc",
-		"reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
-    	}
-	]
+        {
+        "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+        "file_name": "OfficeBuilding_Architecture_0001.ifc",
+        "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+        },
+        {
+        "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+        "file_name": "OfficeBuilding_Heating_0003.ifc",
+        "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
+        }
+    ]
 
 **Example Response**
 
     [
-    	{
-		"ifc_project": "0J$yPqHBD12v72y4qF6XcD",
-		"file_name": "OfficeBuilding_Architecture_0001.ifc",
-		"reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
-    	},
-	    {
-		"ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
-		"file_name": "OfficeBuilding_Heating_0003.ifc",
-		"reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
-    	}
-	]
+        {
+        "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+        "file_name": "OfficeBuilding_Architecture_0001.ifc",
+        "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+        },
+        {
+        "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+        "file_name": "OfficeBuilding_Heating_0003.ifc",
+        "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
+        }
+    ]
 
 ## 4.4 Comment Services ##
 
@@ -1016,7 +1016,7 @@ Update a **collection** of file references on the topic header.
 
 **Resource URL**
 
-	GET /bcf/{version}/projects/{project_id}/topics/{guid}/comments
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/comments
 
 [comment_GET.json](Schemas_draft-03/Collaboration/Comment/comment_GET.json)
 
@@ -1061,7 +1061,7 @@ Get comments that are closed and created after December 5 2015. Sort the result 
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
 
 **Example Response**
 
@@ -1086,7 +1086,7 @@ Get comments that are closed and created after December 5 2015. Sort the result 
 
 **Resource URL**
 
-	POST /bcf/{version}/projects/{project_id}/topics/{guid}/comments
+    POST /bcf/{version}/projects/{project_id}/topics/{guid}/comments
 
 [comment_POST.json](Schemas_draft-03/Collaboration/Comment/comment_POST.json)
 
@@ -1104,7 +1104,7 @@ JSON encoded body using the "application/json" content type.
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
 
     {
       "comment": "will rework the heating model",
@@ -1126,7 +1126,7 @@ JSON encoded body using the "application/json" content type.
 
 **Resource URL**
 
-	GET /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
 
 [comment_GET.json](Schemas_draft-03/Collaboration/Comment/comment_GET.json)
 
@@ -1134,7 +1134,7 @@ Get a single comment.
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
 
 **Example Response**
 
@@ -1150,7 +1150,7 @@ Get a single comment.
 
 **Resource URL**
 
-	PUT /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
+    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
 
 [comment_PUT.json](Schemas_draft-03/Collaboration/Comment/comment_PUT.json)
 
@@ -1162,7 +1162,7 @@ Update a single comment, description similar to POST.
 
 **Resource URL**
 
-	GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints
 
 [viewpoint_GET.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_GET.json)
 
@@ -1170,106 +1170,106 @@ Retrieve a **collection** of all viewpoints related to a topic.
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
 
 **Example Response**
 
-	[
-		{  
-   		"guid":"b24a82e9-f67b-43b8-bda0-4946abf39624",
-   		"perspective_camera":{
-     		"camera_view_point":{  
-        		"x":0.0,
-        		"y":0.0,
-         		"z":0.0},  
-     		"camera_direction":{  
-        		"x":1.0,
-        		"y":1.0,
-         		"z":2.0},
-      		"camera_up_vector":{  
-	    		"x":0.0,
-	    		"y":0.0,
-          		"z":1.0},
-      		"field_of_view":90.0},
-   		"lines":{  
-      		"line":[  
-         			{  
-            		"start_point":{  
-              	 		"x":2.0,
-               			"y":1.0,
-               			"z":1.0},
-           			"end_point":{  
-               			"x":0.0,
-			   			"y":1.0,
-			   			"z":0.7}
-         			}
-      			   ]},
-   		"clipping_planes":{  
-      		"clipping_plane":[  
-         			{  
-            		"location":{  
-               			"x":0.7,
-               			"y":0.3,
-               			"z":-0.2},
-            		"direction":{  
-               			"x":1.0,
-			   			"y":0.4,
-			   			"z":0.1}
-         			}
-      				]
-   				}
-			},
-		{  
-   		"guid":"a11a82e7-e66c-34b4-ada1-5846abf39133",
-   		"perspective_camera":{
-     		"camera_view_point":{  
-        		"x":0.0,
-        		"y":0.0,
-         		"z":0.0},  
-     		"camera_direction":{  
-        		"x":1.0,
-        		"y":1.0,
-         		"z":2.0},
-      		"camera_up_vector":{  
-	    		"x":0.0,
-	    		"y":0.0,
-          		"z":1.0},
-      		"field_of_view":90.0},
-   		"lines":{  
-      		"line":[  
-         			{  
-            		"start_point":{  
-              	 		"x":1.0,
-               			"y":1.0,
-               			"z":1.0},
-           			"end_point":{  
-               			"x":0.0,
-			   			"y":0.0,
-			   			"z":0.0}
-         			}
-      			   ]},
-   		"clipping_planes":{  
-      		"clipping_plane":[  
-         			{  
-            		"location":{  
-               			"x":0.5,
-               			"y":0.5,
-               			"z":0.5},
-            		"direction":{  
-               			"x":1.0,
-			   			"y":0.0,
-			   			"z":0.0}
-         			}
-      				]
-   				}
-			}
-	]
+    [
+        {  
+           "guid":"b24a82e9-f67b-43b8-bda0-4946abf39624",
+           "perspective_camera":{
+             "camera_view_point":{  
+                "x":0.0,
+                "y":0.0,
+                 "z":0.0},  
+             "camera_direction":{  
+                "x":1.0,
+                "y":1.0,
+                 "z":2.0},
+              "camera_up_vector":{  
+                "x":0.0,
+                "y":0.0,
+                  "z":1.0},
+              "field_of_view":90.0},
+           "lines":{  
+              "line":[  
+                     {  
+                    "start_point":{  
+                           "x":2.0,
+                           "y":1.0,
+                           "z":1.0},
+                       "end_point":{  
+                           "x":0.0,
+                           "y":1.0,
+                           "z":0.7}
+                     }
+                     ]},
+           "clipping_planes":{  
+              "clipping_plane":[  
+                     {  
+                    "location":{  
+                           "x":0.7,
+                           "y":0.3,
+                           "z":-0.2},
+                    "direction":{  
+                           "x":1.0,
+                           "y":0.4,
+                           "z":0.1}
+                     }
+                      ]
+                   }
+            },
+        {  
+           "guid":"a11a82e7-e66c-34b4-ada1-5846abf39133",
+           "perspective_camera":{
+             "camera_view_point":{  
+                "x":0.0,
+                "y":0.0,
+                 "z":0.0},  
+             "camera_direction":{  
+                "x":1.0,
+                "y":1.0,
+                 "z":2.0},
+              "camera_up_vector":{  
+                "x":0.0,
+                "y":0.0,
+                  "z":1.0},
+              "field_of_view":90.0},
+           "lines":{  
+              "line":[  
+                     {  
+                    "start_point":{  
+                           "x":1.0,
+                           "y":1.0,
+                           "z":1.0},
+                       "end_point":{  
+                           "x":0.0,
+                           "y":0.0,
+                           "z":0.0}
+                     }
+                     ]},
+           "clipping_planes":{  
+              "clipping_plane":[  
+                     {  
+                    "location":{  
+                           "x":0.5,
+                           "y":0.5,
+                           "z":0.5},
+                    "direction":{  
+                           "x":1.0,
+                           "y":0.0,
+                           "z":0.0}
+                     }
+                      ]
+                   }
+            }
+    ]
 
 ### 4.5.2 POST Viewpoint Services ###
 
 **Resource URL**
 
-	POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints
+    POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints
 
 [viewpoint_POST.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_POST.json)
 
@@ -1424,97 +1424,97 @@ JSON encoded body using the "application/json" content type.
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
-	{  
-   		"perspective_camera":{
-     		"camera_view_point":{  
-        		"x":0.0,
-        		"y":0.0,
-         		"z":0.0},  
-     		"camera_direction":{  
-        		"x":1.0,
-        		"y":1.0,
-         		"z":2.0},
-      		"camera_up_vector":{  
-	    		"x":0.0,
-	    		"y":0.0,
-          		"z":1.0},
-      		"field_of_view":90.0},
-   		"lines":{  
-      		"line":[  
-         			{  
-            		"start_point":{  
-              	 		"x":1.0,
-               			"y":1.0,
-               			"z":1.0},
-           			"end_point":{  
-               			"x":0.0,
-			   			"y":0.0,
-			   			"z":0.0}
-         			}
-      			   ]},
-   		"clipping_planes":{  
-      		"clipping_plane":[  
-         			{  
-            		"location":{  
-               			"x":0.5,
-               			"y":0.5,
-               			"z":0.5},
-            		"direction":{  
-               			"x":1.0,
-			   			"y":0.0,
-			   			"z":0.0}
-         			}
-      				]
-   				}
-			}
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
+    {  
+           "perspective_camera":{
+             "camera_view_point":{  
+                "x":0.0,
+                "y":0.0,
+                 "z":0.0},  
+             "camera_direction":{  
+                "x":1.0,
+                "y":1.0,
+                 "z":2.0},
+              "camera_up_vector":{  
+                "x":0.0,
+                "y":0.0,
+                  "z":1.0},
+              "field_of_view":90.0},
+           "lines":{  
+              "line":[  
+                     {  
+                    "start_point":{  
+                           "x":1.0,
+                           "y":1.0,
+                           "z":1.0},
+                       "end_point":{  
+                           "x":0.0,
+                           "y":0.0,
+                           "z":0.0}
+                     }
+                     ]},
+           "clipping_planes":{  
+              "clipping_plane":[  
+                     {  
+                    "location":{  
+                           "x":0.5,
+                           "y":0.5,
+                           "z":0.5},
+                    "direction":{  
+                           "x":1.0,
+                           "y":0.0,
+                           "z":0.0}
+                     }
+                      ]
+                   }
+            }
 
 **Example Response**
 
-	{  
-   		"guid":"a11a82e7-e66c-34b4-ada1-5846abf39133",
-   		"perspective_camera":{
-     		"camera_view_point":{  
-        		"x":0.0,
-        		"y":0.0,
-         		"z":0.0},  
-     		"camera_direction":{  
-        		"x":1.0,
-        		"y":1.0,
-         		"z":2.0},
-      		"camera_up_vector":{  
-	    		"x":0.0,
-	    		"y":0.0,
-          		"z":1.0},
-      		"field_of_view":90.0},
-   		"lines":{  
-      		"line":[  
-         			{  
-            		"start_point":{  
-              	 		"x":1.0,
-               			"y":1.0,
-               			"z":1.0},
-           			"end_point":{  
-               			"x":0.0,
-			   			"y":0.0,
-			   			"z":0.0}
-         			}
-      			   ]},
-   		"clipping_planes":{  
-      		"clipping_plane":[  
-         			{  
-            		"location":{  
-               			"x":0.5,
-               			"y":0.5,
-               			"z":0.5},
-            		"direction":{  
-               			"x":1.0,
-			   			"y":0.0,
-			   			"z":0.0}
-         			}
-      				]
-   				}
-			}
+    {  
+           "guid":"a11a82e7-e66c-34b4-ada1-5846abf39133",
+           "perspective_camera":{
+             "camera_view_point":{  
+                "x":0.0,
+                "y":0.0,
+                 "z":0.0},  
+             "camera_direction":{  
+                "x":1.0,
+                "y":1.0,
+                 "z":2.0},
+              "camera_up_vector":{  
+                "x":0.0,
+                "y":0.0,
+                  "z":1.0},
+              "field_of_view":90.0},
+           "lines":{  
+              "line":[  
+                     {  
+                    "start_point":{  
+                           "x":1.0,
+                           "y":1.0,
+                           "z":1.0},
+                       "end_point":{  
+                           "x":0.0,
+                           "y":0.0,
+                           "z":0.0}
+                     }
+                     ]},
+           "clipping_planes":{  
+              "clipping_plane":[  
+                     {  
+                    "location":{  
+                           "x":0.5,
+                           "y":0.5,
+                           "z":0.5},
+                    "direction":{  
+                           "x":1.0,
+                           "y":0.0,
+                           "z":0.0}
+                     }
+                      ]
+                   }
+            }
 
 ### 4.5.3 GET Single Viewpoint Services ###
 
@@ -1535,50 +1535,50 @@ Retrieve a specific viewpoint.
 
 **Example Response**
 
-	{  
-   		"guid":"a11a82e7-e66c-34b4-ada1-5846abf39133",
-   		"perspective_camera":{
-     		"camera_view_point":{  
-        		"x":0.0,
-        		"y":0.0,
-         		"z":0.0},  
-     		"camera_direction":{  
-        		"x":1.0,
-        		"y":1.0,
-         		"z":2.0},
-      		"camera_up_vector":{  
-	    		"x":0.0,
-	    		"y":0.0,
-          		"z":1.0},
-      		"field_of_view":90.0},
-   		"lines":{  
-      		"line":[  
-         			{  
-            		"start_point":{  
-              	 		"x":1.0,
-               			"y":1.0,
-               			"z":1.0},
-           			"end_point":{  
-               			"x":0.0,
-			   			"y":0.0,
-			   			"z":0.0}
-         			}
-      			   ]},
-   		"clipping_planes":{  
-      		"clipping_plane":[  
-         			{  
-            		"location":{  
-               			"x":0.5,
-               			"y":0.5,
-               			"z":0.5},
-            		"direction":{  
-               			"x":1.0,
-			   			"y":0.0,
-			   			"z":0.0}
-         			}
-      				]
-   				}
-			}
+    {  
+           "guid":"a11a82e7-e66c-34b4-ada1-5846abf39133",
+           "perspective_camera":{
+             "camera_view_point":{  
+                "x":0.0,
+                "y":0.0,
+                 "z":0.0},  
+             "camera_direction":{  
+                "x":1.0,
+                "y":1.0,
+                 "z":2.0},
+              "camera_up_vector":{  
+                "x":0.0,
+                "y":0.0,
+                  "z":1.0},
+              "field_of_view":90.0},
+           "lines":{  
+              "line":[  
+                     {  
+                    "start_point":{  
+                           "x":1.0,
+                           "y":1.0,
+                           "z":1.0},
+                       "end_point":{  
+                           "x":0.0,
+                           "y":0.0,
+                           "z":0.0}
+                     }
+                     ]},
+           "clipping_planes":{  
+              "clipping_plane":[  
+                     {  
+                    "location":{  
+                           "x":0.5,
+                           "y":0.5,
+                           "z":0.5},
+                    "direction":{  
+                           "x":1.0,
+                           "y":0.0,
+                           "z":0.0}
+                     }
+                      ]
+                   }
+            }
 
 
 ### 4.5.4 PUT Single Viewpoint Services
@@ -1610,7 +1610,7 @@ Retrieve a viewpoints snapshot (png, jpg or bmp).
 
 HTTP-response header:
 
-	Content-Type: image/png
+    Content-Type: image/png
 
 
 ### 4.5.6 PUT snapshot of a Viewpoint Service
@@ -1627,7 +1627,7 @@ Add or update a viewpoints snapshot (png, jpg or bmp).
 
 HTTP PUT request header:
 
-	Content-Type: image/png
+    Content-Type: image/png
 
 PUT Body contains binary image data
 
@@ -1642,7 +1642,7 @@ HTTP-response status code:
 
 **Resource URL**
 
-	GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
+    GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
 
 Retrieve a specific viewpoint bitmaps image file (png, jpg or bmp).
 
@@ -1653,23 +1653,23 @@ Retrieve a specific viewpoint bitmaps image file (png, jpg or bmp).
 
 HTTP-response header:
 
-	Content-Type: image/png
+    Content-Type: image/png
 
 ### 4.5.8 PUT bitmap of a Viewpoint Service
 
 **Resource URL**
 
-	PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
+    PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
 
 Add or update a specific bitmap in a viewpoint (png, jpg or bmp).
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
 
 HTTP-PUT request header:
 
-	Content-Type: image/png
+    Content-Type: image/png
 
 PUT Body contains binary image data
 
@@ -1685,7 +1685,7 @@ HTTP-response status code:
 
 **Resource URL**
 
-	GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
 [component_GET.json](Schemas_draft-03/Collaboration/Component/component_GET.json)
 
@@ -1693,34 +1693,34 @@ Retrieve a **collection** of all components related to a viewpoint.
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
 
 **Example Response**
 
-	[
- 	{
-  		"ifc_guid":"2MF28NhmDBiRVyFakgdbCT",
-  		"selected": true,
-  		"visible":  true,
-  		"color":"0A00FF",
-  		"originating_system":"Example CAD Application",
-  		"authoring_tool_id":"EXCAD/v1.0"
- 	},
- 	{
-  		"ifc_guid":"3$cshxZO9AJBebsni$z9Yk",
-  		"selected": true,
-  		"visible":  true,
-  		"color":"0A00FF",
-  		"originating_system":"Example CAD Application",
-  		"authoring_tool_id":"EXCAD/v1.0"
- 	}
-	]
+    [
+     {
+          "ifc_guid":"2MF28NhmDBiRVyFakgdbCT",
+          "selected": true,
+          "visible":  true,
+          "color":"0A00FF",
+          "originating_system":"Example CAD Application",
+          "authoring_tool_id":"EXCAD/v1.0"
+     },
+     {
+          "ifc_guid":"3$cshxZO9AJBebsni$z9Yk",
+          "selected": true,
+          "visible":  true,
+          "color":"0A00FF",
+          "originating_system":"Example CAD Application",
+          "authoring_tool_id":"EXCAD/v1.0"
+     }
+    ]
 
 ### 4.6.2 PUT Component Services ###
 
 **Resource URL**
 
-	POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
+    POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
 [component_PUT.json](Schemas_draft-03/Collaboration/Component/component_PUT.json)
 
@@ -1728,47 +1728,47 @@ Add or update a **collection** of all components related to a viewpoint.
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
 
-	[
- 	{
-  		"ifc_guid":"2MF28NhmDBiRVyFakgdbCT",
-  		"selected": true,
-  		"visible":  true,
-  		"color":"0A00FF",
-  		"originating_system":"Example CAD Application",
-  		"authoring_tool_id":"EXCAD/v1.0"
- 	},
- 	{
-  		"ifc_guid":"3$cshxZO9AJBebsni$z9Yk",
-  		"selected": true,
-  		"visible":  true,
-  		"color":"0A00FF",
-  		"originating_system":"Example CAD Application",
-  		"authoring_tool_id":"EXCAD/v1.0"
- 	}
-	]
+    [
+     {
+          "ifc_guid":"2MF28NhmDBiRVyFakgdbCT",
+          "selected": true,
+          "visible":  true,
+          "color":"0A00FF",
+          "originating_system":"Example CAD Application",
+          "authoring_tool_id":"EXCAD/v1.0"
+     },
+     {
+          "ifc_guid":"3$cshxZO9AJBebsni$z9Yk",
+          "selected": true,
+          "visible":  true,
+          "color":"0A00FF",
+          "originating_system":"Example CAD Application",
+          "authoring_tool_id":"EXCAD/v1.0"
+     }
+    ]
 
 **Example Response**
 
-	[
- 	{
-  		"ifc_guid":"2MF28NhmDBiRVyFakgdbCT",
-  		"selected": true,
-  		"visible":  true,
-  		"color":"0A00FF",
-  		"originating_system":"Example CAD Application",
-  		"authoring_tool_id":"EXCAD/v1.0"
- 	},
- 	{
-  		"ifc_guid":"3$cshxZO9AJBebsni$z9Yk",
-  		"selected": true,
-  		"visible":  true,
-  		"color":"0A00FF",
-  		"originating_system":"Example CAD Application",
-  		"authoring_tool_id":"EXCAD/v1.0"
- 	}
-	]
+    [
+     {
+          "ifc_guid":"2MF28NhmDBiRVyFakgdbCT",
+          "selected": true,
+          "visible":  true,
+          "color":"0A00FF",
+          "originating_system":"Example CAD Application",
+          "authoring_tool_id":"EXCAD/v1.0"
+     },
+     {
+          "ifc_guid":"3$cshxZO9AJBebsni$z9Yk",
+          "selected": true,
+          "visible":  true,
+          "color":"0A00FF",
+          "originating_system":"Example CAD Application",
+          "authoring_tool_id":"EXCAD/v1.0"
+     }
+    ]
 
 
 ## 4.7 Related Topics Services ##
@@ -1777,7 +1777,7 @@ Add or update a **collection** of all components related to a viewpoint.
 
 **Resource URL**
 
-	GET /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
 
 [related_topic_GET.json](Schemas_draft-03/Collaboration/RelatedTopic/related_topic_GET.json)
 
@@ -1785,24 +1785,24 @@ Retrieve a **collection** of all related topics to a topic.
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
 
 **Example Response**
 
-	[
- 	{
-  		"related_topic_guid":"db49df2b-0e42-473b-a3ee-f7b785d783c4",
- 	},
- 	{
-  		"related_topic_guid":"6963a846-54d1-4050-954d-607cd5e48aa3",
- 	}
-	]
+    [
+     {
+          "related_topic_guid":"db49df2b-0e42-473b-a3ee-f7b785d783c4",
+     },
+     {
+          "related_topic_guid":"6963a846-54d1-4050-954d-607cd5e48aa3",
+     }
+    ]
 
 ### 4.7.2 PUT Related Topics Services ###
 
 **Resource URL**
 
-	POST /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
+    POST /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
 
 [related_topic_PUT.json](Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PUT.json)
 
@@ -1810,33 +1810,33 @@ Add or update a **collection** of all related topics to a topic.
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
 
-	[
- 	{
-  		"related_topic_guid":"db49df2b-0e42-473b-a3ee-f7b785d783c4"
- 	},
- 	{
-  		"related_topic_guid":"6963a846-54d1-4050-954d-607cd5e48aa3"
- 	},
-	{
-  		"related_topic_guid":"bac66ab4-331e-4f21-a28e-083d2cf2e796"
- 	}
-	]
+    [
+     {
+          "related_topic_guid":"db49df2b-0e42-473b-a3ee-f7b785d783c4"
+     },
+     {
+          "related_topic_guid":"6963a846-54d1-4050-954d-607cd5e48aa3"
+     },
+    {
+          "related_topic_guid":"bac66ab4-331e-4f21-a28e-083d2cf2e796"
+     }
+    ]
 
 **Example Response**
 
-	[
- 	{
-  		"related_topic_guid":"db49df2b-0e42-473b-a3ee-f7b785d783c4"
- 	},
- 	{
-  		"related_topic_guid":"6963a846-54d1-4050-954d-607cd5e48aa3"
- 	},
-	{
-  		"related_topic_guid":"bac66ab4-331e-4f21-a28e-083d2cf2e796"
- 	}
-	]
+    [
+     {
+          "related_topic_guid":"db49df2b-0e42-473b-a3ee-f7b785d783c4"
+     },
+     {
+          "related_topic_guid":"6963a846-54d1-4050-954d-607cd5e48aa3"
+     },
+    {
+          "related_topic_guid":"bac66ab4-331e-4f21-a28e-083d2cf2e796"
+     }
+    ]
 
 ## 4.8 Document Reference Services ##
 
@@ -1844,7 +1844,7 @@ Add or update a **collection** of all related topics to a topic.
 
 **Resource URL**
 
-	GET /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
 
 [document_reference_GET.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_GET.json)
 
@@ -1852,28 +1852,28 @@ Retrieve a **collection** of all document references to a topic.
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
 
 **Example Response**
 
-	[
- 	{
-  		"guid":"472ab37a-6122-448e-86fc-86503183b520",
-  		"referenced_document":"http://example.com/files/LegalRequirements.pdf",
-  		"description":"The legal requirements for buildings."
- 	},
- 	{
-	  	"guid":"6cbfe31d-95c3-4f4d-92a6-420c23698721",
-	  	"referenced_document":"http://example.com/files/DesignParameters.pdf",
-	  	"description":"The building owners global design parameters for buildings."
- 	}
-	]
+    [
+     {
+          "guid":"472ab37a-6122-448e-86fc-86503183b520",
+          "referenced_document":"http://example.com/files/LegalRequirements.pdf",
+          "description":"The legal requirements for buildings."
+     },
+     {
+          "guid":"6cbfe31d-95c3-4f4d-92a6-420c23698721",
+          "referenced_document":"http://example.com/files/DesignParameters.pdf",
+          "description":"The building owners global design parameters for buildings."
+     }
+    ]
 
 ### 4.8.2 PUT Document Reference Services ###
 
 **Resource URL**
 
-	POST /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
+    POST /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
 
 [document_reference_PUT.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
@@ -1882,24 +1882,24 @@ The PUT object may either contain the property "guid" to reference a document st
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
 
-	[
- 	{
-  		"referenced_document":"http://example.com/files/LegalRequirements.pdf",
-  		"description":"The legal requirements for buildings."
- 	}
-	]
+    [
+     {
+          "referenced_document":"http://example.com/files/LegalRequirements.pdf",
+          "description":"The legal requirements for buildings."
+     }
+    ]
 
 **Example Response**
 
-	[
- 	{
-  		"guid":"472ab37a-6122-448e-86fc-86503183b520",
-  		"referenced_document":"http://example.com/files/LegalRequirements.pdf",
-  		"description":"The legal requirements for buildings."
- 	}
-	]
+    [
+     {
+          "guid":"472ab37a-6122-448e-86fc-86503183b520",
+          "referenced_document":"http://example.com/files/LegalRequirements.pdf",
+          "description":"The legal requirements for buildings."
+     }
+    ]
 
 ## 4.9 Document Services
 
@@ -1909,55 +1909,55 @@ The PUT object may either contain the property "guid" to reference a document st
 
 **Resource URL**
 
-	GET /bcf/{version}/projects/{project_id}/documents
+    GET /bcf/{version}/projects/{project_id}/documents
 
 Retrieve a **collection** of all documents uploaded to a project.
 
 **Example Request**
 
-	https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
 
 **Example Response**
 
-	[
- 	{
-  		"guid":"472ab37a-6122-448e-86fc-86503183b520",
-  		"filename":"LegalRequirements.pdf"
- 	},
- 	{
-	  	"guid":"6cbfe31d-95c3-4f4d-92a6-420c23698721",
-	  	"filename":"DesignParameters.pdf"
- 	}
-	]
+    [
+     {
+          "guid":"472ab37a-6122-448e-86fc-86503183b520",
+          "filename":"LegalRequirements.pdf"
+     },
+     {
+          "guid":"6cbfe31d-95c3-4f4d-92a6-420c23698721",
+          "filename":"DesignParameters.pdf"
+     }
+    ]
 
 ### 4.9.2 POST Document Services
 
 
 **Resource URL**
 
-	POST /bcf/{version}/projects/{project_id}/documents
+    POST /bcf/{version}/projects/{project_id}/documents
 
 Upload a document (binary file) to a project. The following HTTP headers are used for the upload:
 
-	Content-Type: application/octet-stream;
-	Content-Length: {Size of file in bytes};
-	Content-Disposition: attachment; filename="{Filename.extension}";
+    Content-Type: application/octet-stream;
+    Content-Length: {Size of file in bytes};
+    Content-Disposition: attachment; filename="{Filename.extension}";
 
 **Example Response**
 
- 	{
-  		"guid":"472ab37a-6122-448e-86fc-86503183b520",
-		"filename":"Official_Building_Permission.pdf"
- 	}
+     {
+          "guid":"472ab37a-6122-448e-86fc-86503183b520",
+        "filename":"Official_Building_Permission.pdf"
+     }
 
 ### 4.9.3 GET Document Services
 
 **Resource URL**
 
-	GET /bcf/{version}/projects/{project_id}/documents/{guid}
+    GET /bcf/{version}/projects/{project_id}/documents/{guid}
 
 Retrieves a document as binary file. Will use the following HTTP headers to deliver additional information:
 
-	Content-Type: application/octet-stream;
-	Content-Length: {Size of file in bytes};
-	Content-Disposition: attachment; filename="{Filename.extension}";
+    Content-Type: application/octet-stream;
+    Content-Length: {Size of file in bytes};
+    Content-Disposition: attachment; filename="{Filename.extension}";
