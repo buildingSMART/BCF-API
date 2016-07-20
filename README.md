@@ -340,12 +340,17 @@ The Client uses the **"oauth2\_token_url"** to request a token. Example:
 	</tr>
 </table>
 
-The POST request has to be done via HTTP Basic Authorization. Your applications "ClientID" is the username, your "ClientSecret" is the password.
+The POST request can be done via HTTP Basic Authorization with your applications "ClientID" as the username and your "ClientSecret" as the password.
 
 **Post Request Body:** 
 
 	grant_type=authorization_code&code=<YourAccessCode>
 
+Alternatively all parameters may be passed in the token request body
+
+**Post Request Body:** 
+
+	grant_type=authorization_code&code=<YourAccessCode>&client_id=<ClientID>&client_secret=<ClientSecret>
 
 The access token will be returned as JSON in the response body and is an arbitrary string, guaranteed to fit in a varchar(255) field.
 
