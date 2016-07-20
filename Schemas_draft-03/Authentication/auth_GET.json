@@ -15,7 +15,10 @@
         "string",
         "null"
       ]
-    }
+    },
+	"http_basic_supported":{
+	  "type": "boolean"
+	}
   }
 }
 
