@@ -1487,7 +1487,7 @@ Retrieve a **collection** of all components related to a viewpoint.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
 
 **Example Response**
 
@@ -1511,7 +1511,7 @@ Retrieve a **collection** of all components related to a viewpoint.
 
 **Resource URL**
 
-    POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
+    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
 [component_PUT.json](Schemas_draft-03/Collaboration/Component/component_PUT.json)
 
@@ -1519,8 +1519,8 @@ Add or update a **collection** of all components related to a viewpoint.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
-
+    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
+    Body:
     [{
         "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
         "selected": true,
@@ -1569,7 +1569,7 @@ Retrieve a **collection** of all related topics to a topic.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
 
 **Example Response**
 
@@ -1591,8 +1591,8 @@ Add or update a **collection** of all related topics to a topic.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
-
+    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
+    Body:
     [{
         "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4"
     }, {
@@ -1625,7 +1625,7 @@ Retrieve a **collection** of all document references to a topic.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
 
 **Example Response**
 
@@ -1648,12 +1648,11 @@ Retrieve a **collection** of all document references to a topic.
 [document_reference_PUT.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
 Add or update document references to a topic.
-The PUT object may either contain the property "guid" to reference a document stored on the BCF server (see section 4.9) OR the property "referenced_document" to point to an external resource.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
-
+    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
+    Body:
     [{
         "referenced_document": "http://example.com/files/LegalRequirements.pdf",
         "description": "The legal requirements for buildings."
@@ -1681,7 +1680,7 @@ Retrieve a **collection** of all documents uploaded to a project.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
 
 **Example Response**
 
@@ -1699,8 +1698,12 @@ Retrieve a **collection** of all documents uploaded to a project.
 
     POST /bcf/{version}/projects/{project_id}/documents
 
-Upload a document (binary file) to a project. The following HTTP headers are used for the upload:
+Upload a document (binary file) to a project.
 
+**Example Request**
+
+    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
+    Headers:
     Content-Type: application/octet-stream;
     Content-Length: {Size of file in bytes};
     Content-Disposition: attachment; filename="{Filename.extension}";
@@ -1720,6 +1723,13 @@ Upload a document (binary file) to a project. The following HTTP headers are use
 
 Retrieves a document as binary file. Will use the following HTTP headers to deliver additional information:
 
+**Example Request**
+
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents/472ab37a-6122-448e-86fc-86503183b520
+
+**Example Response**
+
+    Headers:
     Content-Type: application/octet-stream;
     Content-Length: {Size of file in bytes};
     Content-Disposition: attachment; filename="{Filename.extension}";
