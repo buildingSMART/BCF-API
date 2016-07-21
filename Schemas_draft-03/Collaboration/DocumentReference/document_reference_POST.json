@@ -1,0 +1,14 @@
+{
+    "title": "document_reference_POST",
+    "type": "object",
+    "properties": {
+        "referenced_document": {
+            "type": ["string",
+            "null"]
+        },
+        "description": {
+            "type": ["string",
+            "null"]
+        }
+    }
+}

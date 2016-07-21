@@ -12,10 +12,10 @@
   * [1.1 Paging, Sorting and Filtering](#11-paging-sorting-and-filtering)
   * [1.2 Caching](#12-caching)
   * [1.3 Updating Resources via HTTP PUT](#13-updating-resources-via-http-put)
-  * [1.4 Cross origin resource sharing (Cors)](#14-cross-origin-resource-sharing-cors)
-  * [1.5 HTTP status codes](#15-http-status-codes)
-  * [1.6 Error response body format](#16-error-response-body-format)
-  * [1.7 DateTime format](#17-datetime-format)
+  * [1.4 Cross Origin Resource Sharing (Cors)](#14-cross-origin-resource-sharing-cors)
+  * [1.5 Http Status Codes](#15-http-status-codes)
+  * [1.6 Error Response Body Format](#16-error-response-body-format)
+  * [1.7 DateTime Format](#17-datetime-format)
   * [1.8 Additional Response Object Properties](#18-additional-response-object-properties)
 - [2. Topologies](#2-topologies)
   * [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
@@ -24,54 +24,55 @@
   * [3.1 Version Service](#31-version-service)
   * [3.2 Authentication Services](#32-authentication-services)
     + [3.2.1 Obtaining Authentication Information](#321-obtaining-authentication-information)
-    + [3.2.2 OAuth2 protocol flow - Client Request](#322-oauth2-protocol-flow---client-request)
-    + [3.2.3 OAuth2 protocol flow - Token Request](#323-oauth2-protocol-flow---token-request)
-    + [3.2.4 OAuth2 protocol flow - Refresh Token Request](#324-oauth2-protocol-flow---refresh-token-request)
-    + [3.2.5 OAuth2 protocol flow - Dynamic Client Registration](#325-oauth2-protocol-flow---dynamic-client-registration)
-    + [3.2.6 OAuth2 protocol flow - Requesting Resources](#326-oauth2-protocol-flow---requesting-resources)
+    + [3.2.2 OAuth2 Protocol Flow - Client Request](#322-oauth2-protocol-flow---client-request)
+    + [3.2.3 OAuth2 Protocol Flow - Token Request](#323-oauth2-protocol-flow---token-request)
+    + [3.2.4 OAuth2 Protocol Flow - Refresh Token Request](#324-oauth2-protocol-flow---refresh-token-request)
+    + [3.2.5 OAuth2 Protocol Flow - Dynamic Client Registration](#325-oauth2-protocol-flow---dynamic-client-registration)
+    + [3.2.6 OAuth2 Protocol Flow - Requesting Resources](#326-oauth2-protocol-flow---requesting-resources)
 - [4. BCF Services](#4-bcf-services)
   * [4.1 Project Services](#41-project-services)
-    + [4.1.1 GET Project Services](#411-get-project-services)
-    + [4.1.2 GET Single Project Services](#412-get-single-project-services)
-    + [4.1.3 PUT Single Project Services](#413-put-single-project-services)
-    + [4.1.4 GET Project Extension Services](#414-get-project-extension-services)
+    + [4.1.1 GET Projects Service](#411-get-projects-service)
+    + [4.1.2 GET Project Service](#412-get-project-service)
+    + [4.1.3 PUT Project Service](#413-put-project-service)
+    + [4.1.4 GET Project Extension Service](#414-get-project-extension-service)
   * [4.2 Topic Services](#42-topic-services)
-    + [4.2.1 GET Topic Services](#421-get-topic-services)
-    + [4.2.2 POST Topic Services](#422-post-topic-services)
-    + [4.2.3 GET Single Topic Services](#423-get-single-topic-services)
-    + [4.2.4 PUT Single Topic Services](#424-put-single-topic-services)
-    + [4.2.6 GET Topic BIM Snippet](#426-get-topic-bim-snippet)
-    + [4.2.7 PUT Topic BIM Snippet](#427-put-topic-bim-snippet)
+    + [4.2.1 GET Topics Service](#421-get-topics-service)
+    + [4.2.2 POST Topic Service](#422-post-topic-service)
+    + [4.2.3 GET Topic Service](#423-get-topic-service)
+    + [4.2.4 PUT Topic Service](#424-put-topic-service)
+    + [4.2.6 GET Topic BIM Snippet Service](#426-get-topic-bim-snippet-service)
+    + [4.2.7 PUT Topic BIM Snippet Service](#427-put-topic-bim-snippet-service)
   * [4.3 File Services](#43-file-services)
-    + [4.3.1 GET File (Header) Services](#431-get-file-header-services)
-    + [4.3.2 PUT File (Header) Services](#432-put-file-header-services)
+    + [4.3.1 GET Files (Header) Service](#431-get-files-header-service)
+    + [4.3.2 PUT Files (Header) Service](#432-put-files-header-service)
   * [4.4 Comment Services](#44-comment-services)
-    + [4.4.1 GET Comment Services](#441-get-comment-services)
-    + [4.4.2 POST Comment Services](#442-post-comment-services)
-    + [4.4.3 GET Single Comment Services](#443-get-single-comment-services)
-    + [4.4.4 PUT Single Comment Services](#444-put-single-comment-services)
+    + [4.4.1 GET Comments Service](#441-get-comments-service)
+    + [4.4.2 POST Comment Service](#442-post-comment-service)
+    + [4.4.3 GET Comment Service](#443-get-comment-service)
+    + [4.4.4 PUT Comment Service](#444-put-comment-service)
   * [4.5 Viewpoint Services](#45-viewpoint-services)
-    + [4.5.1 GET Viewpoint Services](#451-get-viewpoint-services)
-    + [4.5.2 POST Viewpoint Services](#452-post-viewpoint-services)
-    + [4.5.3 GET Single Viewpoint Services](#453-get-single-viewpoint-services)
-    + [4.5.4 PUT Single Viewpoint Services](#454-put-single-viewpoint-services)
-    + [4.5.5 GET snapshot of a Viewpoint Service](#455-get-snapshot-of-a-viewpoint-service)
-    + [4.5.6 PUT snapshot of a Viewpoint Service](#456-put-snapshot-of-a-viewpoint-service)
-    + [4.5.7 GET bitmap of a Viewpoint Service](#457-get-bitmap-of-a-viewpoint-service)
-    + [4.5.8 PUT bitmap of a Viewpoint Service](#458-put-bitmap-of-a-viewpoint-service)
+    + [4.5.1 GET Viewpoints Service](#451-get-viewpoints-service)
+    + [4.5.2 POST Viewpoint Service](#452-post-viewpoint-service)
+    + [4.5.3 GET Viewpoint Service](#453-get-viewpoint-service)
+    + [4.5.4 PUT Viewpoint Service](#454-put-viewpoint-service)
+    + [4.5.5 GET Viewpoint Snapshot Service](#455-get-viewpoint-snapshot-service)
+    + [4.5.6 PUT Viewpoint Snapshot Service](#456-put-viewpoint-snapshot-service)
+    + [4.5.7 GET Viewpoint Bitmap Service](#457-get-viewpoint-bitmap-service)
+    + [4.5.8 PUT Viewpoint Bitmap Service](#458-put-viewpoint-bitmap-service)
   * [4.6 Component Services](#46-component-services)
-    + [4.6.1 GET Component Services](#461-get-component-services)
-    + [4.6.2 PUT Component Services](#462-put-component-services)
+    + [4.6.1 GET Components Service](#461-get-components-service)
+    + [4.6.2 PUT Components Service](#462-put-components-service)
   * [4.7 Related Topics Services](#47-related-topics-services)
-    + [4.7.1 GET Related Topics Services](#471-get-related-topics-services)
-    + [4.7.2 PUT Related Topics Services](#472-put-related-topics-services)
+    + [4.7.1 GET Related Topics Service](#471-get-related-topics-service)
+    + [4.7.2 PUT Related Topics Service](#472-put-related-topics-service)
   * [4.8 Document Reference Services](#48-document-reference-services)
-    + [4.8.1 GET Document Reference Services](#481-get-document-reference-services)
-    + [4.8.2 PUT Document Reference Services](#482-put-document-reference-services)
+    + [4.8.1 GET Document References Service](#481-get-document-references-service)
+    + [4.8.2 POST Document Reference Service](#482-post-document-reference-service)
+    + [4.8.3 PUT Document Reference Service](#483-put-document-reference-service)
   * [4.9 Document Services](#49-document-services)
-    + [4.9.1 GET Documents Services](#491-get-documents-services)
-    + [4.9.2 POST Document Services](#492-post-document-services)
-    + [4.9.3 GET Document Services](#493-get-document-services)
+    + [4.9.1 GET Documents Service](#491-get-documents-service)
+    + [4.9.2 POST Document Service](#492-post-document-service)
+    + [4.9.3 GET Document Service](#493-get-document-service)
 
 <!-- tocstop -->
 
@@ -113,7 +114,7 @@ Whenever a resource offers the HTTP PUT method to be updated as a whole.
 
 This means that there is no partial update mechanism for objects but every PUT request is sending the whole object representation. PUT schemas may exclude server generated values that cannot be edited, such as creation dates or authors.
 
-## 1.4 Cross origin resource sharing (Cors)
+## 1.4 Cross Origin Resource Sharing (Cors)
 
 The server will put the "Access-Control-Allow-Headers" in the response header and specify who can access the servers (JSON) resources. The client can look for this value and proceed with accessing the resources.
 
@@ -127,15 +128,15 @@ The server has a web config file .. "*" means the server allow the resources for
         </customHeaders>
     </httpProtocol>
 
-## 1.5 HTTP status codes
+## 1.5 Http Status Codes
 
 The BCF API relies on the regular Http Status Code definitions. Good sources are [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) or the [HTTP/1.1 Specification](https://tools.ietf.org/html/rfc7231).
 
-## 1.6 Error response body format
+## 1.6 Error Response Body Format
 
 BCF-API has a specified error response body format [error.json](Schemas_draft-03/error.json).
 
-## 1.7 DateTime format
+## 1.7 DateTime Format
 
 DateTime values in this API are supposed to be in ISO 8601 compliant `YYYY-MM-DDThh:mm:ss` format with optional time zone indicators. This is the same format as defined in the Xml `xs:dateTime` type as well as the result of JavaScripts Date.toJson() output.
 
@@ -234,7 +235,7 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
         "http_basic_supported": true
     }
 
-### 3.2.2 OAuth2 protocol flow - Client Request
+### 3.2.2 OAuth2 Protocol Flow - Client Request
 
 The Client uses the **"oauth2\_auth_url"** and adds the following parameters to it.
 
@@ -257,7 +258,7 @@ You can use the state parameter to transport custom information.
 
 **Open a browser window or redirect the user to this resource.** This redirects back to the specified redirect URI with the provided state and the authorization code as a query parameter if the user allows your app to access the account, the value "access_denied" in the error query parameter if the user denies access.
 
-### 3.2.3 OAuth2 protocol flow - Token Request
+### 3.2.3 OAuth2 Protocol Flow - Token Request
 
 [token_GET.json](Schemas_draft-03/Authentication/token_GET.json)
 
@@ -300,7 +301,7 @@ The access token will be returned as JSON in the response body and is an arbitra
         "refresh_token": "MTRiMjkzZTYtOTgwNC0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh"
     }
 
-### 3.2.4 OAuth2 protocol flow - Refresh Token Request
+### 3.2.4 OAuth2 Protocol Flow - Refresh Token Request
 
 [token_GET.json](Schemas_draft-03/Authentication/token_GET.json)
 
@@ -331,7 +332,7 @@ The access token will be returned as JSON in the response body and is an arbitra
 
 The refresh token can only be used once to retrieve a token and a new refresh token.
 
-### 3.2.5 OAuth2 protocol flow - Dynamic Client Registration
+### 3.2.5 OAuth2 Protocol Flow - Dynamic Client Registration
 
 [dynRegClient\_POST.json](Schemas_draft-03/Authentication/dynRegClient_POST.json)
 
@@ -372,7 +373,7 @@ JSON encoded body using the "application/json" content type.
         "client_secret": "ZWFzdXJlLg=="
     }
 
-### 3.2.6 OAuth2 protocol flow - Requesting Resources
+### 3.2.6 OAuth2 Protocol Flow - Requesting Resources
 
 When requesting other resources the access token must be passed via the `Authorization` header using the Bearer scheme (e.g. `Authorization: Bearer Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh`).
 
@@ -382,7 +383,7 @@ When requesting other resources the access token must be passed via the `Authori
 
 ## 4.1 Project Services
 
-### 4.1.1 GET Project Services
+### 4.1.1 GET Projects Service
 
 **Resource URL**
 
@@ -406,7 +407,7 @@ Retrieve a **collection** of projects where the currently logged on user has acc
         "name": "Example project 2"
     }]
 
-### 4.1.2 GET Single Project Services
+### 4.1.2 GET Project Service
 
 **Resource URL**
 
@@ -427,7 +428,7 @@ Retrieve a specific project.
         "name": "Example project 3"
     }
 
-### 4.1.3 PUT Single Project Services
+### 4.1.3 PUT Project Service
 
 **Resource URL**
 
@@ -452,7 +453,7 @@ Modify a specific project.
         "name": "Example project 3 - Second Section"
     }
 
-### 4.1.4 GET Project Extension Services
+### 4.1.4 GET Project Extension Service
 
 **Resource URL**
 
@@ -504,7 +505,7 @@ Project extensions are used to define possible values that can be used in topics
 
 ## 4.2 Topic Services
 
-### 4.2.1 GET Topic Services
+### 4.2.1 GET Topics Service
 
 **Resource URL**
 
@@ -573,7 +574,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
         "creation_date": "2014-11-19T14:24:11.316Z"
     }]
 
-### 4.2.2 POST Topic Services
+### 4.2.2 POST Topic Service
 
 **Resource URL**
 
@@ -651,7 +652,7 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
         }
     }
 
-### 4.2.3 GET Single Topic Services
+### 4.2.3 GET Topic Service
 
 **Resource URL**
 
@@ -688,7 +689,7 @@ Retrieve a specific topic.
         }
     }
 
-### 4.2.4 PUT Single Topic Services
+### 4.2.4 PUT Topic Service
 
 **Resource URL**
 
@@ -746,7 +747,7 @@ Modify a specific topic, description similar to POST.
         }
     }
 
-### 4.2.6 GET Topic BIM Snippet
+### 4.2.6 GET Topic BIM Snippet Service
 
 **Resource URL**
 
@@ -758,7 +759,7 @@ Retrieves a topics BIM-Snippet as binary file. Will use the following HTTP heade
     Content-Length: {Size of file in bytes};
     Content-Disposition: attachment; filename="{Filename.extension}";
 
-### 4.2.7 PUT Topic BIM Snippet
+### 4.2.7 PUT Topic BIM Snippet Service
 
 **Resource URL**
 
@@ -771,7 +772,7 @@ Puts a new BIM Snippet binary file to a topic. If this is used, the parent topic
 
 ## 4.3 File Services
 
-### 4.3.1 GET File (Header) Services
+### 4.3.1 GET Files (Header) Service
 
 **Resource URL**
 
@@ -797,7 +798,7 @@ Retrieve a **collection** of file references as topic header.
         "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
     }]
 
-### 4.3.2 PUT File (Header) Services
+### 4.3.2 PUT Files (Header) Service
 
 **Resource URL**
 
@@ -835,7 +836,7 @@ Update a **collection** of file references on the topic header.
 
 ## 4.4 Comment Services
 
-### 4.4.1 GET Comment Services
+### 4.4.1 GET Comments Service
 
 **Resource URL**
 
@@ -889,7 +890,7 @@ Get comments that are closed and created after December 5 2015. Sort the result 
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }]
 
-### 4.4.2 POST Comment Services
+### 4.4.2 POST Comment Service
 
 **Resource URL**
 
@@ -927,7 +928,7 @@ JSON encoded body using the "application/json" content type.
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }
 
-### 4.4.3 GET Single Comment Services
+### 4.4.3 GET Comment Service
 
 **Resource URL**
 
@@ -951,7 +952,7 @@ Get a single comment.
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }
 
-### 4.4.4 PUT Single Comment Services
+### 4.4.4 PUT Comment Service
 
 **Resource URL**
 
@@ -983,7 +984,7 @@ Update a single comment, description similar to POST.
 
 ## 4.5 Viewpoint Services
 
-### 4.5.1 GET Viewpoint Services
+### 4.5.1 GET Viewpoints Service
 
 **Resource URL**
 
@@ -1096,7 +1097,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
             }]
         }
     }]
-### 4.5.2 POST Viewpoint Services
+### 4.5.2 POST Viewpoint Service
 
 **Resource URL**
 
@@ -1241,7 +1242,7 @@ JSON encoded body using the "application/json" content type.
         }
     }
 
-### 4.5.3 GET Single Viewpoint Services
+### 4.5.3 GET Viewpoint Service
 
 **Resource URL**
 
@@ -1307,7 +1308,7 @@ Retrieve a specific viewpoint.
         }
     }
 
-### 4.5.4 PUT Single Viewpoint Services
+### 4.5.4 PUT Viewpoint Service
 
 **Resource URL**
 
@@ -1394,7 +1395,7 @@ Update a single viewpoint, description similar to POST.
         }
     }
 
-### 4.5.5 GET snapshot of a Viewpoint Service
+### 4.5.5 GET Viewpoint Snapshot Service
 
 **Resource URL**
 
@@ -1412,7 +1413,7 @@ HTTP-response header:
 
     Content-Type: image/png
 
-### 4.5.6 PUT snapshot of a Viewpoint Service
+### 4.5.6 PUT Viewpoint Snapshot Service
 
 **Resource URL**
 
@@ -1436,7 +1437,7 @@ HTTP-response status code:
 
 201 created (empty response body)
 
-### 4.5.7 GET bitmap of a Viewpoint Service
+### 4.5.7 GET Viewpoint Bitmap Service
 
 **Resource URL**
 
@@ -1453,7 +1454,7 @@ HTTP-response header:
 
     Content-Type: image/png
 
-### 4.5.8 PUT bitmap of a Viewpoint Service
+### 4.5.8 PUT Viewpoint Bitmap Service
 
 **Resource URL**
 
@@ -1479,7 +1480,7 @@ HTTP-response status code:
 
 ## 4.6 Component Services
 
-### 4.6.1 GET Component Services
+### 4.6.1 GET Components Service
 
 **Resource URL**
 
@@ -1511,7 +1512,7 @@ Retrieve a **collection** of all components related to a viewpoint.
         "authoring_tool_id": "EXCAD/v1.0"
     }]
 
-### 4.6.2 PUT Component Services
+### 4.6.2 PUT Components Service
 
 **Resource URL**
 
@@ -1561,7 +1562,7 @@ Add or update a **collection** of all components related to a viewpoint.
 
 ## 4.7 Related Topics Services
 
-### 4.7.1 GET Related Topics Services
+### 4.7.1 GET Related Topics Service
 
 **Resource URL**
 
@@ -1583,7 +1584,7 @@ Retrieve a **collection** of all related topics to a topic.
         "related_topic_guid": "6963a846-54d1-4050-954d-607cd5e48aa3"
     }]
 
-### 4.7.2 PUT Related Topics Services
+### 4.7.2 PUT Related Topics Service
 
 **Resource URL**
 
@@ -1617,7 +1618,7 @@ Add or update a **collection** of all related topics to a topic.
 
 ## 4.8 Document Reference Services
 
-### 4.8.1 GET Document Reference Services
+### 4.8.1 GET Document References Service
 
 **Resource URL**
 
@@ -1643,19 +1644,19 @@ Retrieve a **collection** of all document references to a topic.
         "description": "The building owners global design parameters for buildings."
     }]
 
-### 4.8.2 PUT Document Reference Services
+### 4.8.2 POST Document Reference Service
 
 **Resource URL**
 
     POST /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
 
-[document_reference_PUT.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
+[document_reference_POST.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_POST.json)
 
 Add or update document references to a topic.
 
 **Example Request**
 
-    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
+    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
     Body:
     [{
         "referenced_document": "http://example.com/files/LegalRequirements.pdf",
@@ -1670,9 +1671,37 @@ Add or update document references to a topic.
         "description": "The legal requirements for buildings."
     }]
 
+### 4.8.3 PUT Document Reference Service
+
+**Resource URL**
+
+    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/document_references/{guid}
+
+[document_reference_PUT.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
+
+Add or update document references to a topic.
+
+**Example Request**
+
+    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references/472ab37a-6122-448e-86fc-86503183b520
+    Body:
+    [{
+        "guid": "472ab37a-6122-448e-86fc-86503183b520",
+        "referenced_document": "http://example.com/files/LegalRequirements_Update.pdf",
+        "description": "The legal requirements for buildings."
+    }]
+
+**Example Response**
+
+    [{
+        "guid": "472ab37a-6122-448e-86fc-86503183b520",
+        "referenced_document": "http://example.com/files/LegalRequirements_Update.pdf",
+        "description": "The legal requirements for buildings."
+    }]
+
 ## 4.9 Document Services
 
-### 4.9.1 GET Documents Services
+### 4.9.1 GET Documents Service
 
 [document_GET.json](Schemas_draft-03/Collaboration/Document/document_GET.json)
 
@@ -1696,7 +1725,7 @@ Retrieve a **collection** of all documents uploaded to a project.
         "filename": "DesignParameters.pdf"
     }]
 
-### 4.9.2 POST Document Services
+### 4.9.2 POST Document Service
 
 **Resource URL**
 
@@ -1719,7 +1748,7 @@ Upload a document (binary file) to a project.
         "filename": "Official_Building_Permission.pdf"
     }
 
-### 4.9.3 GET Document Services
+### 4.9.3 GET Document Service
 
 **Resource URL**
 
