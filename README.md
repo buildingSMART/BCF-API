@@ -508,7 +508,7 @@ Project extensions are used to define possible values that can be used in topics
 
 [topic_GET.json](Schemas_draft-03/Collaboration/Topic/topic_GET.json)
 
-Retrieve a **collection** of topics related to a project (default sort order is creation_date).
+Retrieve a **collection** of topics related to a project (default sort order is `creation_date`).
 
 **Odata filter parameters**
 
@@ -533,9 +533,9 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 
 **Example Request with odata**
 
-Get topics that are open, assigned to Architect@example.com and created after December 5 2015. Sort the result on last modified
+Get topics that are open, assigned to Architect@example.com and created after December 5th 2015. Sort the result on last modified
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and status eq 'Open' and creation_date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=modified_date desc
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and status eq 'Open' and creation_date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=modified_date desc
 
 Odata does not support list operators. To achieve list query, use the 'or' operator.
 Get topics that have at least one of the labels 'Architecture', 'Structural' or 'Heating'
@@ -544,12 +544,13 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
 
 **Example Response**
 
     [{
         "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "creation_author": "Architect@example.com",
         "title": "Example topic 1",
         "labels": [
             "Architecture",
@@ -558,6 +559,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
         "creation_date": "2013-10-21T17:34:22.409Z"
     }, {
         "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+        "creation_author": "Architect@example.com",
         "title": "Example topic 2",
         "labels": [
             "Architecture",
@@ -602,10 +604,32 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
-
-    POST Body:
+    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
+    Body:
     {
+        "topic_type": "Clash",
+        "topic_status": "open",
+        "title": "Example topic 3",
+        "priority": "high",
+        "labels": [
+            "Architecture",
+            "Heating"
+        ],
+        "assigned_to": "harry.muster@example.com",
+        "bim_snippet": {
+            "snippet_type": "clash",
+            "is_external": true,
+            "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
+            "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
+        }
+    }
+
+**Example Response**
+
+    {
+        "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "creation_author": "Architect@example.com",
+        "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": "Clash",
         "topic_status": "open",
         "title": "Example topic 3",
@@ -635,12 +659,14 @@ Retrieve a specific topic.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
 
 **Example Response**
 
     {
         "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+        "creation_author": "Architect@example.com",
+        "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": "Clash",
         "topic_status": "open",
         "title": "Example topic 3",
@@ -668,6 +694,54 @@ Retrieve a specific topic.
 
 Modify a specific topic, description similar to POST.
 
+**Example Request**
+
+    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+    Body:
+    {
+        "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+        "topic_type": "Clash",
+        "topic_status": "open",
+        "title": "Example topic 3 - Changed Title",
+        "priority": "high",
+        "labels": [
+            "Architecture",
+            "Heating"
+        ],
+        "assigned_to": "harry.muster@example.com",
+        "bim_snippet": {
+            "snippet_type": "clash",
+            "is_external": true,
+            "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
+            "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
+        }
+    }
+
+**Example Response**
+
+    {
+        "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+        "creation_author": "Architect@example.com",
+        "creation_date": "2016-08-01T17:34:22.409Z",
+        "modified_author": "Architect@example.com",
+        "modified_date": "2016-08-02T13:22:22.409Z",
+        "topic_type": "Clash",
+        "topic_status": "open",
+        "title": "Example topic 3 - Changed Title",
+        "priority": "high",
+        "labels": [
+            "Architecture",
+            "Heating"
+        ],
+        "assigned_to": "harry.muster@example.com",
+        "bim_snippet": {
+            "snippet_type": "clash",
+            "is_external": true,
+            "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
+            "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
+        }
+    }
+
 ### 4.2.6 GET Topic BIM Snippet
 
 **Resource URL**
@@ -686,7 +760,7 @@ Retrieves a topics BIM-Snippet as binary file. Will use the following HTTP heade
 
     PUT /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
 
-Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property must be set to "is_external"=false and the "reference" must be the file name with extension. The following HTTP headers are used for the upload:
+Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property `is_external` must be set to `false` and the `reference` must be the file name with extension. The following HTTP headers are used for the upload:
 
     Content-Type: application/octet-stream;
     Content-Length: {Size of file in bytes};
