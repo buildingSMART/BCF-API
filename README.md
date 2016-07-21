@@ -873,13 +873,13 @@ Get comments that are closed and created after December 5 2015. Sort the result 
 
     [{
         "guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
-        "date": "2013-10-21T17:34:22.409Z",
+        "date": "2016-08-01T12:34:22.409Z",
         "author": "max.muster@example.com",
         "comment": "Clash found",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }, {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
-        "date": "2013-11-19T14:24:11.316Z",
+        "date": "2016-08-01T14:24:11.316Z",
         "author": "bob.heater@example.com",
         "comment": "will rework the heating model",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
@@ -907,8 +907,8 @@ JSON encoded body using the "application/json" content type.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
-
+    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
+    Body:
     {
         "comment": "will rework the heating model"
     }
@@ -917,9 +917,7 @@ JSON encoded body using the "application/json" content type.
 
     {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
-        "verbal_status": "closed",
-        "status": "closed",
-        "date": "2013-11-19T14:24:11.316Z",
+        "date": "2016-08-01T14:24:11.316Z",
         "author": "bob.heater@example.com",
         "comment": "will rework the heating model",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
@@ -937,13 +935,13 @@ Get a single comment.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
 
 **Example Response**
 
     {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
-        "date": "2013-11-19T14:24:11.316Z",
+        "date": "2016-08-01T14:24:11.316Z",
         "author": "bob.heater@example.com",
         "comment": "will rework the heating model",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
@@ -959,6 +957,26 @@ Get a single comment.
 
 Update a single comment, description similar to POST.
 
+**Example Request**
+
+    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
+    Body:
+    {
+        "comment": "will rework the heating model and fix the ventilation"
+    }
+
+**Example Response**
+
+    {
+        "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+        "date": "2016-08-01T14:24:11.316Z",
+        "author": "bob.heater@example.com",
+        "modified_date": "2016-08-01T19:24:11.316Z",
+        "modified_author": "bob.heater@example.com",
+        "comment": "will rework the heating model and fix the ventilation",
+        "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
+    }
+
 ## 4.5 Viewpoint Services
 
 ### 4.5.1 GET Viewpoint Services
@@ -973,7 +991,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
 
 **Example Response**
 
@@ -1116,7 +1134,8 @@ JSON encoded body using the "application/json" content type.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
+    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
+    Body:
     {
         "perspective_camera": {
             "camera_view_point": {
@@ -1230,7 +1249,7 @@ Retrieve a specific viewpoint.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
 
 **Example Response**
 
@@ -1294,6 +1313,83 @@ Retrieve a specific viewpoint.
 
 Update a single viewpoint, description similar to POST.
 
+**Example Request**
+
+    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
+    Body:
+    {
+        "perspective_camera": {
+            "camera_view_point": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "camera_direction": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 2.0
+            },
+            "camera_up_vector": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 1.0
+            },
+            "field_of_view": 90.0
+        },
+        "clipping_planes": {
+            "clipping_plane": [{
+                "location": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "direction": {
+                    "x": 1.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            }]
+        }
+    }
+
+**Example Response**
+
+    {
+        "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+        "perspective_camera": {
+            "camera_view_point": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "camera_direction": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 2.0
+            },
+            "camera_up_vector": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 1.0
+            },
+            "field_of_view": 90.0
+        },
+        "clipping_planes": {
+            "clipping_plane": [{
+                "location": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "direction": {
+                    "x": 1.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            }]
+        }
+    }
+
 ### 4.5.5 GET snapshot of a Viewpoint Service
 
 **Resource URL**
@@ -1304,7 +1400,7 @@ Retrieve a viewpoints snapshot (png, jpg or bmp).
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
 **Example Response**
 
@@ -1322,7 +1418,7 @@ Add or update a viewpoints snapshot (png, jpg or bmp).
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
+    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
 HTTP PUT request header:
 
@@ -1345,7 +1441,7 @@ HTTP-response status code:
 Retrieve a specific viewpoint bitmaps image file (png, jpg or bmp).
 
 **Example Request**
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
 
 **Example Response**
 
@@ -1363,7 +1459,7 @@ Add or update a specific bitmap in a viewpoint (png, jpg or bmp).
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
+    https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
 
 HTTP-PUT request header:
 
