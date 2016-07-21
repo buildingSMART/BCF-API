@@ -165,7 +165,7 @@ BCF and model server are co-located on the same hosts.
 ----------
 # 3. Public Services
 
-## 3.1 Information Services
+## 3.1 Version Service
 
 [version_GET.json](Schemas_draft-03/Public/version_GET.json)
 
