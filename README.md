@@ -16,6 +16,7 @@
   * [1.5 HTTP status codes](#15-http-status-codes)
   * [1.6 Error response body format](#16-error-response-body-format)
   * [1.7 DateTime format](#17-datetime-format)
+  * [1.8 Additional Response Object Properties](#18-additional-response-object-properties)
 - [2. Topologies](#2-topologies)
   * [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
   * [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
@@ -34,8 +35,6 @@
     + [4.1.2 GET Single Project Services](#412-get-single-project-services)
     + [4.1.3 PUT Single Project Services](#413-put-single-project-services)
     + [4.1.4 GET Project Extension Services](#414-get-project-extension-services)
-    + [4.1.5 POST Project Extension Services](#415-post-project-extension-services)
-    + [4.1.6 PUT Project Extension Services](#416-put-project-extension-services)
   * [4.2 Topic Services](#42-topic-services)
     + [4.2.1 GET Topic Services](#421-get-topic-services)
     + [4.2.2 POST Topic Services](#422-post-topic-services)
@@ -141,6 +140,11 @@ BCF-API has a specified error response body format [error.json](Schemas_draft-03
 DateTime values in this API are supposed to be in ISO 8601 compliant `YYYY-MM-DDThh:mm:ss` format with optional time zone indicators. This is the same format as defined in the Xml `xs:dateTime` type as well as the result of JavaScripts Date.toJson() output.
 
 For example, `2016-04-28-16:31.27+2:00` would represent _Thursday, April 28th, 2016, 16:31 (270ms) with a time zone offset of +2 hours relative to UTC._
+
+## 1.8 Additional Response Object Properties
+
+All API response Json objects may contain additional properties that are not covered by this specification.
+This is to allow server implementations freedom to add additional functionality. Clients shall ignore those properties.
 
 ----------
 
