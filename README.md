@@ -180,13 +180,16 @@ Returns a list of all supported BCF API versions of the server.
 
 **Example Request**
 
-    https://example.com/bcf/version
+    GET https://example.com/bcf/version
 
 **Example Response**
 
     {
         "versions": [{
             "version_id": "1.0",
+            "detailed_version": "https://github.com/BuildingSMART/BCF-API"
+        }, {
+            "version_id": "2.1",
             "detailed_version": "https://github.com/BuildingSMART/BCF-API"
         }]
     }
@@ -216,7 +219,7 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 
 **Example Request**
 
-    https://example.com/bcf/auth
+    GET https://example.com/bcf/auth
 
 **Example Response**
 
@@ -239,16 +242,16 @@ The Client uses the **"oauth2\_auth_url"** and adds the following parameters to 
 
 Example URL:
 
-    https://example.com/bcf/oauth2/auth?response_type=code&client_id=<YourClientID>&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
+    GET https://example.com/bcf/oauth2/auth?response_type=code&client_id=<your_client_id>&state=<user_defined_string>
 
 Example redirected URL:
 
-    https://YourWebsite.com/retrieveCode?code=ABC1234567890XYZ&state=D98F9B4F-5B0E-4948-B8B5-59F4FE23B8E0
+    https://YourWebsite.com/retrieveCode?code=<server_generated_code>&state=<user_defined_string>
 
 Tip:
 You can use the state parameter to transport custom information.
 
-Open a browser window or redirect the user to this resource. This redirects back to the specified redirect URI with the provided state and the authorization code as a query parameter if the user allows your app to access the account, the value "access_denied" in the error query parameter if the user denies access.
+**Open a browser window or redirect the user to this resource.** This redirects back to the specified redirect URI with the provided state and the authorization code as a query parameter if the user allows your app to access the account, the value "access_denied" in the error query parameter if the user denies access.
 
 ### 3.2.3 OAuth2 protocol flow - Token Request -
 
@@ -268,19 +271,21 @@ The Client uses the **"oauth2\_token_url"** to request a token. Example:
 |expires_in|integer|The lifetime of the access token in seconds|
 |refresh_token|string|The issued OAuth2 refresh token, one-time-usable only|
 
-The POST request can be done via HTTP Basic Authorization with your applications "ClientID" as the username and your "ClientSecret" as the password.
+The POST request can be done via HTTP Basic Authorization with your applications `client_id` as the username and your `client_secret` as the password.
 
-**Post Request Body:**
+**Example Request**
 
-    grant_type=authorization_code&code=<YourAccessCode>
+    POST https://example.com/bcf/oauth2/token?grant_type=authorization_code&code=<your_access_code>
+    Headers:
+    Authorization: Basic <client_id:client_secret>
 
-Alternatively all parameters may be passed in the token request body
+Alternatively all parameters may be passed in the token request body instead of using Url parameters.
 
-**Post Request Body:**
+    POST https://example.com/bcf/oauth2/token
+    Body:
+    grant_type=authorization_code&code=<your_access_code>&client_id=<client_id>&client_secret=<client_secret>
 
-    grant_type=authorization_code&code=<YourAccessCode>&client_id=<ClientID>&client_secret=<ClientSecret>
-
-The access token will be returned as JSON in the response body and is an arbitrary string, guaranteed to fit in a varchar(255) field.
+The access token will be returned as JSON in the response body and is an arbitrary string, guaranteed to not exceed 255 characters length.
 
 **Example Response**
 
@@ -295,11 +300,30 @@ The access token will be returned as JSON in the response body and is an arbitra
 
 [token_GET.json](Schemas_draft-03/Authentication/token_GET.json)
 
-The process to retrieve a refresh token is exactly the same as retrieving a token except the POST Request Body.
+The process to retrieve a refresh token is exactly the same as retrieving a token via the code workflow except the `refresh_token` is sent instead of the `code` parameter and the `refresh_token` grant type is used.
 
-POST Request Body:
+**Example Request**
 
-    grant_type=refresh_token&refresh_token=<YourRefreshToken>
+    POST https://example.com/bcf/oauth2/token?grant_type=refresh_token&refresh_token=<your_refresh_token>
+    Headers:
+    Authorization: Basic <client_id:client_secret>
+
+Alternatively all parameters may be passed in the token request body instead of using Url parameters.
+
+    POST https://example.com/bcf/oauth2/token
+    Body:
+    grant_type=refresh_token&refresh_token=<your_refresh_token>&client_id=<client_id>&client_secret=<client_secret>
+
+The access token will be returned as JSON in the response body and is an arbitrary string, guaranteed to not exceed 255 characters length.
+
+**Example Response**
+
+    {
+        "access_token": "Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh",
+        "token_type": "bearer",
+        "expires_in": "3600",
+        "refresh_token": "MTRiMjkzZTYtOTgwNC0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh"
+    }
 
 The refresh token can only be used once to retrieve a token and a new refresh token.
 
@@ -309,11 +333,9 @@ The refresh token can only be used once to retrieve a token and a new refresh to
 
 [dynRegClient\_GET.json](Schemas_draft-03/Authentication/dynRegClient_GET.json)
 
- The following part describes the optional dynamic registration process of a client. BCF-Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
+The following part describes the optional dynamic registration process of a client. BCF-Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
 
-**Resource URL**
-
-    POST <oauth2_dynamic_client_reg_url> (obtained from auth_GET)
+The resource Url for this service is server specific and is returned as `oauth2_dynamic_client_reg_url` in the `GET /bcf/auth` resource.
 
 Register a new client :
 
@@ -330,7 +352,8 @@ JSON encoded body using the "application/json" content type.
 
 **Example Request**
 
-    https://example.com/bcf/oauth2/reg
+    POST https://example.com/bcf/oauth2/reg
+    Body:
     {
         "client_name": "Example Application",
         "client_description": "Example CAD desktop application",
@@ -347,7 +370,7 @@ JSON encoded body using the "application/json" content type.
 
 ### 3.2.6 OAuth2 protocol flow - Requesting Resources -
 
-When requesting other resources the access token must be passed via the Authorization header using the Bearer scheme *(e.g. Authorization: Bearer T9UNRV4sC9vr7ga)*.
+When requesting other resources the access token must be passed via the `Authorization` header using the Bearer scheme (e.g. `Authorization: Bearer Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh`).
 
 ----------
 
@@ -367,7 +390,7 @@ Retrieve a **collection** of projects where the currently logged on user has acc
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects
+    GET https://example.com/bcf/2.1/projects
 
 **Example Response**
 
@@ -391,7 +414,7 @@ Retrieve a specific project.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
+    GET https://example.com/bcf/2.1/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
 
 **Example Response**
 
@@ -408,7 +431,22 @@ Retrieve a specific project.
 
 [project_PUT.json](Schemas_draft-03/Project/project_PUT.json)
 
-Modify a specific project, description similar to POST.
+Modify a specific project.
+
+**Example Request**
+
+    PUT https://example.com/bcf/2.1/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
+    Body:
+    {
+        "name": "Example project 3 - Second Section"
+    }
+
+**Example Response**
+
+    {
+        "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
+        "name": "Example project 3 - Second Section"
+    }
 
 ### 4.1.4 GET Project Extension Services
 
@@ -423,7 +461,7 @@ Project extensions are used to define possible values that can be used in topics
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
+    GET https://example.com/bcf/2.1/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
 
 **Example Response**
 
@@ -470,7 +508,7 @@ Project extensions are used to define possible values that can be used in topics
 
 [topic_GET.json](Schemas_draft-03/Collaboration/Topic/topic_GET.json)
 
-Retrieve a **collection** of topics related to a project (default sort order is creation_date).
+Retrieve a **collection** of topics related to a project (default sort order is `creation_date`).
 
 **Odata filter parameters**
 
@@ -495,9 +533,9 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 
 **Example Request with odata**
 
-Get topics that are open, assigned to Architect@example.com and created after December 5 2015. Sort the result on last modified
+Get topics that are open, assigned to Architect@example.com and created after December 5th 2015. Sort the result on last modified
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and status eq 'Open' and creation_date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=modified_date desc
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and status eq 'Open' and creation_date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=modified_date desc
 
 Odata does not support list operators. To achieve list query, use the 'or' operator.
 Get topics that have at least one of the labels 'Architecture', 'Structural' or 'Heating'
@@ -506,12 +544,13 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
 
 **Example Response**
 
     [{
         "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "creation_author": "Architect@example.com",
         "title": "Example topic 1",
         "labels": [
             "Architecture",
@@ -520,6 +559,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
         "creation_date": "2013-10-21T17:34:22.409Z"
     }, {
         "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+        "creation_author": "Architect@example.com",
         "title": "Example topic 2",
         "labels": [
             "Architecture",
@@ -564,10 +604,32 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
-
-    POST Body:
+    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
+    Body:
     {
+        "topic_type": "Clash",
+        "topic_status": "open",
+        "title": "Example topic 3",
+        "priority": "high",
+        "labels": [
+            "Architecture",
+            "Heating"
+        ],
+        "assigned_to": "harry.muster@example.com",
+        "bim_snippet": {
+            "snippet_type": "clash",
+            "is_external": true,
+            "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
+            "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
+        }
+    }
+
+**Example Response**
+
+    {
+        "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "creation_author": "Architect@example.com",
+        "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": "Clash",
         "topic_status": "open",
         "title": "Example topic 3",
@@ -597,12 +659,14 @@ Retrieve a specific topic.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
 
 **Example Response**
 
     {
         "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+        "creation_author": "Architect@example.com",
+        "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": "Clash",
         "topic_status": "open",
         "title": "Example topic 3",
@@ -630,6 +694,54 @@ Retrieve a specific topic.
 
 Modify a specific topic, description similar to POST.
 
+**Example Request**
+
+    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+    Body:
+    {
+        "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+        "topic_type": "Clash",
+        "topic_status": "open",
+        "title": "Example topic 3 - Changed Title",
+        "priority": "high",
+        "labels": [
+            "Architecture",
+            "Heating"
+        ],
+        "assigned_to": "harry.muster@example.com",
+        "bim_snippet": {
+            "snippet_type": "clash",
+            "is_external": true,
+            "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
+            "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
+        }
+    }
+
+**Example Response**
+
+    {
+        "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+        "creation_author": "Architect@example.com",
+        "creation_date": "2016-08-01T17:34:22.409Z",
+        "modified_author": "Architect@example.com",
+        "modified_date": "2016-08-02T13:22:22.409Z",
+        "topic_type": "Clash",
+        "topic_status": "open",
+        "title": "Example topic 3 - Changed Title",
+        "priority": "high",
+        "labels": [
+            "Architecture",
+            "Heating"
+        ],
+        "assigned_to": "harry.muster@example.com",
+        "bim_snippet": {
+            "snippet_type": "clash",
+            "is_external": true,
+            "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
+            "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
+        }
+    }
+
 ### 4.2.6 GET Topic BIM Snippet
 
 **Resource URL**
@@ -648,7 +760,7 @@ Retrieves a topics BIM-Snippet as binary file. Will use the following HTTP heade
 
     PUT /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
 
-Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property must be set to "is_external"=false and the "reference" must be the file name with extension. The following HTTP headers are used for the upload:
+Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property `is_external` must be set to `false` and the `reference` must be the file name with extension. The following HTTP headers are used for the upload:
 
     Content-Type: application/octet-stream;
     Content-Length: {Size of file in bytes};
@@ -667,7 +779,7 @@ Retrieve a **collection** of file references as topic header.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
 
 **Example Response**
 
@@ -693,8 +805,8 @@ Update a **collection** of file references on the topic header.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
-
+    PUT https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
+    Body:
     [{
         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
         "file_name": "OfficeBuilding_Architecture_0001.ifc",
@@ -761,13 +873,13 @@ Get comments that are closed and created after December 5 2015. Sort the result 
 
     [{
         "guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
-        "date": "2013-10-21T17:34:22.409Z",
+        "date": "2016-08-01T12:34:22.409Z",
         "author": "max.muster@example.com",
         "comment": "Clash found",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }, {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
-        "date": "2013-11-19T14:24:11.316Z",
+        "date": "2016-08-01T14:24:11.316Z",
         "author": "bob.heater@example.com",
         "comment": "will rework the heating model",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
@@ -795,8 +907,8 @@ JSON encoded body using the "application/json" content type.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
-
+    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
+    Body:
     {
         "comment": "will rework the heating model"
     }
@@ -805,9 +917,7 @@ JSON encoded body using the "application/json" content type.
 
     {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
-        "verbal_status": "closed",
-        "status": "closed",
-        "date": "2013-11-19T14:24:11.316Z",
+        "date": "2016-08-01T14:24:11.316Z",
         "author": "bob.heater@example.com",
         "comment": "will rework the heating model",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
@@ -825,13 +935,13 @@ Get a single comment.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
 
 **Example Response**
 
     {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
-        "date": "2013-11-19T14:24:11.316Z",
+        "date": "2016-08-01T14:24:11.316Z",
         "author": "bob.heater@example.com",
         "comment": "will rework the heating model",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
@@ -847,6 +957,26 @@ Get a single comment.
 
 Update a single comment, description similar to POST.
 
+**Example Request**
+
+    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
+    Body:
+    {
+        "comment": "will rework the heating model and fix the ventilation"
+    }
+
+**Example Response**
+
+    {
+        "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+        "date": "2016-08-01T14:24:11.316Z",
+        "author": "bob.heater@example.com",
+        "modified_date": "2016-08-01T19:24:11.316Z",
+        "modified_author": "bob.heater@example.com",
+        "comment": "will rework the heating model and fix the ventilation",
+        "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
+    }
+
 ## 4.5 Viewpoint Services
 
 ### 4.5.1 GET Viewpoint Services
@@ -861,7 +991,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
 
 **Example Response**
 
@@ -1004,7 +1134,8 @@ JSON encoded body using the "application/json" content type.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
+    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
+    Body:
     {
         "perspective_camera": {
             "camera_view_point": {
@@ -1118,7 +1249,7 @@ Retrieve a specific viewpoint.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
 
 **Example Response**
 
@@ -1182,6 +1313,83 @@ Retrieve a specific viewpoint.
 
 Update a single viewpoint, description similar to POST.
 
+**Example Request**
+
+    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
+    Body:
+    {
+        "perspective_camera": {
+            "camera_view_point": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "camera_direction": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 2.0
+            },
+            "camera_up_vector": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 1.0
+            },
+            "field_of_view": 90.0
+        },
+        "clipping_planes": {
+            "clipping_plane": [{
+                "location": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "direction": {
+                    "x": 1.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            }]
+        }
+    }
+
+**Example Response**
+
+    {
+        "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+        "perspective_camera": {
+            "camera_view_point": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "camera_direction": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 2.0
+            },
+            "camera_up_vector": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 1.0
+            },
+            "field_of_view": 90.0
+        },
+        "clipping_planes": {
+            "clipping_plane": [{
+                "location": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "direction": {
+                    "x": 1.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            }]
+        }
+    }
+
 ### 4.5.5 GET snapshot of a Viewpoint Service
 
 **Resource URL**
@@ -1192,7 +1400,7 @@ Retrieve a viewpoints snapshot (png, jpg or bmp).
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
 **Example Response**
 
@@ -1210,7 +1418,7 @@ Add or update a viewpoints snapshot (png, jpg or bmp).
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
+    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
 HTTP PUT request header:
 
@@ -1233,7 +1441,7 @@ HTTP-response status code:
 Retrieve a specific viewpoint bitmaps image file (png, jpg or bmp).
 
 **Example Request**
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
 
 **Example Response**
 
@@ -1251,7 +1459,7 @@ Add or update a specific bitmap in a viewpoint (png, jpg or bmp).
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
+    https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
 
 HTTP-PUT request header:
 
@@ -1279,7 +1487,7 @@ Retrieve a **collection** of all components related to a viewpoint.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
 
 **Example Response**
 
@@ -1303,7 +1511,7 @@ Retrieve a **collection** of all components related to a viewpoint.
 
 **Resource URL**
 
-    POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
+    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
 [component_PUT.json](Schemas_draft-03/Collaboration/Component/component_PUT.json)
 
@@ -1311,8 +1519,8 @@ Add or update a **collection** of all components related to a viewpoint.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
-
+    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
+    Body:
     [{
         "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
         "selected": true,
@@ -1361,7 +1569,7 @@ Retrieve a **collection** of all related topics to a topic.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
 
 **Example Response**
 
@@ -1383,8 +1591,8 @@ Add or update a **collection** of all related topics to a topic.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
-
+    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
+    Body:
     [{
         "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4"
     }, {
@@ -1417,7 +1625,7 @@ Retrieve a **collection** of all document references to a topic.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
 
 **Example Response**
 
@@ -1440,12 +1648,11 @@ Retrieve a **collection** of all document references to a topic.
 [document_reference_PUT.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
 Add or update document references to a topic.
-The PUT object may either contain the property "guid" to reference a document stored on the BCF server (see section 4.9) OR the property "referenced_document" to point to an external resource.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
-
+    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
+    Body:
     [{
         "referenced_document": "http://example.com/files/LegalRequirements.pdf",
         "description": "The legal requirements for buildings."
@@ -1473,7 +1680,7 @@ Retrieve a **collection** of all documents uploaded to a project.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
 
 **Example Response**
 
@@ -1491,8 +1698,12 @@ Retrieve a **collection** of all documents uploaded to a project.
 
     POST /bcf/{version}/projects/{project_id}/documents
 
-Upload a document (binary file) to a project. The following HTTP headers are used for the upload:
+Upload a document (binary file) to a project.
 
+**Example Request**
+
+    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
+    Headers:
     Content-Type: application/octet-stream;
     Content-Length: {Size of file in bytes};
     Content-Disposition: attachment; filename="{Filename.extension}";
@@ -1512,6 +1723,13 @@ Upload a document (binary file) to a project. The following HTTP headers are use
 
 Retrieves a document as binary file. Will use the following HTTP headers to deliver additional information:
 
+**Example Request**
+
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents/472ab37a-6122-448e-86fc-86503183b520
+
+**Example Response**
+
+    Headers:
     Content-Type: application/octet-stream;
     Content-Length: {Size of file in bytes};
     Content-Disposition: attachment; filename="{Filename.extension}";
