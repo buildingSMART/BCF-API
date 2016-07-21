@@ -779,7 +779,7 @@ Retrieve a **collection** of file references as topic header.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
 
 **Example Response**
 
@@ -805,8 +805,8 @@ Update a **collection** of file references on the topic header.
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
-
+    PUT https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
+    Body:
     [{
         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
         "file_name": "OfficeBuilding_Architecture_0001.ifc",
