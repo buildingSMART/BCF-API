@@ -21,14 +21,14 @@
   * [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
   * [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
 - [3. Public Services](#3-public-services)
-  * [3.1 Information Services](#31-information-services)
+  * [3.1 Version Service](#31-version-service)
   * [3.2 Authentication Services](#32-authentication-services)
     + [3.2.1 Obtaining Authentication Information](#321-obtaining-authentication-information)
-    + [3.2.2 OAuth2 protocol flow - Client Request -](#322-oauth2-protocol-flow---client-request--)
-    + [3.2.3 OAuth2 protocol flow - Token Request -](#323-oauth2-protocol-flow---token-request--)
-    + [3.2.4 OAuth2 protocol flow - Refresh Token Request -](#324-oauth2-protocol-flow---refresh-token-request--)
-    + [3.2.5 OAuth2 protocol flow - Dynamic Client Registration -](#325-oauth2-protocol-flow---dynamic-client-registration--)
-    + [3.2.6 OAuth2 protocol flow - Requesting Resources -](#326-oauth2-protocol-flow---requesting-resources--)
+    + [3.2.2 OAuth2 protocol flow - Client Request](#322-oauth2-protocol-flow---client-request)
+    + [3.2.3 OAuth2 protocol flow - Token Request](#323-oauth2-protocol-flow---token-request)
+    + [3.2.4 OAuth2 protocol flow - Refresh Token Request](#324-oauth2-protocol-flow---refresh-token-request)
+    + [3.2.5 OAuth2 protocol flow - Dynamic Client Registration](#325-oauth2-protocol-flow---dynamic-client-registration)
+    + [3.2.6 OAuth2 protocol flow - Requesting Resources](#326-oauth2-protocol-flow---requesting-resources)
 - [4. BCF Services](#4-bcf-services)
   * [4.1 Project Services](#41-project-services)
     + [4.1.1 GET Project Services](#411-get-project-services)
@@ -234,7 +234,7 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
         "http_basic_supported": true
     }
 
-### 3.2.2 OAuth2 protocol flow - Client Request -
+### 3.2.2 OAuth2 protocol flow - Client Request
 
 The Client uses the **"oauth2\_auth_url"** and adds the following parameters to it.
 
@@ -257,7 +257,7 @@ You can use the state parameter to transport custom information.
 
 **Open a browser window or redirect the user to this resource.** This redirects back to the specified redirect URI with the provided state and the authorization code as a query parameter if the user allows your app to access the account, the value "access_denied" in the error query parameter if the user denies access.
 
-### 3.2.3 OAuth2 protocol flow - Token Request -
+### 3.2.3 OAuth2 protocol flow - Token Request
 
 [token_GET.json](Schemas_draft-03/Authentication/token_GET.json)
 
@@ -300,7 +300,7 @@ The access token will be returned as JSON in the response body and is an arbitra
         "refresh_token": "MTRiMjkzZTYtOTgwNC0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh"
     }
 
-### 3.2.4 OAuth2 protocol flow - Refresh Token Request -
+### 3.2.4 OAuth2 protocol flow - Refresh Token Request
 
 [token_GET.json](Schemas_draft-03/Authentication/token_GET.json)
 
@@ -331,7 +331,7 @@ The access token will be returned as JSON in the response body and is an arbitra
 
 The refresh token can only be used once to retrieve a token and a new refresh token.
 
-### 3.2.5 OAuth2 protocol flow - Dynamic Client Registration -
+### 3.2.5 OAuth2 protocol flow - Dynamic Client Registration
 
 [dynRegClient\_POST.json](Schemas_draft-03/Authentication/dynRegClient_POST.json)
 
@@ -372,7 +372,7 @@ JSON encoded body using the "application/json" content type.
         "client_secret": "ZWFzdXJlLg=="
     }
 
-### 3.2.6 OAuth2 protocol flow - Requesting Resources -
+### 3.2.6 OAuth2 protocol flow - Requesting Resources
 
 When requesting other resources the access token must be passed via the `Authorization` header using the Bearer scheme (e.g. `Authorization: Bearer Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh`).
 
