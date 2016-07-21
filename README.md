@@ -114,11 +114,18 @@ Whenever a resource offers the HTTP PUT method to be updated as a whole.
 
 This means that there is no partial update mechanism for objects but every PUT request is sending the whole object representation. PUT schemas may exclude server generated values that cannot be edited, such as creation dates or authors.
 
-## 1.4 Cross Origin Resource Sharing (Cors)
+## 1.4 Cross Origin Resource Sharing (CORS)
 
-The server will put the "Access-Control-Allow-Headers" in the response header and specify who can access the servers (JSON) resources. The client can look for this value and proceed with accessing the resources.
+To work with browser based API clients, servers shall allow [Cross Origin Resource Sharing (Cors)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) for any domains.
 
-The server has a web config file .. "*" means the server allow the resources for all domains.
+In a CORS scenario, web clients expect the following headers:
+* `Access-Controll-Allow-Headers: Authorization, Content-Type, Accept` to allow the `Authorization`, `Content-Type` and `Accept` headers to be used via [XHR requests](https://en.wikipedia.org/wiki/XMLHttpRequest)
+* `Access-Controll-Allow-Methods: GET, POST, PUT, OPTIONS` to allow the Http methods the API needs
+* `Access-Control-Allow-Origin: *` to allow XHR requests from any domain to the BCF server
+
+The server will put the headers in the response and specify who can access the servers (JSON) resources. The client can look for these values and proceed with accessing the resources.
+
+For example, Asp.Net applications in IIS need the following entries in their `web.config` file. `*` means the server allows any values.
 
     <httpProtocol>
         <customHeaders>
