@@ -78,7 +78,7 @@
 
 # 1. Introduction
 
-BCF is a format for managing issues on a BIM project. RESTful BCF-API supports the exchange of BCFv2 issues between software applications.
+BCF is a format for managing issues on a BIM project. RESTful BCF-API supports the exchange of BCF issues between software applications.
 
 All API access is transmitted over HTTPS. Data is sent as URL encoded query parameters and JSON POST bodies and received as JSON. Every resource has a corresponding JSON Schema (Draft 03). JSON Hyper Schema is used for link definition. The authentication method is OAuth2. URL schemas in this readme are relational to the base server URL.
 
