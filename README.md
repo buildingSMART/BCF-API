@@ -119,8 +119,8 @@ This means that there is no partial update mechanism for objects but every PUT r
 To work with browser based API clients, servers shall allow [Cross Origin Resource Sharing (Cors)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) for any domains.
 
 In a CORS scenario, web clients expect the following headers:
-* `Access-Controll-Allow-Headers: Authorization, Content-Type, Accept` to allow the `Authorization`, `Content-Type` and `Accept` headers to be used via [XHR requests](https://en.wikipedia.org/wiki/XMLHttpRequest)
-* `Access-Controll-Allow-Methods: GET, POST, PUT, OPTIONS` to allow the Http methods the API needs
+* `Access-Control-Allow-Headers: Authorization, Content-Type, Accept` to allow the `Authorization`, `Content-Type` and `Accept` headers to be used via [XHR requests](https://en.wikipedia.org/wiki/XMLHttpRequest)
+* `Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS` to allow the Http methods the API needs
 * `Access-Control-Allow-Origin: *` to allow XHR requests from any domain to the BCF server
 
 The server will put the headers in the response and specify who can access the servers (JSON) resources. The client can look for these values and proceed with accessing the resources.
