@@ -324,8 +324,6 @@ The process to retrieve a refresh token is exactly the same as retrieving a toke
 **Example Request**
 
     POST https://example.com/bcf/oauth2/token?grant_type=refresh_token&refresh_token=<your_refresh_token>
-    Headers:
-    Authorization: Basic <client_id:client_secret>
 
 Alternatively all parameters may be passed in the token request body instead of using Url parameters.
 
