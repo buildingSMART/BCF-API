@@ -116,14 +116,12 @@ This means that there is no partial update mechanism for objects but every PUT r
 
 ## 1.4 Cross Origin Resource Sharing (CORS)
 
-To work with browser based API clients, servers shall allow [Cross Origin Resource Sharing (Cors)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) for any domains.
+To work with browser based API clients using [Cross Origin Resource Sharing (Cors)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing), servers will put the `Access-Control-Allow'` headers in the response headers and specifiy who can access the servers Json resources. The client can look for these values and proceed with accessing the resources.
 
 In a CORS scenario, web clients expect the following headers:
 * `Access-Control-Allow-Headers: Authorization, Content-Type, Accept` to allow the `Authorization`, `Content-Type` and `Accept` headers to be used via [XHR requests](https://en.wikipedia.org/wiki/XMLHttpRequest)
 * `Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS` to allow the Http methods the API needs
-* `Access-Control-Allow-Origin: *` to allow XHR requests from any domain to the BCF server
-
-The server will put the headers in the response and specify who can access the servers (JSON) resources. The client can look for these values and proceed with accessing the resources.
+* `Access-Control-Allow-Origin: example.com` to allow XHR requests from the `example.com` domain to the BCF server
 
 For example, Asp.Net applications in IIS need the following entries in their `web.config` file. `*` means the server allows any values.
 
