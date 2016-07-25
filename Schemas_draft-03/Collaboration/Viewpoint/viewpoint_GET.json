@@ -2,6 +2,12 @@
     "title": "viewpoint_GET",
     "type": "object",
     "properties": {
+		"index": {
+		    "type": [
+			    "number",
+				"null"
+			]
+		},
         "guid": {
             "required": true,
             "type": "string"

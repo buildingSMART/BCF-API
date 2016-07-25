@@ -2,6 +2,12 @@
     "title": "viewpoint_PUT",
     "type": "object",
     "properties": {
+	    "index": {
+		    "type": [
+			    "number",
+				"null"
+			]
+		},
         "orthogonal_camera": {
             "type": ["object",
             "null"],
