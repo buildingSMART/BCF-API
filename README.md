@@ -1790,7 +1790,7 @@ Upload a document (binary file) to a project.
 
     GET /bcf/{version}/projects/{project_id}/documents/{guid}
 
-Retrieves a document as binary file. Will use the following HTTP headers to deliver additional information:
+Retrieves a document as binary file.
 
 **Example Request**
 
