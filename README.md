@@ -200,6 +200,8 @@ Returns a list of all supported BCF API versions of the server.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     {
         "versions": [{
             "version_id": "1.0",
@@ -239,6 +241,8 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     {
         "oauth2_auth_url": "https://example.com/bcf/oauth2/auth",
         "oauth2_token_url": "https://example.com/bcf/oauth2/token",
@@ -276,7 +280,6 @@ You can use the state parameter to transport custom information.
 The Client uses the **"oauth2\_token_url"** to request a token. Example:
 
     POST https://example.com/bcf/oauth2/token
-    Content type: application/x-www-form-urlencoded.
 
 **Parameters**
 
@@ -292,10 +295,8 @@ The POST request can be done via HTTP Basic Authorization with your applications
 **Example Request**
 
     POST https://example.com/bcf/oauth2/token?grant_type=authorization_code&code=<your_access_code>
-    Headers:
-    Authorization: Basic <client_id:client_secret>
 
-Alternatively all parameters may be passed in the token request body instead of using Url parameters.
+Alternatively all parameters may be passed in the token request body instead of using Url parameters. The expected `Content-Type` for this request is `application/x-www-form-urlencoded`.
 
     POST https://example.com/bcf/oauth2/token
     Body:
@@ -305,6 +306,8 @@ The access token will be returned as JSON in the response body and is an arbitra
 
 **Example Response**
 
+    Response Code: 201 - Created
+    Body:
     {
         "access_token": "Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh",
         "token_type": "bearer",
@@ -334,6 +337,8 @@ The access token will be returned as JSON in the response body and is an arbitra
 
 **Example Response**
 
+    Response Code: 201 - Created
+    Body:
     {
         "access_token": "Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh",
         "token_type": "bearer",
@@ -379,6 +384,8 @@ JSON encoded body using the "application/json" content type.
 
 **Example Response**
 
+    Response Code: 201 - Created
+    Body:
     {
         "client_id": "cGxlYXN1cmUu",
         "client_secret": "ZWFzdXJlLg=="
