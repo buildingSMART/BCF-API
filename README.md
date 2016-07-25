@@ -399,6 +399,8 @@ When requesting other resources the access token must be passed via the `Authori
 
 ## 4.1 Project Services
 
+For compatibility with the project structure of existing systems, the `project_id` property of `project` resources is **not forced to be a guid but may be any string**.
+
 ### 4.1.1 GET Projects Service
 
 **Resource URL**
