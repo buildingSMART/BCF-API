@@ -137,6 +137,12 @@ For example, Asp.Net applications in IIS need the following entries in their `we
 
 The BCF API relies on the regular Http Status Code definitions. Good sources are [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) or the [HTTP/1.1 Specification](https://tools.ietf.org/html/rfc7231).
 
+Generally, these response codes shall be used in the API:
+* `200 - OK` for `GET` requests that return data or `PUT` requests that update data
+* `201 - Created` for `POST` requests that create data
+
+`POST` and `PUT` requests do usually include the created resource in the response body. Exceptions to this rule are described in the specific section for the resource.
+
 ## 1.6 Error Response Body Format
 
 BCF-API has a specified error response body format [error.json](Schemas_draft-03/error.json).
@@ -194,6 +200,8 @@ Returns a list of all supported BCF API versions of the server.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     {
         "versions": [{
             "version_id": "1.0",
@@ -233,6 +241,8 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     {
         "oauth2_auth_url": "https://example.com/bcf/oauth2/auth",
         "oauth2_token_url": "https://example.com/bcf/oauth2/token",
@@ -270,7 +280,6 @@ You can use the state parameter to transport custom information.
 The Client uses the **"oauth2\_token_url"** to request a token. Example:
 
     POST https://example.com/bcf/oauth2/token
-    Content type: application/x-www-form-urlencoded.
 
 **Parameters**
 
@@ -286,10 +295,8 @@ The POST request can be done via HTTP Basic Authorization with your applications
 **Example Request**
 
     POST https://example.com/bcf/oauth2/token?grant_type=authorization_code&code=<your_access_code>
-    Headers:
-    Authorization: Basic <client_id:client_secret>
 
-Alternatively all parameters may be passed in the token request body instead of using Url parameters.
+Alternatively all parameters may be passed in the token request body instead of using Url parameters. The expected `Content-Type` for this request is `application/x-www-form-urlencoded`.
 
     POST https://example.com/bcf/oauth2/token
     Body:
@@ -299,6 +306,8 @@ The access token will be returned as JSON in the response body and is an arbitra
 
 **Example Response**
 
+    Response Code: 201 - Created
+    Body:
     {
         "access_token": "Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh",
         "token_type": "bearer",
@@ -315,8 +324,6 @@ The process to retrieve a refresh token is exactly the same as retrieving a toke
 **Example Request**
 
     POST https://example.com/bcf/oauth2/token?grant_type=refresh_token&refresh_token=<your_refresh_token>
-    Headers:
-    Authorization: Basic <client_id:client_secret>
 
 Alternatively all parameters may be passed in the token request body instead of using Url parameters.
 
@@ -328,6 +335,8 @@ The access token will be returned as JSON in the response body and is an arbitra
 
 **Example Response**
 
+    Response Code: 201 - Created
+    Body:
     {
         "access_token": "Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh",
         "token_type": "bearer",
@@ -373,6 +382,8 @@ JSON encoded body using the "application/json" content type.
 
 **Example Response**
 
+    Response Code: 201 - Created
+    Body:
     {
         "client_id": "cGxlYXN1cmUu",
         "client_secret": "ZWFzdXJlLg=="
@@ -404,6 +415,8 @@ Retrieve a **collection** of projects where the currently logged on user has acc
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     [{
         "project_id": "F445F4F2-4D02-4B2A-B612-5E456BEF9137",
         "name": "Example project 1"
@@ -428,6 +441,8 @@ Retrieve a specific project.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     {
         "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
         "name": "Example project 3"
@@ -453,6 +468,8 @@ Modify a specific project.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     {
         "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
         "name": "Example project 3 - Second Section"
@@ -475,6 +492,8 @@ Project extensions are used to define possible values that can be used in topics
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     {
         "topic_type": [
             "Information",
@@ -558,6 +577,8 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     [{
         "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
         "creation_author": "Architect@example.com",
@@ -636,6 +657,8 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
 
 **Example Response**
 
+    Response Code: 201 - Created
+    Body:
     {
         "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
         "creation_author": "Architect@example.com",
@@ -673,6 +696,8 @@ Retrieve a specific topic.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     {
         "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
         "creation_author": "Architect@example.com",
@@ -729,6 +754,8 @@ Modify a specific topic, description similar to POST.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     {
         "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
         "creation_author": "Architect@example.com",
@@ -758,11 +785,7 @@ Modify a specific topic, description similar to POST.
 
     GET /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
 
-Retrieves a topics BIM-Snippet as binary file. Will use the following HTTP headers to deliver additional information:
-
-    Content-Type: application/octet-stream;
-    Content-Length: {Size of file in bytes};
-    Content-Disposition: attachment; filename="{Filename.extension}";
+Retrieves a topics BIM-Snippet as binary file.
 
 ### 4.2.7 PUT Topic BIM Snippet Service
 
@@ -770,10 +793,7 @@ Retrieves a topics BIM-Snippet as binary file. Will use the following HTTP heade
 
     PUT /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
 
-Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property `is_external` must be set to `false` and the `reference` must be the file name with extension. The following HTTP headers are used for the upload:
-
-    Content-Type: application/octet-stream;
-    Content-Length: {Size of file in bytes};
+Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property `is_external` must be set to `false` and the `reference` must be the file name with extension.
 
 ## 4.3 File Services
 
@@ -793,6 +813,8 @@ Retrieve a **collection** of file references as topic header.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     [{
         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
         "file_name": "OfficeBuilding_Architecture_0001.ifc",
@@ -829,6 +851,8 @@ Update a **collection** of file references on the topic header.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     [{
         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
         "file_name": "OfficeBuilding_Architecture_0001.ifc",
@@ -869,18 +893,16 @@ Retrieve a **collection** of all comments related to a topic (default ordering i
 
 Get comments that are closed and created after December 5 2015. Sort the result on first created
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments?$filter=status eq 'Closed' and date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=date asc
+    GET https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments?$filter=status eq 'Closed' and date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=date asc
 
 **Example Request**
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
-
-**Example Request**
-
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
+    GET https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     [{
         "guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
         "date": "2016-08-01T12:34:22.409Z",
@@ -925,6 +947,8 @@ JSON encoded body using the "application/json" content type.
 
 **Example Response**
 
+    Response Code: 201 - Created
+    Body:
     {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
         "date": "2016-08-01T14:24:11.316Z",
@@ -949,6 +973,8 @@ Get a single comment.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
         "date": "2016-08-01T14:24:11.316Z",
@@ -977,6 +1003,8 @@ Update a single comment, description similar to POST.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
         "date": "2016-08-01T14:24:11.316Z",
@@ -1005,6 +1033,8 @@ Retrieve a **collection** of all viewpoints related to a topic.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     [{
         "guid": "b24a82e9-f67b-43b8-bda0-4946abf39624",
         "perspective_camera": {
@@ -1197,6 +1227,8 @@ JSON encoded body using the "application/json" content type.
 
 **Example Response**
 
+    Response Code: 201 - Created
+    Body:
     {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
         "perspective_camera": {
@@ -1263,6 +1295,8 @@ Retrieve a specific viewpoint.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
         "perspective_camera": {
@@ -1364,6 +1398,8 @@ Update a single viewpoint, description similar to POST.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
         "perspective_camera": {
@@ -1406,17 +1442,11 @@ Update a single viewpoint, description similar to POST.
 
     GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
 
-Retrieve a viewpoints snapshot (png, jpg or bmp).
+Retrieve a viewpoints snapshot (png, jpg or bmp) as image file.
 
 **Example Request**
 
     GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
-
-**Example Response**
-
-HTTP-response header:
-
-    Content-Type: image/png
 
 ### 4.5.6 PUT Viewpoint Snapshot Service
 
@@ -1428,19 +1458,14 @@ Add or update a viewpoints snapshot (png, jpg or bmp).
 
 **Example Request**
 
-    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
-
-HTTP PUT request header:
-
-    Content-Type: image/png
+    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
 PUT Body contains binary image data
 
 **Example Response**
 
-HTTP-response status code:
-
-201 created (empty response body)
+    Response Code: 200 - OK
+    Empty Body
 
 ### 4.5.7 GET Viewpoint Bitmap Service
 
@@ -1448,16 +1473,10 @@ HTTP-response status code:
 
     GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
 
-Retrieve a specific viewpoint bitmaps image file (png, jpg or bmp).
+Retrieve a specific viewpoints bitmap image file (png, jpg or bmp).
 
 **Example Request**
     GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
-
-**Example Response**
-
-HTTP-response header:
-
-    Content-Type: image/png
 
 ### 4.5.8 PUT Viewpoint Bitmap Service
 
@@ -1469,19 +1488,15 @@ Add or update a specific bitmap in a viewpoint (png, jpg or bmp).
 
 **Example Request**
 
-    https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
-
-HTTP-PUT request header:
-
-    Content-Type: image/png
+    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
 
 PUT Body contains binary image data
 
 **Example Response**
 
-HTTP-response status code:
 
-201 created (empty response body)
+    Response Code: 200 - OK
+    Empty Body
 
 ## 4.6 Component Services
 
@@ -1501,6 +1516,8 @@ Retrieve a **collection** of all components related to a viewpoint.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     [{
         "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
         "selected": true,
@@ -1549,6 +1566,8 @@ Add or update a **collection** of all components related to a viewpoint.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     [{
         "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
         "selected": true,
@@ -1583,6 +1602,8 @@ Retrieve a **collection** of all related topics to a topic.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     [{
         "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4"
     }, {
@@ -1593,7 +1614,7 @@ Retrieve a **collection** of all related topics to a topic.
 
 **Resource URL**
 
-    POST /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
+    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
 
 [related_topic_PUT.json](Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PUT.json)
 
@@ -1601,7 +1622,7 @@ Add or update a **collection** of all related topics to a topic.
 
 **Example Request**
 
-    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
+    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
     Body:
     [{
         "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4"
@@ -1613,6 +1634,8 @@ Add or update a **collection** of all related topics to a topic.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     [{
         "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4"
     }, {
@@ -1639,6 +1662,8 @@ Retrieve a **collection** of all document references to a topic.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     [{
         "guid": "472ab37a-6122-448e-86fc-86503183b520",
         "referenced_document": "http://example.com/files/LegalRequirements.pdf",
@@ -1670,6 +1695,8 @@ Add or update document references to a topic.
 
 **Example Response**
 
+    Response Code: 201 - Created
+    Body:
     [{
         "guid": "472ab37a-6122-448e-86fc-86503183b520",
         "referenced_document": "http://example.com/files/LegalRequirements.pdf",
@@ -1698,6 +1725,8 @@ Add or update document references to a topic.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     [{
         "guid": "472ab37a-6122-448e-86fc-86503183b520",
         "referenced_document": "http://example.com/files/LegalRequirements_Update.pdf",
@@ -1722,6 +1751,8 @@ Retrieve a **collection** of all documents uploaded to a project.
 
 **Example Response**
 
+    Response Code: 200 - OK
+    Body:
     [{
         "guid": "472ab37a-6122-448e-86fc-86503183b520",
         "filename": "LegalRequirements.pdf"
@@ -1741,13 +1772,11 @@ Upload a document (binary file) to a project.
 **Example Request**
 
     POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
-    Headers:
-    Content-Type: application/octet-stream;
-    Content-Length: {Size of file in bytes};
-    Content-Disposition: attachment; filename="{Filename.extension}";
 
 **Example Response**
 
+    Response Code: 201 - Created
+    Body:
     {
         "guid": "472ab37a-6122-448e-86fc-86503183b520",
         "filename": "Official_Building_Permission.pdf"
@@ -1759,7 +1788,7 @@ Upload a document (binary file) to a project.
 
     GET /bcf/{version}/projects/{project_id}/documents/{guid}
 
-Retrieves a document as binary file. Will use the following HTTP headers to deliver additional information:
+Retrieves a document as binary file.
 
 **Example Request**
 
@@ -1767,7 +1796,4 @@ Retrieves a document as binary file. Will use the following HTTP headers to deli
 
 **Example Response**
 
-    Headers:
-    Content-Type: application/octet-stream;
-    Content-Length: {Size of file in bytes};
-    Content-Disposition: attachment; filename="{Filename.extension}";
+Retrieves a document as binary file.
