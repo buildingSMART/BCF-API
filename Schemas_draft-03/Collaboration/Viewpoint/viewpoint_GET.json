@@ -2,12 +2,10 @@
     "title": "viewpoint_GET",
     "type": "object",
     "properties": {
-		"index": {
-		    "type": [
-			    "number",
-				"null"
-			]
-		},
+        "index": {
+            "type": ["number",
+            "null"]
+        },
         "guid": {
             "required": true,
             "type": "string"
@@ -280,6 +278,22 @@
                         "height": {
                             "type": "integer"
                         }
+                    }
+                }
+            }
+        },
+        "authorization": {
+            "type": "object",
+            "required": false,
+            "properties": {
+                "viewpoint_actions": {
+                    "required": false,
+                    "type": "array",
+                    "items": {
+                        "enum": ["update",
+                        "updateBitmap",
+                        "updateSnapshot",
+                        "updateComponent"]
                     }
                 }
             }

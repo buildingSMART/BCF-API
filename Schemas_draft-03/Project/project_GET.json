@@ -11,14 +11,22 @@
         "name": {
             "type": "string",
             "required": true
+        },
+        "authorization": {
+            "type": "object",
+            "required": false,
+            "properties": {
+                "project_actions": {
+                    "required": false,
+                    "type": "array",
+                    "items": {
+                        "enum": ["update",
+                        "createTopic",
+                        "createDocument",
+                        "updateProjectExtensions"]
+                    }
+                }
+            }
         }
-    },
-    "links": [{
-        "rel": "topics",
-        "href": "{project_id}/topics"
-    },
-    {
-        "rel": "extension",
-        "href": "{project_id}/extension"
-    }]
+    }
 }

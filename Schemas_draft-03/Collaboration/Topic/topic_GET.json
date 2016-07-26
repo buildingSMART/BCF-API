@@ -89,26 +89,29 @@
         "due_date": {
             "type": ["string",
             "null"]
+        },
+        "authorization": {
+            "type": "object",
+            "required": false,
+            "properties": {
+                "topic_actions": {
+                    "required": false,
+                    "type": "array",
+                    "items": {
+                        "enum": ["update",
+                        "updateBimSnippet",
+                        "updateRelatedTopics",
+                        "updateDocumentServices",
+                        "updateFiles",
+                        "createComment",
+                        "createViewpoint"]
+                    }
+                },
+                "topic_status": {
+                    "type": ["string",
+                    "null"]
+                }
+            }
         }
-    },
-    "links": [{
-        "rel": "files",
-        "href": "{guid}/files"
-    },
-    {
-        "rel": "document_references",
-        "href": "{guid}/document_references"
-    },
-    {
-        "rel": "related_topics",
-        "href": "{guid}/related_topics"
-    },
-    {
-        "rel": "comments",
-        "href": "{guid}/comments"
-    },
-    {
-        "rel": "viewpoints",
-        "href": "{guid}/viewpoints"
-    }]
+    }
 }
