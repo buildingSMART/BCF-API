@@ -153,7 +153,65 @@ DateTime values in this API are supposed to be in ISO 8601 compliant `YYYY-MM-DD
 
 For example, `2016-04-28-16:31.27+2:00` would represent _Thursday, April 28th, 2016, 16:31 (270ms) with a time zone offset of +2 hours relative to UTC._
 
-## 1.8 Additional Response Object Properties
+## 1.8 Authorization
+
+API implementors can optionally choose to restrict the actions a user is allowed to perform on the BCF entities
+via the API. The global default authorizations for all entities are expressed in the project extensions schema and can
+be locally overridden in the entities themselves.
+
+### 1.8.1 Per-entity authorization
+
+Whenever a user requests an update-able entity with the request parameter "includeAuthorization" equal to "true" the
+server should include an "authorization" field in the entity containing any local variations from the global
+authorization defaults for that entity. Using this information clients can decide whether to, for example, include an
+"Edit" button in the UI displaying the entity depending on the actions permitted for the user.
+
+### 1.8.2 Determining authorized entity actions
+
+The client can calculate the available set of actions for a particular entity by taking the project-wide defaults from
+the project extensions, then replacing any keys defined in the entity's "authorization" map with the values specified
+locally. The meaning of each of the authorization keys is outlined in outlined in
+[4.1.8 Expressing user authorization through Project Extensions](#418-expressing-user-authorization-through-project-extensions).
+
+**Example Scenario (Topic)**
+
+_In the Project Extensions_
+
+    {
+        "topic_actions": [],
+        "topic_status": [
+            "open",
+            "closed",
+            "confirmed"
+        ]
+    }
+
+Indicating that by default:
+
+* no modifications can be made to Topics
+* Topics can be placed in 'open', 'closed' or 'confirmed' status
+
+_In the Topic_
+
+    {
+        "authorization": {
+            "topic_actions": [
+                "update",
+                "createComment",
+                "createViewpoint"
+            ],
+            "topic_status": [
+                "closed"
+            ]
+        }
+    }
+
+Indicating that for this topic, the current user can:
+
+* update the Topic, or add comments or viewpoints
+* place the Topic into 'closed' status
+
+## 1.9 Additional Response Object Properties
 
 All API response Json objects may contain additional properties that are not covered by this specification.
 This is to allow server implementations freedom to add additional functionality. Clients shall ignore those properties.
@@ -421,10 +479,19 @@ Retrieve a **collection** of projects where the currently logged on user has acc
     Body:
     [{
         "project_id": "F445F4F2-4D02-4B2A-B612-5E456BEF9137",
-        "name": "Example project 1"
+        "name": "Example project 1",
+		"authorization": {
+            "project_actions": [
+                "createTopic",
+                "createDocument"
+            ]
+        }
     }, {
         "project_id": "A233FBB2-3A3B-EFF4-C123-DE22ABC8414",
-        "name": "Example project 2"
+        "name": "Example project 2",
+		"authorization": {
+            "project_actions": []
+        }
     }]
 
 ### 4.1.2 GET Project Service
@@ -447,7 +514,13 @@ Retrieve a specific project.
     Body:
     {
         "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
-        "name": "Example project 3"
+        "name": "Example project 3",
+		"authorization": {
+            "project_actions": [
+                "update",
+                "updateProjectExtensions"
+            ]
+        }
     }
 
 ### 4.1.3 PUT Project Service
@@ -474,7 +547,13 @@ Modify a specific project.
     Body:
     {
         "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
-        "name": "Example project 3 - Second Section"
+        "name": "Example project 3 - Second Section",
+		"authorization": {
+            "project_actions": [
+                "update",
+                "updateProjectExtensions"
+            ]
+        }
     }
 
 ### 4.1.4 GET Project Extension Service
@@ -524,8 +603,78 @@ Project extensions are used to define possible values that can be used in topics
             "Architect@example.com",
             "BIM-Manager@example.com",
             "bob_heater@example.com"
+        ],
+        "project_actions": [
+            "update",
+            "createTopic",
+            "createDocument",
+            "updateProjectExtensions"
+        ],
+        "topic_actions": [
+            "update",
+            "updateBimSnippet",
+            "updateRelatedTopics",
+            "updateDocumentServices",
+            "updateFiles",
+            "createComment",
+            "createViewpoint"
+        ],
+        "comment_actions": [
+            "update"
+        ],
+        "viewpoint_actions": [
+            "update",
+            "updateBitmap",
+            "updateSnapshot",
+            "updateComponent"
         ]
     }
+
+### 4.1.5 Expressing user authorization through Project Extensions
+
+Global default authorizations for the requesting user can be expressed in the project schema. The actions authorized
+here will apply to any entities that do not override them locally. The complete set of options for the BCF entities are
+listed below.
+
+#### 4.1.5.1 Project
+
+The 'project_actions' entry in the project extensions defines what actions are allowed to be performed
+at the project level. The available actions include:
+
+* *update* - The ability to update the project details (see [4.1.4 PUT Single Project Services](#414-put-single-project-services))
+* *createTopic* - The ability to create a new topic (see [4.2.2 POST Topic Services](#422-post-topic-services))
+* *createDocument* - The ability to create a new document (see [4.9.2 POST Document Services](#492-post-document-services))
+* *updateProjectExtensions* - The ability to update the project extensions (see [4.1.7 PUT Project Extension Services](#417-put-project-extension-services))
+
+#### 4.1.5.2 Topic
+
+The 'topic_actions' entry in the project extensions defines what actions are allowed to be performed at the topic
+level by default (i.e. unless overridden by specific topics) The available actions include:
+
+* *update* - The ability to update the topic (see [4.2.4 PUT Single Topic Services](#424-put-single-topic-services))
+* *updateBimSnippet* - The ability to update the BIM snippet for topics (see [4.2.7 PUT Topic BIM Snippet](#427-put-topic-bim-snippet))
+* *updateRelatedTopics* - The ability to update the collection of related topics (see [4.7.2 PUT Related Topics Services](#472-put-related-topics-services))
+* *updateDocumentReferences* - The ability to update the collection of document references (see [4.8.2 PUT Document Reference Services](#482-put-document-reference-services))
+* *updateFiles* - The ability to update the file header (see [4.3.2 PUT File (Header) Services](#432-put-file-header-services))
+* *createComment* - The ability to create a comment (see [4.4.2 POST Comment Services](#442-post-comment-services))
+* *createViewpoint* - The ability to create a new viewpoint (see [4.5.2 POST Viewpoint Services](#452-post-viewpoint-services))
+
+#### 4.1.5.3 Comment
+
+The 'comment_actions' entry in the project extensions defines what actions are allowed to be performed at the comment level by
+default (i.e unless overridden by specific comments). The available actions include:
+
+* *update* - The ability to update the comment (see [4.4.4 PUT Single Comment Services](#444-put-single-comment-services))
+
+#### 4.1.5.4 Viewpoint
+
+The 'viewpoint_actions' entry in the project extensions defines what actions are allowed to be performed at the viewpoint level by
+default (i.e. unless overridden by specific viewpoints). The available actions include:
+
+* *update* - The ability to update the viewpoint (see [4.5.4 PUT Single Viewpoint Services](#454-put-single-viewpoint-services))
+* *updateBitmap* - The ability to update the bitmap for the viewpoint (see [4.5.8 PUT bitmap of a Viewpoint Service](#458-put-bitmap-of-a-viewpoint-service))
+* *updateSnapshot* - The ability to update the snapshot for the viewpoint (see [4.5.6 PUT snapshot of a Viewpoint Service](#456-put-snapshot-of-a-viewpoint-service))
+* *updateComponent* - The ability to update the component for the viewpoint (see [4.6.2 PUT Component Services](#462-put-component-services))
 
 ---------
 
@@ -718,6 +867,12 @@ Retrieve a specific topic.
             "is_external": true,
             "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
             "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
+        },
+		"authorization": {
+            "topic_actions": [
+                "createComment",
+                "createViewpoint"
+            ]
         }
     }
 
@@ -796,6 +951,12 @@ Retrieves a topics BIM-Snippet as binary file.
     PUT /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
 
 Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property `is_external` must be set to `false` and the `reference` must be the file name with extension.
+
+### 4.2.8 Determining allowed Topic modifications
+
+The global default Topic authorizations are expressed in the project schema and when Topic(s) are requested with the
+parameter "includeAuthorization" equal to "true" Topics will include an "authorization" field containing any local
+overrides for each Topic.
 
 ## 4.3 File Services
 
@@ -910,7 +1071,12 @@ Get comments that are closed and created after December 5 2015. Sort the result 
         "date": "2016-08-01T12:34:22.409Z",
         "author": "max.muster@example.com",
         "comment": "Clash found",
-        "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
+        "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+		"authorization": {
+            "comment_actions": [
+                "update"
+            ]
+        }
     }, {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
         "date": "2016-08-01T14:24:11.316Z",
@@ -1003,6 +1169,7 @@ Update a single comment, description similar to POST.
         "comment": "will rework the heating model and fix the ventilation"
     }
 
+
 **Example Response**
 
     Response Code: 200 - OK
@@ -1016,6 +1183,12 @@ Update a single comment, description similar to POST.
         "comment": "will rework the heating model and fix the ventilation",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }
+
+### 4.4.5 Determining allowed Comment modifications
+
+The global default Comment authorizations are expressed in the project schema and when Comment(s) are requested with the
+parameter "includeAuthorization" equal to "true" Comments will include an "authorization" field containing any local
+overrides for each Comment.
 
 ## 4.5 Viewpoint Services
 
@@ -1084,6 +1257,14 @@ Retrieve a **collection** of all viewpoints related to a topic.
                     "z": 0.1
                 }
             }]
+        },
+        "authorization": {
+            "viewpoint_actions": [
+                "update",
+                "updateBitmap",
+                "updateSnapshot",
+                "updateComponent"
+            ]
         }
     }, {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
@@ -1132,8 +1313,12 @@ Retrieve a **collection** of all viewpoints related to a topic.
                     "z": 0.0
                 }
             }]
+        },
+        "authorization": {
+            "viewpoint_actions": []
         }
     }]
+
 ### 4.5.2 POST Viewpoint Service
 
 **Resource URL**
@@ -1347,6 +1532,14 @@ Retrieve a specific viewpoint.
                     "z": 0.0
                 }
             }]
+        },
+        "authorization": {
+            "viewpoint_actions": [
+                "update",
+                "updateBitmap",
+                "updateSnapshot",
+                "updateComponent"
+            ]
         }
     }
 
@@ -1497,9 +1690,14 @@ PUT Body contains binary image data
 
 **Example Response**
 
-
     Response Code: 200 - OK
     Empty Body
+
+### 4.5.9 Determining allowed Viewpoint modifications
+
+The global default Viewpoint authorizations are expressed in the project schema and when Viewpoint(s) are requested with the
+parameter "includeAuthorization" equal to "true" Viewpoints will include an "authorization" field containing any local
+overrides for each Viewpoint.
 
 ## 4.6 Component Services
 
