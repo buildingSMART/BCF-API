@@ -55,6 +55,46 @@
                 "type": ["string",
                 "null"]
             }
+        },
+        "project_actions": {
+            "required": false,
+            "type": "array",
+            "items": {
+                "enum": ["update",
+                "createTopic",
+                "createDocument",
+                "updateProjectExtensions"]
+            }
+        },
+        "topic_actions": {
+            "required": false,
+            "type": "array",
+            "items": {
+                "enum": ["update",
+                "updateBimSnippet",
+                "updateRelatedTopics",
+                "updateDocumentServices",
+                "updateFiles",
+                "createComment",
+                "createViewpoint"]
+            }
+        },
+        "comment_actions": {
+            "required": false,
+            "type": "array",
+            "items": {
+                "enum": ["update"]
+            }
+        },
+        "viewpoint_actions": {
+            "required": false,
+            "type": "array",
+            "items": {
+                "enum": ["update",
+                "updateBitmap",
+                "updateSnapshot",
+                "updateComponent"]
+            }
         }
     }
 }

@@ -37,6 +37,19 @@
         "modified_author": {
             "type": ["string",
             "null"]
+        },
+        "authorization": {
+            "type": "object",
+            "required": false,
+            "properties": {
+                "comment_actions": {
+                    "required": false,
+                    "type": "array",
+                    "items": {
+                        "enum": ["update"]
+                    }
+                }
+            }
         }
     }
 }
