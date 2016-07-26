@@ -491,7 +491,7 @@ Retrieve a **collection** of projects where the currently logged on user has acc
     [{
         "project_id": "F445F4F2-4D02-4B2A-B612-5E456BEF9137",
         "name": "Example project 1",
-		"authorization": {
+        "authorization": {
             "project_actions": [
                 "createTopic",
                 "createDocument"
@@ -500,7 +500,7 @@ Retrieve a **collection** of projects where the currently logged on user has acc
     }, {
         "project_id": "A233FBB2-3A3B-EFF4-C123-DE22ABC8414",
         "name": "Example project 2",
-		"authorization": {
+        "authorization": {
             "project_actions": []
         }
     }]
@@ -526,7 +526,7 @@ Retrieve a specific project.
     {
         "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
         "name": "Example project 3",
-		"authorization": {
+        "authorization": {
             "project_actions": [
                 "update",
                 "updateProjectExtensions"
@@ -559,7 +559,7 @@ Modify a specific project.
     {
         "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
         "name": "Example project 3 - Second Section",
-		"authorization": {
+        "authorization": {
             "project_actions": [
                 "update",
                 "updateProjectExtensions"
@@ -878,7 +878,7 @@ Retrieve a specific topic.
             "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
             "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
         },
-		"authorization": {
+        "authorization": {
             "topic_actions": [
                 "createComment",
                 "createViewpoint"
@@ -1082,7 +1082,7 @@ Get comments that are closed and created after December 5 2015. Sort the result 
         "author": "max.muster@example.com",
         "comment": "Clash found",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
-		"authorization": {
+        "authorization": {
             "comment_actions": [
                 "update"
             ]
@@ -1178,7 +1178,6 @@ Update a single comment, description similar to POST.
     {
         "comment": "will rework the heating model and fix the ventilation"
     }
-
 
 **Example Response**
 
