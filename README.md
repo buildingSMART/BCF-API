@@ -172,15 +172,15 @@ be locally overridden in the entities themselves.
 
 ### 1.8.1 Per-Entity Authorization
 
-Whenever a user requests an update-able entity with the request parameter "includeAuthorization" equal to "true" the
-server should include an "authorization" field in the entity containing any local variations from the global
+Whenever a user requests an update-able entity with the request parameter `includeAuthorization` equal to `true` the
+server should include an `authorization` field in the entity containing any local variations from the global
 authorization defaults for that entity. Using this information clients can decide whether to, for example, include an
 "Edit" button in the UI displaying the entity depending on the actions permitted for the user.
 
 ### 1.8.2 Determining Authorized Entity Actions
 
 The client can calculate the available set of actions for a particular entity by taking the project-wide defaults from
-the project extensions, then replacing any keys defined in the entity's "authorization" map with the values specified
+the project extensions, then replacing any keys defined in the entity's `authorization` map with the values specified
 locally. The meaning of each of the authorization keys is outlined in outlined in
 [4.1.5 Expressing User Authorization through Project Extensions](#415-expressing-user-authorization-through-project-extensions).
 
@@ -655,7 +655,6 @@ at the project level. The available actions include:
 * *update* - The ability to update the project details (see [4.1.3 PUT Project Service](#413-put-project-service))
 * *createTopic* - The ability to create a new topic (see [4.2.2 POST Topic Service](#422-post-topic-service))
 * *createDocument* - The ability to create a new document (see [4.9.2 POST Document Service](#492-post-document-service))
-* *updateProjectExtensions* - The ability to update the project extensions (see [4.1.7 PUT Project Extension Services](#417-put-project-extension-services))
 
 #### 4.1.5.2 Topic
 

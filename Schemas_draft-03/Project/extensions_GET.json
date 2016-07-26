@@ -62,8 +62,7 @@
             "items": {
                 "enum": ["update",
                 "createTopic",
-                "createDocument",
-                "updateProjectExtensions"]
+                "createDocument"]
             }
         },
         "topic_actions": {
