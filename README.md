@@ -901,7 +901,6 @@ Modify a specific topic, description similar to POST.
     PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
     Body:
     {
-        "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
         "topic_type": "Clash",
         "topic_status": "open",
         "title": "Example topic 3 - Changed Title",
