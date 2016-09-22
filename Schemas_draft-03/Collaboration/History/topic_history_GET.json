@@ -1,0 +1,26 @@
+{
+    "title": "topic_history_GET",
+    "type": "object",
+    "properties": {
+        "topic_guid": {
+            "required": true,
+            "type": "string"
+        },
+        "type": {
+            "required": true,
+            "type": "string"
+        },
+        "value": {
+            "type": ["string",
+            "null"]
+        },
+        "date": {
+            "required": true,
+            "type": "string"
+        },
+        "author": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
