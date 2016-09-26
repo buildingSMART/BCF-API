@@ -51,7 +51,6 @@
     + [4.2.6 GET Topic BIM Snippet Service](#426-get-topic-bim-snippet-service)
     + [4.2.7 PUT Topic BIM Snippet Service](#427-put-topic-bim-snippet-service)
     + [4.2.8 Determining Allowed Topic Modifications](#428-determining-allowed-topic-modifications)
-    + [4.2.9 GET Topic History Service](#429-get-topic-history-service)
   * [4.3 File Services](#43-file-services)
     + [4.3.1 GET Files (Header) Service](#431-get-files-header-service)
     + [4.3.2 PUT Files (Header) Service](#432-put-files-header-service)
@@ -85,6 +84,9 @@
     + [4.9.1 GET Documents Service](#491-get-documents-service)
     + [4.9.2 POST Document Service](#492-post-document-service)
     + [4.9.3 GET Document Service](#493-get-document-service)
+  * [5.1 Topics History Services](#51-topics-history-services)
+    + [5.1.1 GET Topics History Service](#511-get-topics-history-service)
+    + [5.1.2 GET Topic History Service](#512-get-topic-history-service)
 
 <!-- tocstop -->
 
@@ -968,82 +970,6 @@ Puts a new BIM Snippet binary file to a topic. If this is used, the parent topic
 The global default Topic authorizations are expressed in the project schema and when Topic(s) are requested with the
 parameter "includeAuthorization" equal to "true" Topics will include an "authorization" field containing any local
 overrides for each Topic.
-
-### 4.2.9 GET Topic History Service
-
-**Resource URL**
-
-    GET /bcf/{version}/projects/{project_id}/topics/history
-
-[topic_history_GET.json](Schemas_draft-03/Collaboration/History/topic_history_GET.json)
-
-Retrieve a **collection** of topic histories related to a project (default sort order is `date`).
-
-**Topic history types**
-
-|type|value|
-|---------|-----------|
-|topic_created|null|
-|title_set|The title (limit: 100 characters)|
-|description_set|The description (limit: 500 characters)|
-|status_set|The status (value from extensions) |
-|type_set|The type (value from extensions)|
-|priority_set|The priority (value from extensions)|
-|assigned_set|The assigned user (value from extensions)|
-|label_added|The added label (value from extensions)|
-|label_removed|The removed label (value from extensions)|
-
-**Odata filter parameters**
-
-|parameter|type|description|
-|---------|----|-----------|
-|topic_guid|string|guid of the topic |
-|author|string|userId of the author (value from extensions)|
-|type|string|type of the history (value from Topic history types, table above)|
-|date|datetime|date of the history|
-
-**Odata sort parameters**
-
-|parameter|description|
-|---------|-----------|
-|date|date of the history|
-
-**Example Request with odata**
-
-Get histories of type 'status_set' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
-
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=author eq 'Architect@example.com' and type eq 'status_set' and date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=date asc
-
-Get latest histories of given topic. Skip the 10 first, and get the 5 next
-
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=topic_guid eq 'A245F4F2-2C01-B43B-B612-5E456BEF8116'&$top=5&$skip=10
-
-Odata does not support list operators. To achieve list query, use the 'or' operator.
-Get histories that is of type 'status_set', 'type_set' or 'title_set'
-
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=type eq 'status_set' or type eq 'type_set' or type eq 'title_set'
-
-**Example Request**
-
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history
-
-**Example Response**
-
-    Response Code: 200 - OK
-    Body:
-    [{
-        "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
-        "type": "status_set",
-        "value": "Open",
-        "date": "2013-10-21T17:34:22.409Z"
-        "author": "Architect@example.com"
-    }, {
-        "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
-        "type": "type_set",
-        "value": "Error",
-        "date": "2014-11-19T14:24:11.316Z"
-        "author": "Architect@example.com"
-    }]
 
 ## 4.3 File Services
 
@@ -2084,3 +2010,179 @@ Retrieves a document as binary file.
 **Example Response**
 
 Retrieves a document as binary file.
+
+## 5.1 Topics History Services
+
+The topic history service reflects the history for topics. Each creation or update of a topic generates a new topic history.
+
+### 5.1.1 GET Topics History Service
+
+**Resource URL**
+
+    GET /bcf/{version}/projects/{project_id}/topics/history
+
+[topic_history_GET.json](Schemas_draft-03/Collaboration/History/topic_history_GET.json)
+
+Retrieve a **collection** of topic histories related to a project (default sort order is `date`).
+
+**Topic history types**
+
+|type|operation|value|
+|---------|-----------|-----------|
+|topic|created|null|
+|title|updated|The title (limit: 128 characters)|
+|description|updated, removed|The description (limit: 1024 characters) or null if removed|
+|status|updated|The status (value from extensions) |
+|type|updated|The type (value from extensions)|
+|priority|updated, removed|The priority (value from extensions) or null if removed|
+|due_date|updated, removed|The due date or null if removed|
+|assigned|updated, removed|The assigned user (value from extensions) or null if removed|
+|label|added, removed|The label added or removed (value from extensions)|
+
+**Odata filter parameters**
+
+|parameter|type|description|
+|---------|----|-----------|
+|topic_guid|string|guid of the topic |
+|author|string|userId of the author (value from extensions)|
+|type|string|type of the history (value from Topic history types, table above)|
+|date|datetime|date of the history|
+
+**Odata sort parameters**
+
+|parameter|description|
+|---------|-----------|
+|date|date of the history|
+
+**Example Request with odata**
+
+Get histories of type 'status_set' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
+
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=author eq 'Architect@example.com' and type eq 'status_set' and date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=date asc
+
+Get latest histories of given topic. Skip the 10 first, and get the 5 next
+
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=topic_guid eq 'A245F4F2-2C01-B43B-B612-5E456BEF8116'&$top=5&$skip=10
+
+Odata does not support list operators. To achieve list query, use the 'or' operator.
+Get histories that is of type 'status_set', 'type_set' or 'title_set'
+
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=type eq 'status_set' or type eq 'type_set' or type eq 'title_set'
+
+**Example Request**
+
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history
+
+**Example Response**
+
+    Response Code: 200 - OK
+    Body:
+    [{
+        "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+        "date": "2014-11-19T14:24:11.316Z",
+        "author": "Architect@example.com",
+        "events": [
+            {
+                "type": "status",
+                "operation": "update",
+                "value": "Closed"
+            }
+        ]
+    }, {
+        "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "date": "2013-10-21T17:34:22.409Z",
+        "author": "Architect@example.com",
+        "events": [
+            {
+                "type": "type",
+                "operation": "update",
+                "value": "Warning"
+            }
+        ]
+    }]
+
+### 5.1.2 GET Topic History Service
+
+**Resource URL**
+
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/history
+
+[topic_history_GET.json](Schemas_draft-03/Collaboration/History/topic_history_GET.json)
+
+Retrieve a **collection** of topic histories related to a project (default sort order is `date`).
+
+**Topic history types**
+
+|type|operation|value|
+|---------|-----------|-----------|
+|topic|created|null|
+|title|updated|The title (limit: 128 characters)|
+|description|updated, removed|The description (limit: 1024 characters) or null if removed|
+|status|updated|The status (value from extensions) |
+|type|updated|The type (value from extensions)|
+|priority|updated, removed|The priority (value from extensions) or null if removed|
+|due_date|updated, removed|The due date or null if removed|
+|assigned|updated, removed|The assigned user (value from extensions) or null if removed|
+|label|added, removed|The label added or removed (value from extensions)|
+
+**Odata filter parameters**
+
+|parameter|type|description|
+|---------|----|-----------|
+|author|string|userId of the author (value from extensions)|
+|type|string|type of the history (value from Topic history types, table above)|
+|date|datetime|date of the history|
+
+**Odata sort parameters**
+
+|parameter|description|
+|---------|-----------|
+|date|date of the history|
+
+**Example Request with odata**
+
+Get histories of type 'status_set' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
+
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$filter=author eq 'Architect@example.com' and type eq 'status_set' and date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=date asc
+
+Get latest histories. Skip the 10 first, and get the 5 next
+
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$top=5&$skip=10
+
+Odata does not support list operators. To achieve list query, use the 'or' operator.
+Get histories that is of type 'status_set', 'type_set' or 'title_set'
+
+    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$filter=type eq 'status_set' or type eq 'type_set' or type eq 'title_set'
+
+**Example Request**
+
+    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history
+
+**Example Response**
+
+    Response Code: 200 - OK
+    Body:
+    [{
+        "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "date": "2014-11-19T14:24:11.316Z",
+        "author": "Architect@example.com",
+        "events": [
+            {
+                "type": "type",
+                "operation": "update",
+                "value": "Error"
+            }
+        ]
+    }, {
+        "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "date": "2013-10-21T17:34:22.409Z",
+        "author": "Architect@example.com",
+        "events": [
+            {
+                "type": "status",
+                "operation": "update",
+                "value": "Open"
+            }
+        ]
+    }]
+
