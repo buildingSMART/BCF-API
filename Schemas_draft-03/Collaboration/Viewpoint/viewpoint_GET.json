@@ -3,298 +3,36 @@
     "type": "object",
     "properties": {
         "index": {
-            "type": ["number",
-            "null"]
+            "type": [
+                "number",
+                "null"
+            ]
         },
         "guid": {
             "required": true,
             "type": "string"
         },
         "orthogonal_camera": {
-            "type": ["object",
-            "null"],
-            "properties": {
-                "camera_view_point": {
-                    "type": ["object",
-                    "null"],
-                    "properties": {
-                        "x": {
-                            "type": "number"
-                        },
-                        "y": {
-                            "type": "number"
-                        },
-                        "z": {
-                            "type": "number"
-                        }
-                    }
-                },
-                "camera_direction": {
-                    "type": ["object",
-                    "null"],
-                    "properties": {
-                        "x": {
-                            "type": "number"
-                        },
-                        "y": {
-                            "type": "number"
-                        },
-                        "z": {
-                            "type": "number"
-                        }
-                    }
-                },
-                "camera_up_vector": {
-                    "type": ["object",
-                    "null"],
-                    "properties": {
-                        "x": {
-                            "type": "number"
-                        },
-                        "y": {
-                            "type": "number"
-                        },
-                        "z": {
-                            "type": "number"
-                        }
-                    }
-                },
-                "view_to_world_scale": {
-                    "type": "number"
-                }
-            }
+            "$ref": "orthogonal_camera.json"
         },
         "perspective_camera": {
-            "type": ["object",
-            "null"],
-            "properties": {
-                "camera_view_point": {
-                    "type": ["object",
-                    "null"],
-                    "properties": {
-                        "x": {
-                            "type": "number"
-                        },
-                        "y": {
-                            "type": "number"
-                        },
-                        "z": {
-                            "type": "number"
-                        }
-                    }
-                },
-                "camera_direction": {
-                    "type": ["object",
-                    "null"],
-                    "properties": {
-                        "x": {
-                            "type": "number"
-                        },
-                        "y": {
-                            "type": "number"
-                        },
-                        "z": {
-                            "type": "number"
-                        }
-                    }
-                },
-                "camera_up_vector": {
-                    "type": ["object",
-                    "null"],
-                    "properties": {
-                        "x": {
-                            "type": "number"
-                        },
-                        "y": {
-                            "type": "number"
-                        },
-                        "z": {
-                            "type": "number"
-                        }
-                    }
-                },
-                "field_of_view": {
-                    "type": "number"
-                }
-            }
+            "$ref": "perspective_camera.json"
         },
         "lines": {
-            "type": ["object",
-            "null"],
-            "properties": {
-                "line": {
-                    "type": ["array",
-                    "null"],
-                    "items": {
-                        "type": ["object",
-                        "null"],
-                        "properties": {
-                            "start_point": {
-                                "type": ["object",
-                                "null"],
-                                "properties": {
-                                    "x": {
-                                        "type": "number"
-                                    },
-                                    "y": {
-                                        "type": "number"
-                                    },
-                                    "z": {
-                                        "type": "number"
-                                    }
-                                }
-                            },
-                            "end_point": {
-                                "type": ["object",
-                                "null"],
-                                "properties": {
-                                    "x": {
-                                        "type": "number"
-                                    },
-                                    "y": {
-                                        "type": "number"
-                                    },
-                                    "z": {
-                                        "type": "number"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            "$ref": "lines.json"
         },
         "clipping_planes": {
-            "type": ["object",
-            "null"],
-            "properties": {
-                "clipping_plane": {
-                    "type": ["array",
-                    "null"],
-                    "items": {
-                        "type": ["object",
-                        "null"],
-                        "properties": {
-                            "location": {
-                                "type": ["object",
-                                "null"],
-                                "properties": {
-                                    "x": {
-                                        "type": "number"
-                                    },
-                                    "y": {
-                                        "type": "number"
-                                    },
-                                    "z": {
-                                        "type": "number"
-                                    }
-                                }
-                            },
-                            "direction": {
-                                "type": ["object",
-                                "null"],
-                                "properties": {
-                                    "x": {
-                                        "type": "number"
-                                    },
-                                    "y": {
-                                        "type": "number"
-                                    },
-                                    "z": {
-                                        "type": "number"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "snapshot_available": {
-            "type": "boolean"
+            "$ref": "clipping_planes.json"
         },
         "bitmaps": {
-            "type": ["array",
-            "null"],
-            "properties": {
-                "bitmap": {
-                    "type": ["object",
-                    "null"],
-                    "properties": {
-                        "guid": {
-                            "type": ["string"]
-                        },
-                        "bitmap_type": {
-                            "type": "integer",
-                            "enum": [0,
-                            1,
-                            2]
-                        },
-                        "location": {
-                            "type": ["object",
-                            "null"],
-                            "properties": {
-                                "x": {
-                                    "type": "number"
-                                },
-                                "y": {
-                                    "type": "number"
-                                },
-                                "z": {
-                                    "type": "number"
-                                }
-                            }
-                        },
-                        "normal": {
-                            "type": ["object",
-                            "null"],
-                            "properties": {
-                                "x": {
-                                    "type": "number"
-                                },
-                                "y": {
-                                    "type": "number"
-                                },
-                                "z": {
-                                    "type": "number"
-                                }
-                            }
-                        },
-                        "up": {
-                            "type": ["object",
-                            "null"],
-                            "properties": {
-                                "x": {
-                                    "type": "number"
-                                },
-                                "y": {
-                                    "type": "number"
-                                },
-                                "z": {
-                                    "type": "number"
-                                }
-                            }
-                        },
-                        "height": {
-                            "type": "integer"
-                        }
-                    }
-                }
-            }
+            "$ref": "bitmaps.json"
         },
         "authorization": {
             "type": "object",
             "required": false,
             "properties": {
                 "viewpoint_actions": {
-                    "required": false,
-                    "type": "array",
-                    "items": {
-                        "enum": ["update",
-                        "updateBitmap",
-                        "updateSnapshot",
-                        "updateComponent"]
-                    }
+                    "$ref": "../Action/viewpoint_actions.json"
                 }
             }
         }

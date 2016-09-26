@@ -1,0 +1,18 @@
+{
+    "type": ["object",
+    "null"],
+    "properties": {
+        "camera_view_point": { 
+            "$ref": "camera_view_point.json"
+        },
+        "camera_direction": { 
+            "$ref": "camera_direction.json"
+        },
+        "camera_up_vector": { 
+            "$ref": "camera_up_vector.json"
+        },
+        "field_of_view": {
+            "type": "number"
+        }
+    }
+}

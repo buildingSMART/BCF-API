@@ -57,43 +57,16 @@
             }
         },
         "project_actions": {
-            "required": false,
-            "type": "array",
-            "items": {
-                "enum": ["update",
-                "createTopic",
-                "createDocument"]
-            }
+            "$ref": "../Collaboration/Action/project_actions.json"
         },
         "topic_actions": {
-            "required": false,
-            "type": "array",
-            "items": {
-                "enum": ["update",
-                "updateBimSnippet",
-                "updateRelatedTopics",
-                "updateDocumentServices",
-                "updateFiles",
-                "createComment",
-                "createViewpoint"]
-            }
+            "$ref": "../Collaboration/Action/topic_actions.json"
         },
         "comment_actions": {
-            "required": false,
-            "type": "array",
-            "items": {
-                "enum": ["update"]
-            }
+            "$ref": "../Collaboration/Action/comment_actions.json"
         },
         "viewpoint_actions": {
-            "required": false,
-            "type": "array",
-            "items": {
-                "enum": ["update",
-                "updateBitmap",
-                "updateSnapshot",
-                "updateComponent"]
-            }
+            "$ref": "../Collaboration/Action/viewpoint_actions.json"
         }
     }
 }

@@ -1,0 +1,36 @@
+{
+    "type": ["object",
+    "null"],
+    "properties": {
+        "start_point": {
+            "type": ["object",
+            "null"],
+            "properties": {
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                },
+                "z": {
+                    "type": "number"
+                }
+            }
+        },
+        "end_point": {
+            "type": ["object",
+            "null"],
+            "properties": {
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                },
+                "z": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}

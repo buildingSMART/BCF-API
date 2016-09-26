@@ -1,0 +1,13 @@
+{
+    "required": false,
+    "type": "array",
+    "items": {
+        "enum": ["update",
+        "updateBimSnippet",
+        "updateRelatedTopics",
+        "updateDocumentServices",
+        "updateFiles",
+        "createComment",
+        "createViewpoint"]
+    }
+}

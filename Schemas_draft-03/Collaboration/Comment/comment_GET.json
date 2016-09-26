@@ -43,11 +43,7 @@
             "required": false,
             "properties": {
                 "comment_actions": {
-                    "required": false,
-                    "type": "array",
-                    "items": {
-                        "enum": ["update"]
-                    }
+                    "$ref": "../Action/comment_actions.json"
                 }
             }
         }
