@@ -8,13 +8,16 @@
             "required": true,
             "type": "array",
             "items": {
-                "version_id": {
-                    "type": "string",
-                    "required": true
-                },
-                "detailed_version": {
-                    "type": "string",
-                    "required": false
+                "type": ["object", "null"],
+                "properties": {
+                    "version_id": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "detailed_version": {
+                        "type": "string",
+                        "required": false
+                    }
                 }
             }
         }
