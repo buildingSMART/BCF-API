@@ -1568,20 +1568,18 @@ Update a single viewpoint, description similar to POST.
             },
             "field_of_view": 90.0
         },
-        "clipping_planes": {
-            "clipping_plane": [{
-                "location": {
-                    "x": 0.5,
-                    "y": 0.5,
-                    "z": 0.5
-                },
-                "direction": {
-                    "x": 1.0,
-                    "y": 0.0,
-                    "z": 0.0
-                }
-            }]
-        }
+        "clipping_planes": [{
+            "location": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5
+            },
+            "direction": {
+                "x": 1.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }]
     }
 
 **Example Response**
@@ -1608,20 +1606,18 @@ Update a single viewpoint, description similar to POST.
             },
             "field_of_view": 90.0
         },
-        "clipping_planes": {
-            "clipping_plane": [{
-                "location": {
-                    "x": 0.5,
-                    "y": 0.5,
-                    "z": 0.5
-                },
-                "direction": {
-                    "x": 1.0,
-                    "y": 0.0,
-                    "z": 0.0
-                }
-            }]
-        }
+        "clipping_planes": [{
+            "location": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5
+            },
+            "direction": {
+                "x": 1.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }]
     }
 
 ### 4.5.5 GET Viewpoint Snapshot Service
