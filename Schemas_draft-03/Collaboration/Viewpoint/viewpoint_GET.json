@@ -19,7 +19,10 @@
             "$ref": "perspective_camera.json"
         },
         "lines": {
-            "$ref": "lines.json"
+            "type": ["array", "null"],
+            "items": {
+                "$ref": "line.json"
+            }
         },
         "clipping_planes": {
             "$ref": "clipping_planes.json"
