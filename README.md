@@ -269,7 +269,7 @@ Returns a list of all supported BCF API versions of the server.
 
 **Example Request**
 
-    GET https://example.com/bcf/version
+    GET /bcf/version
 
 **Example Response**
 
@@ -310,7 +310,7 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 
 **Example Request**
 
-    GET https://example.com/bcf/auth
+    GET /bcf/auth
 
 **Example Response**
 
@@ -486,7 +486,7 @@ Retrieve a **collection** of projects where the currently logged on user has acc
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects
+    GET /bcf/2.1/projects
 
 **Example Response**
 
@@ -521,7 +521,7 @@ Retrieve a specific project.
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
+    GET /bcf/2.1/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
 
 **Example Response**
 
@@ -550,7 +550,7 @@ Modify a specific project.
 
 **Example Request**
 
-    PUT https://example.com/bcf/2.1/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
+    PUT /bcf/2.1/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
     Body:
     {
         "name": "Example project 3 - Second Section"
@@ -584,7 +584,7 @@ Project extensions are used to define possible values that can be used in topics
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
+    GET /bcf/2.1/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
 
 **Example Response**
 
@@ -729,16 +729,16 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 
 Get topics that are open, assigned to Architect@example.com and created after December 5th 2015. Sort the result on last modified
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and status eq 'Open' and creation_date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=modified_date desc
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and status eq 'Open' and creation_date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=modified_date desc
 
 Odata does not support list operators. To achieve list query, use the 'or' operator.
 Get topics that have at least one of the labels 'Architecture', 'Structural' or 'Heating'
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=contains(labels, 'Architecture') or contains(labels, 'Structural') or contains(labels, 'Heating')
+    GET /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=contains(labels, 'Architecture') or contains(labels, 'Structural') or contains(labels, 'Heating')
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
 
 **Example Response**
 
@@ -800,7 +800,7 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
 
 **Example Request**
 
-    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
+    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
     Body:
     {
         "topic_type": "Clash",
@@ -857,7 +857,7 @@ Retrieve a specific topic.
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
 
 **Example Response**
 
@@ -902,7 +902,7 @@ Modify a specific topic, description similar to POST.
 
 **Example Request**
 
-    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
     Body:
     {
         "topic_type": "Clash",
@@ -985,7 +985,7 @@ Retrieve a **collection** of file references as topic header.
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
 
 **Example Response**
 
@@ -1013,7 +1013,7 @@ Update a **collection** of file references on the topic header.
 
 **Example Request**
 
-    PUT https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
+    PUT /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
     Body:
     [{
         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
@@ -1069,11 +1069,11 @@ Retrieve a **collection** of all comments related to a topic (default ordering i
 
 Get comments that are closed and created after December 5 2015. Sort the result on first created
 
-    GET https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments?$filter=status eq 'Closed' and date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=date asc
+    GET /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments?$filter=status eq 'Closed' and date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=date asc
 
 **Example Request**
 
-    GET https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
+    GET /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
 
 **Example Response**
 
@@ -1120,7 +1120,7 @@ JSON encoded body using the "application/json" content type.
 
 **Example Request**
 
-    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
+    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
     Body:
     {
         "comment": "will rework the heating model"
@@ -1150,7 +1150,7 @@ Get a single comment.
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
 
 **Example Response**
 
@@ -1176,7 +1176,7 @@ Update a single comment, description similar to POST.
 
 **Example Request**
 
-    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
+    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
     Body:
     {
         "comment": "will rework the heating model and fix the ventilation"
@@ -1216,7 +1216,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
 
 **Example Response**
 
@@ -1374,7 +1374,7 @@ JSON encoded body using the "application/json" content type.
 
 **Example Request**
 
-    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
+    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
     Body:
     {
         "perspective_camera": {
@@ -1491,7 +1491,7 @@ Retrieve a specific viewpoint.
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
 
 **Example Response**
 
@@ -1567,7 +1567,7 @@ Update a single viewpoint, description similar to POST.
 
 **Example Request**
 
-    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
+    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
     Body:
     {
         "perspective_camera": {
@@ -1654,7 +1654,7 @@ Retrieve a viewpoints snapshot (png, jpg or bmp) as image file.
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
 ### 4.5.6 PUT Viewpoint Snapshot Service
 
@@ -1666,7 +1666,7 @@ Add or update a viewpoints snapshot (png, jpg or bmp).
 
 **Example Request**
 
-    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
+    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
 PUT Body contains binary image data
 
@@ -1684,7 +1684,7 @@ PUT Body contains binary image data
 Retrieve a specific viewpoints bitmap image file (png, jpg or bmp).
 
 **Example Request**
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
 
 ### 4.5.8 PUT Viewpoint Bitmap Service
 
@@ -1696,7 +1696,7 @@ Add or update a specific bitmap in a viewpoint (png, jpg or bmp).
 
 **Example Request**
 
-    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
+    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
 
 PUT Body contains binary image data
 
@@ -1725,7 +1725,7 @@ Retrieve a **collection** of all components related to a viewpoint.
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
 
 **Example Response**
 
@@ -1759,7 +1759,7 @@ Add or update a **collection** of all components related to a viewpoint.
 
 **Example Request**
 
-    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
+    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
     Body:
     [{
         "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
@@ -1811,7 +1811,7 @@ Retrieve a **collection** of all related topics to a topic.
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
 
 **Example Response**
 
@@ -1835,7 +1835,7 @@ Add or update a **collection** of all related topics to a topic.
 
 **Example Request**
 
-    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
+    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
     Body:
     [{
         "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4"
@@ -1871,7 +1871,7 @@ Retrieve a **collection** of all document references to a topic.
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
 
 **Example Response**
 
@@ -1899,7 +1899,7 @@ Add or update document references to a topic.
 
 **Example Request**
 
-    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
+    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
     Body:
     [{
         "referenced_document": "http://example.com/files/LegalRequirements.pdf",
@@ -1928,7 +1928,7 @@ Add or update document references to a topic.
 
 **Example Request**
 
-    PUT https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references/472ab37a-6122-448e-86fc-86503183b520
+    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references/472ab37a-6122-448e-86fc-86503183b520
     Body:
     [{
         "guid": "472ab37a-6122-448e-86fc-86503183b520",
@@ -1960,7 +1960,7 @@ Retrieve a **collection** of all documents uploaded to a project.
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
 
 **Example Response**
 
@@ -1984,7 +1984,7 @@ Upload a document (binary file) to a project.
 
 **Example Request**
 
-    POST https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
+    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
 
 **Example Response**
 
@@ -2005,7 +2005,7 @@ Retrieves a document as binary file.
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents/472ab37a-6122-448e-86fc-86503183b520
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents/472ab37a-6122-448e-86fc-86503183b520
 
 **Example Response**
 
@@ -2058,20 +2058,20 @@ Retrieve a **collection** of topic histories related to a project (default sort 
 
 Get histories of type 'status_set' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=author eq 'Architect@example.com' and type eq 'status_set' and date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=date asc
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=author eq 'Architect@example.com' and type eq 'status_set' and date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=date asc
 
 Get latest histories of given topic. Skip the 10 first, and get the 5 next
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=topic_guid eq 'A245F4F2-2C01-B43B-B612-5E456BEF8116'&$top=5&$skip=10
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=topic_guid eq 'A245F4F2-2C01-B43B-B612-5E456BEF8116'&$top=5&$skip=10
 
 Odata does not support list operators. To achieve list query, use the 'or' operator.
 Get histories that is of type 'status_set', 'type_set' or 'title_set'
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=type eq 'status_set' or type eq 'type_set' or type eq 'title_set'
+    /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=type eq 'status_set' or type eq 'type_set' or type eq 'title_set'
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history
 
 **Example Response**
 
@@ -2143,20 +2143,20 @@ Retrieve a **collection** of topic histories related to a project (default sort 
 
 Get histories of type 'status_set' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$filter=author eq 'Architect@example.com' and type eq 'status_set' and date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=date asc
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$filter=author eq 'Architect@example.com' and type eq 'status_set' and date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=date asc
 
 Get latest histories. Skip the 10 first, and get the 5 next
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$top=5&$skip=10
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$top=5&$skip=10
 
 Odata does not support list operators. To achieve list query, use the 'or' operator.
 Get histories that is of type 'status_set', 'type_set' or 'title_set'
 
-    https://example.com/bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$filter=type eq 'status_set' or type eq 'type_set' or type eq 'title_set'
+    /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$filter=type eq 'status_set' or type eq 'type_set' or type eq 'title_set'
 
 **Example Request**
 
-    GET https://example.com/bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history
 
 **Example Response**
 
