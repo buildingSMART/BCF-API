@@ -99,7 +99,7 @@ An example of a client implementation in C# can be found here:
 
 ## 1.1 Paging, Sorting and Filtering
 
-When requesting collections of items, the BCF-API should offer URL parameters according to the OData specification. It can be found at [http://www.odata.org/documentation/](http://www.odata.org/documentation/).
+When requesting collections of items, the BCF-API should offer URL parameters according to the OData v4 specification. It can be found at [http://www.odata.org/documentation/](http://www.odata.org/documentation/).
 
 ## 1.2 Caching
 
