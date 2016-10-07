@@ -1,0 +1,12 @@
+{
+    "type": ["object",
+    "null"],
+    "properties": {
+        "line": {
+            "type": ["array", "null"],
+            "items": {
+                "$ref": "line.json"
+            }
+        }
+    }
+}

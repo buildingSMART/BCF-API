@@ -17,14 +17,7 @@
             "required": false,
             "properties": {
                 "project_actions": {
-                    "required": false,
-                    "type": "array",
-                    "items": {
-                        "enum": ["update",
-                        "createTopic",
-                        "createDocument",
-                        "updateProjectExtensions"]
-                    }
+                    "$ref": "../Collaboration/Action/project_actions.json"
                 }
             }
         }

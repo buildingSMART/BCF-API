@@ -64,27 +64,7 @@
             "null"]
         },
         "bim_snippet": {
-            "title": "bim_snippet",
-            "type": ["object",
-            "null"],
-            "properties": {
-                "snippet_type": {
-                    "required": true,
-                    "type": "string"
-                },
-                "is_external": {
-                    "required": true,
-                    "type": "boolean"
-                },
-                "reference": {
-                    "required": true,
-                    "type": "string"
-                },
-                "reference_schema": {
-                    "required": true,
-                    "type": "string"
-                }
-            }
+            "$ref": "bim_snippet.json"
         },
         "due_date": {
             "type": ["string",
@@ -95,17 +75,7 @@
             "required": false,
             "properties": {
                 "topic_actions": {
-                    "required": false,
-                    "type": "array",
-                    "items": {
-                        "enum": ["update",
-                        "updateBimSnippet",
-                        "updateRelatedTopics",
-                        "updateDocumentServices",
-                        "updateFiles",
-                        "createComment",
-                        "createViewpoint"]
-                    }
+                    "$ref": "../Action/topic_actions.json"
                 },
                 "topic_status": {
                     "type": ["string",

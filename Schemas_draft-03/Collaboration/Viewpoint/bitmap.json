@@ -1,0 +1,51 @@
+{
+    "type": ["object",
+    "null"],
+    "properties": {
+        "guid": {
+            "type": ["string"]
+        },
+        "bitmap_type": {
+            "type": "integer",
+            "enum": [0,
+            1,
+            2]
+        },
+        "location": {
+            "$ref": "location.json"
+        },
+        "normal": {
+            "type": ["object",
+            "null"],
+            "properties": {
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                },
+                "z": {
+                    "type": "number"
+                }
+            }
+        },
+        "up": {
+            "type": ["object",
+            "null"],
+            "properties": {
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                },
+                "z": {
+                    "type": "number"
+                }
+            }
+        },
+        "height": {
+            "type": "integer"
+        }
+    }
+}

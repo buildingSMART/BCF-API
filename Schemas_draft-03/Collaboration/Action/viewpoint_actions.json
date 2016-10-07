@@ -1,0 +1,10 @@
+{
+    "required": false,
+    "type": "array",
+    "items": {
+        "enum": ["update",
+        "updateBitmap",
+        "updateSnapshot",
+        "updateComponent"]
+    }
+}
