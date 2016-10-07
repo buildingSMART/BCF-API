@@ -1501,34 +1501,30 @@ Retrieve a specific viewpoint.
             },
             "field_of_view": 90.0
         },
-        "lines": {
-            "line": [{
-                "start_point": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "end_point": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                }
-            }]
-        },
-        "clipping_planes": {
-            "clipping_plane": [{
-                "location": {
-                    "x": 0.5,
-                    "y": 0.5,
-                    "z": 0.5
-                },
-                "direction": {
-                    "x": 1.0,
-                    "y": 0.0,
-                    "z": 0.0
-                }
-            }]
-        },
+        "lines": [{
+            "start_point": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "end_point": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }],
+        "clipping_planes": [{
+            "location": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5
+            },
+            "direction": {
+                "x": 1.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }],
         "authorization": {
             "viewpoint_actions": [
                 "update",
