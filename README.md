@@ -84,9 +84,9 @@
     + [4.9.1 GET Documents Service](#491-get-documents-service)
     + [4.9.2 POST Document Service](#492-post-document-service)
     + [4.9.3 GET Document Service](#493-get-document-service)
-  * [5.1 Topics History Services](#51-topics-history-services)
-    + [5.1.1 GET Topics History Service](#511-get-topics-history-service)
-    + [5.1.2 GET Topic History Service](#512-get-topic-history-service)
+  * [4.10 Topics History Services](#410-topics-history-services)
+    + [4.10.1 GET Topics History Service](#4101-get-topics-history-service)
+    + [4.10.2 GET Topic History Service](#4102-get-topic-history-service)
 
 <!-- tocstop -->
 
@@ -2011,11 +2011,11 @@ Retrieves a document as binary file.
 
 Retrieves a document as binary file.
 
-## 5.1 Topics History Services
+## 4.10 Topics History Services
 
 The topic history service reflects the history for topics. Each creation or update of a topic generates a new topic history.
 
-### 5.1.1 GET Topics History Service
+### 4.10.1 GET Topics History Service
 
 **Resource URL**
 
@@ -2101,7 +2101,7 @@ Get histories that is of type 'status_set', 'type_set' or 'title_set'
         ]
     }]
 
-### 5.1.2 GET Topic History Service
+### 4.10.2 GET Topic History Service
 
 **Resource URL**
 
@@ -2185,4 +2185,3 @@ Get histories that is of type 'status_set', 'type_set' or 'title_set'
             }
         ]
     }]
-
