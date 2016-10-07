@@ -25,7 +25,10 @@
             "$ref": "clipping_planes.json"
         },
         "bitmaps": {
-            "$ref": "bitmaps.json"
+            "type": ["array", "null"],
+            "items": {
+                "$ref": "bitmap.json"
+            }
         },
         "authorization": {
             "type": "object",
