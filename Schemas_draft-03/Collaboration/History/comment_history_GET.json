@@ -1,0 +1,40 @@
+{
+    "title": "topic_history_GET",
+    "type": "object",
+    "properties": {
+        "comment_guid": {
+            "required": true,
+            "type": "string"
+        },
+        "topic_guid": {
+            "required": true,
+            "type": "string"
+        },
+        "date": {
+            "required": true,
+            "type": "string"
+        },
+        "author": {
+            "required": true,
+            "type": "string"
+        },
+        "events": {
+            "type": ["array"],
+            "minItems": 1,
+            "items": {
+                "type":  {
+                    "required": true,
+                    "type": "string"
+                },
+                "operation":  {
+                    "required": true,
+                    "type": "string"
+                },
+                "value": {
+                    "type": ["string",
+                    "null"]
+                }
+            }
+        }
+    }
+}
