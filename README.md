@@ -729,7 +729,7 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 
 Get topics that are open, assigned to Architect@example.com and created after December 5th 2015. Sort the result on last modified
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and status eq 'Open' and creation_date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=modified_date desc
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and status eq 'Open' and creation_date gt 2015-12-05T00:00:00+01:00&$orderby=modified_date desc
 
 Odata does not support list operators. To achieve list query, use the 'or' operator.
 Get topics that have at least one of the labels 'Architecture', 'Structural' or 'Heating'
@@ -1069,7 +1069,7 @@ Retrieve a **collection** of all comments related to a topic (default ordering i
 
 Get comments that are closed and created after December 5 2015. Sort the result on first created
 
-    GET /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments?$filter=status eq 'Closed' and date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=date asc
+    GET /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments?$filter=status eq 'Closed' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
 
 **Example Request**
 
@@ -2058,7 +2058,7 @@ Retrieve a **collection** of topic histories related to a project (default sort 
 
 Get histories of type 'status_set' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=author eq 'Architect@example.com' and type eq 'status_set' and date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=date asc
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=author eq 'Architect@example.com' and type eq 'status_set' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
 
 Get latest histories of given topic. Skip the 10 first, and get the 5 next
 
@@ -2143,7 +2143,7 @@ Retrieve a **collection** of topic histories related to a project (default sort 
 
 Get histories of type 'status_set' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$filter=author eq 'Architect@example.com' and type eq 'status_set' and date gt datetime'2015-12-05T00:00:00+01:00'&$orderby=date asc
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$filter=author eq 'Architect@example.com' and type eq 'status_set' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
 
 Get latest histories. Skip the 10 first, and get the 5 next
 
