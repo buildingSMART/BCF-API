@@ -1969,18 +1969,17 @@ Retrieve a **collection** of topic histories related to a project (default sort 
 
 **Example Request with odata**
 
-Get histories of type 'status_set' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
+Get histories of type 'status' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=author eq 'Architect@example.com' and type eq 'status_set' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=author eq 'Architect@example.com' and type eq 'status' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
 
 Get latest histories of given topic. Skip the 10 first, and get the 5 next
 
     GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=topic_guid eq 'A245F4F2-2C01-B43B-B612-5E456BEF8116'&$top=5&$skip=10
 
-Odata does not support list operators. To achieve list query, use the 'or' operator.
-Get histories that is of type 'status_set', 'type_set' or 'title_set'
+Get histories that is of type 'status', 'type' or 'title' or 'label added'
 
-    /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=type eq 'status_set' or type eq 'type_set' or type eq 'title_set'
+    /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=type eq 'status' or type eq 'type' or type eq 'title' or (type eq 'label' and operation eq 'added')
 
 **Example Request**
 
@@ -2054,18 +2053,18 @@ Retrieve a **collection** of topic histories related to a project (default sort 
 
 **Example Request with odata**
 
-Get histories of type 'status_set' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
+Get histories of type 'status' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$filter=author eq 'Architect@example.com' and type eq 'status_set' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$filter=author eq 'Architect@example.com' and type eq 'status' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
 
 Get latest histories. Skip the 10 first, and get the 5 next
 
     GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$top=5&$skip=10
 
 Odata does not support list operators. To achieve list query, use the 'or' operator.
-Get histories that is of type 'status_set', 'type_set' or 'title_set'
+Get histories that is of type 'status', 'type' or 'title' or 'label added'
 
-    /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$filter=type eq 'status_set' or type eq 'type_set' or type eq 'title_set'
+    /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$filter=type eq 'status' or type eq 'type' or type eq 'title' or (type eq 'label' and operation eq 'added')
 
 **Example Request**
 
