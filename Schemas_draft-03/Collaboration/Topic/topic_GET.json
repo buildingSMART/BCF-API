@@ -59,6 +59,10 @@
             "type": ["string",
             "null"]
         },
+		"topic_area": {
+            "type": ["string",
+            "null"]
+        },
         "description": {
             "type": ["string",
             "null"]

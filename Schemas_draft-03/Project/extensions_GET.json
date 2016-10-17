@@ -56,6 +56,15 @@
                 "null"]
             }
         },
+		"topic_area": {
+            "required": true,
+            "type": ["array",
+            "null"],
+            "items": {
+                "type": ["string",
+                "null"]
+            }
+        },
         "project_actions": {
             "$ref": "../Collaboration/Action/project_actions.json"
         },
