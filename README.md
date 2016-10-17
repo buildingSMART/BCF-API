@@ -790,7 +790,7 @@ JSON encoded body using the "application/json" content type.
 |priority|string|The priority of a topic (value from extension.xsd)|false|
 |index|integer|The index of a topic|false|
 |labels|array (string)|The collection of labels of a topic (values from extension.xsd)|false|
-|assigned_to|string|UserID assigned to a topic (value from extension.xsd)|false|
+|assigned_to|string|UserID assigned to a topic (value from extension.xsd). UserIDs are recommended to be in email format as to uniquely identify users throughout multiple systems|false|
 |description|string|Description of a topic|false|
 |bim_snippet.snippet_type|string|Type of a BIM-Snippet of a topic (value from extension.xsd)|false|
 |bim_snippet.is_external|boolean|Is the BIM-Snippet external (default = false)|false|
