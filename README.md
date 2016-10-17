@@ -64,12 +64,11 @@
     + [4.5.1 GET Viewpoints Service](#451-get-viewpoints-service)
     + [4.5.2 POST Viewpoint Service](#452-post-viewpoint-service)
     + [4.5.3 GET Viewpoint Service](#453-get-viewpoint-service)
-    + [4.5.4 PUT Viewpoint Service](#454-put-viewpoint-service)
-    + [4.5.5 GET Viewpoint Snapshot Service](#455-get-viewpoint-snapshot-service)
-    + [4.5.6 PUT Viewpoint Snapshot Service](#456-put-viewpoint-snapshot-service)
-    + [4.5.7 GET Viewpoint Bitmap Service](#457-get-viewpoint-bitmap-service)
-    + [4.5.8 PUT Viewpoint Bitmap Service](#458-put-viewpoint-bitmap-service)
-    + [4.5.9 Determining allowed Viewpoint modifications](#459-determining-allowed-viewpoint-modifications)
+    + [4.5.4 GET Viewpoint Snapshot Service](#454-get-viewpoint-snapshot-service)
+    + [4.5.5 POST Viewpoint Snapshot Service](#455-post-viewpoint-snapshot-service)
+    + [4.5.6 GET Viewpoint Bitmap Service](#456-get-viewpoint-bitmap-service)
+    + [4.5.7 POST Viewpoint Bitmap Service](#457-post-viewpoint-bitmap-service)
+    + [4.5.8 Determining allowed Viewpoint modifications](#458-determining-allowed-viewpoint-modifications)
   * [4.6 Component Services](#46-component-services)
     + [4.6.1 GET Components Service](#461-get-components-service)
     + [4.6.2 PUT Components Service](#462-put-components-service)
@@ -1339,7 +1338,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
 
 [viewpoint_POST.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_POST.json)
 
-Add a new viewpoint.
+Add a new viewpoint. Viewpoints are immutable, meaning that they should never change. Requirements for different visualizations should be handled by creating new viewpoint elements.
 
 **Parameters**
 
@@ -1555,96 +1554,7 @@ Retrieve a specific viewpoint.
         }
     }
 
-### 4.5.4 PUT Viewpoint Service
-
-**Resource URL**
-
-    PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}
-
-[viewpoint_PUT.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_PUT.json)
-
-Update a single viewpoint, description similar to POST.
-
-**Example Request**
-
-    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
-    Body:
-    {
-        "perspective_camera": {
-            "camera_view_point": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "camera_direction": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 2.0
-            },
-            "camera_up_vector": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 1.0
-            },
-            "field_of_view": 90.0
-        },
-        "clipping_planes": {
-            "clipping_plane": [{
-                "location": {
-                    "x": 0.5,
-                    "y": 0.5,
-                    "z": 0.5
-                },
-                "direction": {
-                    "x": 1.0,
-                    "y": 0.0,
-                    "z": 0.0
-                }
-            }]
-        }
-    }
-
-**Example Response**
-
-    Response Code: 200 - OK
-    Body:
-    {
-        "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
-        "perspective_camera": {
-            "camera_view_point": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "camera_direction": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 2.0
-            },
-            "camera_up_vector": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 1.0
-            },
-            "field_of_view": 90.0
-        },
-        "clipping_planes": {
-            "clipping_plane": [{
-                "location": {
-                    "x": 0.5,
-                    "y": 0.5,
-                    "z": 0.5
-                },
-                "direction": {
-                    "x": 1.0,
-                    "y": 0.0,
-                    "z": 0.0
-                }
-            }]
-        }
-    }
-
-### 4.5.5 GET Viewpoint Snapshot Service
+### 4.5.4 GET Viewpoint Snapshot Service
 
 **Resource URL**
 
@@ -1656,26 +1566,26 @@ Retrieve a viewpoints snapshot (png, jpg or bmp) as image file.
 
     GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
-### 4.5.6 PUT Viewpoint Snapshot Service
+### 4.5.5 POST Viewpoint Snapshot Service
 
 **Resource URL**
 
-    PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
+    POST /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
 
-Add or update a viewpoints snapshot (png, jpg or bmp).
+Add a viewpoints snapshot (png, jpg or bmp).
 
 **Example Request**
 
-    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
+    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
-PUT Body contains binary image data
+POST Body contains binary image data
 
 **Example Response**
 
     Response Code: 200 - OK
     Empty Body
 
-### 4.5.7 GET Viewpoint Bitmap Service
+### 4.5.6 GET Viewpoint Bitmap Service
 
 **Resource URL**
 
@@ -1686,26 +1596,26 @@ Retrieve a specific viewpoints bitmap image file (png, jpg or bmp).
 **Example Request**
     GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
 
-### 4.5.8 PUT Viewpoint Bitmap Service
+### 4.5.7 POST Viewpoint Bitmap Service
 
 **Resource URL**
 
-    PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
+    POST /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
 
-Add or update a specific bitmap in a viewpoint (png, jpg or bmp).
+Add a specific bitmap in a viewpoint (png, jpg or bmp).
 
 **Example Request**
 
-    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
+    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
 
-PUT Body contains binary image data
+POST Body contains binary image data
 
 **Example Response**
 
     Response Code: 200 - OK
     Empty Body
 
-### 4.5.9 Determining allowed Viewpoint modifications
+### 4.5.8 Determining allowed Viewpoint modifications
 
 The global default Viewpoint authorizations are expressed in the project schema and when Viewpoint(s) are requested with the
 parameter "includeAuthorization" equal to "true" Viewpoints will include an "authorization" field containing any local
