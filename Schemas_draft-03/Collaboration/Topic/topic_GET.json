@@ -56,8 +56,12 @@
             "null"]
         },
         "assigned_to": {
-            "type": ["string",
-            "null"]
+            "type": ["array",
+            "null"],
+            "items": {
+                "type": ["string",
+                "null"]
+            }
         },
         "description": {
             "type": ["string",
