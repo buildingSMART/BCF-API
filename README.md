@@ -86,6 +86,9 @@
   * [4.10 Topics History Services](#410-topics-history-services)
     + [4.10.1 GET Topics History Service](#4101-get-topics-history-service)
     + [4.10.2 GET Topic History Service](#4102-get-topic-history-service)
+  * [4.11 Comments History Services](#411-comments-history-services)
+    + [4.11.1 GET Comments History Service](#4111-get-comments-history-service)
+    + [4.11.2 GET Comment History Service](#4112-get-comment-history-service)
 
 <!-- tocstop -->
 
@@ -2092,6 +2095,172 @@ Get histories that is of type 'status_set', 'type_set' or 'title_set'
                 "type": "status",
                 "operation": "update",
                 "value": "Open"
+            }
+        ]
+    }]
+
+## 4.11 Comments History Services
+
+The comment history service reflects the history for topic comments. Each creation or update of a comment generates a new comment history.
+
+### 4.11.1 GET Comments History Service
+
+**Resource URL**
+
+    GET /bcf/{version}/projects/{project_id}/topics/comments/history
+
+[comment_history_GET.json](Schemas_draft-03/Collaboration/History/comment_history_GET.json)
+
+Retrieve a **collection** of comment histories related to a project (default sort order is `date`).
+
+**Comment history types**
+
+|type|operation|value|
+|---------|-----------|-----------|
+|comment|created|null|
+|comment_text|updated|The comment text(limit: 1024 characters)|
+|viewpoint|updated, removed|The viewpoint guid or null if removed|
+|reply_to_comment|updated, removed|The reply to comment guid or null if removed|
+
+**Odata filter parameters**
+
+|parameter|type|description|
+|---------|----|-----------|
+|comment_guid|string|guid of the comment |
+|topic_guid|string|guid of the topic |
+|author|string|userId of the author (value from extensions)|
+|date|datetime|date of the history|
+
+**Odata sort parameters**
+
+|parameter|description|
+|---------|-----------|
+|date|date of the history|
+
+**Example Request with odata**
+
+Get histories of type 'created' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
+
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/comments/history?$filter=author eq 'Architect@example.com' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
+
+Get latest histories of given comment. Skip the 10 first, and get the 5 next
+
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/comments/history?$filter=comment_guid eq 'C4215F4D-AC45-A43A-D615-AA456BEF832B'&$top=5&$skip=10
+
+Get histories that is of type 'comment created', or 'viewpoint updated'
+
+    /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=type eq 'comment' or (type eq 'viewpoint' and operation eq 'updated')
+
+**Example Request**
+
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/comments/history
+
+**Example Response**
+
+    Response Code: 200 - OK
+    Body:
+    [{
+        "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+        "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+        "date": "2014-11-19T14:24:11.316Z",
+        "author": "Architect@example.com",
+        "events": [
+            {
+                "type": "comment",
+                "operation": "created",
+                "value": null
+            }
+        ]
+    }, {
+        "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+        "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "date": "2013-10-21T17:34:22.409Z",
+        "author": "Architect@example.com",
+        "events": [
+            {
+                "type": "viewpoint",
+                "operation": "updated",
+                "value": "b24a82e9-f67b-43b8-bda0-4946abf39624"
+            }
+        ]
+    }]
+
+### 4.11.2 GET Comment History Service
+
+**Resource URL**
+
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}/history
+
+[comment_history_GET.json](Schemas_draft-03/Collaboration/History/comment_history_GET.json)
+
+Retrieve a **collection** of comment histories related to a comment (default sort order is `date`).
+
+**Comment history types**
+
+|type|operation|value|
+|---------|-----------|-----------|
+|comment|created|null|
+|comment_text|updated|The comment text(limit: 1024 characters)|
+|viewpoint|updated, removed|The viewpoint guid or null if removed|
+|reply_to_comment|updated, removed|The reply to comment guid or null if removed|
+
+**Odata filter parameters**
+
+|parameter|type|description|
+|---------|----|-----------|
+|author|string|userId of the author (value from extensions)|
+|date|datetime|date of the history|
+
+**Odata sort parameters**
+
+|parameter|description|
+|---------|-----------|
+|date|date of the history|
+
+**Example Request with odata**
+
+Get histories of type 'created' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
+
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/history?$filter=author eq 'Architect@example.com' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
+
+Get latest histories of given comment. Skip the 10 first, and get the 5 next
+
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/history?$top=5&$skip=10
+
+Get histories that is of type 'comment created', or 'comment_text updated'
+
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/history?$filter=type eq 'comment' or (type eq 'ciewpoint' and operation eq 'updated')
+
+**Example Request**
+
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/history
+
+**Example Response**
+
+    Response Code: 200 - OK
+    Body:
+    [{
+        "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+        "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+        "date": "2014-11-19T14:24:11.316Z",
+        "author": "Architect@example.com",
+        "events": [
+            {
+                "type": "comment",
+                "operation": "created",
+                "value": null
+            }
+        ]
+    }, {
+        "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+        "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "date": "2013-10-21T17:34:22.409Z",
+        "author": "Architect@example.com",
+        "events": [
+            {
+                "type": "comment_text",
+                "operation": "updated",
+                "value": "This is the updated comment"
             }
         ]
     }]
