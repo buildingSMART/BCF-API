@@ -1338,7 +1338,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
 
 [viewpoint_POST.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_POST.json)
 
-Add a new viewpoint.
+Add a new viewpoint. Viewpoints are immutable, meaning that they should never change. Requirements for different visualizations should be handled by creating new viewpoint elements.
 
 **Parameters**
 
@@ -1566,19 +1566,19 @@ Retrieve a viewpoints snapshot (png, jpg or bmp) as image file.
 
     GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
-### 4.5.5 PUT Viewpoint Snapshot Service
+### 4.5.5 POST Viewpoint Snapshot Service
 
 **Resource URL**
 
-    PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
+    POST /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
 
-Add or update a viewpoints snapshot (png, jpg or bmp).
+Add a viewpoints snapshot (png, jpg or bmp).
 
 **Example Request**
 
-    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
+    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
-PUT Body contains binary image data
+POST Body contains binary image data
 
 **Example Response**
 
@@ -1596,19 +1596,19 @@ Retrieve a specific viewpoints bitmap image file (png, jpg or bmp).
 **Example Request**
     GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
 
-### 4.5.7 PUT Viewpoint Bitmap Service
+### 4.5.7 POST Viewpoint Bitmap Service
 
 **Resource URL**
 
-    PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
+    POST /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
 
-Add or update a specific bitmap in a viewpoint (png, jpg or bmp).
+Add a specific bitmap in a viewpoint (png, jpg or bmp).
 
 **Example Request**
 
-    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
+    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
 
-PUT Body contains binary image data
+POST Body contains binary image data
 
 **Example Response**
 
