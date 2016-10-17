@@ -913,8 +913,7 @@ Modify a specific topic, description similar to POST.
             "Architecture",
             "Heating"
         ],
-        "assigned_to": "harry.muster@example.com"
-        ],
+        "assigned_to": "harry.muster@example.com",
         "bim_snippet": {
             "snippet_type": "clash",
             "is_external": true,
