@@ -619,6 +619,12 @@ Project extensions are used to define possible values that can be used in topics
             "BIM-Manager@example.com",
             "bob_heater@example.com"
         ],
+        "topic_area"_ [
+            "Shops",
+            "Offices",
+            "Appartments",
+            "General"
+        ],
         "project_actions": [
             "update",
             "createTopic",
@@ -711,6 +717,7 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 |creation_author|string|userId of the creation author (value from extensions)|
 |modified_author|string|userId of the modified author (value from extensions)|
 |assigned_to|string|userId of the assigned person (value from extensions)|
+|topic_area|string|identification of the area this topic is referencing (value from extensions)|
 |topic_status|string|status of a topic (value from extensions)|
 |topic_type|string|type of a topic (value from extensions)|
 |creation_date|datetime|creation date of a topic|
@@ -789,6 +796,7 @@ JSON encoded body using the "application/json" content type.
 |index|integer|The index of a topic|false|
 |labels|array (string)|The collection of labels of a topic (values from extension.xsd)|false|
 |assigned_to|string|UserID assigned to a topic (value from extension.xsd)|false|
+|topic_area|string|Identification of the area this topic is referencing (value from extension.xsd)|false|
 |description|string|Description of a topic|false|
 |bim_snippet.snippet_type|string|Type of a BIM-Snippet of a topic (value from extension.xsd)|false|
 |bim_snippet.is_external|boolean|Is the BIM-Snippet external (default = false)|false|
