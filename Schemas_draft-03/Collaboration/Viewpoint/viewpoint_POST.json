@@ -15,13 +15,22 @@
             "$ref": "perspective_camera.json"
         },
         "lines": {
-            "$ref": "lines.json"
+            "type": ["array", "null"],
+            "items": {
+                "$ref": "line.json"
+            }
         },
         "clipping_planes": {
-            "$ref": "clipping_planes.json"
+            "type": ["array", "null"],
+            "items": {
+                "$ref": "clipping_plane.json"
+            }
         },
         "bitmaps": {
-            "$ref": "bitmaps.json"
+            "type": ["array", "null"],
+            "items": {
+                "$ref": "bitmap.json"
+            }
         }
     }
 }
