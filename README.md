@@ -638,12 +638,6 @@ Project extensions are used to define possible values that can be used in topics
         ],
         "comment_actions": [
             "update"
-        ],
-        "viewpoint_actions": [
-            "update",
-            "updateBitmap",
-            "updateSnapshot",
-            "updateComponent"
         ]
     }
 
@@ -681,16 +675,6 @@ The 'comment_actions' entry in the project extensions defines what actions are a
 default (i.e unless overridden by specific comments). The available actions include:
 
 * *update* - The ability to update the comment (see [4.4.4 PUT Comment Service](#444-put-comment-service))
-
-#### 4.1.5.4 Viewpoint
-
-The 'viewpoint_actions' entry in the project extensions defines what actions are allowed to be performed at the viewpoint level by
-default (i.e. unless overridden by specific viewpoints). The available actions include:
-
-* *update* - The ability to update the viewpoint (see [4.5.4 PUT Viewpoint Service](#454-put-viewpoint-service))
-* *updateBitmap* - The ability to update the bitmap for the viewpoint (see [4.5.8 PUT Viewpoint Bitmap Service](#458-put-viewpoint-bitmap-service))
-* *updateSnapshot* - The ability to update the snapshot for the viewpoint (see [4.5.6 PUT Viewpoint Snapshot Service](#456-put-viewpoint-snapshot-service))
-* *updateComponent* - The ability to update the component for the viewpoint (see [4.6.2 PUT Components Service](#462-put-components-service))
 
 ---------
 
