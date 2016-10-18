@@ -71,7 +71,7 @@
     + [4.5.8 Determining allowed Viewpoint modifications](#458-determining-allowed-viewpoint-modifications)
   * [4.6 Component Services](#46-component-services)
     + [4.6.1 GET Components Service](#461-get-components-service)
-    + [4.6.2 PUT Components Service](#462-put-components-service)
+    + [4.6.2 POST Components Service](#462-post-components-service)
   * [4.7 Related Topics Services](#47-related-topics-services)
     + [4.7.1 GET Related Topics Service](#471-get-related-topics-service)
     + [4.7.2 PUT Related Topics Service](#472-put-related-topics-service)
@@ -1640,19 +1640,19 @@ Retrieve a **collection** of all components related to a viewpoint.
         "authoring_tool_id": "EXCAD/v1.0"
     }]
 
-### 4.6.2 PUT Components Service
+### 4.6.2 POST Components Service
 
 **Resource URL**
 
-    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
+    POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
-[component_PUT.json](Schemas_draft-03/Collaboration/Component/component_PUT.json)
+[component_POST.json](Schemas_draft-03/Collaboration/Component/component_POST.json)
 
-Add or update a **collection** of all components related to a viewpoint.
+Add a **collection** of all components related to a viewpoint.
 
 **Example Request**
 
-    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
+    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
     Body:
     [{
         "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
@@ -1672,7 +1672,7 @@ Add or update a **collection** of all components related to a viewpoint.
 
 **Example Response**
 
-    Response Code: 200 - OK
+    Response Code: 201 - Created
     Body:
     [{
         "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
