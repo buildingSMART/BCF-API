@@ -1600,6 +1600,18 @@ overrides for each Viewpoint.
 
 Retrieve a **collection** of all components related to a viewpoint.
 
+**Odata filter parameters**
+
+|parameter|type|description|
+|---------|----|-----------|
+|component_list|string|name of the component list. Could be one of: "components", "spaces", "spaceBoundaries" or "openings". The remaining lists will be skipped in the result|
+
+**Example Request with odata**
+
+Get topics that are open, assigned to Architect@example.com and created after December 5th 2015. Sort the result on last modified
+
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components?$filter=component_list eq 'spaces'
+
 **Example Request**
 
     GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
@@ -1608,21 +1620,40 @@ Retrieve a **collection** of all components related to a viewpoint.
 
     Response Code: 200 - OK
     Body:
-    [{
-        "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-        "selected": true,
-        "visible": true,
-        "color": "0A00FF",
-        "originating_system": "Example CAD Application",
-        "authoring_tool_id": "EXCAD/v1.0"
-    }, {
-        "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-        "selected": true,
-        "visible": true,
-        "color": "0A00FF",
-        "originating_system": "Example CAD Application",
-        "authoring_tool_id": "EXCAD/v1.0"
-    }]
+    {
+        "components": {
+            "items": [
+                {
+                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                    "selected": true,
+                    "visible": true,
+                    "color": "0A00FF",
+                    "originating_system": "Example CAD Application",
+                    "authoring_tool_id": "EXCAD/v1.0"
+                }, {
+                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+                    "selected": true,
+                    "visible": true,
+                    "color": "0A00FF",
+                    "originating_system": "Example CAD Application",
+                    "authoring_tool_id": "EXCAD/v1.0"
+                }
+            ],
+            "defaultVisibility": true
+        },
+        "spaces": {
+            "items": [],
+            "defaultVisibility": false
+        },
+        "spaceBoundaries": {
+            "items": [],
+            "defaultVisibility": false
+        },
+        "openings": {
+            "items": [],
+            "defaultVisibility": false
+        }
+    }
 
 ### 4.6.2 POST Components Service
 
@@ -1638,41 +1669,79 @@ Add a **collection** of all components related to a viewpoint.
 
     POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
     Body:
-    [{
-        "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-        "selected": true,
-        "visible": true,
-        "color": "0A00FF",
-        "originating_system": "Example CAD Application",
-        "authoring_tool_id": "EXCAD/v1.0"
-    }, {
-        "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-        "selected": true,
-        "visible": true,
-        "color": "0A00FF",
-        "originating_system": "Example CAD Application",
-        "authoring_tool_id": "EXCAD/v1.0"
-    }]
+    {
+        "components": {
+            "items": [
+                {
+                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                    "selected": true,
+                    "visible": true,
+                    "color": "0A00FF",
+                    "originating_system": "Example CAD Application",
+                    "authoring_tool_id": "EXCAD/v1.0"
+                }, {
+                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+                    "selected": true,
+                    "visible": true,
+                    "color": "0A00FF",
+                    "originating_system": "Example CAD Application",
+                    "authoring_tool_id": "EXCAD/v1.0"
+                }
+            ],
+            "defaultVisibility": true
+        },
+        "spaces": {
+            "items": [],
+            "defaultVisibility": false
+        },
+        "spaceBoundaries": {
+            "items": [],
+            "defaultVisibility": false
+        },
+        "openings": {
+            "items": [],
+            "defaultVisibility": false
+        }
+    }
 
 **Example Response**
 
     Response Code: 201 - Created
     Body:
-    [{
-        "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-        "selected": true,
-        "visible": true,
-        "color": "0A00FF",
-        "originating_system": "Example CAD Application",
-        "authoring_tool_id": "EXCAD/v1.0"
-    }, {
-        "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-        "selected": true,
-        "visible": true,
-        "color": "0A00FF",
-        "originating_system": "Example CAD Application",
-        "authoring_tool_id": "EXCAD/v1.0"
-    }]
+    {
+        "components": {
+            "items": [
+                {
+                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                    "selected": true,
+                    "visible": true,
+                    "color": "0A00FF",
+                    "originating_system": "Example CAD Application",
+                    "authoring_tool_id": "EXCAD/v1.0"
+                }, {
+                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+                    "selected": true,
+                    "visible": true,
+                    "color": "0A00FF",
+                    "originating_system": "Example CAD Application",
+                    "authoring_tool_id": "EXCAD/v1.0"
+                }
+            ],
+            "defaultVisibility": true
+        },
+        "spaces": {
+            "items": [],
+            "defaultVisibility": false
+        },
+        "spaceBoundaries": {
+            "items": [],
+            "defaultVisibility": false
+        },
+        "openings": {
+            "items": [],
+            "defaultVisibility": false
+        }
+    }
 
 ## 4.7 Related Topics Services
 
