@@ -621,6 +621,11 @@ Project extensions are used to define possible values that can be used in topics
             "BIM-Manager@example.com",
             "bob_heater@example.com"
         ],
+        "stage": [
+            "Preliminary Planning End",
+            "Construction Start",
+            "Construction End"
+        ],
         "project_actions": [
             "update",
             "createTopic",
@@ -697,6 +702,7 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 |creation_author|string|userId of the creation author (value from extensions)|
 |modified_author|string|userId of the modified author (value from extensions)|
 |assigned_to|string|userId of the assigned person (value from extensions)|
+|stage|string|stage this topic is part of (value from extensions)|
 |topic_status|string|status of a topic (value from extensions)|
 |topic_type|string|type of a topic (value from extensions)|
 |creation_date|datetime|creation date of a topic|
@@ -775,6 +781,7 @@ JSON encoded body using the "application/json" content type.
 |index|integer|The index of a topic|false|
 |labels|array (string)|The collection of labels of a topic (values from extension.xsd)|false|
 |assigned_to|string|UserID assigned to a topic (value from extension.xsd). UserIDs are recommended to be in email format as to uniquely identify users throughout multiple systems|false|
+|stage|string|Stage this topic is part of (value from extension.xsd)|false|
 |description|string|Description of a topic|false|
 |bim_snippet.snippet_type|string|Type of a BIM-Snippet of a topic (value from extension.xsd)|false|
 |bim_snippet.is_external|boolean|Is the BIM-Snippet external (default = false)|false|

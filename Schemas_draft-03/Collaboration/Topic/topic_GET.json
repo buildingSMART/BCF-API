@@ -59,6 +59,10 @@
             "type": ["string",
             "null"]
         },
+        "stage": {
+            "type": ["string",
+            "null"]
+        },
         "description": {
             "type": ["string",
             "null"]
