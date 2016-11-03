@@ -1,0 +1,15 @@
+{
+    "title": "component list",
+    "type": ["object", "null"],
+    "properties": {
+        "items": {
+            "type": ["array", "null"],
+            "items": {
+                "$ref": "component.json"
+            }
+        },
+        "defaultVisibility": {
+            "type": "boolean"
+        }
+    }
+}

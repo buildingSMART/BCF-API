@@ -1,8 +1,6 @@
 {
-    "$schema": "http://json-schema.org/draft-03/schema#",
-    "title": "component_PUT",
-    "description": "Schema for component PUT, BCF REST API.",
-    "type": "object",
+    "title": "component",
+    "type": ["object", "null"],
     "properties": {
         "ifc_guid": {
             "type": ["string",
