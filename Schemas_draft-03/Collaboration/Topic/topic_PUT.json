@@ -42,7 +42,7 @@
             "type": ["string",
             "null"]
         },
-		"stage": {
+        "stage": {
             "type": ["string",
             "null"]
         },
