@@ -59,7 +59,7 @@
             "type": ["string",
             "null"]
         },
-		"milestone": {
+		"stage": {
             "type": ["string",
             "null"]
         },

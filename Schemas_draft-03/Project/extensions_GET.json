@@ -56,7 +56,7 @@
                 "null"]
             }
         },
-		"milestone": {
+        "stage": {
             "required": true,
             "type": ["array",
             "null"],
