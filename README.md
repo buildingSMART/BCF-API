@@ -42,7 +42,6 @@
       - [4.1.5.1 Project](#4151-project)
       - [4.1.5.2 Topic](#4152-topic)
       - [4.1.5.3 Comment](#4153-comment)
-      - [4.1.5.4 Viewpoint](#4154-viewpoint)
   * [4.2 Topic Services](#42-topic-services)
     + [4.2.1 GET Topics Service](#421-get-topics-service)
     + [4.2.2 POST Topic Service](#422-post-topic-service)
@@ -68,7 +67,6 @@
     + [4.5.5 POST Viewpoint Snapshot Service](#455-post-viewpoint-snapshot-service)
     + [4.5.6 GET Viewpoint Bitmap Service](#456-get-viewpoint-bitmap-service)
     + [4.5.7 POST Viewpoint Bitmap Service](#457-post-viewpoint-bitmap-service)
-    + [4.5.8 Determining allowed Viewpoint modifications](#458-determining-allowed-viewpoint-modifications)
   * [4.6 Component Services](#46-component-services)
     + [4.6.1 GET Components Service](#461-get-components-service)
     + [4.6.2 POST Components Service](#462-post-components-service)
@@ -1258,15 +1256,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
                 "y": 0.4,
                 "z": 0.1
             }
-        }],
-        "authorization": {
-            "viewpoint_actions": [
-                "update",
-                "updateBitmap",
-                "updateSnapshot",
-                "updateComponent"
-            ]
-        }
+        }]
     }, {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
         "perspective_camera": {
@@ -1310,10 +1300,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
                 "y": 0.0,
                 "z": 0.0
             }
-        }],
-        "authorization": {
-            "viewpoint_actions": []
-        }
+        }]
     }]
 
 ### 4.5.2 POST Viewpoint Service
@@ -1517,15 +1504,7 @@ Retrieve a specific viewpoint.
                 "y": 0.0,
                 "z": 0.0
             }
-        }],
-        "authorization": {
-            "viewpoint_actions": [
-                "update",
-                "updateBitmap",
-                "updateSnapshot",
-                "updateComponent"
-            ]
-        }
+        }]
     }
 
 ### 4.5.4 GET Viewpoint Snapshot Service
@@ -1588,12 +1567,6 @@ POST Body contains binary image data
 
     Response Code: 200 - OK
     Empty Body
-
-### 4.5.8 Determining allowed Viewpoint modifications
-
-The global default Viewpoint authorizations are expressed in the project schema and when Viewpoint(s) are requested with the
-parameter "includeAuthorization" equal to "true" Viewpoints will include an "authorization" field containing any local
-overrides for each Viewpoint.
 
 ## 4.6 Component Services
 
