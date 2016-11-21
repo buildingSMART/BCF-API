@@ -8,7 +8,16 @@
                 "$ref": "component.json"
             }
         },
-        "defaultVisibility": {
+        "defaultVisibilityComponents": {
+            "type": "boolean"
+        },
+        "defaultVisibilitySpaces": {
+            "type": "boolean"
+        },
+        "defaultVisibilityOpenings": {
+            "type": "boolean"
+        },
+        "defaultVisibilitySpaceBoundaries": {
             "type": "boolean"
         }
     }

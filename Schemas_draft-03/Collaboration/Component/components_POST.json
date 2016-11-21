@@ -5,14 +5,5 @@
     "type": "object",
     "components": {
         "$ref": "component_list.json"
-    },
-    "spaces": {
-        "$ref": "component_list.json"
-    },
-    "spaceBoundaries": {
-        "$ref": "component_list.json"
-    },
-    "openings": {
-        "$ref": "component_list.json"
     }
 }
