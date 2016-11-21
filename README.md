@@ -1603,7 +1603,7 @@ overrides for each Viewpoint.
 
     GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
-[component_GET.json](Schemas_draft-03/Collaboration/Component/component_GET.json)
+[component_GET.json](Schemas_draft-03/Collaboration/Component/components_GET.json)
 
 Retrieve a **collection** of all components related to a viewpoint.
 
@@ -1668,7 +1668,7 @@ Get topics that are open, assigned to Architect@example.com and created after De
 
     POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
-[component_POST.json](Schemas_draft-03/Collaboration/Component/component_POST.json)
+[component_POST.json](Schemas_draft-03/Collaboration/Component/components_POST.json)
 
 Add a **collection** of all components related to a viewpoint.
 
