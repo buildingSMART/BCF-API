@@ -82,8 +82,11 @@
                     "$ref": "../Action/topic_actions.json"
                 },
                 "topic_status": {
-                    "type": ["string",
-                    "null"]
+                    "type": ["array",
+                    "null"],
+                    "items": {
+                      "type": "string"
+                    }
                 }
             }
         }
