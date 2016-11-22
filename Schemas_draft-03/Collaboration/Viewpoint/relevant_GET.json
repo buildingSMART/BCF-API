@@ -1,0 +1,11 @@
+{
+    "$schema": "http://json-schema.org/draft-03/schema#",
+    "title": "component_GET",
+    "description": "Schema for relevant GET, BCF REST API.",
+    "type": "object",
+    "properties": {
+        "relevant": {
+            "$ref": "component_list.json"
+        }
+    }
+}

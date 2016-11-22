@@ -31,6 +31,24 @@
             "items": {
                 "$ref": "bitmap.json"
             }
+        },
+        "snapshot": {
+            "type": ["string", "null"],
+            "format": "base64"
+        },
+        "components": {
+            "type": ["object", "null"],
+            "properties": {
+                "relevant": {
+                    "$ref": "component_list.json"
+                },
+                "coloring": {
+                    "$ref": "coloring.json"
+                },
+                "visibility": {
+                    "$ref": "visibility.json"
+                }
+            }
         }
     }
 }
