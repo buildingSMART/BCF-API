@@ -32,6 +32,8 @@
     + [3.2.4 OAuth2 Protocol Flow - Refresh Token Request](#324-oauth2-protocol-flow---refresh-token-request)
     + [3.2.5 OAuth2 Protocol Flow - Dynamic Client Registration](#325-oauth2-protocol-flow---dynamic-client-registration)
     + [3.2.6 OAuth2 Protocol Flow - Requesting Resources](#326-oauth2-protocol-flow---requesting-resources)
+  * [3.3 User Services](#33-user-services)
+    + [3.3.1 Get current user](#331-get-current-user)
 - [4. BCF Services](#4-bcf-services)
   * [4.1 Project Services](#41-project-services)
     + [4.1.1 GET Projects Service](#411-get-projects-service)
@@ -465,6 +467,31 @@ JSON encoded body using the "application/json" content type.
 ### 3.2.6 OAuth2 Protocol Flow - Requesting Resources
 
 When requesting other resources the access token must be passed via the `Authorization` header using the Bearer scheme (e.g. `Authorization: Bearer Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh`).
+
+----------
+
+## 3.3 User Services
+
+### 3.3.1 Get current user
+
+[user_GET.json](Schemas_draft-03/User/user_GET.json)
+
+**Resource URL**
+
+    GET /bcf/{version}/current-user
+
+**Example Request**
+
+    GET /bcf/2.1/current-user
+
+**Example Response**
+
+    Response Code: 200 - OK
+    Body:
+    {
+        "id": "Architect@example.com",
+        "name": "John Doe"
+    }
 
 ----------
 
