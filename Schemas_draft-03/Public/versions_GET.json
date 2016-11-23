@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-03/schema#",
-    "title": "version_GET",
-    "description": "Schema for Version",
+    "title": "versions_GET",
+    "description": "Schema for Versions",
     "type": "object",
     "properties": {
         "versions": {
