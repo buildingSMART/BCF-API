@@ -28,7 +28,10 @@
             "null"]
         },
         "index": {
-            "type": "integer"
+            "type": [
+                "integer",
+                "null"
+            ]
         },
         "labels": {
             "type": ["array",
