@@ -1,5 +1,5 @@
 {
-    "title": "topic_history_GET",
+    "title": "comment_history_GET",
     "type": "object",
     "properties": {
         "comment_guid": {
@@ -19,21 +19,10 @@
             "type": "string"
         },
         "events": {
-            "type": ["array"],
+            "type": "array",
             "minItems": 1,
             "items": {
-                "type":  {
-                    "required": true,
-                    "type": "string"
-                },
-                "operation":  {
-                    "required": true,
-                    "type": "string"
-                },
-                "value": {
-                    "type": ["string",
-                    "null"]
-                }
+                "$ref": "event.json"
             }
         }
     }

@@ -1,0 +1,18 @@
+{
+    "title": "event",
+    "type": ["object", "null"],
+    "properties": {
+        "type":  {
+            "required": true,
+            "type": "string"
+        },
+        "operation":  {
+            "required": true,
+            "type": "string"
+        },
+        "value": {
+            "type": ["string",
+            "null"]
+        }
+    }
+}
