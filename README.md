@@ -178,7 +178,7 @@ be locally overridden in the entities themselves.
 
 ### 1.8.1 Per-Entity Authorization
 
-Whenever a user requests an update-able entity with the request parameter `includeAuthorization` equal to `true` the
+Whenever a user requests an update-able entity with the query parameter `includeAuthorization` equal to `true` the
 server should include an `authorization` field in the entity containing any local variations from the global
 authorization defaults for that entity. Using this information clients can decide whether to, for example, include an
 "Edit" button in the UI displaying the entity depending on the actions permitted for the user.
@@ -986,7 +986,7 @@ Puts a new BIM Snippet binary file to a topic. If this is used, the parent topic
 ### 4.2.8 Determining Allowed Topic Modifications
 
 The global default Topic authorizations are expressed in the project schema and when Topic(s) are requested with the
-parameter "includeAuthorization" equal to "true" Topics will include an "authorization" field containing any local
+query parameter "includeAuthorization" equal to "true" Topics will include an "authorization" field containing any local
 overrides for each Topic.
 
 ## 4.3 File Services
@@ -1216,7 +1216,7 @@ Update a single comment, description similar to POST.
 ### 4.4.5 Determining allowed Comment modifications
 
 The global default Comment authorizations are expressed in the project schema and when Comment(s) are requested with the
-parameter "includeAuthorization" equal to "true" Comments will include an "authorization" field containing any local
+query parameter "includeAuthorization" equal to "true" Comments will include an "authorization" field containing any local
 overrides for each Comment.
 
 ## 4.5 Viewpoint Services
