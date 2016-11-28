@@ -4,7 +4,7 @@
     "properties": {
         "index": {
             "type": [
-                "number",
+                "integer",
                 "null"
             ]
         },

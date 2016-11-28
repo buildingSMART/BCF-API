@@ -1346,7 +1346,7 @@ JSON encoded body using the "application/json" content type.
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | x, y, z | number | numbers defining either a point or a vector | optional |
-| index | number | parameter for sorting | optional |
+| index | integer | parameter for sorting | optional |
 | orthogonal camera | object | orthogonal camera view | optional |
 | camera_view_point | object | viewpoint of the camera | optional |
 | camera_directiont | object | direction of the camera | optional |
