@@ -24,7 +24,7 @@
   * [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
   * [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
 - [3. Public Services](#3-public-services)
-  * [3.1 Version Service](#31-version-service)
+  * [3.1 Versions Service](#31-versions-service)
   * [3.2 Authentication Services](#32-authentication-services)
     + [3.2.1 Obtaining Authentication Information](#321-obtaining-authentication-information)
     + [3.2.2 OAuth2 Protocol Flow - Client Request](#322-oauth2-protocol-flow---client-request)
@@ -252,13 +252,13 @@ BCF and model server are co-located on the same hosts.
 ----------
 # 3. Public Services
 
-## 3.1 Version Service
+## 3.1 Versions Service
 
-[version_GET.json](Schemas_draft-03/Public/version_GET.json)
+[versions_GET.json](Schemas_draft-03/Public/versions_GET.json)
 
 **Resource URL (public resource)**
 
-    GET /bcf/version
+    GET /bcf/versions
 
 **Parameters**
 
@@ -271,7 +271,7 @@ Returns a list of all supported BCF API versions of the server.
 
 **Example Request**
 
-    GET /bcf/version
+    GET /bcf/versions
 
 **Example Response**
 
