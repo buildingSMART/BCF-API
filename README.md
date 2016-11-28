@@ -1074,7 +1074,6 @@ Retrieve a **collection** of all comments related to a topic (default ordering i
 |parameter|type|description|
 |---------|----|-----------|
 |author|string|userId of the author (value from extensions)|
-|status|string|status of a comment (value from extensions)|
 |date|datetime|creation date of a comment|
 
 **Odata sort parameters**
@@ -1085,9 +1084,9 @@ Retrieve a **collection** of all comments related to a topic (default ordering i
 
 **Example Request with odata**
 
-Get comments that are closed and created after December 5 2015. Sort the result on first created
+Get comments that are created after December 5 2015. Sort the result on first created
 
-    GET /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments?$filter=status eq 'Closed' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
+    GET /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments?$filter=date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
 
 **Example Request**
 
