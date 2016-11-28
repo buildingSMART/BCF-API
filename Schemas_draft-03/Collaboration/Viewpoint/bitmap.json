@@ -6,10 +6,9 @@
             "type": ["string"]
         },
         "bitmap_type": {
-            "type": "integer",
-            "enum": [0,
-            1,
-            2]
+            "type": "string",
+            "enum": ["jpg",
+            "png"]
         },
         "location": {
             "$ref": "location.json"

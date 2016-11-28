@@ -1365,7 +1365,7 @@ JSON encoded body using the "application/json" content type.
 | direction | object | direction of the clipping plane | optional |
 | bitmaps | array | array of embedded pictures in the viewpoint | optional |
 | guid | string | guid for the bitmap | mandatory |
-| bitmap_type | enum | format of the bitmap. Predefined values `png` = 0, `jpg` = 1, `bmp` = 2 | mandatory |
+| bitmap_type | enum (string) | format of the bitmap. Predefined values `png` or `jpg` | mandatory |
 | location | object | location of the center of the bitmap in world coordinates (point) | optional |
 | normal | object | normal vector of the bitmap (vector) | optional |
 | up | object | up vector of the bitmap (vector) | optional |
@@ -1570,7 +1570,7 @@ POST Body contains binary image data
 
     GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
 
-Retrieve a specific viewpoints bitmap image file (png, jpg or bmp).
+Retrieve a specific viewpoints bitmap image file (png or jpg).
 
 **Example Request**
     GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
@@ -1581,7 +1581,7 @@ Retrieve a specific viewpoints bitmap image file (png, jpg or bmp).
 
     POST /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
 
-Add a specific bitmap in a viewpoint (png, jpg or bmp).
+Add a specific bitmap in a viewpoint (png or jpg).
 
 **Example Request**
 
