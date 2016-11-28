@@ -1,0 +1,24 @@
+{
+    "type": "object",
+    "properties": {
+        "default_visibility": {
+            "type": "boolean",
+            "default": "false"
+        },
+        "exceptions": {
+            "$ref": "component_list.json"
+        },
+        "spaces_on": {
+            "type": "boolean",
+            "default": "false"
+        },
+        "space_boundaries_on": {
+            "type": "boolean",
+            "default": "false"
+        },
+        "openings_on": {
+            "type": "boolean",
+            "default": "false"
+        }
+    }
+}

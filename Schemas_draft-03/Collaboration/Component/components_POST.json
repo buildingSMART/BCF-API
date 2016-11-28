@@ -1,9 +1,0 @@
-{
-    "$schema": "http://json-schema.org/draft-03/schema#",
-    "title": "component_POST",
-    "description": "Schema for components POST, BCF REST API.",
-    "type": "object",
-    "components": {
-        "$ref": "component_list.json"
-    }
-}
