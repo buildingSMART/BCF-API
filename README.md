@@ -305,10 +305,12 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
-|oauth2_auth_url|string|URL to authorisation page|true|
-|oauth2_token_url|string|URL for token requests|true|
-|oauth2_dynamic_client_reg_url|string|URL for automated client registration|true|
-|http_basic_supported|boolean|Indicates if Http Basic Authentication is supported|true|
+|oauth2_auth_url|string|URL to authorisation page|false|
+|oauth2_token_url|string|URL for token requests|false|
+|oauth2_dynamic_client_reg_url|string|URL for automated client registration|false|
+|http_basic_supported|boolean|Indicates if Http Basic Authentication is supported|false|
+
+If `oauth2_auth_url` is present, then `oauth2_token_url` must also be present and vice versa. If properties are not present in the response, clients should assume that the functionality is not supported by the server, e.g. a missing `http_basic_supported` property would indicate that Http basic authentication is not available on the server.
 
 **Example Request**
 

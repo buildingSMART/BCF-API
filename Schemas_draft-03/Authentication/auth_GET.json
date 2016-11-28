@@ -3,19 +3,20 @@
     "type": "object",
     "properties": {
         "oauth2_auth_url": {
-            "required": true,
-            "type": "string"
+            "type": ["string",
+            "null"]
         },
         "oauth2_token_url": {
-            "required": true,
-            "type": "string"
+            "type": ["string",
+            "null"]
         },
         "oauth2_dynamic_client_reg_url": {
             "type": ["string",
             "null"]
         },
         "http_basic_supported": {
-            "type": "boolean"
+            "type": ["boolean",
+            "null"]
         }
     }
 }
