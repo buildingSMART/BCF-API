@@ -235,7 +235,7 @@ The server has a web config file .. "*" means the server allow the resources for
 
 ## 1.7 Error response body format ##
 
-BCF-API has a specified error response body format [error.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/error.json).
+BCF-API has a specified error response body format [error.json](Schemas_draft-03/error.json).
 
 ----------
 
@@ -263,7 +263,7 @@ BCF and model server are co-located on the same hosts.
 
 ## 3.1 Information Services ##
 
-[version_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Public/version_GET.json)
+[version_GET.json](Schemas_draft-03/Public/version_GET.json)
 
 **Recource URL (public resource)**
 
@@ -306,7 +306,7 @@ BCF and model server are co-located on the same hosts.
 
 ### 3.2.1 Obtaining Authentication Information ###
 
-[auth_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/auth_GET.json)
+[auth_GET.json](Schemas_draft-03/Authentication/auth_GET.json)
 
 Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/draft-ietf-oauth-v2-22).
 
@@ -387,7 +387,7 @@ Open a browser window or redirect the user to this resource. This redirects back
 
 ### 3.2.3 OAuth2 protocol flow - Token Request -###
 
-[token_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/token_GET.json)
+[token_GET.json](Schemas_draft-03/Authentication/token_GET.json)
 
 The Client uses the **"oauth2\_token_url"** to request a token. Example:
 
@@ -443,7 +443,7 @@ The access token will be returned as JSON in the response body and is an arbitra
 
 ### 3.2.4 OAuth2 protocol flow - Refresh Token Request -###
 
-[token_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/token_GET.json)
+[token_GET.json](Schemas_draft-03/Authentication/token_GET.json)
 
 
 The process to retrieve a refresh token is exactly the same as retrieving a token except the POST Request Body.
@@ -457,9 +457,9 @@ The refresh token can only be used once to retrieve a token and a new refresh to
 
 ### 3.2.5 OAuth2 protocol flow - Dynamic Client Registration -###
 
-[dynRegClient\_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/dynRegClient_POST.json)
+[dynRegClient\_POST.json](Schemas_draft-03/Authentication/dynRegClient_POST.json)
 
-[dynRegClient\_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Authentication/dynRegClient_GET.json) 
+[dynRegClient\_GET.json](Schemas_draft-03/Authentication/dynRegClient_GET.json) 
 
  The following part describes the optional dynamic registration process of a client. BCF-Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
 
@@ -535,7 +535,7 @@ When requesting other resources the access token must be passed via the Authoriz
 
     GET /bcf/{version}/projects
 
-[project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_GET.json)
+[project_GET.json](Schemas_draft-03/Project/project_GET.json)
 
 Retrieve a **collection** of projects where the currently logged on user has access to.
 
@@ -564,7 +564,7 @@ Retrieve a **collection** of projects where the currently logged on user has acc
 
     POST /bcf/{version}/projects
 
-[project_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_POST.json)
+[project_POST.json](Schemas_draft-03/Project/project_POST.json)
 
 Add a new project.
 
@@ -604,7 +604,7 @@ JSON encoded body using the "application/json" content type.
 
     GET /bcf/{version}/projects/{project_id}
 
-[project_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_GET.json)
+[project_GET.json](Schemas_draft-03/Project/project_GET.json)
 
 Retrieve a specific project.
 
@@ -628,7 +628,7 @@ Retrieve a specific project.
 
     PUT /bcf/{version}/projects/{project_id}
 
-[project_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/project_PUT.json)
+[project_PUT.json](Schemas_draft-03/Project/project_PUT.json)
 
 Modify a specific project, description similar to POST.
 
@@ -639,7 +639,7 @@ Modify a specific project, description similar to POST.
 
 	GET /bcf/{version}/projects/{project_id}/extensions
 
-[extensions_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/extensions_GET.json)
+[extensions_GET.json](Schemas_draft-03/Project/extensions_GET.json)
 
 Retrieve a specific projects extensions.
 
@@ -694,7 +694,7 @@ Retrieve a specific projects extensions.
 
 	POST /bcf/{version}/projects/{project_id}/extensions
 
-[extensions_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/extensions_POST.json)
+[extensions_POST.json](Schemas_draft-03/Project/extensions_POST.json)
 
 Create a specific projects extensions.
 
@@ -826,7 +826,7 @@ JSON encoded body using the "application/json" content type.
 
 	PUT /bcf/{version}/projects/{project_id}/extensions
 
-[extensions_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Project/extensions_PUT.json)
+[extensions_PUT.json](Schemas_draft-03/Project/extensions_PUT.json)
 
 Modify a specific projects extensions, description similar to POST.
 
@@ -841,7 +841,7 @@ Modify a specific projects extensions, description similar to POST.
  
 	GET /bcf/{version}/projects/{project_id}/topics
 
-[topic_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_GET.json)
+[topic_GET.json](Schemas_draft-03/Collaboration/Topic/topic_GET.json)
 
 Retrieve a **collection** of topics related to a project (default sort order is creation_date).
 
@@ -880,7 +880,7 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 
     POST /bcf/{version}/projects/{project_id}/topics
 
-[topic_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_POST.json)
+[topic_POST.json](Schemas_draft-03/Collaboration/Topic/topic_POST.json)
 
 Add a new topic.
 
@@ -997,7 +997,7 @@ JSON encoded body using the "application/json" content type.
     GET /bcf/{version}/topics/{guid}
     GET /bcf/{version}/projects/{guid}/topics/{guid}
 
-[topic_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_GET.json)
+[topic_GET.json](Schemas_draft-03/Collaboration/Topic/topic_GET.json)
 
 
 Retrieve a specific topic.
@@ -1036,7 +1036,7 @@ Retrieve a specific topic.
     PUT /bcf/{version}/topics/{guid}
     PUT /bcf/{version}/projects/{project_id}/topics/{guid}
 
-[topic_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Topic/topic_PUT.json)
+[topic_PUT.json](Schemas_draft-03/Collaboration/Topic/topic_PUT.json)
 
 Modify a specific topic, description similar to POST.
 
@@ -1078,7 +1078,7 @@ Puts a new BIM Snippet binary file to a topic. If this is used, the parent topic
     GET /bcf/{version}/topics/{guid}/files
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/files
 
-[file_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/File/file_GET.json)
+[file_GET.json](Schemas_draft-03/Collaboration/File/file_GET.json)
 
 Retrieve a **collection** of file references as topic header.
 
@@ -1109,7 +1109,7 @@ Retrieve a **collection** of file references as topic header.
     PUT /bcf/{version}/topics/{guid}/files
 	PUT /bcf/{version}/projects/{project_id}/topics/{guid}/files
 
-[file_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/File/file_PUT.json)
+[file_PUT.json](Schemas_draft-03/Collaboration/File/file_PUT.json)
 
 Update a **collection** of file references on the topic header.
 
@@ -1154,7 +1154,7 @@ Update a **collection** of file references on the topic header.
     GET /bcf/{version}/topics/{guid}/comments
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/comments
 
-[comment_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Comment/comment_GET.json)
+[comment_GET.json](Schemas_draft-03/Collaboration/Comment/comment_GET.json)
 
 Retrieve a **collection** of all comments related to a topic.
 
@@ -1191,7 +1191,7 @@ Retrieve a **collection** of all comments related to a topic.
     POST /bcf/{version}/topics/{guid}/comments
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/comments
 
-[comment_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Comment/comment_POST.json)
+[comment_POST.json](Schemas_draft-03/Collaboration/Comment/comment_POST.json)
 
 Add a new comment to a topic.
 
@@ -1262,7 +1262,7 @@ JSON encoded body using the "application/json" content type.
     GET /bcf/{version}/comments/{guid}
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
 
-[comment_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Comment/comment_GET.json)
+[comment_GET.json](Schemas_draft-03/Collaboration/Comment/comment_GET.json)
 
 Get a single comment.
 
@@ -1289,7 +1289,7 @@ Get a single comment.
     PUT /bcf/{version}/comments/{guid}
 	PUT /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
 
-[comment_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Comment/comment_PUT.json)
+[comment_PUT.json](Schemas_draft-03/Collaboration/Comment/comment_PUT.json)
 
 Update a single comment, description similar to POST.
 
@@ -1302,7 +1302,7 @@ Update a single comment, description similar to POST.
     GET /bcf/{version}/topics/{guid}/viewpoints
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints
 
-[viewpoint_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Viewpoint/viewpoint_GET.json)
+[viewpoint_GET.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_GET.json)
 
 Retrieve a **collection** of all viewpoints related to a topic.
 
@@ -1410,7 +1410,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
     POST /bcf/{version}/topics/{guid}/viewpoints
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints
 
-[viewpoint_POST.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Viewpoint/viewpoint_POST.json)
+[viewpoint_POST.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_POST.json)
 
 Add a new viewpoint.
 
@@ -1661,7 +1661,7 @@ JSON encoded body using the "application/json" content type.
     GET /bcf/{version}/viewpoints/{guid}
     GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}
 
-[viewpoint_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Viewpoint/viewpoint_GET.json)
+[viewpoint_GET.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_GET.json)
 
 
 Retrieve a specific viewpoint.
@@ -1727,7 +1727,7 @@ Retrieve a specific viewpoint.
     PUT /bcf/{version}/viewpoints/{guid}
     PUT /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}
 
-[viewpoint_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Viewpoint/viewpoint_PUT.json)
+[viewpoint_PUT.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_PUT.json)
 
 Update a single viewpoint, description similar to POST.
 
@@ -1789,7 +1789,7 @@ HTTP-response status code:
     GET /bcf/{version}/viewpoints/{guid}/components
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
-[component_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Component/component_GET.json)
+[component_GET.json](Schemas_draft-03/Collaboration/Component/component_GET.json)
 
 Retrieve a **collection** of all components related to a viewpoint.
 
@@ -1825,7 +1825,7 @@ Retrieve a **collection** of all components related to a viewpoint.
     POST /bcf/{version}/viewpoints/{guid}/components
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
 
-[component_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Component/component_PUT.json)
+[component_PUT.json](Schemas_draft-03/Collaboration/Component/component_PUT.json)
 
 Add or update a **collection** of all components related to a viewpoint.
 
@@ -1883,7 +1883,7 @@ Add or update a **collection** of all components related to a viewpoint.
     GET /bcf/{version}/topics/{guid}/related_topics
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
 
-[related_topic_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/RelatedTopic/related_topic_GET.json)
+[related_topic_GET.json](Schemas_draft-03/Collaboration/RelatedTopic/related_topic_GET.json)
 
 Retrieve a **collection** of all related topics to a topic.
 
@@ -1909,7 +1909,7 @@ Retrieve a **collection** of all related topics to a topic.
     POST /bcf/{version}/topics/{guid}/related_topics
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
 
-[related_topic_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PUT.json)
+[related_topic_PUT.json](Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PUT.json)
 
 Add or update a **collection** of all related topics to a topic.
 
@@ -1952,7 +1952,7 @@ Add or update a **collection** of all related topics to a topic.
     GET /bcf/{version}/topics/{guid}/document_references
 	GET /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
 
-[document_reference_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_GET.json)
+[document_reference_GET.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_GET.json)
 
 Retrieve a **collection** of all document references to a topic.
 
@@ -1982,7 +1982,7 @@ Retrieve a **collection** of all document references to a topic.
     POST /bcf/{version}/topics/{guid}/document_references
 	POST /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
 
-[document_reference_PUT.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
+[document_reference_PUT.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
 Add or update document references to a topic.
 The PUT object may either contain the property "guid" to reference a document stored on the BCF server (see section 4.9) OR the property "referenced_document" to point to an external resource.
@@ -2012,7 +2012,7 @@ The PUT object may either contain the property "guid" to reference a document st
 
 ### 4.9.1 GET Documents Services
 
-[document_GET.json](https://raw.githubusercontent.com/BuildingSMART/BCF-API/master/Schemas_draft-03/Collaboration/Document/document_GET.json)
+[document_GET.json](Schemas_draft-03/Collaboration/Document/document_GET.json)
 
 **Recource URL**
 
