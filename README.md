@@ -309,8 +309,9 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 |oauth2_token_url|string|URL for token requests|false|
 |oauth2_dynamic_client_reg_url|string|URL for automated client registration|false|
 |http_basic_supported|boolean|Indicates if Http Basic Authentication is supported|false|
+|client_authentication_required|boolean|If true, OAuth2 clients must authenticate on this server|false|
 
-If `oauth2_auth_url` is present, then `oauth2_token_url` must also be present and vice versa. If properties are not present in the response, clients should assume that the functionality is not supported by the server, e.g. a missing `http_basic_supported` property would indicate that Http basic authentication is not available on the server.
+If `oauth2_auth_url` is present, then `oauth2_token_url` must also be present and vice versa. If properties are not present in the response, clients should assume that the functionality is not supported by the server, e.g. a missing `http_basic_supported` property would indicate that Http basic authentication is not available on the server. If `client_authentication_required` is `true`, this means that all OAuth2 token requests have mandatory client authentication, so `client_id` and `client_secret` are expected to be sent with every token request.
 
 **Example Request**
 
@@ -358,22 +359,14 @@ The Client uses the **"oauth2\_token_url"** to request a token. Example:
 
     POST https://example.com/bcf/oauth2/token
 
-**Parameters**
-
-|parameter|type|description|
-|---------|----|-----------|
-|access_token|string|The issued OAuth2 token|
-|token_type|string|Always `bearer`|
-|expires_in|integer|The lifetime of the access token in seconds|
-|refresh_token|string|The issued OAuth2 refresh token, one-time-usable only|
-
-The POST request can be done via HTTP Basic Authorization with your applications `client_id` as the username and your `client_secret` as the password.
+_If the server requires client authentication:_
+Authorize your request via Http Basic Authorization with your applications `client_id` as the username and your `client_secret` as the password.
 
 **Example Request**
 
     POST https://example.com/bcf/oauth2/token?grant_type=authorization_code&code=<your_access_code>
 
-Alternatively all parameters may be passed in the token request body instead of using Url parameters. The expected `Content-Type` for this request is `application/x-www-form-urlencoded`.
+Alternatively all parameters may be passed in the token request body instead of using Url parameters. The expected `Content-Type` for this request is `application/x-www-form-urlencoded`. `client_id` and `client_secret` are part of the body in this case.
 
     POST https://example.com/bcf/oauth2/token
     Body:
@@ -391,6 +384,15 @@ The access token will be returned as JSON in the response body and is an arbitra
         "expires_in": "3600",
         "refresh_token": "MTRiMjkzZTYtOTgwNC0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh"
     }
+
+**Response Parameters**
+
+|parameter|type|description|
+|---------|----|-----------|
+|access_token|string|The issued OAuth2 token|
+|token_type|string|Always `bearer`|
+|expires_in|integer|The lifetime of the access token in seconds|
+|refresh_token|string|The issued OAuth2 refresh token, one-time-usable only|
 
 ### 3.2.4 OAuth2 Protocol Flow - Refresh Token Request
 
