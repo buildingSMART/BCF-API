@@ -1,11 +1,7 @@
 {
-    "title": "comment_history_GET",
+    "title": "topic_event_GET",
     "type": "object",
     "properties": {
-        "comment_guid": {
-            "required": true,
-            "type": "string"
-        },
         "topic_guid": {
             "required": true,
             "type": "string"
@@ -18,11 +14,11 @@
             "required": true,
             "type": "string"
         },
-        "events": {
+        "actions": {
             "type": "array",
             "minItems": 1,
             "items": {
-                "$ref": "event.json"
+                "$ref": "event_action.json"
             }
         }
     }

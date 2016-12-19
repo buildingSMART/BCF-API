@@ -83,12 +83,12 @@
     + [4.9.1 GET Documents Service](#491-get-documents-service)
     + [4.9.2 POST Document Service](#492-post-document-service)
     + [4.9.3 GET Document Service](#493-get-document-service)
-  * [4.10 Topics History Services](#410-topics-history-services)
-    + [4.10.1 GET Topics History Service](#4101-get-topics-history-service)
-    + [4.10.2 GET Topic History Service](#4102-get-topic-history-service)
-  * [4.11 Comments History Services](#411-comments-history-services)
-    + [4.11.1 GET Comments History Service](#4111-get-comments-history-service)
-    + [4.11.2 GET Comment History Service](#4112-get-comment-history-service)
+  * [4.10 Topics Events Services](#410-topics-events-services)
+    + [4.10.1 GET Topics Events Service](#4101-get-topics-events-service)
+    + [4.10.2 GET Topic Events Service](#4102-get-topic-events-service)
+  * [4.11 Comments Events Services](#411-comments-events-services)
+    + [4.11.1 GET Comments Events Service](#4111-get-comments-events-service)
+    + [4.11.2 GET Comment Events Service](#4112-get-comment-events-service)
 
 <!-- tocstop -->
 
@@ -1926,33 +1926,38 @@ Retrieves a document as binary file.
 
 Retrieves a document as binary file.
 
-## 4.10 Topics History Services
+## 4.10 Topics Events Services
 
-The topic history service reflects the history for topics. Each creation or update of a topic generates a new topic history.
+The topic events service reflects the events for topics. Each creation or update of a topic generates a new topic event.
 
-### 4.10.1 GET Topics History Service
+### 4.10.1 GET Topics Events Service
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/history
+    GET /bcf/{version}/projects/{project_id}/topics/events
 
-[topic_history_GET.json](Schemas_draft-03/Collaboration/History/topic_history_GET.json)
+[topic_event_GET.json](Schemas_draft-03/Collaboration/Events/topic_event_GET.json)
 
-Retrieve a **collection** of topic histories related to a project (default sort order is `date`).
+Retrieve a **collection** of topic events related to a project (default sort order is `date`).
 
-**Topic history types**
+**Topic event types**
 
-|type|operation|value|
-|---------|-----------|-----------|
-|topic|created|null|
-|title|updated|The title (limit: 128 characters)|
-|description|updated, removed|The description (limit: 1024 characters) or null if removed|
-|status|updated|The status (value from extensions) |
-|type|updated|The type (value from extensions)|
-|priority|updated, removed|The priority (value from extensions) or null if removed|
-|due_date|updated, removed|The due date or null if removed|
-|assigned|updated, removed|The assigned user (value from extensions) or null if removed|
-|label|added, removed|The label added or removed (value from extensions)|
+|type|value|
+|---------|-----------|
+|topic_created|null|
+|title_updated|The title (limit: 128 characters)|
+|description_updated|The description (limit: 1024 characters)|
+|description_removed|null|
+|status_updated|The status (value from extensions) |
+|type_updated|The type (value from extensions)|
+|priority_updated|The priority (value from extensions)|
+|priority_removed|null|
+|due_date_updated|The due date|
+|due_date_removed|null|
+|assigned_to_updated|The assigned user (value from extensions)|
+|assigned_to_removed|null|
+|label_added|The label added (value from extensions)|
+|label_removed|The label removed (value from extensions)|
 
 **Odata filter parameters**
 
@@ -1960,32 +1965,32 @@ Retrieve a **collection** of topic histories related to a project (default sort 
 |---------|----|-----------|
 |topic_guid|string|guid of the topic |
 |author|string|userId of the author (value from extensions)|
-|type|string|type of the history (value from Topic history types, table above)|
-|date|datetime|date of the history|
+|type|string|type of the event (value from Topic event types, table above)|
+|date|datetime|date of the event|
 
 **Odata sort parameters**
 
 |parameter|description|
 |---------|-----------|
-|date|date of the history|
+|date|date of the event|
 
 **Example Request with odata**
 
-Get histories of type 'status' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
+Get events of type 'status_updated' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=author eq 'Architect@example.com' and type eq 'status' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/events?$filter=author eq 'Architect@example.com' and type eq 'status_updated' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
 
-Get latest histories of given topic. Skip the 10 first, and get the 5 next
+Get latest events of given topic. Skip the 10 first, and get the 5 next
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=topic_guid eq 'A245F4F2-2C01-B43B-B612-5E456BEF8116'&$top=5&$skip=10
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/events?$filter=topic_guid eq 'A245F4F2-2C01-B43B-B612-5E456BEF8116'&$top=5&$skip=10
 
-Get histories that is of type 'status', 'type' or 'title' or 'label added'
+Get events that are of type 'status_updated', 'type_updated' or 'title_updated' or 'label_added'
 
-    /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=type eq 'status' or type eq 'type' or type eq 'title' or (type eq 'label' and operation eq 'added')
+    /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/events?$filter=type eq 'status_updated' or type eq 'type_updated' or type eq 'title_updated' or type eq 'label_added'
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/events
 
 **Example Response**
 
@@ -1997,8 +2002,7 @@ Get histories that is of type 'status', 'type' or 'title' or 'label added'
         "author": "Architect@example.com",
         "events": [
             {
-                "type": "status",
-                "operation": "update",
+                "type": "status_updated",
                 "value": "Closed"
             }
         ]
@@ -2008,69 +2012,73 @@ Get histories that is of type 'status', 'type' or 'title' or 'label added'
         "author": "Architect@example.com",
         "events": [
             {
-                "type": "type",
-                "operation": "update",
+                "type": "type_updated",
                 "value": "Warning"
             }
         ]
     }]
 
-### 4.10.2 GET Topic History Service
+### 4.10.2 GET Topic Events Service
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/history
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/events
 
-[topic_history_GET.json](Schemas_draft-03/Collaboration/History/topic_history_GET.json)
+[topic_event_GET.json](Schemas_draft-03/Collaboration/Events/topic_event_GET.json)
 
-Retrieve a **collection** of topic histories related to a project (default sort order is `date`).
+Retrieve a **collection** of topic events related to a project (default sort order is `date`).
 
-**Topic history types**
+**Topic event types**
 
-|type|operation|value|
-|---------|-----------|-----------|
-|topic|created|null|
-|title|updated|The title (limit: 128 characters)|
-|description|updated, removed|The description (limit: 1024 characters) or null if removed|
-|status|updated|The status (value from extensions) |
-|type|updated|The type (value from extensions)|
-|priority|updated, removed|The priority (value from extensions) or null if removed|
-|due_date|updated, removed|The due date or null if removed|
-|assigned|updated, removed|The assigned user (value from extensions) or null if removed|
-|label|added, removed|The label added or removed (value from extensions)|
+|type|value|
+|---------|-----------|
+|topic_created|null|
+|title_updated|The title (limit: 128 characters)|
+|description_updated|The description (limit: 1024 characters)|
+|description_removed|null|
+|status_updated|The status (value from extensions) |
+|type_updated|The type (value from extensions)|
+|priority_updated|The priority (value from extensions)|
+|priority_removed|null|
+|due_date_updated|The due date|
+|due_date_removed|null|
+|assigned_to_updated|The assigned user (value from extensions)|
+|assigned_to_removed|null|
+|label_added|The label added (value from extensions)|
+|label_removed|The label removed (value from extensions)|
 
 **Odata filter parameters**
 
 |parameter|type|description|
 |---------|----|-----------|
 |author|string|userId of the author (value from extensions)|
-|type|string|type of the history (value from Topic history types, table above)|
-|date|datetime|date of the history|
+|type|string|type of the event (value from Topic event types, table above)|
+|date|datetime|date of the event|
 
 **Odata sort parameters**
 
 |parameter|description|
 |---------|-----------|
-|date|date of the history|
+|date|date of the event|
 
 **Example Request with odata**
 
-Get histories of type 'status' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
+Get events of type 'status_updated' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$filter=author eq 'Architect@example.com' and type eq 'status' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/events?$filter=author eq 'Architect@example.com' and type eq 'status_updated' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
 
-Get latest histories. Skip the 10 first, and get the 5 next
+Get latest events. Skip the 10 first, and get the 5 next
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$top=5&$skip=10
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/events?$top=5&$skip=10
 
 Odata does not support list operators. To achieve list query, use the 'or' operator.
-Get histories that is of type 'status', 'type' or 'title' or 'label added'
+Get events that is of type 'status_updated', 'type_updated' or 'title_updated' or 'label_added'
 
-    /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history?$filter=type eq 'status' or type eq 'type' or type eq 'title' or (type eq 'label' and operation eq 'added')
+    /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/events?$filter=type eq 'status_updated' or type eq 'type_updated' or type eq 'title_updated' or type eq 'label_updated'
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/history
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/events
 
 **Example Response**
 
@@ -2082,8 +2090,7 @@ Get histories that is of type 'status', 'type' or 'title' or 'label added'
         "author": "Architect@example.com",
         "events": [
             {
-                "type": "type",
-                "operation": "update",
+                "type": "type_updated",
                 "value": "Error"
             }
         ]
@@ -2093,35 +2100,36 @@ Get histories that is of type 'status', 'type' or 'title' or 'label added'
         "author": "Architect@example.com",
         "events": [
             {
-                "type": "status",
-                "operation": "update",
+                "type": "status_updated",
                 "value": "Open"
             }
         ]
     }]
 
-## 4.11 Comments History Services
+## 4.11 Comments Events Services
 
-The comment history service reflects the history for topic comments. Each creation or update of a comment generates a new comment history.
+The comment events service reflects the events for topic comments. Each creation or update of a comment generates a new comment event.
 
-### 4.11.1 GET Comments History Service
+### 4.11.1 GET Comments Events Service
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/comments/history
+    GET /bcf/{version}/projects/{project_id}/topics/comments/events
 
-[comment_history_GET.json](Schemas_draft-03/Collaboration/History/comment_history_GET.json)
+[comment_event_GET.json](Schemas_draft-03/Collaboration/Events/comment_event_GET.json)
 
-Retrieve a **collection** of comment histories related to a project (default sort order is `date`).
+Retrieve a **collection** of comment events related to a project (default sort order is `date`).
 
-**Comment history types**
+**Comment event types**
 
-|type|operation|value|
-|---------|-----------|-----------|
-|comment|created|null|
-|comment_text|updated|The comment text(limit: 1024 characters)|
-|viewpoint|updated, removed|The viewpoint guid or null if removed|
-|reply_to_comment|updated, removed|The reply to comment guid or null if removed|
+|type|value|
+|---------|-----------|
+|comment_created|null|
+|comment_text_updated|The comment text(limit: 1024 characters)|
+|viewpoint_updated|The viewpoint guid|
+|viewpoint_removed|null|
+|reply_to_comment_updated|The reply to comment guid|
+|reply_to_comment_removed|null|
 
 **Odata filter parameters**
 
@@ -2130,31 +2138,32 @@ Retrieve a **collection** of comment histories related to a project (default sor
 |comment_guid|string|guid of the comment |
 |topic_guid|string|guid of the topic |
 |author|string|userId of the author (value from extensions)|
-|date|datetime|date of the history|
+|date|datetime|date of the event|
+|type|string|type of the event (value from Comment event types, table above)|
 
 **Odata sort parameters**
 
 |parameter|description|
 |---------|-----------|
-|date|date of the history|
+|date|date of the event|
 
 **Example Request with odata**
 
-Get histories of type 'created' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
+Get events of type 'comment_created' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/comments/history?$filter=author eq 'Architect@example.com' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/comments/events?$filter=author eq 'Architect@example.com' and date gt 2015-12-05T00:00:00+01:00 and type eq 'comment_created'&$orderby=date asc
 
-Get latest histories of given comment. Skip the 10 first, and get the 5 next
+Get latest events of given comment. Skip the 10 first, and get the 5 next
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/comments/history?$filter=comment_guid eq 'C4215F4D-AC45-A43A-D615-AA456BEF832B'&$top=5&$skip=10
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/comments/events?$filter=comment_guid eq 'C4215F4D-AC45-A43A-D615-AA456BEF832B'&$top=5&$skip=10
 
-Get histories that is of type 'comment created', or 'viewpoint updated'
+Get events that are of type 'comment_created', or 'viewpoint_updated'
 
-    /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/history?$filter=type eq 'comment' or (type eq 'viewpoint' and operation eq 'updated')
+    /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/events?$filter=type eq 'comment_created' or type eq 'viewpoint_updated'
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/comments/history
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/comments/events
 
 **Example Response**
 
@@ -2167,8 +2176,7 @@ Get histories that is of type 'comment created', or 'viewpoint updated'
         "author": "Architect@example.com",
         "events": [
             {
-                "type": "comment",
-                "operation": "created",
+                "type": "comment_created",
                 "value": null
             }
         ]
@@ -2179,62 +2187,64 @@ Get histories that is of type 'comment created', or 'viewpoint updated'
         "author": "Architect@example.com",
         "events": [
             {
-                "type": "viewpoint",
-                "operation": "updated",
+                "type": "viewpoint_updated",
                 "value": "b24a82e9-f67b-43b8-bda0-4946abf39624"
             }
         ]
     }]
 
-### 4.11.2 GET Comment History Service
+### 4.11.2 GET Comment Events Service
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}/history
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}/events
 
-[comment_history_GET.json](Schemas_draft-03/Collaboration/History/comment_history_GET.json)
+[comment_event_GET.json](Schemas_draft-03/Collaboration/Events/comment_event_GET.json)
 
-Retrieve a **collection** of comment histories related to a comment (default sort order is `date`).
+Retrieve a **collection** of comment events related to a comment (default sort order is `date`).
 
-**Comment history types**
+**Comment event types**
 
-|type|operation|value|
-|---------|-----------|-----------|
-|comment|created|null|
-|comment_text|updated|The comment text(limit: 1024 characters)|
-|viewpoint|updated, removed|The viewpoint guid or null if removed|
-|reply_to_comment|updated, removed|The reply to comment guid or null if removed|
+|type|value|
+|---------|-----------|
+|comment_created|null|
+|comment_text_updated|The comment text(limit: 1024 characters)|
+|viewpoint_updated|The viewpoint guid|
+|viewpoint_removed|null|
+|reply_to_comment_updated|The reply to comment guid|
+|reply_to_comment_removed|null|
 
 **Odata filter parameters**
 
 |parameter|type|description|
 |---------|----|-----------|
 |author|string|userId of the author (value from extensions)|
-|date|datetime|date of the history|
+|date|datetime|date of the event|
+|type|string|type of the event (value from Comment event types, table above)|
 
 **Odata sort parameters**
 
 |parameter|description|
 |---------|-----------|
-|date|date of the history|
+|date|date of the event|
 
 **Example Request with odata**
 
-Get histories of type 'created' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
+Get events of type 'comment_created' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/history?$filter=author eq 'Architect@example.com' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/events?$filter=author eq 'Architect@example.com' and date gt 2015-12-05T00:00:00+01:00 and type eq 'comment_created'&$orderby=date asc
 
-Get latest histories of given comment. Skip the 10 first, and get the 5 next
+Get latest events of given comment. Skip the 10 first, and get the 5 next
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/history?$top=5&$skip=10
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/events?$top=5&$skip=10
 
-Get histories that is of type 'comment created', or 'comment_text updated'
+Get events that are of type 'comment_created', or 'comment_text_updated'
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/history?$filter=type eq 'comment' or (type eq 'ciewpoint' and operation eq 'updated')
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/events?$filter=type eq 'comment_created' or type eq 'viewpoint_updated'
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/history
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/events
 
 **Example Response**
 
@@ -2247,8 +2257,7 @@ Get histories that is of type 'comment created', or 'comment_text updated'
         "author": "Architect@example.com",
         "events": [
             {
-                "type": "comment",
-                "operation": "created",
+                "type": "comment_created",
                 "value": null
             }
         ]
@@ -2259,8 +2268,7 @@ Get histories that is of type 'comment created', or 'comment_text updated'
         "author": "Architect@example.com",
         "events": [
             {
-                "type": "comment_text",
-                "operation": "updated",
+                "type": "comment_text_updated",
                 "value": "This is the updated comment"
             }
         ]
