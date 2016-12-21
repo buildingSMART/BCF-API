@@ -4,7 +4,7 @@
 
     "properties": {
         "color": {
-            "type": ["string", "null"]
+            "type": "string"
         },
         "components": {
             "$ref": "component_list.json"

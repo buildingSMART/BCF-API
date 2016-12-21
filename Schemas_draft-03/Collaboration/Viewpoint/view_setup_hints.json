@@ -1,0 +1,17 @@
+{
+    "type": ["object", null],
+    "properties": {
+        "spaces_visible": {
+            "type": "boolean",
+            "default": "false"
+        },
+        "space_boundaries_visible": {
+            "type": "boolean",
+            "default": "false"
+        },
+        "openings_visible": {
+            "type": "boolean",
+            "default": "false"
+        }
+    }
+}

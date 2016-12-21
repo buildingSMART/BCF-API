@@ -1,10 +1,10 @@
 {
     "$schema": "http://json-schema.org/draft-03/schema#",
-    "title": "component_GET",
-    "description": "Schema for relevant GET, BCF REST API.",
+    "title": "selection_GET",
+    "description": "Schema for selection GET, BCF REST API.",
     "type": "object",
     "properties": {
-        "relevant": {
+        "selection": {
             "$ref": "component_list.json"
         }
     }

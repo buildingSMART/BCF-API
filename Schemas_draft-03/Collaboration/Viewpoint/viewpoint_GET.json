@@ -33,8 +33,11 @@
         "bitmaps": {
             "type": ["array", "null"],
             "items": {
-                "$ref": "bitmap.json"
+                "$ref": "bitmap_GET.json"
             }
-        }
+        },
+        "snapshot": {
+            "$ref": "snapshot_GET.json"
+        },
     }
 }
