@@ -42,7 +42,10 @@
                     "$ref": "component_list.json"
                 },
                 "coloring": {
-                    "$ref": "coloring.json"
+                    "type": ["array", "null"],
+                    "items": {
+                        "$ref": "coloring.json"
+                    }
                 },
                 "visibility": {
                     "$ref": "visibility.json"

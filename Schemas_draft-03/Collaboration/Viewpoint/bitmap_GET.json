@@ -6,38 +6,16 @@
         },
         "bitmap_type": {
             "type": "string",
-            "enum": ["jpg", "png"]
+            "enum": ["jpg", "png", "bmp"]
         },
         "location": {
             "$ref": "location.json"
         },
         "normal": {
-            "type": "object",
-            "properties": {
-                "x": {
-                    "type": "number"
-                },
-                "y": {
-                    "type": "number"
-                },
-                "z": {
-                    "type": "number"
-                }
-            }
+            "$ref": "point.json"
         },
         "up": {
-            "type": "object",
-            "properties": {
-                "x": {
-                    "type": "number"
-                },
-                "y": {
-                    "type": "number"
-                },
-                "z": {
-                    "type": "number"
-                }
-            }
+            "$ref": "point.json"
         },
         "height": {
             "type": "number"

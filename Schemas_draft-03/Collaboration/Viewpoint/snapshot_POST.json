@@ -3,7 +3,7 @@
     "properties": {
         "snapshot_type": {
             "type": "string",
-            "enum": ["jpg", "png"]
+            "enum": ["jpg", "png", "bmp"]
         },
         "snapshot_data": {
             "type": "string",
