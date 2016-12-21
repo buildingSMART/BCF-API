@@ -67,26 +67,26 @@
     + [4.5.3 GET Viewpoint Service](#453-get-viewpoint-service)
     + [4.5.4 GET Viewpoint Snapshot Service](#454-get-viewpoint-snapshot-service)
     + [4.5.5 GET Viewpoint Bitmap Service](#455-get-viewpoint-bitmap-service)
-  * [4.6 Component Services](#46-component-services)
-    + [4.6.1 GET Components Service](#461-get-components-service)
-    + [4.6.2 POST Components Service](#462-post-components-service)
-  * [4.7 Related Topics Services](#47-related-topics-services)
-    + [4.7.1 GET Related Topics Service](#471-get-related-topics-service)
-    + [4.7.2 PUT Related Topics Service](#472-put-related-topics-service)
-  * [4.8 Document Reference Services](#48-document-reference-services)
-    + [4.8.1 GET Document References Service](#481-get-document-references-service)
-    + [4.8.2 POST Document Reference Service](#482-post-document-reference-service)
-    + [4.8.3 PUT Document Reference Service](#483-put-document-reference-service)
-  * [4.9 Document Services](#49-document-services)
-    + [4.9.1 GET Documents Service](#491-get-documents-service)
-    + [4.9.2 POST Document Service](#492-post-document-service)
-    + [4.9.3 GET Document Service](#493-get-document-service)
-  * [4.10 Topics Events Services](#410-topics-events-services)
-    + [4.10.1 GET Topics Events Service](#4101-get-topics-events-service)
-    + [4.10.2 GET Topic Events Service](#4102-get-topic-events-service)
-  * [4.11 Comments Events Services](#411-comments-events-services)
-    + [4.11.1 GET Comments Events Service](#4111-get-comments-events-service)
-    + [4.11.2 GET Comment Events Service](#4112-get-comment-events-service)
+    + [4.5.6 GET selected Components Service](#456-get-selected-components-service)
+    + [4.5.7 GET colored Components Service](#457-get-colored-components-service)
+    + [4.5.8 GET visibility of Components Service](#458-get-visibility-of-components-service)
+  * [4.6 Related Topics Services](#46-related-topics-services)
+    + [4.6.1 GET Related Topics Service](#461-get-related-topics-service)
+    + [4.6.2 PUT Related Topics Service](#462-put-related-topics-service)
+  * [4.7 Document Reference Services](#47-document-reference-services)
+    + [4.7.1 GET Document References Service](#471-get-document-references-service)
+    + [4.7.2 POST Document Reference Service](#472-post-document-reference-service)
+    + [4.7.3 PUT Document Reference Service](#473-put-document-reference-service)
+  * [4.8 Document Services](#48-document-services)
+    + [4.8.1 GET Documents Service](#481-get-documents-service)
+    + [4.8.2 POST Document Service](#482-post-document-service)
+    + [4.8.3 GET Document Service](#483-get-document-service)
+  * [4.9 Topics Events Services](#49-topics-events-services)
+    + [4.9.1 GET Topics Events Service](#491-get-topics-events-service)
+    + [4.9.2 GET Topic Events Service](#492-get-topic-events-service)
+  * [4.10 Comments Events Services](#410-comments-events-services)
+    + [4.10.1 GET Comments Events Service](#4101-get-comments-events-service)
+    + [4.10.2 GET Comment Events Service](#4102-get-comment-events-service)
 
 <!-- tocstop -->
 
@@ -684,7 +684,7 @@ at the project level. The available actions include:
 
 * *update* - The ability to update the project details (see [4.1.3 PUT Project Service](#413-put-project-service))
 * *createTopic* - The ability to create a new topic (see [4.2.2 POST Topic Service](#422-post-topic-service))
-* *createDocument* - The ability to create a new document (see [4.9.2 POST Document Service](#492-post-document-service))
+* *createDocument* - The ability to create a new document (see [4.8.2 POST Document Service](#492-post-document-service))
 
 #### 4.1.5.2 Topic
 
@@ -693,8 +693,8 @@ level by default (i.e. unless overridden by specific topics) The available actio
 
 * *update* - The ability to update the topic (see [4.2.4 PUT Topic Service](#424-put-topic-service))
 * *updateBimSnippet* - The ability to update the BIM snippet for topics (see [4.2.7 PUT Topic BIM Snippet Service](#427-put-topic-bim-snippet-service))
-* *updateRelatedTopics* - The ability to update the collection of related topics (see [4.7.2 PUT Related Topics Service](#472-put-related-topics-service))
-* *updateDocumentReferences* - The ability to update the collection of document references (see [4.8.3 PUT Document Reference Service](#483-put-document-reference-service))
+* *updateRelatedTopics* - The ability to update the collection of related topics (see [4.6.2 PUT Related Topics Service](#472-put-related-topics-service))
+* *updateDocumentReferences* - The ability to update the collection of document references (see [4.7.3 PUT Document Reference Service](#483-put-document-reference-service))
 * *updateFiles* - The ability to update the file header (see [4.3.2 PUT Files (Header) Service](#432-put-files-header-service))
 * *createComment* - The ability to create a comment (see [4.4.2 POST Comment Service](#442-post-comment-service))
 * *createViewpoint* - The ability to create a new viewpoint (see [4.5.2 POST Viewpoint Service](#452-post-viewpoint-service))
@@ -1429,6 +1429,8 @@ JSON encoded body using the "application/json" content type.
 
 ***[Coloring](Schemas_draft-03/Collaboration/Viewpoint/coloring.json)***
 
+The color is given in ARGB format. Colors are represented as 6 or 8 hexadecimal digits. If 8 digits are present, the first two represent the alpha (transparency) channel. For example, `40E0D0` would be the color <span style="color:#40E0D0;";>Turquoise</span>. [More information about the color format can be found on Wikipedia.](https://en.wikipedia.org/wiki/RGBA_color_space)
+
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | color | string | Color of the components | mandatory |
@@ -1732,127 +1734,105 @@ Retrieve a specific viewpoints bitmap image file (png, jpg or bmp).
 **Example Request**
     GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/20c1cb56-315f-4a0a-922d-ed7a4a8edf55
 
-## 4.6 Component Services
-
-Components are references to objects within an Ifc file that can be used in the viewpoint. The color is given in ARGB format. Colors are represented as 6 or 8 hexadecimal digits. If 8 digits are present, the first two represent the alpha (transparency) channel. For example, `40E0D0` would be the color <span style="color:#40E0D0;";>Turquoise</span>. [More information about the color format can be found on Wikipedia.](https://en.wikipedia.org/wiki/RGBA_color_space)
-
-### 4.6.1 GET Components Service
-
+### 4.5.6 GET selected Components Service
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/selection
 
-[component_GET.json](Schemas_draft-03/Collaboration/Component/components_GET.json)
+[component_GET.json](Schemas_draft-03/Collaboration/Component/selection_GET.json)
 
-Retrieve a **collection** of all components related to a viewpoint.
+Retrieve a **collection** of all selected components in a viewpoint.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/selection
 
 **Example Response**
 
     Response Code: 200 - OK
     Body:
-    {
-        "components": {
-            "items": [
-                {
-                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                    "selected": true,
-                    "visible": true,
-                    "color": "0A00FF",
-                    "originating_system": "Example CAD Application",
-                    "authoring_tool_id": "EXCAD/v1.0"
-                }, {
-                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-                    "selected": true,
-                    "visible": true,
-                    "color": "0A00FF",
-                    "originating_system": "Example CAD Application",
-                    "authoring_tool_id": "EXCAD/v1.0"
-                }
-            ],
-            "defaultVisibilityComponents": true,
-            "defaultVisibilitySpaces": false,
-            "defaultVisibilityOpenings": false,
-            "defaultVisibilitySpaceBoundaries": false
+    [
+        {
+            "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+            "originating_system": "Example CAD Application",
+            "authoring_tool_id": "EXCAD/v1.0"
+        }, {
+            "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
         }
-    }
+    ]
 
-### 4.6.2 POST Components Service
+### 4.5.7 GET colored Components Service
 
 **Resource URL**
 
-    POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/coloring
 
-[component_POST.json](Schemas_draft-03/Collaboration/Component/components_POST.json)
+[component_GET.json](Schemas_draft-03/Collaboration/Component/coloring_GET.json)
 
-Add a **collection** of all components related to a viewpoint.
+Retrieve a **collection** of all colored components in a viewpoint.
 
 **Example Request**
 
-    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
-    Body:
-    {
-        "components": {
-            "items": [
-                {
-                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                    "selected": true,
-                    "visible": true,
-                    "color": "0A00FF",
-                    "originating_system": "Example CAD Application",
-                    "authoring_tool_id": "EXCAD/v1.0"
-                }, {
-                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-                    "selected": true,
-                    "visible": true,
-                    "color": "0A00FF",
-                    "originating_system": "Example CAD Application",
-                    "authoring_tool_id": "EXCAD/v1.0"
-                }
-            ],
-            "defaultVisibilityComponents": true,
-            "defaultVisibilitySpaces": false,
-            "defaultVisibilityOpenings": false,
-            "defaultVisibilitySpaceBoundaries": false
-        }
-    }
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/selection
 
 **Example Response**
 
-    Response Code: 201 - Created
+    Response Code: 200 - OK
     Body:
-    {
-        "components": {
-            "items": [
+    [
+        {
+            "color": "#ff0000",
+            "components": [
                 {
                     "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                    "selected": true,
-                    "visible": true,
-                    "color": "0A00FF",
                     "originating_system": "Example CAD Application",
                     "authoring_tool_id": "EXCAD/v1.0"
                 }, {
                     "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-                    "selected": true,
-                    "visible": true,
-                    "color": "0A00FF",
-                    "originating_system": "Example CAD Application",
-                    "authoring_tool_id": "EXCAD/v1.0"
                 }
-            ],
-            "defaultVisibilityComponents": true,
-            "defaultVisibilitySpaces": false,
-            "defaultVisibilityOpenings": false,
-            "defaultVisibilitySpaceBoundaries": false
+            ]
+        }
+    ]
+
+### 4.5.8 GET visibility of Components Service
+
+**Resource URL**
+
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/visibility
+
+[visibility_GET.json](Schemas_draft-03/Collaboration/Component/visibility_GET.json)
+
+Retrieve visibility of components in a viewpoint.
+
+**Example Request**
+
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/visibility
+
+**Example Response**
+
+    Response Code: 200 - OK
+    Body:
+     {
+        "default_visibility": true,
+        "exceptions": [
+            {
+                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                "originating_system": "Example CAD Application",
+                "authoring_tool_id": "EXCAD/v1.0"
+            }, {
+                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+            }
+        ],
+        "view_setup_hints": {
+            "spaces_visible": true,
+            "space_boundaries_visible": false,
+            "openings_visible": true
         }
     }
 
-## 4.7 Related Topics Services
+## 4.6 Related Topics Services
 
-### 4.7.1 GET Related Topics Service
+### 4.6.1 GET Related Topics Service
 
 **Resource URL**
 
@@ -1876,7 +1856,7 @@ Retrieve a **collection** of all related topics to a topic.
         "related_topic_guid": "6963a846-54d1-4050-954d-607cd5e48aa3"
     }]
 
-### 4.7.2 PUT Related Topics Service
+### 4.6.2 PUT Related Topics Service
 
 **Resource URL**
 
@@ -1910,9 +1890,9 @@ Add or update a **collection** of all related topics to a topic.
         "related_topic_guid": "bac66ab4-331e-4f21-a28e-083d2cf2e796"
     }]
 
-## 4.8 Document Reference Services
+## 4.7 Document Reference Services
 
-### 4.8.1 GET Document References Service
+### 4.7.1 GET Document References Service
 
 **Resource URL**
 
@@ -1940,7 +1920,7 @@ Retrieve a **collection** of all document references to a topic.
         "description": "The building owners global design parameters for buildings."
     }]
 
-### 4.8.2 POST Document Reference Service
+### 4.7.2 POST Document Reference Service
 
 **Resource URL**
 
@@ -1969,7 +1949,7 @@ Add or update document references to a topic.
         "description": "The legal requirements for buildings."
     }]
 
-### 4.8.3 PUT Document Reference Service
+### 4.7.3 PUT Document Reference Service
 
 **Resource URL**
 
@@ -1999,9 +1979,9 @@ Add or update document references to a topic.
         "description": "The legal requirements for buildings."
     }]
 
-## 4.9 Document Services
+## 4.8 Document Services
 
-### 4.9.1 GET Documents Service
+### 4.8.1 GET Documents Service
 
 [document_GET.json](Schemas_draft-03/Collaboration/Document/document_GET.json)
 
@@ -2027,7 +2007,7 @@ Retrieve a **collection** of all documents uploaded to a project.
         "filename": "DesignParameters.pdf"
     }]
 
-### 4.9.2 POST Document Service
+### 4.8.2 POST Document Service
 
 **Resource URL**
 
@@ -2048,7 +2028,7 @@ Upload a document (binary file) to a project.
         "filename": "Official_Building_Permission.pdf"
     }
 
-### 4.9.3 GET Document Service
+### 4.8.3 GET Document Service
 
 **Resource URL**
 
@@ -2064,11 +2044,11 @@ Retrieves a document as binary file.
 
 Retrieves a document as binary file.
 
-## 4.10 Topics Events Services
+## 4.9 Topics Events Services
 
 The topic events service reflects the events for topics. Each creation or update of a topic generates a new topic event.
 
-### 4.10.1 GET Topics Events Service
+### 4.9.1 GET Topics Events Service
 
 **Resource URL**
 
@@ -2156,7 +2136,7 @@ Get events that are of type 'status_updated', 'type_updated' or 'title_updated' 
         ]
     }]
 
-### 4.10.2 GET Topic Events Service
+### 4.9.2 GET Topic Events Service
 
 **Resource URL**
 
@@ -2244,11 +2224,11 @@ Get events that is of type 'status_updated', 'type_updated' or 'title_updated' o
         ]
     }]
 
-## 4.11 Comments Events Services
+## 4.10 Comments Events Services
 
 The comment events service reflects the events for topic comments. Each creation or update of a comment generates a new comment event.
 
-### 4.11.1 GET Comments Events Service
+### 4.10.1 GET Comments Events Service
 
 **Resource URL**
 
@@ -2331,7 +2311,7 @@ Get events that are of type 'comment_created', or 'viewpoint_updated'
         ]
     }]
 
-### 4.11.2 GET Comment Events Service
+### 4.10.2 GET Comment Events Service
 
 **Resource URL**
 
