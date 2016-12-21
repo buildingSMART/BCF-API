@@ -1,6 +1,5 @@
 {
-    "type": ["object",
-    "null"],
+    "type": ["object", "null"],
     "properties": {
         "start_point": {
             "$ref": "point.json"

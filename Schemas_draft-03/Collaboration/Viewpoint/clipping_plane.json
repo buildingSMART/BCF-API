@@ -3,7 +3,7 @@
     "null"],
     "properties": {
         "location": {
-            "$ref": "location.json"
+            "$ref": "point.json"
         },
         "direction": {
             "$ref": "point.json"

@@ -66,9 +66,7 @@
     + [4.5.2 POST Viewpoint Service](#452-post-viewpoint-service)
     + [4.5.3 GET Viewpoint Service](#453-get-viewpoint-service)
     + [4.5.4 GET Viewpoint Snapshot Service](#454-get-viewpoint-snapshot-service)
-    + [4.5.5 POST Viewpoint Snapshot Service](#455-post-viewpoint-snapshot-service)
-    + [4.5.6 GET Viewpoint Bitmap Service](#456-get-viewpoint-bitmap-service)
-    + [4.5.7 POST Viewpoint Bitmap Service](#457-post-viewpoint-bitmap-service)
+    + [4.5.5 GET Viewpoint Bitmap Service](#455-get-viewpoint-bitmap-service)
   * [4.6 Component Services](#46-component-services)
     + [4.6.1 GET Components Service](#461-get-components-service)
     + [4.6.2 POST Components Service](#462-post-components-service)
@@ -1347,36 +1345,117 @@ JSON encoded body using the "application/json" content type.
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
-| x, y, z | number | numbers defining either a point or a vector | optional |
 | index | integer | parameter for sorting | optional |
-| orthogonal camera | object | orthogonal camera view | optional |
-| camera_view_point | object | viewpoint of the camera | optional |
-| camera_directiont | object | direction of the camera | optional |
-| camera_up_vector | object | direction of camera up | optional |
-| view_to_world_scale | object | proportion of camera view to model | optional |
-| perspective camera | object | perspective view of the camera | optional |
-| camera_view_point | object | viewpoint of the camera | optional |
-| camera_directiont | object | direction of the camera | optional |
-| camera_up_vector | object | direction of camera up | optional |
-| field_of_view | object | field of view | optional |
-| line | object | graphical line | optional |
-| start_point | object | start point of the line | optional |
-| end_point | object | end point of the line | optional |
-| clipping_plane | object | clipping plane for the model view | optional |
-| location | object | origin of the clipping plane | optional |
-| direction | object | direction of the clipping plane | optional |
-| bitmaps | array | array of embedded pictures in the viewpoint | optional |
-| guid | string | guid for the bitmap | mandatory |
-| bitmap_type | enum (string) | format of the bitmap. Predefined values `png` or `jpg` | mandatory |
-| location | object | location of the center of the bitmap in world coordinates (point) | optional |
-| normal | object | normal vector of the bitmap (vector) | optional |
-| up | object | up vector of the bitmap (vector) | optional |
+| orthogonal camera | *Orthogonal_camera* | orthogonal camera view | optional |
+| perspective camera | *Perspective_camera* | perspective view of the camera | optional |
+| lines | array of *Line* | graphical line | optional |
+| clipping_planes | array of *Clipping_Plane* | clipping planes for the model view | optional |
+| bitmaps | array of *Bitmap* | embedded pictures in the viewpoint | optional |
+| components | *Components* | Components in the viewpoint | optional |
+
+***[Point](Schemas_draft-03/Collaboration/Viewpoint/point.json)***
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| x | number | x coordinate | mandatory |
+| y | number | y coordinate | mandatory |
+| z | number | z coordinate | mandatory |
+
+***[Orthogonal_camera](Schemas_draft-03/Collaboration/Viewpoint/orthogonal_camera.json)***
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| camera_view_point | *Point* | viewpoint of the camera | mandatory |
+| camera_directiont | *Point* | direction of the camera | mandatory |
+| camera_up_vector | *Point* | direction of camera up | mandatory |
+| view_to_world_scale | number | proportion of camera view to model | mandatory |
+
+***[Perspective_camera](Schemas_draft-03/Collaboration/Viewpoint/perspective_camera.json)***
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| camera_view_point | *Point* | viewpoint of the camera | mandatory |
+| camera_directiont | *Point* | direction of the camera | mandatory |
+| camera_up_vector | *Point* | direction of camera up | mandatory |
+| field_of_view | number | field of view | mandatory |
+
+***[Line](Schemas_draft-03/Collaboration/Viewpoint/line.json)***
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| start_point | *Point* | start point of the line | mandatory |
+| end_point | *Point* | end point of the line (Treated as point if start_point and end_point is the same | mandatory |
+
+***[Clipping_plane](Schemas_draft-03/Collaboration/Viewpoint/clipping_plane.json)***
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| location | *Point* | origin of the clipping plane | mandatory |
+| direction | *Point* | direction of the clipping plane | mandatory |
+
+***[Bitmap](Schemas_draft-03/Collaboration/Viewpoint/bitmap_POST.json)***
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| bitmap_type | enum (string) | format of the bitmap. Predefined values `png`,  `jpg` or `bmp` | mandatory |
+| bitmap_data | base64 encoded string | The bitmap image data | mandatory |
+| location | *Point* | location of the center of the bitmap in world coordinates (point) | mandatory |
+| normal | *Point* | normal vector of the bitmap (vector) | mandatory |
+| up | *Point* | up vector of the bitmap (vector) | mandatory |
+| height | number | height of bitmap in the scene | mandatory |
+
+***[Snapshot](Schemas_draft-03/Collaboration/Viewpoint/snapshot_POST.json)***
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| snapshot_type | enum (string) | format of the snapshot. Predefined values `png`,  `jpg` or `bmp` | mandatory |
+| snapshot_data | base64 encoded string | The snapshot image data | mandatory |
+
+***[Components](Schemas_draft-03/Collaboration/Viewpoint/components.json)***
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| selection | array of *Component* | Selected components | optional |
+| coloring | array of *Coloring* | Colored components | optional |
+| visibility | *Visibility* | Visibility of components | optional |
+
+***[Component](Schemas_draft-03/Collaboration/Viewpoint/component.json)***
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| ifc_guid | string | IFC guid of the component | optional |
+| originating_system | string | originating system of the component | optional |
+| authoring_tool_id | string | internal id for the authoring tool of the component | optional |
+
+***[Coloring](Schemas_draft-03/Collaboration/Viewpoint/coloring.json)***
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| color | string | Color of the components | mandatory |
+| components | array of *Component* | Colored components | mandatory |
+
+***[Visibility](Schemas_draft-03/Collaboration/Viewpoint/visibility.json)***
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| default_visibility | boolean | If true: Show all components, and hide the exceptions. If false: Hide all components and show exceptions | optional, default false |
+| exceptions | array of *Component* | Components to hide/show determined by default_visibility | optional |
+| view_setup_hints | *View_setup_hints* | Hints about the setup of the viewer | optional |
+
+***[View_setup_hints](Schemas_draft-03/Collaboration/Viewpoint/view_setup_hints.json)***
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| spaces_visible | boolean | Visibility of spaces | optional, default false |
+| space_boundaries_visible | Visibility of space_boundaries | optional, default false |
+| openings_visible | boolean | Visibility of openings | optional, default false |
 
 **Example Request**
 
     POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
     Body:
     {
+        "index": 10,
         "perspective_camera": {
             "camera_view_point": {
                 "x": 0.0,
@@ -1418,7 +1497,55 @@ JSON encoded body using the "application/json" content type.
                 "y": 0.0,
                 "z": 0.0
             }
-        }]
+        }],
+        "bitmaps": [{
+            "bitmap_type": "jpg",
+            "bitmap_data": "data:image/jpg;base64,......",
+            "location": {
+                "x": 10.0,
+                "y": -10.0,
+                "z": 7.0
+            },
+            "normal": {
+                "x": -1.0,
+                "y": 1.25,
+                "z": 0.0
+            },
+            "up": {
+                "x": -5.4,
+                "y": -4.3,
+                "z": 1.0
+            },
+            "height": 1666
+        }],
+        "snapshot": {
+            "snapshot_type": "png",
+            "snapshot_data": "data:image/png;base64,......"
+        },
+        "components": {
+            "selection": [{
+                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                "originating_system": "Example CAD Application",
+                "authoring_tool_id": "EXCAD/v1.0"
+            }],
+            "coloring": [{
+                "color": "#ff0000",
+                "components": [{
+                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
+                }]
+            }],
+            "visibility": {
+                "default_visbility": false,
+                "exceptions": [{
+                    "ifc_guid": "4$cshxZO9AJBebsni$z9Yk"
+                }],
+                "view_setup_hints": {
+                    "spaces_visible": true,
+                    "space_boundaries_visible": false,
+                    "openings_visible": true
+                }
+            }
+        }
     }
 
 **Example Response**
@@ -1427,6 +1554,7 @@ JSON encoded body using the "application/json" content type.
     Body:
     {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+        "index": 10,
         "perspective_camera": {
             "camera_view_point": {
                 "x": 0.0,
@@ -1468,9 +1596,31 @@ JSON encoded body using the "application/json" content type.
                 "y": 0.0,
                 "z": 0.0
             }
-        }]
+        }],
+        "bitmaps": [{
+            "guid": "20c1cb56-315f-4a0a-922d-ed7a4a8edf55",
+            "bitmap_type": "jpg",
+            "location": {
+                "x": 10.0,
+                "y": -10.0,
+                "z": 7.0
+            },
+            "normal": {
+                "x": -1.0,
+                "y": 1.25,
+                "z": 0.0
+            },
+            "up": {
+                "x": -5.4,
+                "y": -4.3,
+                "z": 1.0
+            },
+            "height": 1666
+        }],
+        "snapshot": {
+            "snapshot_type": "png"
+        }
     }
-
 ### 4.5.3 GET Viewpoint Service
 
 **Resource URL**
@@ -1491,6 +1641,7 @@ Retrieve a specific viewpoint.
     Body:
     {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+        "index": 10,
         "perspective_camera": {
             "camera_view_point": {
                 "x": 0.0,
@@ -1532,7 +1683,30 @@ Retrieve a specific viewpoint.
                 "y": 0.0,
                 "z": 0.0
             }
-        }]
+        }],
+        "bitmaps": [{
+            "guid": "20c1cb56-315f-4a0a-922d-ed7a4a8edf55"
+            "bitmap_type": "jpg",
+            "location": {
+                "x": 10.0,
+                "y": -10.0,
+                "z": 7.0
+            },
+            "normal": {
+                "x": -1.0,
+                "y": 1.25,
+                "z": 0.0
+            },
+            "up": {
+                "x": -5.4,
+                "y": -4.3,
+                "z": 1.0
+            },
+            "height": 1666
+        }],
+        "snapshot": {
+            "snapshot_type": "png"
+        }
     }
 
 ### 4.5.4 GET Viewpoint Snapshot Service
@@ -1541,60 +1715,22 @@ Retrieve a specific viewpoint.
 
     GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
 
-Retrieve a viewpoints snapshot (png, jpg or bmp) as image file.
+Retrieve a viewpoints snapshot (png, jpg or bmp) as image file. A viewpoint contains a snapshot if viewpoint.snapshot != null.
 
 **Example Request**
 
     GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
-### 4.5.5 POST Viewpoint Snapshot Service
-
-**Resource URL**
-
-    POST /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
-
-Add a viewpoints snapshot (png, jpg or bmp).
-
-**Example Request**
-
-    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
-
-POST Body contains binary image data
-
-**Example Response**
-
-    Response Code: 200 - OK
-    Empty Body
-
-### 4.5.6 GET Viewpoint Bitmap Service
+### 4.5.5 GET Viewpoint Bitmap Service
 
 **Resource URL**
 
     GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
 
-Retrieve a specific viewpoints bitmap image file (png or jpg).
+Retrieve a specific viewpoints bitmap image file (png, jpg or bmp).
 
 **Example Request**
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
-
-### 4.5.7 POST Viewpoint Bitmap Service
-
-**Resource URL**
-
-    POST /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
-
-Add a specific bitmap in a viewpoint (png or jpg).
-
-**Example Request**
-
-    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
-
-POST Body contains binary image data
-
-**Example Response**
-
-    Response Code: 200 - OK
-    Empty Body
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/20c1cb56-315f-4a0a-922d-ed7a4a8edf55
 
 ## 4.6 Component Services
 
