@@ -1431,6 +1431,10 @@ JSON encoded body using the "application/json" content type.
 ####4.5.2.9 Component
 [component.json](Schemas_draft-03/Collaboration/Viewpoint/component.json)
 
+#####Optimization rules
+BCF is suitable for selecting a few components. A huge list of selected components causes poor performance. All clients should follow this rule:
+- If the size of the selected components is huge (approximately 1000 components), alert the user and give him the opportunity to modify the visibility.
+
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | ifc_guid | string | IFC guid of the component | optional |
@@ -1439,6 +1443,10 @@ JSON encoded body using the "application/json" content type.
 
 ####4.5.2.10 Coloring
 [coloring.json](Schemas_draft-03/Collaboration/Viewpoint/coloring.json)
+
+#####Optimization rules
+BCF is suitable for coloring on a few components. A huge list of components causes poor performance. All clients should follow this rule:
+- If the size of colored components is huge (approximately 1000 components), alert the user and give him the opportunity to modify the coloring.
 
 The color is given in ARGB format. Colors are represented as 6 or 8 hexadecimal digits. If 8 digits are present, the first two represent the alpha (transparency) channel. For example, `40E0D0` would be the color <span style="color:#40E0D0;";>Turquoise</span>. [More information about the color format can be found on Wikipedia.](https://en.wikipedia.org/wiki/RGBA_color_space)
 
@@ -1449,6 +1457,12 @@ The color is given in ARGB format. Colors are represented as 6 or 8 hexadecimal 
 
 ####4.5.2.11 Visibility
 [visibility.json](Schemas_draft-03/Collaboration/Viewpoint/visibility.json)
+
+#####Optimization rules
+BCF is suitable for hiding/showing a few components. A huge list of hidden/shown components causes poor performance. All clients should follow these rules:
+- If the list of hidden components is smaller than the list of visible components: set default_visibility to true and put the hidden components in exceptions.
+- If the list of visible components is smaller or equals the list of hidden components:  set default_visibility to false and put the visible components in exceptions.
+- If the size of exceptions is huge (approximately 1000 components), alert the user and give him the opportunity to modify the visibility.
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
