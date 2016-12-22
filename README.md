@@ -1404,7 +1404,7 @@ JSON encoded body using the "application/json" content type.
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
-| bitmap_type | enum (string) | format of the bitmap. Predefined values `png`,  `jpg` or `bmp` | mandatory |
+| bitmap_type | enum (string) | format of the bitmap. Predefined values `png` or `jpg` | mandatory |
 | bitmap_data | base64 encoded string | The bitmap image data | mandatory |
 | location | [Point](#4521-point) | location of the center of the bitmap in world coordinates (point) | mandatory |
 | normal | [Point](#4521-point) | normal vector of the bitmap (vector) | mandatory |
@@ -1416,7 +1416,7 @@ JSON encoded body using the "application/json" content type.
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
-| snapshot_type | enum (string) | format of the snapshot. Predefined values `png`,  `jpg` or `bmp` | mandatory |
+| snapshot_type | enum (string) | format of the snapshot. Predefined values `png` or `jpg` | mandatory |
 | snapshot_data | base64 encoded string | The snapshot image data | mandatory |
 
 ####4.5.2.8 Components
@@ -1744,7 +1744,7 @@ Retrieve a specific viewpoint.
 
     GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
 
-Retrieve a viewpoints snapshot (png, jpg or bmp) as image file. A viewpoint contains a snapshot if viewpoint.snapshot != null.
+Retrieve a viewpoints snapshot (png or jpg) as image file. A viewpoint contains a snapshot if viewpoint.snapshot != null.
 
 **Example Request**
 
@@ -1756,7 +1756,7 @@ Retrieve a viewpoints snapshot (png, jpg or bmp) as image file. A viewpoint cont
 
     GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
 
-Retrieve a specific viewpoints bitmap image file (png, jpg or bmp).
+Retrieve a specific viewpoints bitmap image file (png or jpg).
 
 **Example Request**
     GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/20c1cb56-315f-4a0a-922d-ed7a4a8edf55

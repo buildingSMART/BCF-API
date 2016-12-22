@@ -3,7 +3,7 @@
     "properties": {
         "bitmap_type": {
             "type": "string",
-            "enum": ["jpg", "png", "bmp"]
+            "enum": ["jpg", "png"]
         },
         "bitmap_data": {
             "type": "string",
