@@ -29,11 +29,8 @@
   * [3.1 Versions Service](#31-versions-service)
   * [3.2 Authentication Services](#32-authentication-services)
     + [3.2.1 Obtaining Authentication Information](#321-obtaining-authentication-information)
-    + [3.2.2 OAuth2 Protocol Flow - Client Request](#322-oauth2-protocol-flow---client-request)
-    + [3.2.3 OAuth2 Protocol Flow - Token Request](#323-oauth2-protocol-flow---token-request)
-    + [3.2.4 OAuth2 Protocol Flow - Refresh Token Request](#324-oauth2-protocol-flow---refresh-token-request)
-    + [3.2.5 OAuth2 Protocol Flow - Dynamic Client Registration](#325-oauth2-protocol-flow---dynamic-client-registration)
-    + [3.2.6 OAuth2 Protocol Flow - Requesting Resources](#326-oauth2-protocol-flow---requesting-resources)
+    + [3.2.2 OAuth2 Example](#322-oauth2-example)
+    + [3.2.3 OAuth2 Protocol Flow - Dynamic Client Registration](#323-oauth2-protocol-flow---dynamic-client-registration)
   * [3.3 User Services](#33-user-services)
     + [3.3.1 Get current user](#331-get-current-user)
 - [4. BCF Services](#4-bcf-services)
@@ -299,22 +296,31 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 
 **Resource URL (public resource)**
 
-    GET /bcf/auth
+    GET /bcf/{version}/auth
 
 **Parameters**
 
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
-|oauth2_auth_url|string|URL to authorisation page|false|
+|oauth2_auth_url|string|URL to authorisation page (used for Authorization Code Grant and Implicit Grant OAuth2 flows)|false|
 |oauth2_token_url|string|URL for token requests|false|
 |oauth2_dynamic_client_reg_url|string|URL for automated client registration|false|
 |http_basic_supported|boolean|Indicates if Http Basic Authentication is supported|false|
+|supported_oauth2_flows|string[]|array of supported OAuth2 flows|
 
 If `oauth2_auth_url` is present, then `oauth2_token_url` must also be present and vice versa. If properties are not present in the response, clients should assume that the functionality is not supported by the server, e.g. a missing `http_basic_supported` property would indicate that Http basic authentication is not available on the server.
 
+OAuth2 flows are described in detail in the [OAuth2 specification](https://tools.ietf.org/html/rfc6749). BCF API servers may support the following workflows:
+* `authorization_code_grant` - [4.1 - Authorization Code Grant](https://tools.ietf.org/html/rfc6749#section-4.1)
+* `implicit_grant` - [4.2 - Implicit Grant](https://tools.ietf.org/html/rfc6749#section-4.2)
+* `resource_owner_password_credentials_grant` - [4.3 - Resource Owner Password Credentials Grant](https://tools.ietf.org/html/rfc6749#section-4.3)
+* `extension_grants` - [4.5 - Extension Grants](https://tools.ietf.org/html/rfc6749#section-4.5)
+
+The [OAuth2 Client Credentials Grant (section 4.4)](https://tools.ietf.org/html/rfc6749#section-4.4) is not supported since it does not contain an user identity.
+
 **Example Request**
 
-    GET /bcf/auth
+    GET /bcf/2.1/auth
 
 **Example Response**
 
@@ -324,106 +330,19 @@ If `oauth2_auth_url` is present, then `oauth2_token_url` must also be present an
         "oauth2_auth_url": "https://example.com/bcf/oauth2/auth",
         "oauth2_token_url": "https://example.com/bcf/oauth2/token",
         "oauth2_dynamic_client_reg_url": "https://example.com/bcf/oauth2/reg",
-        "http_basic_supported": true
+        "http_basic_supported": true,
+        "supported_oauth2_flows": [
+            "authorization_code_grant",
+            "implicit_grant",
+            "resource_owner_password_credentials_grant"
+        ]
     }
 
-### 3.2.2 OAuth2 Protocol Flow - Client Request
+### 3.2.2 OAuth2 Example
 
-The Client uses the **"oauth2\_auth_url"** and adds the following parameters to it.
+An example for the OAuth2 Authorization Grant workflow [can be found here](OAuth2Examples.md).
 
-|parameter|value|
-|-------------|------|
-|response_type|`code` as string literal|
-|client_id|your client id|
-|state|unique user defined value|
-
-Example URL:
-
-    GET https://example.com/bcf/oauth2/auth?response_type=code&client_id=<your_client_id>&state=<user_defined_string>
-
-Example redirected URL:
-
-    https://YourWebsite.com/retrieveCode?code=<server_generated_code>&state=<user_defined_string>
-
-Tip:
-You can use the state parameter to transport custom information.
-
-**Open a browser window or redirect the user to this resource.** This redirects back to the specified redirect URI with the provided state and the authorization code as a query parameter if the user allows your app to access the account, the value "access_denied" in the error query parameter if the user denies access.
-
-### 3.2.3 OAuth2 Protocol Flow - Token Request
-
-[token_GET.json](Schemas_draft-03/Authentication/token_GET.json)
-
-The Client uses the **"oauth2\_token_url"** to request a token. Example:
-
-    POST https://example.com/bcf/oauth2/token
-
-**Parameters**
-
-|parameter|type|description|
-|---------|----|-----------|
-|access_token|string|The issued OAuth2 token|
-|token_type|string|Always `bearer`|
-|expires_in|integer|The lifetime of the access token in seconds|
-|refresh_token|string|The issued OAuth2 refresh token, one-time-usable only|
-
-The POST request can be done via HTTP Basic Authorization with your applications `client_id` as the username and your `client_secret` as the password.
-
-**Example Request**
-
-    POST https://example.com/bcf/oauth2/token?grant_type=authorization_code&code=<your_access_code>
-
-Alternatively all parameters may be passed in the token request body instead of using Url parameters. The expected `Content-Type` for this request is `application/x-www-form-urlencoded`.
-
-    POST https://example.com/bcf/oauth2/token
-    Body:
-    grant_type=authorization_code&code=<your_access_code>&client_id=<client_id>&client_secret=<client_secret>
-
-The access token will be returned as JSON in the response body and is an arbitrary string, guaranteed to not exceed 255 characters length.
-
-**Example Response**
-
-    Response Code: 201 - Created
-    Body:
-    {
-        "access_token": "Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh",
-        "token_type": "bearer",
-        "expires_in": "3600",
-        "refresh_token": "MTRiMjkzZTYtOTgwNC0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh"
-    }
-
-### 3.2.4 OAuth2 Protocol Flow - Refresh Token Request
-
-[token_GET.json](Schemas_draft-03/Authentication/token_GET.json)
-
-The process to retrieve a refresh token is exactly the same as retrieving a token via the code workflow except the `refresh_token` is sent instead of the `code` parameter and the `refresh_token` grant type is used.
-
-**Example Request**
-
-    POST https://example.com/bcf/oauth2/token?grant_type=refresh_token&refresh_token=<your_refresh_token>
-
-Alternatively all parameters may be passed in the token request body instead of using Url parameters.
-
-    POST https://example.com/bcf/oauth2/token
-    Body:
-    grant_type=refresh_token&refresh_token=<your_refresh_token>&client_id=<client_id>&client_secret=<client_secret>
-
-The access token will be returned as JSON in the response body and is an arbitrary string, guaranteed to not exceed 255 characters length.
-
-**Example Response**
-
-    Response Code: 201 - Created
-    Body:
-    {
-        "access_token": "Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh",
-        "token_type": "bearer",
-        "expires_in": "3600",
-        "refresh_token": "MTRiMjkzZTYtOTgwNC0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh"
-    }
-
-The refresh token can only be used once to retrieve a token and a new refresh token.
-
-### 3.2.5 OAuth2 Protocol Flow - Dynamic Client Registration
+### 3.2.3 OAuth2 Protocol Flow - Dynamic Client Registration
 
 [dynRegClient\_POST.json](Schemas_draft-03/Authentication/dynRegClient_POST.json)
 
@@ -431,13 +350,13 @@ The refresh token can only be used once to retrieve a token and a new refresh to
 
 The following part describes the optional dynamic registration process of a client. BCF-Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
 
-The resource Url for this service is server specific and is returned as `oauth2_dynamic_client_reg_url` in the `GET /bcf/auth` resource.
+The resource url for this service is server specific and is returned as `oauth2_dynamic_client_reg_url` in the `GET /bcf/{version}/auth` resource.
 
 Register a new client :
 
 **Parameters**
 
-JSON encoded body using the "application/json" content type.
+JSON encoded body using the `application/json` content type.
 
 |parameter|type|description|
 |---------|----|-----------|
@@ -465,10 +384,6 @@ JSON encoded body using the "application/json" content type.
         "client_id": "cGxlYXN1cmUu",
         "client_secret": "ZWFzdXJlLg=="
     }
-
-### 3.2.6 OAuth2 Protocol Flow - Requesting Resources
-
-When requesting other resources the access token must be passed via the `Authorization` header using the Bearer scheme (e.g. `Authorization: Bearer Zjk1YjYyNDQtOTgwMy0xMWU0LWIxMDAtMTIzYjkzZjc1Y2Jh`).
 
 ----------
 
