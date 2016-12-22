@@ -1435,7 +1435,7 @@ JSON encoded body using the "application/json" content type.
 |---------|----|-----------|--------|
 | selection | array of [Component](#45210-component) | Selected components | optional |
 | coloring | array of [Coloring](#45211-coloring) | Colored components | optional |
-| visibility | [Visibility](#45212-visibility) | Visibility of components | optional |
+| visibility | [Visibility](#45212-visibility) | Visibility of components | mandatory |
 
 ####4.5.2.10 Component
 [component.json](Schemas_draft-03/Collaboration/Viewpoint/component.json)
