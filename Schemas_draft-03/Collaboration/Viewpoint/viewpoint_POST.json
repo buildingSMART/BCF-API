@@ -29,26 +29,14 @@
         "bitmaps": {
             "type": ["array", "null"],
             "items": {
-                "$ref": "bitmap.json"
+                "$ref": "bitmap_POST.json"
             }
         },
         "snapshot": {
-            "type": ["string", "null"],
-            "format": "base64"
+            "$ref": "snapshot_POST.json"
         },
         "components": {
-            "type": ["object", "null"],
-            "properties": {
-                "relevant": {
-                    "$ref": "component_list.json"
-                },
-                "coloring": {
-                    "$ref": "coloring.json"
-                },
-                "visibility": {
-                    "$ref": "visibility.json"
-                }
-            }
+            "$ref": "components.json"
         }
     }
 }

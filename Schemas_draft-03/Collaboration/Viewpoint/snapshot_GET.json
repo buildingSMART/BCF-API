@@ -1,0 +1,9 @@
+{
+    "type": ["object", "null"],
+    "properties": {
+        "snapshot_type": {
+            "type": "string",
+            "enum": ["jpg", "png"]
+        },
+    }
+}

@@ -66,29 +66,27 @@
     + [4.5.2 POST Viewpoint Service](#452-post-viewpoint-service)
     + [4.5.3 GET Viewpoint Service](#453-get-viewpoint-service)
     + [4.5.4 GET Viewpoint Snapshot Service](#454-get-viewpoint-snapshot-service)
-    + [4.5.5 POST Viewpoint Snapshot Service](#455-post-viewpoint-snapshot-service)
-    + [4.5.6 GET Viewpoint Bitmap Service](#456-get-viewpoint-bitmap-service)
-    + [4.5.7 POST Viewpoint Bitmap Service](#457-post-viewpoint-bitmap-service)
-  * [4.6 Component Services](#46-component-services)
-    + [4.6.1 GET Components Service](#461-get-components-service)
-    + [4.6.2 POST Components Service](#462-post-components-service)
-  * [4.7 Related Topics Services](#47-related-topics-services)
-    + [4.7.1 GET Related Topics Service](#471-get-related-topics-service)
-    + [4.7.2 PUT Related Topics Service](#472-put-related-topics-service)
-  * [4.8 Document Reference Services](#48-document-reference-services)
-    + [4.8.1 GET Document References Service](#481-get-document-references-service)
-    + [4.8.2 POST Document Reference Service](#482-post-document-reference-service)
-    + [4.8.3 PUT Document Reference Service](#483-put-document-reference-service)
-  * [4.9 Document Services](#49-document-services)
-    + [4.9.1 GET Documents Service](#491-get-documents-service)
-    + [4.9.2 POST Document Service](#492-post-document-service)
-    + [4.9.3 GET Document Service](#493-get-document-service)
-  * [4.10 Topics Events Services](#410-topics-events-services)
-    + [4.10.1 GET Topics Events Service](#4101-get-topics-events-service)
-    + [4.10.2 GET Topic Events Service](#4102-get-topic-events-service)
-  * [4.11 Comments Events Services](#411-comments-events-services)
-    + [4.11.1 GET Comments Events Service](#4111-get-comments-events-service)
-    + [4.11.2 GET Comment Events Service](#4112-get-comment-events-service)
+    + [4.5.5 GET Viewpoint Bitmap Service](#455-get-viewpoint-bitmap-service)
+    + [4.5.6 GET selected Components Service](#456-get-selected-components-service)
+    + [4.5.7 GET colored Components Service](#457-get-colored-components-service)
+    + [4.5.8 GET visibility of Components Service](#458-get-visibility-of-components-service)
+  * [4.6 Related Topics Services](#46-related-topics-services)
+    + [4.6.1 GET Related Topics Service](#461-get-related-topics-service)
+    + [4.6.2 PUT Related Topics Service](#462-put-related-topics-service)
+  * [4.7 Document Reference Services](#47-document-reference-services)
+    + [4.7.1 GET Document References Service](#471-get-document-references-service)
+    + [4.7.2 POST Document Reference Service](#472-post-document-reference-service)
+    + [4.7.3 PUT Document Reference Service](#473-put-document-reference-service)
+  * [4.8 Document Services](#48-document-services)
+    + [4.8.1 GET Documents Service](#481-get-documents-service)
+    + [4.8.2 POST Document Service](#482-post-document-service)
+    + [4.8.3 GET Document Service](#483-get-document-service)
+  * [4.9 Topics Events Services](#49-topics-events-services)
+    + [4.9.1 GET Topics Events Service](#491-get-topics-events-service)
+    + [4.9.2 GET Topic Events Service](#492-get-topic-events-service)
+  * [4.10 Comments Events Services](#410-comments-events-services)
+    + [4.10.1 GET Comments Events Service](#4101-get-comments-events-service)
+    + [4.10.2 GET Comment Events Service](#4102-get-comment-events-service)
 
 <!-- tocstop -->
 
@@ -686,7 +684,7 @@ at the project level. The available actions include:
 
 * *update* - The ability to update the project details (see [4.1.3 PUT Project Service](#413-put-project-service))
 * *createTopic* - The ability to create a new topic (see [4.2.2 POST Topic Service](#422-post-topic-service))
-* *createDocument* - The ability to create a new document (see [4.9.2 POST Document Service](#492-post-document-service))
+* *createDocument* - The ability to create a new document (see [4.8.2 POST Document Service](#492-post-document-service))
 
 #### 4.1.5.2 Topic
 
@@ -695,8 +693,8 @@ level by default (i.e. unless overridden by specific topics) The available actio
 
 * *update* - The ability to update the topic (see [4.2.4 PUT Topic Service](#424-put-topic-service))
 * *updateBimSnippet* - The ability to update the BIM snippet for topics (see [4.2.7 PUT Topic BIM Snippet Service](#427-put-topic-bim-snippet-service))
-* *updateRelatedTopics* - The ability to update the collection of related topics (see [4.7.2 PUT Related Topics Service](#472-put-related-topics-service))
-* *updateDocumentReferences* - The ability to update the collection of document references (see [4.8.3 PUT Document Reference Service](#483-put-document-reference-service))
+* *updateRelatedTopics* - The ability to update the collection of related topics (see [4.6.2 PUT Related Topics Service](#472-put-related-topics-service))
+* *updateDocumentReferences* - The ability to update the collection of document references (see [4.7.3 PUT Document Reference Service](#483-put-document-reference-service))
 * *updateFiles* - The ability to update the file header (see [4.3.2 PUT Files (Header) Service](#432-put-files-header-service))
 * *createComment* - The ability to create a comment (see [4.4.2 POST Comment Service](#442-post-comment-service))
 * *createViewpoint* - The ability to create a new viewpoint (see [4.5.2 POST Viewpoint Service](#452-post-viewpoint-service))
@@ -1347,36 +1345,155 @@ JSON encoded body using the "application/json" content type.
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
-| x, y, z | number | numbers defining either a point or a vector | optional |
 | index | integer | parameter for sorting | optional |
-| orthogonal camera | object | orthogonal camera view | optional |
-| camera_view_point | object | viewpoint of the camera | optional |
-| camera_directiont | object | direction of the camera | optional |
-| camera_up_vector | object | direction of camera up | optional |
-| view_to_world_scale | object | proportion of camera view to model | optional |
-| perspective camera | object | perspective view of the camera | optional |
-| camera_view_point | object | viewpoint of the camera | optional |
-| camera_directiont | object | direction of the camera | optional |
-| camera_up_vector | object | direction of camera up | optional |
-| field_of_view | object | field of view | optional |
-| line | object | graphical line | optional |
-| start_point | object | start point of the line | optional |
-| end_point | object | end point of the line | optional |
-| clipping_plane | object | clipping plane for the model view | optional |
-| location | object | origin of the clipping plane | optional |
-| direction | object | direction of the clipping plane | optional |
-| bitmaps | array | array of embedded pictures in the viewpoint | optional |
-| guid | string | guid for the bitmap | mandatory |
+| orthogonal camera | [Orthogonal camera](#4523-orthogonal-camera) | orthogonal camera view | optional |
+| perspective camera | [Perspective camera](#4524-perspective-camera) | perspective view of the camera | optional |
+| lines | array of [Line](#4525-line) | graphical line | optional |
+| clipping_planes | array of [Clipping Plane](#4526-clipping-plane) | clipping planes for the model view | optional |
+| bitmaps | array of [Bitmap](#4527-bitmap) | embedded pictures in the viewpoint | optional |
+| snapshot | [Snapshot](#4528-snapshot) | snapshot image of the viewpoint | optional |
+| components | [Components](#4529-components) | Components in the viewpoint | optional |
+
+####4.5.2.1 Point
+[point.json](Schemas_draft-03/Collaboration/Viewpoint/point.json)
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| x | number | x point | mandatory |
+| y | number | y point | mandatory |
+| z | number | z point | mandatory |
+
+####4.5.2.2 Direction
+[direction.json](Schemas_draft-03/Collaboration/Viewpoint/direction.json)
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| x | number | x direction | mandatory |
+| y | number | y direction | mandatory |
+| z | number | z direction | mandatory |
+
+####4.5.2.3 Orthogonal camera
+[orthogonal_camera.json](Schemas_draft-03/Collaboration/Viewpoint/orthogonal_camera.json)
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| camera_view_point | [Direction](#4522-direction) | viewpoint of the camera | mandatory |
+| camera_directiont | [Direction](#4522-direction) | direction of the camera | mandatory |
+| camera_up_vector | [Direction](#4522-direction) | direction of camera up | mandatory |
+| view_to_world_scale | number | proportion of camera view to model | mandatory |
+
+####4.5.2.4 Perspective camera
+[perspective_camera.json](Schemas_draft-03/Collaboration/Viewpoint/perspective_camera.json)
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| camera_view_point | [Point](#4521-point) | viewpoint of the camera | mandatory |
+| camera_directiont | [Direction](#4522-direction) | direction of the camera | mandatory |
+| camera_up_vector | [Direction](#4522-direction) | direction of camera up | mandatory |
+| field_of_view | number | field of view | mandatory |
+
+####4.5.2.5 Line
+[line.json](Schemas_draft-03/Collaboration/Viewpoint/line.json)
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| start_point | [Point](#4521-point) | start point of the line | mandatory |
+| end_point | [Point](#4521-point) | end point of the line (Treated as point if start_point and end_point is the same | mandatory |
+
+####4.5.2.6 Clipping plane
+[clipping_plane.json](Schemas_draft-03/Collaboration/Viewpoint/clipping_plane.json)
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| location | [Point](#4521-point) | origin of the clipping plane | mandatory |
+| direction | [Direction](#4522-direction) | direction of the clipping plane | mandatory |
+
+####4.5.2.7 Bitmap
+[bitmap.json](Schemas_draft-03/Collaboration/Viewpoint/bitmap_POST.json)
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
 | bitmap_type | enum (string) | format of the bitmap. Predefined values `png` or `jpg` | mandatory |
-| location | object | location of the center of the bitmap in world coordinates (point) | optional |
-| normal | object | normal vector of the bitmap (vector) | optional |
-| up | object | up vector of the bitmap (vector) | optional |
+| bitmap_data | base64 encoded string | The bitmap image data | mandatory |
+| location | [Point](#4521-point) | location of the center of the bitmap in world coordinates (point) | mandatory |
+| normal | [Direction](#4522-direction) | normal vector of the bitmap (vector) | mandatory |
+| up | [Direction](#4522-direction) | up vector of the bitmap (vector) | mandatory |
+| height | number | height of bitmap in the scene | mandatory |
+
+####4.5.2.8 Snapshot
+[snapshot.json](Schemas_draft-03/Collaboration/Viewpoint/snapshot_POST.json)
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| snapshot_type | enum (string) | format of the snapshot. Predefined values `png` or `jpg` | mandatory |
+| snapshot_data | base64 encoded string | The snapshot image data | mandatory |
+
+####4.5.2.9 Components
+[components.json](Schemas_draft-03/Collaboration/Viewpoint/components.json)
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| selection | array of [Component](#45210-component) | Selected components | optional |
+| coloring | array of [Coloring](#45211-coloring) | Colored components | optional |
+| visibility | [Visibility](#45212-visibility) | Visibility of components | mandatory |
+
+####4.5.2.10 Component
+[component.json](Schemas_draft-03/Collaboration/Viewpoint/component.json)
+
+#####Optimization rules
+BCF is suitable for selecting a few components. A huge list of selected components causes poor performance. All clients should follow this rule:
+- If the size of the selected components is huge (approximately 1000 components), alert the user and give him the opportunity to modify the visibility.
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| ifc_guid | string | IFC guid of the component | optional |
+| originating_system | string | originating system of the component | optional |
+| authoring_tool_id | string | internal id for the authoring tool of the component | optional |
+
+####4.5.2.11 Coloring
+[coloring.json](Schemas_draft-03/Collaboration/Viewpoint/coloring.json)
+
+#####Optimization rules
+BCF is suitable for coloring on a few components. A huge list of components causes poor performance. All clients should follow this rule:
+- If the size of colored components is huge (approximately 1000 components), alert the user and give him the opportunity to modify the coloring.
+
+The color is given in ARGB format. Colors are represented as 6 or 8 hexadecimal digits. If 8 digits are present, the first two represent the alpha (transparency) channel. For example, `40E0D0` would be the color <span style="color:#40E0D0;";>Turquoise</span>. [More information about the color format can be found on Wikipedia.](https://en.wikipedia.org/wiki/RGBA_color_space)
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| color | string | Color of the components | mandatory |
+| components | array of [Component](#45210-component) | Colored components | mandatory |
+
+####4.5.2.12 Visibility
+[visibility.json](Schemas_draft-03/Collaboration/Viewpoint/visibility.json)
+
+#####Optimization rules
+BCF is suitable for hiding/showing a few components. A huge list of hidden/shown components causes poor performance. All clients should follow these rules:
+- If the list of hidden components is smaller than the list of visible components: set default_visibility to true and put the hidden components in exceptions.
+- If the list of visible components is smaller or equals the list of hidden components:  set default_visibility to false and put the visible components in exceptions.
+- If the size of exceptions is huge (approximately 1000 components), alert the user and give him the opportunity to modify the visibility.
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| default_visibility | boolean | If true: Show all components, and hide the exceptions. If false: Hide all components and show exceptions | optional, default false |
+| exceptions | array of [Component](#45210-component) | Components to hide/show determined by default_visibility | optional |
+| view_setup_hints | [View setup hints](#45213-view-setup-hints) | Hints about the setup of the viewer | optional |
+
+####4.5.2.13 View setup hints
+[view_setup_hints.json](Schemas_draft-03/Collaboration/Viewpoint/view_setup_hints.json)
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| spaces_visible | boolean | Visibility of spaces | optional, default false |
+| space_boundaries_visible | Visibility of space_boundaries | optional, default false |
+| openings_visible | boolean | Visibility of openings | optional, default false |
 
 **Example Request**
 
     POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
     Body:
     {
+        "index": 10,
         "perspective_camera": {
             "camera_view_point": {
                 "x": 0.0,
@@ -1418,7 +1535,55 @@ JSON encoded body using the "application/json" content type.
                 "y": 0.0,
                 "z": 0.0
             }
-        }]
+        }],
+        "bitmaps": [{
+            "bitmap_type": "jpg",
+            "bitmap_data": "data:image/jpg;base64,......",
+            "location": {
+                "x": 10.0,
+                "y": -10.0,
+                "z": 7.0
+            },
+            "normal": {
+                "x": -1.0,
+                "y": 1.25,
+                "z": 0.0
+            },
+            "up": {
+                "x": -5.4,
+                "y": -4.3,
+                "z": 1.0
+            },
+            "height": 1666
+        }],
+        "snapshot": {
+            "snapshot_type": "png",
+            "snapshot_data": "data:image/png;base64,......"
+        },
+        "components": {
+            "selection": [{
+                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                "originating_system": "Example CAD Application",
+                "authoring_tool_id": "EXCAD/v1.0"
+            }],
+            "coloring": [{
+                "color": "#ff0000",
+                "components": [{
+                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
+                }]
+            }],
+            "visibility": {
+                "default_visbility": false,
+                "exceptions": [{
+                    "ifc_guid": "4$cshxZO9AJBebsni$z9Yk"
+                }],
+                "view_setup_hints": {
+                    "spaces_visible": true,
+                    "space_boundaries_visible": false,
+                    "openings_visible": true
+                }
+            }
+        }
     }
 
 **Example Response**
@@ -1427,6 +1592,7 @@ JSON encoded body using the "application/json" content type.
     Body:
     {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+        "index": 10,
         "perspective_camera": {
             "camera_view_point": {
                 "x": 0.0,
@@ -1468,9 +1634,31 @@ JSON encoded body using the "application/json" content type.
                 "y": 0.0,
                 "z": 0.0
             }
-        }]
+        }],
+        "bitmaps": [{
+            "guid": "20c1cb56-315f-4a0a-922d-ed7a4a8edf55",
+            "bitmap_type": "jpg",
+            "location": {
+                "x": 10.0,
+                "y": -10.0,
+                "z": 7.0
+            },
+            "normal": {
+                "x": -1.0,
+                "y": 1.25,
+                "z": 0.0
+            },
+            "up": {
+                "x": -5.4,
+                "y": -4.3,
+                "z": 1.0
+            },
+            "height": 1666
+        }],
+        "snapshot": {
+            "snapshot_type": "png"
+        }
     }
-
 ### 4.5.3 GET Viewpoint Service
 
 **Resource URL**
@@ -1491,6 +1679,7 @@ Retrieve a specific viewpoint.
     Body:
     {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+        "index": 10,
         "perspective_camera": {
             "camera_view_point": {
                 "x": 0.0,
@@ -1532,7 +1721,30 @@ Retrieve a specific viewpoint.
                 "y": 0.0,
                 "z": 0.0
             }
-        }]
+        }],
+        "bitmaps": [{
+            "guid": "20c1cb56-315f-4a0a-922d-ed7a4a8edf55"
+            "bitmap_type": "jpg",
+            "location": {
+                "x": 10.0,
+                "y": -10.0,
+                "z": 7.0
+            },
+            "normal": {
+                "x": -1.0,
+                "y": 1.25,
+                "z": 0.0
+            },
+            "up": {
+                "x": -5.4,
+                "y": -4.3,
+                "z": 1.0
+            },
+            "height": 1666
+        }],
+        "snapshot": {
+            "snapshot_type": "png"
+        }
     }
 
 ### 4.5.4 GET Viewpoint Snapshot Service
@@ -1541,32 +1753,13 @@ Retrieve a specific viewpoint.
 
     GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
 
-Retrieve a viewpoints snapshot (png, jpg or bmp) as image file.
+Retrieve a viewpoints snapshot (png or jpg) as image file. A viewpoint contains a snapshot if viewpoint.snapshot != null.
 
 **Example Request**
 
     GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
-### 4.5.5 POST Viewpoint Snapshot Service
-
-**Resource URL**
-
-    POST /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
-
-Add a viewpoints snapshot (png, jpg or bmp).
-
-**Example Request**
-
-    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
-
-POST Body contains binary image data
-
-**Example Response**
-
-    Response Code: 200 - OK
-    Empty Body
-
-### 4.5.6 GET Viewpoint Bitmap Service
+### 4.5.5 GET Viewpoint Bitmap Service
 
 **Resource URL**
 
@@ -1575,148 +1768,107 @@ POST Body contains binary image data
 Retrieve a specific viewpoints bitmap image file (png or jpg).
 
 **Example Request**
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/20c1cb56-315f-4a0a-922d-ed7a4a8edf55
 
-### 4.5.7 POST Viewpoint Bitmap Service
-
+### 4.5.6 GET selected Components Service
 **Resource URL**
 
-    POST /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/selection
 
-Add a specific bitmap in a viewpoint (png or jpg).
+[component_GET.json](Schemas_draft-03/Collaboration/Component/selection_GET.json)
+
+Retrieve a **collection** of all selected components in a viewpoint.
 
 **Example Request**
 
-    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/760bc4ca-fb9c-467f-884f-5ecffeca8cae
-
-POST Body contains binary image data
-
-**Example Response**
-
-    Response Code: 200 - OK
-    Empty Body
-
-## 4.6 Component Services
-
-Components are references to objects within an Ifc file that can be used in the viewpoint. The color is given in ARGB format. Colors are represented as 6 or 8 hexadecimal digits. If 8 digits are present, the first two represent the alpha (transparency) channel. For example, `40E0D0` would be the color <span style="color:#40E0D0;";>Turquoise</span>. [More information about the color format can be found on Wikipedia.](https://en.wikipedia.org/wiki/RGBA_color_space)
-
-### 4.6.1 GET Components Service
-
-**Resource URL**
-
-    GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
-
-[component_GET.json](Schemas_draft-03/Collaboration/Component/components_GET.json)
-
-Retrieve a **collection** of all components related to a viewpoint.
-
-**Example Request**
-
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/selection
 
 **Example Response**
 
     Response Code: 200 - OK
     Body:
-    {
-        "components": {
-            "items": [
-                {
-                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                    "selected": true,
-                    "visible": true,
-                    "color": "0A00FF",
-                    "originating_system": "Example CAD Application",
-                    "authoring_tool_id": "EXCAD/v1.0"
-                }, {
-                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-                    "selected": true,
-                    "visible": true,
-                    "color": "0A00FF",
-                    "originating_system": "Example CAD Application",
-                    "authoring_tool_id": "EXCAD/v1.0"
-                }
-            ],
-            "defaultVisibilityComponents": true,
-            "defaultVisibilitySpaces": false,
-            "defaultVisibilityOpenings": false,
-            "defaultVisibilitySpaceBoundaries": false
+    [
+        {
+            "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+            "originating_system": "Example CAD Application",
+            "authoring_tool_id": "EXCAD/v1.0"
+        }, {
+            "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
         }
-    }
+    ]
 
-### 4.6.2 POST Components Service
+### 4.5.7 GET colored Components Service
 
 **Resource URL**
 
-    POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/components
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/coloring
 
-[component_POST.json](Schemas_draft-03/Collaboration/Component/components_POST.json)
+[component_GET.json](Schemas_draft-03/Collaboration/Component/coloring_GET.json)
 
-Add a **collection** of all components related to a viewpoint.
+Retrieve a **collection** of all colored components in a viewpoint.
 
 **Example Request**
 
-    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/components
-    Body:
-    {
-        "components": {
-            "items": [
-                {
-                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                    "selected": true,
-                    "visible": true,
-                    "color": "0A00FF",
-                    "originating_system": "Example CAD Application",
-                    "authoring_tool_id": "EXCAD/v1.0"
-                }, {
-                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-                    "selected": true,
-                    "visible": true,
-                    "color": "0A00FF",
-                    "originating_system": "Example CAD Application",
-                    "authoring_tool_id": "EXCAD/v1.0"
-                }
-            ],
-            "defaultVisibilityComponents": true,
-            "defaultVisibilitySpaces": false,
-            "defaultVisibilityOpenings": false,
-            "defaultVisibilitySpaceBoundaries": false
-        }
-    }
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/selection
 
 **Example Response**
 
-    Response Code: 201 - Created
+    Response Code: 200 - OK
     Body:
-    {
-        "components": {
-            "items": [
+    [
+        {
+            "color": "#ff0000",
+            "components": [
                 {
                     "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                    "selected": true,
-                    "visible": true,
-                    "color": "0A00FF",
                     "originating_system": "Example CAD Application",
                     "authoring_tool_id": "EXCAD/v1.0"
                 }, {
                     "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-                    "selected": true,
-                    "visible": true,
-                    "color": "0A00FF",
-                    "originating_system": "Example CAD Application",
-                    "authoring_tool_id": "EXCAD/v1.0"
                 }
-            ],
-            "defaultVisibilityComponents": true,
-            "defaultVisibilitySpaces": false,
-            "defaultVisibilityOpenings": false,
-            "defaultVisibilitySpaceBoundaries": false
+            ]
+        }
+    ]
+
+### 4.5.8 GET visibility of Components Service
+
+**Resource URL**
+
+    GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/visibility
+
+[visibility_GET.json](Schemas_draft-03/Collaboration/Component/visibility_GET.json)
+
+Retrieve visibility of components in a viewpoint.
+
+**Example Request**
+
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/visibility
+
+**Example Response**
+
+    Response Code: 200 - OK
+    Body:
+     {
+        "default_visibility": true,
+        "exceptions": [
+            {
+                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                "originating_system": "Example CAD Application",
+                "authoring_tool_id": "EXCAD/v1.0"
+            }, {
+                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+            }
+        ],
+        "view_setup_hints": {
+            "spaces_visible": true,
+            "space_boundaries_visible": false,
+            "openings_visible": true
         }
     }
 
-## 4.7 Related Topics Services
+## 4.6 Related Topics Services
 
-### 4.7.1 GET Related Topics Service
+### 4.6.1 GET Related Topics Service
 
 **Resource URL**
 
@@ -1740,7 +1892,7 @@ Retrieve a **collection** of all related topics to a topic.
         "related_topic_guid": "6963a846-54d1-4050-954d-607cd5e48aa3"
     }]
 
-### 4.7.2 PUT Related Topics Service
+### 4.6.2 PUT Related Topics Service
 
 **Resource URL**
 
@@ -1774,9 +1926,9 @@ Add or update a **collection** of all related topics to a topic.
         "related_topic_guid": "bac66ab4-331e-4f21-a28e-083d2cf2e796"
     }]
 
-## 4.8 Document Reference Services
+## 4.7 Document Reference Services
 
-### 4.8.1 GET Document References Service
+### 4.7.1 GET Document References Service
 
 **Resource URL**
 
@@ -1804,7 +1956,7 @@ Retrieve a **collection** of all document references to a topic.
         "description": "The building owners global design parameters for buildings."
     }]
 
-### 4.8.2 POST Document Reference Service
+### 4.7.2 POST Document Reference Service
 
 **Resource URL**
 
@@ -1833,7 +1985,7 @@ Add or update document references to a topic.
         "description": "The legal requirements for buildings."
     }]
 
-### 4.8.3 PUT Document Reference Service
+### 4.7.3 PUT Document Reference Service
 
 **Resource URL**
 
@@ -1863,9 +2015,9 @@ Add or update document references to a topic.
         "description": "The legal requirements for buildings."
     }]
 
-## 4.9 Document Services
+## 4.8 Document Services
 
-### 4.9.1 GET Documents Service
+### 4.8.1 GET Documents Service
 
 [document_GET.json](Schemas_draft-03/Collaboration/Document/document_GET.json)
 
@@ -1891,7 +2043,7 @@ Retrieve a **collection** of all documents uploaded to a project.
         "filename": "DesignParameters.pdf"
     }]
 
-### 4.9.2 POST Document Service
+### 4.8.2 POST Document Service
 
 **Resource URL**
 
@@ -1912,7 +2064,7 @@ Upload a document (binary file) to a project.
         "filename": "Official_Building_Permission.pdf"
     }
 
-### 4.9.3 GET Document Service
+### 4.8.3 GET Document Service
 
 **Resource URL**
 
@@ -1928,11 +2080,11 @@ Retrieves a document as binary file.
 
 Retrieves a document as binary file.
 
-## 4.10 Topics Events Services
+## 4.9 Topics Events Services
 
 The topic events service reflects the events for topics. Each creation or update of a topic generates a new topic event.
 
-### 4.10.1 GET Topics Events Service
+### 4.9.1 GET Topics Events Service
 
 **Resource URL**
 
@@ -2020,7 +2172,7 @@ Get events that are of type 'status_updated', 'type_updated' or 'title_updated' 
         ]
     }]
 
-### 4.10.2 GET Topic Events Service
+### 4.9.2 GET Topic Events Service
 
 **Resource URL**
 
@@ -2108,11 +2260,11 @@ Get events that is of type 'status_updated', 'type_updated' or 'title_updated' o
         ]
     }]
 
-## 4.11 Comments Events Services
+## 4.10 Comments Events Services
 
 The comment events service reflects the events for topic comments. Each creation or update of a comment generates a new comment event.
 
-### 4.11.1 GET Comments Events Service
+### 4.10.1 GET Comments Events Service
 
 **Resource URL**
 
@@ -2195,7 +2347,7 @@ Get events that are of type 'comment_created', or 'viewpoint_updated'
         ]
     }]
 
-### 4.11.2 GET Comment Events Service
+### 4.10.2 GET Comment Events Service
 
 **Resource URL**
 

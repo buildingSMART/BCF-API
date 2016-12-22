@@ -3,22 +3,10 @@
     "null"],
     "properties": {
         "location": {
-            "$ref": "location.json"
+            "$ref": "point.json"
         },
         "direction": {
-            "type": ["object",
-            "null"],
-            "properties": {
-                "x": {
-                    "type": "number"
-                },
-                "y": {
-                    "type": "number"
-                },
-                "z": {
-                    "type": "number"
-                }
-            }
+            "$ref": "direction.json"
         }
     }
 }

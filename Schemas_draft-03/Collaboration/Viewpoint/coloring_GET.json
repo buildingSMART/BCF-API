@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-03/schema#",
-    "title": "colored_GET",
-    "description": "Schema for colored GET, BCF REST API.",
+    "title": "coloring_GET",
+    "description": "Schema for coloring GET, BCF REST API.",
     "type": "object",
     "properties": {
         "coloring": {
