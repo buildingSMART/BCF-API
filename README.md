@@ -2,7 +2,9 @@
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
 **Version 2.1** based on BCFv2.1.
-[GitHub repository](https://github.com/BuildingSMART/BCF)
+[BCF XML GitHub repository](https://github.com/BuildingSMART/BCF)
+
+[Version 1.0 of the BCF API specification is available here](https://github.com/BuildingSMART/BCF-API/tree/v1.0)
 
 **Table of Contents**
 
