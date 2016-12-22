@@ -17,6 +17,10 @@
         "http_basic_supported": {
             "type": ["boolean",
             "null"]
-        }
+        },
+		"client_authentication_required":{
+			"type": ["boolean",
+			"null"]
+		}
     }
 }
