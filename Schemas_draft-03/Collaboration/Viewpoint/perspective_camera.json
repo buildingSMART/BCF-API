@@ -6,10 +6,10 @@
             "$ref": "point.json"
         },
         "camera_direction": { 
-            "$ref": "point.json"
+            "$ref": "direction.json"
         },
         "camera_up_vector": { 
-            "$ref": "point.json"
+            "$ref": "direction.json"
         },
         "field_of_view": {
             "type": "number"

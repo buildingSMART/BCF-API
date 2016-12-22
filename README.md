@@ -1346,44 +1346,53 @@ JSON encoded body using the "application/json" content type.
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | index | integer | parameter for sorting | optional |
-| orthogonal camera | [Orthogonal camera](#4522-orthogonal-camera) | orthogonal camera view | optional |
-| perspective camera | [Perspective camera](#4523-perspective-camera) | perspective view of the camera | optional |
-| lines | array of [Line](#4524-line) | graphical line | optional |
-| clipping_planes | array of [Clipping Plane](#4525-clipping-plane) | clipping planes for the model view | optional |
-| bitmaps | array of [Bitmap](#4526-bitmap) | embedded pictures in the viewpoint | optional |
-| snapshot | [Snapshot](#4527-snapshot) | snapshot image of the viewpoint | optional |
-| components | [Components](#4528-components) | Components in the viewpoint | optional |
+| orthogonal camera | [Orthogonal camera](#4523-orthogonal-camera) | orthogonal camera view | optional |
+| perspective camera | [Perspective camera](#4524-perspective-camera) | perspective view of the camera | optional |
+| lines | array of [Line](#4525-line) | graphical line | optional |
+| clipping_planes | array of [Clipping Plane](#4526-clipping-plane) | clipping planes for the model view | optional |
+| bitmaps | array of [Bitmap](#4527-bitmap) | embedded pictures in the viewpoint | optional |
+| snapshot | [Snapshot](#4528-snapshot) | snapshot image of the viewpoint | optional |
+| components | [Components](#4529-components) | Components in the viewpoint | optional |
 
 ####4.5.2.1 Point
 [point.json](Schemas_draft-03/Collaboration/Viewpoint/point.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
-| x | number | x coordinate | mandatory |
-| y | number | y coordinate | mandatory |
-| z | number | z coordinate | mandatory |
+| x | number | x point | mandatory |
+| y | number | y point | mandatory |
+| z | number | z point | mandatory |
 
-####4.5.2.2 Orthogonal camera
+####4.5.2.2 Direction
+[direction.json](Schemas_draft-03/Collaboration/Viewpoint/direction.json)
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| x | number | x direction | mandatory |
+| y | number | y direction | mandatory |
+| z | number | z direction | mandatory |
+
+####4.5.2.3 Orthogonal camera
 [orthogonal_camera.json](Schemas_draft-03/Collaboration/Viewpoint/orthogonal_camera.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
-| camera_view_point | [Point](#4521-point) | viewpoint of the camera | mandatory |
-| camera_directiont | [Point](#4521-point) | direction of the camera | mandatory |
-| camera_up_vector | [Point](#4521-point) | direction of camera up | mandatory |
+| camera_view_point | [Direction](#4522-direction) | viewpoint of the camera | mandatory |
+| camera_directiont | [Direction](#4522-direction) | direction of the camera | mandatory |
+| camera_up_vector | [Direction](#4522-direction) | direction of camera up | mandatory |
 | view_to_world_scale | number | proportion of camera view to model | mandatory |
 
-####4.5.2.3 Perspective camera
+####4.5.2.4 Perspective camera
 [perspective_camera.json](Schemas_draft-03/Collaboration/Viewpoint/perspective_camera.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | camera_view_point | [Point](#4521-point) | viewpoint of the camera | mandatory |
-| camera_directiont | [Point](#4521-point) | direction of the camera | mandatory |
-| camera_up_vector | [Point](#4521-point) | direction of camera up | mandatory |
+| camera_directiont | [Direction](#4522-direction) | direction of the camera | mandatory |
+| camera_up_vector | [Direction](#4522-direction) | direction of camera up | mandatory |
 | field_of_view | number | field of view | mandatory |
 
-####4.5.2.4 Line
+####4.5.2.5 Line
 [line.json](Schemas_draft-03/Collaboration/Viewpoint/line.json)
 
 |parameter|type|description|required|
@@ -1391,15 +1400,15 @@ JSON encoded body using the "application/json" content type.
 | start_point | [Point](#4521-point) | start point of the line | mandatory |
 | end_point | [Point](#4521-point) | end point of the line (Treated as point if start_point and end_point is the same | mandatory |
 
-####4.5.2.5 Clipping plane
+####4.5.2.6 Clipping plane
 [clipping_plane.json](Schemas_draft-03/Collaboration/Viewpoint/clipping_plane.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | location | [Point](#4521-point) | origin of the clipping plane | mandatory |
-| direction | [Point](#4521-point) | direction of the clipping plane | mandatory |
+| direction | [Direction](#4522-direction) | direction of the clipping plane | mandatory |
 
-####4.5.2.6 Bitmap
+####4.5.2.7 Bitmap
 [bitmap.json](Schemas_draft-03/Collaboration/Viewpoint/bitmap_POST.json)
 
 |parameter|type|description|required|
@@ -1407,11 +1416,11 @@ JSON encoded body using the "application/json" content type.
 | bitmap_type | enum (string) | format of the bitmap. Predefined values `png` or `jpg` | mandatory |
 | bitmap_data | base64 encoded string | The bitmap image data | mandatory |
 | location | [Point](#4521-point) | location of the center of the bitmap in world coordinates (point) | mandatory |
-| normal | [Point](#4521-point) | normal vector of the bitmap (vector) | mandatory |
-| up | [Point](#4521-point) | up vector of the bitmap (vector) | mandatory |
+| normal | [Direction](#4522-direction) | normal vector of the bitmap (vector) | mandatory |
+| up | [Direction](#4522-direction) | up vector of the bitmap (vector) | mandatory |
 | height | number | height of bitmap in the scene | mandatory |
 
-####4.5.2.7 Snapshot
+####4.5.2.8 Snapshot
 [snapshot.json](Schemas_draft-03/Collaboration/Viewpoint/snapshot_POST.json)
 
 |parameter|type|description|required|
@@ -1419,16 +1428,16 @@ JSON encoded body using the "application/json" content type.
 | snapshot_type | enum (string) | format of the snapshot. Predefined values `png` or `jpg` | mandatory |
 | snapshot_data | base64 encoded string | The snapshot image data | mandatory |
 
-####4.5.2.8 Components
+####4.5.2.9 Components
 [components.json](Schemas_draft-03/Collaboration/Viewpoint/components.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
-| selection | array of [Component](#4529-component) | Selected components | optional |
-| coloring | array of [Coloring](#45210-coloring) | Colored components | optional |
-| visibility | [Visibility](#45211-visibility) | Visibility of components | optional |
+| selection | array of [Component](#45210-component) | Selected components | optional |
+| coloring | array of [Coloring](#45211-coloring) | Colored components | optional |
+| visibility | [Visibility](#45212-visibility) | Visibility of components | optional |
 
-####4.5.2.9 Component
+####4.5.2.10 Component
 [component.json](Schemas_draft-03/Collaboration/Viewpoint/component.json)
 
 #####Optimization rules
@@ -1441,7 +1450,7 @@ BCF is suitable for selecting a few components. A huge list of selected componen
 | originating_system | string | originating system of the component | optional |
 | authoring_tool_id | string | internal id for the authoring tool of the component | optional |
 
-####4.5.2.10 Coloring
+####4.5.2.11 Coloring
 [coloring.json](Schemas_draft-03/Collaboration/Viewpoint/coloring.json)
 
 #####Optimization rules
@@ -1453,9 +1462,9 @@ The color is given in ARGB format. Colors are represented as 6 or 8 hexadecimal 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | color | string | Color of the components | mandatory |
-| components | array of [Component](#4529-component) | Colored components | mandatory |
+| components | array of [Component](#45210-component) | Colored components | mandatory |
 
-####4.5.2.11 Visibility
+####4.5.2.12 Visibility
 [visibility.json](Schemas_draft-03/Collaboration/Viewpoint/visibility.json)
 
 #####Optimization rules
@@ -1467,10 +1476,10 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | default_visibility | boolean | If true: Show all components, and hide the exceptions. If false: Hide all components and show exceptions | optional, default false |
-| exceptions | array of [Component](#4529-component) | Components to hide/show determined by default_visibility | optional |
-| view_setup_hints | [View setup hints](#45212-view-setup-hints) | Hints about the setup of the viewer | optional |
+| exceptions | array of [Component](#45210-component) | Components to hide/show determined by default_visibility | optional |
+| view_setup_hints | [View setup hints](#45213-view-setup-hints) | Hints about the setup of the viewer | optional |
 
-####4.5.2.12 View setup hints
+####4.5.2.13 View setup hints
 [view_setup_hints.json](Schemas_draft-03/Collaboration/Viewpoint/view_setup_hints.json)
 
 |parameter|type|description|required|

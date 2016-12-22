@@ -6,7 +6,7 @@
             "$ref": "point.json"
         },
         "direction": {
-            "$ref": "point.json"
+            "$ref": "direction.json"
         }
     }
 }

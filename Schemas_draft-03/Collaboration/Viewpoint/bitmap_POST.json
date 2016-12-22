@@ -13,10 +13,10 @@
             "$ref": "location.json"
         },
         "normal": {
-            "$ref": "point.json"
+            "$ref": "direction.json"
         },
         "up": {
-            "$ref": "point.json"
+            "$ref": "direction.json"
         },
         "height": {
             "type": "number"
