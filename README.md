@@ -302,7 +302,7 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
-|oauth2_auth_url|string|URL to authorisation page (used for Authorization Code Grant and Implicit Grant OAuth2 flows)|false|
+|oauth2_auth_url|string|URL to authorization page (used for Authorization Code Grant and Implicit Grant OAuth2 flows)|false|
 |oauth2_token_url|string|URL for token requests|false|
 |oauth2_dynamic_client_reg_url|string|URL for automated client registration|false|
 |http_basic_supported|boolean|Indicates if Http Basic Authentication is supported|false|
@@ -316,7 +316,7 @@ OAuth2 flows are described in detail in the [OAuth2 specification](https://tools
 * `resource_owner_password_credentials_grant` - [4.3 - Resource Owner Password Credentials Grant](https://tools.ietf.org/html/rfc6749#section-4.3)
 * `extension_grants` - [4.5 - Extension Grants](https://tools.ietf.org/html/rfc6749#section-4.5)
 
-The [OAuth2 Client Credentials Grant (section 4.4)](https://tools.ietf.org/html/rfc6749#section-4.4) is not supported since it does not contain an user identity.
+The [OAuth2 Client Credentials Grant (section 4.4)](https://tools.ietf.org/html/rfc6749#section-4.4) is not supported since it does not contain any user identity.
 
 **Example Request**
 
