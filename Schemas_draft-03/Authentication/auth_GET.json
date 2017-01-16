@@ -17,6 +17,13 @@
         "http_basic_supported": {
             "type": ["boolean",
             "null"]
+        },
+        "supported_oauth2_flows": {
+            "type": ["array",
+            "null"],
+            "items": {
+                "type": ["string"]
+            }
         }
     }
 }
