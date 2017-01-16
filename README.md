@@ -314,9 +314,9 @@ OAuth2 flows are described in detail in the [OAuth2 specification](https://tools
 * `authorization_code_grant` - [4.1 - Authorization Code Grant](https://tools.ietf.org/html/rfc6749#section-4.1)
 * `implicit_grant` - [4.2 - Implicit Grant](https://tools.ietf.org/html/rfc6749#section-4.2)
 * `resource_owner_password_credentials_grant` - [4.3 - Resource Owner Password Credentials Grant](https://tools.ietf.org/html/rfc6749#section-4.3)
-* `extension_grants` - [4.5 - Extension Grants](https://tools.ietf.org/html/rfc6749#section-4.5)
 
 The [OAuth2 Client Credentials Grant (section 4.4)](https://tools.ietf.org/html/rfc6749#section-4.4) is not supported since it does not contain any user identity.
+Also the [Extension Grants (section 4.5)](https://tools.ietf.org/html/rfc6749#section-4.5) are not supported.
 
 **Example Request**
 
