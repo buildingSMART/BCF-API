@@ -4,6 +4,6 @@
         "snapshot_type": {
             "type": "string",
             "enum": ["jpg", "png"]
-        },
+        }
     }
 }
