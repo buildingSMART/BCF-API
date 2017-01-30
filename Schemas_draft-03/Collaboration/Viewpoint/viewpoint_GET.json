@@ -38,6 +38,6 @@
         },
         "snapshot": {
             "$ref": "snapshot_GET.json"
-        },
+        }
     }
 }
