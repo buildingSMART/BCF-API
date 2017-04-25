@@ -1711,7 +1711,7 @@ Retrieve a **collection** of all selected components in a viewpoint.
                 "originating_system": "Example CAD Application",
                 "authoring_tool_id": "EXCAD/v1.0"
             }, {
-                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
             }
         ]
     }
@@ -1722,7 +1722,7 @@ Retrieve a **collection** of all selected components in a viewpoint.
 
     GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/coloring
 
-[component_GET.json](Schemas_draft-03/Collaboration/Component/coloring_GET.json)
+[coloring_GET.json](Schemas_draft-03/Collaboration/Viewpoint/coloring_GET.json)
 
 Retrieve a **collection** of all colored components in a viewpoint.
 
@@ -1734,20 +1734,22 @@ Retrieve a **collection** of all colored components in a viewpoint.
 
     Response Code: 200 - OK
     Body:
-    [
-        {
-            "color": "#ff0000",
-            "components": [
-                {
-                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                    "originating_system": "Example CAD Application",
-                    "authoring_tool_id": "EXCAD/v1.0"
-                }, {
-                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-                }
-            ]
-        }
-    ]
+    {
+        "coloring": [
+            {
+                "color": "#ff0000",
+                "components": [
+                    {
+                        "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                        "originating_system": "Example CAD Application",
+                        "authoring_tool_id": "EXCAD/v1.0"
+                    }, {
+                        "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
+                    }
+                ]
+            }
+        ]
+    }
 
 ### 4.5.8 GET visibility of Components Service
 
