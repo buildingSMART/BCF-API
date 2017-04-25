@@ -1757,7 +1757,7 @@ Retrieve a **collection** of all colored components in a viewpoint.
 
     GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/visibility
 
-[visibility_GET.json](Schemas_draft-03/Collaboration/Component/visibility_GET.json)
+[visibility_GET.json](Schemas_draft-03/Collaboration/Viewpoint/visibility_GET.json)
 
 Retrieve visibility of components in a viewpoint.
 
@@ -1769,21 +1769,23 @@ Retrieve visibility of components in a viewpoint.
 
     Response Code: 200 - OK
     Body:
-     {
-        "default_visibility": true,
-        "exceptions": [
-            {
-                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                "originating_system": "Example CAD Application",
-                "authoring_tool_id": "EXCAD/v1.0"
-            }, {
-                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+    {
+        "visibility": {
+                "default_visibility": true,
+            "exceptions": [
+                {
+                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                    "originating_system": "Example CAD Application",
+                    "authoring_tool_id": "EXCAD/v1.0"
+                }, {
+                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+                }
+            ],
+            "view_setup_hints": {
+                "spaces_visible": true,
+                "space_boundaries_visible": false,
+                "openings_visible": true
             }
-        ],
-        "view_setup_hints": {
-            "spaces_visible": true,
-            "space_boundaries_visible": false,
-            "openings_visible": true
         }
     }
 
