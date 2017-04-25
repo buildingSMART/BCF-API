@@ -1692,7 +1692,7 @@ Retrieve a specific viewpoints bitmap image file (png or jpg).
 
     GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/selection
 
-[component_GET.json](Schemas_draft-03/Collaboration/Component/selection_GET.json)
+[selection_GET.json](Schemas_draft-03/Collaboration/Viewpoint/selection_GET.json)
 
 Retrieve a **collection** of all selected components in a viewpoint.
 
@@ -1704,15 +1704,17 @@ Retrieve a **collection** of all selected components in a viewpoint.
 
     Response Code: 200 - OK
     Body:
-    [
-        {
-            "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-            "originating_system": "Example CAD Application",
-            "authoring_tool_id": "EXCAD/v1.0"
-        }, {
-            "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-        }
-    ]
+    {
+        "selection": [
+            {
+                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                "originating_system": "Example CAD Application",
+                "authoring_tool_id": "EXCAD/v1.0"
+            }, {
+                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+            }
+        ]
+    }
 
 ### 4.5.7 GET colored Components Service
 
