@@ -1,5 +1,5 @@
 {
-	"title": "direction",
+    "title": "direction",
     "type": "object",
     "properties": {
         "x": {

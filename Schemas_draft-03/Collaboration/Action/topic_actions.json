@@ -3,7 +3,7 @@
     "required": false,
     "type": "array",
     "items": {
-	    "type": "string",
+        "type": "string",
         "enum": ["update",
         "updateBimSnippet",
         "updateRelatedTopics",

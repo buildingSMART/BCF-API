@@ -8,7 +8,7 @@
             "required": true,
             "type": "array",
             "items": {
-			    "title": "version",
+                "title": "version",
                 "type": ["object", "null"],
                 "properties": {
                     "version_id": {
