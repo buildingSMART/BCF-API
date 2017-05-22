@@ -1,7 +1,6 @@
 {
     "title": "coloring",
     "type": "object",
-
     "properties": {
         "color": {
             "type": "string"

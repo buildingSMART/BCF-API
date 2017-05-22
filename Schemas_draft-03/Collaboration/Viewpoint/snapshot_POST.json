@@ -1,4 +1,5 @@
 {
+    "title": "snapshot_POST",
     "type": ["object", "null"],
     "properties": {
         "snapshot_type": {
