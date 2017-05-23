@@ -261,7 +261,7 @@ BCF and model server are co-located on the same hosts.
 
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
-|version|string|Identifier of the version|true|
+|version_id|string|Identifier of the version|true|
 |detailed_version|string|Url to specification on GitHub|false|
 
 Returns a list of all supported BCF API versions of the server.
