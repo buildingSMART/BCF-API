@@ -12,6 +12,12 @@
             "type": "string",
             "required": true
         },
+        "project_group_name": {
+            "type": ["string", "null"]
+        },
+        "project_group_id": {
+            "type": ["string", "null"]
+        },
         "authorization": {
             "type": "object",
             "required": false,
