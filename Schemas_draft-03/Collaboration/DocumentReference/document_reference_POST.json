@@ -2,13 +2,14 @@
     "title": "document_reference_POST",
     "type": "object",
     "properties": {
-        "referenced_document": {
-            "type": ["string",
-            "null"]
+        "document_guid": {
+            "type": ["string", "null"]
+        },
+        "url": {
+            "type": ["string", "null"]
         },
         "description": {
-            "type": ["string",
-            "null"]
+            "type": ["string", "null"]
         }
     }
 }
