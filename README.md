@@ -1999,7 +1999,8 @@ Retrieves a document as binary file.
 
 ## 4.9 Topics Events Services
 
-The topic events service reflects the events for topics. Each creation or update of a topic generates a new topic event.
+The topic events service reflects the events for topics. Each creation or update of a topic generates new topic events.
+Note: Whenever a topic has been created, the server also generates "update" and "add" events for all fields that are initially set. Example: If a topic contains a description, the **description_updated** event is generated. This is to ensure the full history.
 
 ### 4.9.1 GET Topics Events Service
 
@@ -2179,7 +2180,9 @@ Get events that is of type 'status_updated', 'type_updated' or 'title_updated' o
 
 ## 4.10 Comments Events Services
 
-The comment events service reflects the events for topic comments. Each creation or update of a comment generates a new comment event.
+The comment events service reflects the events for topic comments. Each creation or update of a comment generates new comment events.
+
+Note: Whenever a comment has been created, the server also generates "update" events for all fields that are initially set. Example: If a comment contains a viewpoint, the **viewpoint_updated** event is generated. This is to ensure the full history.
 
 ### 4.10.1 GET Comments Events Service
 
