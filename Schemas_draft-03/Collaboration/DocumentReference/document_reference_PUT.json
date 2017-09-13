@@ -3,16 +3,17 @@
     "type": "object",
     "properties": {
         "guid": {
-            "type": ["string",
-            "null"]
+            "required": true,
+            "type": "string"
         },
-        "referenced_document": {
-            "type": ["string",
-            "null"]
+        "document_guid": {
+            "type": ["string", "null"]
+        },
+        "url": {
+            "type": ["string", "null"]
         },
         "description": {
-            "type": ["string",
-            "null"]
+            "type": ["string", "null"]
         }
     }
 }

@@ -1845,6 +1845,13 @@ Add or update a **collection** of all related topics to a topic.
 
 ## 4.7 Document Reference Services
 
+Service for relating documents to topics.
+Related documents can be either internal or external, determined by the fields **url** and **document_guid**.
+
+The **url** and the **document_guid** fields are mutually exclusive, which means that only one of these fields are set.
+A document_reference with **url** set, is referencing an external resource.
+A document_reference with **document_guid** set, is referencing an internal **document** which can be downloaded using the [GET Document Service](#483-get-document-service).
+
 ### 4.7.1 GET Document References Service
 
 **Resource URL**
@@ -1864,12 +1871,12 @@ Retrieve a **collection** of all document references to a topic.
     Response Code: 200 - OK
     Body:
     [{
-        "guid": "472ab37a-6122-448e-86fc-86503183b520",
-        "referenced_document": "http://example.com/files/LegalRequirements.pdf",
+        "guid": "212ab37a-6122-448e-86fc-86503183b520",
+        "url": "http://example.com/files/LegalRequirements.pdf",
         "description": "The legal requirements for buildings."
     }, {
         "guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
-        "referenced_document": "http://example.com/files/DesignParameters.pdf",
+        "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
         "description": "The building owners global design parameters for buildings."
     }]
 
@@ -1881,14 +1888,22 @@ Retrieve a **collection** of all document references to a topic.
 
 [document_reference_POST.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_POST.json)
 
-Add or update document references to a topic.
+Add a document reference to a topic.
+
+Should either reference an internal or an external document.
+- Internal
+  * **document_guid** must match an existing **document** in the project
+  * **url** must be null
+- External
+  * **document_guid** must be null
+  * **url** must be the url to the external resource
 
 **Example Request**
 
     POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
     Body:
     [{
-        "referenced_document": "http://example.com/files/LegalRequirements.pdf",
+        "url": "http://example.com/files/LegalRequirements.pdf",
         "description": "The legal requirements for buildings."
     }]
 
@@ -1897,9 +1912,28 @@ Add or update document references to a topic.
     Response Code: 201 - Created
     Body:
     [{
-        "guid": "472ab37a-6122-448e-86fc-86503183b520",
-        "referenced_document": "http://example.com/files/LegalRequirements.pdf",
+        "guid": "275ab37a-6122-448e-86fc-86503183b520",
+        "url": "http://example.com/files/LegalRequirements.pdf",
         "description": "The legal requirements for buildings."
+    }]
+
+**Example Request**
+
+    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
+    Body:
+    [{
+        "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
+        "description": "The building owners global design parameters for buildings."
+    }]
+
+**Example Response**
+
+    Response Code: 201 - Created
+    Body:
+    [{
+        "guid": "135ab37a-6122-448e-86fc-86503183b520",
+        "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
+        "description": "The building owners global design parameters for buildings."
     }]
 
 ### 4.7.3 PUT Document Reference Service
@@ -1910,15 +1944,16 @@ Add or update document references to a topic.
 
 [document_reference_PUT.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
-Add or update document references to a topic.
+Update an existing document reference identified by **guid**.
+Uses the same rules as [POST Document Reference Service](#472-post-document-reference-service)
 
 **Example Request**
 
     PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references/472ab37a-6122-448e-86fc-86503183b520
     Body:
     [{
-        "guid": "472ab37a-6122-448e-86fc-86503183b520",
-        "referenced_document": "http://example.com/files/LegalRequirements_Update.pdf",
+        "guid": "135ab37a-6122-448e-86fc-86503183b520",
+        "url": "http://example.com/files/LegalRequirements_Update.pdf",
         "description": "The legal requirements for buildings."
     }]
 
@@ -1927,8 +1962,8 @@ Add or update document references to a topic.
     Response Code: 200 - OK
     Body:
     [{
-        "guid": "472ab37a-6122-448e-86fc-86503183b520",
-        "referenced_document": "http://example.com/files/LegalRequirements_Update.pdf",
+        "guid": "135ab37a-6122-448e-86fc-86503183b520",
+        "url": "http://example.com/files/LegalRequirements_Update.pdf",
         "description": "The legal requirements for buildings."
     }]
 
