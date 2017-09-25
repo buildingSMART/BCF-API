@@ -60,7 +60,8 @@
     + [4.4.2 POST Comment Service](#442-post-comment-service)
     + [4.4.3 GET Comment Service](#443-get-comment-service)
     + [4.4.4 PUT Comment Service](#444-put-comment-service)
-    + [4.4.5 Determining allowed Comment modifications](#445-determining-allowed-comment-modifications)
+    + [4.4.5 DELETE Comment Service](#445-delete-comment-service)
+    + [4.4.6 Determining allowed Comment modifications](#446-determining-allowed-comment-modifications)
   * [4.5 Viewpoint Services](#45-viewpoint-services)
     + [4.5.1 GET Viewpoints Service](#451-get-viewpoints-service)
     + [4.5.2 POST Viewpoint Service](#452-post-viewpoint-service)
@@ -1147,7 +1148,23 @@ Update a single comment, description similar to POST.
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }
 
-### 4.4.5 Determining allowed Comment modifications
+### 4.4.5 DELETE Comment Service
+
+**Resource URL**
+
+    DELETE /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
+
+Deletes a single comment. This operation is only possible when the server returns the `delete` flag in the Comment authorization, see section [4.4.6](#446-determining-allowed-comment-modifications)
+
+**Example Request**
+
+    DELETE /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
+
+**Example Response**
+
+    Response Code: 200 - OK
+
+### 4.4.6 Determining allowed Comment modifications
 
 The global default Comment authorizations are expressed in the project schema and when Comment(s) are requested with the
 query parameter "includeAuthorization" equal to "true" Comments will include an "authorization" field containing any local
