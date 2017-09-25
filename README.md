@@ -918,6 +918,8 @@ overrides for each Topic.
 
 Retrieve a **collection** of file references as topic header.
 
+*Implementer Note*: The `reference` property can either be an **Uri** or a **Guid**. Uris are given as absolute paths to the model files while Guids reference a custom id of the model file and require custom logic per server to retrieve it. This allows referencing of files on the server but requires clients to know how to retrieve files in a specific implementation.
+
 **Example Request**
 
     GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
@@ -933,7 +935,7 @@ Retrieve a **collection** of file references as topic header.
     }, {
         "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
         "file_name": "OfficeBuilding_Heating_0003.ifc",
-        "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
+        "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
     }]
 
 ### 4.3.2 PUT Files (Header) Service
