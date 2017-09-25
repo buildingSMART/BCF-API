@@ -1,4 +1,5 @@
 {
+    "title": "visibility",
     "type": "object",
     "properties": {
         "default_visibility": {
