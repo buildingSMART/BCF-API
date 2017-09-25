@@ -48,6 +48,7 @@
     + [4.2.2 POST Topic Service](#422-post-topic-service)
     + [4.2.3 GET Topic Service](#423-get-topic-service)
     + [4.2.4 PUT Topic Service](#424-put-topic-service)
+    + [4.2.5 DELETE Topic Service](#425-delete-topic-service)
     + [4.2.6 GET Topic BIM Snippet Service](#426-get-topic-bim-snippet-service)
     + [4.2.7 PUT Topic BIM Snippet Service](#427-put-topic-bim-snippet-service)
     + [4.2.8 Determining Allowed Topic Modifications](#428-determining-allowed-topic-modifications)
@@ -882,7 +883,23 @@ Modify a specific topic, description similar to POST.
             "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
             "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
         }
-    }
+    }   
+
+### 4.2.5 DELETE Topic Service
+
+**Resource URL**
+
+    DELETE /bcf/{version}/projects/{project_id}/topics/{guid}
+
+Deletes a single topic. This operation is only possible when the server returns the `delete` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
+
+**Example Request**
+
+    DELETE /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+
+**Example Response**
+
+    Response Code: 200 - OK
 
 ### 4.2.6 GET Topic BIM Snippet Service
 
