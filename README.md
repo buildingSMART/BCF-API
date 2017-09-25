@@ -492,7 +492,7 @@ Retrieve a specific project.
 
 [project_PUT.json](Schemas_draft-03/Project/project_PUT.json)
 
-Modify a specific project.
+Modify a specific project. This operation is only possible when the server returns the `update` flag in the Project authorization, see section [4.1.5](#415-expressing-user-authorization-through-project-extensions)
 
 **Example Request**
 
@@ -709,7 +709,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
 
 [topic_POST.json](Schemas_draft-03/Collaboration/Topic/topic_POST.json)
 
-Add a new topic.
+Add a new topic. This operation is only possible when the server returns the `createTopic` flag in the Project authorization, see section [4.1.5](#415-expressing-user-authorization-through-project-extensions)
 
 **Parameters**
 
@@ -835,7 +835,7 @@ Retrieve a specific topic.
 
 [topic_PUT.json](Schemas_draft-03/Collaboration/Topic/topic_PUT.json)
 
-Modify a specific topic, description similar to POST.
+Modify a specific topic, description similar to POST. This operation is only possible when the server returns the `update` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Example Request**
 
@@ -916,7 +916,7 @@ Retrieves a topics BIM-Snippet as binary file.
 
     PUT /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
 
-Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property `is_external` must be set to `false` and the `reference` must be the file name with extension.
+Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property `is_external` must be set to `false` and the `reference` must be the file name with extension. This operation is only possible when the server returns the `updateBimSnippet` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 ### 4.2.8 Determining Allowed Topic Modifications
 
@@ -962,7 +962,7 @@ Retrieve a **collection** of file references as topic header.
 
 [file_PUT.json](Schemas_draft-03/Collaboration/File/file_PUT.json)
 
-Update a **collection** of file references on the topic header.
+Update a **collection** of file references on the topic header. This operation is only possible when the server returns the `updateFiles` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Example Request**
 
@@ -1058,7 +1058,7 @@ Get comments that are created after December 5 2015. Sort the result on first cr
 
 [comment_POST.json](Schemas_draft-03/Collaboration/Comment/comment_POST.json)
 
-Add a new comment to a topic.
+Add a new comment to a topic. This operation is only possible when the server returns the `createComment` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Parameters**
 
@@ -1124,7 +1124,7 @@ Get a single comment.
 
 [comment_PUT.json](Schemas_draft-03/Collaboration/Comment/comment_PUT.json)
 
-Update a single comment, description similar to POST.
+Update a single comment, description similar to POST. This operation is only possible when the server returns the `update` flag in the Comment authorization, see section [4.4.6](#446-determining-allowed-comment-modifications)
 
 **Example Request**
 
@@ -1288,7 +1288,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
 
 [viewpoint_POST.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_POST.json)
 
-Add a new viewpoint. Viewpoints are immutable, meaning that they should never change. Requirements for different visualizations should be handled by creating new viewpoint elements.
+Add a new viewpoint. Viewpoints are immutable, meaning that they should never change. Requirements for different visualizations should be handled by creating new viewpoint elements. This operation is only possible when the server returns the `createViewpoint` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Parameters**
 
@@ -1851,7 +1851,7 @@ Retrieve a **collection** of all related topics to a topic.
 
 [related_topic_PUT.json](Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PUT.json)
 
-Add or update a **collection** of all related topics to a topic.
+Add or update a **collection** of all related topics to a topic. This operation is only possible when the server returns the `updateRelatedTopics` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Example Request**
 
@@ -1922,7 +1922,7 @@ Retrieve a **collection** of all document references to a topic.
 
 [document_reference_POST.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_POST.json)
 
-Add a document reference to a topic.
+Add a document reference to a topic. This operation is only possible when the server returns the `updateDocumentServices` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 Should either reference an internal or an external document.
 - Internal
@@ -1979,7 +1979,7 @@ Should either reference an internal or an external document.
 [document_reference_PUT.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
 Update an existing document reference identified by **guid**.
-Uses the same rules as [POST Document Reference Service](#472-post-document-reference-service)
+Uses the same rules as [POST Document Reference Service](#472-post-document-reference-service). This operation is only possible when the server returns the `updateDocumentServices` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Example Request**
 
@@ -2035,7 +2035,7 @@ Retrieve a **collection** of all documents uploaded to a project.
 
     POST /bcf/{version}/projects/{project_id}/documents
 
-Upload a document (binary file) to a project.
+Upload a document (binary file) to a project. This operation is only possible when the server returns the `createDocument` flag in the Project authorization, see section [4.1.5](#415-expressing-user-authorization-through-project-extensions)
 
 **Example Request**
 
