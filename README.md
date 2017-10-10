@@ -578,7 +578,7 @@ Project extensions are used to define possible values that can be used in topics
             "update",
             "updateBimSnippet",
             "updateRelatedTopics",
-            "updateDocumentServices",
+            "updateDocumentReferences",
             "updateFiles",
             "createComment",
             "createViewpoint"
@@ -610,8 +610,8 @@ level by default (i.e. unless overridden by specific topics) The available actio
 
 * *update* - The ability to update the topic (see [4.2.4 PUT Topic Service](#424-put-topic-service))
 * *updateBimSnippet* - The ability to update the BIM snippet for topics (see [4.2.7 PUT Topic BIM Snippet Service](#427-put-topic-bim-snippet-service))
-* *updateRelatedTopics* - The ability to update the collection of related topics (see [4.6.2 PUT Related Topics Service](#472-put-related-topics-service))
-* *updateDocumentReferences* - The ability to update the collection of document references (see [4.7.3 PUT Document Reference Service](#483-put-document-reference-service))
+* *updateRelatedTopics* - The ability to update the collection of related topics (see [4.6.2 PUT Related Topics Service](#462-put-related-topics-service))
+* *updateDocumentReferences* - The ability to update the collection of document references (see [4.7.3 PUT Document Reference Service](#473-put-document-reference-service))
 * *updateFiles* - The ability to update the file header (see [4.3.2 PUT Files (Header) Service](#432-put-files-header-service))
 * *createComment* - The ability to create a comment (see [4.4.2 POST Comment Service](#442-post-comment-service))
 * *createViewpoint* - The ability to create a new viewpoint (see [4.5.2 POST Viewpoint Service](#452-post-viewpoint-service))
