@@ -1730,7 +1730,7 @@ Retrieve a specific viewpoints bitmap image file (png or jpg).
 
     GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/selection
 
-[component_GET.json](Schemas_draft-03/Collaboration/Component/selection_GET.json)
+[selection_GET.json](Schemas_draft-03/Collaboration/Viewpoint/selection_GET.json)
 
 Retrieve a **collection** of all selected components in a viewpoint.
 
@@ -1742,15 +1742,17 @@ Retrieve a **collection** of all selected components in a viewpoint.
 
     Response Code: 200 - OK
     Body:
-    [
-        {
-            "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-            "originating_system": "Example CAD Application",
-            "authoring_tool_id": "EXCAD/v1.0"
-        }, {
-            "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-        }
-    ]
+    {
+        "selection": [
+            {
+                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                "originating_system": "Example CAD Application",
+                "authoring_tool_id": "EXCAD/v1.0"
+            }, {
+                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
+            }
+        ]
+    }
 
 ### 4.5.7 GET colored Components Service
 
@@ -1758,7 +1760,7 @@ Retrieve a **collection** of all selected components in a viewpoint.
 
     GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/coloring
 
-[component_GET.json](Schemas_draft-03/Collaboration/Component/coloring_GET.json)
+[coloring_GET.json](Schemas_draft-03/Collaboration/Viewpoint/coloring_GET.json)
 
 Retrieve a **collection** of all colored components in a viewpoint.
 
@@ -1770,20 +1772,22 @@ Retrieve a **collection** of all colored components in a viewpoint.
 
     Response Code: 200 - OK
     Body:
-    [
-        {
-            "color": "#ff0000",
-            "components": [
-                {
-                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                    "originating_system": "Example CAD Application",
-                    "authoring_tool_id": "EXCAD/v1.0"
-                }, {
-                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-                }
-            ]
-        }
-    ]
+    {
+        "coloring": [
+            {
+                "color": "#ff0000",
+                "components": [
+                    {
+                        "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                        "originating_system": "Example CAD Application",
+                        "authoring_tool_id": "EXCAD/v1.0"
+                    }, {
+                        "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
+                    }
+                ]
+            }
+        ]
+    }
 
 ### 4.5.8 GET visibility of Components Service
 
@@ -1791,7 +1795,7 @@ Retrieve a **collection** of all colored components in a viewpoint.
 
     GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/visibility
 
-[visibility_GET.json](Schemas_draft-03/Collaboration/Component/visibility_GET.json)
+[visibility_GET.json](Schemas_draft-03/Collaboration/Viewpoint/visibility_GET.json)
 
 Retrieve visibility of components in a viewpoint.
 
@@ -1803,21 +1807,23 @@ Retrieve visibility of components in a viewpoint.
 
     Response Code: 200 - OK
     Body:
-     {
-        "default_visibility": true,
-        "exceptions": [
-            {
-                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                "originating_system": "Example CAD Application",
-                "authoring_tool_id": "EXCAD/v1.0"
-            }, {
-                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+    {
+        "visibility": {
+                "default_visibility": true,
+            "exceptions": [
+                {
+                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                    "originating_system": "Example CAD Application",
+                    "authoring_tool_id": "EXCAD/v1.0"
+                }, {
+                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+                }
+            ],
+            "view_setup_hints": {
+                "spaces_visible": true,
+                "space_boundaries_visible": false,
+                "openings_visible": true
             }
-        ],
-        "view_setup_hints": {
-            "spaces_visible": true,
-            "space_boundaries_visible": false,
-            "openings_visible": true
         }
     }
 
