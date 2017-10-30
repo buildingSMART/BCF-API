@@ -48,6 +48,7 @@
     + [4.2.2 POST Topic Service](#422-post-topic-service)
     + [4.2.3 GET Topic Service](#423-get-topic-service)
     + [4.2.4 PUT Topic Service](#424-put-topic-service)
+    + [4.2.5 DELETE Topic Service](#425-delete-topic-service)
     + [4.2.6 GET Topic BIM Snippet Service](#426-get-topic-bim-snippet-service)
     + [4.2.7 PUT Topic BIM Snippet Service](#427-put-topic-bim-snippet-service)
     + [4.2.8 Determining Allowed Topic Modifications](#428-determining-allowed-topic-modifications)
@@ -59,7 +60,8 @@
     + [4.4.2 POST Comment Service](#442-post-comment-service)
     + [4.4.3 GET Comment Service](#443-get-comment-service)
     + [4.4.4 PUT Comment Service](#444-put-comment-service)
-    + [4.4.5 Determining allowed Comment modifications](#445-determining-allowed-comment-modifications)
+    + [4.4.5 DELETE Comment Service](#445-delete-comment-service)
+    + [4.4.6 Determining allowed Comment modifications](#446-determining-allowed-comment-modifications)
   * [4.5 Viewpoint Services](#45-viewpoint-services)
     + [4.5.1 GET Viewpoints Service](#451-get-viewpoints-service)
     + [4.5.2 POST Viewpoint Service](#452-post-viewpoint-service)
@@ -490,7 +492,7 @@ Retrieve a specific project.
 
 [project_PUT.json](Schemas_draft-03/Project/project_PUT.json)
 
-Modify a specific project.
+Modify a specific project. This operation is only possible when the server returns the `update` flag in the Project authorization, see section [4.1.5](#415-expressing-user-authorization-through-project-extensions)
 
 **Example Request**
 
@@ -707,7 +709,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
 
 [topic_POST.json](Schemas_draft-03/Collaboration/Topic/topic_POST.json)
 
-Add a new topic.
+Add a new topic. This operation is only possible when the server returns the `createTopic` flag in the Project authorization, see section [4.1.5](#415-expressing-user-authorization-through-project-extensions)
 
 **Parameters**
 
@@ -833,7 +835,7 @@ Retrieve a specific topic.
 
 [topic_PUT.json](Schemas_draft-03/Collaboration/Topic/topic_PUT.json)
 
-Modify a specific topic, description similar to POST.
+Modify a specific topic, description similar to POST. This operation is only possible when the server returns the `update` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Example Request**
 
@@ -882,7 +884,23 @@ Modify a specific topic, description similar to POST.
             "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
             "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
         }
-    }
+    }   
+
+### 4.2.5 DELETE Topic Service
+
+**Resource URL**
+
+    DELETE /bcf/{version}/projects/{project_id}/topics/{guid}
+
+Deletes a single topic. This operation is only possible when the server returns the `delete` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
+
+**Example Request**
+
+    DELETE /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+
+**Example Response**
+
+    Response Code: 200 - OK
 
 ### 4.2.6 GET Topic BIM Snippet Service
 
@@ -898,7 +916,7 @@ Retrieves a topics BIM-Snippet as binary file.
 
     PUT /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
 
-Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property `is_external` must be set to `false` and the `reference` must be the file name with extension.
+Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property `is_external` must be set to `false` and the `reference` must be the file name with extension. This operation is only possible when the server returns the `updateBimSnippet` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 ### 4.2.8 Determining Allowed Topic Modifications
 
@@ -948,7 +966,7 @@ Retrieve a **collection** of file references as topic header.
 
 [file_PUT.json](Schemas_draft-03/Collaboration/File/file_PUT.json)
 
-Update a **collection** of file references on the topic header.
+Update a **collection** of file references on the topic header. This operation is only possible when the server returns the `updateFiles` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Example Request**
 
@@ -1044,7 +1062,7 @@ Get comments that are created after December 5 2015. Sort the result on first cr
 
 [comment_POST.json](Schemas_draft-03/Collaboration/Comment/comment_POST.json)
 
-Add a new comment to a topic.
+Add a new comment to a topic. This operation is only possible when the server returns the `createComment` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Parameters**
 
@@ -1110,11 +1128,11 @@ Get a single comment.
 
 [comment_PUT.json](Schemas_draft-03/Collaboration/Comment/comment_PUT.json)
 
-Update a single comment, description similar to POST.
+Update a single comment, description similar to POST. This operation is only possible when the server returns the `update` flag in the Comment authorization, see section [4.4.6](#446-determining-allowed-comment-modifications)
 
 **Example Request**
 
-    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
+    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
     Body:
     {
         "comment": "will rework the heating model and fix the ventilation"
@@ -1134,7 +1152,23 @@ Update a single comment, description similar to POST.
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }
 
-### 4.4.5 Determining allowed Comment modifications
+### 4.4.5 DELETE Comment Service
+
+**Resource URL**
+
+    DELETE /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
+
+Deletes a single comment. This operation is only possible when the server returns the `delete` flag in the Comment authorization, see section [4.4.6](#446-determining-allowed-comment-modifications)
+
+**Example Request**
+
+    DELETE /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
+
+**Example Response**
+
+    Response Code: 200 - OK
+
+### 4.4.6 Determining allowed Comment modifications
 
 The global default Comment authorizations are expressed in the project schema and when Comment(s) are requested with the
 query parameter "includeAuthorization" equal to "true" Comments will include an "authorization" field containing any local
@@ -1258,7 +1292,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
 
 [viewpoint_POST.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_POST.json)
 
-Add a new viewpoint. Viewpoints are immutable, meaning that they should never change. Requirements for different visualizations should be handled by creating new viewpoint elements.
+Add a new viewpoint. Viewpoints are immutable, meaning that they should never change. Requirements for different visualizations should be handled by creating new viewpoint elements. This operation is only possible when the server returns the `createViewpoint` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Parameters**
 
@@ -1821,7 +1855,7 @@ Retrieve a **collection** of all related topics to a topic.
 
 [related_topic_PUT.json](Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PUT.json)
 
-Add or update a **collection** of all related topics to a topic.
+Add or update a **collection** of all related topics to a topic. This operation is only possible when the server returns the `updateRelatedTopics` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Example Request**
 
@@ -1892,7 +1926,7 @@ Retrieve a **collection** of all document references to a topic.
 
 [document_reference_POST.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_POST.json)
 
-Add a document reference to a topic.
+Add a document reference to a topic. This operation is only possible when the server returns the `updateDocumentServices` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 Should either reference an internal or an external document.
 - Internal
@@ -1949,7 +1983,7 @@ Should either reference an internal or an external document.
 [document_reference_PUT.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
 Update an existing document reference identified by **guid**.
-Uses the same rules as [POST Document Reference Service](#472-post-document-reference-service)
+Uses the same rules as [POST Document Reference Service](#472-post-document-reference-service). This operation is only possible when the server returns the `updateDocumentServices` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Example Request**
 
@@ -2005,7 +2039,7 @@ Retrieve a **collection** of all documents uploaded to a project.
 
     POST /bcf/{version}/projects/{project_id}/documents
 
-Upload a document (binary file) to a project.
+Upload a document (binary file) to a project. This operation is only possible when the server returns the `createDocument` flag in the Project authorization, see section [4.1.5](#415-expressing-user-authorization-through-project-extensions)
 
 **Example Request**
 

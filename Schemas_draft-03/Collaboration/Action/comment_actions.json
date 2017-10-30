@@ -2,6 +2,7 @@
     "required": false,
     "type": "array",
     "items": {
-        "enum": ["update"]
+        "enum": ["update",
+        "delete"]
     }
 }
