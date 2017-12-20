@@ -1,4 +1,5 @@
 {
+    "title": "location",
     "type": ["object",
     "null"],
     "properties": {

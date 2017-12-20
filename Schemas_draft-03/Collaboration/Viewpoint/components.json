@@ -1,6 +1,6 @@
 {
     "title": "components",
-    "type": ["object", null],
+    "type": ["object", "null"],
     "properties": {
         "selection": {
             "$ref": "component_list.json"
