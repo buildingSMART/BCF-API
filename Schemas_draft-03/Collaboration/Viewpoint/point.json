@@ -1,4 +1,5 @@
 {
+    "title": "point",
     "type": "object",
     "properties": {
         "x": {

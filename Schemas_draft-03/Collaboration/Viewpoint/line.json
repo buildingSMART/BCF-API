@@ -1,4 +1,5 @@
 {
+    "title": "line",
     "type": ["object", "null"],
     "properties": {
         "start_point": {

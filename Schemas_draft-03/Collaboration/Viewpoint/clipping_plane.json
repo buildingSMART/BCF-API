@@ -1,4 +1,5 @@
 {
+    "title": "clipping_plane",
     "type": ["object",
     "null"],
     "properties": {
