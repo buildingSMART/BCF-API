@@ -1493,7 +1493,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
         }],
         "bitmaps": [{
             "bitmap_type": "jpg",
-            "bitmap_data": "data:image/jpg;base64,......",
+            "bitmap_data": "SGVsbG8gV29ybGQh",
             "location": {
                 "x": 10.0,
                 "y": -10.0,
@@ -1513,7 +1513,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
         }],
         "snapshot": {
             "snapshot_type": "png",
-            "snapshot_data": "data:image/png;base64,......"
+            "snapshot_data": "SGVsbG8gV29ybGQh"
         },
         "components": {
             "selection": [{
