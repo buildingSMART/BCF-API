@@ -580,7 +580,7 @@ Project extensions are used to define possible values that can be used in topics
             "update",
             "updateBimSnippet",
             "updateRelatedTopics",
-            "updateDocumentServices",
+            "updateDocumentReferences",
             "updateFiles",
             "createComment",
             "createViewpoint"
@@ -1932,7 +1932,7 @@ Retrieve a **collection** of all document references to a topic.
 
 [document_reference_POST.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_POST.json)
 
-Add a document reference to a topic. This operation is only possible when the server returns the `updateDocumentServices` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
+Add a document reference to a topic. This operation is only possible when the server returns the `updateDocumentReferences` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 Should either reference an internal or an external document.
 - Internal
@@ -1989,7 +1989,7 @@ Should either reference an internal or an external document.
 [document_reference_PUT.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
 Update an existing document reference identified by **guid**.
-Uses the same rules as [POST Document Reference Service](#472-post-document-reference-service). This operation is only possible when the server returns the `updateDocumentServices` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
+Uses the same rules as [POST Document Reference Service](#472-post-document-reference-service). This operation is only possible when the server returns the `updateDocumentReferences` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Example Request**
 
