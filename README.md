@@ -22,6 +22,7 @@
     + [1.8.1 Per-Entity Authorization](#181-per-entity-authorization)
     + [1.8.2 Determining Authorized Entity Actions](#182-determining-authorized-entity-actions)
   * [1.9 Additional Response Object Properties](#19-additional-response-object-properties)
+  * [1.10 Binary File Uploads](#110-binary-file-uploads)
 - [2. Topologies](#2-topologies)
   * [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
   * [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
@@ -231,6 +232,18 @@ Indicating that for this topic, the current user can:
 
 All API response Json objects may contain additional properties that are not covered by this specification.
 This is to allow server implementations freedom to add additional functionality. Clients shall ignore those properties.
+
+## 1.10 Binary File Uploads
+
+Some endpoints in the BCF API expect binary file uploads, such as [4.8.2 POST Document Service](#482-post-document-service)
+or [4.2.7 PUT Topic BIM Snippet Service](#427-put-topic-bim-snippet-service).
+
+In such cases, files should be sent with the following Http headers:
+
+    Headers:
+    Content-Type: application/octet-stream;
+    Content-Length: {Size of file in bytes};
+    Content-Disposition: attachment; filename="{Filename.extension}";
 
 ----------
 
