@@ -2029,6 +2029,9 @@ Retrieve a **collection** of topic events related to a project (default sort ord
 |assigned_to_removed|null|
 |label_added|The label added (value from extensions)|
 |label_removed|The label removed (value from extensions)|
+|stage_added|The stage was added (value from extensions)| 
+|stage_updated|The stage was updated (value from extensions)| 
+|stage_removed|The stage was removed (value from extensions)| 
 
 **Odata filter parameters**
 
@@ -2117,6 +2120,9 @@ Retrieve a **collection** of topic events related to a project (default sort ord
 |assigned_to_removed|null|
 |label_added|The label added (value from extensions)|
 |label_removed|The label removed (value from extensions)|
+|stage_added|The stage was added (value from extensions)| 
+|stage_updated|The stage was updated (value from extensions)| 
+|stage_removed|The stage was removed (value from extensions)| 
 
 **Odata filter parameters**
 
