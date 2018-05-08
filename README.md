@@ -21,7 +21,7 @@
   * [1.8 Authorization](#18-authorization)
     + [1.8.1 Per-Entity Authorization](#181-per-entity-authorization)
     + [1.8.2 Determining Authorized Entity Actions](#182-determining-authorized-entity-actions)
-  * [1.9 Additional Response Object Properties](#19-additional-response-object-properties)
+  * [1.9 Additional Response and Request Object Properties](#19-additional-response-and-request-object-properties)
   * [1.10 Binary File Uploads](#110-binary-file-uploads)
 - [2. Topologies](#2-topologies)
   * [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
@@ -245,10 +245,10 @@ Indicating that for this topic, the current user can:
 * update the Topic, or add comments or viewpoints
 * place the Topic into `closed` status
 
-## 1.9 Additional Response Object Properties
+## 1.9 Additional Response and Request Object Properties
 
-All API response Json objects may contain additional properties that are not covered by this specification.
-This is to allow server implementations freedom to add additional functionality. Clients shall ignore those properties.
+All API response and request Json objects may contain additional properties that are not covered by this specification.
+This is to allow server and client implementations freedom to add additional functionality. Servers and clients shall ignore those properties and must not produces errors on additional properties. Servers and clients are not required to preserve these properties.
 
 ## 1.10 Binary File Uploads
 
