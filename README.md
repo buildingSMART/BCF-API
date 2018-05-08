@@ -66,6 +66,22 @@
   * [4.5 Viewpoint Services](#45-viewpoint-services)
     + [4.5.1 GET Viewpoints Service](#451-get-viewpoints-service)
     + [4.5.2 POST Viewpoint Service](#452-post-viewpoint-service)
+      - [4.5.2.1 Point](#4521-point)
+      - [4.5.2.2 Direction](#4522-direction)
+      - [4.5.2.3 Orthogonal camera](#4523-orthogonal-camera)
+      - [4.5.2.4 Perspective camera](#4524-perspective-camera)
+      - [4.5.2.5 Line](#4525-line)
+      - [4.5.2.6 Clipping plane](#4526-clipping-plane)
+      - [4.5.2.7 Bitmap](#4527-bitmap)
+      - [4.5.2.8 Snapshot](#4528-snapshot)
+      - [4.5.2.9 Components](#4529-components)
+      - [4.5.2.10 Component](#45210-component)
+        * [Optimization rules](#optimization-rules)
+      - [4.5.2.11 Coloring](#45211-coloring)
+        * [Optimization rules](#optimization-rules-1)
+      - [4.5.2.12 Visibility](#45212-visibility)
+        * [Optimization rules](#optimization-rules-2)
+      - [4.5.2.13 View setup hints](#45213-view-setup-hints)
     + [4.5.3 GET Viewpoint Service](#453-get-viewpoint-service)
     + [4.5.4 GET Viewpoint Snapshot Service](#454-get-viewpoint-snapshot-service)
     + [4.5.5 GET Viewpoint Bitmap Service](#455-get-viewpoint-bitmap-service)
@@ -1323,7 +1339,7 @@ JSON encoded body using the "application/json" content type.
 | snapshot | [Snapshot](#4528-snapshot) | snapshot image of the viewpoint | optional |
 | components | [Components](#4529-components) | Components in the viewpoint | optional |
 
-####4.5.2.1 Point
+#### 4.5.2.1 Point
 [point.json](Schemas_draft-03/Collaboration/Viewpoint/point.json)
 
 |parameter|type|description|required|
@@ -1332,7 +1348,7 @@ JSON encoded body using the "application/json" content type.
 | y | number | y point | mandatory |
 | z | number | z point | mandatory |
 
-####4.5.2.2 Direction
+#### 4.5.2.2 Direction
 [direction.json](Schemas_draft-03/Collaboration/Viewpoint/direction.json)
 
 |parameter|type|description|required|
@@ -1341,7 +1357,7 @@ JSON encoded body using the "application/json" content type.
 | y | number | y direction | mandatory |
 | z | number | z direction | mandatory |
 
-####4.5.2.3 Orthogonal camera
+#### 4.5.2.3 Orthogonal camera
 [orthogonal_camera.json](Schemas_draft-03/Collaboration/Viewpoint/orthogonal_camera.json)
 
 |parameter|type|description|required|
@@ -1351,7 +1367,7 @@ JSON encoded body using the "application/json" content type.
 | camera_up_vector | [Direction](#4522-direction) | direction of camera up | mandatory |
 | view_to_world_scale | number | proportion of camera view to model | mandatory |
 
-####4.5.2.4 Perspective camera
+#### 4.5.2.4 Perspective camera
 [perspective_camera.json](Schemas_draft-03/Collaboration/Viewpoint/perspective_camera.json)
 
 |parameter|type|description|required|
@@ -1361,7 +1377,7 @@ JSON encoded body using the "application/json" content type.
 | camera_up_vector | [Direction](#4522-direction) | direction of camera up | mandatory |
 | field_of_view | number | field of view | mandatory |
 
-####4.5.2.5 Line
+#### 4.5.2.5 Line
 [line.json](Schemas_draft-03/Collaboration/Viewpoint/line.json)
 
 |parameter|type|description|required|
@@ -1369,7 +1385,7 @@ JSON encoded body using the "application/json" content type.
 | start_point | [Point](#4521-point) | start point of the line | mandatory |
 | end_point | [Point](#4521-point) | end point of the line (Treated as point if start_point and end_point is the same | mandatory |
 
-####4.5.2.6 Clipping plane
+#### 4.5.2.6 Clipping plane
 [clipping_plane.json](Schemas_draft-03/Collaboration/Viewpoint/clipping_plane.json)
 
 |parameter|type|description|required|
@@ -1377,7 +1393,7 @@ JSON encoded body using the "application/json" content type.
 | location | [Point](#4521-point) | origin of the clipping plane | mandatory |
 | direction | [Direction](#4522-direction) | direction of the clipping plane | mandatory |
 
-####4.5.2.7 Bitmap
+#### 4.5.2.7 Bitmap
 [bitmap.json](Schemas_draft-03/Collaboration/Viewpoint/bitmap_POST.json)
 
 |parameter|type|description|required|
@@ -1389,7 +1405,7 @@ JSON encoded body using the "application/json" content type.
 | up | [Direction](#4522-direction) | up vector of the bitmap (vector) | mandatory |
 | height | number | height of bitmap in the scene | mandatory |
 
-####4.5.2.8 Snapshot
+#### 4.5.2.8 Snapshot
 [snapshot.json](Schemas_draft-03/Collaboration/Viewpoint/snapshot_POST.json)
 
 |parameter|type|description|required|
@@ -1397,7 +1413,7 @@ JSON encoded body using the "application/json" content type.
 | snapshot_type | enum (string) | format of the snapshot. Predefined values `png` or `jpg` | mandatory |
 | snapshot_data | base64 encoded string | The snapshot image data | mandatory |
 
-####4.5.2.9 Components
+#### 4.5.2.9 Components
 [components.json](Schemas_draft-03/Collaboration/Viewpoint/components.json)
 
 |parameter|type|description|required|
@@ -1406,10 +1422,10 @@ JSON encoded body using the "application/json" content type.
 | coloring | array of [Coloring](#45211-coloring) | Colored components | optional |
 | visibility | [Visibility](#45212-visibility) | Visibility of components | mandatory |
 
-####4.5.2.10 Component
+#### 4.5.2.10 Component
 [component.json](Schemas_draft-03/Collaboration/Viewpoint/component.json)
 
-#####Optimization rules
+##### Optimization rules
 BCF is suitable for selecting a few components. A huge list of selected components causes poor performance. All clients should follow this rule:
 - If the size of the selected components is huge (approximately 1000 components), alert the user and give him the opportunity to modify the visibility.
 
@@ -1419,10 +1435,10 @@ BCF is suitable for selecting a few components. A huge list of selected componen
 | originating_system | string | originating system of the component | optional |
 | authoring_tool_id | string | internal id for the authoring tool of the component | optional |
 
-####4.5.2.11 Coloring
+#### 4.5.2.11 Coloring
 [coloring.json](Schemas_draft-03/Collaboration/Viewpoint/coloring.json)
 
-#####Optimization rules
+##### Optimization rules
 BCF is suitable for coloring a few components. A huge list of components causes poor performance. All clients should follow this rule:
 - If the size of colored components is huge (approximately 1000 components), alert the user and give him the opportunity to modify the coloring.
 
@@ -1433,10 +1449,10 @@ The color is given in ARGB format. Colors are represented as 6 or 8 hexadecimal 
 | color | string | Color of the components | mandatory |
 | components | array of [Component](#45210-component) | Colored components | mandatory |
 
-####4.5.2.12 Visibility
+#### 4.5.2.12 Visibility
 [visibility.json](Schemas_draft-03/Collaboration/Viewpoint/visibility.json)
 
-#####Optimization rules
+##### Optimization rules
 BCF is suitable for hiding/showing a few components. A huge list of hidden/shown components causes poor performance. All clients should follow these rules:
 - If the list of hidden components is smaller than the list of visible components: set default_visibility to true and put the hidden components in exceptions.
 - If the list of visible components is smaller or equals the list of hidden components:  set default_visibility to false and put the visible components in exceptions.
@@ -1448,7 +1464,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
 | exceptions | array of [Component](#45210-component) | Components to hide/show determined by default_visibility | optional |
 | view_setup_hints | [View setup hints](#45213-view-setup-hints) | Hints about the setup of the viewer | optional |
 
-####4.5.2.13 View setup hints
+#### 4.5.2.13 View setup hints
 [view_setup_hints.json](Schemas_draft-03/Collaboration/Viewpoint/view_setup_hints.json)
 
 |parameter|type|description|required|
