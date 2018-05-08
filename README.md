@@ -1960,39 +1960,39 @@ Should either reference an internal or an external document.
 
     POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
     Body:
-    [{
+    {
         "url": "http://example.com/files/LegalRequirements.pdf",
         "description": "The legal requirements for buildings."
-    }]
+    }
 
 **Example Response**
 
     Response Code: 201 - Created
     Body:
-    [{
+    {
         "guid": "275ab37a-6122-448e-86fc-86503183b520",
         "url": "http://example.com/files/LegalRequirements.pdf",
         "description": "The legal requirements for buildings."
-    }]
+    }
 
 **Example Request**
 
     POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
     Body:
-    [{
+    {
         "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
         "description": "The building owners global design parameters for buildings."
-    }]
+    }
 
 **Example Response**
 
     Response Code: 201 - Created
     Body:
-    [{
+    {
         "guid": "135ab37a-6122-448e-86fc-86503183b520",
         "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
         "description": "The building owners global design parameters for buildings."
-    }]
+    }
 
 ### 4.7.3 PUT Document Reference Service
 
@@ -2009,21 +2009,21 @@ Uses the same rules as [POST Document Reference Service](#472-post-document-refe
 
     PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references/472ab37a-6122-448e-86fc-86503183b520
     Body:
-    [{
+    {
         "guid": "135ab37a-6122-448e-86fc-86503183b520",
         "url": "http://example.com/files/LegalRequirements_Update.pdf",
         "description": "The legal requirements for buildings."
-    }]
+    }
 
 **Example Response**
 
     Response Code: 200 - OK
     Body:
-    [{
+    {
         "guid": "135ab37a-6122-448e-86fc-86503183b520",
         "url": "http://example.com/files/LegalRequirements_Update.pdf",
         "description": "The legal requirements for buildings."
-    }]
+    }
 
 ## 4.8 Document Services
 
