@@ -22,6 +22,7 @@
     + [1.8.1 Per-Entity Authorization](#181-per-entity-authorization)
     + [1.8.2 Determining Authorized Entity Actions](#182-determining-authorized-entity-actions)
   * [1.9 Additional Response and Request Object Properties](#19-additional-response-and-request-object-properties)
+  * [1.10 Binary File Uploads](#110-binary-file-uploads)
 - [2. Topologies](#2-topologies)
   * [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
   * [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
@@ -65,6 +66,22 @@
   * [4.5 Viewpoint Services](#45-viewpoint-services)
     + [4.5.1 GET Viewpoints Service](#451-get-viewpoints-service)
     + [4.5.2 POST Viewpoint Service](#452-post-viewpoint-service)
+      - [4.5.2.1 Point](#4521-point)
+      - [4.5.2.2 Direction](#4522-direction)
+      - [4.5.2.3 Orthogonal camera](#4523-orthogonal-camera)
+      - [4.5.2.4 Perspective camera](#4524-perspective-camera)
+      - [4.5.2.5 Line](#4525-line)
+      - [4.5.2.6 Clipping plane](#4526-clipping-plane)
+      - [4.5.2.7 Bitmap](#4527-bitmap)
+      - [4.5.2.8 Snapshot](#4528-snapshot)
+      - [4.5.2.9 Components](#4529-components)
+      - [4.5.2.10 Component](#45210-component)
+        * [Optimization rules](#optimization-rules)
+      - [4.5.2.11 Coloring](#45211-coloring)
+        * [Optimization rules](#optimization-rules-1)
+      - [4.5.2.12 Visibility](#45212-visibility)
+        * [Optimization rules](#optimization-rules-2)
+      - [4.5.2.13 View setup hints](#45213-view-setup-hints)
     + [4.5.3 GET Viewpoint Service](#453-get-viewpoint-service)
     + [4.5.4 GET Viewpoint Snapshot Service](#454-get-viewpoint-snapshot-service)
     + [4.5.5 GET Viewpoint Bitmap Service](#455-get-viewpoint-bitmap-service)
@@ -168,6 +185,7 @@ BCF-API has a specified error response body format [error.json](Schemas_draft-03
 DateTime values in this API are supposed to be in ISO 8601 compliant `YYYY-MM-DDThh:mm:ss` format with optional time zone indicators. This is the same format as defined in the Xml `xs:dateTime` type as well as the result of JavaScripts Date.toJson() output.
 
 For example, `2016-04-28T16:31:12.270+02:00` would represent _Thursday, April 28th, 2016, 16:31:12 (270ms) with a time zone offset of +2 hours relative to UTC._
+Please note that the colon in the timezone offset is optional, so `+02:00` is equivalent to `+0200`.
 
 ## 1.8 Authorization
 
@@ -231,6 +249,18 @@ Indicating that for this topic, the current user can:
 
 All API response and request Json objects may contain additional properties that are not covered by this specification.
 This is to allow server and client implementations freedom to add additional functionality. Servers and clients shall ignore those properties and must not produces errors on additional properties. Servers and clients are not required to preserve these properties.
+
+## 1.10 Binary File Uploads
+
+Some endpoints in the BCF API expect binary file uploads, such as [4.8.2 POST Document Service](#482-post-document-service)
+or [4.2.7 PUT Topic BIM Snippet Service](#427-put-topic-bim-snippet-service).
+
+In such cases, files should be sent with the following Http headers:
+
+    Headers:
+    Content-Type: application/octet-stream;
+    Content-Length: {Size of file in bytes};
+    Content-Disposition: attachment; filename="{Filename.extension}";
 
 ----------
 
@@ -580,7 +610,7 @@ Project extensions are used to define possible values that can be used in topics
             "update",
             "updateBimSnippet",
             "updateRelatedTopics",
-            "updateDocumentServices",
+            "updateDocumentReferences",
             "updateFiles",
             "createComment",
             "createViewpoint"
@@ -1309,7 +1339,7 @@ JSON encoded body using the "application/json" content type.
 | snapshot | [Snapshot](#4528-snapshot) | snapshot image of the viewpoint | optional |
 | components | [Components](#4529-components) | Components in the viewpoint | optional |
 
-####4.5.2.1 Point
+#### 4.5.2.1 Point
 [point.json](Schemas_draft-03/Collaboration/Viewpoint/point.json)
 
 |parameter|type|description|required|
@@ -1318,7 +1348,7 @@ JSON encoded body using the "application/json" content type.
 | y | number | y point | mandatory |
 | z | number | z point | mandatory |
 
-####4.5.2.2 Direction
+#### 4.5.2.2 Direction
 [direction.json](Schemas_draft-03/Collaboration/Viewpoint/direction.json)
 
 |parameter|type|description|required|
@@ -1327,7 +1357,7 @@ JSON encoded body using the "application/json" content type.
 | y | number | y direction | mandatory |
 | z | number | z direction | mandatory |
 
-####4.5.2.3 Orthogonal camera
+#### 4.5.2.3 Orthogonal camera
 [orthogonal_camera.json](Schemas_draft-03/Collaboration/Viewpoint/orthogonal_camera.json)
 
 |parameter|type|description|required|
@@ -1337,7 +1367,7 @@ JSON encoded body using the "application/json" content type.
 | camera_up_vector | [Direction](#4522-direction) | direction of camera up | mandatory |
 | view_to_world_scale | number | proportion of camera view to model | mandatory |
 
-####4.5.2.4 Perspective camera
+#### 4.5.2.4 Perspective camera
 [perspective_camera.json](Schemas_draft-03/Collaboration/Viewpoint/perspective_camera.json)
 
 |parameter|type|description|required|
@@ -1347,7 +1377,7 @@ JSON encoded body using the "application/json" content type.
 | camera_up_vector | [Direction](#4522-direction) | direction of camera up | mandatory |
 | field_of_view | number | field of view | mandatory |
 
-####4.5.2.5 Line
+#### 4.5.2.5 Line
 [line.json](Schemas_draft-03/Collaboration/Viewpoint/line.json)
 
 |parameter|type|description|required|
@@ -1355,7 +1385,7 @@ JSON encoded body using the "application/json" content type.
 | start_point | [Point](#4521-point) | start point of the line | mandatory |
 | end_point | [Point](#4521-point) | end point of the line (Treated as point if start_point and end_point is the same | mandatory |
 
-####4.5.2.6 Clipping plane
+#### 4.5.2.6 Clipping plane
 [clipping_plane.json](Schemas_draft-03/Collaboration/Viewpoint/clipping_plane.json)
 
 |parameter|type|description|required|
@@ -1363,7 +1393,7 @@ JSON encoded body using the "application/json" content type.
 | location | [Point](#4521-point) | origin of the clipping plane | mandatory |
 | direction | [Direction](#4522-direction) | direction of the clipping plane | mandatory |
 
-####4.5.2.7 Bitmap
+#### 4.5.2.7 Bitmap
 [bitmap.json](Schemas_draft-03/Collaboration/Viewpoint/bitmap_POST.json)
 
 |parameter|type|description|required|
@@ -1375,7 +1405,7 @@ JSON encoded body using the "application/json" content type.
 | up | [Direction](#4522-direction) | up vector of the bitmap (vector) | mandatory |
 | height | number | height of bitmap in the scene | mandatory |
 
-####4.5.2.8 Snapshot
+#### 4.5.2.8 Snapshot
 [snapshot.json](Schemas_draft-03/Collaboration/Viewpoint/snapshot_POST.json)
 
 |parameter|type|description|required|
@@ -1383,7 +1413,7 @@ JSON encoded body using the "application/json" content type.
 | snapshot_type | enum (string) | format of the snapshot. Predefined values `png` or `jpg` | mandatory |
 | snapshot_data | base64 encoded string | The snapshot image data | mandatory |
 
-####4.5.2.9 Components
+#### 4.5.2.9 Components
 [components.json](Schemas_draft-03/Collaboration/Viewpoint/components.json)
 
 |parameter|type|description|required|
@@ -1392,10 +1422,10 @@ JSON encoded body using the "application/json" content type.
 | coloring | array of [Coloring](#45211-coloring) | Colored components | optional |
 | visibility | [Visibility](#45212-visibility) | Visibility of components | mandatory |
 
-####4.5.2.10 Component
+#### 4.5.2.10 Component
 [component.json](Schemas_draft-03/Collaboration/Viewpoint/component.json)
 
-#####Optimization rules
+##### Optimization rules
 BCF is suitable for selecting a few components. A huge list of selected components causes poor performance. All clients should follow this rule:
 - If the size of the selected components is huge (approximately 1000 components), alert the user and give him the opportunity to modify the visibility.
 
@@ -1405,10 +1435,10 @@ BCF is suitable for selecting a few components. A huge list of selected componen
 | originating_system | string | originating system of the component | optional |
 | authoring_tool_id | string | internal id for the authoring tool of the component | optional |
 
-####4.5.2.11 Coloring
+#### 4.5.2.11 Coloring
 [coloring.json](Schemas_draft-03/Collaboration/Viewpoint/coloring.json)
 
-#####Optimization rules
+##### Optimization rules
 BCF is suitable for coloring a few components. A huge list of components causes poor performance. All clients should follow this rule:
 - If the size of colored components is huge (approximately 1000 components), alert the user and give him the opportunity to modify the coloring.
 
@@ -1419,10 +1449,10 @@ The color is given in ARGB format. Colors are represented as 6 or 8 hexadecimal 
 | color | string | Color of the components | mandatory |
 | components | array of [Component](#45210-component) | Colored components | mandatory |
 
-####4.5.2.12 Visibility
+#### 4.5.2.12 Visibility
 [visibility.json](Schemas_draft-03/Collaboration/Viewpoint/visibility.json)
 
-#####Optimization rules
+##### Optimization rules
 BCF is suitable for hiding/showing a few components. A huge list of hidden/shown components causes poor performance. All clients should follow these rules:
 - If the list of hidden components is smaller than the list of visible components: set default_visibility to true and put the hidden components in exceptions.
 - If the list of visible components is smaller or equals the list of hidden components:  set default_visibility to false and put the visible components in exceptions.
@@ -1434,7 +1464,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
 | exceptions | array of [Component](#45210-component) | Components to hide/show determined by default_visibility | optional |
 | view_setup_hints | [View setup hints](#45213-view-setup-hints) | Hints about the setup of the viewer | optional |
 
-####4.5.2.13 View setup hints
+#### 4.5.2.13 View setup hints
 [view_setup_hints.json](Schemas_draft-03/Collaboration/Viewpoint/view_setup_hints.json)
 
 |parameter|type|description|required|
@@ -1493,7 +1523,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
         }],
         "bitmaps": [{
             "bitmap_type": "jpg",
-            "bitmap_data": "data:image/jpg;base64,......",
+            "bitmap_data": "SGVsbG8gV29ybGQh",
             "location": {
                 "x": 10.0,
                 "y": -10.0,
@@ -1513,7 +1543,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
         }],
         "snapshot": {
             "snapshot_type": "png",
-            "snapshot_data": "data:image/png;base64,......"
+            "snapshot_data": "SGVsbG8gV29ybGQh"
         },
         "components": {
             "selection": [{
@@ -1932,7 +1962,7 @@ Retrieve a **collection** of all document references to a topic.
 
 [document_reference_POST.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_POST.json)
 
-Add a document reference to a topic. This operation is only possible when the server returns the `updateDocumentServices` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
+Add a document reference to a topic. This operation is only possible when the server returns the `updateDocumentReferences` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 Should either reference an internal or an external document.
 - Internal
@@ -1946,39 +1976,39 @@ Should either reference an internal or an external document.
 
     POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
     Body:
-    [{
+    {
         "url": "http://example.com/files/LegalRequirements.pdf",
         "description": "The legal requirements for buildings."
-    }]
+    }
 
 **Example Response**
 
     Response Code: 201 - Created
     Body:
-    [{
+    {
         "guid": "275ab37a-6122-448e-86fc-86503183b520",
         "url": "http://example.com/files/LegalRequirements.pdf",
         "description": "The legal requirements for buildings."
-    }]
+    }
 
 **Example Request**
 
     POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
     Body:
-    [{
+    {
         "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
         "description": "The building owners global design parameters for buildings."
-    }]
+    }
 
 **Example Response**
 
     Response Code: 201 - Created
     Body:
-    [{
+    {
         "guid": "135ab37a-6122-448e-86fc-86503183b520",
         "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
         "description": "The building owners global design parameters for buildings."
-    }]
+    }
 
 ### 4.7.3 PUT Document Reference Service
 
@@ -1989,27 +2019,27 @@ Should either reference an internal or an external document.
 [document_reference_PUT.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
 Update an existing document reference identified by **guid**.
-Uses the same rules as [POST Document Reference Service](#472-post-document-reference-service). This operation is only possible when the server returns the `updateDocumentServices` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
+Uses the same rules as [POST Document Reference Service](#472-post-document-reference-service). This operation is only possible when the server returns the `updateDocumentReferences` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Example Request**
 
     PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references/472ab37a-6122-448e-86fc-86503183b520
     Body:
-    [{
+    {
         "guid": "135ab37a-6122-448e-86fc-86503183b520",
         "url": "http://example.com/files/LegalRequirements_Update.pdf",
         "description": "The legal requirements for buildings."
-    }]
+    }
 
 **Example Response**
 
     Response Code: 200 - OK
     Body:
-    [{
+    {
         "guid": "135ab37a-6122-448e-86fc-86503183b520",
         "url": "http://example.com/files/LegalRequirements_Update.pdf",
         "description": "The legal requirements for buildings."
-    }]
+    }
 
 ## 4.8 Document Services
 

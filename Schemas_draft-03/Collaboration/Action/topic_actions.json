@@ -5,7 +5,7 @@
         "enum": ["update",
         "updateBimSnippet",
         "updateRelatedTopics",
-        "updateDocumentServices",
+        "updateDocumentReferences",
         "updateFiles",
         "createComment",
         "createViewpoint",
