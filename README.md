@@ -22,6 +22,7 @@
     + [1.8.1 Per-Entity Authorization](#181-per-entity-authorization)
     + [1.8.2 Determining Authorized Entity Actions](#182-determining-authorized-entity-actions)
   * [1.9 Additional Response Object Properties](#19-additional-response-object-properties)
+  * [1.10 Differences Between null and Empty Lists](#110-differences-between-null-and-empty-lists)
 - [2. Topologies](#2-topologies)
   * [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
   * [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
@@ -229,6 +230,19 @@ Indicating that for this topic, the current user can:
 
 All API response Json objects may contain additional properties that are not covered by this specification.
 This is to allow server implementations freedom to add additional functionality. Clients shall ignore those properties.
+
+## 1.10 Differences Between null and Empty Lists
+
+Some array or list properties and responses can be interpreted differently if they are either `null` or empty. In general, there are two cases to consider.
+
+**For collection resources:**
+
+* A collection resource that does not exist should return Http error `404 - Not Found`, e.g. the list of topics for an invalid project id.
+* If the resource exists but there are no elements, the returned response should be an empty array `[]`, e.g. the list of topics for a project where no topics exist.
+
+**For properties:**
+
+* If a list property is `null` (by explicitly setting it to null or not returning it in the response object at all), the client should not assume that this represents an empty list but instead the property is not present on the response object. Depending on the response object, this can have the same meaning as an empty list (e.g. no components in a viewpoint is the same as an empty list of components), but this can also mean the property is just omitted for optional properties (e.g. no `topic_actions` in an `authorization` object can mean no restrictions).
 
 ----------
 
