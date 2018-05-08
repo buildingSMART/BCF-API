@@ -242,7 +242,7 @@ Some array or list properties and responses can be interpreted differently if th
 
 **For properties:**
 
-* If a list property is `null` (by explicitly setting it to null or not returning it in the response object at all), the client should not assume that this represents an empty list but instead the property is not present on the response object. Depending on the reponse object, this can have the same meaning as an empty list (e.g. no components in a viewpoint is the same as an empty list of components), but this can also mean the property is just omitted for optional properties (e.g. no `topic_actions` in an `authorization` object can mean no restrictions).
+* If a list property is `null` (by explicitly setting it to null or not returning it in the response object at all), the client should not assume that this represents an empty list but instead the property is not present on the response object. Depending on the response object, this can have the same meaning as an empty list (e.g. no components in a viewpoint is the same as an empty list of components), but this can also mean the property is just omitted for optional properties (e.g. no `topic_actions` in an `authorization` object can mean no restrictions).
 
 ----------
 
