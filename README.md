@@ -1363,7 +1363,7 @@ JSON encoded body using the "application/json" content type.
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | camera_view_point | [Direction](#4522-direction) | viewpoint of the camera | mandatory |
-| camera_directiont | [Direction](#4522-direction) | direction of the camera | mandatory |
+| camera_direction | [Direction](#4522-direction) | direction of the camera | mandatory |
 | camera_up_vector | [Direction](#4522-direction) | direction of camera up | mandatory |
 | view_to_world_scale | number | proportion of camera view to model | mandatory |
 
@@ -1373,7 +1373,7 @@ JSON encoded body using the "application/json" content type.
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | camera_view_point | [Point](#4521-point) | viewpoint of the camera | mandatory |
-| camera_directiont | [Direction](#4522-direction) | direction of the camera | mandatory |
+| camera_direction | [Direction](#4522-direction) | direction of the camera | mandatory |
 | camera_up_vector | [Direction](#4522-direction) | direction of camera up | mandatory |
 | field_of_view | number | field of view | mandatory |
 
