@@ -765,7 +765,7 @@ JSON encoded body using the "application/json" content type.
 |bim_snippet.reference|string|Reference of a BIM-Snippet of a topic|false|
 |bim_snippet.reference_schema|string|Schema of a BIM-Snippet of a topic|false|
 |due_date|string|Until when the topics issue needs to be resolved|false|
-|topic_guid|string|GUID of the topic. The server may ignore this and instead generate it's own topic_guid|false|
+|guid|string|GUID of the topic. The server may ignore this and instead generate it's own guid|false|
 
 _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `is_external`, `reference` and `reference_schema`) are mandatory._
 
