@@ -1561,7 +1561,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
                 }]
             }],
             "visibility": {
-                "default_visbility": false,
+                "default_visibility": false,
                 "exceptions": [{
                     "ifc_guid": "4$cshxZO9AJBebsni$z9Yk"
                 }],
