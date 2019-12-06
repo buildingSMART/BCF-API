@@ -251,7 +251,7 @@ Indicating that for this topic, the current user can:
 ## 1.9 Additional Response and Request Object Properties
 
 All API response and request Json objects may contain additional properties that are not covered by this specification.
-This is to allow server and client implementations freedom to add additional functionality. Servers and clients shall ignore those properties and must not produces errors on additional properties. Servers and clients are not required to preserve these properties.
+This is to allow server and client implementations freedom to add additional functionality. Servers and clients shall ignore those properties and must not produce errors on additional properties. Servers and clients are not required to preserve these properties.
 
 ## 1.10 Binary File Uploads
 
