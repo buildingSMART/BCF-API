@@ -2,6 +2,10 @@
     "title": "comment_POST",
     "type": "object",
     "properties": {
+        "guid": {
+            "type": ["string",
+            "null"]
+        },
         "comment": {
             "required": true,
             "type": "string"
