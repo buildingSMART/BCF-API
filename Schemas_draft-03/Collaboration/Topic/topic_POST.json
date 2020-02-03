@@ -4,6 +4,10 @@
     "description": "Schema for topic POST, BCF REST API.",
     "type": "object",
     "properties": {
+        "guid": {
+            "type": ["string",
+            "null"]
+        },
         "topic_type": {
             "type": ["string",
             "null"]

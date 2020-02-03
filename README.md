@@ -750,6 +750,7 @@ JSON encoded body using the "application/json" content type.
 
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
+|guid|string|The desired guid|false|
 |topic_type|string|The type of a topic (value from extension.xsd)|false|
 |topic_status|string|The status of a topic (value from extension.xsd)|false|
 |reference_links|array (string)|Reference links, i.e. links to referenced resources|false|
@@ -765,6 +766,7 @@ JSON encoded body using the "application/json" content type.
 |bim_snippet.reference|string|Reference of a BIM-Snippet of a topic|false|
 |bim_snippet.reference_schema|string|Schema of a BIM-Snippet of a topic|false|
 |due_date|string|Until when the topics issue needs to be resolved|false|
+|guid|string|GUID of the topic. The server may ignore this and instead generate it's own guid|false|
 
 _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `is_external`, `reference` and `reference_schema`) are mandatory._
 
@@ -1103,6 +1105,7 @@ JSON encoded body using the "application/json" content type.
 
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
+|guid|string|The desired guid|false|
 |comment|string|The comment text|true|
 |viewpoint_guid|string|The GUID of the related viewpoint|false|
 |reply_to_comment_guid|string|GUID of the comment to which this comment replies to|false|
@@ -1333,6 +1336,7 @@ JSON encoded body using the "application/json" content type.
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
+| guid | string | The desired guid | optional |
 | index | integer | parameter for sorting | optional |
 | orthogonal camera | [Orthogonal camera](#4523-orthogonal-camera) | orthogonal camera view | optional |
 | perspective camera | [Perspective camera](#4524-perspective-camera) | perspective view of the camera | optional |
@@ -1975,6 +1979,17 @@ Should either reference an internal or an external document.
   * **document_guid** must be null
   * **url** must be the url to the external resource
 
+**Parameters**
+
+JSON encoded body using the "application/json" content type.
+
+|Parameter|Type|Description|Required|
+|---------|----|-----------|--------|
+|guid|string|The desired guid|false|
+|document_guid|string|The guid of the document (Internal document)|false|
+|url|The url (External document)|false|
+|description|string|The description of the document reference|false|
+
 **Example Request**
 
     POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
@@ -2080,9 +2095,11 @@ Retrieve a **collection** of all documents uploaded to a project.
 
 Upload a document (binary file) to a project. This operation is only possible when the server returns the `createDocument` flag in the Project authorization, see section [4.1.5](#415-expressing-user-authorization-through-project-extensions)
 
+Optional: The desired document guid may be passed as a query parameter.
+
 **Example Request**
 
-    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
+    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents?guid=472ab37a-6122-448e-86fc-86503183b520
 
 **Example Response**
 
