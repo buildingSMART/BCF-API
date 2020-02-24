@@ -91,7 +91,9 @@
     + [4.5.6 GET selected Components Service](#456-get-selected-components-service)
     + [4.5.7 GET colored Components Service](#457-get-colored-components-service)
     + [4.5.8 GET visibility of Components Service](#458-get-visibility-of-components-service)
-  * [4.6 Related Topics Services](#46-related-topics-services)
+    + [4.5.9 DELETE Viewpoint Service](#459-delete-viewpoint-service)
+    + [4.5.10 Determining allowed Viewpoint modifications](#4510-determining-allowed-viewpoint-modifications)
+   * [4.6 Related Topics Services](#46-related-topics-services)
     + [4.6.1 GET Related Topics Service](#461-get-related-topics-service)
     + [4.6.2 PUT Related Topics Service](#462-put-related-topics-service)
   * [4.7 Document Reference Services](#47-document-reference-services)
@@ -1863,6 +1865,28 @@ Retrieve visibility of components in a viewpoint.
             }
         }
     }
+
+### 4.5.9 DELETE Viewpoint Service
+
+**Resource URL**
+
+    DELETE /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}
+
+Deletes a single viewpoint. This operation is only possible when the server returns the `delete` flag in the Viewpoint authorization, see section [4.5.10](#4510-determining-allowed-viewpoint-modifications)
+
+**Example Request**
+
+    DELETE /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
+
+**Example Response**
+
+    Response Code: 200 - OK
+
+### 4.5.10 Determining allowed Viewpoint modifications
+
+The global default Viewpoint authorizations are expressed in the project schema and when Viewpoint(s) are requested with the
+query parameter "includeAuthorization" equal to "true" Viewpoints will include an "authorization" field containing any local
+overrides for each Viewpoint.
 
 ## 4.6 Related Topics Services
 

@@ -39,5 +39,14 @@
         "snapshot": {
             "$ref": "snapshot_GET.json"
         }
+	    "authorization": {
+            "type": "object",
+            "required": false,
+            "properties": {
+                "viewpoint_actions": {
+                    "$ref": "../Action/viewpoint_actions.json"
+                }
+            }
+        }
     }
 }
