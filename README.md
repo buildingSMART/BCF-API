@@ -1473,7 +1473,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | spaces_visible | boolean | Visibility of spaces | optional, default false |
-| space_boundaries_visible | Visibility of space_boundaries | optional, default false |
+| space_boundaries_visible | boolean | Visibility of space_boundaries | optional, default false |
 | openings_visible | boolean | Visibility of openings | optional, default false |
 
 **Example Request**
