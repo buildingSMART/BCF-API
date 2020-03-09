@@ -2119,11 +2119,9 @@ Retrieve a **collection** of all documents uploaded to a project.
 
 Upload a document (binary file) to a project. This operation is only possible when the server returns the `createDocument` flag in the Project authorization, see section [4.1.5](#415-expressing-user-authorization-through-project-extensions)
 
-Optional: The desired document guid may be passed as a query parameter.
-
 **Example Request**
 
-    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents?guid=472ab37a-6122-448e-86fc-86503183b520
+    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
 
 **Example Response**
 
