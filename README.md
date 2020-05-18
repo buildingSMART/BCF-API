@@ -1354,6 +1354,8 @@ JSON encoded body using the "application/json" content type.
 #### 4.5.2.2 Direction
 [direction.json](Schemas_draft-03/Collaboration/Viewpoint/direction.json)
 
+Direction must not be a zero vector.
+
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | x | number | x direction | mandatory |
