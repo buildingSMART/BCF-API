@@ -511,8 +511,7 @@ Retrieve a specific project.
         "name": "Example project 3",
         "authorization": {
             "project_actions": [
-                "update",
-                "updateProjectExtensions"
+                "update"
             ]
         }
     }
@@ -544,8 +543,7 @@ Modify a specific project. This operation is only possible when the server retur
         "name": "Example project 3 - Second Section",
         "authorization": {
             "project_actions": [
-                "update",
-                "updateProjectExtensions"
+                "update"
             ]
         }
     }
@@ -606,8 +604,7 @@ Project extensions are used to define possible values that can be used in topics
         "project_actions": [
             "update",
             "createTopic",
-            "createDocument",
-            "updateProjectExtensions"
+            "createDocument"
         ],
         "topic_actions": [
             "update",
