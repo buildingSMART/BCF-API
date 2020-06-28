@@ -56,6 +56,7 @@
     + [4.2.6 GET Topic BIM Snippet Service](#426-get-topic-bim-snippet-service)
     + [4.2.7 PUT Topic BIM Snippet Service](#427-put-topic-bim-snippet-service)
     + [4.2.8 Determining Allowed Topic Modifications](#428-determining-allowed-topic-modifications)
+    + [4.2.9 Topic Identifiers](#429-topic-identifiers)
   * [4.3 File Services](#43-file-services)
     + [4.3.1 GET Files (Header) Service](#431-get-files-header-service)
     + [4.3.2 PUT Files (Header) Service](#432-put-files-header-service)
@@ -717,6 +718,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
     Body:
     [{
         "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "server_id": "CLASH-00001",
         "creation_author": "Architect@example.com",
         "title": "Example topic 1",
         "labels": [
@@ -726,6 +728,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
         "creation_date": "2013-10-21T17:34:22.409Z"
     }, {
         "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+        "server_id": "CLASH-00078",
         "creation_author": "Architect@example.com",
         "title": "Example topic 2",
         "labels": [
@@ -799,6 +802,7 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
     Body:
     {
         "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "server_id": "ISSUE-01462",
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": "Clash",
@@ -838,6 +842,7 @@ Retrieve a specific topic.
     Body:
     {
         "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+        "server_id": "ISSUE-00549",
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": "Clash",
@@ -901,6 +906,7 @@ Modify a specific topic, description similar to POST. This operation is only pos
     Body:
     {
         "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+        "server_id": "ISSUE-00037",
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
         "modified_author": "Architect@example.com",
@@ -959,6 +965,21 @@ Puts a new BIM Snippet binary file to a topic. If this is used, the parent topic
 The global default Topic authorizations are expressed in the project schema and when Topic(s) are requested with the
 query parameter "includeAuthorization" equal to "true" Topics will include an "authorization" field containing any local
 overrides for each Topic.
+
+### 4.2.9 Topic Identifiers
+
+Each topic has two identifiers: 
+1. `guid` - machine-friendly, randomly generated and universally unique identifier. Both clients and servers must generate 
+    a `guid` when creating a topic using an RFC 4122 compliant UUID generator. The `guid` should be used in all client-server 
+    interactions to identify topics. <br> 
+    
+    `guid` examples: 420b24db-921c-46d6-9629-d529d130307f, 5139a00f-5cbd-4760-9e44-16cc4826aa5a 
+2. `server_id` - a human-friendly identifier which is generated and controlled by the server. A `server_id` is project-unique: 
+    No two topics in a given server and project may have the same `server_id`. However, topics in different projects on a 
+    given server may have identical `server_id`s. `server_id`s can't be changed using the API; BCF clients should display 
+    `server_id`s to users to make it easier to locate and discuss topics.<br>
+    
+    `server_id` examples: 003490, ISSUE-01, CLASH-578  
 
 ## 4.3 File Services
 

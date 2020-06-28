@@ -6,6 +6,10 @@
             "required": true,
             "type": "string"
         },
+        "server_id": {
+            "required": true,
+            "type": "string"
+        },
         "topic_type": {
             "type": ["string",
             "null"]
