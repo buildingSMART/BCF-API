@@ -688,6 +688,7 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 |creation_date|datetime|creation date of a topic|
 |modified_date|datetime|modification date of a topic|
 |labels|array (string)|labels of a topic (value from extensions)|
+|priority|string|priority of a topic (value from extensions)|
 
 **Odata sort parameters**
 
