@@ -196,7 +196,7 @@ Please note that the colon in the timezone offset is optional, so `+02:00` is eq
 ## 1.8 Authorization
 
 API implementors can optionally choose to restrict the actions a user is allowed to perform on the BCF entities
-via the API. The global default authorizations for all entities are expressed in the project extensions schema and can
+via the API. The global defaults authorizations for all entities are expressed in the project extensions schema and can
 be locally overridden in the entities themselves.
 
 ### 1.8.1 Per-Entity Authorization
@@ -204,16 +204,19 @@ be locally overridden in the entities themselves.
 Whenever a user requests an update-able entity with the query parameter `includeAuthorization` equal to `true` the
 server should include an `authorization` field in the entity containing any local variations from the global
 authorization defaults for that entity. Using this information clients can decide whether to, for example, include an
-"Edit" button in the UI displaying the entity depending on the actions permitted for the user.
+"Edit" button in the UI displaying the entity depending on the actions permitted for the user or suggest only the 
+options available to the user for choice fields such as topic status. 
 
 ### 1.8.2 Determining Authorized Entity Actions
 
 The client can calculate the available set of actions for a particular entity by taking the project-wide defaults from
 the project extensions, then replacing any keys defined in the entity's `authorization` map with the values specified
-locally. The meaning of each of the authorization keys is outlined in outlined in
+locally. The meaning of each of the authorization keys is outlined in
 [4.1.5 Expressing User Authorization through Project Extensions](#415-expressing-user-authorization-through-project-extensions).
 
 **Example Scenario (Topic)**
+
+In this scenario assume the topic status is set to `open`.
 
 _In the Project Extensions_
 
@@ -241,6 +244,7 @@ _In the Topic_
                 "createViewpoint"
             ],
             "topic_status": [
+                "open",
                 "closed"
             ]
         }
@@ -250,6 +254,7 @@ Indicating that for this topic, the current user can:
 
 * update the Topic, or add comments or viewpoints
 * place the Topic into `closed` status
+* leave the Topic `open` or place the topic back into `open` status after closing it
 
 ## 1.9 Additional Response and Request Object Properties
 
