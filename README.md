@@ -1477,7 +1477,7 @@ BCF is suitable for selecting a few components. A huge list of selected componen
 BCF is suitable for coloring a few components. A huge list of components causes poor performance. All clients should follow this rule:
 - If the size of colored components is huge (approximately 1000 components), alert the user and give him the opportunity to modify the coloring.
 
-The color is given in ARGB format. Colors are represented as 6 or 8 hexadecimal digits. If 8 digits are present, the first two represent the alpha (transparency) channel. For example, `40E0D0` would be the color <span style="color:#40E0D0;";>Turquoise</span>. [More information about the color format can be found on Wikipedia.](https://en.wikipedia.org/wiki/RGBA_color_space)
+The color is given in ARGB format. Colors are represented as 6 or 8 hexadecimal digits. If 8 digits are present, the first two represent the alpha (transparency) channel. For example, `40E0D0` would be the color Turquoise. [More information about the color format can be found on Wikipedia.](https://en.wikipedia.org/wiki/RGBA_color_space)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
@@ -1587,7 +1587,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
                 "authoring_tool_id": "EXCAD/v1.0"
             }],
             "coloring": [{
-                "color": "#ff0000",
+                "color": "ff0000",
                 "components": [{
                     "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
                 }]
@@ -1840,7 +1840,7 @@ Retrieve a **collection** of all colored components in a viewpoint.
     {
         "coloring": [
             {
-                "color": "#ff0000",
+                "color": "ff0000",
                 "components": [
                     {
                         "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
