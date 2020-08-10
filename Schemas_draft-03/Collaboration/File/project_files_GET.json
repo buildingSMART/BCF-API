@@ -1,0 +1,8 @@
+{
+  "description": "Schema for the listing the response of the GET project files service",
+  "title": "project_files_GET",
+  "type": "array",
+  "items": {
+    "$ref": "project_file.json"
+  }
+}
