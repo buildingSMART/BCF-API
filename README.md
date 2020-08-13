@@ -993,13 +993,24 @@ Each topic has two identifiers:
     
 [project_files_GET.json](Schemas_draft-03/Collaboration/File/project_files_GET.json)
 
-Retrieve a **collection** of project files that supports allowing users to choose which files (models) to reference in
-the header of topics ppostyed to that the server. 
+Retrieve a **collection** of `project_file`s to support allowing users to choose which `File`s (models) to reference in
+the header of topics created on the server. 
 
-Each Project file record contains a server provided display-name to allow users to match the file with the 
-model in server's user interface. Each project file also contains a
+Each [project_file](Schemas_draft-03/Collaboration/File/project_file.json) record contains 
+`display_information` to allow users to associate the `File` with a server model. 
+The `display_information` object is designed to support user interface rendering in tabular format. The
+servers are required to provide a consistent list of fields across all 
+[project_file](Schemas_draft-03/Collaboration/File/project_file.json) objects. The following table demonstrates tabular
+rendering of the **Example Response** (below):
+
+| Model Name | Revision Date |
+|------------|---------------|
+| ARCH-Z100-051 | May 3 2020 |
+| MEP-Z100-015 | Apr 30 2020 |
+ 
+Each [project_file](Schemas_draft-03/Collaboration/File/project_file.json) also contains a
 [file_GET](Schemas_draft-03/Collaboration/File/file_GET.json) object that will be accepted by the server should the 
-user choose to associate topics with that file.
+user choose to associate a topic with that `File`.
 
 **Example Request**
 
