@@ -58,7 +58,7 @@
     + [4.2.8 Determining Allowed Topic Modifications](#428-determining-allowed-topic-modifications)
     + [4.2.9 Topic Identifiers](#429-topic-identifiers)
   * [4.3 File Services](#43-file-services)
-    + [4.3.1 GET Project Files Service](#431-get-project-files-service)
+    + [4.3.1 GET Project Files Information Service](#431-get-project-files-information-service)
     + [4.3.2 GET Files (Header) Service](#431-get-files-header-service)
     + [4.3.3 PUT Files (Header) Service](#432-put-files-header-service)
   * [4.4 Comment Services](#44-comment-services)
@@ -985,36 +985,36 @@ Each topic has two identifiers:
 
 ## 4.3 File Services
 
-### 4.3.1 GET Project Files Service
+### 4.3.1 GET Project Files Information Service
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/files
+    GET /bcf/{version}/projects/{project_id}/files_information
     
-[project_files_GET.json](Schemas_draft-03/Collaboration/File/project_files_GET.json)
+[project_files_information_GET.json](Schemas_draft-03/Collaboration/File/project_files_information_GET.json)
 
-Retrieve a **collection** of `project_file`s to support allowing users to choose which `File`s (models) to reference in
-the header of topics created on the server. 
+Retrieve a **collection** of `project_file_information`s to support allowing users to choose which `File`s (models) 
+to reference in the header of topics created on the server. 
 
-Each [project_file](Schemas_draft-03/Collaboration/File/project_file.json) record contains 
+Each [project_file_information](Schemas_draft-03/Collaboration/File/project_file_information.json) record contains 
 `display_information` to allow users to associate the `File` with a server model. 
 The `display_information` object is designed to support user interface rendering in tabular format. The
 servers are required to provide a consistent list of fields across all 
-[project_file](Schemas_draft-03/Collaboration/File/project_file.json) objects. The following table demonstrates tabular
-rendering of the **Example Response** (below):
+[project_file_information](Schemas_draft-03/Collaboration/File/project_file_information.json) objects. The following 
+table demonstrates tabular rendering of the **Example Response** (below):
 
 | Model Name | Revision Date |
 |------------|---------------|
 | ARCH-Z100-051 | May 3 2020 |
 | MEP-Z100-015 | Apr 30 2020 |
  
-Each [project_file](Schemas_draft-03/Collaboration/File/project_file.json) also contains a
+Each [project_file_information](Schemas_draft-03/Collaboration/File/project_file_information.json) also contains a
 [file_GET](Schemas_draft-03/Collaboration/File/file_GET.json) object that will be accepted by the server should the 
 user choose to associate a topic with that `File`.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/files
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/files_information
 
 **Example Response**
 

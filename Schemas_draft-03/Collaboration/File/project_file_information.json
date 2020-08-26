@@ -1,6 +1,6 @@
 {
-  "title": "project_file",
-  "description": "Schema for a single project file, BCF REST API.",
+  "title": "project_file_information",
+  "description": "Schema for a single project file information, BCF REST API.",
   "type": "object",
   "properties": {
     "display_information": {
