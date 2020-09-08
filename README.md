@@ -58,8 +58,9 @@
     + [4.2.8 Determining Allowed Topic Modifications](#428-determining-allowed-topic-modifications)
     + [4.2.9 Topic Identifiers](#429-topic-identifiers)
   * [4.3 File Services](#43-file-services)
-    + [4.3.1 GET Files (Header) Service](#431-get-files-header-service)
-    + [4.3.2 PUT Files (Header) Service](#432-put-files-header-service)
+    + [4.3.1 GET Project Files Information Service](#431-get-project-files-information-service)
+    + [4.3.2 GET Files (Header) Service](#432-get-files-header-service)
+    + [4.3.3 PUT Files (Header) Service](#433-put-files-header-service)
   * [4.4 Comment Services](#44-comment-services)
     + [4.4.1 GET Comments Service](#441-get-comments-service)
     + [4.4.2 POST Comment Service](#442-post-comment-service)
@@ -989,7 +990,71 @@ Each topic has two identifiers:
 
 ## 4.3 File Services
 
-### 4.3.1 GET Files (Header) Service
+### 4.3.1 GET Project Files Information Service
+
+**Resource URL**
+
+    GET /bcf/{version}/projects/{project_id}/files_information
+    
+[project_files_information_GET.json](Schemas_draft-03/Collaboration/File/project_files_information_GET.json)
+
+Retrieve a **collection** of `project_file_information`s to support allowing users to choose which `File`s (models) 
+to reference in the header of topics created on the server. 
+
+Each [project_file_information](Schemas_draft-03/Collaboration/File/project_file_information.json) record contains 
+`display_information` to allow users to associate the `File` with a server model. 
+The `display_information` object is designed to support user interface rendering in tabular format. The
+servers are required to provide a consistent list of fields across all 
+[project_file_information](Schemas_draft-03/Collaboration/File/project_file_information.json) objects. The following 
+table demonstrates tabular rendering of the **Example Response** (below):
+
+| Model Name | Revision Date |
+|------------|---------------|
+| ARCH-Z100-051 | May 3 2020 |
+| MEP-Z100-015 | Apr 30 2020 |
+ 
+Each [project_file_information](Schemas_draft-03/Collaboration/File/project_file_information.json) also contains a
+[file_GET](Schemas_draft-03/Collaboration/File/file_GET.json) object that will be accepted by the server should the 
+user choose to associate a topic with that `File`.
+
+**Example Request**
+
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/files_information
+
+**Example Response**
+
+    Response Code: 200 - OK
+    Body:
+    [{
+        "display_information": [{
+            "field_display_name": "Model Name",
+            "field_value": "ARCH-Z100-051"
+        }, {
+             "field_display_name": "Revision Date",
+             "field_value": "May 3 2020"
+        }],
+        "file": {
+            "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+            "file_name": "OfficeBuilding_Architecture_0001.ifc",
+            "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+        }
+    }, {
+        "display_information": [{
+            "field_display_name": "Model Name",
+            "field_value": "MEP-Z100-015"
+        }, {
+             "field_display_name": "Revision Date",
+             "field_value": "Apr 30 2020"
+        }],        
+        "file": {
+            "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+            "file_name": "OfficeBuilding_Heating_0003.ifc",
+            "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
+        }
+    }]
+
+
+### 4.3.2 GET Files (Header) Service
 
 **Resource URL**
 
@@ -1021,7 +1086,7 @@ Retrieve a **collection** of file references as topic header.
 
 > Note: In the above example, the second items reference is in a guid format and points to a model file that is located on the server. Servers don't have to use guid formats for their internal ids, so the expected format of the response can vary between servers.
 
-### 4.3.2 PUT Files (Header) Service
+### 4.3.3 PUT Files (Header) Service
 
 **Resource URL**
 
