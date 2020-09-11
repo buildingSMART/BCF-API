@@ -1,4 +1,5 @@
 {
+    "title": "perspective_camera",
     "type": ["object",
     "null"],
     "properties": {

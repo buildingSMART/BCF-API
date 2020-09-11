@@ -1,6 +1,6 @@
 {
     "title": "viewpoint_POST",
-    "type": "object",
+    "type": [ "object" ],
     "properties": {
         "guid": {
             "type": ["string",

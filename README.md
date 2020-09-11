@@ -26,6 +26,7 @@
     + [1.8.2 Determining Authorized Entity Actions](#182-determining-authorized-entity-actions)
   * [1.9 Additional Response and Request Object Properties](#19-additional-response-and-request-object-properties)
   * [1.10 Binary File Uploads](#110-binary-file-uploads)
+  * [1.11 Differences Between null and Empty Lists](#111-differences-between-null-and-empty-lists)
 - [2. Topologies](#2-topologies)
   * [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
   * [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
@@ -197,7 +198,7 @@ Please note that the colon in the timezone offset is optional, so `+02:00` is eq
 ## 1.8 Authorization
 
 API implementors can optionally choose to restrict the actions a user is allowed to perform on the BCF entities
-via the API. The global defaults authorizations for all entities are expressed in the project extensions schema and can
+via the API. The global default authorizations for all entities are expressed in the project extensions schema and can
 be locally overridden in the entities themselves.
 
 ### 1.8.1 Per-Entity Authorization
@@ -217,7 +218,7 @@ locally. The meaning of each of the authorization keys is outlined in
 
 **Example Scenario (Topic)**
 
-In this scenario assume the topic status is set to `open`.
+This scenario assumes the topic status is set to `open`.
 
 _In the Project Extensions_
 
@@ -273,6 +274,19 @@ In such cases, files should be sent with the following Http headers:
     Content-Type: application/octet-stream;
     Content-Length: {Size of file in bytes};
     Content-Disposition: attachment; filename="{Filename.extension}";
+
+## 1.11 Differences Between null and Empty Lists
+
+Some array or list properties and responses can be interpreted differently if they are either `null` or empty. In general, there are two cases to consider.
+
+**For collection resources:**
+
+* A collection resource that does not exist should return Http error `404 - Not Found`, e.g. the list of topics for an invalid project id.
+* If the resource exists but there are no elements, the returned response should be an empty array `[]`, e.g. the list of topics for a project where no topics exist.
+
+**For properties:**
+
+* If a list property is `null` (by explicitly setting it to null or not returning it in the response object at all), the client should not assume that this represents an empty list but instead the property is not present on the response object. Depending on the response object, this can have the same meaning as an empty list (e.g. no components in a viewpoint is the same as an empty list of components), but this can also mean the property is just omitted for optional properties (e.g. no `topic_actions` in an `authorization` object can mean no restrictions).
 
 ----------
 
@@ -930,7 +944,7 @@ Modify a specific topic, description similar to POST. This operation is only pos
             "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
             "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
         }
-    }   
+    }
 
 ### 4.2.5 DELETE Topic Service
 
@@ -2273,6 +2287,9 @@ Retrieve a **collection** of topic events related to a project (default sort ord
 |assigned_to_removed|null|
 |label_added|The label added (value from extensions)|
 |label_removed|The label removed (value from extensions)|
+|stage_added|The stage was added (value from extensions)| 
+|stage_updated|The stage was updated (value from extensions)| 
+|stage_removed|The stage was removed (value from extensions)| 
 
 **Odata filter parameters**
 
@@ -2361,6 +2378,9 @@ Retrieve a **collection** of topic events related to a project (default sort ord
 |assigned_to_removed|null|
 |label_added|The label added (value from extensions)|
 |label_removed|The label removed (value from extensions)|
+|stage_added|The stage was added (value from extensions)| 
+|stage_updated|The stage was updated (value from extensions)| 
+|stage_removed|The stage was removed (value from extensions)| 
 
 **Odata filter parameters**
 
