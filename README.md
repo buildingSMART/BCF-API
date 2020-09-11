@@ -520,8 +520,7 @@ Retrieve a specific project.
         "name": "Example project 3",
         "authorization": {
             "project_actions": [
-                "update",
-                "updateProjectExtensions"
+                "update"
             ]
         }
     }
@@ -553,8 +552,7 @@ Modify a specific project. This operation is only possible when the server retur
         "name": "Example project 3 - Second Section",
         "authorization": {
             "project_actions": [
-                "update",
-                "updateProjectExtensions"
+                "update"
             ]
         }
     }
@@ -615,8 +613,7 @@ Project extensions are used to define possible values that can be used in topics
         "project_actions": [
             "update",
             "createTopic",
-            "createDocument",
-            "updateProjectExtensions"
+            "createDocument"
         ],
         "topic_actions": [
             "update",
@@ -1451,6 +1448,8 @@ JSON encoded body using the "application/json" content type.
 #### 4.5.2.2 Direction
 [direction.json](Schemas_draft-03/Collaboration/Viewpoint/direction.json)
 
+Direction must not be a zero vector.
+
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | x | number | x direction | mandatory |
@@ -1570,7 +1569,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | spaces_visible | boolean | Visibility of spaces | optional, default false |
-| space_boundaries_visible | Visibility of space_boundaries | optional, default false |
+| space_boundaries_visible | boolean | Visibility of space_boundaries | optional, default false |
 | openings_visible | boolean | Visibility of openings | optional, default false |
 
 **Example Request**
