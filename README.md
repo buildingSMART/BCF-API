@@ -614,7 +614,7 @@ Project extensions are used to define possible values that can be used in topics
             "Medium",
             "High"
         ],
-        "user_id_type": [
+        "users": [
             "Architect@example.com",
             "BIM-Manager@example.com",
             "bob_heater@example.com"

@@ -47,7 +47,7 @@
                 "null"]
             }
         },
-        "user_id_type": {
+        "users": {
             "required": true,
             "type": ["array",
             "null"],
