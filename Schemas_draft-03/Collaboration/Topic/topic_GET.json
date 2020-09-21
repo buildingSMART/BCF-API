@@ -81,6 +81,9 @@
             "type": ["string",
             "null"]
         },
+        "properties": {
+            "$ref": "properties.json"
+        },
         "authorization": {
             "type": "object",
             "required": false,

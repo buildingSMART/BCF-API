@@ -73,6 +73,12 @@
         },
         "comment_actions": {
             "$ref": "../Collaboration/Action/comment_actions.json"
+        },
+        "properties": {
+            "type": ["array"],
+            "items": {
+                "$ref": "property.json"
+            }
         }
     }
 }

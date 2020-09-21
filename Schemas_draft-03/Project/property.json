@@ -1,0 +1,13 @@
+{
+    "title": "property",
+    "type": "object",
+
+    "properties": {
+        "propertyName": {
+            "type": "string"
+        },
+        "propertyType": {
+            "enum": ["number", "string", "boolean"]
+        }
+    }
+}
