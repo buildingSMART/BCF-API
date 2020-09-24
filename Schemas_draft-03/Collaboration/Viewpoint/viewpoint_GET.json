@@ -38,8 +38,8 @@
         },
         "snapshot": {
             "$ref": "snapshot_GET.json"
-        }
-	    "authorization": {
+        },
+        "authorization": {
             "type": "object",
             "required": false,
             "properties": {
