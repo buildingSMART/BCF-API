@@ -713,6 +713,7 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 |---------|-----------|
 |creation_date|creation date of a topic|
 |modified_date|modification date of a topic|
+|server_id|the [server_id](#429-topic-identifiers) of the topic|
 |index|index of a topic|
 
 **Example Request with odata**
