@@ -130,6 +130,21 @@ An example of a client implementation in C# can be found here:
 
 When requesting collections of items, the BCF-API should offer URL parameters according to the OData v4 specification. It can be found at [http://www.odata.org/documentation/](http://www.odata.org/documentation/).
 
+### If the server supports pagination
+
+The server will return a partial collection of the items if the collection is larger than the limit.
+The max limit, and default limit, might vary between different servers.
+You should expect the following pagination headers in the response.
+
+|Header name|Type|Description|Required|
+|---------|----|-----------|--------|
+|odata.totalCount|number|The total count of all items|true|
+|odata.nextLink|string|Only set when the last item is not sent in the response|false|
+
+### If the server does not support pagination
+
+The server should always return the full collection of the items, and you should not see any pagination headers.
+
 ## 1.2 Caching
 
 ETags, or entity-tags, are an important part of HTTP, being a critical part of caching, and also used in "conditional" requests.
