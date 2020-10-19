@@ -195,7 +195,7 @@ DateTime values in this API are supposed to be in ISO 8601 compliant `YYYY-MM-DD
 For example, `2016-04-28T16:31:12.270+02:00` would represent _Thursday, April 28th, 2016, 16:31:12 (270ms) with a time zone offset of +2 hours relative to UTC._
 Please note that the colon in the timezone offset is optional, so `+02:00` is equivalent to `+0200`.
 
-To void ambiguity, This speicifcation steps away from ISO 8601 on the topic of DateTime values with no timezone: The ISO 8601 says that DateTime values with no timezone designator are local times - **In BCF all DateTime values with no timezone designator as assumed to be in UTC**.
+To void ambiguity, This specification steps away from ISO 8601 on the topic of DateTime values with no timezone: The ISO 8601 says that DateTime values with no timezone designator are local times - **In BCF all DateTime values with no timezone designator as assumed to be in UTC**.
 
 ## 1.8 Authorization
 
