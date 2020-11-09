@@ -12,7 +12,7 @@
             "type": ["string",
             "null"]
         },
-        "file_name": {
+        "filename": {
             "type": ["string",
             "null"]
         },
