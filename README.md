@@ -1090,11 +1090,11 @@ Retrieve a **collection** of file references as topic header.
     Body:
     [{
         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
-        "file_name": "OfficeBuilding_Architecture_0001.ifc",
+        "filename": "OfficeBuilding_Architecture_0001.ifc",
         "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
     }, {
         "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
-        "file_name": "OfficeBuilding_Heating_0003.ifc",
+        "filename": "OfficeBuilding_Heating_0003.ifc",
         "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
     }]
 
@@ -1116,11 +1116,11 @@ Update a **collection** of file references on the topic header. This operation i
     Body:
     [{
         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
-        "file_name": "OfficeBuilding_Architecture_0001.ifc",
+        "filename": "OfficeBuilding_Architecture_0001.ifc",
         "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
     }, {
         "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
-        "file_name": "OfficeBuilding_Heating_0003.ifc",
+        "filename": "OfficeBuilding_Heating_0003.ifc",
         "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
     }]
 
@@ -1130,11 +1130,11 @@ Update a **collection** of file references on the topic header. This operation i
     Body:
     [{
         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
-        "file_name": "OfficeBuilding_Architecture_0001.ifc",
+        "filename": "OfficeBuilding_Architecture_0001.ifc",
         "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
     }, {
         "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
-        "file_name": "OfficeBuilding_Heating_0003.ifc",
+        "filename": "OfficeBuilding_Heating_0003.ifc",
         "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
     }]
 
