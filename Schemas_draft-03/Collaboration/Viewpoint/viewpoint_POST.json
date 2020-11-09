@@ -2,6 +2,10 @@
     "title": "viewpoint_POST",
     "type": [ "object" ],
     "properties": {
+        "guid": {
+            "type": ["string",
+            "null"]
+        },
         "index": {
             "type": [
                 "integer",

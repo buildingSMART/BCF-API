@@ -1,3 +1,6 @@
+[![Official repository by buildingSMART International](https://img.shields.io/badge/buildingSMART-Official%20Repository-orange.svg)](https://www.buildingsmart.org/)
+[![This repo is managed by the BCF Implementers Group](https://img.shields.io/badge/-BCF%20Implementers%20Group-blue.svg)](https://img.shields.io/badge/-BCF%20Implementers%20Group-blue.svg)
+
 # BCF REST API
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
@@ -21,8 +24,9 @@
   * [1.8 Authorization](#18-authorization)
     + [1.8.1 Per-Entity Authorization](#181-per-entity-authorization)
     + [1.8.2 Determining Authorized Entity Actions](#182-determining-authorized-entity-actions)
-  * [1.9 Additional Response Object Properties](#19-additional-response-object-properties)
-  * [1.10 Differences Between null and Empty Lists](#110-differences-between-null-and-empty-lists)
+  * [1.9 Additional Response and Request Object Properties](#19-additional-response-and-request-object-properties)
+  * [1.10 Binary File Uploads](#110-binary-file-uploads)
+  * [1.11 Differences Between null and Empty Lists](#111-differences-between-null-and-empty-lists)
 - [2. Topologies](#2-topologies)
   * [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
   * [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
@@ -49,28 +53,50 @@
     + [4.2.2 POST Topic Service](#422-post-topic-service)
     + [4.2.3 GET Topic Service](#423-get-topic-service)
     + [4.2.4 PUT Topic Service](#424-put-topic-service)
+    + [4.2.5 DELETE Topic Service](#425-delete-topic-service)
     + [4.2.6 GET Topic BIM Snippet Service](#426-get-topic-bim-snippet-service)
     + [4.2.7 PUT Topic BIM Snippet Service](#427-put-topic-bim-snippet-service)
     + [4.2.8 Determining Allowed Topic Modifications](#428-determining-allowed-topic-modifications)
+    + [4.2.9 Topic Identifiers](#429-topic-identifiers)
   * [4.3 File Services](#43-file-services)
-    + [4.3.1 GET Files (Header) Service](#431-get-files-header-service)
-    + [4.3.2 PUT Files (Header) Service](#432-put-files-header-service)
+    + [4.3.1 GET Project Files Information Service](#431-get-project-files-information-service)
+    + [4.3.2 GET Files (Header) Service](#432-get-files-header-service)
+    + [4.3.3 PUT Files (Header) Service](#433-put-files-header-service)
   * [4.4 Comment Services](#44-comment-services)
     + [4.4.1 GET Comments Service](#441-get-comments-service)
     + [4.4.2 POST Comment Service](#442-post-comment-service)
     + [4.4.3 GET Comment Service](#443-get-comment-service)
     + [4.4.4 PUT Comment Service](#444-put-comment-service)
-    + [4.4.5 Determining allowed Comment modifications](#445-determining-allowed-comment-modifications)
+    + [4.4.5 DELETE Comment Service](#445-delete-comment-service)
+    + [4.4.6 Determining allowed Comment modifications](#446-determining-allowed-comment-modifications)
   * [4.5 Viewpoint Services](#45-viewpoint-services)
     + [4.5.1 GET Viewpoints Service](#451-get-viewpoints-service)
     + [4.5.2 POST Viewpoint Service](#452-post-viewpoint-service)
+      - [4.5.2.1 Point](#4521-point)
+      - [4.5.2.2 Direction](#4522-direction)
+      - [4.5.2.3 Orthogonal camera](#4523-orthogonal-camera)
+      - [4.5.2.4 Perspective camera](#4524-perspective-camera)
+      - [4.5.2.5 Line](#4525-line)
+      - [4.5.2.6 Clipping plane](#4526-clipping-plane)
+      - [4.5.2.7 Bitmap](#4527-bitmap)
+      - [4.5.2.8 Snapshot](#4528-snapshot)
+      - [4.5.2.9 Components](#4529-components)
+      - [4.5.2.10 Component](#45210-component)
+        * [Optimization rules](#optimization-rules)
+      - [4.5.2.11 Coloring](#45211-coloring)
+        * [Optimization rules](#optimization-rules-1)
+      - [4.5.2.12 Visibility](#45212-visibility)
+        * [Optimization rules](#optimization-rules-2)
+      - [4.5.2.13 View setup hints](#45213-view-setup-hints)
     + [4.5.3 GET Viewpoint Service](#453-get-viewpoint-service)
     + [4.5.4 GET Viewpoint Snapshot Service](#454-get-viewpoint-snapshot-service)
     + [4.5.5 GET Viewpoint Bitmap Service](#455-get-viewpoint-bitmap-service)
     + [4.5.6 GET selected Components Service](#456-get-selected-components-service)
     + [4.5.7 GET colored Components Service](#457-get-colored-components-service)
     + [4.5.8 GET visibility of Components Service](#458-get-visibility-of-components-service)
-  * [4.6 Related Topics Services](#46-related-topics-services)
+    + [4.5.9 DELETE Viewpoint Service](#459-delete-viewpoint-service)
+    + [4.5.10 Determining allowed Viewpoint modifications](#4510-determining-allowed-viewpoint-modifications)
+   * [4.6 Related Topics Services](#46-related-topics-services)
     + [4.6.1 GET Related Topics Service](#461-get-related-topics-service)
     + [4.6.2 PUT Related Topics Service](#462-put-related-topics-service)
   * [4.7 Document Reference Services](#47-document-reference-services)
@@ -167,6 +193,9 @@ BCF-API has a specified error response body format [error.json](Schemas_draft-03
 DateTime values in this API are supposed to be in ISO 8601 compliant `YYYY-MM-DDThh:mm:ss` format with optional time zone indicators. This is the same format as defined in the Xml `xs:dateTime` type as well as the result of JavaScripts Date.toJson() output.
 
 For example, `2016-04-28T16:31:12.270+02:00` would represent _Thursday, April 28th, 2016, 16:31:12 (270ms) with a time zone offset of +2 hours relative to UTC._
+Please note that the colon in the timezone offset is optional, so `+02:00` is equivalent to `+0200`.
+
+To void ambiguity, This specification steps away from ISO 8601 on the topic of DateTime values with no timezone: The ISO 8601 says that DateTime values with no timezone designator are local times - **In BCF all DateTime values with no timezone designator as assumed to be in UTC**.
 
 ## 1.8 Authorization
 
@@ -179,16 +208,19 @@ be locally overridden in the entities themselves.
 Whenever a user requests an update-able entity with the query parameter `includeAuthorization` equal to `true` the
 server should include an `authorization` field in the entity containing any local variations from the global
 authorization defaults for that entity. Using this information clients can decide whether to, for example, include an
-"Edit" button in the UI displaying the entity depending on the actions permitted for the user.
+"Edit" button in the UI displaying the entity depending on the actions permitted for the user or suggest only the 
+options available to the user for choice fields such as topic status. 
 
 ### 1.8.2 Determining Authorized Entity Actions
 
 The client can calculate the available set of actions for a particular entity by taking the project-wide defaults from
 the project extensions, then replacing any keys defined in the entity's `authorization` map with the values specified
-locally. The meaning of each of the authorization keys is outlined in outlined in
+locally. The meaning of each of the authorization keys is outlined in
 [4.1.5 Expressing User Authorization through Project Extensions](#415-expressing-user-authorization-through-project-extensions).
 
 **Example Scenario (Topic)**
+
+This scenario assumes the topic status is set to `open`.
 
 _In the Project Extensions_
 
@@ -216,6 +248,7 @@ _In the Topic_
                 "createViewpoint"
             ],
             "topic_status": [
+                "open",
                 "closed"
             ]
         }
@@ -225,13 +258,26 @@ Indicating that for this topic, the current user can:
 
 * update the Topic, or add comments or viewpoints
 * place the Topic into `closed` status
+* leave the Topic `open` or place the topic back into `open` status after closing it
 
-## 1.9 Additional Response Object Properties
+## 1.9 Additional Response and Request Object Properties
 
-All API response Json objects may contain additional properties that are not covered by this specification.
-This is to allow server implementations freedom to add additional functionality. Clients shall ignore those properties.
+All API response and request Json objects may contain additional properties that are not covered by this specification.
+This is to allow server and client implementations freedom to add additional functionality. Servers and clients shall ignore those properties and must not produce errors on additional properties. Servers and clients are not required to preserve these properties.
 
-## 1.10 Differences Between null and Empty Lists
+## 1.10 Binary File Uploads
+
+Some endpoints in the BCF API expect binary file uploads, such as [4.8.2 POST Document Service](#482-post-document-service)
+or [4.2.7 PUT Topic BIM Snippet Service](#427-put-topic-bim-snippet-service).
+
+In such cases, files should be sent with the following Http headers:
+
+    Headers:
+    Content-Type: application/octet-stream;
+    Content-Length: {Size of file in bytes};
+    Content-Disposition: attachment; filename="{Filename.extension}";
+
+## 1.11 Differences Between null and Empty Lists
 
 Some array or list properties and responses can be interpreted differently if they are either `null` or empty. In general, there are two cases to consider.
 
@@ -275,7 +321,7 @@ BCF and model server are co-located on the same hosts.
 
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
-|version|string|Identifier of the version|true|
+|version_id|string|Identifier of the version|true|
 |detailed_version|string|Url to specification on GitHub|false|
 
 Returns a list of all supported BCF API versions of the server.
@@ -490,8 +536,7 @@ Retrieve a specific project.
         "name": "Example project 3",
         "authorization": {
             "project_actions": [
-                "update",
-                "updateProjectExtensions"
+                "update"
             ]
         }
     }
@@ -504,7 +549,7 @@ Retrieve a specific project.
 
 [project_PUT.json](Schemas_draft-03/Project/project_PUT.json)
 
-Modify a specific project.
+Modify a specific project. This operation is only possible when the server returns the `update` flag in the Project authorization, see section [4.1.5](#415-expressing-user-authorization-through-project-extensions)
 
 **Example Request**
 
@@ -523,8 +568,7 @@ Modify a specific project.
         "name": "Example project 3 - Second Section",
         "authorization": {
             "project_actions": [
-                "update",
-                "updateProjectExtensions"
+                "update"
             ]
         }
     }
@@ -585,8 +629,7 @@ Project extensions are used to define possible values that can be used in topics
         "project_actions": [
             "update",
             "createTopic",
-            "createDocument",
-            "updateProjectExtensions"
+            "createDocument"
         ],
         "topic_actions": [
             "update",
@@ -624,8 +667,8 @@ level by default (i.e. unless overridden by specific topics) The available actio
 
 * *update* - The ability to update the topic (see [4.2.4 PUT Topic Service](#424-put-topic-service))
 * *updateBimSnippet* - The ability to update the BIM snippet for topics (see [4.2.7 PUT Topic BIM Snippet Service](#427-put-topic-bim-snippet-service))
-* *updateRelatedTopics* - The ability to update the collection of related topics (see [4.6.2 PUT Related Topics Service](#462-put-related-topics-service))
-* *updateDocumentReferences* - The ability to update the collection of document references (see [4.7.3 PUT Document Reference Service](#473-put-document-reference-service))
+* *updateRelatedTopics* - The ability to update the collection of related topics (see [4.6.2 PUT Related Topics Service](#472-put-related-topics-service))
+* *updateDocumentReferences* - The ability to update the collection of document references (see [4.7.3 PUT Document Reference Service](#483-put-document-reference-service))
 * *updateFiles* - The ability to update the file header (see [4.3.2 PUT Files (Header) Service](#432-put-files-header-service))
 * *createComment* - The ability to create a comment (see [4.4.2 POST Comment Service](#442-post-comment-service))
 * *createViewpoint* - The ability to create a new viewpoint (see [4.5.2 POST Viewpoint Service](#452-post-viewpoint-service))
@@ -664,6 +707,7 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 |creation_date|datetime|creation date of a topic|
 |modified_date|datetime|modification date of a topic|
 |labels|array (string)|labels of a topic (value from extensions)|
+|priority|string|priority of a topic (value from extensions)|
 
 **Odata sort parameters**
 
@@ -671,13 +715,14 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 |---------|-----------|
 |creation_date|creation date of a topic|
 |modified_date|modification date of a topic|
+|server_id|the [server_id](#429-topic-identifiers) of the topic|
 |index|index of a topic|
 
 **Example Request with odata**
 
 Get topics that are open, assigned to Architect@example.com and created after December 5th 2015. Sort the result on last modified
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and status eq 'Open' and creation_date gt 2015-12-05T00:00:00+01:00&$orderby=modified_date desc
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and topic_status eq 'Open' and creation_date gt 2015-12-05T00:00:00+01:00&$orderby=modified_date desc
 
 Odata does not support list operators. To achieve list query, use the 'or' operator.
 Get topics that have at least one of the labels 'Architecture', 'Structural' or 'Heating'
@@ -694,6 +739,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
     Body:
     [{
         "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "server_id": "CLASH-00001",
         "creation_author": "Architect@example.com",
         "title": "Example topic 1",
         "labels": [
@@ -703,6 +749,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
         "creation_date": "2013-10-21T17:34:22.409Z"
     }, {
         "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+        "server_id": "CLASH-00078",
         "creation_author": "Architect@example.com",
         "title": "Example topic 2",
         "labels": [
@@ -721,7 +768,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
 
 [topic_POST.json](Schemas_draft-03/Collaboration/Topic/topic_POST.json)
 
-Add a new topic.
+Add a new topic. This operation is only possible when the server returns the `createTopic` flag in the Project authorization, see section [4.1.5](#415-expressing-user-authorization-through-project-extensions)
 
 **Parameters**
 
@@ -729,6 +776,7 @@ JSON encoded body using the "application/json" content type.
 
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
+|guid|string|The desired guid|false|
 |topic_type|string|The type of a topic (value from extension.xsd)|false|
 |topic_status|string|The status of a topic (value from extension.xsd)|false|
 |reference_links|array (string)|Reference links, i.e. links to referenced resources|false|
@@ -775,6 +823,7 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
     Body:
     {
         "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "server_id": "ISSUE-01462",
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": "Clash",
@@ -814,6 +863,7 @@ Retrieve a specific topic.
     Body:
     {
         "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+        "server_id": "ISSUE-00549",
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": "Clash",
@@ -847,7 +897,7 @@ Retrieve a specific topic.
 
 [topic_PUT.json](Schemas_draft-03/Collaboration/Topic/topic_PUT.json)
 
-Modify a specific topic, description similar to POST.
+Modify a specific topic, description similar to POST. This operation is only possible when the server returns the `update` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Example Request**
 
@@ -877,6 +927,7 @@ Modify a specific topic, description similar to POST.
     Body:
     {
         "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+        "server_id": "ISSUE-00037",
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
         "modified_author": "Architect@example.com",
@@ -898,6 +949,22 @@ Modify a specific topic, description similar to POST.
         }
     }
 
+### 4.2.5 DELETE Topic Service
+
+**Resource URL**
+
+    DELETE /bcf/{version}/projects/{project_id}/topics/{guid}
+
+Deletes a single topic. This operation is only possible when the server returns the `delete` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
+
+**Example Request**
+
+    DELETE /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+
+**Example Response**
+
+    Response Code: 200 - OK
+
 ### 4.2.6 GET Topic BIM Snippet Service
 
 **Resource URL**
@@ -912,7 +979,7 @@ Retrieves a topics BIM-Snippet as binary file.
 
     PUT /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
 
-Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property `is_external` must be set to `false` and the `reference` must be the file name with extension.
+Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property `is_external` must be set to `false` and the `reference` must be the file name with extension. This operation is only possible when the server returns the `updateBimSnippet` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 ### 4.2.8 Determining Allowed Topic Modifications
 
@@ -920,9 +987,88 @@ The global default Topic authorizations are expressed in the project schema and 
 query parameter "includeAuthorization" equal to "true" Topics will include an "authorization" field containing any local
 overrides for each Topic.
 
+### 4.2.9 Topic Identifiers
+
+Each topic has two identifiers: 
+1. `guid` - machine-friendly, randomly generated and universally unique identifier. Both clients and servers must generate 
+    a `guid` when creating a topic using an RFC 4122 compliant UUID generator. The `guid` should be used in all client-server 
+    interactions to identify topics. <br> 
+    
+    `guid` examples: 420b24db-921c-46d6-9629-d529d130307f, 5139a00f-5cbd-4760-9e44-16cc4826aa5a 
+2. `server_id` - a human-friendly identifier which is generated and controlled by the server. A `server_id` is project-unique: 
+    No two topics in a given server and project may have the same `server_id`. However, topics in different projects on a 
+    given server may have identical `server_id`s. `server_id`s can't be changed using the API; BCF clients should display 
+    `server_id`s to users to make it easier to locate and discuss topics.<br>
+    
+    `server_id` examples: 003490, ISSUE-01, CLASH-578  
+
 ## 4.3 File Services
 
-### 4.3.1 GET Files (Header) Service
+### 4.3.1 GET Project Files Information Service
+
+**Resource URL**
+
+    GET /bcf/{version}/projects/{project_id}/files_information
+    
+[project_files_information_GET.json](Schemas_draft-03/Collaboration/File/project_files_information_GET.json)
+
+Retrieve a **collection** of `project_file_information`s to support allowing users to choose which `File`s (models) 
+to reference in the header of topics created on the server. 
+
+Each [project_file_information](Schemas_draft-03/Collaboration/File/project_file_information.json) record contains 
+`display_information` to allow users to associate the `File` with a server model. 
+The `display_information` object is designed to support user interface rendering in tabular format. The
+servers are required to provide a consistent list of fields across all 
+[project_file_information](Schemas_draft-03/Collaboration/File/project_file_information.json) objects. The following 
+table demonstrates tabular rendering of the **Example Response** (below):
+
+| Model Name | Revision Date |
+|------------|---------------|
+| ARCH-Z100-051 | May 3 2020 |
+| MEP-Z100-015 | Apr 30 2020 |
+ 
+Each [project_file_information](Schemas_draft-03/Collaboration/File/project_file_information.json) also contains a
+[file_GET](Schemas_draft-03/Collaboration/File/file_GET.json) object that will be accepted by the server should the 
+user choose to associate a topic with that `File`.
+
+**Example Request**
+
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/files_information
+
+**Example Response**
+
+    Response Code: 200 - OK
+    Body:
+    [{
+        "display_information": [{
+            "field_display_name": "Model Name",
+            "field_value": "ARCH-Z100-051"
+        }, {
+             "field_display_name": "Revision Date",
+             "field_value": "May 3 2020"
+        }],
+        "file": {
+            "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+            "file_name": "OfficeBuilding_Architecture_0001.ifc",
+            "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+        }
+    }, {
+        "display_information": [{
+            "field_display_name": "Model Name",
+            "field_value": "MEP-Z100-015"
+        }, {
+             "field_display_name": "Revision Date",
+             "field_value": "Apr 30 2020"
+        }],        
+        "file": {
+            "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+            "file_name": "OfficeBuilding_Heating_0003.ifc",
+            "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
+        }
+    }]
+
+
+### 4.3.2 GET Files (Header) Service
 
 **Resource URL**
 
@@ -931,6 +1077,8 @@ overrides for each Topic.
 [file_GET.json](Schemas_draft-03/Collaboration/File/file_GET.json)
 
 Retrieve a **collection** of file references as topic header.
+
+*Implementer Note*: The `reference` property can either be an **Uri** or a **server specific id**. Uris are given as absolute paths to the model files while ids reference a custom id of the model file and require custom logic per server to retrieve it. This allows referencing of files on the server but requires clients to know how to retrieve files in a specific implementation.
 
 **Example Request**
 
@@ -947,10 +1095,12 @@ Retrieve a **collection** of file references as topic header.
     }, {
         "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
         "filename": "OfficeBuilding_Heating_0003.ifc",
-        "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
+        "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
     }]
 
-### 4.3.2 PUT Files (Header) Service
+> Note: In the above example, the second items reference is in a guid format and points to a model file that is located on the server. Servers don't have to use guid formats for their internal ids, so the expected format of the response can vary between servers.
+
+### 4.3.3 PUT Files (Header) Service
 
 **Resource URL**
 
@@ -958,7 +1108,7 @@ Retrieve a **collection** of file references as topic header.
 
 [file_PUT.json](Schemas_draft-03/Collaboration/File/file_PUT.json)
 
-Update a **collection** of file references on the topic header.
+Update a **collection** of file references on the topic header. This operation is only possible when the server returns the `updateFiles` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Example Request**
 
@@ -1054,7 +1204,7 @@ Get comments that are created after December 5 2015. Sort the result on first cr
 
 [comment_POST.json](Schemas_draft-03/Collaboration/Comment/comment_POST.json)
 
-Add a new comment to a topic.
+Add a new comment to a topic. This operation is only possible when the server returns the `createComment` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Parameters**
 
@@ -1062,6 +1212,7 @@ JSON encoded body using the "application/json" content type.
 
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
+|guid|string|The desired guid|false|
 |comment|string|The comment text|true|
 |viewpoint_guid|string|The GUID of the related viewpoint|false|
 |reply_to_comment_guid|string|GUID of the comment to which this comment replies to|false|
@@ -1120,11 +1271,11 @@ Get a single comment.
 
 [comment_PUT.json](Schemas_draft-03/Collaboration/Comment/comment_PUT.json)
 
-Update a single comment, description similar to POST.
+Update a single comment, description similar to POST. This operation is only possible when the server returns the `update` flag in the Comment authorization, see section [4.4.6](#446-determining-allowed-comment-modifications)
 
 **Example Request**
 
-    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
+    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
     Body:
     {
         "comment": "will rework the heating model and fix the ventilation"
@@ -1144,7 +1295,23 @@ Update a single comment, description similar to POST.
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }
 
-### 4.4.5 Determining allowed Comment modifications
+### 4.4.5 DELETE Comment Service
+
+**Resource URL**
+
+    DELETE /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
+
+Deletes a single comment. This operation is only possible when the server returns the `delete` flag in the Comment authorization, see section [4.4.6](#446-determining-allowed-comment-modifications)
+
+**Example Request**
+
+    DELETE /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
+
+**Example Response**
+
+    Response Code: 200 - OK
+
+### 4.4.6 Determining allowed Comment modifications
 
 The global default Comment authorizations are expressed in the project schema and when Comment(s) are requested with the
 query parameter "includeAuthorization" equal to "true" Comments will include an "authorization" field containing any local
@@ -1268,7 +1435,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
 
 [viewpoint_POST.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_POST.json)
 
-Add a new viewpoint. Viewpoints are immutable, meaning that they should never change. Requirements for different visualizations should be handled by creating new viewpoint elements.
+Add a new viewpoint. Viewpoints are immutable, meaning that they should never change. Requirements for different visualizations should be handled by creating new viewpoint elements. This operation is only possible when the server returns the `createViewpoint` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Parameters**
 
@@ -1276,6 +1443,7 @@ JSON encoded body using the "application/json" content type.
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
+| guid | string | The desired guid | optional |
 | index | integer | parameter for sorting | optional |
 | orthogonal camera | [Orthogonal camera](#4523-orthogonal-camera) | orthogonal camera view | optional |
 | perspective camera | [Perspective camera](#4524-perspective-camera) | perspective view of the camera | optional |
@@ -1285,7 +1453,7 @@ JSON encoded body using the "application/json" content type.
 | snapshot | [Snapshot](#4528-snapshot) | snapshot image of the viewpoint | optional |
 | components | [Components](#4529-components) | Components in the viewpoint | optional |
 
-####4.5.2.1 Point
+#### 4.5.2.1 Point
 [point.json](Schemas_draft-03/Collaboration/Viewpoint/point.json)
 
 |parameter|type|description|required|
@@ -1294,8 +1462,10 @@ JSON encoded body using the "application/json" content type.
 | y | number | y point | mandatory |
 | z | number | z point | mandatory |
 
-####4.5.2.2 Direction
+#### 4.5.2.2 Direction
 [direction.json](Schemas_draft-03/Collaboration/Viewpoint/direction.json)
+
+Direction must not be a zero vector.
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
@@ -1303,27 +1473,27 @@ JSON encoded body using the "application/json" content type.
 | y | number | y direction | mandatory |
 | z | number | z direction | mandatory |
 
-####4.5.2.3 Orthogonal camera
+#### 4.5.2.3 Orthogonal camera
 [orthogonal_camera.json](Schemas_draft-03/Collaboration/Viewpoint/orthogonal_camera.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | camera_view_point | [Direction](#4522-direction) | viewpoint of the camera | mandatory |
-| camera_directiont | [Direction](#4522-direction) | direction of the camera | mandatory |
+| camera_direction | [Direction](#4522-direction) | direction of the camera | mandatory |
 | camera_up_vector | [Direction](#4522-direction) | direction of camera up | mandatory |
 | view_to_world_scale | number | proportion of camera view to model | mandatory |
 
-####4.5.2.4 Perspective camera
+#### 4.5.2.4 Perspective camera
 [perspective_camera.json](Schemas_draft-03/Collaboration/Viewpoint/perspective_camera.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | camera_view_point | [Point](#4521-point) | viewpoint of the camera | mandatory |
-| camera_directiont | [Direction](#4522-direction) | direction of the camera | mandatory |
+| camera_direction | [Direction](#4522-direction) | direction of the camera | mandatory |
 | camera_up_vector | [Direction](#4522-direction) | direction of camera up | mandatory |
 | field_of_view | number | field of view | mandatory |
 
-####4.5.2.5 Line
+#### 4.5.2.5 Line
 [line.json](Schemas_draft-03/Collaboration/Viewpoint/line.json)
 
 |parameter|type|description|required|
@@ -1331,7 +1501,7 @@ JSON encoded body using the "application/json" content type.
 | start_point | [Point](#4521-point) | start point of the line | mandatory |
 | end_point | [Point](#4521-point) | end point of the line (Treated as point if start_point and end_point is the same | mandatory |
 
-####4.5.2.6 Clipping plane
+#### 4.5.2.6 Clipping plane
 [clipping_plane.json](Schemas_draft-03/Collaboration/Viewpoint/clipping_plane.json)
 
 |parameter|type|description|required|
@@ -1339,7 +1509,7 @@ JSON encoded body using the "application/json" content type.
 | location | [Point](#4521-point) | origin of the clipping plane | mandatory |
 | direction | [Direction](#4522-direction) | direction of the clipping plane | mandatory |
 
-####4.5.2.7 Bitmap
+#### 4.5.2.7 Bitmap
 [bitmap.json](Schemas_draft-03/Collaboration/Viewpoint/bitmap_POST.json)
 
 |parameter|type|description|required|
@@ -1351,7 +1521,7 @@ JSON encoded body using the "application/json" content type.
 | up | [Direction](#4522-direction) | up vector of the bitmap (vector) | mandatory |
 | height | number | height of bitmap in the scene | mandatory |
 
-####4.5.2.8 Snapshot
+#### 4.5.2.8 Snapshot
 [snapshot.json](Schemas_draft-03/Collaboration/Viewpoint/snapshot_POST.json)
 
 |parameter|type|description|required|
@@ -1359,7 +1529,7 @@ JSON encoded body using the "application/json" content type.
 | snapshot_type | enum (string) | format of the snapshot. Predefined values `png` or `jpg` | mandatory |
 | snapshot_data | base64 encoded string | The snapshot image data | mandatory |
 
-####4.5.2.9 Components
+#### 4.5.2.9 Components
 [components.json](Schemas_draft-03/Collaboration/Viewpoint/components.json)
 
 |parameter|type|description|required|
@@ -1368,10 +1538,10 @@ JSON encoded body using the "application/json" content type.
 | coloring | array of [Coloring](#45211-coloring) | Colored components | optional |
 | visibility | [Visibility](#45212-visibility) | Visibility of components | mandatory |
 
-####4.5.2.10 Component
+#### 4.5.2.10 Component
 [component.json](Schemas_draft-03/Collaboration/Viewpoint/component.json)
 
-#####Optimization rules
+##### Optimization rules
 BCF is suitable for selecting a few components. A huge list of selected components causes poor performance. All clients should follow this rule:
 - If the size of the selected components is huge (approximately 1000 components), alert the user and give him the opportunity to modify the visibility.
 
@@ -1381,24 +1551,24 @@ BCF is suitable for selecting a few components. A huge list of selected componen
 | originating_system | string | originating system of the component | optional |
 | authoring_tool_id | string | internal id for the authoring tool of the component | optional |
 
-####4.5.2.11 Coloring
+#### 4.5.2.11 Coloring
 [coloring.json](Schemas_draft-03/Collaboration/Viewpoint/coloring.json)
 
-#####Optimization rules
+##### Optimization rules
 BCF is suitable for coloring a few components. A huge list of components causes poor performance. All clients should follow this rule:
 - If the size of colored components is huge (approximately 1000 components), alert the user and give him the opportunity to modify the coloring.
 
-The color is given in ARGB format. Colors are represented as 6 or 8 hexadecimal digits. If 8 digits are present, the first two represent the alpha (transparency) channel. For example, `40E0D0` would be the color <span style="color:#40E0D0;";>Turquoise</span>. [More information about the color format can be found on Wikipedia.](https://en.wikipedia.org/wiki/RGBA_color_space)
+The color is given in ARGB format. Colors are represented as 6 or 8 hexadecimal digits. If 8 digits are present, the first two represent the alpha (transparency) channel. For example, `40E0D0` would be the color Turquoise. [More information about the color format can be found on Wikipedia.](https://en.wikipedia.org/wiki/RGBA_color_space)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | color | string | Color of the components | mandatory |
 | components | array of [Component](#45210-component) | Colored components | mandatory |
 
-####4.5.2.12 Visibility
+#### 4.5.2.12 Visibility
 [visibility.json](Schemas_draft-03/Collaboration/Viewpoint/visibility.json)
 
-#####Optimization rules
+##### Optimization rules
 BCF is suitable for hiding/showing a few components. A huge list of hidden/shown components causes poor performance. All clients should follow these rules:
 - If the list of hidden components is smaller than the list of visible components: set default_visibility to true and put the hidden components in exceptions.
 - If the list of visible components is smaller or equals the list of hidden components:  set default_visibility to false and put the visible components in exceptions.
@@ -1410,13 +1580,13 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
 | exceptions | array of [Component](#45210-component) | Components to hide/show determined by default_visibility | optional |
 | view_setup_hints | [View setup hints](#45213-view-setup-hints) | Hints about the setup of the viewer | optional |
 
-####4.5.2.13 View setup hints
+#### 4.5.2.13 View setup hints
 [view_setup_hints.json](Schemas_draft-03/Collaboration/Viewpoint/view_setup_hints.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | spaces_visible | boolean | Visibility of spaces | optional, default false |
-| space_boundaries_visible | Visibility of space_boundaries | optional, default false |
+| space_boundaries_visible | boolean | Visibility of space_boundaries | optional, default false |
 | openings_visible | boolean | Visibility of openings | optional, default false |
 
 **Example Request**
@@ -1469,7 +1639,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
         }],
         "bitmaps": [{
             "bitmap_type": "jpg",
-            "bitmap_data": "data:image/jpg;base64,......",
+            "bitmap_data": "SGVsbG8gV29ybGQh",
             "location": {
                 "x": 10.0,
                 "y": -10.0,
@@ -1489,7 +1659,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
         }],
         "snapshot": {
             "snapshot_type": "png",
-            "snapshot_data": "data:image/png;base64,......"
+            "snapshot_data": "SGVsbG8gV29ybGQh"
         },
         "components": {
             "selection": [{
@@ -1498,13 +1668,13 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
                 "authoring_tool_id": "EXCAD/v1.0"
             }],
             "coloring": [{
-                "color": "#ff0000",
+                "color": "ff0000",
                 "components": [{
                     "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
                 }]
             }],
             "visibility": {
-                "default_visbility": false,
+                "default_visibility": false,
                 "exceptions": [{
                     "ifc_guid": "4$cshxZO9AJBebsni$z9Yk"
                 }],
@@ -1699,6 +1869,7 @@ Retrieve a viewpoints snapshot (png or jpg) as image file. A viewpoint contains 
 Retrieve a specific viewpoints bitmap image file (png or jpg).
 
 **Example Request**
+
     GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/20c1cb56-315f-4a0a-922d-ed7a4a8edf55
 
 ### 4.5.6 GET selected Components Service
@@ -1706,7 +1877,7 @@ Retrieve a specific viewpoints bitmap image file (png or jpg).
 
     GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/selection
 
-[component_GET.json](Schemas_draft-03/Collaboration/Component/selection_GET.json)
+[selection_GET.json](Schemas_draft-03/Collaboration/Viewpoint/selection_GET.json)
 
 Retrieve a **collection** of all selected components in a viewpoint.
 
@@ -1718,15 +1889,17 @@ Retrieve a **collection** of all selected components in a viewpoint.
 
     Response Code: 200 - OK
     Body:
-    [
-        {
-            "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-            "originating_system": "Example CAD Application",
-            "authoring_tool_id": "EXCAD/v1.0"
-        }, {
-            "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-        }
-    ]
+    {
+        "selection": [
+            {
+                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                "originating_system": "Example CAD Application",
+                "authoring_tool_id": "EXCAD/v1.0"
+            }, {
+                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
+            }
+        ]
+    }
 
 ### 4.5.7 GET colored Components Service
 
@@ -1734,32 +1907,34 @@ Retrieve a **collection** of all selected components in a viewpoint.
 
     GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/coloring
 
-[component_GET.json](Schemas_draft-03/Collaboration/Component/coloring_GET.json)
+[coloring_GET.json](Schemas_draft-03/Collaboration/Viewpoint/coloring_GET.json)
 
 Retrieve a **collection** of all colored components in a viewpoint.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/selection
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/coloring
 
 **Example Response**
 
     Response Code: 200 - OK
     Body:
-    [
-        {
-            "color": "#ff0000",
-            "components": [
-                {
-                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                    "originating_system": "Example CAD Application",
-                    "authoring_tool_id": "EXCAD/v1.0"
-                }, {
-                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-                }
-            ]
-        }
-    ]
+    {
+        "coloring": [
+            {
+                "color": "ff0000",
+                "components": [
+                    {
+                        "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                        "originating_system": "Example CAD Application",
+                        "authoring_tool_id": "EXCAD/v1.0"
+                    }, {
+                        "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
+                    }
+                ]
+            }
+        ]
+    }
 
 ### 4.5.8 GET visibility of Components Service
 
@@ -1767,7 +1942,7 @@ Retrieve a **collection** of all colored components in a viewpoint.
 
     GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/visibility
 
-[visibility_GET.json](Schemas_draft-03/Collaboration/Component/visibility_GET.json)
+[visibility_GET.json](Schemas_draft-03/Collaboration/Viewpoint/visibility_GET.json)
 
 Retrieve visibility of components in a viewpoint.
 
@@ -1779,23 +1954,47 @@ Retrieve visibility of components in a viewpoint.
 
     Response Code: 200 - OK
     Body:
-     {
-        "default_visibility": true,
-        "exceptions": [
-            {
-                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                "originating_system": "Example CAD Application",
-                "authoring_tool_id": "EXCAD/v1.0"
-            }, {
-                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+    {
+        "visibility": {
+                "default_visibility": true,
+            "exceptions": [
+                {
+                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                    "originating_system": "Example CAD Application",
+                    "authoring_tool_id": "EXCAD/v1.0"
+                }, {
+                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+                }
+            ],
+            "view_setup_hints": {
+                "spaces_visible": true,
+                "space_boundaries_visible": false,
+                "openings_visible": true
             }
-        ],
-        "view_setup_hints": {
-            "spaces_visible": true,
-            "space_boundaries_visible": false,
-            "openings_visible": true
         }
     }
+
+### 4.5.9 DELETE Viewpoint Service
+
+**Resource URL**
+
+    DELETE /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}
+
+Deletes a single viewpoint. This operation is only possible when the server returns the `delete` flag in the Viewpoint authorization, see section [4.5.10](#4510-determining-allowed-viewpoint-modifications)
+
+**Example Request**
+
+    DELETE /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
+
+**Example Response**
+
+    Response Code: 200 - OK
+
+### 4.5.10 Determining allowed Viewpoint modifications
+
+The global default Viewpoint authorizations are expressed in the project schema and when Viewpoint(s) are requested with the
+query parameter "includeAuthorization" equal to "true" Viewpoints will include an "authorization" field containing any local
+overrides for each Viewpoint.
 
 ## 4.6 Related Topics Services
 
@@ -1831,7 +2030,7 @@ Retrieve a **collection** of all related topics to a topic.
 
 [related_topic_PUT.json](Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PUT.json)
 
-Add or update a **collection** of all related topics to a topic.
+Add or update a **collection** of all related topics to a topic. This operation is only possible when the server returns the `updateRelatedTopics` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Example Request**
 
@@ -1859,6 +2058,13 @@ Add or update a **collection** of all related topics to a topic.
 
 ## 4.7 Document Reference Services
 
+Service for relating documents to topics.
+Related documents can be either internal or external, determined by the fields **url** and **document_guid**.
+
+The **url** and the **document_guid** fields are mutually exclusive, which means that only one of these fields are set.
+A document_reference with **url** set, is referencing an external resource.
+A document_reference with **document_guid** set, is referencing an internal **document** which can be downloaded using the [GET Document Service](#483-get-document-service).
+
 ### 4.7.1 GET Document References Service
 
 **Resource URL**
@@ -1878,12 +2084,12 @@ Retrieve a **collection** of all document references to a topic.
     Response Code: 200 - OK
     Body:
     [{
-        "guid": "472ab37a-6122-448e-86fc-86503183b520",
-        "referenced_document": "http://example.com/files/LegalRequirements.pdf",
+        "guid": "212ab37a-6122-448e-86fc-86503183b520",
+        "url": "http://example.com/files/LegalRequirements.pdf",
         "description": "The legal requirements for buildings."
     }, {
         "guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
-        "referenced_document": "http://example.com/files/DesignParameters.pdf",
+        "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
         "description": "The building owners global design parameters for buildings."
     }]
 
@@ -1895,26 +2101,64 @@ Retrieve a **collection** of all document references to a topic.
 
 [document_reference_POST.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_POST.json)
 
-Add or update document references to a topic.
+Add a document reference to a topic. This operation is only possible when the server returns the `updateDocumentReferences` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
+
+Should either reference an internal or an external document.
+- Internal
+  * **document_guid** must match an existing **document** in the project
+  * **url** must be null
+- External
+  * **document_guid** must be null
+  * **url** must be the url to the external resource
+
+**Parameters**
+
+JSON encoded body using the "application/json" content type.
+
+|Parameter|Type|Description|Required|
+|---------|----|-----------|--------|
+|guid|string|The desired guid|false|
+|document_guid|string|The guid of the document (Internal document)|false|
+|url|The url (External document)|false|
+|description|string|The description of the document reference|false|
 
 **Example Request**
 
     POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
     Body:
-    [{
-        "referenced_document": "http://example.com/files/LegalRequirements.pdf",
+    {
+        "url": "http://example.com/files/LegalRequirements.pdf",
         "description": "The legal requirements for buildings."
-    }]
+    }
 
 **Example Response**
 
     Response Code: 201 - Created
     Body:
-    [{
-        "guid": "472ab37a-6122-448e-86fc-86503183b520",
-        "referenced_document": "http://example.com/files/LegalRequirements.pdf",
+    {
+        "guid": "275ab37a-6122-448e-86fc-86503183b520",
+        "url": "http://example.com/files/LegalRequirements.pdf",
         "description": "The legal requirements for buildings."
-    }]
+    }
+
+**Example Request**
+
+    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
+    Body:
+    {
+        "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
+        "description": "The building owners global design parameters for buildings."
+    }
+
+**Example Response**
+
+    Response Code: 201 - Created
+    Body:
+    {
+        "guid": "135ab37a-6122-448e-86fc-86503183b520",
+        "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
+        "description": "The building owners global design parameters for buildings."
+    }
 
 ### 4.7.3 PUT Document Reference Service
 
@@ -1924,27 +2168,28 @@ Add or update document references to a topic.
 
 [document_reference_PUT.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
-Add or update document references to a topic.
+Update an existing document reference identified by **guid**.
+Uses the same rules as [POST Document Reference Service](#472-post-document-reference-service). This operation is only possible when the server returns the `updateDocumentReferences` flag in the Topic authorization, see section [4.2.8](#428-determining-allowed-topic-modifications)
 
 **Example Request**
 
     PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references/472ab37a-6122-448e-86fc-86503183b520
     Body:
-    [{
-        "guid": "472ab37a-6122-448e-86fc-86503183b520",
-        "referenced_document": "http://example.com/files/LegalRequirements_Update.pdf",
+    {
+        "guid": "135ab37a-6122-448e-86fc-86503183b520",
+        "url": "http://example.com/files/LegalRequirements_Update.pdf",
         "description": "The legal requirements for buildings."
-    }]
+    }
 
 **Example Response**
 
     Response Code: 200 - OK
     Body:
-    [{
-        "guid": "472ab37a-6122-448e-86fc-86503183b520",
-        "referenced_document": "http://example.com/files/LegalRequirements_Update.pdf",
+    {
+        "guid": "135ab37a-6122-448e-86fc-86503183b520",
+        "url": "http://example.com/files/LegalRequirements_Update.pdf",
         "description": "The legal requirements for buildings."
-    }]
+    }
 
 ## 4.8 Document Services
 
@@ -1980,11 +2225,13 @@ Retrieve a **collection** of all documents uploaded to a project.
 
     POST /bcf/{version}/projects/{project_id}/documents
 
-Upload a document (binary file) to a project.
+Upload a document (binary file) to a project. This operation is only possible when the server returns the `createDocument` flag in the Project authorization, see section [4.1.5](#415-expressing-user-authorization-through-project-extensions)
+
+Optional: The desired document guid may be passed as a query parameter.
 
 **Example Request**
 
-    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
+    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents?guid=472ab37a-6122-448e-86fc-86503183b520
 
 **Example Response**
 
@@ -2013,7 +2260,8 @@ Retrieves a document as binary file.
 
 ## 4.9 Topics Events Services
 
-The topic events service reflects the events for topics. Each creation or update of a topic generates a new topic event.
+The topic events service reflects the events for topics. Each creation or update of a topic generates new topic events.
+Note: Whenever a topic has been created, the server also generates "update" and "add" events for all fields that are initially set. Example: If a topic contains a description, the **description_updated** event is generated. This is to ensure the full history.
 
 ### 4.9.1 GET Topics Events Service
 
@@ -2199,7 +2447,9 @@ Get events that is of type 'status_updated', 'type_updated' or 'title_updated' o
 
 ## 4.10 Comments Events Services
 
-The comment events service reflects the events for topic comments. Each creation or update of a comment generates a new comment event.
+The comment events service reflects the events for topic comments. Each creation or update of a comment generates new comment events.
+
+Note: Whenever a comment has been created, the server also generates "update" events for all fields that are initially set. Example: If a comment contains a viewpoint, the **viewpoint_updated** event is generated. This is to ensure the full history.
 
 ### 4.10.1 GET Comments Events Service
 

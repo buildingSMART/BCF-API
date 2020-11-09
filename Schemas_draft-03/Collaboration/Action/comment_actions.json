@@ -4,6 +4,7 @@
     "type": "array",
     "items": {
         "type": "string",
-        "enum": ["update"]
+        "enum": ["update",
+            "delete"]
     }
 }
