@@ -2028,7 +2028,6 @@ Uses the same rules as [POST Document Reference Service](#472-post-document-refe
     PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references/472ab37a-6122-448e-86fc-86503183b520
     Body:
     {
-        "guid": "135ab37a-6122-448e-86fc-86503183b520",
         "url": "http://example.com/files/LegalRequirements_Update.pdf",
         "description": "The legal requirements for buildings."
     }
