@@ -26,10 +26,6 @@
             "type": ["string",
             "null"]
         },
-        "reply_to_comment_guid": {
-            "type": ["string",
-            "null"]
-        },
         "modified_date": {
             "type": ["string",
             "null"]

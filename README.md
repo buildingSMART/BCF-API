@@ -656,7 +656,7 @@ at the project level. The available actions include:
 
 * *update* - The ability to update the project details (see [4.1.3 PUT Project Service](#413-put-project-service))
 * *createTopic* - The ability to create a new topic (see [4.2.2 POST Topic Service](#422-post-topic-service))
-* *createDocument* - The ability to create a new document (see [4.8.2 POST Document Service](#492-post-document-service))
+* *createDocument* - The ability to create a new document (see [4.8.2 POST Document Service](#482-post-document-service))
 
 #### 4.1.5.2 Topic
 
@@ -665,9 +665,9 @@ level by default (i.e. unless overridden by specific topics) The available actio
 
 * *update* - The ability to update the topic (see [4.2.4 PUT Topic Service](#424-put-topic-service))
 * *updateBimSnippet* - The ability to update the BIM snippet for topics (see [4.2.7 PUT Topic BIM Snippet Service](#427-put-topic-bim-snippet-service))
-* *updateRelatedTopics* - The ability to update the collection of related topics (see [4.6.2 PUT Related Topics Service](#472-put-related-topics-service))
-* *updateDocumentReferences* - The ability to update the collection of document references (see [4.7.3 PUT Document Reference Service](#483-put-document-reference-service))
-* *updateFiles* - The ability to update the file header (see [4.3.2 PUT Files (Header) Service](#432-put-files-header-service))
+* *updateRelatedTopics* - The ability to update the collection of related topics (see [4.6.2 PUT Related Topics Service](#462-put-related-topics-service))
+* *updateDocumentReferences* - The ability to update the collection of document references (see [4.7.3 PUT Document Reference Service](#473-put-document-reference-service))
+* *updateFiles* - The ability to update the file header (see [4.3.3 PUT Files (Header) Service](#433-put-files-header-service))
 * *createComment* - The ability to create a comment (see [4.4.2 POST Comment Service](#442-post-comment-service))
 * *createViewpoint* - The ability to create a new viewpoint (see [4.5.2 POST Viewpoint Service](#452-post-viewpoint-service))
 
@@ -1211,9 +1211,8 @@ JSON encoded body using the "application/json" content type.
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
 |guid|string|The desired guid|false|
-|comment|string|The comment text|true|
-|viewpoint_guid|string|The GUID of the related viewpoint|false|
-|reply_to_comment_guid|string|GUID of the comment to which this comment replies to|false|
+|comment|string|The comment text, can't be empty when provided|true, if `viewpoint_guid` is not provided|
+|viewpoint_guid|string|The GUID of the related viewpoint|true, if `comment` is not provided|
 
 **Example Request**
 
@@ -2466,8 +2465,6 @@ Retrieve a **collection** of comment events related to a project (default sort o
 |comment_text_updated|The comment text(limit: 1024 characters)|
 |viewpoint_updated|The viewpoint guid|
 |viewpoint_removed|null|
-|reply_to_comment_updated|The reply to comment guid|
-|reply_to_comment_removed|null|
 
 **Odata filter parameters**
 
@@ -2539,7 +2536,7 @@ Get events that are of type 'comment_created', or 'viewpoint_updated'
 
 [comment_event_GET.json](Schemas_draft-03/Collaboration/Events/comment_event_GET.json)
 
-Retrieve a **collection** of comment events related to a comment (default sort order is `date`).
+Retrieve a **collection** of comment events related to a single comment (default sort order is `date`).
 
 **Comment event types**
 
@@ -2549,8 +2546,6 @@ Retrieve a **collection** of comment events related to a comment (default sort o
 |comment_text_updated|The comment text(limit: 1024 characters)|
 |viewpoint_updated|The viewpoint guid|
 |viewpoint_removed|null|
-|reply_to_comment_updated|The reply to comment guid|
-|reply_to_comment_removed|null|
 
 **Odata filter parameters**
 
