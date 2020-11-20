@@ -4,29 +4,22 @@
 # BCF REST API
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
-**Version 2.1** based on BCFv2.1.
+**Version 2.2** based on BCFv2.1.
 [BCF XML GitHub repository](https://github.com/BuildingSMART/BCF)
 
+[Version 1.0 of the Open CDE Foundation API specification is available here](https://github.com/BuildingSMART/shared-common-API/tree/v1.0)
 [Version 1.0 of the BCF API specification is available here](https://github.com/BuildingSMART/BCF-API/tree/v1.0)
+[Version 2.1 of the BCF API specification is available here](https://github.com/BuildingSMART/BCF-API/tree/v2.1)
 
 **Table of Contents**
 
 <!-- toc -->
 
 - [1. Introduction](#1-introduction)
-  * [1.1 Paging, Sorting and Filtering](#11-paging-sorting-and-filtering)
-  * [1.2 Caching](#12-caching)
-  * [1.3 Updating Resources via HTTP PUT](#13-updating-resources-via-http-put)
-  * [1.4 Cross Origin Resource Sharing (CORS)](#14-cross-origin-resource-sharing-cors)
-  * [1.5 Http Status Codes](#15-http-status-codes)
-  * [1.6 Error Response Body Format](#16-error-response-body-format)
-  * [1.7 DateTime Format](#17-datetime-format)
-  * [1.8 Authorization](#18-authorization)
-    + [1.8.1 Per-Entity Authorization](#181-per-entity-authorization)
-    + [1.8.2 Determining Authorized Entity Actions](#182-determining-authorized-entity-actions)
-  * [1.9 Additional Response and Request Object Properties](#19-additional-response-and-request-object-properties)
-  * [1.10 Binary File Uploads](#110-binary-file-uploads)
-  * [1.11 Differences Between null and Empty Lists](#111-differences-between-null-and-empty-lists)
+  * [1.1 Open CDE Foundation API](#11-open-cde-foundation-api)
+  * [1.2 Authorization](#18-authorization)
+    + [1.2.1 Per-Entity Authorization](#181-per-entity-authorization)
+    + [1.2.2 Determining Authorized Entity Actions](#182-determining-authorized-entity-actions)
 - [2. Topologies](#2-topologies)
   * [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
   * [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
@@ -118,7 +111,7 @@
 
 # 1. Introduction
 
-BCF is a format for managing issues on a BIM project. The BCF-API supports the exchange of BCF issues between software applications via a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) web interface, which means that data is exchanged via Url-encoded query parameters and Json bodies over the Http protocol. Every resource described in this API has a corresponding Json schema (schema version draft-03).
+BCF is an open standard for managing issues on a BIM project. The BCF-API supports the exchange of BCF issues between software applications via a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) web interface, which means that data is exchanged via Url-encoded query parameters and Json bodies over the Http protocol. Every resource described in this API has a corresponding Json schema (schema version draft-03).
 Url schemas in this readme are relational to the BCF base servers Url if no absolute values are provided.
 
 For security reasons, all API Http traffic should be sent via TLS/SSL over Https connection. Clients and Servers should both enforce secure connections and disallow unsafe connections.
@@ -126,84 +119,19 @@ For security reasons, all API Http traffic should be sent via TLS/SSL over Https
 An example of a client implementation in C# can be found here:
 [https://github.com/rvestvik/BcfApiExampleClient](https://github.com/rvestvik/BcfApiExampleClient)
 
-## 1.1 Paging, Sorting and Filtering
+## 1.1 Open CDE Foundation API
 
-When requesting collections of items, the BCF-API should offer URL parameters according to the OData v4 specification. It can be found at [http://www.odata.org/documentation/](http://www.odata.org/documentation/).
+BCF API is a member of the Open CDE API family. All Open CDE APIs are united by a shared common API called [Open CDE Foundation API](https://github.com/buildingSMART/shared-common-API). 
+The foundation API specifies a small number of services and a few conventions that are common to all Open CDE APIs. All BCF API implementations must implement the Foundation API and follow its conventions and guidelines. 
+Implementers should start by implementing the Founation API and only then continue to implement the BCF API.
 
-## 1.2 Caching
-
-ETags, or entity-tags, are an important part of HTTP, being a critical part of caching, and also used in "conditional" requests.
-
-The ETag response-header field value, an entity tag, provides for an "opaque" cache validator.
-The easiest way to think of an etag is as an MD5 or SHA1 hash of all the bytes in a representation. If just one byte in the representation changes, the etag will change.
-
-ETags are returned in a response to a GET:
-
-    joe@joe-laptop:~$ curl --include http://bitworking.org/news/
-    HTTP/1.1 200 Ok
-    Date: Wed, 21 Mar 2007 15:06:15 GMT
-    Server: Apache
-    ETag: "078de59b16c27119c670e63fa53e5b51"
-    Content-Length: 23081
-    …
-
-The client may send an "If-None-Match" HTTP Header containing the last retrieved etag. If the content has not changed the server returns a status code 304 (not modified) and no response body.
-
-## 1.3 Updating Resources via HTTP PUT
-
-Whenever a resource offers the HTTP PUT method to be updated as a whole.
-
-This means that there is no partial update mechanism for objects but every PUT request is sending the whole object representation. PUT schemas may exclude server generated values that cannot be edited, such as creation dates or authors.
-
-## 1.4 Cross Origin Resource Sharing (CORS)
-
-To work with browser based API clients using [Cross Origin Resource Sharing (Cors)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing), servers will put the `Access-Control-Allow'` headers in the response headers and specifiy who can access the servers Json resources. The client can look for these values and proceed with accessing the resources.
-
-In a CORS scenario, web clients expect the following headers:
-* `Access-Control-Allow-Headers: Authorization, Content-Type, Accept` to allow the `Authorization`, `Content-Type` and `Accept` headers to be used via [XHR requests](https://en.wikipedia.org/wiki/XMLHttpRequest)
-* `Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS` to allow the Http methods the API needs
-* `Access-Control-Allow-Origin: example.com` to allow XHR requests from the `example.com` domain to the BCF server
-
-For example, Asp.Net applications in IIS need the following entries in their `web.config` file. `*` means the server allows any values.
-
-    <httpProtocol>
-        <customHeaders>
-            <add name="Access-Control-Allow-Headers" value="Content-Type, Accept, X-Requested-With,  Authorization" />
-            <add name="Access-Control-Allow-Methods" value="GET, POST, PUT, DELETE, OPTIONS" />
-            <add name="Access-Control-Allow-Origin" value="*" />
-        </customHeaders>
-    </httpProtocol>
-
-## 1.5 Http Status Codes
-
-The BCF API relies on the regular Http Status Code definitions. Good sources are [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) or the [HTTP/1.1 Specification](https://tools.ietf.org/html/rfc7231).
-
-Generally, these response codes shall be used in the API:
-* `200 - OK` for `GET` requests that return data or `PUT` requests that update data
-* `201 - Created` for `POST` requests that create data
-
-`POST` and `PUT` requests do usually include the created resource in the response body. Exceptions to this rule are described in the specific section for the resource.
-
-## 1.6 Error Response Body Format
-
-BCF-API has a specified error response body format [error.json](Schemas_draft-03/error.json).
-
-## 1.7 DateTime Format
-
-DateTime values in this API are supposed to be in ISO 8601 compliant `YYYY-MM-DDThh:mm:ss` format with optional time zone indicators. This is the same format as defined in the Xml `xs:dateTime` type as well as the result of JavaScripts Date.toJson() output.
-
-For example, `2016-04-28T16:31:12.270+02:00` would represent _Thursday, April 28th, 2016, 16:31:12 (270ms) with a time zone offset of +2 hours relative to UTC._
-Please note that the colon in the timezone offset is optional, so `+02:00` is equivalent to `+0200`.
-
-To void ambiguity, This specification steps away from ISO 8601 on the topic of DateTime values with no timezone: The ISO 8601 says that DateTime values with no timezone designator are local times - **In BCF all DateTime values with no timezone designator as assumed to be in UTC**.
-
-## 1.8 Authorization
+## 1.2 Authorization
 
 API implementors can optionally choose to restrict the actions a user is allowed to perform on the BCF entities
 via the API. The global default authorizations for all entities are expressed in the project extensions schema and can
 be locally overridden in the entities themselves.
 
-### 1.8.1 Per-Entity Authorization
+### 1.2.1 Per-Entity Authorization
 
 Whenever a user requests an update-able entity with the query parameter `includeAuthorization` equal to `true` the
 server should include an `authorization` field in the entity containing any local variations from the global
@@ -211,7 +139,7 @@ authorization defaults for that entity. Using this information clients can decid
 "Edit" button in the UI displaying the entity depending on the actions permitted for the user or suggest only the 
 options available to the user for choice fields such as topic status. 
 
-### 1.8.2 Determining Authorized Entity Actions
+### 1.2.2 Determining Authorized Entity Actions
 
 The client can calculate the available set of actions for a particular entity by taking the project-wide defaults from
 the project extensions, then replacing any keys defined in the entity's `authorization` map with the values specified
@@ -259,36 +187,6 @@ Indicating that for this topic, the current user can:
 * update the Topic, or add comments or viewpoints
 * place the Topic into `closed` status
 * leave the Topic `open` or place the topic back into `open` status after closing it
-
-## 1.9 Additional Response and Request Object Properties
-
-All API response and request Json objects may contain additional properties that are not covered by this specification.
-This is to allow server and client implementations freedom to add additional functionality. Servers and clients shall ignore those properties and must not produce errors on additional properties. Servers and clients are not required to preserve these properties.
-
-## 1.10 Binary File Uploads
-
-Some endpoints in the BCF API expect binary file uploads, such as [4.8.2 POST Document Service](#482-post-document-service)
-or [4.2.7 PUT Topic BIM Snippet Service](#427-put-topic-bim-snippet-service).
-
-In such cases, files should be sent with the following Http headers:
-
-    Headers:
-    Content-Type: application/octet-stream;
-    Content-Length: {Size of file in bytes};
-    Content-Disposition: attachment; filename="{Filename.extension}";
-
-## 1.11 Differences Between null and Empty Lists
-
-Some array or list properties and responses can be interpreted differently if they are either `null` or empty. In general, there are two cases to consider.
-
-**For collection resources:**
-
-* A collection resource that does not exist should return Http error `404 - Not Found`, e.g. the list of topics for an invalid project id.
-* If the resource exists but there are no elements, the returned response should be an empty array `[]`, e.g. the list of topics for a project where no topics exist.
-
-**For properties:**
-
-* If a list property is `null` (by explicitly setting it to null or not returning it in the response object at all), the client should not assume that this represents an empty list but instead the property is not present on the response object. Depending on the response object, this can have the same meaning as an empty list (e.g. no components in a viewpoint is the same as an empty list of components), but this can also mean the property is just omitted for optional properties (e.g. no `topic_actions` in an `authorization` object can mean no restrictions).
 
 ----------
 
