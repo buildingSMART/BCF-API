@@ -1445,13 +1445,20 @@ JSON encoded body using the "application/json" content type.
 |---------|----|-----------|--------|
 | guid | string | The desired guid | optional |
 | index | integer | parameter for sorting | optional |
-| orthogonal camera | [Orthogonal camera](#4523-orthogonal-camera) | orthogonal camera view | optional |
-| perspective camera | [Perspective camera](#4524-perspective-camera) | perspective view of the camera | optional |
+| orthogonal_camera | [Orthogonal camera](#4523-orthogonal-camera) | orthogonal camera view | see viewpoint optional/mandatory fields clarification |
+| perspective_camera | [Perspective camera](#4524-perspective-camera) | perspective view of the camera |  see viewpoint optional/mandatory fields clarification |
 | lines | array of [Line](#4525-line) | graphical line | optional |
 | clipping_planes | array of [Clipping Plane](#4526-clipping-plane) | clipping planes for the model view | optional |
 | bitmaps | array of [Bitmap](#4527-bitmap) | embedded pictures in the viewpoint | optional |
-| snapshot | [Snapshot](#4528-snapshot) | snapshot image of the viewpoint | optional |
+| snapshot | [Snapshot](#4528-snapshot) | snapshot image of the viewpoint |  see viewpoint optional/mandatory fields clarification |
 | components | [Components](#4529-components) | Components in the viewpoint | optional |
+
+**Viewpoint optional/mandatory fields clarification**
+
+1. **Camera definition** is exactly one of `perspective_camera` or `orthogonal_camera`
+2. **Visualisation information** consists of one or more of the following elements: `lines`, `clipping_plans`, `bitmaps`, `components`
+3. A viewpoint must contain a _camera definition_, a `snapshot` or both
+4. A viewpoint containing _visualization information_ must also contain a _camera definition_
 
 #### 4.5.2.1 Point
 [point.json](Schemas_draft-03/Collaboration/Viewpoint/point.json)
