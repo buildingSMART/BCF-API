@@ -716,7 +716,7 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 |creation_date|creation date of a topic|
 |modified_date|modification date of a topic|
 |server_id|the [server_id](#429-topic-identifiers) of the topic|
-|index|index of a topic|
+|index|index of a topic **This property is deprecated and will be removed in a future release**|
 
 **Example Request with odata**
 
@@ -782,7 +782,7 @@ JSON encoded body using the "application/json" content type.
 |reference_links|array (string)|Reference links, i.e. links to referenced resources|false|
 |title|string|The title of a topic|true|
 |priority|string|The priority of a topic (value from extension.xsd)|false|
-|index|integer|The index of a topic|false|
+|index|integer|The index of a topic **This property is deprecated and will be removed in a future release**|false|
 |labels|array (string)|The collection of labels of a topic (values from extension.xsd)|false|
 |assigned_to|string|UserID assigned to a topic (value from extension.xsd). UserIDs are recommended to be in email format as to uniquely identify users throughout multiple systems|false|
 |stage|string|Stage this topic is part of (value from extension.xsd)|false|
