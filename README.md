@@ -4,11 +4,14 @@
 # BCF REST API
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
-**Version 2.2** based on BCFv2.1.
-[BCF XML GitHub repository](https://github.com/BuildingSMART/BCF)
+**BCFv2.2** is based on BCFv2.1.
+
+[BCF XML GitHub repository](https://github.com/BuildingSMART/BCF-XML)
 
 [Version 1.0 of the Open CDE Foundation API specification is available here](https://github.com/BuildingSMART/shared-common-API/tree/v1.0)
+
 [Version 1.0 of the BCF API specification is available here](https://github.com/BuildingSMART/BCF-API/tree/v1.0)
+
 [Version 2.1 of the BCF API specification is available here](https://github.com/BuildingSMART/BCF-API/tree/v2.1)
 
 **Table of Contents**
@@ -111,8 +114,8 @@
 
 # 1. Introduction
 
-BCF is an open standard for managing issues on a BIM project. The BCF-API supports the exchange of BCF issues between software applications via a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) web interface, which means that data is exchanged via Url-encoded query parameters and Json bodies over the Http protocol. Every resource described in this API has a corresponding Json schema (schema version draft-03).
-Url schemas in this readme are relational to the BCF base servers Url if no absolute values are provided.
+BCF is an open standard for managing issues on a BIM project. The BCF-API supports the exchange of BCF issues between software applications via a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) web interface, which means that data is exchanged via HTTP query parameters and Json bodies. Every resource described in this API has a corresponding Json schema (schema version draft-03).
+Url schemas in this README are relative to the BCF servers' base Url unless absolute values are provided.
 
 For security reasons, all API Http traffic should be sent via TLS/SSL over Https connection. Clients and Servers should both enforce secure connections and disallow unsafe connections.
 
@@ -123,7 +126,7 @@ An example of a client implementation in C# can be found here:
 
 BCF API is a member of the Open CDE API family. All Open CDE APIs are united by a shared common API called [Open CDE Foundation API](https://github.com/buildingSMART/shared-common-API). 
 The foundation API specifies a small number of services and a few conventions that are common to all Open CDE APIs. All BCF API implementations must implement the Foundation API and follow its conventions and guidelines. 
-Implementers should start by implementing the Founation API and only then continue to implement the BCF API.
+Implementers should start by implementing the Foundation API and only then continue to implement the BCF API.
 
 ## 1.2 Authorization
 
