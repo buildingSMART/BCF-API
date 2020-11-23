@@ -1213,8 +1213,8 @@ JSON encoded body using the "application/json" content type.
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
 |guid|string|The desired guid|false|
-|comment|string|The comment text, can't be empty when provided|true, if `viewpoint_guid` is not provided|
-|viewpoint_guid|string|The GUID of the related viewpoint|true, if `comment` is not provided|
+|comment|string|The comment text. Must not be blank or empty if provided|true, unless `viewpoint_guid` is provided|
+|viewpoint_guid|string|The GUID of the related viewpoint|true, unless `comment` is provided|
 
 **Example Request**
 
