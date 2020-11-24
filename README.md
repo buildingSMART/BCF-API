@@ -114,7 +114,7 @@
 
 # 1. Introduction
 
-BCF is an open standard for managing issues on a BIM project. The BCF-API supports the exchange of BCF issues between software applications via a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) web interface, which means that data is exchanged via HTTP query parameters and Json bodies. Every resource described in this API has a corresponding Json schema (schema version draft-03).
+BCF is an open standard for managing issues on a BIM project. The BCF-API supports the exchange of BCF issues between software applications via a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) web interface, which means that data is exchanged via HTTP query parameters and JSON bodies. Every resource described in this API has a corresponding JSON schema (schema version draft-03).
 Url schemas in this README are relative to the BCF servers' base Url unless absolute values are provided.
 
 For security reasons, all API Http traffic should be sent via TLS/SSL over Https connection. Clients and Servers should both enforce secure connections and disallow unsafe connections.
