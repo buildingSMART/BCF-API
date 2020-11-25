@@ -694,6 +694,9 @@ default (i.e unless overridden by specific comments). The available actions incl
 
 Retrieve a **collection** of topics related to a project (default sort order is `creation_date`).
 
+The topic modified_date returned by the server should be the latest value of either when the topic or when the latest comment was updated.
+The addition of a floating viewpoint should update the topic modified_date.
+
 **Odata filter parameters**
 
 |parameter|type|description|
