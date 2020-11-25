@@ -179,10 +179,20 @@ For example, Asp.Net applications in IIS need the following entries in their `we
 The BCF API relies on the regular Http Status Code definitions. Good sources are [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) or the [HTTP/1.1 Specification](https://tools.ietf.org/html/rfc7231).
 
 Generally, these response codes shall be used in the API:
+
+### Success
+
 * `200 - OK` for `GET` requests that return data or `PUT` requests that update data
 * `201 - Created` for `POST` requests that create data
 
 `POST` and `PUT` requests do usually include the created resource in the response body. Exceptions to this rule are described in the specific section for the resource.
+
+### Error
+
+* `400 - Bad Request` for invalid requests.
+* `401 - Unauthorized` for requests that have errors when the user is not authenticated.
+* `403 - Forbidden` for requests when the user is authenticated but not authorized to perform the operation.
+* `500 - Internal Server Error` the server encountered an unexpected condition which prevented it from fulfilling the request.
 
 ## 1.6 Error Response Body Format
 
@@ -795,6 +805,11 @@ JSON encoded body using the "application/json" content type.
 
 _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `is_external`, `reference` and `reference_schema`) are mandatory._
 
+
+**Additional errors**
+
+* `409 - Conflict` A topic with the same guid already exists in the project.
+
 **Example Request**
 
     POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
@@ -1216,6 +1231,10 @@ JSON encoded body using the "application/json" content type.
 |comment|string|The comment text. Must not be blank or empty if provided|true, unless `viewpoint_guid` is provided|
 |viewpoint_guid|string|The GUID of the related viewpoint|true, unless `comment` is provided|
 
+**Additional errors**
+
+* `409 - Conflict` A comment with the same guid already exists in the topic.
+
 **Example Request**
 
     POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
@@ -1600,6 +1619,10 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
 | spaces_visible | boolean | Visibility of spaces | optional, default false |
 | space_boundaries_visible | boolean | Visibility of space_boundaries | optional, default false |
 | openings_visible | boolean | Visibility of openings | optional, default false |
+
+**Additional errors**
+
+* `409 - Conflict` A viewpoint with the same guid already exists in the topic.
 
 **Example Request**
 
@@ -2137,6 +2160,10 @@ JSON encoded body using the "application/json" content type.
 |url|The url (External document)|false|
 |description|string|The description of the document reference|false|
 
+**Additional errors**
+
+* `409 - Conflict` A document reference with the same guid already exists in the topic.
+
 **Example Request**
 
     POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
@@ -2242,6 +2269,10 @@ Retrieve a **collection** of all documents uploaded to a project.
 Upload a document (binary file) to a project. This operation is only possible when the server returns the `createDocument` flag in the Project authorization, see section [4.1.5](#415-expressing-user-authorization-through-project-extensions)
 
 Optional: The desired document guid may be passed as a query parameter.
+
+**Additional errors**
+
+* `409 - Conflict` A document with the same guid already exists in the project.
 
 **Example Request**
 
