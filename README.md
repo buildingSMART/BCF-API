@@ -1318,6 +1318,8 @@ overrides for each Comment.
 
 ## 4.5 Viewpoint Services
 
+Viewpoints are described in detail in [BCF-XML](https://github.com/buildingSMART/BCF-XML/tree/release_2_2/Documentation#viewpoints).
+
 ### 4.5.1 GET Viewpoints Service
 
 **Resource URL**
@@ -1354,7 +1356,8 @@ Retrieve a **collection** of all viewpoints related to a topic.
                 "y": 0.0,
                 "z": 1.0
             },
-            "field_of_view": 90.0
+            "field_of_view": 90.0,
+            "aspect_ratio": 1.33
         },
         "lines": [{
             "start_point": {
@@ -1398,7 +1401,8 @@ Retrieve a **collection** of all viewpoints related to a topic.
                 "y": 0.0,
                 "z": 1.0
             },
-            "field_of_view": 90.0
+            "field_of_view": 90.0,
+            "aspect_ratio": 1.33
         },
         "lines": [{
             "start_point": {
@@ -1484,20 +1488,22 @@ Direction must not be a zero vector.
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
-| camera_view_point | [Direction](#4522-direction) | viewpoint of the camera | mandatory |
-| camera_direction | [Direction](#4522-direction) | direction of the camera | mandatory |
-| camera_up_vector | [Direction](#4522-direction) | direction of camera up | mandatory |
-| view_to_world_scale | number | proportion of camera view to model | mandatory |
+| camera_view_point | [Point](#4521-point) | camera location | mandatory |
+| camera_direction | [Direction](#4522-direction) | camera direction | mandatory |
+| camera_up_vector | [Direction](#4522-direction) | camera up vector | mandatory |
+| view_to_world_scale | number | the entire vertical scaling from view to world | mandatory |
+| aspect_ratio | number | proportional relationship between the width and the height of the view (w/h) | mandatory |
 
 #### 4.5.2.4 Perspective camera
 [perspective_camera.json](Schemas_draft-03/Collaboration/Viewpoint/perspective_camera.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
-| camera_view_point | [Point](#4521-point) | viewpoint of the camera | mandatory |
-| camera_direction | [Direction](#4522-direction) | direction of the camera | mandatory |
-| camera_up_vector | [Direction](#4522-direction) | direction of camera up | mandatory |
-| field_of_view | number | field of view | mandatory |
+| camera_view_point | [Point](#4521-point) | camera location  | mandatory |
+| camera_direction | [Direction](#4522-direction) | camera direction | mandatory |
+| camera_up_vector | [Direction](#4522-direction) | camera up vector | mandatory |
+| field_of_view | number | the entire vertical field of view angle of the camera, expressed in degrees | mandatory |
+| aspect_ratio | number | proportional relationship between the width and the height of the view (w/h) | mandatory |
 
 #### 4.5.2.5 Line
 [line.json](Schemas_draft-03/Collaboration/Viewpoint/line.json)
@@ -1617,7 +1623,8 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
                 "y": 0.0,
                 "z": 1.0
             },
-            "field_of_view": 90.0
+            "field_of_view": 90.0,
+            "aspect_ratio": 1.33
         },
         "lines": [{
             "start_point": {
@@ -1716,7 +1723,8 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
                 "y": 0.0,
                 "z": 1.0
             },
-            "field_of_view": 90.0
+            "field_of_view": 90.0,
+            "aspect_ratio": 1.33
         },
         "lines": [{
             "start_point": {
@@ -1803,7 +1811,8 @@ Retrieve a specific viewpoint.
                 "y": 0.0,
                 "z": 1.0
             },
-            "field_of_view": 90.0
+            "field_of_view": 90.0,
+            "aspect_ratio": 1.33
         },
         "lines": [{
             "start_point": {
