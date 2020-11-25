@@ -6,7 +6,7 @@
             "required": true,
             "type": "string"
         },
-        "server_id": {
+        "server_assigned_id": {
             "required": true,
             "type": "string"
         },

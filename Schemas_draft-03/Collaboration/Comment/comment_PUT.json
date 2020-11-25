@@ -9,10 +9,6 @@
         "viewpoint_guid": {
             "type": ["string",
             "null"]
-        },
-        "reply_to_comment_guid": {
-            "type": ["string",
-            "null"]
         }
     }
 }

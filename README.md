@@ -8,7 +8,7 @@
 
 [BCF XML GitHub repository](https://github.com/BuildingSMART/BCF-XML)
 
-[Version 1.0 of the Open CDE Foundation API specification is available here](https://github.com/BuildingSMART/shared-common-API/tree/v1.0)
+[Version 1.0 of the OpenCDE Foundation API specification is available here](https://github.com/BuildingSMART/opencde-foundation-API/tree/v1.0)
 
 [Version 1.0 of the BCF API specification is available here](https://github.com/BuildingSMART/BCF-API/tree/v1.0)
 
@@ -19,7 +19,7 @@
 <!-- toc -->
 
 - [1. Introduction](#1-introduction)
-  * [1.1 Open CDE Foundation API](#11-open-cde-foundation-api)
+  * [1.1 OpenCDE Foundation API](#11-opencde-foundation-api)
   * [1.2 Authorization](#12-authorization)
     + [1.2.1 Per-Entity Authorization](#121-per-entity-authorization)
     + [1.2.2 Determining Authorized Entity Actions](#122-determining-authorized-entity-actions)
@@ -107,17 +107,17 @@
 # 1. Introduction
 
 BCF is an open standard for managing issues on a BIM project. The BCF-API supports the exchange of BCF issues between software applications via a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) web interface, which means that data is exchanged via HTTP query parameters and JSON bodies. Every resource described in this API has a corresponding JSON schema (schema version draft-03).
-Url schemas in this README are relative to the BCF servers' base Url unless absolute values are provided.
+URL schemas in this README are relative to the BCF servers' base URL unless absolute values are provided.
 
 For security reasons, all API Http traffic should be sent via TLS/SSL over Https connection. Clients and Servers should both enforce secure connections and disallow unsafe connections.
 
 An example of a client implementation in C# can be found here:
 [https://github.com/rvestvik/BcfApiExampleClient](https://github.com/rvestvik/BcfApiExampleClient)
 
-## 1.1 Open CDE Foundation API
+## 1.1 OpenCDE Foundation API
 
-BCF API is a member of the Open CDE API family. All Open CDE APIs are united by a shared common API called [Open CDE Foundation API](https://github.com/buildingSMART/shared-common-API). 
-The foundation API specifies a small number of services and a few conventions that are common to all Open CDE APIs. All BCF API implementations must implement the Foundation API and follow its conventions and guidelines. 
+BCF API is a member of the OpenCDE API family. All OpenCDE APIs are united by a shared common API called [OpenCDE Foundation API](https://github.com/buildingSMART/opencde-foundation-API). 
+The foundation API specifies a small number of services and a few conventions that are common to all OpenCDE APIs. All BCF API implementations must implement the Foundation API and follow its conventions and guidelines. 
 Implementers should start by implementing the Foundation API and only then continue to implement the BCF API.
 
 ## 1.2 Authorization
@@ -444,8 +444,8 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 |---------|-----------|
 |creation_date|creation date of a topic|
 |modified_date|modification date of a topic|
-|server_id|the [server_id](#329-topic-identifiers) of the topic|
-|index|index of a topic|
+|server_assigned_id|the [server_assigned_id](#329-topic-identifiers) of the topic|
+|index|index of a topic **This property is deprecated and will be removed in a future release**|
 
 **Example Request with odata**
 
@@ -456,7 +456,7 @@ Get topics that are open, assigned to Architect@example.com and created after De
 Odata does not support list operators. To achieve list query, use the 'or' operator.
 Get topics that have at least one of the labels 'Architecture', 'Structural' or 'Heating'
 
-    GET /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=contains(labels, 'Architecture') or contains(labels, 'Structural') or contains(labels, 'Heating')
+    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=labels/any(label: label eq 'Architecture') or labels/any(label: label eq 'Structural') or labels/any(label: label eq 'Heating')
 
 **Example Request**
 
@@ -468,7 +468,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
     Body:
     [{
         "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
-        "server_id": "CLASH-00001",
+        "server_assigned_id": "ISSUE-00001",
         "creation_author": "Architect@example.com",
         "title": "Example topic 1",
         "labels": [
@@ -478,7 +478,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
         "creation_date": "2013-10-21T17:34:22.409Z"
     }, {
         "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
-        "server_id": "CLASH-00078",
+        "server_assigned_id": "ISSUE-00078",
         "creation_author": "Architect@example.com",
         "title": "Example topic 2",
         "labels": [
@@ -511,7 +511,7 @@ JSON encoded body using the "application/json" content type.
 |reference_links|array (string)|Reference links, i.e. links to referenced resources|false|
 |title|string|The title of a topic|true|
 |priority|string|The priority of a topic (value from extension.xsd)|false|
-|index|integer|The index of a topic|false|
+|index|integer|The index of a topic **This property is deprecated and will be removed in a future release**|false|
 |labels|array (string)|The collection of labels of a topic (values from extension.xsd)|false|
 |assigned_to|string|UserID assigned to a topic (value from extension.xsd). UserIDs are recommended to be in email format as to uniquely identify users throughout multiple systems|false|
 |stage|string|Stage this topic is part of (value from extension.xsd)|false|
@@ -552,7 +552,7 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
     Body:
     {
         "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
-        "server_id": "ISSUE-01462",
+        "server_assigned_id": "ISSUE-01462",
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": "Clash",
@@ -592,7 +592,7 @@ Retrieve a specific topic.
     Body:
     {
         "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
-        "server_id": "ISSUE-00549",
+        "server_assigned_id": "ISSUE-00549",
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": "Clash",
@@ -656,7 +656,7 @@ Modify a specific topic, description similar to POST. This operation is only pos
     Body:
     {
         "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
-        "server_id": "ISSUE-00037",
+        "server_assigned_id": "ISSUE-00037",
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
         "modified_author": "Architect@example.com",
@@ -724,12 +724,12 @@ Each topic has two identifiers:
     interactions to identify topics. <br> 
     
     `guid` examples: 420b24db-921c-46d6-9629-d529d130307f, 5139a00f-5cbd-4760-9e44-16cc4826aa5a 
-2. `server_id` - a human-friendly identifier which is generated and controlled by the server. A `server_id` is project-unique: 
-    No two topics in a given server and project may have the same `server_id`. However, topics in different projects on a 
-    given server may have identical `server_id`s. `server_id`s can't be changed using the API; BCF clients should display 
-    `server_id`s to users to make it easier to locate and discuss topics.<br>
+2. `server_assigned_id` - a human-friendly identifier which is generated and controlled by the server. A `server_assigned_id` is project-unique: 
+    No two topics in a given server and project may have the same `server_assigned_id`. However, topics in different projects on a 
+    given server may have identical `server_assigned_id`s. `server_assigned_id`s can't be changed using the API; BCF clients should display 
+    `server_assigned_id`s to users to make it easier to locate and discuss topics.<br>
     
-    `server_id` examples: 003490, ISSUE-01, CLASH-578  
+    `server_assigned_id` examples: 003490, ISSUE-01  
 
 ## 3.3 File Services
 
@@ -942,9 +942,8 @@ JSON encoded body using the "application/json" content type.
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
 |guid|string|The desired guid|false|
-|comment|string|The comment text|true|
-|viewpoint_guid|string|The GUID of the related viewpoint|false|
-|reply_to_comment_guid|string|GUID of the comment to which this comment replies to|false|
+|comment|string|The comment text. Must not be blank or empty if provided|true, unless `viewpoint_guid` is provided|
+|viewpoint_guid|string|The GUID of the related viewpoint|true, unless `comment` is provided|
 
 **Example Request**
 
@@ -1048,6 +1047,8 @@ overrides for each Comment.
 
 ## 3.5 Viewpoint Services
 
+Viewpoints are described in detail in [BCF-XML](https://github.com/buildingSMART/BCF-XML/tree/release_2_2/Documentation#viewpoints).
+
 ### 3.5.1 GET Viewpoints Service
 
 **Resource URL**
@@ -1084,7 +1085,8 @@ Retrieve a **collection** of all viewpoints related to a topic.
                 "y": 0.0,
                 "z": 1.0
             },
-            "field_of_view": 90.0
+            "field_of_view": 90.0,
+            "aspect_ratio": 1.33
         },
         "lines": [{
             "start_point": {
@@ -1128,7 +1130,8 @@ Retrieve a **collection** of all viewpoints related to a topic.
                 "y": 0.0,
                 "z": 1.0
             },
-            "field_of_view": 90.0
+            "field_of_view": 90.0,
+            "aspect_ratio": 1.33
         },
         "lines": [{
             "start_point": {
@@ -1174,13 +1177,20 @@ JSON encoded body using the "application/json" content type.
 |---------|----|-----------|--------|
 | guid | string | The desired guid | optional |
 | index | integer | parameter for sorting | optional |
-| orthogonal camera | [Orthogonal camera](#3523-orthogonal-camera) | orthogonal camera view | optional |
-| perspective camera | [Perspective camera](#3524-perspective-camera) | perspective view of the camera | optional |
+| orthogonal_camera | [Orthogonal camera](#3523-orthogonal-camera) | orthogonal camera view | see viewpoint optional/mandatory fields clarification |
+| perspective_camera | [Perspective camera](#3524-perspective-camera) | perspective view of the camera |  see viewpoint optional/mandatory fields clarification |
 | lines | array of [Line](#3525-line) | graphical line | optional |
 | clipping_planes | array of [Clipping Plane](#3526-clipping-plane) | clipping planes for the model view | optional |
 | bitmaps | array of [Bitmap](#3527-bitmap) | embedded pictures in the viewpoint | optional |
-| snapshot | [Snapshot](#3528-snapshot) | snapshot image of the viewpoint | optional |
+| snapshot | [Snapshot](#3528-snapshot) | snapshot image of the viewpoint |  see viewpoint optional/mandatory fields clarification |
 | components | [Components](#3529-components) | Components in the viewpoint | optional |
+
+**Viewpoint optional/mandatory fields clarification**
+
+1. **Camera definition** is exactly one of `perspective_camera` or `orthogonal_camera`
+2. **Visualisation information** consists of one or more of the following elements: `lines`, `clipping_plans`, `bitmaps`, `components`
+3. A viewpoint must contain a _camera definition_, a `snapshot` or both
+4. A viewpoint containing _visualization information_ must also contain a _camera definition_
 
 #### 3.5.2.1 Point
 [point.json](Schemas_draft-03/Collaboration/Viewpoint/point.json)
@@ -1207,20 +1217,22 @@ Direction must not be a zero vector.
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
-| camera_view_point | [Direction](#3522-direction) | viewpoint of the camera | mandatory |
-| camera_direction | [Direction](#3522-direction) | direction of the camera | mandatory |
-| camera_up_vector | [Direction](#3522-direction) | direction of camera up | mandatory |
-| view_to_world_scale | number | proportion of camera view to model | mandatory |
+| camera_view_point | [Point](#3521-point) | camera location | mandatory |
+| camera_direction | [Direction](#3522-direction) | camera direction | mandatory |
+| camera_up_vector | [Direction](#3522-direction) | camera up vector | mandatory |
+| view_to_world_scale | number | the entire vertical scaling from view to world | mandatory |
+| aspect_ratio | number | proportional relationship between the width and the height of the view (w/h) | mandatory |
 
 #### 3.5.2.4 Perspective camera
 [perspective_camera.json](Schemas_draft-03/Collaboration/Viewpoint/perspective_camera.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
-| camera_view_point | [Point](#3521-point) | viewpoint of the camera | mandatory |
-| camera_direction | [Direction](#3522-direction) | direction of the camera | mandatory |
-| camera_up_vector | [Direction](#3522-direction) | direction of camera up | mandatory |
-| field_of_view | number | field of view | mandatory |
+| camera_view_point | [Point](#3521-point) | camera location  | mandatory |
+| camera_direction | [Direction](#3522-direction) | camera direction | mandatory |
+| camera_up_vector | [Direction](#3522-direction) | camera up vector | mandatory |
+| field_of_view | number | the entire vertical field of view angle of the camera, expressed in degrees | mandatory |
+| aspect_ratio | number | proportional relationship between the width and the height of the view (w/h) | mandatory |
 
 #### 3.5.2.5 Line
 [line.json](Schemas_draft-03/Collaboration/Viewpoint/line.json)
@@ -1340,7 +1352,8 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
                 "y": 0.0,
                 "z": 1.0
             },
-            "field_of_view": 90.0
+            "field_of_view": 90.0,
+            "aspect_ratio": 1.33
         },
         "lines": [{
             "start_point": {
@@ -1439,7 +1452,8 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
                 "y": 0.0,
                 "z": 1.0
             },
-            "field_of_view": 90.0
+            "field_of_view": 90.0,
+            "aspect_ratio": 1.33
         },
         "lines": [{
             "start_point": {
@@ -1526,7 +1540,8 @@ Retrieve a specific viewpoint.
                 "y": 0.0,
                 "z": 1.0
             },
-            "field_of_view": 90.0
+            "field_of_view": 90.0,
+            "aspect_ratio": 1.33
         },
         "lines": [{
             "start_point": {
@@ -2197,8 +2212,6 @@ Retrieve a **collection** of comment events related to a project (default sort o
 |comment_text_updated|The comment text(limit: 1024 characters)|
 |viewpoint_updated|The viewpoint guid|
 |viewpoint_removed|null|
-|reply_to_comment_updated|The reply to comment guid|
-|reply_to_comment_removed|null|
 
 **Odata filter parameters**
 
@@ -2270,7 +2283,7 @@ Get events that are of type 'comment_created', or 'viewpoint_updated'
 
 [comment_event_GET.json](Schemas_draft-03/Collaboration/Events/comment_event_GET.json)
 
-Retrieve a **collection** of comment events related to a comment (default sort order is `date`).
+Retrieve a **collection** of comment events related to a single comment (default sort order is `date`).
 
 **Comment event types**
 
@@ -2280,8 +2293,6 @@ Retrieve a **collection** of comment events related to a comment (default sort o
 |comment_text_updated|The comment text(limit: 1024 characters)|
 |viewpoint_updated|The viewpoint guid|
 |viewpoint_removed|null|
-|reply_to_comment_updated|The reply to comment guid|
-|reply_to_comment_removed|null|
 
 **Odata filter parameters**
 

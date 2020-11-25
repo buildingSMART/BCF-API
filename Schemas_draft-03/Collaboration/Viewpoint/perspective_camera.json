@@ -14,6 +14,9 @@
         },
         "field_of_view": {
             "type": "number"
+        },
+        "aspect_ratio": {
+            "type": "number"
         }
     }
 }
