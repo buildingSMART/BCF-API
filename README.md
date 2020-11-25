@@ -1433,9 +1433,11 @@ BCF is suitable for selecting a few components. A huge list of selected componen
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
-| ifc_guid | string | IFC guid of the component | optional |
+| ifc_guid | string | IFC guid of the component | optional, if authoring_tool_id is provided |
 | originating_system | string | originating system of the component | optional |
-| authoring_tool_id | string | internal id for the authoring tool of the component | optional |
+| authoring_tool_id | string | internal id for the authoring tool of the component | optional, if ifc_guid is provided |
+
+Note that `ifc_guid` must be provided, if possible. The `authoring_tool_id` can be used as a fallback when an `ifc_guid` is not available.
 
 #### 4.5.2.11 Coloring
 [coloring.json](Schemas_draft-03/Collaboration/Viewpoint/coloring.json)
