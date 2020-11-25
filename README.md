@@ -739,7 +739,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
     Body:
     [{
         "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
-        "server_assigned_id": "CLASH-00001",
+        "server_assigned_id": "ISSUE-00001",
         "creation_author": "Architect@example.com",
         "title": "Example topic 1",
         "labels": [
@@ -749,7 +749,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
         "creation_date": "2013-10-21T17:34:22.409Z"
     }, {
         "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
-        "server_assigned_id": "CLASH-00078",
+        "server_assigned_id": "ISSUE-00078",
         "creation_author": "Architect@example.com",
         "title": "Example topic 2",
         "labels": [
@@ -1000,7 +1000,7 @@ Each topic has two identifiers:
     given server may have identical `server_assigned_id`s. `server_assigned_id`s can't be changed using the API; BCF clients should display 
     `server_assigned_id`s to users to make it easier to locate and discuss topics.<br>
     
-    `server_assigned_id` examples: 003490, ISSUE-01, CLASH-578  
+    `server_assigned_id` examples: 003490, ISSUE-01  
 
 ## 4.3 File Services
 
