@@ -19,6 +19,7 @@
   * [1.3 Updating Resources via HTTP PUT](#13-updating-resources-via-http-put)
   * [1.4 Cross Origin Resource Sharing (CORS)](#14-cross-origin-resource-sharing-cors)
   * [1.5 Http Status Codes](#15-http-status-codes)
+    + [1.5.1 Conflict on creation](#151-conflict-on-creation)
   * [1.6 Error Response Body Format](#16-error-response-body-format)
   * [1.7 DateTime Format](#17-datetime-format)
   * [1.8 Authorization](#18-authorization)
@@ -183,6 +184,10 @@ Generally, these response codes shall be used in the API:
 * `201 - Created` for `POST` requests that create data
 
 `POST` and `PUT` requests do usually include the created resource in the response body. Exceptions to this rule are described in the specific section for the resource.
+
+### 1.5.1 Conflict on creation
+
+For resource creation by `POST` with GUID specified, if the GUID already exists in the target system, status code `409 - Conflict` will be returned.
 
 ## 1.6 Error Response Body Format
 
@@ -768,7 +773,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
 
 [topic_POST.json](Schemas_draft-03/Collaboration/Topic/topic_POST.json)
 
-Add a new topic. This operation is only possible when the server returns the `createTopic` flag in the Project authorization, see section [4.1.5](#415-expressing-user-authorization-through-project-extensions)
+Add a new topic. This operation is only possible when the server returns the `createTopic` flag in the Project authorization, see section [4.1.5](#415-expressing-user-authorization-through-project-extensions).
 
 **Parameters**
 
@@ -776,7 +781,7 @@ JSON encoded body using the "application/json" content type.
 
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
-|guid|string|The desired guid|false|
+|guid|string|The desired guid. See section [1.5.1](#151-conflict-on-creation) when GUID already exists in target system.|false|
 |topic_type|string|The type of a topic (value from extension.xsd)|false|
 |topic_status|string|The status of a topic (value from extension.xsd)|false|
 |reference_links|array (string)|Reference links, i.e. links to referenced resources|false|
@@ -1212,7 +1217,7 @@ JSON encoded body using the "application/json" content type.
 
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
-|guid|string|The desired guid|false|
+|guid|string|The desired guid. See section [1.5.1](#151-conflict-on-creation) when GUID already exists in target system.|false|
 |comment|string|The comment text. Must not be blank or empty if provided|true, unless `viewpoint_guid` is provided|
 |viewpoint_guid|string|The GUID of the related viewpoint|true, unless `comment` is provided|
 
@@ -1446,7 +1451,7 @@ JSON encoded body using the "application/json" content type.
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
-| guid | string | The desired guid | optional |
+| guid | string | The desired guid. See section [1.5.1](#151-conflict-on-creation) when GUID already exists in target system. | optional |
 | index | integer | parameter for sorting | optional |
 | orthogonal_camera | [Orthogonal camera](#4523-orthogonal-camera) | orthogonal camera view | see viewpoint optional/mandatory fields clarification |
 | perspective_camera | [Perspective camera](#4524-perspective-camera) | perspective view of the camera |  see viewpoint optional/mandatory fields clarification |
@@ -2132,7 +2137,7 @@ JSON encoded body using the "application/json" content type.
 
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
-|guid|string|The desired guid|false|
+|guid|string|The desired guid. See section [1.5.1](#151-conflict-on-creation) when GUID already exists in target system.|false|
 |document_guid|string|The guid of the document (Internal document)|false|
 |url|The url (External document)|false|
 |description|string|The description of the document reference|false|
