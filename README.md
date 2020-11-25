@@ -715,7 +715,7 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 |---------|-----------|
 |creation_date|creation date of a topic|
 |modified_date|modification date of a topic|
-|server_id|the [server_id](#429-topic-identifiers) of the topic|
+|server_assigned_id|the [server_assigned_id](#429-topic-identifiers) of the topic|
 |index|index of a topic **This property is deprecated and will be removed in a future release**|
 
 **Example Request with odata**
@@ -739,7 +739,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
     Body:
     [{
         "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
-        "server_id": "CLASH-00001",
+        "server_assigned_id": "ISSUE-00001",
         "creation_author": "Architect@example.com",
         "title": "Example topic 1",
         "labels": [
@@ -749,7 +749,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
         "creation_date": "2013-10-21T17:34:22.409Z"
     }, {
         "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
-        "server_id": "CLASH-00078",
+        "server_assigned_id": "ISSUE-00078",
         "creation_author": "Architect@example.com",
         "title": "Example topic 2",
         "labels": [
@@ -823,7 +823,7 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
     Body:
     {
         "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
-        "server_id": "ISSUE-01462",
+        "server_assigned_id": "ISSUE-01462",
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": "Clash",
@@ -863,7 +863,7 @@ Retrieve a specific topic.
     Body:
     {
         "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
-        "server_id": "ISSUE-00549",
+        "server_assigned_id": "ISSUE-00549",
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": "Clash",
@@ -927,7 +927,7 @@ Modify a specific topic, description similar to POST. This operation is only pos
     Body:
     {
         "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
-        "server_id": "ISSUE-00037",
+        "server_assigned_id": "ISSUE-00037",
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
         "modified_author": "Architect@example.com",
@@ -995,12 +995,12 @@ Each topic has two identifiers:
     interactions to identify topics. <br> 
     
     `guid` examples: 420b24db-921c-46d6-9629-d529d130307f, 5139a00f-5cbd-4760-9e44-16cc4826aa5a 
-2. `server_id` - a human-friendly identifier which is generated and controlled by the server. A `server_id` is project-unique: 
-    No two topics in a given server and project may have the same `server_id`. However, topics in different projects on a 
-    given server may have identical `server_id`s. `server_id`s can't be changed using the API; BCF clients should display 
-    `server_id`s to users to make it easier to locate and discuss topics.<br>
+2. `server_assigned_id` - a human-friendly identifier which is generated and controlled by the server. A `server_assigned_id` is project-unique: 
+    No two topics in a given server and project may have the same `server_assigned_id`. However, topics in different projects on a 
+    given server may have identical `server_assigned_id`s. `server_assigned_id`s can't be changed using the API; BCF clients should display 
+    `server_assigned_id`s to users to make it easier to locate and discuss topics.<br>
     
-    `server_id` examples: 003490, ISSUE-01, CLASH-578  
+    `server_assigned_id` examples: 003490, ISSUE-01  
 
 ## 4.3 File Services
 
