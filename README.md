@@ -1182,7 +1182,7 @@ JSON encoded body using the "application/json" content type.
 | lines | array of [Line](#3525-line) | graphical line | optional |
 | clipping_planes | array of [Clipping Plane](#3526-clipping-plane) | clipping planes for the model view | optional |
 | bitmaps | array of [Bitmap](#3527-bitmap) | embedded pictures in the viewpoint | optional |
-| snapshot | [Snapshot](#3528-snapshot) | snapshot image of the viewpoint |  see viewpoint optional/mandatory fields clarification |
+| snapshot | [Snapshot](#3528-snapshot) | snapshot image of the viewpoint. Note: The longest dimension of should not exceed 1500 px, length or width. |  see viewpoint optional/mandatory fields clarification |
 | components | [Components](#3529-components) | Components in the viewpoint | optional |
 
 **Viewpoint optional/mandatory fields clarification**
