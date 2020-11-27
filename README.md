@@ -434,7 +434,7 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 |topic_status|string|status of a topic (value from extensions)|
 |topic_type|string|type of a topic (value from extensions)|
 |creation_date|datetime|creation date of a topic|
-|modified_date|datetime|modification date of a topic. The modification date of a server's topic should be the latest value of when the topic has been modified or when the latest [comment](#44-comment-services) has been updated or when a "floating viewpoint" (a [viewpoint](#45-viewpoint-services) which is not associated with a comment) is added|
+|modified_date|datetime|modification date of a topic. The modification date of a server's topic should be the latest value of when the topic has been modified or when the latest [comment](#34-comment-services) has been updated or when a "floating viewpoint" (a [viewpoint](#35-viewpoint-services) which is not associated with a comment) is added|
 |labels|array (string)|labels of a topic (value from extensions)|
 |priority|string|priority of a topic (value from extensions)|
 
@@ -1211,6 +1211,12 @@ Direction must not be a zero vector.
 | x | number | x direction | mandatory |
 | y | number | y direction | mandatory |
 | z | number | z direction | mandatory |
+
+### Camera
+
+Perspective and Orthogonal cameras are explained in detail in [BCF-XML](https://github.com/buildingSMART/BCF-XML/tree/release_3_0/Documentation#camera).
+
+![Camera Illustration](https://github.com/buildingSMART/BCF-XML/blob/release_3_0/Documentation/Graphics/Cameras.png)
 
 #### 3.5.2.3 Orthogonal camera
 [orthogonal_camera.json](Schemas_draft-03/Collaboration/Viewpoint/orthogonal_camera.json)
