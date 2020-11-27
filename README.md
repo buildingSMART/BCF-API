@@ -1248,7 +1248,7 @@ Direction must not be a zero vector.
 |parameter|type|description|required|
 |---------|----|-----------|--------|
 | location | [Point](#3521-point) | origin of the clipping plane | mandatory |
-| direction | [Direction](#3522-direction) | direction of the clipping plane | mandatory |
+| direction | [Direction](#3522-direction) | direction of the clipping plane, points in the invisible direction meaning the half-space that is clipped | mandatory |
 
 #### 3.5.2.7 Bitmap
 [bitmap.json](Schemas_draft-03/Collaboration/Viewpoint/bitmap_POST.json)
