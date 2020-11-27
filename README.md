@@ -1212,6 +1212,12 @@ Direction must not be a zero vector.
 | y | number | y direction | mandatory |
 | z | number | z direction | mandatory |
 
+### Camera
+
+Perspective and Orthogonal cameras are explained in detail in [BCF-XML](https://github.com/buildingSMART/BCF-XML/tree/release_3_0/Documentation#camera).
+
+![Camera Illustration](https://github.com/buildingSMART/BCF-XML/blob/release_3_0/Documentation/Graphics/Cameras.png)
+
 #### 3.5.2.3 Orthogonal camera
 [orthogonal_camera.json](Schemas_draft-03/Collaboration/Viewpoint/orthogonal_camera.json)
 
