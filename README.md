@@ -4,7 +4,7 @@
 # BCF REST API
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
-**BCFv2.2** is based on BCFv2.1.
+**BCFv3.0** is based on BCFv2.1.
 
 [BCF XML GitHub repository](https://github.com/BuildingSMART/BCF-XML)
 
@@ -219,7 +219,7 @@ Retrieve a **collection** of projects where the currently logged on user has acc
 
 **Example Request**
 
-    GET /bcf/2.1/projects
+    GET /bcf/3.0/projects
 
 **Example Response**
 
@@ -254,7 +254,7 @@ Retrieve a specific project.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
+    GET /bcf/3.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
 
 **Example Response**
 
@@ -282,7 +282,7 @@ Modify a specific project. This operation is only possible when the server retur
 
 **Example Request**
 
-    PUT /bcf/2.1/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
+    PUT /bcf/3.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414
     Body:
     {
         "name": "Example project 3 - Second Section"
@@ -315,7 +315,7 @@ Project extensions are used to define possible values that can be used in topics
 
 **Example Request**
 
-    GET /bcf/2.1/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
+    GET /bcf/3.0/projects/B724AAC3-5B2A-234A-D143-AE33CC18414/extensions
 
 **Example Response**
 
@@ -451,16 +451,16 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 
 Get topics that are open, assigned to Architect@example.com and created after December 5th 2015. Sort the result on last modified
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and topic_status eq 'Open' and creation_date gt 2015-12-05T00:00:00+01:00&$orderby=modified_date desc
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and topic_status eq 'Open' and creation_date gt 2015-12-05T00:00:00+01:00&$orderby=modified_date desc
 
 Odata does not support list operators. To achieve list query, use the 'or' operator.
 Get topics that have at least one of the labels 'Architecture', 'Structural' or 'Heating'
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=labels/any(label: label eq 'Architecture') or labels/any(label: label eq 'Structural') or labels/any(label: label eq 'Heating')
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=labels/any(label: label eq 'Architecture') or labels/any(label: label eq 'Structural') or labels/any(label: label eq 'Heating')
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
 
 **Example Response**
 
@@ -526,7 +526,7 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
 
 **Example Request**
 
-    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
+    POST /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
     Body:
     {
         "topic_type": "Clash",
@@ -584,7 +584,7 @@ Retrieve a specific topic.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
 
 **Example Response**
 
@@ -630,7 +630,7 @@ Modify a specific topic, description similar to POST. This operation is only pos
 
 **Example Request**
 
-    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+    PUT /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
     Body:
     {
         "topic_type": "Clash",
@@ -688,7 +688,7 @@ Deletes a single topic. This operation is only possible when the server returns 
 
 **Example Request**
 
-    DELETE /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
+    DELETE /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
 
 **Example Response**
 
@@ -762,7 +762,7 @@ user choose to associate a topic with that `File`.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/files_information
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/files_information
 
 **Example Response**
 
@@ -811,7 +811,7 @@ Retrieve a **collection** of file references as topic header.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
 
 **Example Response**
 
@@ -947,7 +947,7 @@ JSON encoded body using the "application/json" content type.
 
 **Example Request**
 
-    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
+    POST /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments
     Body:
     {
         "comment": "will rework the heating model"
@@ -977,7 +977,7 @@ Get a single comment.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
 
 **Example Response**
 
@@ -1003,7 +1003,7 @@ Update a single comment, description similar to POST. This operation is only pos
 
 **Example Request**
 
-    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
+    PUT /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
     Body:
     {
         "comment": "will rework the heating model and fix the ventilation"
@@ -1033,7 +1033,7 @@ Deletes a single comment. This operation is only possible when the server return
 
 **Example Request**
 
-    DELETE /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
+    DELETE /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/comments/A333FCA8-1A31-CAAC-A321-BB33ABC8414
 
 **Example Response**
 
@@ -1061,7 +1061,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
 
 **Example Response**
 
@@ -1340,7 +1340,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
 
 **Example Request**
 
-    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
+    POST /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
     Body:
     {
         "index": 10,
@@ -1523,7 +1523,7 @@ Retrieve a specific viewpoint.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
 
 **Example Response**
 
@@ -1610,7 +1610,7 @@ Retrieve a viewpoints snapshot (png or jpg) as image file. A viewpoint contains 
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/snapshot
 
 ### 3.5.5 GET Viewpoint Bitmap Service
 
@@ -1622,7 +1622,7 @@ Retrieve a specific viewpoints bitmap image file (png or jpg).
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/20c1cb56-315f-4a0a-922d-ed7a4a8edf55
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/20c1cb56-315f-4a0a-922d-ed7a4a8edf55
 
 ### 3.5.6 GET selected Components Service
 **Resource URL**
@@ -1635,7 +1635,7 @@ Retrieve a **collection** of all selected components in a viewpoint.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/selection
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/selection
 
 **Example Response**
 
@@ -1665,7 +1665,7 @@ Retrieve a **collection** of all colored components in a viewpoint.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/coloring
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/coloring
 
 **Example Response**
 
@@ -1700,7 +1700,7 @@ Retrieve visibility of components in a viewpoint.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/visibility
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/visibility
 
 **Example Response**
 
@@ -1736,7 +1736,7 @@ Deletes a single viewpoint. This operation is only possible when the server retu
 
 **Example Request**
 
-    DELETE /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
+    DELETE /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
 
 **Example Response**
 
@@ -1762,7 +1762,7 @@ Retrieve a **collection** of all related topics to a topic.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
 
 **Example Response**
 
@@ -1786,7 +1786,7 @@ Add or update a **collection** of all related topics to a topic. This operation 
 
 **Example Request**
 
-    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
+    PUT /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
     Body:
     [{
         "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4"
@@ -1829,7 +1829,7 @@ Retrieve a **collection** of all document references to a topic.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
 
 **Example Response**
 
@@ -1876,7 +1876,7 @@ JSON encoded body using the "application/json" content type.
 
 **Example Request**
 
-    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
+    POST /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
     Body:
     {
         "url": "http://example.com/files/LegalRequirements.pdf",
@@ -1895,7 +1895,7 @@ JSON encoded body using the "application/json" content type.
 
 **Example Request**
 
-    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
+    POST /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references
     Body:
     {
         "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
@@ -1925,7 +1925,7 @@ Uses the same rules as [POST Document Reference Service](#372-post-document-refe
 
 **Example Request**
 
-    PUT /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references/472ab37a-6122-448e-86fc-86503183b520
+    PUT /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/document_references/472ab37a-6122-448e-86fc-86503183b520
     Body:
     {
         "url": "http://example.com/files/LegalRequirements_Update.pdf",
@@ -1956,7 +1956,7 @@ Retrieve a **collection** of all documents uploaded to a project.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents
 
 **Example Response**
 
@@ -1982,7 +1982,7 @@ Optional: The desired document guid may be passed as a query parameter.
 
 **Example Request**
 
-    POST /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents?guid=472ab37a-6122-448e-86fc-86503183b520
+    POST /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents?guid=472ab37a-6122-448e-86fc-86503183b520
 
 **Example Response**
 
@@ -2003,7 +2003,7 @@ Retrieves a document as binary file.
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents/472ab37a-6122-448e-86fc-86503183b520
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/documents/472ab37a-6122-448e-86fc-86503183b520
 
 **Example Response**
 
@@ -2065,11 +2065,11 @@ Retrieve a **collection** of topic events related to a project (default sort ord
 
 Get events of type 'status_updated' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/events?$filter=author eq 'Architect@example.com' and type eq 'status_updated' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/events?$filter=author eq 'Architect@example.com' and type eq 'status_updated' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
 
 Get latest events of given topic. Skip the 10 first, and get the 5 next
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/events?$filter=topic_guid eq 'A245F4F2-2C01-B43B-B612-5E456BEF8116'&$top=5&$skip=10
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/events?$filter=topic_guid eq 'A245F4F2-2C01-B43B-B612-5E456BEF8116'&$top=5&$skip=10
 
 Get events that are of type 'status_updated', 'type_updated' or 'title_updated' or 'label_added'
 
@@ -2077,7 +2077,7 @@ Get events that are of type 'status_updated', 'type_updated' or 'title_updated' 
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/events
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/events
 
 **Example Response**
 
@@ -2155,11 +2155,11 @@ Retrieve a **collection** of topic events related to a project (default sort ord
 
 Get events of type 'status_updated' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/events?$filter=author eq 'Architect@example.com' and type eq 'status_updated' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/events?$filter=author eq 'Architect@example.com' and type eq 'status_updated' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
 
 Get latest events. Skip the 10 first, and get the 5 next
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/events?$top=5&$skip=10
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/events?$top=5&$skip=10
 
 Odata does not support list operators. To achieve list query, use the 'or' operator.
 Get events that is of type 'status_updated', 'type_updated' or 'title_updated' or 'label_added'
@@ -2168,7 +2168,7 @@ Get events that is of type 'status_updated', 'type_updated' or 'title_updated' o
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/events
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/events
 
 **Example Response**
 
@@ -2241,11 +2241,11 @@ Retrieve a **collection** of comment events related to a project (default sort o
 
 Get events of type 'comment_created' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/comments/events?$filter=author eq 'Architect@example.com' and date gt 2015-12-05T00:00:00+01:00 and type eq 'comment_created'&$orderby=date asc
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/comments/events?$filter=author eq 'Architect@example.com' and date gt 2015-12-05T00:00:00+01:00 and type eq 'comment_created'&$orderby=date asc
 
 Get latest events of given comment. Skip the 10 first, and get the 5 next
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/comments/events?$filter=comment_guid eq 'C4215F4D-AC45-A43A-D615-AA456BEF832B'&$top=5&$skip=10
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/comments/events?$filter=comment_guid eq 'C4215F4D-AC45-A43A-D615-AA456BEF832B'&$top=5&$skip=10
 
 Get events that are of type 'comment_created', or 'viewpoint_updated'
 
@@ -2253,7 +2253,7 @@ Get events that are of type 'comment_created', or 'viewpoint_updated'
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/comments/events
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/comments/events
 
 **Example Response**
 
@@ -2320,19 +2320,19 @@ Retrieve a **collection** of comment events related to a single comment (default
 
 Get events of type 'comment_created' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/events?$filter=author eq 'Architect@example.com' and date gt 2015-12-05T00:00:00+01:00 and type eq 'comment_created'&$orderby=date asc
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/events?$filter=author eq 'Architect@example.com' and date gt 2015-12-05T00:00:00+01:00 and type eq 'comment_created'&$orderby=date asc
 
 Get latest events of given comment. Skip the 10 first, and get the 5 next
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/events?$top=5&$skip=10
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/events?$top=5&$skip=10
 
 Get events that are of type 'comment_created', or 'comment_text_updated'
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/events?$filter=type eq 'comment_created' or type eq 'viewpoint_updated'
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/events?$filter=type eq 'comment_created' or type eq 'viewpoint_updated'
 
 **Example Request**
 
-    GET /bcf/2.1/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/events
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A211FCC2-3A3B-EAA4-C321-DE22ABC8414/comments/C4215F4D-AC45-A43A-D615-AA456BEF832B/events
 
 **Example Response**
 
