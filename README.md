@@ -1734,6 +1734,10 @@ Retrieve visibility of components in a viewpoint.
 
 Deletes a single viewpoint. This operation is only possible when the server returns the `delete` flag in the Viewpoint authorization, see section [3.5.10](#3510-determining-allowed-viewpoint-modifications)
 
+Note: If there is a comment associated to the viewpoint, the server might reject this request:
+- The server should return the http response status code 409
+- The client needs to disaccosiate this comment, before trying again.
+
 **Example Request**
 
     DELETE /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133
