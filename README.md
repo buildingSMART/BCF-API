@@ -733,6 +733,8 @@ Each topic has two identifiers:
 
 ## 3.3 File Services
 
+This group of services corresponds to the BCF-XML [header](https://github.com/buildingSMART/BCF-XML/tree/release_3_0/Documentation#header) `Files` element. The files associated with a topic are the models that should be loaded when displaying the topic's viewpoints. 
+
 ### 3.3.1 GET Project Files Information Service
 
 **Resource URL**
@@ -837,11 +839,11 @@ Retrieve a **collection** of file references as topic header.
 
 [file_PUT.json](Schemas_draft-03/Collaboration/File/file_PUT.json)
 
-Update a **collection** of file references on the topic header. This operation is only possible when the server returns the `updateFiles` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications)
+Update a **collection** of file references on the topic header. This operation is only possible when the server returns the `updateFiles` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications). Servers must always accept a [File](Schemas_draft-03/Collaboration/File/file_GET.json) reference returned by the [files_information](#331-get-project-files-information-service) endpoint. Servers may also accept other values such as a combination of fields from the header of the IFC file. 
 
 **Example Request**
 
-    PUT /bcf/1.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
+    PUT /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
     Body:
     [{
         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
@@ -850,7 +852,7 @@ Update a **collection** of file references on the topic header. This operation i
     }, {
         "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
         "filename": "OfficeBuilding_Heating_0003.ifc",
-        "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
+        "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
     }]
 
 **Example Response**
@@ -864,7 +866,7 @@ Update a **collection** of file references on the topic header. This operation i
     }, {
         "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
         "filename": "OfficeBuilding_Heating_0003.ifc",
-        "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
+        "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
     }]
 
 ## 3.4 Comment Services
