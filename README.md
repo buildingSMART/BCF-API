@@ -8,7 +8,7 @@
 
 [BCF XML GitHub repository](https://github.com/BuildingSMART/BCF-XML)
 
-[Version 1.0 of the OpenCDE Foundation API specification is available here](https://github.com/BuildingSMART/opencde-foundation-API/tree/v1.0)
+[Version 1.0 of the OpenCDE Foundation API specification is available here](https://github.com/BuildingSMART/foundation-API/tree/v1.0)
 
 [Version 1.0 of the BCF API specification is available here](https://github.com/BuildingSMART/BCF-API/tree/v1.0)
 
@@ -120,7 +120,7 @@ An example of a client implementation in C# can be found here:
 
 ## 1.1 OpenCDE Foundation API
 
-BCF API is a member of the OpenCDE API family. All OpenCDE APIs are united by a shared common API called [OpenCDE Foundation API](https://github.com/buildingSMART/opencde-foundation-API). 
+BCF API is a member of the OpenCDE API family. All OpenCDE APIs are united by a shared common API called [OpenCDE Foundation API](https://github.com/buildingSMART/foundation-API). 
 The foundation API specifies a small number of services and a few conventions that are common to all OpenCDE APIs. All BCF API implementations must implement the Foundation API and follow its conventions and guidelines. 
 Implementers should start by implementing the Foundation API and only then continue to implement the BCF API.
 
@@ -509,7 +509,7 @@ JSON encoded body using the "application/json" content type.
 
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
-|guid|string|The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/opencde-foundation-API#151-conflict-on-creation) when GUID already exists in target system.|false|
+|guid|string|The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system.|false|
 |topic_type|string|The type of a topic (value from extension.xsd)|false|
 |topic_status|string|The status of a topic (value from extension.xsd)|false|
 |reference_links|array (string)|Reference links, i.e. links to referenced resources|false|
@@ -947,7 +947,7 @@ JSON encoded body using the "application/json" content type.
 
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
-|guid|string|The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/opencde-foundation-API#151-conflict-on-creation) when GUID already exists in target system.|false|
+|guid|string|The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system.|false|
 |comment|string|The comment text. Must not be blank or empty if provided|true, unless `viewpoint_guid` is provided|
 |viewpoint_guid|string|The GUID of the related viewpoint|true, unless `comment` is provided|
 
@@ -1181,7 +1181,7 @@ JSON encoded body using the "application/json" content type.
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
-| guid | string | The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/opencde-foundation-API#151-conflict-on-creation) when GUID already exists in target system. | optional |
+| guid | string | The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system. | optional |
 | index | integer | parameter for sorting | optional |
 | orthogonal_camera | [Orthogonal camera](#3523-orthogonal-camera) | orthogonal camera view | see viewpoint optional/mandatory fields clarification |
 | perspective_camera | [Perspective camera](#3524-perspective-camera) | perspective view of the camera |  see viewpoint optional/mandatory fields clarification |
@@ -1879,7 +1879,7 @@ JSON encoded body using the "application/json" content type.
 
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
-|guid|string|The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/opencde-foundation-API#151-conflict-on-creation) when GUID already exists in target system.|false|
+|guid|string|The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system.|false|
 |document_guid|string|The guid of the document (Internal document)|false|
 |url|The url (External document)|false|
 |description|string|The description of the document reference|false|
