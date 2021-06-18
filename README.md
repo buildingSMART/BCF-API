@@ -15,7 +15,7 @@
 [Version 2.1 of the BCF API specification is available here](https://github.com/BuildingSMART/BCF-API/tree/v2.1)
 
 **Swagger / OpenAPI Specification**  
-[BCF-API on SwaggerHub](https://app.swaggerhub.com/apis/buildingSMART/BCF-OpenAPI-3.0/3.0)  
+[BCF-API on SwaggerHub](https://app.swaggerhub.com/apis/buildingSMART/BCF/3.0)  
 > The Swagger / OpenAPI specification is offered as a reference for implementers. The BCF group may update it and fix issues as necessary at any time.
 
 **Table of Contents**
