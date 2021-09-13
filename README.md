@@ -608,7 +608,7 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{guid}/topics/{guid}
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}
 
 [topic_GET.json](Schemas_draft-03/Collaboration/Topic/topic_GET.json)
 
@@ -654,7 +654,7 @@ Retrieve a specific topic.
 
 **Resource URL**
 
-    PUT /bcf/{version}/projects/{project_id}/topics/{guid}
+    PUT /bcf/{version}/projects/{project_id}/topics/{topic_guid}
 
 [topic_PUT.json](Schemas_draft-03/Collaboration/Topic/topic_PUT.json)
 
@@ -714,7 +714,7 @@ Modify a specific topic, description similar to POST. This operation is only pos
 
 **Resource URL**
 
-    DELETE /bcf/{version}/projects/{project_id}/topics/{guid}
+    DELETE /bcf/{version}/projects/{project_id}/topics/{topic_guid}
 
 Deletes a single topic. This operation is only possible when the server returns the `delete` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications)
 
@@ -730,7 +730,7 @@ Deletes a single topic. This operation is only possible when the server returns 
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/snippet
 
 Retrieves a topics BIM-Snippet as binary file.
 
@@ -738,7 +738,7 @@ Retrieves a topics BIM-Snippet as binary file.
 
 **Resource URL**
 
-    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/snippet
+    PUT /bcf/{version}/projects/{project_id}/topics/{topic_guid}/snippet
 
 Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property `is_external` must be set to `false` and the `reference` must be the file name with extension. This operation is only possible when the server returns the `updateBimSnippet` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications)
 
@@ -835,7 +835,7 @@ user choose to associate a topic with that `File`.
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/{guid}/files
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/files
 
 [file_GET.json](Schemas_draft-03/Collaboration/File/file_GET.json)
 
@@ -867,7 +867,7 @@ Retrieve a **collection** of file references as topic header.
 
 **Resource URL**
 
-    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/files
+    PUT /bcf/{version}/projects/{project_id}/topics/{topic_guid}/files
 
 [file_PUT.json](Schemas_draft-03/Collaboration/File/file_PUT.json)
 
@@ -907,7 +907,7 @@ Update a **collection** of file references on the topic header. This operation i
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/{guid}/comments
+    GET /bcf/{version}/projects/{project_id}/topics/{guid_topic}/comments
 
 [comment_GET.json](Schemas_draft-03/Collaboration/Comment/comment_GET.json)
 
@@ -963,7 +963,7 @@ Get comments that are created after December 5 2015. Sort the result on first cr
 
 **Resource URL**
 
-    POST /bcf/{version}/projects/{project_id}/topics/{guid}/comments
+    POST /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments
 
 [comment_POST.json](Schemas_draft-03/Collaboration/Comment/comment_POST.json)
 
@@ -1003,7 +1003,7 @@ JSON encoded body using the "application/json" content type.
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}
 
 [comment_GET.json](Schemas_draft-03/Collaboration/Comment/comment_GET.json)
 
@@ -1029,7 +1029,7 @@ Get a single comment.
 
 **Resource URL**
 
-    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
+    PUT /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}
 
 [comment_PUT.json](Schemas_draft-03/Collaboration/Comment/comment_PUT.json)
 
@@ -1061,7 +1061,7 @@ Update a single comment, description similar to POST. This operation is only pos
 
 **Resource URL**
 
-    DELETE /bcf/{version}/projects/{project_id}/topics/{guid}/comments/{guid}
+    DELETE /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}
 
 Deletes a single comment. This operation is only possible when the server returns the `delete` flag in the Comment authorization, see section [3.4.6](#346-determining-allowed-comment-modifications)
 
@@ -1087,7 +1087,7 @@ Viewpoints are described in detail in [BCF-XML](https://github.com/buildingSMART
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints
 
 [viewpoint_GET.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_GET.json)
 
@@ -1197,7 +1197,7 @@ Retrieve a **collection** of all viewpoints related to a topic.
 
 **Resource URL**
 
-    POST /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints
+    POST /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints
 
 [viewpoint_POST.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_POST.json)
 
@@ -1549,7 +1549,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}
 
 [viewpoint_GET.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_GET.json)
 
@@ -1638,7 +1638,7 @@ Retrieve a specific viewpoint.
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/snapshot
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_id}/viewpoints/{viewpoint_guid}/snapshot
 
 Retrieve a viewpoints snapshot (png or jpg) as image file. A viewpoint contains a snapshot if viewpoint.snapshot != null.
 
@@ -1650,7 +1650,7 @@ Retrieve a viewpoints snapshot (png or jpg) as image file. A viewpoint contains 
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{guid}/topics/{guid}/viewpoints/{guid}/bitmaps/{guid}
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/bitmaps/{bitmap_guid}
 
 Retrieve a specific viewpoints bitmap image file (png or jpg).
 
@@ -1661,7 +1661,7 @@ Retrieve a specific viewpoints bitmap image file (png or jpg).
 ### 3.5.6 GET selected Components Service
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/selection
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/selection
 
 [selection_GET.json](Schemas_draft-03/Collaboration/Viewpoint/selection_GET.json)
 
@@ -1691,7 +1691,7 @@ Retrieve a **collection** of all selected components in a viewpoint.
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/coloring
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/coloring
 
 [coloring_GET.json](Schemas_draft-03/Collaboration/Viewpoint/coloring_GET.json)
 
@@ -1726,7 +1726,7 @@ Retrieve a **collection** of all colored components in a viewpoint.
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}/visibility
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/visibility
 
 [visibility_GET.json](Schemas_draft-03/Collaboration/Viewpoint/visibility_GET.json)
 
@@ -1764,7 +1764,7 @@ Retrieve visibility of components in a viewpoint.
 
 **Resource URL**
 
-    DELETE /bcf/{version}/projects/{project_id}/topics/{guid}/viewpoints/{guid}
+    DELETE /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}
 
 Deletes a single viewpoint. This operation is only possible when the server returns the `delete` flag in the Viewpoint authorization, see section [3.5.10](#3510-determining-allowed-viewpoint-modifications)
 
@@ -1792,7 +1792,7 @@ overrides for each Viewpoint.
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/related_topics
 
 [related_topic_GET.json](Schemas_draft-03/Collaboration/RelatedTopic/related_topic_GET.json)
 
@@ -1816,7 +1816,7 @@ Retrieve a **collection** of all related topics to a topic.
 
 **Resource URL**
 
-    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/related_topics
+    PUT /bcf/{version}/projects/{project_id}/topics/{topic_guid}/related_topics
 
 [related_topic_PUT.json](Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PUT.json)
 
@@ -1859,7 +1859,7 @@ A document_reference with **document_guid** set, is referencing an internal **do
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/document_references
 
 [document_reference_GET.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_GET.json)
 
@@ -1887,7 +1887,7 @@ Retrieve a **collection** of all document references to a topic.
 
 **Resource URL**
 
-    POST /bcf/{version}/projects/{project_id}/topics/{guid}/document_references
+    POST /bcf/{version}/projects/{project_id}/topics/{topic_guid}/document_references
 
 [document_reference_POST.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_POST.json)
 
@@ -1954,7 +1954,7 @@ JSON encoded body using the "application/json" content type.
 
 **Resource URL**
 
-    PUT /bcf/{version}/projects/{project_id}/topics/{guid}/document_references/{guid}
+    PUT /bcf/{version}/projects/{project_id}/topics/{topic_guid}/document_references/{document_guid}
 
 [document_reference_PUT.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
 
@@ -2035,7 +2035,7 @@ Optional: The desired document guid may be passed as a query parameter.
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/documents/{guid}
+    GET /bcf/{version}/projects/{project_id}/documents/{document_guid}
 
 Retrieves a document as binary file.
 
