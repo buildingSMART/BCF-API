@@ -31,7 +31,7 @@ The Open CDE workgroup develops the BCF standard. The group meets every second M
   * [1.2 Authorization](#12-authorization)
     + [1.2.1 Per-Entity Authorization](#121-per-entity-authorization)
     + [1.2.2 Determining Authorized Entity Actions](#122-determining-authorized-entity-actions)
-  * [1.3 Units of numeric values](#13-units-of-numeric-values)
+  * [1.3 Units of Numeric Values](#13-units-of-numeric-values)
 - [2. Topologies](#2-topologies)
   * [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
   * [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
@@ -192,7 +192,7 @@ Indicating that for this topic, the current user can:
 * place the Topic into `closed` status
 * leave the Topic `open` or place the topic back into `open` status after closing it
 
-### 1.3 Units of numeric values
+### 1.3 Units of Numeric Values
 
 Numeric values in this specification are all in fixed units - meters for length and degrees for angle.
 
