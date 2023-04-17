@@ -1079,8 +1079,6 @@ Note: For viewpoints without audit information (Not supported in version 3.0 and
 - If no comments are linked to the viewpoint, return audit information of the issue
 
 
-is not supported in older BCF versions. When 
-
 **Example Response**
 
     Response Code: 200 - OK
