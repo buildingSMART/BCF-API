@@ -18,10 +18,6 @@
 [BCF-API on SwaggerHub](https://app.swaggerhub.com/apis/buildingSMART/BCF/3.0)  
 > The Swagger / OpenAPI specification is offered as a reference for implementers. The BCF group may update it and fix issues as necessary at any time.
 
-# Contributing
-
-The Open CDE workgroup develops the BCF standard. The group meets every second Monday at 11am CET. To join the fortnightly meeting please email [opencde@buildingsmart.org](mailto:opencde@buildingsmart.org). 
-
 **Table of Contents**
 
 <!-- toc -->
@@ -331,37 +327,84 @@ Project extensions are used to define possible values that can be used in topics
     Body:
     {
         "topic_type": [
-            "Information",
-            "Error"
+            {
+                "id": "b66099a5ad854dddb6b031205e511c12",
+                "name": "Information"
+            },
+            {
+                "id": "be27df7a5d194158b7fe70f17f037546",
+                "name": "Error"
+            }
         ],
         "topic_status": [
-            "Open",
-            "Closed",
-            "ReOpened"
+            {
+                "id": "63aa3b71b1b24e4b839234c31795e7e1",
+                "name": "Open"
+            },
+            {
+                "id": "b5239f734bdb4c23bcab91065c2cc20f",
+                "name": "Closed"
+            },
+            {
+                "id": "800fb425a6964845ab3a8bb5dea85f5c",
+                "name": "ReOpened"
+            }
         ],
         "topic_label": [
-            "Architecture",
-            "Structural",
-            "MEP"
-        ],
-        "snippet_type": [
-            ".ifc",
-            ".csv"
+            {
+                "id": "b153d9e9245d404f98274c8f69c7ec5f",
+                "name": "Architecture"
+            },
+            {
+                "id": "16ca43bad1e54a9e96c4011fcc30bb42",
+                "name": "Structural"
+            },
+            {
+                "id": "7ad5014d32a348edb0a81503071eb70e",
+                "name": "MEP"
+            }
         ],
         "priority": [
-            "Low",
-            "Medium",
-            "High"
+            {
+                "id": "7d0ce3c9bdf74f11891ded217e849268",
+                "name": "Low"
+            },
+            {
+                "id": "85f099eb19194d059a279acc1afd053a",
+                "name": "Medium"
+            },
+            {
+                "id": "c96a2c2c666e4b5085dd91d45f096315",
+                "name": "High"
+            }
         ],
         "users": [
-            "Architect@example.com",
-            "BIM-Manager@example.com",
-            "bob_heater@example.com"
+            {
+                "id": "b0ae7848d13b41c4853eb786ff63ca75",
+                "name": "Architect@example.com"
+            },
+            {
+                "id": "6e82bb89b3a04db9bbfe365ff5703847",
+                "name": "BIM-Manager@example.com"
+            },
+            {
+                "id": "08ab8692fd654f169ccfc135027c4dea",
+                "name": "bob_heater@example.com"
+            }
         ],
         "stage": [
-            "Preliminary Planning End",
-            "Construction Start",
-            "Construction End"
+            {
+                "id": "6888ab79044240fc93eb65e29c652eeb",
+                "name": "Preliminary Planning End"
+            },
+            {
+                "id": "9880769534dd4bd28cec35170888b10a",
+                "name": "Construction Start"
+            },
+            {
+                "id": "25918c96f7c5496db8ad9de1fcac254c",
+                "name": "Construction End"
+            }
         ],
         "project_actions": [
             "update",
@@ -379,6 +422,10 @@ Project extensions are used to define possible values that can be used in topics
         ],
         "comment_actions": [
             "update"
+        ],
+        "snippet_type": [
+            ".ifc",
+            ".csv"
         ]
     }
 

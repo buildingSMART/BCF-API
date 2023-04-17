@@ -4,35 +4,28 @@
     "properties": {
         "topic_type": {
             "required": true,
-            "type": ["array",
-            "null"],
+            "type": ["array", "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "extension_item.json"
             }
         },
         "topic_status": {
             "required": true,
-            "type": ["array",
-            "null"],
+            "type": ["array", "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "extension_item.json"
             }
         },
         "topic_label": {
             "required": true,
-            "type": ["array",
-            "null"],
+            "type": ["array", "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "extension_item.json"
             }
         },
         "snippet_type": {
             "required": true,
-            "type": ["array",
-            "null"],
+            "type": ["array", "null"],
             "items": {
                 "type": ["string",
                 "null"]
@@ -40,29 +33,23 @@
         },
         "priority": {
             "required": true,
-            "type": ["array",
-            "null"],
+            "type": ["array", "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "extension_item.json"
             }
         },
         "users": {
             "required": true,
-            "type": ["array",
-            "null"],
+            "type": ["array", "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "extension_item.json"
             }
         },
         "stage": {
             "required": true,
-            "type": ["array",
-            "null"],
+            "type": ["array", "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "extension_item.json"
             }
         },
         "project_actions": {
