@@ -2,12 +2,17 @@
     "title": "property",
     "type": ["object"],
     "properties": {
+        "id": {
+            "required": false,
+            "type": "string"
+        },
         "propertyName": {
             "required": true,
             "type": "string"
         },
         "propertyValue": {
-            "required": false
+            "required": false,
+            "type": "string"
         }
     }
 }
