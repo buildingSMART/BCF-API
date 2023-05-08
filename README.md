@@ -1751,7 +1751,7 @@ Deletes a single viewpoint. This operation is only possible when the server retu
 
 Note: If there is a comment associated to the viewpoint, the server might reject this request:
 - The server should return the http response status code 409
-- The client needs to disaccosiate this comment, before trying again.
+- The client needs to delete or unlink this comment, before trying again.
 
 **Example Request**
 
