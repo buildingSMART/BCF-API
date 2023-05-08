@@ -79,6 +79,9 @@
             "items": {
                 "$ref": "property.json"
             }
+        },
+        "allow_additional_properties": {
+            "type": ["boolean"]
         }
     }
 }
