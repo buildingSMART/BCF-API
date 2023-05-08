@@ -7,7 +7,22 @@
             "type": "string"
         },
         "propertyType": {
-            "enum": ["number", "string", "boolean"]
+            "enum": ["integer", "decimal", "string", "boolean", "enum", "date", "date-time"]
+        },
+        "readonly": {
+            "type": "boolean"
+        },
+        "required": {
+            "type": "boolean"
+        },
+        "defaultValue": {
+            "type": "string"
+        },
+        "enumValues": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         }
     }
 }
