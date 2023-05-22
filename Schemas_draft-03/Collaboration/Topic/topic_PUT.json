@@ -59,6 +59,9 @@
         "due_date": {
             "type": ["string",
             "null"]
+        },
+        "properties": {
+            "$ref": "properties.json"
         }
     }
 }
