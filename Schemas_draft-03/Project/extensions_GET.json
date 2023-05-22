@@ -79,9 +79,6 @@
             "items": {
                 "$ref": "custom_field.json"
             }
-        },
-        "allow_additional_properties": {
-            "type": ["boolean"]
         }
     }
 }
