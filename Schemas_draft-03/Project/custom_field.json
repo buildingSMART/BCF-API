@@ -2,6 +2,10 @@
     "title": "custom_field",
     "type": "object",
     "properties": {
+        "id": {
+            "required": true,
+            "type": "string"
+        },
         "name": {
             "required": true,
             "type": "string"
