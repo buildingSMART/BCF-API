@@ -379,8 +379,28 @@ Project extensions are used to define possible values that can be used in topics
         ],
         "comment_actions": [
             "update"
+        ],
+        "custom_fields": [
+            {
+                "id": "6e6bddaa-4c53-4fb8-b884-500e0d2dba6a",
+                "name": "price_in_dollar",
+                "type": "decimal",
+                "readonly": false,
+                "required": true
+            }
         ]
     }
+
+> **About custom fields:** Projects may be configured to allow `custom_fields` in a topic. This is a way of enabling clients and servers to embed custom data in a topic. Those custom fields can be sent when creating or updating a topic, and they will be returned by the server when retrieving topics.
+
+Custom field values are always represented as strings. The type of the custom field indicates how it should be parsed. The value null indicates that it is absent.
+- integer: A number that does not contain decimals
+- decimal: A number than can contain decimals
+- string: Any string
+- boolean: The values 'true' or 'false'
+- enum: A value from the predefined enumValues array
+- date-time: ISO 8601 compliant date: https://github.com/buildingSMART/foundation-API#17-datetime-format
+
 
 ### 3.1.5 Expressing User Authorization Through Project Extensions
 
@@ -529,6 +549,10 @@ JSON encoded body using the "application/json" content type.
 |bim_snippet.reference|string|Reference of a BIM-Snippet of a topic|false|
 |bim_snippet.reference_schema|string|Schema of a BIM-Snippet of a topic|false|
 |due_date|string|Until when the topics issue needs to be resolved|false|
+| custom_fields| array (object) | Custom fields of a topic | false |
+
+> `custom_fields` are an optional array property that can be used by clients to attach custom data to a topic. The server should return the same array in the response. The array may be empty. It should contain the custom fields as defined in the project extensions.  
+> The `id` property of each custom field object is used to identify a field within a project. When creating or updating a topic, the `id` property from the extensions must be provided.
 
 _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `is_external`, `reference` and `reference_schema`) are mandatory._
 
