@@ -1,18 +1,21 @@
 {
     "title": "property",
     "type": "object",
-
     "properties": {
         "propertyName": {
+            "required": true,
             "type": "string"
         },
         "propertyType": {
+            "required": true,
             "enum": ["integer", "decimal", "string", "boolean", "enum", "date", "date-time"]
         },
         "readonly": {
+            "required": true,
             "type": "boolean"
         },
         "required": {
+            "required": true,
             "type": "boolean"
         },
         "defaultValue": {
