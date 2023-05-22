@@ -81,8 +81,8 @@
             "type": ["string",
             "null"]
         },
-        "properties": {
-            "$ref": "properties.json"
+        "custom_fields": {
+            "$ref": "custom_fields.json"
         },
         "authorization": {
             "type": "object",

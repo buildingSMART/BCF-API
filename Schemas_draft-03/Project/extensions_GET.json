@@ -74,10 +74,10 @@
         "comment_actions": {
             "$ref": "../Collaboration/Action/comment_actions.json"
         },
-        "properties": {
+        "custom_fields": {
             "type": ["array"],
             "items": {
-                "$ref": "property.json"
+                "$ref": "custom_field.json"
             }
         },
         "allow_additional_properties": {

@@ -1,12 +1,12 @@
 {
-    "title": "property",
+    "title": "custom_field",
     "type": "object",
     "properties": {
-        "propertyName": {
+        "name": {
             "required": true,
             "type": "string"
         },
-        "propertyType": {
+        "type": {
             "required": true,
             "enum": ["integer", "decimal", "string", "boolean", "enum", "date", "date-time"]
         },

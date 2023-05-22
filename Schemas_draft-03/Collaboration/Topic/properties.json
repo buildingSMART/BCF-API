@@ -1,7 +1,0 @@
-{
-    "title": "properties",
-    "type": ["array"],
-    "items": {
-        "$ref": "property.json"
-    }
-}
