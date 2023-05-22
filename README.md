@@ -393,6 +393,15 @@ Project extensions are used to define possible values that can be used in topics
 
 > **About custom fields:** Projects may be configured to allow `custom_fields` in a topic. This is a way of enabling clients and servers to embed custom data in a topic. Those custom fields can be sent when creating or updating a topic, and they will be returned by the server when retrieving topics.
 
+Custom field values are always represented as strings. The type of the custom field indicates how it should be parsed. The value null indicates that it is absent.
+- integer: A number that does not contain decimals
+- decimal: A number than can contain decimals
+- string: Any string. 
+- boolean: The values 'true' of 'false'
+- enum: A value from the predefined enumValues array.
+- date-time: ISO 8601 complian date: https://github.com/buildingSMART/foundation-API#17-datetime-format
+
+
 ### 3.1.5 Expressing User Authorization Through Project Extensions
 
 Global default authorizations for the requesting user can be expressed in the project schema. The actions authorized
