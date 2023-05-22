@@ -396,10 +396,10 @@ Project extensions are used to define possible values that can be used in topics
 Custom field values are always represented as strings. The type of the custom field indicates how it should be parsed. The value null indicates that it is absent.
 - integer: A number that does not contain decimals
 - decimal: A number than can contain decimals
-- string: Any string. 
-- boolean: The values 'true' of 'false'
-- enum: A value from the predefined enumValues array.
-- date-time: ISO 8601 complian date: https://github.com/buildingSMART/foundation-API#17-datetime-format
+- string: Any string
+- boolean: The values 'true' or 'false'
+- enum: A value from the predefined enumValues array
+- date-time: ISO 8601 compliant date: https://github.com/buildingSMART/foundation-API#17-datetime-format
 
 
 ### 3.1.5 Expressing User Authorization Through Project Extensions
