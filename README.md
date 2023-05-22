@@ -379,8 +379,18 @@ Project extensions are used to define possible values that can be used in topics
         ],
         "comment_actions": [
             "update"
+        ],
+        "custom_fields": [
+            {
+                "name": "price_in_dollar",
+                "type": "decimal",
+                "readonly": false,
+                "required": true
+            }
         ]
     }
+
+> **About custom fields:** Projects may be configured to allow `custom_fields` in a topic. This is a way of enabling clients and servers to embed custom data in a topic. Those custom fields can be sent when creating or updating a topic, and they will be returned by the server when retrieving topics.
 
 ### 3.1.5 Expressing User Authorization Through Project Extensions
 
@@ -529,6 +539,9 @@ JSON encoded body using the "application/json" content type.
 |bim_snippet.reference|string|Reference of a BIM-Snippet of a topic|false|
 |bim_snippet.reference_schema|string|Schema of a BIM-Snippet of a topic|false|
 |due_date|string|Until when the topics issue needs to be resolved|false|
+| custom_fields| array (object) | Custom fields of a topic | false |
+
+> `custom_fields` are an optional array property that can be used by clients to attach custom data to a topic. The server should return the same array in the response. The array may be empty. It should follow the schema as defined in the project extensions.
 
 _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `is_external`, `reference` and `reference_schema`) are mandatory._
 
