@@ -1822,6 +1822,8 @@ Retrieve a **collection** of all related topics to a topic.
 
 Add or update a **collection** of all related topics to a topic. This operation is only possible when the server returns the `updateRelatedTopics` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications)
 
+Throws "409 Conflict" if requestion to add a parent-child relation causing an infinite loop. Example: TopicA is already the parent of TopicB. Making TopicB the parent of TopicA is not allowed, as it will cause an infinite tree-structure.
+
 **Example Request**
 
     PUT /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/related_topics
