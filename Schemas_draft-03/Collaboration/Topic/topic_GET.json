@@ -85,7 +85,10 @@
             "$ref": "custom_fields.json"
         },
         "related_topics": {
-            "$ref": "related_topics.json"
+            "type": ["array", "null"],
+            "items": {
+                "$ref": "../RelatedTopic/related_topic_GET.json"
+            }
         },
         "authorization": {
             "type": "object",
