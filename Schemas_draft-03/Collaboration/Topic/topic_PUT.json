@@ -59,6 +59,9 @@
         "due_date": {
             "type": ["string",
             "null"]
+        },
+        "custom_fields": {
+            "$ref": "custom_fields.json"
         }
     }
 }

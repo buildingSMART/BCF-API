@@ -1,0 +1,15 @@
+{
+    "title": "custom_field",
+    "type": ["object"],
+    "properties": {
+        "id": {
+            "description": "Refers to the id of the custom field in the project extensions.",
+            "required": false,
+            "type": "string"
+        },
+        "value": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

@@ -81,6 +81,9 @@
             "type": ["string",
             "null"]
         },
+        "custom_fields": {
+            "$ref": "custom_fields.json"
+        },
         "authorization": {
             "type": "object",
             "required": false,
