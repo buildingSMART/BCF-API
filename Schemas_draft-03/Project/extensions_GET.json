@@ -74,6 +74,14 @@
         "comment_actions": {
             "$ref": "../Collaboration/Action/comment_actions.json"
         },
+        "relation_types": {
+            "required": false,
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": ["relates", "parent-child"]
+            }
+        },
         "custom_fields": {
             "type": ["array"],
             "items": {
