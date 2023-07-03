@@ -748,6 +748,10 @@ The global default Topic authorizations are expressed in the project schema and 
 query parameter "includeAuthorization" equal to "true" Topics will include an "authorization" field containing any local
 overrides for each Topic.
 
+### 3.2.8 Including Topic Relations when Returning Topics
+
+The topic relations are defined in the schema and when Topic(s) are requested with the query parameter "includeTopicRelations" equal to "true" Topics will include a "topic_relations" field containing any relations for each Topic.
+
 ### 3.2.9 Topic Identifiers
 
 Each topic has two identifiers: 
