@@ -750,8 +750,7 @@ overrides for each Topic.
 
 ### 3.2.8 Including topic relations when returning topics
 
-The topic relations are defined in the schema and when Topic(s) are requested with the
-query parameter "includeTopicRelations" equal to "true" Topics will include a "topic_relations" field containing any relations for each Topic.
+The topic relations are defined in the schema and when Topic(s) are requested with the query parameter "includeTopicRelations" equal to "true" Topics will include a "topic_relations" field containing any relations for each Topic.
 
 ### 3.2.9 Topic Identifiers
 
