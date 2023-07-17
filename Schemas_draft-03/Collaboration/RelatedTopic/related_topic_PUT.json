@@ -7,6 +7,11 @@
         "related_topic_guid": {
             "required": true,
             "type": "string"
+        },
+        "relation_type": {
+            "required": true,
+            "type": "string",
+            "enum": ["relates", "parent", "child"]
         }
     }
 }
