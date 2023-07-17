@@ -84,6 +84,7 @@ The Open CDE workgroup develops the BCF standard. The group meets every second M
       - [3.5.2.12 Visibility](#35212-visibility)
         * [Optimization rules](#optimization-rules-2)
       - [3.5.2.13 View setup hints](#35213-view-setup-hints)
+      - [3.5.2.14 Marker](#35214-marker)
     + [3.5.3 GET Viewpoint Service](#353-get-viewpoint-service)
     + [3.5.4 GET Viewpoint Snapshot Service](#354-get-viewpoint-snapshot-service)
     + [3.5.5 GET Viewpoint Bitmap Service](#355-get-viewpoint-bitmap-service)
@@ -1138,6 +1139,13 @@ Retrieve a **collection** of all viewpoints related to a topic.
                 "z": 0.7
             }
         }],
+        "markers": [{
+            "location": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            }
+        }],
         "clipping_planes": [{
             "location": {
                 "x": 0.7,
@@ -1181,6 +1189,13 @@ Retrieve a **collection** of all viewpoints related to a topic.
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
+            }
+        }],
+        "markers": [{
+            "location": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
             }
         }],
         "clipping_planes": [{
@@ -1413,6 +1428,13 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
                 "z": 0.0
             }
         }],
+        "markers": [{
+            "location": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            }
+        }],
         "clipping_planes": [{
             "location": {
                 "x": 0.5,
@@ -1513,6 +1535,13 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
                 "z": 0.0
             }
         }],
+        "markers": [{
+            "location": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            }
+        }],
         "clipping_planes": [{
             "location": {
                 "x": 0.5,
@@ -1549,6 +1578,14 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
             "snapshot_type": "png"
         }
     }
+
+#### 3.5.2.14 Marker
+[maker.json](Schemas_draft-03/Collaboration/Viewpoint/marker.json)
+
+|parameter|type|description|required|
+|---------|----|-----------|--------|
+| location | [Point](#3521-point) | Location of the marker | mandatory |
+
 ### 3.5.3 GET Viewpoint Service
 
 **Resource URL**
@@ -1599,6 +1636,13 @@ Retrieve a specific viewpoint.
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
+            }
+        }],
+        "markers": [{
+            "location": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
             }
         }],
         "clipping_planes": [{
