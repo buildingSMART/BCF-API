@@ -1233,6 +1233,7 @@ JSON encoded body using the "application/json" content type.
 | orthogonal_camera | [Orthogonal camera](#3523-orthogonal-camera) | orthogonal camera view | see viewpoint optional/mandatory fields clarification |
 | perspective_camera | [Perspective camera](#3524-perspective-camera) | perspective view of the camera |  see viewpoint optional/mandatory fields clarification |
 | lines | array of [Line](#3525-line) | graphical line | optional |
+| markers | array of [Marker](#35214-marker) | highlight specific locations | optional |
 | clipping_planes | array of [Clipping Plane](#3526-clipping-plane) | clipping planes for the model view | optional |
 | bitmaps | array of [Bitmap](#3527-bitmap) | embedded pictures in the viewpoint | optional |
 | snapshot | [Snapshot](#3528-snapshot) | snapshot image of the viewpoint. Note: The longest dimension of should not exceed 1500 px, length or width. |  see viewpoint optional/mandatory fields clarification |
@@ -1241,7 +1242,7 @@ JSON encoded body using the "application/json" content type.
 **Viewpoint optional/mandatory fields clarification**
 
 1. **Camera definition** is exactly one of `perspective_camera` or `orthogonal_camera`
-2. **Visualisation information** consists of one or more of the following elements: `lines`, `clipping_plans`, `bitmaps`, `components`
+2. **Visualisation information** consists of one or more of the following elements: `lines`, `markers`, `clipping_plans`, `bitmaps`, `components`
 3. A viewpoint must contain a _camera definition_, a `snapshot` or both
 4. A viewpoint containing _visualization information_ must also contain a _camera definition_
 
