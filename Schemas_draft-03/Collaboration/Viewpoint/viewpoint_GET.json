@@ -24,6 +24,12 @@
                 "$ref": "line.json"
             }
         },
+        "markers": {
+            "type": ["array", "null"],
+            "items": {
+                "$ref": "point.json"
+            }
+        },
         "clipping_planes": {
             "type": ["array", "null"],
             "items": {
