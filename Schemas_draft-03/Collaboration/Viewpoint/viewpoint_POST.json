@@ -27,7 +27,7 @@
         "markers": {
             "type": ["array", "null"],
             "items": {
-                "$ref": "point.json"
+                "$ref": "marker.json"
             }
         },
         "clipping_planes": {
