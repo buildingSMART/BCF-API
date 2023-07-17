@@ -81,6 +81,15 @@
             "type": ["string",
             "null"]
         },
+        "custom_fields": {
+            "$ref": "custom_fields.json"
+        },
+        "related_topics": {
+            "type": ["array", "null"],
+            "items": {
+                "$ref": "../RelatedTopic/related_topic_GET.json"
+            }
+        },
         "authorization": {
             "type": "object",
             "required": false,
