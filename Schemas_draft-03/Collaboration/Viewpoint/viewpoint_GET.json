@@ -39,6 +39,12 @@
         "snapshot": {
             "$ref": "snapshot_GET.json"
         },
+        "models": {
+            "type": ["array", "null"],
+            "items": {
+                "$ref": "file_GET.json"
+            }
+        },
         "authorization": {
             "type": "object",
             "required": false,

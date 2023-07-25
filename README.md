@@ -1149,6 +1149,15 @@ Retrieve a **collection** of all viewpoints related to a topic.
                 "y": 0.4,
                 "z": 0.1
             }
+        }],
+        "models": [{
+            "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+            "filename": "OfficeBuilding_Architecture_0001.ifc",
+            "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+        }, {
+            "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+            "filename": "OfficeBuilding_Heating_0003.ifc",
+            "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
         }]
     }, {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
@@ -1194,7 +1203,8 @@ Retrieve a **collection** of all viewpoints related to a topic.
                 "y": 0.0,
                 "z": 0.0
             }
-        }]
+        }],
+        "models": null
     }]
 
 ### 3.5.2 POST Viewpoint Service
@@ -1222,6 +1232,7 @@ JSON encoded body using the "application/json" content type.
 | bitmaps | array of [Bitmap](#3527-bitmap) | embedded pictures in the viewpoint | optional |
 | snapshot | [Snapshot](#3528-snapshot) | snapshot image of the viewpoint. Note: The longest dimension of should not exceed 1500 px, length or width. |  see viewpoint optional/mandatory fields clarification |
 | components | [Components](#3529-components) | Components in the viewpoint | optional |
+| models | array of [File](Schemas_draft-03/Collaboration/File/file_GET.json) | Models associated to the viewpoint. May be absent if being the same models as described in the topic | optional |
 
 **Viewpoint optional/mandatory fields clarification**
 

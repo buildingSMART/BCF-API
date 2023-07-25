@@ -41,6 +41,12 @@
         },
         "components": {
             "$ref": "components.json"
+        },
+        "models": {
+            "type": ["array", "null"],
+            "items": {
+                "$ref": "file_GET.json"
+            }
         }
     }
 }
