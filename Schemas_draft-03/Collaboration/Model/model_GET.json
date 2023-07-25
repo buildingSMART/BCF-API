@@ -1,5 +1,7 @@
 {
-    "title": "file_PUT",
+    "$schema": "http://json-schema.org/draft-03/schema#",
+    "title": "model_GET",
+    "description": "Schema for a single model GET, BCF REST API.",
     "type": "object",
     "properties": {
         "ifc_project": {

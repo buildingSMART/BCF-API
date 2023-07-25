@@ -8,7 +8,7 @@
         "updateBimSnippet",
         "updateRelatedTopics",
         "updateDocumentReferences",
-        "updateFiles",
+        "updateModels",
         "createComment",
         "createViewpoint",
         "delete"]

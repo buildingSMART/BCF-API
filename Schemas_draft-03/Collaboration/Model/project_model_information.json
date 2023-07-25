@@ -1,0 +1,13 @@
+{
+  "title": "project_model_information",
+  "description": "Schema for a single project_model information, BCF REST API.",
+  "type": "object",
+  "properties": {
+    "display_information": {
+      "type": "array",
+      "items": { "$ref": "project_model_display_information.json" },
+      "default": []
+    },
+    "model": { "$ref": "model_GET.json" }
+  }
+}

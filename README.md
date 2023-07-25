@@ -54,10 +54,10 @@ The Open CDE workgroup develops the BCF standard. The group meets every second M
     + [3.2.7 PUT Topic BIM Snippet Service](#327-put-topic-bim-snippet-service)
     + [3.2.8 Determining Allowed Topic Modifications](#328-determining-allowed-topic-modifications)
     + [3.2.9 Topic Identifiers](#329-topic-identifiers)
-  * [3.3 File Services](#33-file-services)
-    + [3.3.1 GET Project Files Information Service](#331-get-project-files-information-service)
-    + [3.3.2 GET Files (Header) Service](#332-get-files-header-service)
-    + [3.3.3 PUT Files (Header) Service](#333-put-files-header-service)
+  * [3.3 Model Services](#33-model-services)
+    + [3.3.1 GET Project Models Information Service](#331-get-project-models-information-service)
+    + [3.3.2 GET Models (Header) Service](#332-get-models-header-service)
+    + [3.3.3 PUT Models (Header) Service](#333-put-models-header-service)
   * [3.4 Comment Services](#34-comment-services)
     + [3.4.1 GET Comments Service](#341-get-comments-service)
     + [3.4.2 POST Comment Service](#342-post-comment-service)
@@ -373,7 +373,7 @@ Project extensions are used to define possible values that can be used in topics
             "updateBimSnippet",
             "updateRelatedTopics",
             "updateDocumentReferences",
-            "updateFiles",
+            "updateModels",
             "createComment",
             "createViewpoint"
         ],
@@ -426,7 +426,7 @@ level by default (i.e. unless overridden by specific topics) The available actio
 * *updateBimSnippet* - The ability to update the BIM snippet for topics (see [3.2.7 PUT Topic BIM Snippet Service](#327-put-topic-bim-snippet-service))
 * *updateRelatedTopics* - The ability to update the collection of related topics (see [3.6.2 PUT Related Topics Service](#362-put-related-topics-service))
 * *updateDocumentReferences* - The ability to update the collection of document references (see [3.7.3 PUT Document Reference Service](#373-put-document-reference-service))
-* *updateFiles* - The ability to update the file header (see [3.3.3 PUT Files (Header) Service](#333-put-files-header-service))
+* *updateModels* - The ability to update the model header (see [3.3.3 PUT Models (Header) Service](#333-put-models-header-service))
 * *createComment* - The ability to create a comment (see [3.4.2 POST Comment Service](#342-post-comment-service))
 * *createViewpoint* - The ability to create a new viewpoint (see [3.5.2 POST Viewpoint Service](#352-post-viewpoint-service))
 
@@ -767,26 +767,26 @@ Each topic has two identifiers:
     
     `server_assigned_id` examples: 003490, ISSUE-01  
 
-## 3.3 File Services
+## 3.3 Model Services
 
-This group of services corresponds to the BCF-XML [header](https://github.com/buildingSMART/BCF-XML/tree/release_3_0/Documentation#header) `Files` element. The files associated with a topic are the models that should be loaded when displaying the topic's viewpoints. 
+This group of services corresponds to the BCF-XML [header](https://github.com/buildingSMART/BCF-XML/tree/release_3_0/Documentation#header) `Models` element. The models associated with a topic should be loaded when displaying the topic's viewpoints. 
 
-### 3.3.1 GET Project Files Information Service
+### 3.3.1 GET Project Models Information Service
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/files_information
+    GET /bcf/{version}/projects/{project_id}/models_information
     
-[project_files_information_GET.json](Schemas_draft-03/Collaboration/File/project_files_information_GET.json)
+[project_models_information_GET.json](Schemas_draft-03/Collaboration/Model/project_models_information_GET.json)
 
-Retrieve a **collection** of `project_file_information`s to support allowing users to choose which `File`s (models) 
+Retrieve a **collection** of `project_model_information`s to support allowing users to choose which `Model`s (models) 
 to reference in the header of topics created on the server. 
 
-Each [project_file_information](Schemas_draft-03/Collaboration/File/project_file_information.json) record contains 
-`display_information` to allow users to associate the `File` with a server model. 
+Each [project_model_information](Schemas_draft-03/Collaboration/Model/project_model_information.json) record contains 
+`display_information` to allow users to associate the `Model` with a server model. 
 The `display_information` object is designed to support user interface rendering in tabular format. The
 servers are required to provide a consistent list of fields across all 
-[project_file_information](Schemas_draft-03/Collaboration/File/project_file_information.json) objects. The following 
+[project_model_information](Schemas_draft-03/Collaboration/Model/project_model_information.json) objects. The following 
 table demonstrates tabular rendering of the **Example Response** (below):
 
 | Model Name | Revision Date |
@@ -794,13 +794,13 @@ table demonstrates tabular rendering of the **Example Response** (below):
 | ARCH-Z100-051 | May 3 2020 |
 | MEP-Z100-015 | Apr 30 2020 |
  
-Each [project_file_information](Schemas_draft-03/Collaboration/File/project_file_information.json) also contains a
-[file_GET](Schemas_draft-03/Collaboration/File/file_GET.json) object that will be accepted by the server should the 
-user choose to associate a topic with that `File`.
+Each [project_model_information](Schemas_draft-03/Collaboration/Model/project_model_information.json) also contains a
+[model_GET](Schemas_draft-03/Collaboration/Model/model_GET.json) object that will be accepted by the server should the 
+user choose to associate a topic with that `Model`.
 
 **Example Request**
 
-    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/files_information
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/models_information
 
 **Example Response**
 
@@ -817,7 +817,7 @@ user choose to associate a topic with that `File`.
         "file": {
             "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
             "file_name": "OfficeBuilding_Architecture_0001.ifc",
-            "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+            "reference": "https://example.com/models/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
         }
     }, {
         "display_information": [{
@@ -835,21 +835,21 @@ user choose to associate a topic with that `File`.
     }]
 
 
-### 3.3.2 GET Files (Header) Service
+### 3.3.2 GET Models (Header) Service
 
 **Resource URL**
 
-    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/files
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/models
 
-[file_GET.json](Schemas_draft-03/Collaboration/File/file_GET.json)
+[model_GET.json](Schemas_draft-03/Collaboration/Model/model_GET.json)
 
-Retrieve a **collection** of file references as topic header.
+Retrieve a **collection** of model references as topic header.
 
-*Implementer Note*: The `reference` property can either be an **Uri** or a **server specific id**. Uris are given as absolute paths to the model files while ids reference a custom id of the model file and require custom logic per server to retrieve it. This allows referencing of files on the server but requires clients to know how to retrieve files in a specific implementation.
+*Implementer Note*: The `reference` property can either be an **Uri** or a **server specific id**. Uris are given as absolute paths to the model files while ids reference a custom id of the model file and require custom logic per server to retrieve it. This allows referencing of models on the server but requires clients to know how to retrieve models in a specific implementation.
 
 **Example Request**
 
-    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/models
 
 **Example Response**
 
@@ -858,7 +858,7 @@ Retrieve a **collection** of file references as topic header.
     [{
         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
         "filename": "OfficeBuilding_Architecture_0001.ifc",
-        "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+        "reference": "https://example.com/models/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
     }, {
         "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
         "filename": "OfficeBuilding_Heating_0003.ifc",
@@ -867,24 +867,24 @@ Retrieve a **collection** of file references as topic header.
 
 > Note: In the above example, the second items reference is in a guid format and points to a model file that is located on the server. Servers don't have to use guid formats for their internal ids, so the expected format of the response can vary between servers.
 
-### 3.3.3 PUT Files (Header) Service
+### 3.3.3 PUT Models (Header) Service
 
 **Resource URL**
 
-    PUT /bcf/{version}/projects/{project_id}/topics/{topic_guid}/files
+    PUT /bcf/{version}/projects/{project_id}/topics/{topic_guid}/models
 
-[file_PUT.json](Schemas_draft-03/Collaboration/File/file_PUT.json)
+[model_PUT.json](Schemas_draft-03/Collaboration/Model/model_PUT.json)
 
-Update a **collection** of file references on the topic header. This operation is only possible when the server returns the `updateFiles` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications). Servers must always accept a [File](Schemas_draft-03/Collaboration/File/file_GET.json) reference returned by the [files_information](#331-get-project-files-information-service) endpoint. Servers may also accept other values such as a combination of fields from the header of the IFC file. 
+Update a **collection** of model references on the topic header. This operation is only possible when the server returns the `updateModels` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications). Servers must always accept a [Model](Schemas_draft-03/Collaboration/Model/model_GET.json) reference returned by the [models_information](#331-get-project-models-information-service) endpoint. Servers may also accept other values such as a combination of fields from the header of the IFC file. 
 
 **Example Request**
 
-    PUT /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/files
+    PUT /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/models
     Body:
     [{
         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
         "filename": "OfficeBuilding_Architecture_0001.ifc",
-        "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+        "reference": "https://example.com/models/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
     }, {
         "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
         "filename": "OfficeBuilding_Heating_0003.ifc",
@@ -898,7 +898,7 @@ Update a **collection** of file references on the topic header. This operation i
     [{
         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
         "filename": "OfficeBuilding_Architecture_0001.ifc",
-        "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+        "reference": "https://example.com/models/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
     }, {
         "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
         "filename": "OfficeBuilding_Heating_0003.ifc",
