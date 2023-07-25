@@ -1581,7 +1581,13 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
     }
 
 #### 3.5.2.14 Marker
-[maker.json](Schemas_draft-03/Collaboration/Viewpoint/marker.json)
+A marker is a way to pinpoint a location in the 3D model. Each vendor can decide how these markers should be rendered.
+
+**Best practice**
+Render the markers based on the topic properties.
+Example: Red markers for open topics, and green markers for closed topics
+
+[marker.json](Schemas_draft-03/Collaboration/Viewpoint/marker.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
