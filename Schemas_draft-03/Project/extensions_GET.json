@@ -6,21 +6,30 @@
             "required": true,
             "type": ["array", "null"],
             "items": {
-                "$ref": "extension_item.json"
+                "type": "object",
+                "properties": {
+                    "name": "string"
+                }
             }
         },
         "topic_status": {
             "required": true,
             "type": ["array", "null"],
             "items": {
-                "$ref": "extension_item.json"
+                "type": "object",
+                "properties": {
+                    "name": "string"
+                }
             }
         },
         "topic_label": {
             "required": true,
             "type": ["array", "null"],
             "items": {
-                "$ref": "extension_item.json"
+                "type": "object",
+                "properties": {
+                    "name": "string"
+                }
             }
         },
         "snippet_type": {
@@ -35,21 +44,30 @@
             "required": true,
             "type": ["array", "null"],
             "items": {
-                "$ref": "extension_item.json"
+                "type": "object",
+                "properties": {
+                    "name": "string"
+                }
             }
         },
         "users": {
             "required": true,
             "type": ["array", "null"],
             "items": {
-                "$ref": "extension_item.json"
+                "type": "object",
+                "properties": {
+                    "name": "string"
+                }
             }
         },
         "stage": {
             "required": true,
             "type": ["array", "null"],
             "items": {
-                "$ref": "extension_item.json"
+                "type": "object",
+                "properties": {
+                    "name": "string"
+                }
             }
         },
         "project_actions": {
