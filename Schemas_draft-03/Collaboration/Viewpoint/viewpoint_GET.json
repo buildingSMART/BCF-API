@@ -39,6 +39,14 @@
         "snapshot": {
             "$ref": "snapshot_GET.json"
         },
+        "creation_date": {
+            "required": true,
+            "type": "string"
+        },
+        "creation_author": {
+            "required": true,
+            "type": "string"
+        },
         "authorization": {
             "type": "object",
             "required": false,

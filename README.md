@@ -1101,12 +1101,20 @@ Retrieve a **collection** of all viewpoints related to a topic.
 
     GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
 
+Note: For viewpoints without audit information (For example viewpoints created in older BCF versions), you still need to return audit information in the API according to the rules below.
+
+- If comments are linked to this viewpoint, return audit information of the oldest linked comment
+- If no comments are linked to the viewpoint, return audit information of the issue
+
+
 **Example Response**
 
     Response Code: 200 - OK
     Body:
     [{
         "guid": "b24a82e9-f67b-43b8-bda0-4946abf39624",
+        "creation_date": "2013-10-21T17:34:22.409Z",
+        "creation_author: "Architect@example.com",
         "perspective_camera": {
             "camera_view_point": {
                 "x": 0.0,
@@ -1152,6 +1160,8 @@ Retrieve a **collection** of all viewpoints related to a topic.
         }]
     }, {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+        "creation_date": "2013-10-21T17:34:22.409Z",
+        "creation_author: "Architect@example.com",
         "perspective_camera": {
             "camera_view_point": {
                 "x": 0.0,
@@ -1569,6 +1579,8 @@ Retrieve a specific viewpoint.
     Body:
     {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+        "creation_date": "2013-10-21T17:34:22.409Z",
+        "creation_author: "Architect@example.com",
         "index": 10,
         "perspective_camera": {
             "camera_view_point": {
