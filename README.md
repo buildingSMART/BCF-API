@@ -226,7 +226,7 @@ For compatibility with the project structure of existing systems, the `project_i
 
     GET /bcf/{version}/projects
 
-[project_GET.json](Schemas_draft-03/Project/project_GET.json)
+[project_GET.json](Schemas/Project/project_GET.json)
 
 Retrieve a **collection** of projects where the currently logged on user has access to.
 
@@ -261,7 +261,7 @@ Retrieve a **collection** of projects where the currently logged on user has acc
 
     GET /bcf/{version}/projects/{project_id}
 
-[project_GET.json](Schemas_draft-03/Project/project_GET.json)
+[project_GET.json](Schemas/Project/project_GET.json)
 
 Retrieve a specific project.
 
@@ -289,7 +289,7 @@ Retrieve a specific project.
 
     PUT /bcf/{version}/projects/{project_id}
 
-[project_PUT.json](Schemas_draft-03/Project/project_PUT.json)
+[project_PUT.json](Schemas/Project/project_PUT.json)
 
 Modify a specific project. This operation is only possible when the server returns the `update` flag in the Project authorization, see section [3.1.5](#315-expressing-user-authorization-through-project-extensions)
 
@@ -321,7 +321,7 @@ Modify a specific project. This operation is only possible when the server retur
 
     GET /bcf/{version}/projects/{project_id}/extensions
 
-[extensions_GET.json](Schemas_draft-03/Project/extensions_GET.json)
+[extensions_GET.json](Schemas/Project/extensions_GET.json)
 
 Retrieve a specific projects extensions.
 Project extensions are used to define possible values that can be used in topics and comments, for example topic labels and priorities. They may change during the course of a project. The most recent extensions state which values are valid at a given moment for newly created topics and comments.
@@ -452,7 +452,7 @@ default (i.e unless overridden by specific comments). The available actions incl
 
     GET /bcf/{version}/projects/{project_id}/topics
 
-[topic_GET.json](Schemas_draft-03/Collaboration/Topic/topic_GET.json)
+[topic_GET.json](Schemas/Collaboration/Topic/topic_GET.json)
 
 Retrieve a **collection** of topics related to a project (default sort order is `creation_date`).
 
@@ -528,7 +528,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
 
     POST /bcf/{version}/projects/{project_id}/topics
 
-[topic_POST.json](Schemas_draft-03/Collaboration/Topic/topic_POST.json)
+[topic_POST.json](Schemas/Collaboration/Topic/topic_POST.json)
 
 Add a new topic. This operation is only possible when the server returns the `createTopic` flag in the Project authorization, see section [3.1.5](#315-expressing-user-authorization-through-project-extensions)
 
@@ -615,7 +615,7 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
 
     GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}
 
-[topic_GET.json](Schemas_draft-03/Collaboration/Topic/topic_GET.json)
+[topic_GET.json](Schemas/Collaboration/Topic/topic_GET.json)
 
 Retrieve a specific topic.
 
@@ -661,7 +661,7 @@ Retrieve a specific topic.
 
     PUT /bcf/{version}/projects/{project_id}/topics/{topic_guid}
 
-[topic_PUT.json](Schemas_draft-03/Collaboration/Topic/topic_PUT.json)
+[topic_PUT.json](Schemas/Collaboration/Topic/topic_PUT.json)
 
 Modify a specific topic, description similar to POST. This operation is only possible when the server returns the `update` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications)
 
@@ -782,16 +782,16 @@ This group of services corresponds to the BCF-XML [header](https://github.com/bu
 
     GET /bcf/{version}/projects/{project_id}/files_information
     
-[project_files_information_GET.json](Schemas_draft-03/Collaboration/File/project_files_information_GET.json)
+[project_files_information_GET.json](Schemas/Collaboration/File/project_files_information_GET.json)
 
 Retrieve a **collection** of `project_file_information`s to support allowing users to choose which `File`s (models) 
 to reference in the header of topics created on the server. 
 
-Each [project_file_information](Schemas_draft-03/Collaboration/File/project_file_information.json) record contains 
+Each [project_file_information](Schemas/Collaboration/File/project_file_information.json) record contains 
 `display_information` to allow users to associate the `File` with a server model. 
 The `display_information` object is designed to support user interface rendering in tabular format. The
 servers are required to provide a consistent list of fields across all 
-[project_file_information](Schemas_draft-03/Collaboration/File/project_file_information.json) objects. The following 
+[project_file_information](Schemas/Collaboration/File/project_file_information.json) objects. The following 
 table demonstrates tabular rendering of the **Example Response** (below):
 
 | Model Name | Revision Date |
@@ -799,8 +799,8 @@ table demonstrates tabular rendering of the **Example Response** (below):
 | ARCH-Z100-051 | May 3 2020 |
 | MEP-Z100-015 | Apr 30 2020 |
  
-Each [project_file_information](Schemas_draft-03/Collaboration/File/project_file_information.json) also contains a
-[file_GET](Schemas_draft-03/Collaboration/File/file_GET.json) object that will be accepted by the server should the 
+Each [project_file_information](Schemas/Collaboration/File/project_file_information.json) also contains a
+[file_GET](Schemas/Collaboration/File/file_GET.json) object that will be accepted by the server should the 
 user choose to associate a topic with that `File`.
 
 **Example Request**
@@ -846,7 +846,7 @@ user choose to associate a topic with that `File`.
 
     GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/files
 
-[file_GET.json](Schemas_draft-03/Collaboration/File/file_GET.json)
+[file_GET.json](Schemas/Collaboration/File/file_GET.json)
 
 Retrieve a **collection** of file references as topic header.
 
@@ -878,9 +878,9 @@ Retrieve a **collection** of file references as topic header.
 
     PUT /bcf/{version}/projects/{project_id}/topics/{topic_guid}/files
 
-[file_PUT.json](Schemas_draft-03/Collaboration/File/file_PUT.json)
+[file_PUT.json](Schemas/Collaboration/File/file_PUT.json)
 
-Update a **collection** of file references on the topic header. This operation is only possible when the server returns the `updateFiles` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications). Servers must always accept a [File](Schemas_draft-03/Collaboration/File/file_GET.json) reference returned by the [files_information](#331-get-project-files-information-service) endpoint. Servers may also accept other values such as a combination of fields from the header of the IFC file. 
+Update a **collection** of file references on the topic header. This operation is only possible when the server returns the `updateFiles` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications). Servers must always accept a [File](Schemas/Collaboration/File/file_GET.json) reference returned by the [files_information](#331-get-project-files-information-service) endpoint. Servers may also accept other values such as a combination of fields from the header of the IFC file. 
 
 **Example Request**
 
@@ -918,7 +918,7 @@ Update a **collection** of file references on the topic header. This operation i
 
     GET /bcf/{version}/projects/{project_id}/topics/{guid_topic}/comments
 
-[comment_GET.json](Schemas_draft-03/Collaboration/Comment/comment_GET.json)
+[comment_GET.json](Schemas/Collaboration/Comment/comment_GET.json)
 
 Retrieve a **collection** of all comments related to a topic (default ordering is date).
 
@@ -974,7 +974,7 @@ Get comments that are created after December 5 2015. Sort the result on first cr
 
     POST /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments
 
-[comment_POST.json](Schemas_draft-03/Collaboration/Comment/comment_POST.json)
+[comment_POST.json](Schemas/Collaboration/Comment/comment_POST.json)
 
 Add a new comment to a topic. This operation is only possible when the server returns the `createComment` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications)
 
@@ -1014,7 +1014,7 @@ JSON encoded body using the "application/json" content type.
 
     GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}
 
-[comment_GET.json](Schemas_draft-03/Collaboration/Comment/comment_GET.json)
+[comment_GET.json](Schemas/Collaboration/Comment/comment_GET.json)
 
 Get a single comment.
 
@@ -1040,7 +1040,7 @@ Get a single comment.
 
     PUT /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}
 
-[comment_PUT.json](Schemas_draft-03/Collaboration/Comment/comment_PUT.json)
+[comment_PUT.json](Schemas/Collaboration/Comment/comment_PUT.json)
 
 Update a single comment, description similar to POST. This operation is only possible when the server returns the `update` flag in the Comment authorization, see section [3.4.6](#346-determining-allowed-comment-modifications)
 
@@ -1098,7 +1098,7 @@ Viewpoints are described in detail in [BCF-XML](https://github.com/buildingSMART
 
     GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints
 
-[viewpoint_GET.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_GET.json)
+[viewpoint_GET.json](Schemas/Collaboration/Viewpoint/viewpoint_GET.json)
 
 Retrieve a **collection** of all viewpoints related to a topic.
 
@@ -1218,7 +1218,7 @@ Note: For viewpoints without audit information (For example viewpoints created i
 
     POST /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints
 
-[viewpoint_POST.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_POST.json)
+[viewpoint_POST.json](Schemas/Collaboration/Viewpoint/viewpoint_POST.json)
 
 Add a new viewpoint. Viewpoints are immutable, meaning that they should never change. Requirements for different visualizations should be handled by creating new viewpoint elements. This operation is only possible when the server returns the `createViewpoint` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications)
 
@@ -1246,7 +1246,7 @@ JSON encoded body using the "application/json" content type.
 4. A viewpoint containing _visualization information_ must also contain a _camera definition_
 
 #### 3.5.2.1 Point
-[point.json](Schemas_draft-03/Collaboration/Viewpoint/point.json)
+[point.json](Schemas/Collaboration/Viewpoint/point.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
@@ -1255,7 +1255,7 @@ JSON encoded body using the "application/json" content type.
 | z | number | z point | mandatory |
 
 #### 3.5.2.2 Direction
-[direction.json](Schemas_draft-03/Collaboration/Viewpoint/direction.json)
+[direction.json](Schemas/Collaboration/Viewpoint/direction.json)
 
 Direction must not be a zero vector.
 
@@ -1272,7 +1272,7 @@ Perspective and Orthogonal cameras are explained in detail in [BCF-XML](https://
 ![Camera Illustration](https://github.com/buildingSMART/BCF-XML/blob/release_3_0/Documentation/Graphics/Cameras.png)
 
 #### 3.5.2.3 Orthogonal camera
-[orthogonal_camera.json](Schemas_draft-03/Collaboration/Viewpoint/orthogonal_camera.json)
+[orthogonal_camera.json](Schemas/Collaboration/Viewpoint/orthogonal_camera.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
@@ -1283,7 +1283,7 @@ Perspective and Orthogonal cameras are explained in detail in [BCF-XML](https://
 | aspect_ratio | number | proportional relationship between the width and the height of the view (w/h) | mandatory |
 
 #### 3.5.2.4 Perspective camera
-[perspective_camera.json](Schemas_draft-03/Collaboration/Viewpoint/perspective_camera.json)
+[perspective_camera.json](Schemas/Collaboration/Viewpoint/perspective_camera.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
@@ -1294,7 +1294,7 @@ Perspective and Orthogonal cameras are explained in detail in [BCF-XML](https://
 | aspect_ratio | number | proportional relationship between the width and the height of the view (w/h) | mandatory |
 
 #### 3.5.2.5 Line
-[line.json](Schemas_draft-03/Collaboration/Viewpoint/line.json)
+[line.json](Schemas/Collaboration/Viewpoint/line.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
@@ -1302,7 +1302,7 @@ Perspective and Orthogonal cameras are explained in detail in [BCF-XML](https://
 | end_point | [Point](#3521-point) | end point of the line (Treated as point if start_point and end_point is the same | mandatory |
 
 #### 3.5.2.6 Clipping plane
-[clipping_plane.json](Schemas_draft-03/Collaboration/Viewpoint/clipping_plane.json)
+[clipping_plane.json](Schemas/Collaboration/Viewpoint/clipping_plane.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
@@ -1310,7 +1310,7 @@ Perspective and Orthogonal cameras are explained in detail in [BCF-XML](https://
 | direction | [Direction](#3522-direction) | direction of the clipping plane, points in the invisible direction meaning the half-space that is clipped | mandatory |
 
 #### 3.5.2.7 Bitmap
-[bitmap.json](Schemas_draft-03/Collaboration/Viewpoint/bitmap_POST.json)
+[bitmap.json](Schemas/Collaboration/Viewpoint/bitmap_POST.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
@@ -1322,7 +1322,7 @@ Perspective and Orthogonal cameras are explained in detail in [BCF-XML](https://
 | height | number | height of bitmap in the scene | mandatory |
 
 #### 3.5.2.8 Snapshot
-[snapshot.json](Schemas_draft-03/Collaboration/Viewpoint/snapshot_POST.json)
+[snapshot.json](Schemas/Collaboration/Viewpoint/snapshot_POST.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
@@ -1330,7 +1330,7 @@ Perspective and Orthogonal cameras are explained in detail in [BCF-XML](https://
 | snapshot_data | base64 encoded string | The snapshot image data | mandatory |
 
 #### 3.5.2.9 Components
-[components.json](Schemas_draft-03/Collaboration/Viewpoint/components.json)
+[components.json](Schemas/Collaboration/Viewpoint/components.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
@@ -1339,7 +1339,7 @@ Perspective and Orthogonal cameras are explained in detail in [BCF-XML](https://
 | visibility | [Visibility](#35212-visibility) | Visibility of components | mandatory |
 
 #### 3.5.2.10 Component
-[component.json](Schemas_draft-03/Collaboration/Viewpoint/component.json)
+[component.json](Schemas/Collaboration/Viewpoint/component.json)
 
 ##### Optimization rules
 BCF is suitable for selecting a few components. A huge list of selected components causes poor performance. All clients should follow this rule:
@@ -1354,7 +1354,7 @@ BCF is suitable for selecting a few components. A huge list of selected componen
 Note that `ifc_guid` must be provided, if possible. The `authoring_tool_id` can be used as a fallback when an `ifc_guid` is not available.
 
 #### 3.5.2.11 Coloring
-[coloring.json](Schemas_draft-03/Collaboration/Viewpoint/coloring.json)
+[coloring.json](Schemas/Collaboration/Viewpoint/coloring.json)
 
 ##### Optimization rules
 BCF is suitable for coloring a few components. A huge list of components causes poor performance. All clients should follow this rule:
@@ -1368,7 +1368,7 @@ The color is given in ARGB format. Colors are represented as 6 or 8 hexadecimal 
 | components | array of [Component](#35210-component) | Colored components | mandatory |
 
 #### 3.5.2.12 Visibility
-[visibility.json](Schemas_draft-03/Collaboration/Viewpoint/visibility.json)
+[visibility.json](Schemas/Collaboration/Viewpoint/visibility.json)
 
 ##### Optimization rules
 BCF is suitable for hiding/showing a few components. A huge list of hidden/shown components causes poor performance. All clients should follow these rules:
@@ -1383,7 +1383,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
 | view_setup_hints | [View setup hints](#35213-view-setup-hints) | Hints about the setup of the viewer | optional |
 
 #### 3.5.2.13 View setup hints
-[view_setup_hints.json](Schemas_draft-03/Collaboration/Viewpoint/view_setup_hints.json)
+[view_setup_hints.json](Schemas/Collaboration/Viewpoint/view_setup_hints.json)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
@@ -1570,7 +1570,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
 
     GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}
 
-[viewpoint_GET.json](Schemas_draft-03/Collaboration/Viewpoint/viewpoint_GET.json)
+[viewpoint_GET.json](Schemas/Collaboration/Viewpoint/viewpoint_GET.json)
 
 Retrieve a specific viewpoint.
 
@@ -1684,7 +1684,7 @@ Retrieve a specific viewpoints bitmap image file (png or jpg).
 
     GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/selection
 
-[selection_GET.json](Schemas_draft-03/Collaboration/Viewpoint/selection_GET.json)
+[selection_GET.json](Schemas/Collaboration/Viewpoint/selection_GET.json)
 
 Retrieve a **collection** of all selected components in a viewpoint.
 
@@ -1714,7 +1714,7 @@ Retrieve a **collection** of all selected components in a viewpoint.
 
     GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/coloring
 
-[coloring_GET.json](Schemas_draft-03/Collaboration/Viewpoint/coloring_GET.json)
+[coloring_GET.json](Schemas/Collaboration/Viewpoint/coloring_GET.json)
 
 Retrieve a **collection** of all colored components in a viewpoint.
 
@@ -1749,7 +1749,7 @@ Retrieve a **collection** of all colored components in a viewpoint.
 
     GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/visibility
 
-[visibility_GET.json](Schemas_draft-03/Collaboration/Viewpoint/visibility_GET.json)
+[visibility_GET.json](Schemas/Collaboration/Viewpoint/visibility_GET.json)
 
 Retrieve visibility of components in a viewpoint.
 
@@ -1815,7 +1815,7 @@ overrides for each Viewpoint.
 
     GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/related_topics
 
-[related_topic_GET.json](Schemas_draft-03/Collaboration/RelatedTopic/related_topic_GET.json)
+[related_topic_GET.json](Schemas/Collaboration/RelatedTopic/related_topic_GET.json)
 
 Retrieve a **collection** of all related topics to a topic.
 
@@ -1839,7 +1839,7 @@ Retrieve a **collection** of all related topics to a topic.
 
     PUT /bcf/{version}/projects/{project_id}/topics/{topic_guid}/related_topics
 
-[related_topic_PUT.json](Schemas_draft-03/Collaboration/RelatedTopic/related_topic_PUT.json)
+[related_topic_PUT.json](Schemas/Collaboration/RelatedTopic/related_topic_PUT.json)
 
 Add or update a **collection** of all related topics to a topic. This operation is only possible when the server returns the `updateRelatedTopics` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications)
 
@@ -1884,7 +1884,7 @@ A document_reference with **document_guid** set, is referencing an internal **do
 
     GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/document_references
 
-[document_reference_GET.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_GET.json)
+[document_reference_GET.json](Schemas/Collaboration/DocumentReference/document_reference_GET.json)
 
 Retrieve a **collection** of all document references to a topic.
 
@@ -1912,7 +1912,7 @@ Retrieve a **collection** of all document references to a topic.
 
     POST /bcf/{version}/projects/{project_id}/topics/{topic_guid}/document_references
 
-[document_reference_POST.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_POST.json)
+[document_reference_POST.json](Schemas/Collaboration/DocumentReference/document_reference_POST.json)
 
 Add a document reference to a topic. This operation is only possible when the server returns the `updateDocumentReferences` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications)
 
@@ -1979,7 +1979,7 @@ JSON encoded body using the "application/json" content type.
 
     PUT /bcf/{version}/projects/{project_id}/topics/{topic_guid}/document_references/{document_guid}
 
-[document_reference_PUT.json](Schemas_draft-03/Collaboration/DocumentReference/document_reference_PUT.json)
+[document_reference_PUT.json](Schemas/Collaboration/DocumentReference/document_reference_PUT.json)
 
 Update an existing document reference identified by **guid**.
 Uses the same rules as [POST Document Reference Service](#372-post-document-reference-service). This operation is only possible when the server returns the `updateDocumentReferences` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications)
@@ -2007,7 +2007,7 @@ Uses the same rules as [POST Document Reference Service](#372-post-document-refe
 
 ### 3.8.1 GET Documents Service
 
-[document_GET.json](Schemas_draft-03/Collaboration/Document/document_GET.json)
+[document_GET.json](Schemas/Collaboration/Document/document_GET.json)
 
 **Resource URL**
 
@@ -2081,7 +2081,7 @@ Note: Whenever a topic has been created, the server also generates "update" and 
 
     GET /bcf/{version}/projects/{project_id}/topics/events
 
-[topic_event_GET.json](Schemas_draft-03/Collaboration/Events/topic_event_GET.json)
+[topic_event_GET.json](Schemas/Collaboration/Events/topic_event_GET.json)
 
 Retrieve a **collection** of topic events related to a project (default sort order is `date`).
 
@@ -2172,7 +2172,7 @@ Get events that are of type 'status_updated', 'type_updated' or 'title_updated' 
 
     GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/events
 
-[topic_event_GET.json](Schemas_draft-03/Collaboration/Events/topic_event_GET.json)
+[topic_event_GET.json](Schemas/Collaboration/Events/topic_event_GET.json)
 
 Retrieve a **collection** of topic events related to a project (default sort order is `date`).
 
@@ -2269,7 +2269,7 @@ Note: Whenever a comment has been created, the server also generates "update" ev
 
     GET /bcf/{version}/projects/{project_id}/topics/comments/events
 
-[comment_event_GET.json](Schemas_draft-03/Collaboration/Events/comment_event_GET.json)
+[comment_event_GET.json](Schemas/Collaboration/Events/comment_event_GET.json)
 
 Retrieve a **collection** of comment events related to a project (default sort order is `date`).
 
@@ -2350,7 +2350,7 @@ Get events that are of type 'comment_created', or 'viewpoint_updated'
 
     GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}/events
 
-[comment_event_GET.json](Schemas_draft-03/Collaboration/Events/comment_event_GET.json)
+[comment_event_GET.json](Schemas/Collaboration/Events/comment_event_GET.json)
 
 Retrieve a **collection** of comment events related to a single comment (default sort order is `date`).
 
