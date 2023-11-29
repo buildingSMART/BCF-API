@@ -85,14 +85,18 @@ The Open CDE workgroup develops the BCF standard. The group meets every second M
       - [3.5.2.12 Visibility](#35212-visibility)
         * [Optimization rules](#optimization-rules-2)
       - [3.5.2.13 View setup hints](#35213-view-setup-hints)
+      - [3.5.2.14 Translucency](#35214-translucency)
+        * [Optimization rules](#optimization-rules-3)
+      - [3.5.2.15 Translucency setup hints](#35215-translucency-setup-hints)
     + [3.5.3 GET Viewpoint Service](#353-get-viewpoint-service)
     + [3.5.4 GET Viewpoint Snapshot Service](#354-get-viewpoint-snapshot-service)
     + [3.5.5 GET Viewpoint Bitmap Service](#355-get-viewpoint-bitmap-service)
     + [3.5.6 GET selected Components Service](#356-get-selected-components-service)
     + [3.5.7 GET colored Components Service](#357-get-colored-components-service)
     + [3.5.8 GET visibility of Components Service](#358-get-visibility-of-components-service)
-    + [3.5.9 DELETE Viewpoint Service](#359-delete-viewpoint-service)
-    + [3.5.10 Determining allowed Viewpoint modifications](#3510-determining-allowed-viewpoint-modifications)
+    + [3.5.9 GET translucency of Components Service](#359-get-translucency-of-components-service)
+    + [3.5.10 DELETE Viewpoint Service](#3510-delete-viewpoint-service)
+    + [3.5.11 Determining allowed Viewpoint modifications](#3511-determining-allowed-viewpoint-modifications)
    * [3.6 Related Topics Services](#36-related-topics-services)
     + [3.6.1 GET Related Topics Service](#361-get-related-topics-service)
     + [3.6.2 PUT Related Topics Service](#362-put-related-topics-service)
@@ -1332,11 +1336,12 @@ Perspective and Orthogonal cameras are explained in detail in [BCF-XML](https://
 #### 3.5.2.9 Components
 [components.json](Schemas/Collaboration/Viewpoint/components.json)
 
-|parameter|type|description|required|
-|---------|----|-----------|--------|
-| selection | array of [Component](#35210-component) | Selected components | optional |
-| coloring | array of [Coloring](#35211-coloring) | Colored components | optional |
-| visibility | [Visibility](#35212-visibility) | Visibility of components | mandatory |
+| parameter    | type                                   | description                | required  |
+|--------------|----------------------------------------|----------------------------|-----------|
+| selection    | array of [Component](#35210-component) | Selected components        | optional  |
+| coloring     | array of [Coloring](#35211-coloring)   | Colored components         | optional  |
+| visibility   | [Visibility](#35212-visibility)        | Visibility of components   | mandatory |
+| translucency | [Translucency](#35214-translucency)    | Translucency of components | optional  |
 
 #### 3.5.2.10 Component
 [component.json](Schemas/Collaboration/Viewpoint/component.json)
@@ -1390,6 +1395,35 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
 | spaces_visible | boolean | Visibility of spaces | optional, default false |
 | space_boundaries_visible | boolean | Visibility of space_boundaries | optional, default false |
 | openings_visible | boolean | Visibility of openings | optional, default false |
+
+#### 3.5.2.14 Translucency
+[translucency.json](Schemas/Collaboration/Viewpoint/translucency.json)
+The `translucency` object decides which components are translucent and which are opaque. Visibility has a higher priority than translucency: A translucent component which is also resolved to be invisible should not be rendered.
+
+Commonly, translucency is specified using a numeric value (alpha) ranging from 0 to 1 where a value of 0 indicates complete transparency and a value of 1 indicates complete opacity. This specification leaves the alpha value for translucent components to the vendor's discretion: when a component is resolved as 'translucent', it should rendered with an alpha greater than 0 but less than 1 in a manner consistent with the visual style of the rendering application.
+
+##### Optimization rules
+BCF is suitable for controlling the translucency of a few components. A huge list of translucent/opaque components will cause poor performance. When encoding a viewpoint follow these rules:
+- Apply visibility optimization first and optimize translucency for visible components only.
+- Omit the translucency element altogether if all visible components are opaque.
+- If the list of translucent components is smaller than the list of opaque components: set `default_translucency` to false and put the translucent components in exceptions.
+- If the list of opaque components is smaller or equals the list of translucent components:  set `default_translucency` to true and put the opaque components in exceptions.
+- If the size of exceptions is huge (over 1000 components), alert the user and ask them to alter the translucency setting to allow efficient encoding.
+
+| parameter                | type                                                | description                                                                                                                                             |required|
+|--------------------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+| default_translucency     | boolean                                             | If true: Make all components translucent, and make the exceptions opaque. If false: Make all components opaque and make all the exceptions translucent. | optional, default false |
+| exceptions               | array of [Component](#35210-component)              | Components to make translucent or opaque as determined by default_translucency                                                                          | optional |
+| translucency_setup_hints | [View setup hints](#35215-translucency-setup-hints) | Hints about the translucency of spaces, space boundaries and openings.                                                                                  | optional |
+
+#### 3.5.2.15 Translucency setup hints
+[translucency_setup_hints.json](Schemas/Collaboration/Viewpoint/translucency_setup_hints.json)
+
+| parameter                    |type|description| required               |
+|------------------------------|----|-----------|------------------------|
+| spaces_translucent           | boolean | Translucency of spaces | optional, default true |
+| space_boundaries_translucent | boolean | Translucency of space_boundaries | optional, default true |
+| openings_translucent         | boolean | Translucency of openings | optional, default true |
 
 **Example Request**
 
@@ -1485,6 +1519,17 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
                     "spaces_visible": true,
                     "space_boundaries_visible": false,
                     "openings_visible": true
+                }
+            },
+            "translucency": {
+                "default_translucency": true,
+                "exceptions": [{
+                    "ifc_guid": "5$cshxZO9AJBebsni$z9Yk"
+                }],
+                "view_setup_hints": {
+                    "spaces_translucent": false,
+                    "space_boundaries_translucent": true,
+                    "openings_translucent": false
                 }
             }
         }
@@ -1781,7 +1826,45 @@ Retrieve visibility of components in a viewpoint.
         }
     }
 
-### 3.5.9 DELETE Viewpoint Service
+### 3.5.9 GET translucency of Components Service
+
+**Resource URL**
+
+    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/translucency
+
+[visibility_GET.json](Schemas/Collaboration/Viewpoint/visibility_GET.json)
+
+Retrieve translucency of components in a viewpoint.
+
+**Example Request**
+
+    GET /bcf/4.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/translucency
+
+**Example Response**
+
+    Response Code: 200 - OK
+    Body:
+    {
+        "translucency": {
+            "default_translucency": true,
+            "exceptions": [
+                {
+                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                    "originating_system": "Example CAD Application",
+                    "authoring_tool_id": "EXCAD/v1.0"
+                }, {
+                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+                }
+            ],
+            "translucency_setup_hints": {
+                "spaces_translucent": true,
+                "space_boundaries_translucent": false,
+                "openings_translucent": true
+            }
+        }
+    }
+
+### 3.5.10 DELETE Viewpoint Service
 
 **Resource URL**
 
@@ -1801,7 +1884,7 @@ Note: If there is a comment associated to the viewpoint, the server might reject
 
     Response Code: 200 - OK
 
-### 3.5.10 Determining allowed Viewpoint modifications
+### 3.5.11 Determining allowed Viewpoint modifications
 
 The global default Viewpoint authorizations are expressed in the project schema and when Viewpoint(s) are requested with the
 query parameter "includeAuthorization" equal to "true" Viewpoints will include an "authorization" field containing any local

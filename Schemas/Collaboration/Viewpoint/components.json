@@ -13,6 +13,9 @@
         },
         "visibility": {
             "$ref": "visibility.json"
+        },
+        "translucency": {
+            "$ref": "translucency.json"
         }
     }
 }
