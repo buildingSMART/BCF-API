@@ -1398,6 +1398,7 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
 
 #### 3.5.2.14 Translucency
 [translucency.json](Schemas/Collaboration/Viewpoint/translucency.json)
+
 The `translucency` object decides which components are translucent and which are opaque. Visibility has a higher priority than translucency: A translucent component which is also resolved to be invisible should not be rendered.
 
 Commonly, translucency is specified using a numeric value (alpha) ranging from 0 to 1 where a value of 0 indicates complete transparency and a value of 1 indicates complete opacity. This specification leaves the alpha value for translucent components to the vendor's discretion: when a component is resolved as 'translucent', it should rendered with an alpha greater than 0 but less than 1 in a manner consistent with the visual style of the rendering application.
