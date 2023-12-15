@@ -9,8 +9,7 @@
             "null"]
         },
         "topic_type": {
-            "type": ["string",
-            "null"]
+            "$ref": "topic_type_SET.json"
         },
         "topic_status": {
             "type": ["string",

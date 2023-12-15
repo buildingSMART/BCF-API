@@ -342,8 +342,8 @@ Project extensions are used to define possible values that can be used in topics
     Body:
     {
         "topic_type": [
-            "Information",
-            "Error"
+            {"id": "info-id", "name": "Information"},
+            {"id": "error-id", "name": "Error"}
         ],
         "topic_status": [
             "Open",
@@ -465,7 +465,7 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 |assigned_to|string|userId of the assigned person (value from extensions)|
 |stage|string|stage this topic is part of (value from extensions)|
 |topic_status|string|status of a topic (value from extensions)|
-|topic_type|string|type of a topic (value from extensions)|
+|topic_type|string|id of a topic_type (value from extensions)|
 |creation_date|datetime|creation date of a topic|
 |modified_date|datetime|modification date of a topic. The modification date of a server's topic should be the latest value of when the topic has been modified or when the latest [comment](#34-comment-services) has been updated or when a "floating viewpoint" (a [viewpoint](#35-viewpoint-services) which is not associated with a comment) is added|
 |labels|array (string)|labels of a topic (value from extensions)|
@@ -539,7 +539,7 @@ JSON encoded body using the "application/json" content type.
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
 |guid|string|The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system.|false|
-|topic_type|string|The type of a topic (value from extension.xsd)|false|
+|topic_type|[topic_type_SET.json](Schemas/Collaboration/Topic/topic_type_SET.json)|The type of a topic (value from extension.xsd)|false|
 |topic_status|string|The status of a topic (value from extension.xsd)|false|
 |reference_links|array (string)|Reference links, i.e. links to referenced resources|false|
 |title|string|The title of a topic|true|
@@ -560,7 +560,7 @@ JSON encoded body using the "application/json" content type.
     POST /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics
     Body:
     {
-        "topic_type": "Clash",
+        "topic_type": { "id": "clash-id" },
         "topic_status": "open",
         "title": "Example topic 3",
         "priority": "high",
@@ -580,7 +580,7 @@ JSON encoded body using the "application/json" content type.
         "server_assigned_id": "ISSUE-01462",
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
-        "topic_type": "Clash",
+        "topic_type": { "id": "clash-id", "name": "Clash" },
         "topic_status": "open",
         "title": "Example topic 3",
         "priority": "high",
@@ -614,7 +614,7 @@ Retrieve a specific topic.
         "server_assigned_id": "ISSUE-00549",
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
-        "topic_type": "Clash",
+        "topic_type": { "id": "clash-id", "name": "Clash" },
         "topic_status": "open",
         "title": "Example topic 3",
         "priority": "high",
@@ -646,7 +646,7 @@ Modify a specific topic, description similar to POST. This operation is only pos
     PUT /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228
     Body:
     {
-        "topic_type": "Clash",
+        "topic_type": { "id": "clash-id" },
         "topic_status": "open",
         "title": "Example topic 3 - Changed Title",
         "priority": "high",
@@ -668,7 +668,7 @@ Modify a specific topic, description similar to POST. This operation is only pos
         "creation_date": "2016-08-01T17:34:22.409Z",
         "modified_author": "Architect@example.com",
         "modified_date": "2016-08-02T13:22:22.409Z",
-        "topic_type": "Clash",
+        "topic_type": { "id": "clash-id", "name": "Clash" },
         "topic_status": "open",
         "title": "Example topic 3 - Changed Title",
         "priority": "high",

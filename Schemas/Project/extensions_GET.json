@@ -4,11 +4,9 @@
     "properties": {
         "topic_type": {
             "required": true,
-            "type": ["array",
-            "null"],
+            "type": ["array", "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "topic_type_extension_GET.json"
             }
         },
         "topic_status": {

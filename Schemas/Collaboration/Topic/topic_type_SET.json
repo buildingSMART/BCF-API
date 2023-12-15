@@ -1,0 +1,10 @@
+{
+    "title": "topic_type_set",
+    "type": ["object", "null"],
+        "properties": {
+        "id": {
+            "type": "string",
+            "required": true
+        }
+    }
+}

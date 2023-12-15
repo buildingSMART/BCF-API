@@ -1,6 +1,6 @@
 {
     "title": "topic_GET",
-    "type": "object",
+    "type": ["object", "null"],
     "properties": {
         "guid": {
             "required": true,
@@ -11,8 +11,7 @@
             "type": "string"
         },
         "topic_type": {
-            "type": ["string",
-            "null"]
+            "$ref": "topic_type_GET.json"
         },
         "topic_status": {
             "type": ["string",
