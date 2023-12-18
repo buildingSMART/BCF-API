@@ -7,9 +7,12 @@
             "required": false,
             "type": "string"
         },
-        "value": {
+        "values": {
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         }
     }
 }

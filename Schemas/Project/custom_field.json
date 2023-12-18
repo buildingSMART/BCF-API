@@ -18,12 +18,19 @@
             "required": true,
             "type": "boolean"
         },
-        "required": {
+        "minArraySize": {
             "required": true,
-            "type": "boolean"
+            "type": "integer"
+        },
+        "maxArraySize": {
+            "required": false,
+            "type": "integer"
         },
         "defaultValue": {
-            "type": "string"
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         },
         "enumValues": {
             "type": "array",
