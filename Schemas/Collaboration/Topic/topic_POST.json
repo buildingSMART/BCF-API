@@ -26,8 +26,7 @@
             "type": "string"
         },
         "priority": {
-            "type": ["string",
-            "null"]
+            "$ref": "topic_priority_SET.json"
         },
         "index": {
             "type": [
@@ -39,8 +38,7 @@
             "type": ["array",
             "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "topic_label_SET.json"
             }
         },
         "assigned_to": {
@@ -48,8 +46,7 @@
             "null"]
         },
         "stage": {
-            "type": ["string",
-            "null"]
+            "$ref": "topic_stage_SET.json"
         },
         "description": {
             "type": ["string",

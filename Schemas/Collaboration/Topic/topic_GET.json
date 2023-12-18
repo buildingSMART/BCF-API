@@ -28,8 +28,7 @@
             "type": "string"
         },
         "priority": {
-            "type": ["string",
-            "null"]
+            "$ref": "topic_priority_GET.json"
         },
         "index": {
             "type": [
@@ -41,8 +40,7 @@
             "type": ["array",
             "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "topic_label_GET.json"
             }
         },
         "creation_date": {
@@ -65,8 +63,7 @@
             "null"]
         },
         "stage": {
-            "type": ["string",
-            "null"]
+            "$ref": "topic_stage_GET.json"
         },
         "description": {
             "type": ["string",

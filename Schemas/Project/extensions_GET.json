@@ -21,8 +21,7 @@
             "type": ["array",
             "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "topic_label_extension_GET.json"
             }
         },
         "priority": {
@@ -30,8 +29,7 @@
             "type": ["array",
             "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "topic_priority_extension_GET.json"
             }
         },
         "users": {
@@ -48,8 +46,7 @@
             "type": ["array",
             "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "topic_stage_extension_GET.json"
             }
         },
         "project_actions": {
