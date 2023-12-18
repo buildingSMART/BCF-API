@@ -846,7 +846,7 @@ Retrieve a **collection** of file references as topic header.
 
 [file_PUT.json](Schemas/Collaboration/File/file_PUT.json)
 
-Update a **collection** of file references on the topic header. This operation is only possible when the server returns the `updateFiles` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications). Servers must always accept a [File](Schemas/Collaboration/File/file_GET.json) reference returned by the [files_information](#331-get-project-files-information-service) endpoint. Servers may also accept other values such as a combination of fields from the header of the IFC file. 
+Update a **collection** of file references on the topic header. This operation is only possible when the server returns the `updateFiles` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications). Servers must always accept a [File](Schemas/Collaboration/File/file_GET.json) reference returned by the [files_information](#331-get-project-files-information-service) endpoint. Servers may also accept other values such as a combination of fields from the header of the IFC file. Servers should reject requests that remove files that are still referenced by viewpoints withing the same topic.
 
 **Example Request**
 
