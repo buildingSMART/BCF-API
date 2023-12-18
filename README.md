@@ -508,8 +508,8 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
         "creation_author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "title": "Example topic 1",
         "labels": [
-            "Architecture",
-            "Structural"
+            { "id": "architecture-id" },
+            { "id": "structural-id" }
         ],
         "creation_date": "2013-10-21T17:34:22.409Z"
     }, {
@@ -518,9 +518,9 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
         "creation_author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "title": "Example topic 2",
         "labels": [
-            "Architecture",
-            "Heating",
-            "Electrical"
+            { "id": "architecture-id" },
+            { "id": "electrical-id" },
+            { "id": "heating-id" }
         ],
         "creation_date": "2014-11-19T14:24:11.316Z"
     }]
