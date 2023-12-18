@@ -12,7 +12,7 @@
         },
         "author": {
             "required": true,
-            "$ref": "../Topic/topic_user_GET.json"
+            "$ref": "../../User/user_GET.json"
         },
         "comment": {
             "required": true,
@@ -31,7 +31,7 @@
             "null"]
         },
         "modified_author": {
-            "$ref": "../Topic/topic_user_GET.json"
+            "$ref": "../../User/user_GET.json"
         },
         "authorization": {
             "type": "object",

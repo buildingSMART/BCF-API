@@ -3,12 +3,15 @@
     "type": "object",
     "properties": {
         "id": {
-            "required": true,
-            "type": "string"
+            "type": "string",
+            "required": true
         },
         "name": {
-            "type": ["string",
-            "null"]
+            "type": ["string", "null"]
+        },
+        "email": {
+            "type": "string",
+            "required": true
         }
     }
 }

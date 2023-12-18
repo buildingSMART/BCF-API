@@ -6,46 +6,42 @@
             "required": true,
             "type": ["array", "null"],
             "items": {
-                "$ref": "topic_type_extension_GET.json"
+                "$ref": "extension_item.json"
             }
         },
         "topic_status": {
             "required": true,
             "type": ["array", "null"],
             "items": {
-                "$ref": "topic_status_extension_GET.json"
+                "$ref": "topic_status_extension_item.json"
             }
         },
         "topic_label": {
             "required": true,
-            "type": ["array",
-            "null"],
+            "type": ["array", "null"],
             "items": {
-                "$ref": "topic_label_extension_GET.json"
+                "$ref": "extension_item.json"
             }
         },
         "priority": {
             "required": true,
-            "type": ["array",
-            "null"],
+            "type": ["array", "null"],
             "items": {
-                "$ref": "topic_priority_extension_GET.json"
+                "$ref": "extension_item.json"
             }
         },
         "users": {
             "required": true,
-            "type": ["array",
-            "null"],
+            "type": ["array", "null"],
             "items": {
-                "$ref": "topic_user_extension_GET.json"
+                "$ref": "user_extension_item.json"
             }
         },
         "stage": {
             "required": true,
-            "type": ["array",
-            "null"],
+            "type": ["array", "null"],
             "items": {
-                "$ref": "topic_stage_extension_GET.json"
+                "$ref": "extension_item.json"
             }
         },
         "project_actions": {

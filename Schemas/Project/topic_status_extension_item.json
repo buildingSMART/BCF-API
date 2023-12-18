@@ -1,5 +1,5 @@
 {
-    "title": "topic_user_get",
+    "title": "topic_status_extension_item",
     "type": ["object", "null"],
     "properties": {
         "id": {
@@ -7,10 +7,6 @@
             "required": true
         },
         "name": {
-            "type": "string",
-            "required": false
-        },
-        "email": {
             "type": "string",
             "required": true
         }
