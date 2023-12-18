@@ -53,9 +53,6 @@
             "type": ["string",
             "null"]
         },
-        "bim_snippet": {
-            "$ref": "bim_snippet.json"
-        },
         "due_date": {
             "type": ["string",
             "null"]

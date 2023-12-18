@@ -29,15 +29,6 @@
                 "null"]
             }
         },
-        "snippet_type": {
-            "required": true,
-            "type": ["array",
-            "null"],
-            "items": {
-                "type": ["string",
-                "null"]
-            }
-        },
         "priority": {
             "required": true,
             "type": ["array",
