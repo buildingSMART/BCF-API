@@ -90,6 +90,7 @@ The Open CDE workgroup develops the BCF standard. The group meets every second M
       - [3.5.2.14 Translucency](#35214-translucency)
         - [Optimization rules](#optimization-rules-3)
       - [3.5.2.15 Translucency setup hints](#35215-translucency-setup-hints)
+      - [3.5.2.16 Topic File Ids](#35216-topic-file-ids)
     - [3.5.3 GET Viewpoint Service](#353-get-viewpoint-service)
     - [3.5.4 GET Viewpoint Snapshot Service](#354-get-viewpoint-snapshot-service)
     - [3.5.5 GET Viewpoint Bitmap Service](#355-get-viewpoint-bitmap-service)
