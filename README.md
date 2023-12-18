@@ -392,14 +392,25 @@ Project extensions are used to define possible values that can be used in topics
                 "name": "price_in_dollar",
                 "type": "decimal",
                 "readonly": false,
-                "required": true
+                "minArraySize": 1,
+                "maxArraySize": 1
             }
         ]
     }
 
 > **About custom fields:** Projects may be configured to allow `custom_fields` in a topic. This is a way of enabling clients and servers to embed custom data in a topic. Those custom fields can be sent when creating or updating a topic, and they will be returned by the server when retrieving topics.
 
-Custom field values are always represented as strings. The type of the custom field indicates how it should be parsed. The value null indicates that it is absent.
+Custom field values are always represented as arrays of strings. The type of the custom field indicates how its values should be parsed. Since all custom fields are expressed as arrays, the `minArraySize` and `maxArraySize` properties are used to describe the required cardinality of the field. For example:
+
+|`minArraySize`|  `maxArraySize` | Description | Example |
+|-|-|-|-|
+| `1` | `1` | Single required item | `["My Custom Value"]` |
+| `0` | `1` | Single optional item | `[]` or `["My Custom Value"]` |
+| `1` | `null` | Multiple required items | `["My Custom Value"]` or `["My Custom Value", "My Other Value"]` |
+| `0` | `null` | Multiple optional items | `[]` or `["My Custom Value"]` or `["My Custom Value", "My Other Value"]` |
+| `2` | `2` | Two required items | `["My Custom Value", "My Other Value"]` |
+
+The following types are supported:
 - integer: A number that does not contain decimals
 - decimal: A number than can contain decimals
 - string: Any string
@@ -568,7 +579,11 @@ JSON encoded body using the "application/json" content type.
             "Architecture",
             "Heating"
         ],
-        "assigned_to": "harry.muster@example.com"
+        "assigned_to": "harry.muster@example.com",
+        "custom_fields":[{
+            "id": "6e6bddaa-4c53-4fb8-b884-500e0d2dba6a",
+            "value": ["19.99"]
+    }]
     }
 
 **Example Response**
