@@ -877,7 +877,7 @@ Retrieve a **collection** of all comments related to a topic (default ordering i
 
 |parameter|type|description|
 |---------|----|-----------|
-|author|string|userId of the author (value from extensions)|
+|author|string|id of the user (value from extensions)|
 |date|datetime|creation date of a comment|
 
 **Odata sort parameters**
@@ -980,7 +980,7 @@ Get a single comment.
     {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
         "date": "2016-08-01T14:24:11.316Z",
-        "author": "author": { "id": "heater-id", "email": "bob.heater@example.com", "name": null },,
+        "author": "author": { "id": "heater-id", "email": "bob.heater@example.com", "name": null },
         "comment": "will rework the heating model",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }
@@ -1489,6 +1489,8 @@ BCF is suitable for controlling the translucency of a few components. A huge lis
     Body:
     {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+        "creation_date": "2013-10-21T17:34:22.409Z",
+        "creation_author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "index": 10,
         "perspective_camera": {
             "camera_view_point": {
@@ -2178,7 +2180,7 @@ Get events that are of type 'status_updated', 'type_updated' or 'title_updated' 
     [{
         "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
         "date": "2014-11-19T14:24:11.316Z",
-        "author": "Architect@example.com",
+        "author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "events": [
             {
                 "type": "status_updated",
@@ -2188,7 +2190,7 @@ Get events that are of type 'status_updated', 'type_updated' or 'title_updated' 
     }, {
         "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
         "date": "2013-10-21T17:34:22.409Z",
-        "author": "Architect@example.com",
+        "author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "events": [
             {
                 "type": "type_updated",
@@ -2247,7 +2249,7 @@ Retrieve a **collection** of topic events related to a project (default sort ord
 
 Get events of type 'status_updated' made by Architect@example.com and created after December 5th 2015. Sort the result on least recent
 
-    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/events?$filter=author eq 'Architect@example.com' and type eq 'status_updated' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/A245F4F2-2C01-B43B-B612-5E456BEF8116/events?$filter=author eq 'architect-id' and type eq 'status_updated' and date gt 2015-12-05T00:00:00+01:00&$orderby=date asc
 
 Get latest events. Skip the 10 first, and get the 5 next
 
@@ -2269,7 +2271,7 @@ Get events that is of type 'status_updated', 'type_updated' or 'title_updated' o
     [{
         "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
         "date": "2014-11-19T14:24:11.316Z",
-        "author": "Architect@example.com",
+        "author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "events": [
             {
                 "type": "type_updated",
@@ -2279,7 +2281,7 @@ Get events that is of type 'status_updated', 'type_updated' or 'title_updated' o
     }, {
         "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
         "date": "2013-10-21T17:34:22.409Z",
-        "author": "Architect@example.com",
+        "author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "events": [
             {
                 "type": "status_updated",
@@ -2355,7 +2357,7 @@ Get events that are of type 'comment_created', or 'viewpoint_updated'
         "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
         "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
         "date": "2014-11-19T14:24:11.316Z",
-        "author": "Architect@example.com",
+        "author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "events": [
             {
                 "type": "comment_created",
@@ -2366,7 +2368,7 @@ Get events that are of type 'comment_created', or 'viewpoint_updated'
         "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
         "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
         "date": "2013-10-21T17:34:22.409Z",
-        "author": "Architect@example.com",
+        "author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "events": [
             {
                 "type": "viewpoint_updated",
@@ -2434,7 +2436,7 @@ Get events that are of type 'comment_created', or 'comment_text_updated'
         "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
         "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
         "date": "2014-11-19T14:24:11.316Z",
-        "author": "Architect@example.com",
+        "author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "events": [
             {
                 "type": "comment_created",
@@ -2445,7 +2447,7 @@ Get events that are of type 'comment_created', or 'comment_text_updated'
         "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
         "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
         "date": "2013-10-21T17:34:22.409Z",
-        "author": "Architect@example.com",
+        "author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "events": [
             {
                 "type": "comment_text_updated",
