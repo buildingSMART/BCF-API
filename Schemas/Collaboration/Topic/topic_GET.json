@@ -11,10 +11,10 @@
             "type": "string"
         },
         "topic_type": {
-            "$ref": "topic_type_GET.json"
+            "$ref": "extenstion_item_GET.json"
         },
         "topic_status": {
-            "$ref": "topic_status_GET.json"
+            "$ref": "extenstion_item_GET.json"
         },
         "reference_links": {
             "type": ["array",
@@ -28,7 +28,7 @@
             "type": "string"
         },
         "priority": {
-            "$ref": "topic_priority_GET.json"
+            "$ref": "extenstion_item_GET.json"
         },
         "index": {
             "type": [
@@ -40,7 +40,7 @@
             "type": ["array",
             "null"],
             "items": {
-                "$ref": "topic_label_GET.json"
+                "$ref": "extenstion_item_GET.json"
             }
         },
         "creation_date": {
@@ -61,7 +61,7 @@
             "$ref": "../../User/user_GET.json"
         },
         "stage": {
-            "$ref": "topic_stage_GET.json"
+            "$ref": "extenstion_item_GET.json"
         },
         "description": {
             "type": ["string",

@@ -1,5 +1,5 @@
 {
-    "title": "topic_label_get",
+    "title": "extension_item_get",
     "type": ["object", "null"],
     "properties": {
         "id": {

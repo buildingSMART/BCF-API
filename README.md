@@ -554,15 +554,15 @@ JSON encoded body using the "application/json" content type.
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
 |guid|string|The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system.|false|
-|topic_type|[topic_type_SET.json](Schemas/Collaboration/Topic/topic_type_SET.json)|The type of a topic (value from extension.xsd)|false|
-|topic_status|[topic_status_SET.json](Schemas/Collaboration/Topic/topic_status_SET.json)|The status of a topic (value from extension.xsd)|false|
+|topic_type|[extension_item_SET.json](Schemas/Collaboration/Topic/extension_item_SET.json)|The type of a topic (value from extension.xsd)|false|
+|topic_status|[extension_item_SET.json](Schemas/Collaboration/Topic/extension_item_SET.json)|The status of a topic (value from extension.xsd)|false|
 |reference_links|array (string)|Reference links, i.e. links to referenced resources|false|
 |title|string|The title of a topic|true|
-|priority|[priority_SET.json](Schemas/Collaboration/Topic/priority_SET.json)|The priority of a topic (value from extension.xsd)|false|
+|priority|[extension_item_SET.json](Schemas/Collaboration/Topic/extension_item_SET.json)|The priority of a topic (value from extension.xsd)|false|
 |index|integer|The index of a topic **This property is deprecated and will be removed in a future release**|false|
-|labels|array of[label_SET.json](Schemas/Collaboration/Topic/priority_SET.json)|The labels of a topic (value from extension.xsd)|false|
-|assigned_to|[user_SET.json]|The user assigned to a topic (value from extension.xsd).|false|
-|stage|[stage_SET.json](Schemas/Collaboration/Topic/stage_SET.json)|The stage of a topic (value from extension.xsd)|false|
+|labels|array of[extension_item_SET.json](Schemas/Collaboration/Topic/extension_item_SET.json)|The labels of a topic (value from extension.xsd)|false|
+|assigned_to|[extension_item_SET.json](Schemas/Collaboration/Topic/extension_item_SET.json)|The user assigned to a topic (value from extension.xsd).|false|
+|stage|[extension_item_SET.json](Schemas/Collaboration/Topic/extension_item_SET.json)|The stage of a topic (value from extension.xsd)|false|
 |description|string|Description of a topic|false|
 |due_date|string|Until when the topics issue needs to be resolved|false|
 | custom_fields| array (object) | Custom fields of a topic | false |
