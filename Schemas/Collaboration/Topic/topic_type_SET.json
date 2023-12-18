@@ -1,7 +1,7 @@
 {
     "title": "topic_type_set",
     "type": ["object", "null"],
-        "properties": {
+    "properties": {
         "id": {
             "type": "string",
             "required": true

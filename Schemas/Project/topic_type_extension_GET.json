@@ -1,5 +1,5 @@
 {
-    "title": "topic_type extension",
+    "title": "topic_type_extension",
     "type": ["object", "null"],
     "properties": {
         "id": {
