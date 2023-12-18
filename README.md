@@ -1129,7 +1129,10 @@ Note: For viewpoints without audit information (For example viewpoints created i
                 "y": 0.4,
                 "z": 0.1
             }
-        }]
+        }],
+        "topic_file_ids": [
+            "570477df-428d-4d3d-a7ae-704d79da8cbd"
+        ]
     }, {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
         "creation_date": "2013-10-21T17:34:22.409Z",
@@ -1176,7 +1179,11 @@ Note: For viewpoints without audit information (For example viewpoints created i
                 "y": 0.0,
                 "z": 0.0
             }
-        }]
+        }],
+        "topic_file_ids": [
+            "570477df-428d-4d3d-a7ae-704d79da8cbd",
+            "5328e0a1-d027-4cca-81d1-d59afb4cf798"
+        ]
     }]
 
 ### 3.5.2 POST Viewpoint Service
@@ -1204,6 +1211,7 @@ JSON encoded body using the "application/json" content type.
 | bitmaps | array of [Bitmap](#3527-bitmap) | embedded pictures in the viewpoint | optional |
 | snapshot | [Snapshot](#3528-snapshot) | snapshot image of the viewpoint. Note: The longest dimension of should not exceed 1500 px, length or width. |  see viewpoint optional/mandatory fields clarification |
 | components | [Components](#3529-components) | Components in the viewpoint | optional |
+| topic_file_ids | array of strings | List of file ids that are referenced in the viewpoint | required, but can be an empty list |
 
 **Viewpoint optional/mandatory fields clarification**
 
@@ -1389,6 +1397,11 @@ BCF is suitable for controlling the translucency of a few components. A huge lis
 | space_boundaries_translucent | boolean | Translucency of space_boundaries | optional, default true |
 | openings_translucent         | boolean | Translucency of openings | optional, default true |
 
+
+#### 3.5.2.16 Topic File Ids
+
+Viewpoints are immutable, while topics may be changed later. To ensure that viewpoints are always referring to the correct models, the topic file IDs are used. This is a list of file IDs that are referenced in the viewpoint. The file IDs are from [files_information](#331-get-project-files-information-service) endpoint.
+
 **Example Request**
 
     POST /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints
@@ -1496,7 +1509,10 @@ BCF is suitable for controlling the translucency of a few components. A huge lis
                     "openings_translucent": false
                 }
             }
-        }
+        },
+        "topic_file_ids": [
+            "570477df-428d-4d3d-a7ae-704d79da8cbd"
+        ]
     }
 
 **Example Response**
@@ -1571,7 +1587,10 @@ BCF is suitable for controlling the translucency of a few components. A huge lis
         }],
         "snapshot": {
             "snapshot_type": "png"
-        }
+        },
+        "topic_file_ids": [
+            "570477df-428d-4d3d-a7ae-704d79da8cbd"
+        ]
     }
 ### 3.5.3 GET Viewpoint Service
 
@@ -1661,7 +1680,10 @@ Retrieve a specific viewpoint.
         }],
         "snapshot": {
             "snapshot_type": "png"
-        }
+        },
+        "topic_file_ids": [
+            "570477df-428d-4d3d-a7ae-704d79da8cbd"
+        ]
     }
 
 ### 3.5.4 GET Viewpoint Snapshot Service
