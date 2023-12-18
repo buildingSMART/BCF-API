@@ -400,7 +400,7 @@ Project extensions are used to define possible values that can be used in topics
 
 > **About custom fields:** Projects may be configured to allow `custom_fields` in a topic. This is a way of enabling clients and servers to embed custom data in a topic. Those custom fields can be sent when creating or updating a topic, and they will be returned by the server when retrieving topics.
 
-Custom field values are always represented as arrays of strings. The type of the custom field indicates how its values should be parsed. An empty list indicates that it is absent. Since all custom fields are expressed as arrays, the `minArraySize` and `maxArraySize` properties are used to describe the required cardinality of the field. For example:
+Custom field values are always represented as arrays of strings. The type of the custom field indicates how its values should be parsed. Since all custom fields are expressed as arrays, the `minArraySize` and `maxArraySize` properties are used to describe the required cardinality of the field. For example:
 
 |`minArraySize`|  `maxArraySize` | Description | Example |
 |-|-|-|-|
