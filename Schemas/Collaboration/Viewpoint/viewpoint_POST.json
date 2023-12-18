@@ -41,6 +41,13 @@
         },
         "components": {
             "$ref": "components.json"
+        },
+        "topic_file_ids": {
+            "required": true,
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         }
     }
 }
