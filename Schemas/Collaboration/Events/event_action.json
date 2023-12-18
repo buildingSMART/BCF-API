@@ -7,8 +7,7 @@
             "type": "string"
         },
         "value": {
-            "type": ["string",
-            "null"]
+            "$ref": "event_action.json"
         }
     }
 }

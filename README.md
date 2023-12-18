@@ -2184,7 +2184,7 @@ Get events that are of type 'status_updated', 'type_updated' or 'title_updated' 
         "events": [
             {
                 "type": "status_updated",
-                "value": "Closed"
+                "value": {"id": "closed-id", "displayValue" "Closed" }
             }
         ]
     }, {
@@ -2194,7 +2194,17 @@ Get events that are of type 'status_updated', 'type_updated' or 'title_updated' 
         "events": [
             {
                 "type": "type_updated",
-                "value": "Warning"
+                "value": {"id": "warning-id", "displayValue" "Warning" }
+            }
+        ]
+    }, {
+        "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "date": "2013-10-21T17:34:22.409Z",
+        "author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
+        "events": [
+            {
+                "type": "title_updated",
+                "value": {"displayValue": "My new title" }
             }
         ]
     }]
@@ -2269,13 +2279,13 @@ Get events that is of type 'status_updated', 'type_updated' or 'title_updated' o
     Response Code: 200 - OK
     Body:
     [{
-        "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
         "date": "2014-11-19T14:24:11.316Z",
         "author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "events": [
             {
-                "type": "type_updated",
-                "value": "Error"
+                "type": "status_updated",
+                "value": {"id": "closed-id", "displayValue" "Closed" }
             }
         ]
     }, {
@@ -2284,8 +2294,18 @@ Get events that is of type 'status_updated', 'type_updated' or 'title_updated' o
         "author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "events": [
             {
-                "type": "status_updated",
-                "value": "Open"
+                "type": "type_updated",
+                "value": {"id": "warning-id", "displayValue" "Warning" }
+            }
+        ]
+    }, {
+        "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+        "date": "2013-10-21T17:34:22.409Z",
+        "author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
+        "events": [
+            {
+                "type": "title_updated",
+                "value": {"displayValue": "My new title" }
             }
         ]
     }]
