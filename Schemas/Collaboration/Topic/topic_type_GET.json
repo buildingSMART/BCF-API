@@ -1,5 +1,5 @@
 {
-    "title": "topic_type",
+    "title": "topic_type_get",
     "type": ["object", "null"],
     "properties": {
         "id": {
