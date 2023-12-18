@@ -37,8 +37,7 @@
             "type": ["array",
             "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "topic_user_extension_GET.json"
             }
         },
         "stage": {

@@ -49,18 +49,16 @@
         },
         "creation_author": {
             "required": true,
-            "type": "string"
+            "$ref": "topic_user_GET.json"
         },
         "modified_date": {
             "type": "string"
         },
         "modified_author": {
-            "type": ["string",
-            "null"]
+            "$ref": "topic_user_GET.json"
         },
         "assigned_to": {
-            "type": ["string",
-            "null"]
+            "$ref": "topic_user_GET.json"
         },
         "stage": {
             "$ref": "topic_stage_GET.json"

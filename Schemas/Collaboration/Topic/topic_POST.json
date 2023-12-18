@@ -42,8 +42,7 @@
             }
         },
         "assigned_to": {
-            "type": ["string",
-            "null"]
+            "$ref": "topic_user_SET.json"
         },
         "stage": {
             "$ref": "topic_stage_SET.json"

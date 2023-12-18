@@ -1,0 +1,18 @@
+{
+    "title": "topic_user_extension",
+    "type": ["object", "null"],
+    "properties": {
+        "id": {
+            "type": "string",
+            "required": true
+        },
+        "name": {
+            "type": "string",
+            "required": false
+        },
+        "email": {
+            "type": "string",
+            "required": true
+        }
+    }
+}

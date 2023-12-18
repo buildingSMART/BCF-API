@@ -362,9 +362,11 @@ Project extensions are used to define possible values that can be used in topics
             { "id": "high-id", "name": "High"}
         ],
         "users": [
-            "Architect@example.com",
-            "BIM-Manager@example.com",
-            "bob_heater@example.com"
+            { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
+            { "id": "manager-id", "email": "BIM-Manager@example.com","name": "BIM-Manager" },
+            { "id": "heater-id", "email": "bob.heater@example.com", "name": null }, // Unknown name
+            { "id": "max-muster-id", "email": "max.muster@example.com", "name": "Max Muster" },
+            { "id": "harry-muster-id", "email": "harry.muster@example.com", "name": "Harry Muster" }
         ],
         "stage": [
             { "id": "planning-end-id", "name": "Preliminary Planning End" },
@@ -461,9 +463,9 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 
 |parameter|type|description|
 |---------|----|-----------|
-|creation_author|string|userId of the creation author (value from extensions)|
-|modified_author|string|userId of the modified author (value from extensions)|
-|assigned_to|string|userId of the assigned person (value from extensions)|
+|creation_author|string|id of the creation author (value from extensions)|
+|modified_author|string|id of the modified author (value from extensions)|
+|assigned_to|string|id of the assigned person (value from extensions)|
 |stage|string|id of a stage (value from extensions)|
 |topic_status|string|id of a topic_status (value from extensions)|
 |topic_type|string|id of a topic_type (value from extensions)|
@@ -485,12 +487,12 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 
 Get topics that are open, assigned to Architect@example.com and created after December 5th 2015. Sort the result on last modified
 
-    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'Architect@example.com' and topic_status eq 'Open' and creation_date gt 2015-12-05T00:00:00+01:00&$orderby=modified_date desc
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=assigned_to eq 'architect-id' and topic_status eq 'open-id' and creation_date gt 2015-12-05T00:00:00+01:00&$orderby=modified_date desc
 
 Odata does not support list operators. To achieve list query, use the 'or' operator.
 Get topics that have at least one of the labels 'Architecture', 'Structural' or 'Heating'
 
-    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=labels/any(label: label eq 'Architecture') or labels/any(label: label eq 'Structural') or labels/any(label: label eq 'Heating')
+    GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics?$filter=labels/any(label: label eq 'architecture-id') or labels/any(label: label eq 'structural-id') or labels/any(label: label eq 'heating-id')
 
 **Example Request**
 
@@ -503,7 +505,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
     [{
         "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
         "server_assigned_id": "ISSUE-00001",
-        "creation_author": "Architect@example.com",
+        "creation_author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "title": "Example topic 1",
         "labels": [
             "Architecture",
@@ -513,7 +515,7 @@ Get topics that have at least one of the labels 'Architecture', 'Structural' or 
     }, {
         "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
         "server_assigned_id": "ISSUE-00078",
-        "creation_author": "Architect@example.com",
+        "creation_author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "title": "Example topic 2",
         "labels": [
             "Architecture",
@@ -547,7 +549,7 @@ JSON encoded body using the "application/json" content type.
 |priority|[priority_SET.json](Schemas/Collaboration/Topic/priority_SET.json)|The priority of a topic (value from extension.xsd)|false|
 |index|integer|The index of a topic **This property is deprecated and will be removed in a future release**|false|
 |labels|array of[label_SET.json](Schemas/Collaboration/Topic/priority_SET.json)|The labels of a topic (value from extension.xsd)|false|
-|assigned_to|string|UserID assigned to a topic (value from extension.xsd). UserIDs are recommended to be in email format as to uniquely identify users throughout multiple systems|false|
+|assigned_to|[user_SET.json]|The user assigned to a topic (value from extension.xsd).|false|
 |stage|[stage_SET.json](Schemas/Collaboration/Topic/stage_SET.json)|The stage of a topic (value from extension.xsd)|false|
 |description|string|Description of a topic|false|
 |due_date|string|Until when the topics issue needs to be resolved|false|
@@ -569,7 +571,7 @@ JSON encoded body using the "application/json" content type.
             { "id": "architecture-id" },
             { "id": "heating-id" }
         ],
-        "assigned_to": "harry.muster@example.com"
+        "assigned_to": { "id": "harry-muster-id" }
     }
 
 **Example Response**
@@ -579,7 +581,7 @@ JSON encoded body using the "application/json" content type.
     {
         "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
         "server_assigned_id": "ISSUE-01462",
-        "creation_author": "Architect@example.com",
+        "creation_author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": { "id": "clash-id", "name": "Clash" },
         "topic_status": { "id: "open-id", "name": "Open" },
@@ -589,7 +591,7 @@ JSON encoded body using the "application/json" content type.
             { "id": "architecture-id", "name": "Architecture"},
             { "id": "heating-id", "name": Heating }
         ],
-        "assigned_to": "harry.muster@example.com"
+        "assigned_to": { "id": "harry-muster-id", "email": "harry.muster@example.com", "name": "Harry Muster" }
     }
 
 ### 3.2.3 GET Topic Service
@@ -613,7 +615,7 @@ Retrieve a specific topic.
     {
         "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
         "server_assigned_id": "ISSUE-00549",
-        "creation_author": "Architect@example.com",
+        "creation_author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": { "id": "clash-id", "name": "Clash" },
         "topic_status": { "id: "open-id", "name": "Open" },
@@ -623,7 +625,7 @@ Retrieve a specific topic.
             { "id": "architecture-id", "name": "Architecture"},
             { "id": "heating-id", "name": Heating }
         ],
-        "assigned_to": "harry.muster@example.com"
+        "assigned_to": { "id": "harry-muster-id", "email": "harry.muster@example.com", "name": "Harry Muster" },
         "authorization": {
             "topic_actions": [
                 "createComment",
@@ -655,7 +657,7 @@ Modify a specific topic, description similar to POST. This operation is only pos
             { "id": "architecture-id" },
             { "id": "heating-id" }
         ],
-        "assigned_to": "harry.muster@example.com"
+        "assigned_to": { "id": "harry-muster-id" }
     }
 
 **Example Response**
@@ -665,9 +667,9 @@ Modify a specific topic, description similar to POST. This operation is only pos
     {
         "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
         "server_assigned_id": "ISSUE-00037",
-        "creation_author": "Architect@example.com",
+        "creation_author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "creation_date": "2016-08-01T17:34:22.409Z",
-        "modified_author": "Architect@example.com",
+        "modified_author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "modified_date": "2016-08-02T13:22:22.409Z",
         "topic_type": { "id": "clash-id", "name": "Clash" },
         "topic_status": { "id: "open-id", "name": "Open" },
@@ -677,7 +679,7 @@ Modify a specific topic, description similar to POST. This operation is only pos
             { "id": "architecture-id", "name": "Architecture"},
             { "id": "heating-id", "name": Heating }
         ],
-        "assigned_to": "harry.muster@example.com"
+        "assigned_to": { "id": "harry-muster-id", "email": "harry.muster@example.com", "name": "Harry Muster" }
     }
 
 ### 3.2.5 DELETE Topic Service
@@ -901,7 +903,7 @@ Get comments that are created after December 5 2015. Sort the result on first cr
     [{
         "guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
         "date": "2016-08-01T12:34:22.409Z",
-        "author": "max.muster@example.com",
+        "author": { "id": "max-muster-id", "email": "max.muster@example.com", "name": "Max Muster" },
         "comment": "Clash found",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
         "authorization": {
@@ -912,7 +914,7 @@ Get comments that are created after December 5 2015. Sort the result on first cr
     }, {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
         "date": "2016-08-01T14:24:11.316Z",
-        "author": "bob.heater@example.com",
+        "author": { "id": "heater-id", "email": "bob.heater@example.com", "name": null },
         "comment": "will rework the heating model",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }]
@@ -952,7 +954,7 @@ JSON encoded body using the "application/json" content type.
     {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
         "date": "2016-08-01T14:24:11.316Z",
-        "author": "bob.heater@example.com",
+        "author": { "id": "heater-id", "email": "bob.heater@example.com", "name": null },
         "comment": "will rework the heating model",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }
@@ -978,7 +980,7 @@ Get a single comment.
     {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
         "date": "2016-08-01T14:24:11.316Z",
-        "author": "bob.heater@example.com",
+        "author": "author": { "id": "heater-id", "email": "bob.heater@example.com", "name": null },,
         "comment": "will rework the heating model",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }
@@ -1008,9 +1010,9 @@ Update a single comment, description similar to POST. This operation is only pos
     {
         "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
         "date": "2016-08-01T14:24:11.316Z",
-        "author": "bob.heater@example.com",
+        "author": "author": { "id": "heater-id", "email": "bob.heater@example.com", "name": null },
         "modified_date": "2016-08-01T19:24:11.316Z",
-        "modified_author": "bob.heater@example.com",
+        "modified_author": { "id": "heater-id", "email": "bob.heater@example.com", "name": null },
         "comment": "will rework the heating model and fix the ventilation",
         "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
     }
@@ -1068,7 +1070,7 @@ Note: For viewpoints without audit information (For example viewpoints created i
     [{
         "guid": "b24a82e9-f67b-43b8-bda0-4946abf39624",
         "creation_date": "2013-10-21T17:34:22.409Z",
-        "creation_author: "Architect@example.com",
+        "creation_author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "perspective_camera": {
             "camera_view_point": {
                 "x": 0.0,
@@ -1115,7 +1117,7 @@ Note: For viewpoints without audit information (For example viewpoints created i
     }, {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
         "creation_date": "2013-10-21T17:34:22.409Z",
-        "creation_author: "Architect@example.com",
+        "creation_author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "perspective_camera": {
             "camera_view_point": {
                 "x": 0.0,
@@ -1576,7 +1578,7 @@ Retrieve a specific viewpoint.
     {
         "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
         "creation_date": "2013-10-21T17:34:22.409Z",
-        "creation_author: "Architect@example.com",
+        "creation_author": { "id": "architect-id", "email": "Architect@example.com", "name": "Architect" },
         "index": 10,
         "perspective_camera": {
             "camera_view_point": {
