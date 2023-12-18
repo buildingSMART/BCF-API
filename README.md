@@ -1401,7 +1401,7 @@ BCF is suitable for controlling the translucency of a few components. A huge lis
 
 #### 3.5.2.16 Topic File Ids
 
-Viewpoints are immutable, while topics may be changed later. To ensure that viewpoints are always referring to the correct models, the topic file IDs are used. This is a list of file IDs that are referenced in the viewpoint. The file IDs are from [files_information](#331-get-project-files-information-service) endpoint.
+Viewpoints are immutable, while topics may be changed later. To ensure that viewpoints are always referring to the correct models, the topic file IDs are used. This is a list of file IDs that are referenced in the viewpoint. The file IDs are from [GET Files (Header) Service](#332-get-files-header-service) endpoint.
 
 **Example Request**
 
