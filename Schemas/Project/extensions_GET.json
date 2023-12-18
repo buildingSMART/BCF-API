@@ -11,11 +11,9 @@
         },
         "topic_status": {
             "required": true,
-            "type": ["array",
-            "null"],
+            "type": ["array", "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "topic_status_extension_GET.json"
             }
         },
         "topic_label": {

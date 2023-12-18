@@ -346,9 +346,9 @@ Project extensions are used to define possible values that can be used in topics
             {"id": "error-id", "name": "Error"}
         ],
         "topic_status": [
-            "Open",
-            "Closed",
-            "ReOpened"
+            {"id": "open-id", "name": "Open"},
+            {"id": "closed-id", "name": "Closed"},
+            {"id": "reopened-id", "name": "ReOpened"}
         ],
         "topic_label": [
             "Architecture",
@@ -464,7 +464,7 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 |modified_author|string|userId of the modified author (value from extensions)|
 |assigned_to|string|userId of the assigned person (value from extensions)|
 |stage|string|stage this topic is part of (value from extensions)|
-|topic_status|string|status of a topic (value from extensions)|
+|topic_status|string|id of topic_status (value from extensions)|
 |topic_type|string|id of a topic_type (value from extensions)|
 |creation_date|datetime|creation date of a topic|
 |modified_date|datetime|modification date of a topic. The modification date of a server's topic should be the latest value of when the topic has been modified or when the latest [comment](#34-comment-services) has been updated or when a "floating viewpoint" (a [viewpoint](#35-viewpoint-services) which is not associated with a comment) is added|
@@ -540,7 +540,7 @@ JSON encoded body using the "application/json" content type.
 |---------|----|-----------|--------|
 |guid|string|The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system.|false|
 |topic_type|[topic_type_SET.json](Schemas/Collaboration/Topic/topic_type_SET.json)|The type of a topic (value from extension.xsd)|false|
-|topic_status|string|The status of a topic (value from extension.xsd)|false|
+|topic_status|[topic_status_SET.json](Schemas/Collaboration/Topic/topic_status_SET.json)|The status of a topic (value from extension.xsd)|false|
 |reference_links|array (string)|Reference links, i.e. links to referenced resources|false|
 |title|string|The title of a topic|true|
 |priority|string|The priority of a topic (value from extension.xsd)|false|
@@ -561,7 +561,7 @@ JSON encoded body using the "application/json" content type.
     Body:
     {
         "topic_type": { "id": "clash-id" },
-        "topic_status": "open",
+        "topic_status": { "id: "open-id" },
         "title": "Example topic 3",
         "priority": "high",
         "labels": [
@@ -581,7 +581,7 @@ JSON encoded body using the "application/json" content type.
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": { "id": "clash-id", "name": "Clash" },
-        "topic_status": "open",
+        "topic_status": { "id: "open-id", "name": "Open" },
         "title": "Example topic 3",
         "priority": "high",
         "labels": [
@@ -615,7 +615,7 @@ Retrieve a specific topic.
         "creation_author": "Architect@example.com",
         "creation_date": "2016-08-01T17:34:22.409Z",
         "topic_type": { "id": "clash-id", "name": "Clash" },
-        "topic_status": "open",
+        "topic_status": { "id: "open-id", "name": "Open" },
         "title": "Example topic 3",
         "priority": "high",
         "labels": [
@@ -647,7 +647,7 @@ Modify a specific topic, description similar to POST. This operation is only pos
     Body:
     {
         "topic_type": { "id": "clash-id" },
-        "topic_status": "open",
+        "topic_status": { "id: "open-id" },
         "title": "Example topic 3 - Changed Title",
         "priority": "high",
         "labels": [
@@ -669,7 +669,7 @@ Modify a specific topic, description similar to POST. This operation is only pos
         "modified_author": "Architect@example.com",
         "modified_date": "2016-08-02T13:22:22.409Z",
         "topic_type": { "id": "clash-id", "name": "Clash" },
-        "topic_status": "open",
+        "topic_status": { "id: "open-id", "name": "Open" },
         "title": "Example topic 3 - Changed Title",
         "priority": "high",
         "labels": [

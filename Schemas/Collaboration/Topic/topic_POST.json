@@ -12,8 +12,7 @@
             "$ref": "topic_type_SET.json"
         },
         "topic_status": {
-            "type": ["string",
-            "null"]
+            "$ref": "topic_status_SET.json"
         },
         "reference_links": {
             "type": ["array",
