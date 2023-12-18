@@ -2381,7 +2381,7 @@ Get events that are of type 'comment_created', or 'viewpoint_updated'
         "events": [
             {
                 "type": "comment_created",
-                "value": null
+                "value": { "displayValue": "This is my comment" }
             }
         ]
     }, {
@@ -2392,7 +2392,7 @@ Get events that are of type 'comment_created', or 'viewpoint_updated'
         "events": [
             {
                 "type": "viewpoint_updated",
-                "value": "b24a82e9-f67b-43b8-bda0-4946abf39624"
+                "value": { "id": "b24a82e9-f67b-43b8-bda0-4946abf39624" }
             }
         ]
     }]
@@ -2460,7 +2460,7 @@ Get events that are of type 'comment_created', or 'comment_text_updated'
         "events": [
             {
                 "type": "comment_created",
-                "value": null
+                "value": { "displayValue": "This is my comment" }
             }
         ]
     }, {
@@ -2471,7 +2471,7 @@ Get events that are of type 'comment_created', or 'comment_text_updated'
         "events": [
             {
                 "type": "comment_text_updated",
-                "value": "This is the updated comment"
+                "value": { "displayValue": "This is the updated comment" }
             }
         ]
     }]
