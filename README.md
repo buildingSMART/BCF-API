@@ -824,10 +824,12 @@ Retrieve a **collection** of file references as topic header.
     Response Code: 200 - OK
     Body:
     [{
+        "id": "570477df-428d-4d3d-a7ae-704d79da8cbd",
         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
         "filename": "OfficeBuilding_Architecture_0001.ifc",
         "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
     }, {
+        "id": "5328e0a1-d027-4cca-81d1-d59afb4cf798",
         "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
         "filename": "OfficeBuilding_Heating_0003.ifc",
         "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
@@ -864,10 +866,12 @@ Update a **collection** of file references on the topic header. This operation i
     Response Code: 200 - OK
     Body:
     [{
+        "id": "570477df-428d-4d3d-a7ae-704d79da8cbd",
         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
         "filename": "OfficeBuilding_Architecture_0001.ifc",
         "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
     }, {
+        "id": "5328e0a1-d027-4cca-81d1-d59afb4cf798",
         "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
         "filename": "OfficeBuilding_Heating_0003.ifc",
         "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
