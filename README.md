@@ -342,23 +342,24 @@ Project extensions are used to define possible values that can be used in topics
     Body:
     {
         "topic_type": [
-            {"id": "info-id", "name": "Information"},
-            {"id": "error-id", "name": "Error"}
+            { "id": "info-id", "name": "Information" },
+            { "id": "error-id", "name": "Error"}
         ],
         "topic_status": [
-            {"id": "open-id", "name": "Open"},
-            {"id": "closed-id", "name": "Closed"},
-            {"id": "reopened-id", "name": "ReOpened"}
+            { "id": "open-id", "name": "Open" },
+            { "id": "closed-id", "name": "Closed" },
+            { "id": "reopened-id", "name": "ReOpened"}
         ],
         "topic_label": [
-            "Architecture",
-            "Structural",
-            "MEP"
+            { "id": "architecture-id", "name": "Architecture" },
+            { "id": "structural-id", "name": "Structural" },
+            { "id": "mep-id", "name": "MEP" },
+            { "id": "heating-id", "name": Heating }
         ],
         "priority": [
-            "Low",
-            "Medium",
-            "High"
+            { "id": "low-id", "name": "Low" },
+            { "id": "medium-id", "name": "Medium" },
+            { "id": "high-id", "name": "High"}
         ],
         "users": [
             "Architect@example.com",
@@ -366,9 +367,9 @@ Project extensions are used to define possible values that can be used in topics
             "bob_heater@example.com"
         ],
         "stage": [
-            "Preliminary Planning End",
-            "Construction Start",
-            "Construction End"
+            { "id": "planning-end-id", "name": "Preliminary Planning End" },
+            { "id": "construction-start-id", "name": "Construction Start" },
+            { "id": "construction-end-id", "name": "Construction End" }
         ],
         "project_actions": [
             "update",
@@ -463,13 +464,13 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 |creation_author|string|userId of the creation author (value from extensions)|
 |modified_author|string|userId of the modified author (value from extensions)|
 |assigned_to|string|userId of the assigned person (value from extensions)|
-|stage|string|stage this topic is part of (value from extensions)|
-|topic_status|string|id of topic_status (value from extensions)|
+|stage|string|id of a stage (value from extensions)|
+|topic_status|string|id of a topic_status (value from extensions)|
 |topic_type|string|id of a topic_type (value from extensions)|
 |creation_date|datetime|creation date of a topic|
 |modified_date|datetime|modification date of a topic. The modification date of a server's topic should be the latest value of when the topic has been modified or when the latest [comment](#34-comment-services) has been updated or when a "floating viewpoint" (a [viewpoint](#35-viewpoint-services) which is not associated with a comment) is added|
-|labels|array (string)|labels of a topic (value from extensions)|
-|priority|string|priority of a topic (value from extensions)|
+|labels|array (string)|ids of labels (value from extensions)|
+|priority|string|id of a priority (value from extensions)|
 
 **Odata sort parameters**
 
@@ -543,11 +544,11 @@ JSON encoded body using the "application/json" content type.
 |topic_status|[topic_status_SET.json](Schemas/Collaboration/Topic/topic_status_SET.json)|The status of a topic (value from extension.xsd)|false|
 |reference_links|array (string)|Reference links, i.e. links to referenced resources|false|
 |title|string|The title of a topic|true|
-|priority|string|The priority of a topic (value from extension.xsd)|false|
+|priority|[priority_SET.json](Schemas/Collaboration/Topic/priority_SET.json)|The priority of a topic (value from extension.xsd)|false|
 |index|integer|The index of a topic **This property is deprecated and will be removed in a future release**|false|
-|labels|array (string)|The collection of labels of a topic (values from extension.xsd)|false|
+|labels|array of[label_SET.json](Schemas/Collaboration/Topic/priority_SET.json)|The labels of a topic (value from extension.xsd)|false|
 |assigned_to|string|UserID assigned to a topic (value from extension.xsd). UserIDs are recommended to be in email format as to uniquely identify users throughout multiple systems|false|
-|stage|string|Stage this topic is part of (value from extension.xsd)|false|
+|stage|[stage_SET.json](Schemas/Collaboration/Topic/stage_SET.json)|The stage of a topic (value from extension.xsd)|false|
 |description|string|Description of a topic|false|
 |due_date|string|Until when the topics issue needs to be resolved|false|
 | custom_fields| array (object) | Custom fields of a topic | false |
@@ -563,10 +564,10 @@ JSON encoded body using the "application/json" content type.
         "topic_type": { "id": "clash-id" },
         "topic_status": { "id: "open-id" },
         "title": "Example topic 3",
-        "priority": "high",
+        "priority": { "id: "high-id" },
         "labels": [
-            "Architecture",
-            "Heating"
+            { "id": "architecture-id" },
+            { "id": "heating-id" }
         ],
         "assigned_to": "harry.muster@example.com"
     }
@@ -583,10 +584,10 @@ JSON encoded body using the "application/json" content type.
         "topic_type": { "id": "clash-id", "name": "Clash" },
         "topic_status": { "id: "open-id", "name": "Open" },
         "title": "Example topic 3",
-        "priority": "high",
+        "priority": { "id: "high", "name": high },
         "labels": [
-            "Architecture",
-            "Heating"
+            { "id": "architecture-id", "name": "Architecture"},
+            { "id": "heating-id", "name": Heating }
         ],
         "assigned_to": "harry.muster@example.com"
     }
@@ -617,10 +618,10 @@ Retrieve a specific topic.
         "topic_type": { "id": "clash-id", "name": "Clash" },
         "topic_status": { "id: "open-id", "name": "Open" },
         "title": "Example topic 3",
-        "priority": "high",
+        "priority": { "id: "high", "name": high },
         "labels": [
-            "Architecture",
-            "Heating"
+            { "id": "architecture-id", "name": "Architecture"},
+            { "id": "heating-id", "name": Heating }
         ],
         "assigned_to": "harry.muster@example.com"
         "authorization": {
@@ -649,10 +650,10 @@ Modify a specific topic, description similar to POST. This operation is only pos
         "topic_type": { "id": "clash-id" },
         "topic_status": { "id: "open-id" },
         "title": "Example topic 3 - Changed Title",
-        "priority": "high",
+        "priority": { "id: "high-id" },
         "labels": [
-            "Architecture",
-            "Heating"
+            { "id": "architecture-id" },
+            { "id": "heating-id" }
         ],
         "assigned_to": "harry.muster@example.com"
     }
@@ -671,10 +672,10 @@ Modify a specific topic, description similar to POST. This operation is only pos
         "topic_type": { "id": "clash-id", "name": "Clash" },
         "topic_status": { "id: "open-id", "name": "Open" },
         "title": "Example topic 3 - Changed Title",
-        "priority": "high",
+        "priority": { "id: "high", "name": high },
         "labels": [
-            "Architecture",
-            "Heating"
+            { "id": "architecture-id", "name": "Architecture"},
+            { "id": "heating-id", "name": Heating }
         ],
         "assigned_to": "harry.muster@example.com"
     }
