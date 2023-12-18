@@ -26,51 +26,53 @@ The Open CDE workgroup develops the BCF standard. The group meets every second M
 
 <!-- toc -->
 
+- [BCF REST API](#bcf-rest-api)
+- [Contributing](#contributing)
 - [1. Introduction](#1-introduction)
-  * [1.1 OpenCDE Foundation API](#11-opencde-foundation-api)
-  * [1.2 Authorization](#12-authorization)
-    + [1.2.1 Per-Entity Authorization](#121-per-entity-authorization)
-    + [1.2.2 Determining Authorized Entity Actions](#122-determining-authorized-entity-actions)
-  * [1.3 Units of Numeric Values](#13-units-of-numeric-values)
+  - [1.1 OpenCDE Foundation API](#11-opencde-foundation-api)
+  - [1.2 Authorization](#12-authorization)
+    - [1.2.1 Per-Entity Authorization](#121-per-entity-authorization)
+    - [1.2.2 Determining Authorized Entity Actions](#122-determining-authorized-entity-actions)
+    - [1.3 Units of Numeric Values](#13-units-of-numeric-values)
 - [2. Topologies](#2-topologies)
-  * [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
-  * [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
+  - [2.1 Topology 1 - BCF-Server only](#21-topology-1---bcf-server-only)
+  - [2.2 Topology 2 - Colocated BCF-Server and Model Server](#22-topology-2---colocated-bcf-server-and-model-server)
 - [3. BCF Services](#3-bcf-services)
-  * [3.1 Project Services](#31-project-services)
-    + [3.1.1 GET Projects Service](#311-get-projects-service)
-    + [3.1.2 GET Project Service](#312-get-project-service)
-    + [3.1.3 PUT Project Service](#313-put-project-service)
-    + [3.1.4 GET Project Extension Service](#314-get-project-extension-service)
-    + [3.1.5 Expressing User Authorization Through Project Extensions](#315-expressing-user-authorization-through-project-extensions)
+  - [3.1 Project Services](#31-project-services)
+    - [3.1.1 GET Projects Service](#311-get-projects-service)
+    - [3.1.2 GET Project Service](#312-get-project-service)
+    - [3.1.3 PUT Project Service](#313-put-project-service)
+    - [3.1.4 GET Project Extension Service](#314-get-project-extension-service)
+    - [3.1.5 Expressing User Authorization Through Project Extensions](#315-expressing-user-authorization-through-project-extensions)
       - [3.1.5.1 Project](#3151-project)
       - [3.1.5.2 Topic](#3152-topic)
       - [3.1.5.3 Comment](#3153-comment)
-  * [3.2 Topic Services](#32-topic-services)
-    + [3.2.1 GET Topics Service](#321-get-topics-service)
-    + [3.2.2 POST Topic Service](#322-post-topic-service)
-    + [3.2.3 GET Topic Service](#323-get-topic-service)
-    + [3.2.4 PUT Topic Service](#324-put-topic-service)
-    + [3.2.5 DELETE Topic Service](#325-delete-topic-service)
-    + [3.2.6 GET Topic BIM Snippet Service](#326-get-topic-bim-snippet-service)
-    + [3.2.7 PUT Topic BIM Snippet Service](#327-put-topic-bim-snippet-service)
-    + [3.2.8 Determining Allowed Topic Modifications](#328-determining-allowed-topic-modifications)
-    + [3.2.9 Topic Identifiers](#329-topic-identifiers)
-  * [3.3 File Services](#33-file-services)
-    + [3.3.1 GET Project Files Information Service](#331-get-project-files-information-service)
-    + [3.3.2 GET Files (Header) Service](#332-get-files-header-service)
-    + [3.3.3 PUT Files (Header) Service](#333-put-files-header-service)
-  * [3.4 Comment Services](#34-comment-services)
-    + [3.4.1 GET Comments Service](#341-get-comments-service)
-    + [3.4.2 POST Comment Service](#342-post-comment-service)
-    + [3.4.3 GET Comment Service](#343-get-comment-service)
-    + [3.4.4 PUT Comment Service](#344-put-comment-service)
-    + [3.4.5 DELETE Comment Service](#345-delete-comment-service)
-    + [3.4.6 Determining allowed Comment modifications](#346-determining-allowed-comment-modifications)
-  * [3.5 Viewpoint Services](#35-viewpoint-services)
-    + [3.5.1 GET Viewpoints Service](#351-get-viewpoints-service)
-    + [3.5.2 POST Viewpoint Service](#352-post-viewpoint-service)
+  - [3.2 Topic Services](#32-topic-services)
+    - [3.2.1 GET Topics Service](#321-get-topics-service)
+    - [3.2.2 POST Topic Service](#322-post-topic-service)
+    - [3.2.3 GET Topic Service](#323-get-topic-service)
+    - [3.2.4 PUT Topic Service](#324-put-topic-service)
+    - [3.2.5 DELETE Topic Service](#325-delete-topic-service)
+    - [3.2.6 Determining Allowed Topic Modifications](#326-determining-allowed-topic-modifications)
+    - [3.2.7 Including Topic Relations when Returning Topics](#327-including-topic-relations-when-returning-topics)
+    - [3.2.8 Topic Identifiers](#328-topic-identifiers)
+  - [3.3 File Services](#33-file-services)
+    - [3.3.1 GET Project Files Information Service](#331-get-project-files-information-service)
+    - [3.3.2 GET Files (Header) Service](#332-get-files-header-service)
+    - [3.3.3 PUT Files (Header) Service](#333-put-files-header-service)
+  - [3.4 Comment Services](#34-comment-services)
+    - [3.4.1 GET Comments Service](#341-get-comments-service)
+    - [3.4.2 POST Comment Service](#342-post-comment-service)
+    - [3.4.3 GET Comment Service](#343-get-comment-service)
+    - [3.4.4 PUT Comment Service](#344-put-comment-service)
+    - [3.4.5 DELETE Comment Service](#345-delete-comment-service)
+    - [3.4.6 Determining allowed Comment modifications](#346-determining-allowed-comment-modifications)
+  - [3.5 Viewpoint Services](#35-viewpoint-services)
+    - [3.5.1 GET Viewpoints Service](#351-get-viewpoints-service)
+    - [3.5.2 POST Viewpoint Service](#352-post-viewpoint-service)
       - [3.5.2.1 Point](#3521-point)
       - [3.5.2.2 Direction](#3522-direction)
+    - [Camera](#camera)
       - [3.5.2.3 Orthogonal camera](#3523-orthogonal-camera)
       - [3.5.2.4 Perspective camera](#3524-perspective-camera)
       - [3.5.2.5 Line](#3525-line)
@@ -79,41 +81,41 @@ The Open CDE workgroup develops the BCF standard. The group meets every second M
       - [3.5.2.8 Snapshot](#3528-snapshot)
       - [3.5.2.9 Components](#3529-components)
       - [3.5.2.10 Component](#35210-component)
-        * [Optimization rules](#optimization-rules)
+        - [Optimization rules](#optimization-rules)
       - [3.5.2.11 Coloring](#35211-coloring)
-        * [Optimization rules](#optimization-rules-1)
+        - [Optimization rules](#optimization-rules-1)
       - [3.5.2.12 Visibility](#35212-visibility)
-        * [Optimization rules](#optimization-rules-2)
+        - [Optimization rules](#optimization-rules-2)
       - [3.5.2.13 View setup hints](#35213-view-setup-hints)
       - [3.5.2.14 Translucency](#35214-translucency)
-        * [Optimization rules](#optimization-rules-3)
+        - [Optimization rules](#optimization-rules-3)
       - [3.5.2.15 Translucency setup hints](#35215-translucency-setup-hints)
-    + [3.5.3 GET Viewpoint Service](#353-get-viewpoint-service)
-    + [3.5.4 GET Viewpoint Snapshot Service](#354-get-viewpoint-snapshot-service)
-    + [3.5.5 GET Viewpoint Bitmap Service](#355-get-viewpoint-bitmap-service)
-    + [3.5.6 GET selected Components Service](#356-get-selected-components-service)
-    + [3.5.7 GET colored Components Service](#357-get-colored-components-service)
-    + [3.5.8 GET visibility of Components Service](#358-get-visibility-of-components-service)
-    + [3.5.9 GET translucency of Components Service](#359-get-translucency-of-components-service)
-    + [3.5.10 DELETE Viewpoint Service](#3510-delete-viewpoint-service)
-    + [3.5.11 Determining allowed Viewpoint modifications](#3511-determining-allowed-viewpoint-modifications)
-   * [3.6 Related Topics Services](#36-related-topics-services)
-    + [3.6.1 GET Related Topics Service](#361-get-related-topics-service)
-    + [3.6.2 PUT Related Topics Service](#362-put-related-topics-service)
-  * [3.7 Document Reference Services](#37-document-reference-services)
-    + [3.7.1 GET Document References Service](#371-get-document-references-service)
-    + [3.7.2 POST Document Reference Service](#372-post-document-reference-service)
-    + [3.7.3 PUT Document Reference Service](#373-put-document-reference-service)
-  * [3.8 Document Services](#38-document-services)
-    + [3.8.1 GET Documents Service](#381-get-documents-service)
-    + [3.8.2 POST Document Service](#382-post-document-service)
-    + [3.8.3 GET Document Service](#383-get-document-service)
-  * [3.9 Topics Events Services](#39-topics-events-services)
-    + [3.9.1 GET Topics Events Service](#391-get-topics-events-service)
-    + [3.9.2 GET Topic Events Service](#392-get-topic-events-service)
-  * [3.10 Comments Events Services](#310-comments-events-services)
-    + [3.10.1 GET Comments Events Service](#3101-get-comments-events-service)
-    + [3.10.2 GET Comment Events Service](#3102-get-comment-events-service)
+    - [3.5.3 GET Viewpoint Service](#353-get-viewpoint-service)
+    - [3.5.4 GET Viewpoint Snapshot Service](#354-get-viewpoint-snapshot-service)
+    - [3.5.5 GET Viewpoint Bitmap Service](#355-get-viewpoint-bitmap-service)
+    - [3.5.6 GET selected Components Service](#356-get-selected-components-service)
+    - [3.5.7 GET colored Components Service](#357-get-colored-components-service)
+    - [3.5.8 GET visibility of Components Service](#358-get-visibility-of-components-service)
+    - [3.5.9 GET translucency of Components Service](#359-get-translucency-of-components-service)
+    - [3.5.10 DELETE Viewpoint Service](#3510-delete-viewpoint-service)
+    - [3.5.11 Determining allowed Viewpoint modifications](#3511-determining-allowed-viewpoint-modifications)
+  - [3.6 Related Topics Services](#36-related-topics-services)
+    - [3.6.1 GET Related Topics Service](#361-get-related-topics-service)
+    - [3.6.2 PUT Related Topics Service](#362-put-related-topics-service)
+  - [3.7 Document Reference Services](#37-document-reference-services)
+    - [3.7.1 GET Document References Service](#371-get-document-references-service)
+    - [3.7.2 POST Document Reference Service](#372-post-document-reference-service)
+    - [3.7.3 PUT Document Reference Service](#373-put-document-reference-service)
+  - [3.8 Document Services](#38-document-services)
+    - [3.8.1 GET Documents Service](#381-get-documents-service)
+    - [3.8.2 POST Document Service](#382-post-document-service)
+    - [3.8.3 GET Document Service](#383-get-document-service)
+  - [3.9 Topics Events Services](#39-topics-events-services)
+    - [3.9.1 GET Topics Events Service](#391-get-topics-events-service)
+    - [3.9.2 GET Topic Events Service](#392-get-topic-events-service)
+  - [3.10 Comments Events Services](#310-comments-events-services)
+    - [3.10.1 GET Comments Events Service](#3101-get-comments-events-service)
+    - [3.10.2 GET Comment Events Service](#3102-get-comment-events-service)
 
 <!-- tocstop -->
 
@@ -353,10 +355,6 @@ Project extensions are used to define possible values that can be used in topics
             "Structural",
             "MEP"
         ],
-        "snippet_type": [
-            ".ifc",
-            ".csv"
-        ],
         "priority": [
             "Low",
             "Medium",
@@ -379,7 +377,6 @@ Project extensions are used to define possible values that can be used in topics
         ],
         "topic_actions": [
             "update",
-            "updateBimSnippet",
             "updateRelatedTopics",
             "updateDocumentReferences",
             "updateFiles",
@@ -432,7 +429,6 @@ The 'topic_actions' entry in the project extensions defines what actions are all
 level by default (i.e. unless overridden by specific topics) The available actions include:
 
 * *update* - The ability to update the topic (see [3.2.4 PUT Topic Service](#324-put-topic-service))
-* *updateBimSnippet* - The ability to update the BIM snippet for topics (see [3.2.7 PUT Topic BIM Snippet Service](#327-put-topic-bim-snippet-service))
 * *updateRelatedTopics* - The ability to update the collection of related topics (see [3.6.2 PUT Related Topics Service](#362-put-related-topics-service))
 * *updateDocumentReferences* - The ability to update the collection of document references (see [3.7.3 PUT Document Reference Service](#373-put-document-reference-service))
 * *updateFiles* - The ability to update the file header (see [3.3.3 PUT Files (Header) Service](#333-put-files-header-service))
@@ -553,17 +549,11 @@ JSON encoded body using the "application/json" content type.
 |assigned_to|string|UserID assigned to a topic (value from extension.xsd). UserIDs are recommended to be in email format as to uniquely identify users throughout multiple systems|false|
 |stage|string|Stage this topic is part of (value from extension.xsd)|false|
 |description|string|Description of a topic|false|
-|bim_snippet.snippet_type|string|Type of a BIM-Snippet of a topic (value from extension.xsd)|false|
-|bim_snippet.is_external|boolean|Is the BIM-Snippet external (default = false)|false|
-|bim_snippet.reference|string|Reference of a BIM-Snippet of a topic|false|
-|bim_snippet.reference_schema|string|Schema of a BIM-Snippet of a topic|false|
 |due_date|string|Until when the topics issue needs to be resolved|false|
 | custom_fields| array (object) | Custom fields of a topic | false |
 
 > `custom_fields` are an optional array property that can be used by clients to attach custom data to a topic. The server should return the same array in the response. The array may be empty. It should contain the custom fields as defined in the project extensions.  
 > The `id` property of each custom field object is used to identify a field within a project. When creating or updating a topic, the `id` property from the extensions must be provided.
-
-_Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `is_external`, `reference` and `reference_schema`) are mandatory._
 
 **Example Request**
 
@@ -578,13 +568,7 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
             "Architecture",
             "Heating"
         ],
-        "assigned_to": "harry.muster@example.com",
-        "bim_snippet": {
-            "snippet_type": "clash",
-            "is_external": true,
-            "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-            "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
-        }
+        "assigned_to": "harry.muster@example.com"
     }
 
 **Example Response**
@@ -604,13 +588,7 @@ _Note: If "bim_snippet" is present, then all four properties (`snippet_type`, `i
             "Architecture",
             "Heating"
         ],
-        "assigned_to": "harry.muster@example.com",
-        "bim_snippet": {
-            "snippet_type": "clash",
-            "is_external": true,
-            "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-            "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
-        }
+        "assigned_to": "harry.muster@example.com"
     }
 
 ### 3.2.3 GET Topic Service
@@ -644,13 +622,7 @@ Retrieve a specific topic.
             "Architecture",
             "Heating"
         ],
-        "assigned_to": "harry.muster@example.com",
-        "bim_snippet": {
-            "snippet_type": "clash",
-            "is_external": true,
-            "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-            "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
-        },
+        "assigned_to": "harry.muster@example.com"
         "authorization": {
             "topic_actions": [
                 "createComment",
@@ -682,13 +654,7 @@ Modify a specific topic, description similar to POST. This operation is only pos
             "Architecture",
             "Heating"
         ],
-        "assigned_to": "harry.muster@example.com",
-        "bim_snippet": {
-            "snippet_type": "clash",
-            "is_external": true,
-            "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-            "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
-        }
+        "assigned_to": "harry.muster@example.com"
     }
 
 **Example Response**
@@ -710,13 +676,7 @@ Modify a specific topic, description similar to POST. This operation is only pos
             "Architecture",
             "Heating"
         ],
-        "assigned_to": "harry.muster@example.com",
-        "bim_snippet": {
-            "snippet_type": "clash",
-            "is_external": true,
-            "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-            "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
-        }
+        "assigned_to": "harry.muster@example.com"
     }
 
 ### 3.2.5 DELETE Topic Service
@@ -735,33 +695,17 @@ Deletes a single topic. This operation is only possible when the server returns 
 
     Response Code: 200 - OK
 
-### 3.2.6 GET Topic BIM Snippet Service
-
-**Resource URL**
-
-    GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/snippet
-
-Retrieves a topics BIM-Snippet as binary file.
-
-### 3.2.7 PUT Topic BIM Snippet Service
-
-**Resource URL**
-
-    PUT /bcf/{version}/projects/{project_id}/topics/{topic_guid}/snippet
-
-Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property `is_external` must be set to `false` and the `reference` must be the file name with extension. This operation is only possible when the server returns the `updateBimSnippet` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications)
-
-### 3.2.8 Determining Allowed Topic Modifications
+### 3.2.6 Determining Allowed Topic Modifications
 
 The global default Topic authorizations are expressed in the project schema and when Topic(s) are requested with the
 query parameter "includeAuthorization" equal to "true" Topics will include an "authorization" field containing any local
 overrides for each Topic.
 
-### 3.2.8 Including Topic Relations when Returning Topics
+### 3.2.7 Including Topic Relations when Returning Topics
 
 The topic relations are defined in the schema and when Topic(s) are requested with the query parameter "includeTopicRelations" equal to "true" Topics will include a "topic_relations" field containing any relations for each Topic.
 
-### 3.2.9 Topic Identifiers
+### 3.2.8 Topic Identifiers
 
 Each topic has two identifiers: 
 1. `guid` - machine-friendly, randomly generated and universally unique identifier. Both clients and servers must generate 
