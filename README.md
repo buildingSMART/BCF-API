@@ -347,9 +347,9 @@ Project extensions are used to define possible values that can be used in topics
             { "id": "error-id", "name": "Error"}
         ],
         "topic_status": [
-            { "id": "open-id", "name": "Open" },
-            { "id": "closed-id", "name": "Closed" },
-            { "id": "reopened-id", "name": "ReOpened"}
+            { "id": "open-id", "name": "Open", "type": "open" },
+            { "id": "closed-id", "name": "Closed", "type": "closed" },
+            { "id": "reopened-id", "name": "ReOpened", "type": "open" }
         ],
         "topic_label": [
             { "id": "architecture-id", "name": "Architecture" },

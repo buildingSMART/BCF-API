@@ -9,6 +9,11 @@
         "name": {
             "type": "string",
             "required": true
+        },
+        "status_type": {
+            "type": "string",
+            "enum": ["open", "closed"],
+            "required": true
         }
     }
 }
