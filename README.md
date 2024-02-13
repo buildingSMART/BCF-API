@@ -587,7 +587,7 @@ JSON encoded body using the "application/json" content type.
         "custom_fields":[{
             "id": "6e6bddaa-4c53-4fb8-b884-500e0d2dba6a",
             "value": ["19.99"]
-    }]
+        }]
     }
 
 **Example Response**
