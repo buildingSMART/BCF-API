@@ -37,7 +37,11 @@
             "items": {
                 "type": "object",
                 "properties": {
-                    "value": {
+                    "id": {
+                        "required": true,
+                        "type": "string"
+                    },
+                    "name": {
                         "required": true,
                         "type": "string"
                     }

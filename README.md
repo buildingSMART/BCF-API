@@ -565,7 +565,7 @@ JSON encoded body using the "application/json" content type.
 |stage|[extension_item_SET.json](Schemas/Collaboration/Topic/extension_item_SET.json)|The stage of a topic (value from extension.xsd)|false|
 |description|string|Description of a topic|false|
 |due_date|string|Until when the topics issue needs to be resolved|false|
-| custom_fields| array (object) | Custom fields of a topic | false |
+|custom_fields| array (object) | Custom fields of a topic | false |
 
 > `custom_fields` are an optional array property that can be used by clients to attach custom data to a topic. The server should return the same array in the response. The array may be empty. It should contain the custom fields as defined in the project extensions.  
 > The `id` property of each custom field object is used to identify a field within a project. When creating or updating a topic, the `id` property from the extensions must be provided.
