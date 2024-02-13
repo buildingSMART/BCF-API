@@ -11,7 +11,7 @@
             "required": false,
             "type": "array",
             "items": {
-                "type": "string"
+                "$ref": "custom_field_value.json"
             }
         }
     }

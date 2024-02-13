@@ -1,0 +1,16 @@
+{
+    "title": "custom_field_value",
+    "type": ["object", "null"],
+    "properties": {
+        "value": {
+            "description": "The value.",
+            "required": false,
+            "type": "string"
+        },
+        "displayValue": {
+            "description": "The human readable value",
+            "required": false,
+            "type": "string"
+        }
+    }
+}
