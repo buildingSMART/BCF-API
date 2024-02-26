@@ -1,15 +1,12 @@
 {
-    "title": "user_GET",
-    "type": "object",
+    "title": "extension_item",
+    "type": ["object", "null"],
     "properties": {
         "id": {
             "type": "string",
             "required": true
         },
         "name": {
-            "type": ["string", "null"]
-        },
-        "email": {
             "type": "string",
             "required": true
         }

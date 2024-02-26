@@ -9,12 +9,10 @@
             "null"]
         },
         "topic_type": {
-            "type": ["string",
-            "null"]
+            "$ref": "extension_item_SET.json"
         },
         "topic_status": {
-            "type": ["string",
-            "null"]
+            "$ref": "extension_item_SET.json"
         },
         "reference_links": {
             "type": ["array",
@@ -28,8 +26,7 @@
             "type": "string"
         },
         "priority": {
-            "type": ["string",
-            "null"]
+            "$ref": "extension_item_SET.json"
         },
         "index": {
             "type": [
@@ -41,17 +38,14 @@
             "type": ["array",
             "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "extension_item_SET.json"
             }
         },
         "assigned_to": {
-            "type": ["string",
-            "null"]
+            "$ref": "extension_item_SET.json"
         },
         "stage": {
-            "type": ["string",
-            "null"]
+            "$ref": "extension_item_SET.json"
         },
         "description": {
             "type": ["string",

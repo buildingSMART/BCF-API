@@ -16,7 +16,7 @@
         },
         "author": {
             "required": true,
-            "type": "string"
+            "$ref": "../../User/user_GET.json"
         },
         "actions": {
             "type": "array",

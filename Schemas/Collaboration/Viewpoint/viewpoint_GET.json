@@ -45,7 +45,7 @@
         },
         "creation_author": {
             "required": true,
-            "type": "string"
+            "$ref": "../../User/user_GET.json"
         },
         "authorization": {
             "type": "object",
