@@ -1,0 +1,10 @@
+{
+    "title": "extension_item_set",
+    "type": ["object", "null"],
+    "properties": {
+        "id": {
+            "type": "string",
+            "required": true
+        }
+    }
+}

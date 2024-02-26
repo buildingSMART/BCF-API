@@ -24,6 +24,12 @@
                 "$ref": "line.json"
             }
         },
+        "markers": {
+            "type": ["array", "null"],
+            "items": {
+                "$ref": "marker.json"
+            }
+        },
         "clipping_planes": {
             "type": ["array", "null"],
             "items": {
@@ -45,6 +51,14 @@
                 "$ref": "file_GET.json"
             }
         },
+        "creation_date": {
+            "required": true,
+            "type": "string"
+        },
+        "creation_author": {
+            "required": true,
+            "$ref": "../../User/user_GET.json"
+        },
         "authorization": {
             "type": "object",
             "required": false,
@@ -52,6 +66,13 @@
                 "viewpoint_actions": {
                     "$ref": "../Action/viewpoint_actions.json"
                 }
+            }
+        },
+        "topic_file_ids": {
+            "required": true,
+            "type": "array",
+            "items": {
+                "type": "string"
             }
         }
     }

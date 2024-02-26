@@ -24,6 +24,12 @@
                 "$ref": "line.json"
             }
         },
+        "markers": {
+            "type": ["array", "null"],
+            "items": {
+                "$ref": "marker.json"
+            }
+        },
         "clipping_planes": {
             "type": ["array", "null"],
             "items": {
@@ -46,6 +52,13 @@
             "type": ["array", "null"],
             "items": {
                 "$ref": "file_GET.json"
+            }
+        },
+        "topic_file_ids": {
+            "required": true,
+            "type": "array",
+            "items": {
+                "type": "string"
             }
         }
     }

@@ -1,0 +1,56 @@
+{
+    "title": "custom_field",
+    "type": "object",
+    "properties": {
+        "id": {
+            "required": true,
+            "type": "string"
+        },
+        "name": {
+            "required": true,
+            "type": "string"
+        },
+        "type": {
+            "required": true,
+            "enum": ["integer", "decimal", "string", "boolean", "enum", "date", "date-time"]
+        },
+        "readonly": {
+            "required": true,
+            "type": "boolean"
+        },
+        "minArraySize": {
+            "required": true,
+            "type": "integer"
+        },
+        "maxArraySize": {
+            "required": false,
+            "type": "integer"
+        },
+        "defaultValue": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "enumValues": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "required": true,
+                        "type": "string"
+                    },
+                    "displayValue": {
+                        "required": true,
+                        "type": "string"
+                    },
+                    "readonly": {
+                        "required": true,
+                        "type": "boolean"
+                    }
+                }
+            }
+        }
+    }
+}
