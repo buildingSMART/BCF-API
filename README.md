@@ -1241,7 +1241,7 @@ JSON encoded body using the "application/json" content type.
 | bitmaps | array of [Bitmap](#3527-bitmap) | embedded pictures in the viewpoint | optional |
 | snapshot | [Snapshot](#3528-snapshot) | snapshot image of the viewpoint. Note: The longest dimension of should not exceed 1500 px, length or width. |  see viewpoint optional/mandatory fields clarification |
 | components | [Components](#3529-components) | Components in the viewpoint | optional |
-| models | array of [File](Schemas_draft-03/Collaboration/File/file_GET.json) | Models associated to the viewpoint. May be absent if being the same models as described in the topic | optional |
+| models | array of [File](Schemas_draft-03/Collaboration/File/file_GET.json) | Models associated to the viewpoint. If no models are provided, the viewpoint is not supposed to show any models, for example snapshot-only viewpoints | optional |
 | topic_file_ids | array of strings | List of file ids that are referenced in the viewpoint | required, but can be an empty list |
 
 **Viewpoint optional/mandatory fields clarification**
