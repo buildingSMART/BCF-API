@@ -1,0 +1,17 @@
+{
+    "title": "user_GET",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "required": true
+        },
+        "name": {
+            "type": ["string", "null"]
+        },
+        "email": {
+            "type": "string",
+            "required": true
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "title": "translucency_GET",
+    "type": "object",
+
+    "properties": {
+        "translucency": {
+            "$ref": "translucency.json"
+        }
+    }
+}

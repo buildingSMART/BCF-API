@@ -1,16 +1,16 @@
 {
-    "title": "viewpoint_GET",
-    "type": "object",
+    "title": "viewpoint_POST",
+    "type": [ "object" ],
     "properties": {
+        "guid": {
+            "type": ["string",
+            "null"]
+        },
         "index": {
             "type": [
                 "integer",
                 "null"
             ]
-        },
-        "guid": {
-            "required": true,
-            "type": "string"
         },
         "orthogonal_camera": {
             "$ref": "orthogonal_camera.json"
@@ -39,19 +39,20 @@
         "bitmaps": {
             "type": ["array", "null"],
             "items": {
-                "$ref": "bitmap_GET.json"
+                "$ref": "bitmap_POST.json"
             }
         },
         "snapshot": {
-            "$ref": "snapshot_GET.json"
+            "$ref": "snapshot_POST.json"
         },
-        "authorization": {
-            "type": "object",
-            "required": false,
-            "properties": {
-                "viewpoint_actions": {
-                    "$ref": "../Action/viewpoint_actions.json"
-                }
+        "components": {
+            "$ref": "components.json"
+        },
+        "topic_file_ids": {
+            "required": true,
+            "type": "array",
+            "items": {
+                "type": "string"
             }
         }
     }
