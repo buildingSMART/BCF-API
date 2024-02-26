@@ -1,0 +1,12 @@
+{
+    "title": "event_action",
+    "type": ["object", "null"],
+    "properties": {
+        "id":  {
+            "type": ["string", "null"]
+        },
+        "displayValue": {
+            "type": ["string", "null"]
+        }
+    }
+}

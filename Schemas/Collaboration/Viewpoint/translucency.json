@@ -1,0 +1,16 @@
+{
+    "title": "translucency",
+    "type": "object",
+    "properties": {
+        "default_translucency": {
+            "type": "boolean",
+            "default": "false"
+        },
+        "exceptions": {
+            "$ref": "component_list.json"
+        },
+        "view_setup_hints": {
+            "$ref": "translucency_setup_hints.json"
+        }
+    }
+}

@@ -1,16 +1,18 @@
 {
     "$schema": "http://json-schema.org/draft-03/schema#",
-    "title": "topic_PUT",
-    "description": "Schema for topic PUT, BCF REST API.",
+    "title": "topic_POST",
+    "description": "Schema for topic POST, BCF REST API.",
     "type": "object",
     "properties": {
-        "topic_type": {
+        "guid": {
             "type": ["string",
             "null"]
         },
+        "topic_type": {
+            "$ref": "extension_item_SET.json"
+        },
         "topic_status": {
-            "type": ["string",
-            "null"]
+            "$ref": "extension_item_SET.json"
         },
         "reference_links": {
             "type": ["array",
@@ -24,8 +26,7 @@
             "type": "string"
         },
         "priority": {
-            "type": ["string",
-            "null"]
+            "$ref": "extension_item_SET.json"
         },
         "index": {
             "type": [
@@ -37,24 +38,18 @@
             "type": ["array",
             "null"],
             "items": {
-                "type": ["string",
-                "null"]
+                "$ref": "extension_item_SET.json"
             }
         },
         "assigned_to": {
-            "type": ["string",
-            "null"]
+            "$ref": "extension_item_SET.json"
         },
         "stage": {
-            "type": ["string",
-            "null"]
+            "$ref": "extension_item_SET.json"
         },
         "description": {
             "type": ["string",
             "null"]
-        },
-        "bim_snippet": {
-            "$ref": "bim_snippet.json"
         },
         "due_date": {
             "type": ["string",

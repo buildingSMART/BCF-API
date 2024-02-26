@@ -1,0 +1,9 @@
+{
+    "title": "marker",
+    "type": "object",
+    "properties": {
+        "location": {
+            "$ref": "point.json"
+        }
+    }
+}

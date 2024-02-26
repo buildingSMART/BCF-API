@@ -1,0 +1,19 @@
+{
+    "title": "topic_status_extension_item",
+    "type": ["object", "null"],
+    "properties": {
+        "id": {
+            "type": "string",
+            "required": true
+        },
+        "name": {
+            "type": "string",
+            "required": true
+        },
+        "status_type": {
+            "type": "string",
+            "enum": ["open", "closed"],
+            "required": true
+        }
+    }
+}

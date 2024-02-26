@@ -23,6 +23,10 @@
         "reference": {
             "type": ["string",
             "null"]
+        },
+        "id": {
+            "type": ["string",
+            "null"]
         }
     }
 }
