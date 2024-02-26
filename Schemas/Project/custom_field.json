@@ -44,6 +44,10 @@
                     "displayValue": {
                         "required": true,
                         "type": "string"
+                    },
+                    "readonly": {
+                        "required": true,
+                        "type": "boolean"
                     }
                 }
             }
