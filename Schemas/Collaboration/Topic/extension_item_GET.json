@@ -2,11 +2,11 @@
     "title": "extension_item_get",
     "type": ["object", "null"],
     "properties": {
-        "id": {
+        "value": {
             "type": "string",
             "required": true
         },
-        "name": {
+        "displayValue": {
             "type": "string",
             "required": true
         }

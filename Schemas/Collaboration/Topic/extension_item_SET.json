@@ -2,7 +2,7 @@
     "title": "extension_item_set",
     "type": ["object", "null"],
     "properties": {
-        "id": {
+        "value": {
             "type": "string",
             "required": true
         }
