@@ -1208,7 +1208,15 @@ Note: For viewpoints without audit information (For example viewpoints created i
                 "z": 0.0
             }
         }],
-        "models": null,
+        "models": [{
+            "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+            "filename": "OfficeBuilding_Architecture_0001.ifc",
+            "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+        }, {
+            "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+            "filename": "OfficeBuilding_Heating_0003.ifc",
+            "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
+        }],
         "topic_file_ids": [
             "570477df-428d-4d3d-a7ae-704d79da8cbd",
             "5328e0a1-d027-4cca-81d1-d59afb4cf798"
