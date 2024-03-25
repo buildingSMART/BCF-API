@@ -10,6 +10,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v1
       - name: Push Swagger API to Swagger Hub
-        run: 'curl -X PUT "https://api.swaggerhub.com/apis/buildingSMART/BCF/4.0" -H "Authorization: $SwaggerHubApiKey" -H "Content-Type: application/yaml" --data-binary @swagger.yaml'
+        run: 'curl -X POST "https://app.swaggerhub.com/apiproxy/registry/buildingSMART/BCF?isPrivate=false&version=4.0" -H "Authorization: $SwaggerHubApiKey" -H "Content-Type: application/yaml" --data-binary @swagger.yaml'
         env:
             SwaggerHubApiKey: ${{ secrets.SWAGGER_HUB_API_KEY }}
