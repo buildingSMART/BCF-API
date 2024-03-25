@@ -1,6 +1,6 @@
 openapi: '3.0.2'
 info:
-  title: BCF API Test
+  title: BCF API
   version: '4.0'
 servers:
 # Relative URLs
