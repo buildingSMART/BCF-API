@@ -9,7 +9,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1
+      - name: Install SwaggerHub CLI
+        run: 'npm i -g swaggerhub-cli'
       - name: Push Swagger API to Swagger Hub
-        run: 'curl -X POST "https://app.swaggerhub.com/apiproxy/registry/buildingSMART/BCF?isPrivate=false&version=4.0" -H "Authorization: $SwaggerHubApiKey" -H "Content-Type: application/yaml" --data-binary @swagger.yaml'
+        run: 'swaggerhub api:update buildingSMART/BCF/4.0 -f swagger.yaml'
         env:
-            SwaggerHubApiKey: ${{ secrets.SWAGGER_HUB_API_KEY }}
+          SWAGGERHUB_API_KEY: ${{ secrets.SWAGGER_HUB_API_KEY }}
