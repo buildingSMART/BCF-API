@@ -1,0 +1,15 @@
+name: swagger-update
+
+on: [push]
+
+jobs:
+  ubuntu-latest:
+    name: ubuntu-latest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: Push Swagger API to Swagger Hub
+        run: 'curl -X POST "https://api.swaggerhub.com/apis/buildingSMART/BCF/4.0" -H "Authorization: $SwaggerHubApiKey" -H "Content-Type: application/yaml" --data-binary @swagger.yaml'
+        env:
+            SwaggerHubApiKey: ${{ secrets.SWAGGER_HUB_API_KEY }}
