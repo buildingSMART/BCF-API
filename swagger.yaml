@@ -2049,6 +2049,9 @@ components:
         reference:
           type: string
           nullable: true
+        id:
+          type: string
+          nullable: true
     file_PUT:
       type: object
       properties:
@@ -2515,6 +2518,11 @@ components:
           properties:
             viewpoint_actions:
               $ref:  "#/components/schemas/viewpoint_actions"
+        topic_file_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
     viewpoint_POST:
       type: object
       properties:
@@ -2553,6 +2561,11 @@ components:
         # Why cant we get components?
         components:
           $ref: '#/components/schemas/components'
+        topic_file_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
     visibility:
       type: object
       properties:
