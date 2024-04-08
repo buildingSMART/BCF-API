@@ -2280,6 +2280,9 @@ components:
               nullable: true
               items:
                 type: string
+        main_viewpoint_guid:
+          type: string
+          nullable: true
     topic_POST:
       type: object
       required:
@@ -2327,6 +2330,9 @@ components:
         due_date:
           type: string
           nullable: true
+        main_viewpoint_guid:
+          type: string
+          nullable: true
     topic_PUT:
       type: object
       required:
@@ -2369,6 +2375,9 @@ components:
         bim_snippet:
           $ref: '#/components/schemas/bim_snippet'
         due_date:
+          type: string
+          nullable: true
+        main_viewpoint_guid:
           type: string
           nullable: true
     # viewpoint schemas
