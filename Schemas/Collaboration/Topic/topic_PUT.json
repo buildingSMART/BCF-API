@@ -54,7 +54,7 @@
         "custom_fields": {
             "$ref": "custom_fields.json"
         },
-        "main_viewpoint_guid": {
+        "default_viewpoint_guid": {
             "type": ["string", "null"]
         }
     }

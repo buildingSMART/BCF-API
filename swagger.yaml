@@ -2280,7 +2280,7 @@ components:
               nullable: true
               items:
                 type: string
-        main_viewpoint_guid:
+        default_viewpoint_guid:
           type: string
           nullable: true
     topic_POST:
@@ -2330,7 +2330,7 @@ components:
         due_date:
           type: string
           nullable: true
-        main_viewpoint_guid:
+        default_viewpoint_guid:
           type: string
           nullable: true
     topic_PUT:
@@ -2377,7 +2377,7 @@ components:
         due_date:
           type: string
           nullable: true
-        main_viewpoint_guid:
+        default_viewpoint_guid:
           type: string
           nullable: true
     # viewpoint schemas
