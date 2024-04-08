@@ -2646,3 +2646,41 @@ components:
       properties:
         location:
           $ref: '#/components/schemas/point'
+  custom_field:
+    parameters:
+      id:
+        type: string
+      name:
+        type: string  
+      type:
+        type: string
+        enum:
+          - integer
+          - decimal
+          - string
+          - boolean
+          - enum
+          - date
+          - date-time
+      readonly:
+        type: boolean
+      minArraySize:
+        type: integer
+      maxArraySize:
+        type: integer
+      defaultValue:
+        type: array
+        items:
+          type: string
+      enumValues:
+        type: array
+        items:
+          $ref: '#/components/schemas/custom_field_enum_value'
+  custom_field_enum_value:
+    parameters:
+      value:
+        type: string
+      displayValue:
+        type: string  
+      readonly:
+        type: boolean
