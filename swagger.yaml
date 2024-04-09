@@ -226,7 +226,7 @@ paths:
                   $ref: '#/components/schemas/topic_GET'
               example:
                 [{
-                    "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                    "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
                     "server_assigned_id": "ISSUE-00001",
                     "creation_author": "Architect@example.com",
                     "title": "Example topic 1",
@@ -236,7 +236,7 @@ paths:
                     ],
                     "creation_date": "2013-10-21T17:34:22.409Z"
                 }, {
-                    "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+                    "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
                     "server_assigned_id": "ISSUE-00078",
                     "creation_author": "Architect@example.com",
                     "title": "Example topic 2",
@@ -285,7 +285,7 @@ paths:
                 $ref: '#/components/schemas/topic_GET'
               example:   
                 {
-                    "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                    "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
                     "server_assigned_id": "ISSUE-01462",
                     "creation_author": "Architect@example.com",
                     "creation_date": "2016-08-01T17:34:22.409Z",
@@ -305,11 +305,11 @@ paths:
                         "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
                     }
                 }
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
+    - $ref:  "#/components/parameters/topic_guid"
     get:
       summary: Get Topic
       description: Retrieve a specific topic.
@@ -324,7 +324,7 @@ paths:
                 $ref: '#/components/schemas/topic_GET'
               example:
                 {
-                    "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+                    "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
                     "server_assigned_id": "ISSUE-00549",
                     "creation_author": "Architect@example.com",
                     "creation_date": "2016-08-01T17:34:22.409Z",
@@ -390,7 +390,7 @@ paths:
                 $ref: '#/components/schemas/topic_GET'
               example:  
                 {
-                    "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+                    "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
                     "server_assigned_id": "ISSUE-00037",
                     "creation_author": "Architect@example.com",
                     "creation_date": "2016-08-01T17:34:22.409Z",
@@ -420,11 +420,11 @@ paths:
       responses:
         '200':
           description: OK
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/snippet:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/snippet:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
+    - $ref:  "#/components/parameters/topic_guid"
     get:
       summary: Get Snippet
       description: Retrieves a topics BIM-Snippet as binary file.
@@ -502,11 +502,11 @@ paths:
                         "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
                     }
                 }]
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/files:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/files:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
+    - $ref:  "#/components/parameters/topic_guid"
     get:
       summary: Get Files
       description:  |
@@ -579,11 +579,11 @@ paths:
                     "file_name": "OfficeBuilding_Heating_0003.ifc",
                     "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
                 }]
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/comments:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
+    - $ref:  "#/components/parameters/topic_guid"
     get:
       summary: Get Comments
       description: Retrieve a collection of all comments related to a topic (default ordering is date).
@@ -624,7 +624,7 @@ paths:
                   $ref: '#/components/schemas/comment_GET'
               example:
                 [{
-                    "guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+                    "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
                     "date": "2016-08-01T12:34:22.409Z",
                     "author": "max.muster@example.com",
                     "comment": "Clash found",
@@ -635,7 +635,7 @@ paths:
                         ]
                     }
                 }, {
-                    "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+                    "comment_guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
                     "date": "2016-08-01T14:24:11.316Z",
                     "author": "bob.heater@example.com",
                     "comment": "will rework the heating model",
@@ -665,18 +665,18 @@ paths:
                 $ref: '#/components/schemas/comment_GET'
               example:       
                 {
-                  "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+                  "comment_guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
                   "date": "2016-08-01T14:24:11.316Z",
                   "author": "bob.heater@example.com",
                   "comment": "will rework the heating model",
                   "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
                 }
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/comments/{comment_id}:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}:
     parameters:
     - $ref:  "#/components/parameters/version"  
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
-    - $ref:  "#/components/parameters/comment_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/comment_guid"
     get:
       summary: Get Comment
       description: Get a single comment.
@@ -691,7 +691,7 @@ paths:
                 $ref: '#/components/schemas/comment_GET'
               example:
                 {
-                  "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+                  "comment_guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
                   "date": "2016-08-01T14:24:11.316Z",
                   "author": "bob.heater@example.com",
                   "comment": "will rework the heating model",
@@ -723,7 +723,7 @@ paths:
                 $ref: '#/components/schemas/comment_GET'
               example:
                 {
-                  "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+                  "comment_guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
                   "date": "2016-08-01T14:24:11.316Z",
                   "author": "bob.heater@example.com",
                   "comment": "will rework the heating model",
@@ -737,11 +737,11 @@ paths:
       responses:
         '200':
           description: OK
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/viewpoints:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
+    - $ref:  "#/components/parameters/topic_guid"
     get:
       summary: Get Viewpoints
       description: Retrieve a collection of all viewpoints related to a topic.
@@ -758,7 +758,7 @@ paths:
                   $ref: '#/components/schemas/viewpoint_GET'
               example:
                 [{
-                    "guid": "b24a82e9-f67b-43b8-bda0-4946abf39624",
+                    "viewpoint_guid": "b24a82e9-f67b-43b8-bda0-4946abf39624",
                     "perspective_camera": {
                         "camera_view_point": {
                             "x": 0.0,
@@ -803,7 +803,7 @@ paths:
                         }
                     }]
                 }, {
-                    "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+                    "viewpoint_guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
                     "perspective_camera": {
                         "camera_view_point": {
                             "x": 0.0,
@@ -965,7 +965,7 @@ paths:
                 $ref: '#/components/schemas/viewpoint_GET'
               example:       
                 {
-                    "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+                    "viewpoint_guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
                     "index": 10,
                     "perspective_camera": {
                         "camera_view_point": {
@@ -1034,12 +1034,12 @@ paths:
                         "snapshot_type": "png"
                     }
                 }
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/viewpoints/{viewpoint_id}:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
-    - $ref:  "#/components/parameters/viewpoint_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/viewpoint_guid"
     get:
       summary: Get Viewpoint
       description:  Retrieve a specific viewpoint.
@@ -1054,7 +1054,7 @@ paths:
                 $ref: '#/components/schemas/viewpoint_GET'
               example:
                 {
-                    "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+                    "viewpoint_guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
                     "index": 10,
                     "perspective_camera": {
                         "camera_view_point": {
@@ -1100,7 +1100,7 @@ paths:
                         }
                     }],
                     "bitmaps": [{
-                        "guid": "20c1cb56-315f-4a0a-922d-ed7a4a8edf55",
+                        "bitmap_guid": "20c1cb56-315f-4a0a-922d-ed7a4a8edf55",
                         "bitmap_type": "jpg",
                         "location": {
                             "x": 10.0,
@@ -1131,12 +1131,12 @@ paths:
       responses:
         '200':
           description: OK
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/viewpoints/{viewpoint_id}/snapshot:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/snapshot:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
-    - $ref:  "#/components/parameters/viewpoint_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/viewpoint_guid"
     get:
       summary: Get Snapshot
       description: Retrieve a viewpoints snapshot (png or jpg) as image file. A viewpoint contains a snapshot if viewpoint.snapshot != null.
@@ -1150,13 +1150,13 @@ paths:
               schema:
                 type: string
                 format: binary
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/viewpoints/{viewpoint_id}/bitmaps/{bitmap_id}:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/bitmaps/{bitmap_guid}:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
-    - $ref:  "#/components/parameters/viewpoint_id"
-    - $ref:  "#/components/parameters/bitmap_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/viewpoint_guid"
+    - $ref:  "#/components/parameters/bitmap_guid"
     get:
       summary: Get Bitmap
       description: Retrieve a specific viewpoints bitmap image file (png or jpg).
@@ -1170,12 +1170,12 @@ paths:
               schema:
                 type: string
                 format: binary
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/viewpoints/{viewpoint_id}/selection:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/selection:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
-    - $ref:  "#/components/parameters/viewpoint_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/viewpoint_guid"
     get:
       summary: Get Selection
       description: Retrieve a collection of all selected components in a viewpoint.
@@ -1200,12 +1200,12 @@ paths:
                       }
                   ]
               }
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/viewpoints/{viewpoint_id}/coloring:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/coloring:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
-    - $ref:  "#/components/parameters/viewpoint_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/viewpoint_guid"
     get:
       summary: Get Coloring
       description: Retrieve a collection of all colored components in a viewpoint.
@@ -1235,12 +1235,12 @@ paths:
                         }
                     ]
                 }
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/viewpoints/{viewpoint_id}/visibility:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/visibility:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
-    - $ref:  "#/components/parameters/viewpoint_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/viewpoint_guid"
     get:
       summary: Get Visibility
       description: Retrieve visibility of components in a viewpoint.
@@ -1273,11 +1273,11 @@ paths:
                         }
                     }
                 }
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/related_topics:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/related_topics:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
+    - $ref:  "#/components/parameters/topic_guid"
     get:
       summary: Get Related Topics
       description: Retrieve a collection of all related topics to a topic.
@@ -1338,11 +1338,11 @@ paths:
                 }, {
                     "related_topic_guid": "bac66ab4-331e-4f21-a28e-083d2cf2e796"
                 }]
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/document_references:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/document_references:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
+    - $ref:  "#/components/parameters/topic_guid"
     get:
       summary: Get Document References
       description:  |
@@ -1361,10 +1361,12 @@ paths:
                   $ref: '#/components/schemas/document_reference_GET'
               example:
                 [{
+                    # document_reference_guid ?
                     "guid": "212ab37a-6122-448e-86fc-86503183b520",
                     "url": "http://example.com/files/LegalRequirements.pdf",
                     "description": "The legal requirements for buildings."
                 }, {
+                    # Shouldn't first guid be a document_reference_guid?
                     "guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
                     "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
                     "description": "The building owners global design parameters for buildings."
@@ -1404,15 +1406,19 @@ paths:
                 $ref: '#/components/schemas/document_reference_GET'
               example:
                 {
+
+                  # documents_reference_guid?
                     "guid": "275ab37a-6122-448e-86fc-86503183b520",
                     "url": "http://example.com/files/LegalRequirements.pdf",
                     "description": "The legal requirements for buildings."
                 }
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/document_references/{document_reference_id}:
+  # There is no document_reference_id according to https://github.com/buildingSMART/BCF-API/commit/d92ce0deb550173b204d7c46d83428ee09b098a0
+  
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/document_references/{document_reference_id}:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
+    - $ref:  "#/components/parameters/topic_guid"
     - $ref:  "#/components/parameters/document_reference_id" 
     put:
       summary: Update Document Reference
@@ -1441,15 +1447,16 @@ paths:
                 $ref: '#/components/schemas/document_reference_GET'
               example:
                 {
+                    # document_reference_guid ?
                     "guid": "135ab37a-6122-448e-86fc-86503183b520",
                     "url": "http://example.com/files/LegalRequirements_Update.pdf",
                     "description": "The legal requirements for buildings."
                 }
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/documents:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/documents:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
+    - $ref:  "#/components/parameters/topic_guid"
     get:
       summary: Get Documents
       description: |
@@ -1467,10 +1474,10 @@ paths:
                   $ref: '#/components/schemas/document_GET'
               example:
                 [{
-                    "guid": "472ab37a-6122-448e-86fc-86503183b520",
+                    "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
                     "filename": "LegalRequirements.pdf"
                 }, {
-                    "guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
+                    "document_guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
                     "filename": "DesignParameters.pdf"
                 }]
     post:
@@ -1496,14 +1503,14 @@ paths:
                 $ref: '#/components/schemas/document_GET'
               example:
                 {
-                    "guid": "472ab37a-6122-448e-86fc-86503183b520",
+                    "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
                     "filename": "Official_Building_Permission.pdf"
                 }
-  /bcf/{version}/projects/{project_id}/documents/{document_id}:
+  /bcf/{version}/projects/{project_id}/documents/{document_guid}:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/document_id"
+    - $ref:  "#/components/parameters/document_guid"
     get:
       summary: Get Document
       description:  |
@@ -1587,11 +1594,11 @@ paths:
                         }
                     ]
                 }] 
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/events:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/events:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
+    - $ref:  "#/components/parameters/topic_guid"
     - $ref: "#/components/parameters/top"
     - $ref: "#/components/parameters/skip"
     get:
@@ -1728,12 +1735,12 @@ paths:
                         }
                     ]
                 }]
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/comments/{comment_id}/events:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}/events:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
-    - $ref:  "#/components/parameters/comment_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/comment_guid"
     - $ref: "#/components/parameters/top"
     - $ref: "#/components/parameters/skip"
     get:
@@ -1949,13 +1956,13 @@ components:
     comment_GET:
       type: object
       required:
-        - guid
+        - comment_guid
         - date
         - author
         - comment
         - topic_guid
       properties:
-        guid:
+        comment_guid:
           type: string
         date:
           type: string
@@ -2014,10 +2021,10 @@ components:
     document_GET:
       type: object
       required:
-        - guid
+        - document_guid
         - filename
       properties:
-        guid:
+        document_guid:
           type: string
         filename:
           type: string
@@ -2026,6 +2033,7 @@ components:
       description: Schema for a single document reference GET, BCF REST API.
       type: object
       required:
+        # should be document_reference_guid ?
         - guid
       properties:
         guid:
@@ -2042,6 +2050,7 @@ components:
     document_reference_POST:
       type: object
       properties:
+        # should be document_reference_guid ?
         guid:
           type: string
           nullable: true
@@ -2057,6 +2066,7 @@ components:
     document_reference_PUT:
       type: object
       required:
+        # should be document_reference_guid?
         - guid
       properties:
         document_guid:
@@ -2211,13 +2221,13 @@ components:
     topic_GET:
       type: object
       required:
-        - guid
+        - topic_guid
         - title
         - server_assigned_id
         - creation_date
         - creation_author
       properties:
-        guid:
+        topic_guid:
           type: string
         server_assigend_id:
           type: string
@@ -2250,7 +2260,7 @@ components:
           type: string
         creation_author:
           type: string
-        # shouldnt modified date also be nullable?
+        # shouldnt modified_date also be nullable?
         modified_date:
           type: string
         modified_author:
@@ -2285,7 +2295,7 @@ components:
       required:
         - title
       properties:
-        guid:
+        topic_guid:
           type: string
           nullable: true
         topic_type:
@@ -2375,7 +2385,7 @@ components:
     bitmap_GET:
       type: object
       properties:
-        guid:
+        bitmap_guid:
           type: string
         bitmap_type:
           type: string
@@ -2570,12 +2580,12 @@ components:
     viewpoint_GET:
       type: object
       required:
-        - guid
+        - viewpoint_guid
       properties:
         index:
           type: integer
           nullable: true
-        guid:
+        viewpoint_guid:
           type: string
         orthogonal_camera:
           $ref: '#/components/schemas/orthogonal_camera'
@@ -2606,7 +2616,7 @@ components:
     viewpoint_POST:
       type: object
       properties:
-        guid:
+        viewpoint_guid:
           type: string
           nullable: true
         index:
@@ -2665,39 +2675,41 @@ components:
       schema:
         type: string
       required: true   
-    topic_id:
+    topic_guid:
       in: path
-      name: topic_id
+      name: topic_guid
       schema:
         type: string
       required: true 
-    comment_id:
+    comment_guid:
       in: path
-      name: comment_id
+      name: comment_guid
       schema:
         type: string
       required: true 
-    viewpoint_id:
+    viewpoint_guid:
       in: path
-      name: viewpoint_id
+      name: viewpoint_guid
       schema:
         type: string
       required: true
+    # Has document_reference_id been dropped while renaming guids?
+    # https://github.com/buildingSMART/BCF-API/commit/d92ce0deb550173b204d7c46d83428ee09b098a0
     document_reference_id:
       in: path
       name: document_reference_id
       schema:
         type: string
       required: true
-    bitmap_id:
+    bitmap_guid:
       in: path
-      name: bitmap_id
+      name: bitmap_guid
       schema:
         type: string
       required: true
-    document_id:
+    document_guid:
       in: path
-      name: document_id
+      name: document_guid
       schema:
         type: string
       required: true
