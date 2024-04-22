@@ -2606,7 +2606,52 @@ components:
       type: object
       properties:
         visibility:
-          $ref: '#/components/schemas/visibility'
+          $ref: '#/components/schemas/visibility'      
+    project_custom_field_extension:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string  
+        type:
+          type: string
+          enum:
+            - integer
+            - decimal
+            - string
+            - boolean
+            - enum
+            - date
+            - date-time
+        readonly:
+          type: boolean
+        minArraySize:
+          type: integer
+        maxArraySize:
+          type: integer
+        defaultValue:
+          type: array
+          items:
+            type: string
+        enumValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/project_custom_field_enum_value'
+    project_custom_field_enum_value:
+      type: object
+      properties:
+        value:
+          type: string
+        displayValue:
+          type: string  
+        readonly:
+          type: boolean
+    marker:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/point'
   parameters:
     version:
       in: path
@@ -2667,46 +2712,3 @@ components:
       name: $skip
       schema:
         type: string
-    marker:
-      type: object
-      properties:
-        location:
-          $ref: '#/components/schemas/point'
-  project_custom_field_extension:
-    parameters:
-      id:
-        type: string
-      name:
-        type: string  
-      type:
-        type: string
-        enum:
-          - integer
-          - decimal
-          - string
-          - boolean
-          - enum
-          - date
-          - date-time
-      readonly:
-        type: boolean
-      minArraySize:
-        type: integer
-      maxArraySize:
-        type: integer
-      defaultValue:
-        type: array
-        items:
-          type: string
-      enumValues:
-        type: array
-        items:
-          $ref: '#/components/schemas/project_custom_field_enum_value'
-  project_custom_field_enum_value:
-    parameters:
-      value:
-        type: string
-      displayValue:
-        type: string  
-      readonly:
-        type: boolean
