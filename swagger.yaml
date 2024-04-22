@@ -1793,6 +1793,11 @@ components:
           $ref: '#/components/schemas/topic_actions'
         comment_actions:
           $ref: '#/components/schemas/comment_actions'
+        custom_fields:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/project_custom_field_extension'
     project_GET:
       type: object
       description: Schema for single project GET, BCF REST API.
@@ -2188,6 +2193,8 @@ components:
         default_viewpoint_guid:
           type: string
           nullable: true
+        custom_fields:
+          $ref: '#/components/schemas/topic_custom_fields'
     topic_POST:
       type: object
       required:
@@ -2236,6 +2243,8 @@ components:
         default_viewpoint_guid:
           type: string
           nullable: true
+        custom_fields:
+          $ref: '#/components/schemas/topic_custom_fields'
     topic_PUT:
       type: object
       required:
@@ -2279,6 +2288,23 @@ components:
           type: string
           nullable: true
         default_viewpoint_guid:
+          type: string
+          nullable: true
+        custom_fields:
+          $ref: '#/components/schemas/topic_custom_fields'
+    # topic custom fields schemas
+    topic_custom_fields:
+      type: array
+      items:
+        $ref: '#/components/schemas/topic_custom_field'
+    topic_custom_field:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+          description: 'Refers to the id of the custom field in the project extensions.'
+        value:
           type: string
           nullable: true
     # viewpoint schemas
@@ -2646,7 +2672,7 @@ components:
       properties:
         location:
           $ref: '#/components/schemas/point'
-  custom_field:
+  project_custom_field_extension:
     parameters:
       id:
         type: string
@@ -2675,8 +2701,8 @@ components:
       enumValues:
         type: array
         items:
-          $ref: '#/components/schemas/custom_field_enum_value'
-  custom_field_enum_value:
+          $ref: '#/components/schemas/project_custom_field_enum_value'
+  project_custom_field_enum_value:
     parameters:
       value:
         type: string
