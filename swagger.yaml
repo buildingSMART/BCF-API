@@ -1999,7 +1999,6 @@ components:
       description: Schema for a single document reference GET, BCF REST API.
       type: object
       required:
-        # should be document_reference_guid ?
         - guid
       properties:
         guid:
