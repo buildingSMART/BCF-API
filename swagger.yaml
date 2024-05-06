@@ -2032,7 +2032,7 @@ components:
       type: object
       required:
       properties:
-        document_reference_guid:
+        document_guid:
           type: string
           nullable: true
         url:
