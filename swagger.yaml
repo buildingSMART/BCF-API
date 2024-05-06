@@ -2033,7 +2033,6 @@ components:
     document_reference_PUT:
       type: object
       required:
-        # should be document_reference_guid?
         - document_reference_guid
       properties:
         document_reference_guid:
