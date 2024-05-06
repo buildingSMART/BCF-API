@@ -132,10 +132,6 @@ paths:
                         "Structural",
                         "MEP"
                     ],
-                    "snippet_type": [
-                        ".ifc",
-                        ".csv"
-                    ],
                     "priority": [
                         "Low",
                         "Medium",
@@ -158,7 +154,6 @@ paths:
                     ],
                     "topic_actions": [
                         "update",
-                        "updateBimSnippet",
                         "updateRelatedTopics",
                         "updateDocumentReferences",
                         "updateFiles",
@@ -268,13 +263,7 @@ paths:
                         "Architecture",
                         "Heating"
                     ],
-                    "assigned_to": "harry.muster@example.com",
-                    "bim_snippet": {
-                        "snippet_type": "clash",
-                        "is_external": true,
-                        "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-                        "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
-                    }
+                    "assigned_to": "harry.muster@example.com"
                 }              
       responses:
         '201':
@@ -297,13 +286,7 @@ paths:
                         "Architecture",
                         "Heating"
                     ],
-                    "assigned_to": "harry.muster@example.com",
-                    "bim_snippet": {
-                        "snippet_type": "clash",
-                        "is_external": true,
-                        "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-                        "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
-                    }
+                    "assigned_to": "harry.muster@example.com"
                 }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}:
     parameters:
@@ -337,12 +320,6 @@ paths:
                         "Heating"
                     ],
                     "assigned_to": "harry.muster@example.com",
-                    "bim_snippet": {
-                        "snippet_type": "clash",
-                        "is_external": true,
-                        "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-                        "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
-                    },
                     "authorization": {
                         "topic_actions": [
                             "createComment",
@@ -373,13 +350,7 @@ paths:
                         "Architecture",
                         "Heating"
                     ],
-                    "assigned_to": "harry.muster@example.com",
-                    "bim_snippet": {
-                        "snippet_type": "clash",
-                        "is_external": true,
-                        "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-                        "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
-                    }
+                    "assigned_to": "harry.muster@example.com"
                 }           
       responses:
         '200':
@@ -404,55 +375,13 @@ paths:
                         "Architecture",
                         "Heating"
                     ],
-                    "assigned_to": "harry.muster@example.com",
-                    "bim_snippet": {
-                        "snippet_type": "clash",
-                        "is_external": true,
-                        "reference": "https://example.com/bcf/1.0/ADFE23AA11BCFF444122BB",
-                        "reference_schema": "https://example.com/bcf/1.0/clash.xsd"
-                    }
+                    "assigned_to": "harry.muster@example.com"
                 }
     delete:
       summary: Delete Topic
       description: Deletes a single topic. This operation is only possible when the server returns the delete flag in the Topic authorization, see section 3.2.8
       tags:
         - Topics       
-      responses:
-        '200':
-          description: OK
-  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/snippet:
-    parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
-    get:
-      summary: Get Snippet
-      description: Retrieves a topics BIM-Snippet as binary file.
-      tags:
-        - Snippets       
-      responses:
-        '200':
-          description: OK
-          content:
-            application/octet-stream:
-              schema:
-                type: string
-                format: binary
-    put:
-      summary: Update Snippet
-      description:  |
-        Puts a new BIM Snippet binary file to a topic. If this is used, the parent topics BIM Snippet property is_external must
-        be set to false and the reference must be the file name with extension. This operation is only possible when the server returns the updateBimSnippet
-        flag in the Topic authorization, see section 3.2.8
-      tags:
-        - Snippets       
-      requestBody:
-        required: true
-        content:
-          application/octet-stream:
-            schema:
-              type: string
-              format: binary
       responses:
         '200':
           description: OK
@@ -1825,7 +1754,6 @@ components:
         - topic_type
         - topic_status
         - topic_label
-        - snippet_type
         - priority
         - users
         - stage
@@ -1843,12 +1771,6 @@ components:
             type: string
             nullable: true
         topic_label:
-          type: array
-          nullable: true
-          items:
-            type: string
-            nullable: true
-        snippet_type:
           type: array
           nullable: true
           items:
@@ -1921,7 +1843,6 @@ components:
         type: string
         enum:
           - update
-          - updateBimSnippet
           - updateRelatedTopics
           - updateDocumentReferences
           - updateFiles
@@ -2138,6 +2059,9 @@ components:
         reference:
           type: string
           nullable: true
+        id:
+          type: string
+          nullable: true
     file_PUT:
       type: object
       properties:
@@ -2201,23 +2125,6 @@ components:
         related_topic_guid:
           type: string
     # topic schemas
-    bim_snippet:
-      type: object
-      nullable: true
-      required:
-        - snippet_type
-        - is_external
-        - reference
-        - reference_schema
-      properties:
-        snippet_type:
-          type: string
-        is_external:
-          type: string
-        reference:
-          type: string
-        reference_schema:
-          type: string
     topic_GET:
       type: object
       required:
@@ -2275,8 +2182,6 @@ components:
         description:
           type: string
           nullable: true
-        bim_snippet:
-          $ref: '#/components/schemas/bim_snippet'
         due_date:
           type: string
           nullable: true
@@ -2290,6 +2195,9 @@ components:
               nullable: true
               items:
                 type: string
+        default_viewpoint_guid:
+          type: string
+          nullable: true
     topic_POST:
       type: object
       required:
@@ -2332,9 +2240,10 @@ components:
         description:
           type: string
           nullable: true
-        bim_snippet:
-          $ref: '#/components/schemas/bim_snippet'
         due_date:
+          type: string
+          nullable: true
+        default_viewpoint_guid:
           type: string
           nullable: true
     topic_PUT:
@@ -2376,9 +2285,10 @@ components:
         description:
           type: string
           nullable: true
-        bim_snippet:
-          $ref: '#/components/schemas/bim_snippet'
         due_date:
+          type: string
+          nullable: true
+        default_viewpoint_guid:
           type: string
           nullable: true
     # viewpoint schemas
@@ -2596,6 +2506,11 @@ components:
           nullable: true
           items:
             $ref: '#/components/schemas/line'
+        markers:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/marker'
         clipping_planes:
           type: array
           nullable: true
@@ -2613,6 +2528,11 @@ components:
           properties:
             viewpoint_actions:
               $ref:  "#/components/schemas/viewpoint_actions"
+        topic_file_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
     viewpoint_POST:
       type: object
       properties:
@@ -2631,6 +2551,11 @@ components:
           nullable: true
           items:
             $ref: '#/components/schemas/line'
+        markers:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/marker'
         clipping_planes:
           type: array
           nullable: true
@@ -2646,6 +2571,11 @@ components:
         # Why cant we get components?
         components:
           $ref: '#/components/schemas/components'
+        topic_file_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
     visibility:
       type: object
       properties:
@@ -2723,3 +2653,8 @@ components:
       name: $skip
       schema:
         type: string
+    marker:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/point'

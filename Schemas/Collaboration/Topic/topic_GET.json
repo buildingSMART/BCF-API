@@ -80,7 +80,7 @@
                 "$ref": "../RelatedTopic/related_topic_GET.json"
             }
         },
-        "main_viewpoint_guid": {
+        "default_viewpoint_guid": {
             "type": ["string", "null"]
         },
         "authorization": {
