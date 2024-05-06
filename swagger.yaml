@@ -1383,7 +1383,7 @@ paths:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
     - $ref:  "#/components/parameters/topic_guid"
-    - $ref:  "#/components/parameters/document_reference_id" 
+    - $ref:  "#/components/parameters/document_reference_guid" 
     put:
       summary: Update Document Reference
       description:  |
