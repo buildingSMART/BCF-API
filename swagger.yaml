@@ -1378,7 +1378,7 @@ paths:
                     "url": "http://example.com/files/LegalRequirements.pdf",
                     "description": "The legal requirements for buildings."
                 }
-  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/document_references/{document_reference_id}:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/document_references/{document_reference_guid}:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
