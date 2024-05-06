@@ -2031,7 +2031,6 @@ components:
     document_reference_PUT:
       type: object
       required:
-        - document_reference_guid
       properties:
         document_reference_guid:
           type: string
