@@ -221,7 +221,7 @@ paths:
                   $ref: '#/components/schemas/topic_GET'
               example:
                 [{
-                    "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                    "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
                     "server_assigned_id": "ISSUE-00001",
                     "creation_author": "Architect@example.com",
                     "title": "Example topic 1",
@@ -231,7 +231,7 @@ paths:
                     ],
                     "creation_date": "2013-10-21T17:34:22.409Z"
                 }, {
-                    "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+                    "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
                     "server_assigned_id": "ISSUE-00078",
                     "creation_author": "Architect@example.com",
                     "title": "Example topic 2",
@@ -274,7 +274,7 @@ paths:
                 $ref: '#/components/schemas/topic_GET'
               example:   
                 {
-                    "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                    "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
                     "server_assigned_id": "ISSUE-01462",
                     "creation_author": "Architect@example.com",
                     "creation_date": "2016-08-01T17:34:22.409Z",
@@ -307,7 +307,7 @@ paths:
                 $ref: '#/components/schemas/topic_GET'
               example:
                 {
-                    "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+                    "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
                     "server_assigned_id": "ISSUE-00549",
                     "creation_author": "Architect@example.com",
                     "creation_date": "2016-08-01T17:34:22.409Z",
@@ -361,7 +361,7 @@ paths:
                 $ref: '#/components/schemas/topic_GET'
               example:  
                 {
-                    "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+                    "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
                     "server_assigned_id": "ISSUE-00037",
                     "creation_author": "Architect@example.com",
                     "creation_date": "2016-08-01T17:34:22.409Z",
@@ -553,7 +553,7 @@ paths:
                   $ref: '#/components/schemas/comment_GET'
               example:
                 [{
-                    "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+                    "guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
                     "date": "2016-08-01T12:34:22.409Z",
                     "author": "max.muster@example.com",
                     "comment": "Clash found",
@@ -564,7 +564,7 @@ paths:
                         ]
                     }
                 }, {
-                    "comment_guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+                    "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
                     "date": "2016-08-01T14:24:11.316Z",
                     "author": "bob.heater@example.com",
                     "comment": "will rework the heating model",
@@ -594,7 +594,7 @@ paths:
                 $ref: '#/components/schemas/comment_GET'
               example:       
                 {
-                  "comment_guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+                  "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
                   "date": "2016-08-01T14:24:11.316Z",
                   "author": "bob.heater@example.com",
                   "comment": "will rework the heating model",
@@ -620,7 +620,7 @@ paths:
                 $ref: '#/components/schemas/comment_GET'
               example:
                 {
-                  "comment_guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+                  "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
                   "date": "2016-08-01T14:24:11.316Z",
                   "author": "bob.heater@example.com",
                   "comment": "will rework the heating model",
@@ -652,7 +652,7 @@ paths:
                 $ref: '#/components/schemas/comment_GET'
               example:
                 {
-                  "comment_guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+                  "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
                   "date": "2016-08-01T14:24:11.316Z",
                   "author": "bob.heater@example.com",
                   "comment": "will rework the heating model",
@@ -687,7 +687,7 @@ paths:
                   $ref: '#/components/schemas/viewpoint_GET'
               example:
                 [{
-                    "viewpoint_guid": "b24a82e9-f67b-43b8-bda0-4946abf39624",
+                    "guid": "b24a82e9-f67b-43b8-bda0-4946abf39624",
                     "perspective_camera": {
                         "camera_view_point": {
                             "x": 0.0,
@@ -732,7 +732,7 @@ paths:
                         }
                     }]
                 }, {
-                    "viewpoint_guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+                    "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
                     "perspective_camera": {
                         "camera_view_point": {
                             "x": 0.0,
@@ -894,7 +894,7 @@ paths:
                 $ref: '#/components/schemas/viewpoint_GET'
               example:       
                 {
-                    "viewpoint_guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+                    "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
                     "index": 10,
                     "perspective_camera": {
                         "camera_view_point": {
@@ -983,7 +983,7 @@ paths:
                 $ref: '#/components/schemas/viewpoint_GET'
               example:
                 {
-                    "viewpoint_guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+                    "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
                     "index": 10,
                     "perspective_camera": {
                         "camera_view_point": {
@@ -1029,7 +1029,7 @@ paths:
                         }
                     }],
                     "bitmaps": [{
-                        "bitmap_guid": "20c1cb56-315f-4a0a-922d-ed7a4a8edf55",
+                        "guid": "20c1cb56-315f-4a0a-922d-ed7a4a8edf55",
                         "bitmap_type": "jpg",
                         "location": {
                             "x": 10.0,
@@ -1290,12 +1290,10 @@ paths:
                   $ref: '#/components/schemas/document_reference_GET'
               example:
                 [{
-                    # document_reference_guid ?
                     "guid": "212ab37a-6122-448e-86fc-86503183b520",
                     "url": "http://example.com/files/LegalRequirements.pdf",
                     "description": "The legal requirements for buildings."
                 }, {
-                    # Shouldn't first guid be a document_reference_guid?
                     "guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
                     "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
                     "description": "The building owners global design parameters for buildings."
@@ -1335,14 +1333,11 @@ paths:
                 $ref: '#/components/schemas/document_reference_GET'
               example:
                 {
-
-                  # documents_reference_guid?
                     "guid": "275ab37a-6122-448e-86fc-86503183b520",
                     "url": "http://example.com/files/LegalRequirements.pdf",
                     "description": "The legal requirements for buildings."
                 }
   # There is no document_reference_id according to https://github.com/buildingSMART/BCF-API/commit/d92ce0deb550173b204d7c46d83428ee09b098a0
-  
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/document_references/{document_reference_id}:
     parameters:
     - $ref:  "#/components/parameters/version"
@@ -1376,7 +1371,6 @@ paths:
                 $ref: '#/components/schemas/document_reference_GET'
               example:
                 {
-                    # document_reference_guid ?
                     "guid": "135ab37a-6122-448e-86fc-86503183b520",
                     "url": "http://example.com/files/LegalRequirements_Update.pdf",
                     "description": "The legal requirements for buildings."
@@ -1403,10 +1397,10 @@ paths:
                   $ref: '#/components/schemas/document_GET'
               example:
                 [{
-                    "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
+                    "guid": "472ab37a-6122-448e-86fc-86503183b520",
                     "filename": "LegalRequirements.pdf"
                 }, {
-                    "document_guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
+                    "guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
                     "filename": "DesignParameters.pdf"
                 }]
     post:
@@ -1432,7 +1426,7 @@ paths:
                 $ref: '#/components/schemas/document_GET'
               example:
                 {
-                    "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
+                    "guid": "472ab37a-6122-448e-86fc-86503183b520",
                     "filename": "Official_Building_Permission.pdf"
                 }
   /bcf/{version}/projects/{project_id}/documents/{document_guid}:
