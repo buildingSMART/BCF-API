@@ -2180,6 +2180,11 @@ components:
         due_date:
           type: string
           nullable: true
+        related_topics:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/related_topic_GET'
         authorization:
           type: object
           properties:
