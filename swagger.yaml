@@ -1202,12 +1202,12 @@ paths:
                         }
                     }
                 }
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/viewpoints/{viewpoint_id}/translucency:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/translucency:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
-    - $ref:  "#/components/parameters/viewpoint_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/viewpoint_guid"
     get:
       summary: Get Translucency
       description: Retrieve translucency of components in a viewpoint.
