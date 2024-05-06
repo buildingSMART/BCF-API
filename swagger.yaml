@@ -2404,6 +2404,8 @@ components:
             $ref: '#/components/schemas/coloring'
         visibility:
           $ref: '#/components/schemas/visibility'
+        translucency:
+          $ref: '#/components/schemas/translucency'
     direction:
       type: object
       properties:
@@ -2508,6 +2510,24 @@ components:
         openings_visible:
           type: boolean
           default: false
+    translucency_setup_hints:
+      type: object
+      nullable: true
+      properties:
+        spaces_translucent:
+          type: boolean
+          default: true
+        space_boundaries_translucent:
+          type: boolean
+          default: true
+        openings_translucent:
+          type: boolean
+          default: true
+    translucency_GET:
+      type: object
+      properties:
+        translucency:
+          $ref: '#/components/schemas/translucency'
     viewpoint_GET:
       type: object
       required:
@@ -2618,6 +2638,16 @@ components:
       properties:
         visibility:
           $ref: '#/components/schemas/visibility'      
+    translucency:
+      type: object
+      properties:
+        default_translucency:
+          type: boolean
+          default: false
+        exceptions:
+          $ref: '#/components/schemas/component_list'
+        view_setup_hints:
+          $ref: '#/components/schemas/translucency_setup_hints'
     project_custom_field_extension:
       type: object
       properties:
