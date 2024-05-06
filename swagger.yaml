@@ -2036,7 +2036,7 @@ components:
         # should be document_reference_guid?
         - guid
       properties:
-        document_guid:
+        document_reference_guid:
           type: string
           nullable: true
         url:
