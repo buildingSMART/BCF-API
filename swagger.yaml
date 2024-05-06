@@ -1240,11 +1240,11 @@ paths:
                         }
                       }
                     }
-  /bcf/{version}/projects/{project_id}/topics/{topic_id}/related_topics:
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/related_topics:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_id"
+    - $ref:  "#/components/parameters/topic_guid"
     get:
       summary: Get Related Topics
       description: Retrieve a collection of all related topics to a topic.
