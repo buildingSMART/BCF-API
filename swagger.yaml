@@ -2034,7 +2034,7 @@ components:
       type: object
       required:
         # should be document_reference_guid?
-        - guid
+        - document_reference_guid
       properties:
         document_reference_guid:
           type: string
