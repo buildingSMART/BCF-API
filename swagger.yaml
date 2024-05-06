@@ -1202,11 +1202,49 @@ paths:
                         }
                     }
                 }
-  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/related_topics:
+  /bcf/{version}/projects/{project_id}/topics/{topic_id}/viewpoints/{viewpoint_id}/translucency:
     parameters:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/topic_id"
+    - $ref:  "#/components/parameters/viewpoint_id"
+    get:
+      summary: Get Translucency
+      description: Retrieve translucency of components in a viewpoint.
+      tags:
+        - Viewpoints      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/translucency_GET'
+              example:
+                    {
+                      "translucency": {
+                        "default_translucency": true,
+                        "exceptions": [
+                            {
+                                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                                "originating_system": "Example CAD Application",
+                                "authoring_tool_id": "EXCAD/v1.0"
+                            }, {
+                                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+                            }
+                        ],
+                        "translucency_setup_hints": {
+                            "spaces_translucent": true,
+                            "space_boundaries_translucent": false,
+                            "openings_translucent": true
+                        }
+                      }
+                    }
+  /bcf/{version}/projects/{project_id}/topics/{topic_id}/related_topics:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_id"
     get:
       summary: Get Related Topics
       description: Retrieve a collection of all related topics to a topic.
@@ -1231,7 +1269,8 @@ paths:
       summary: Update Related Topics
       description:  |
         Add or update a collection of all related topics to a topic. This operation is only possible when the server returns the updateRelatedTopics
-        flag in the Topic authorization, see section 3.2.8
+        flag in the Topic authorization, see section 3.2.8.
+        Throws "409 Conflict" if requesting to add a parent-child relation causing an infinite loop. Example: TopicA is already the parent of TopicB. Making TopicB the parent of TopicA is not allowed.
       tags:
         - Related Topics        
       requestBody:
@@ -1251,6 +1290,8 @@ paths:
                     "related_topic_guid": "bac66ab4-331e-4f21-a28e-083d2cf2e796"
                 }]                
       responses:
+        '409':
+          description: Conflict
         '200':
           description: OK
           content:
@@ -1794,6 +1835,17 @@ components:
           $ref: '#/components/schemas/topic_actions'
         comment_actions:
           $ref: '#/components/schemas/comment_actions'
+        relation_types:
+          type: array
+          nullable: true
+          items:
+            type: string
+            enum: [relates, parent-child]
+        custom_fields:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/project_custom_field_extension'
     project_GET:
       type: object
       description: Schema for single project GET, BCF REST API.
@@ -2107,17 +2159,25 @@ components:
       type: object
       required:
         - related_topic_guid
+        - relation_type
       properties:
         related_topic_guid:
           type: string
+        relation_type:
+          type: string
+          enum: [relates, parent, child]
     related_topic_PUT:
       description: Schema for related topic PUT, BCF REST API.
       type: object
       required:
         - related_topic_guid
+        - relation_type
       properties:
         related_topic_guid:
           type: string
+        relation_type:
+          type: string
+          enum: [relates, parent, child]
     # topic schemas
     topic_GET:
       type: object
@@ -2179,6 +2239,11 @@ components:
         due_date:
           type: string
           nullable: true
+        related_topics:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/related_topic_GET'
         authorization:
           type: object
           properties:
@@ -2192,6 +2257,8 @@ components:
         default_viewpoint_guid:
           type: string
           nullable: true
+        custom_fields:
+          $ref: '#/components/schemas/topic_custom_fields'
     topic_POST:
       type: object
       required:
@@ -2240,6 +2307,8 @@ components:
         default_viewpoint_guid:
           type: string
           nullable: true
+        custom_fields:
+          $ref: '#/components/schemas/topic_custom_fields'
     topic_PUT:
       type: object
       required:
@@ -2283,6 +2352,23 @@ components:
           type: string
           nullable: true
         default_viewpoint_guid:
+          type: string
+          nullable: true
+        custom_fields:
+          $ref: '#/components/schemas/topic_custom_fields'
+    # topic custom fields schemas
+    topic_custom_fields:
+      type: array
+      items:
+        $ref: '#/components/schemas/topic_custom_field'
+    topic_custom_field:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+          description: 'Refers to the id of the custom field in the project extensions.'
+        value:
           type: string
           nullable: true
     # viewpoint schemas
@@ -2377,6 +2463,8 @@ components:
             $ref: '#/components/schemas/coloring'
         visibility:
           $ref: '#/components/schemas/visibility'
+        translucency:
+          $ref: '#/components/schemas/translucency'
     direction:
       type: object
       properties:
@@ -2481,10 +2569,30 @@ components:
         openings_visible:
           type: boolean
           default: false
+    translucency_setup_hints:
+      type: object
+      nullable: true
+      properties:
+        spaces_translucent:
+          type: boolean
+          default: true
+        space_boundaries_translucent:
+          type: boolean
+          default: true
+        openings_translucent:
+          type: boolean
+          default: true
+    translucency_GET:
+      type: object
+      properties:
+        translucency:
+          $ref: '#/components/schemas/translucency'
     viewpoint_GET:
       type: object
       required:
         - viewpoint_guid
+        - creation_date
+        - creation_author
       properties:
         index:
           type: integer
@@ -2517,6 +2625,10 @@ components:
             $ref: '#/components/schemas/bitmap_GET'
         snapshot:
           $ref: '#/components/schemas/snapshot_GET'
+        creation_date:
+          type: string
+        creation_author:
+          type: string
         authorization:
           type: object
           properties:
@@ -2584,7 +2696,62 @@ components:
       type: object
       properties:
         visibility:
-          $ref: '#/components/schemas/visibility'
+          $ref: '#/components/schemas/visibility'      
+    translucency:
+      type: object
+      properties:
+        default_translucency:
+          type: boolean
+          default: false
+        exceptions:
+          $ref: '#/components/schemas/component_list'
+        view_setup_hints:
+          $ref: '#/components/schemas/translucency_setup_hints'
+    project_custom_field_extension:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string  
+        type:
+          type: string
+          enum:
+            - integer
+            - decimal
+            - string
+            - boolean
+            - enum
+            - date
+            - date-time
+        readonly:
+          type: boolean
+        minArraySize:
+          type: integer
+        maxArraySize:
+          type: integer
+        defaultValue:
+          type: array
+          items:
+            type: string
+        enumValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/project_custom_field_enum_value'
+    project_custom_field_enum_value:
+      type: object
+      properties:
+        value:
+          type: string
+        displayValue:
+          type: string  
+        readonly:
+          type: boolean
+    marker:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/point'
   parameters:
     version:
       in: path
@@ -2647,8 +2814,3 @@ components:
       name: $skip
       schema:
         type: string
-    marker:
-      type: object
-      properties:
-        location:
-          $ref: '#/components/schemas/point'
