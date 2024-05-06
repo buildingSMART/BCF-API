@@ -1202,6 +1202,44 @@ paths:
                         }
                     }
                 }
+  /bcf/{version}/projects/{project_id}/topics/{topic_id}/viewpoints/{viewpoint_id}/translucency:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_id"
+    - $ref:  "#/components/parameters/viewpoint_id"
+    get:
+      summary: Get Translucency
+      description: Retrieve translucency of components in a viewpoint.
+      tags:
+        - Viewpoints      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/translucency_GET'
+              example:
+                    {
+                      "translucency": {
+                        "default_translucency": true,
+                        "exceptions": [
+                            {
+                                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                                "originating_system": "Example CAD Application",
+                                "authoring_tool_id": "EXCAD/v1.0"
+                            }, {
+                                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+                            }
+                        ],
+                        "translucency_setup_hints": {
+                            "spaces_translucent": true,
+                            "space_boundaries_translucent": false,
+                            "openings_translucent": true
+                        }
+                      }
+                    }
   /bcf/{version}/projects/{project_id}/topics/{topic_id}/related_topics:
     parameters:
     - $ref:  "#/components/parameters/version"
