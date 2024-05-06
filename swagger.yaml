@@ -2016,7 +2016,7 @@ components:
       type: object
       properties:
         # should be document_reference_guid ?
-        guid:
+        document_reference_guid:
           type: string
           nullable: true
         document_guid:
