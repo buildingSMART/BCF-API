@@ -1269,7 +1269,8 @@ paths:
       summary: Update Related Topics
       description:  |
         Add or update a collection of all related topics to a topic. This operation is only possible when the server returns the updateRelatedTopics
-        flag in the Topic authorization, see section 3.2.8
+        flag in the Topic authorization, see section 3.2.8.
+        Throws "409 Conflict" if requesting to add a parent-child relation causing an infinite loop. Example: TopicA is already the parent of TopicB. Making TopicB the parent of TopicA is not allowed.
       tags:
         - Related Topics        
       requestBody:
@@ -1289,6 +1290,8 @@ paths:
                     "related_topic_guid": "bac66ab4-331e-4f21-a28e-083d2cf2e796"
                 }]                
       responses:
+        '409':
+          description: Conflict
         '200':
           description: OK
           content:
@@ -1831,6 +1834,12 @@ components:
           $ref: '#/components/schemas/topic_actions'
         comment_actions:
           $ref: '#/components/schemas/comment_actions'
+        relation_types:
+          type: array
+          nullable: true
+          items:
+            type: string
+            enum: [relates, parent-child]
         custom_fields:
           type: array
           nullable: true
@@ -2146,17 +2155,25 @@ components:
       type: object
       required:
         - related_topic_guid
+        - relation_type
       properties:
         related_topic_guid:
           type: string
+        relation_type:
+          type: string
+          enum: [relates, parent, child]
     related_topic_PUT:
       description: Schema for related topic PUT, BCF REST API.
       type: object
       required:
         - related_topic_guid
+        - relation_type
       properties:
         related_topic_guid:
           type: string
+        relation_type:
+          type: string
+          enum: [relates, parent, child]
     # topic schemas
     topic_GET:
       type: object
