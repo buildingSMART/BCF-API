@@ -1202,6 +1202,44 @@ paths:
                         }
                     }
                 }
+  /bcf/{version}/projects/{project_id}/topics/{topic_id}/viewpoints/{viewpoint_id}/translucency:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_id"
+    - $ref:  "#/components/parameters/viewpoint_id"
+    get:
+      summary: Get Translucency
+      description: Retrieve translucency of components in a viewpoint.
+      tags:
+        - Viewpoints      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/translucency_GET'
+              example:
+                    {
+                      "translucency": {
+                        "default_translucency": true,
+                        "exceptions": [
+                            {
+                                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                                "originating_system": "Example CAD Application",
+                                "authoring_tool_id": "EXCAD/v1.0"
+                            }, {
+                                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+                            }
+                        ],
+                        "translucency_setup_hints": {
+                            "spaces_translucent": true,
+                            "space_boundaries_translucent": false,
+                            "openings_translucent": true
+                        }
+                      }
+                    }
   /bcf/{version}/projects/{project_id}/topics/{topic_id}/related_topics:
     parameters:
     - $ref:  "#/components/parameters/version"
@@ -2404,6 +2442,8 @@ components:
             $ref: '#/components/schemas/coloring'
         visibility:
           $ref: '#/components/schemas/visibility'
+        translucency:
+          $ref: '#/components/schemas/translucency'
     direction:
       type: object
       properties:
@@ -2508,6 +2548,24 @@ components:
         openings_visible:
           type: boolean
           default: false
+    translucency_setup_hints:
+      type: object
+      nullable: true
+      properties:
+        spaces_translucent:
+          type: boolean
+          default: true
+        space_boundaries_translucent:
+          type: boolean
+          default: true
+        openings_translucent:
+          type: boolean
+          default: true
+    translucency_GET:
+      type: object
+      properties:
+        translucency:
+          $ref: '#/components/schemas/translucency'
     viewpoint_GET:
       type: object
       required:
@@ -2618,6 +2676,16 @@ components:
       properties:
         visibility:
           $ref: '#/components/schemas/visibility'      
+    translucency:
+      type: object
+      properties:
+        default_translucency:
+          type: boolean
+          default: false
+        exceptions:
+          $ref: '#/components/schemas/component_list'
+        view_setup_hints:
+          $ref: '#/components/schemas/translucency_setup_hints'
     project_custom_field_extension:
       type: object
       properties:
