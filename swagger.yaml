@@ -1983,6 +1983,7 @@ components:
           type: string
         date:
           type: string
+          format: date-time
         author:
           $ref: "#/components/schemas/user_GET"
         comment:
@@ -1997,6 +1998,7 @@ components:
           nullable: true
         modified_date:
           type: string
+          format: date-time
           nullable: true
         modified_author:
           type: string
@@ -2106,6 +2108,7 @@ components:
           type: string
         date:
           type: string
+          format: date-time
         author:
           $ref:  "#/components/schemas/user_GET"
         actions:
@@ -2124,6 +2127,7 @@ components:
           type: string
         date:
           type: string
+          format: date-time
         author:
           $ref:  "#/components/schemas/user_GET"
         actions:
@@ -2147,6 +2151,7 @@ components:
           nullable: true
         date:
           type: string
+          format: date-time
           nullable: true
         reference:
           type: string
@@ -2168,6 +2173,7 @@ components:
           nullable: true
         date:
           type: string
+          format: date-time
           nullable: true
         reference:
           type: string
@@ -2265,11 +2271,13 @@ components:
             nullable: true
         creation_date:
           type: string
+          format: date-time
         creation_author:
           $ref: "#/components/schemas/user_GET"
         # shouldnt modified_date also be nullable?
         modified_date:
           type: string
+          format: date-time
         modified_author:
           $ref: "#/components/schemas/user_GET"
           nullable: true
@@ -2284,6 +2292,7 @@ components:
           nullable: true
         due_date:
           type: string
+          format: date
           nullable: true
         related_topics:
           type: array
@@ -2349,6 +2358,7 @@ components:
           nullable: true
         due_date:
           type: string
+          format: date
           nullable: true
         default_viewpoint_guid:
           type: string
@@ -2396,6 +2406,7 @@ components:
           nullable: true
         due_date:
           type: string
+          format: date
           nullable: true
         default_viewpoint_guid:
           type: string
@@ -2673,6 +2684,7 @@ components:
           $ref: '#/components/schemas/snapshot_GET'
         creation_date:
           type: string
+          format: date-time
         creation_author:
           $ref:  "#/components/schemas/user_GET"
         authorization:
