@@ -1933,7 +1933,7 @@ components:
         date:
           type: string
         author:
-          type: string
+          $ref:  "#/components/schemas/user_GET"
         comment:
           type: string
         topic_guid:
@@ -1949,7 +1949,7 @@ components:
           nullable: true
         modified_author:
           type: string
-          nullable: true
+          $ref:  "#/components/schemas/user_GET"
         authorization:
           type: object
           properties:
@@ -2057,7 +2057,7 @@ components:
         date:
           type: string
         author:
-          type: string
+          $ref:  "#/components/schemas/user_GET"
         actions:
           type: array
           minItems: 1
@@ -2075,7 +2075,7 @@ components:
         date:
           type: string
         author:
-          type: string
+          $ref:  "#/components/schemas/user_GET"
         actions:
           type: array
           minItems: 1
@@ -2216,12 +2216,12 @@ components:
         creation_date:
           type: string
         creation_author:
-          type: string
+          $ref:  "#/components/schemas/user_GET"
         # shouldnt modified_date also be nullable?
         modified_date:
           type: string
         modified_author:
-          type: string
+          $ref:  "#/components/schemas/user_GET"
           nullable: true
         assigned_to:
           type: string
@@ -2624,7 +2624,7 @@ components:
         creation_date:
           type: string
         creation_author:
-          type: string
+          $ref:  "#/components/schemas/user_GET"
         authorization:
           type: object
           properties:
@@ -2748,6 +2748,21 @@ components:
       properties:
         location:
           $ref: '#/components/schemas/point'
+    user_GET:
+      type: object
+      required:
+        - id
+      oneOf:
+        - required: ['name']
+        - required: ['email']
+      properties:
+        id:
+          type: string
+          description: 'This is a string that uniquely identifies the user in the server, often it is an email address or an internal id'
+        name:
+          type: string
+        email:
+          type: string
   parameters:
     version:
       in: path
