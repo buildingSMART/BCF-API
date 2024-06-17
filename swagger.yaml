@@ -1796,37 +1796,37 @@ components:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: '#/components/schemas/extension_item_GET'
             nullable: true
         topic_status:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: '#/components/schemas/topic_status_extension_item_GET'
             nullable: true
         topic_label:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: '#/components/schemas/extension_item_GET'
             nullable: true
         priority:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: '#/components/schemas/extension_item_GET'
             nullable: true   
         users:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: '#/components/schemas/user_extension_item_GET'
             nullable: true
         stage:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: '#/components/schemas/extension_item_GET'
             nullable: true
         project_actions:
           $ref: '#/components/schemas/project_actions'
@@ -1845,6 +1845,50 @@ components:
           nullable: true
           items:
             $ref: '#/components/schemas/project_custom_field_extension'
+    extension_item_GET:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    topic_status_extension_item_GET:
+      type: object
+      required:
+        - id
+        - name
+        - status_type
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status_type:
+          type: string
+          enum: [open, closed]
+    user_extension_item_GET:
+      type: object
+      required:
+        - id
+        - name
+        - email
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+    extension_item_SET:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
     project_GET:
       type: object
       description: Schema for single project GET, BCF REST API.
@@ -1916,8 +1960,15 @@ components:
         type:
           type: string
         value:
-          type: string
+          $ref: "#/components/schemas/event_action_value"
           nullable: true
+    event_action_value:
+      type: object
+      properties:
+        id:
+          type: string
+        displayValue:
+          type: string
     # comment schemas
     comment_GET:
       type: object
@@ -1933,7 +1984,7 @@ components:
         date:
           type: string
         author:
-          type: string
+          $ref: "#/components/schemas/user_GET"
         comment:
           type: string
         topic_guid:
@@ -1949,7 +2000,7 @@ components:
           nullable: true
         modified_author:
           type: string
-          nullable: true
+          $ref:  "#/components/schemas/user_GET"
         authorization:
           type: object
           properties:
@@ -2030,7 +2081,6 @@ components:
           nullable: true
     document_reference_PUT:
       type: object
-      required:
       properties:
         document_guid:
           type: string
@@ -2057,7 +2107,7 @@ components:
         date:
           type: string
         author:
-          type: string
+          $ref:  "#/components/schemas/user_GET"
         actions:
           type: array
           minItems: 1
@@ -2075,7 +2125,7 @@ components:
         date:
           type: string
         author:
-          type: string
+          $ref:  "#/components/schemas/user_GET"
         actions:
           type: array
           minItems: 1
@@ -2189,10 +2239,10 @@ components:
         server_assigend_id:
           type: string
         topic_type:
-          type: string
+          $ref: "#/components/schemas/extension_item_GET"
           nullable: true
         topic_status:
-          type: string
+          $ref: "#/components/schemas/extension_item_GET"
           nullable: true
         reference_links:
           type: array
@@ -2202,7 +2252,7 @@ components:
         title:
           type: string
         priority:
-          type: string
+          $ref: "#/components/schemas/extension_item_GET"
           nullable: true
         index:
           type: integer
@@ -2211,23 +2261,23 @@ components:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: "#/components/schemas/extension_item_GET"
             nullable: true
         creation_date:
           type: string
         creation_author:
-          type: string
+          $ref: "#/components/schemas/user_GET"
         # shouldnt modified_date also be nullable?
         modified_date:
           type: string
         modified_author:
-          type: string
+          $ref: "#/components/schemas/user_GET"
           nullable: true
         assigned_to:
-          type: string
+          $ref: "#/components/schemas/user_GET"
           nullable: true
         stage:
-          type: string
+          $ref: "#/components/schemas/extension_item_GET"
           nullable: true
         description:
           type: string
@@ -2264,10 +2314,10 @@ components:
           type: string
           nullable: true
         topic_type:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         topic_status:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         reference_links:
           type: array
@@ -2277,7 +2327,7 @@ components:
         title:
           type: string
         priority:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         index:
           type: integer
@@ -2286,13 +2336,13 @@ components:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: "#/components/schemas/extension_item_SET"
             nullable: true
         assigned_to:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         stage:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         description:
           type: string
@@ -2311,10 +2361,10 @@ components:
         - title
       properties:
         topic_type:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         topic_status:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         reference_links:
           type: array
@@ -2324,7 +2374,7 @@ components:
         title:
           type: string
         priority:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         index:
           type: integer
@@ -2333,13 +2383,13 @@ components:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: "#/components/schemas/extension_item_SET"
             nullable: true
         assigned_to:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         stage:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         description:
           type: string
@@ -2624,7 +2674,7 @@ components:
         creation_date:
           type: string
         creation_author:
-          type: string
+          $ref:  "#/components/schemas/user_GET"
         authorization:
           type: object
           properties:
@@ -2748,6 +2798,21 @@ components:
       properties:
         location:
           $ref: '#/components/schemas/point'
+    user_GET:
+      type: object
+      required:
+        - id
+      oneOf:
+        - required: ['name']
+        - required: ['email']
+      properties:
+        id:
+          type: string
+          description: 'This is a string that uniquely identifies the user in the server, often it is an email address or an internal id'
+        name:
+          type: string
+        email:
+          type: string
   parameters:
     version:
       in: path
@@ -2780,11 +2845,9 @@ components:
       schema:
         type: string
       required: true
-    # Has document_reference_id been dropped while renaming guids?
-    # https://github.com/buildingSMART/BCF-API/commit/d92ce0deb550173b204d7c46d83428ee09b098a0
-    document_reference_id:
+    document_reference_guid:
       in: path
-      name: document_reference_id
+      name: document_reference_guid
       schema:
         type: string
       required: true
