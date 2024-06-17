@@ -1916,8 +1916,15 @@ components:
         type:
           type: string
         value:
-          type: string
+          $ref: "#/components/schemas/event_action_value"
           nullable: true
+    event_action_value:
+      type: object
+      properties:
+        id:
+          type: string
+        displayValue:
+          type: string
     # comment schemas
     comment_GET:
       type: object
@@ -1933,7 +1940,7 @@ components:
         date:
           type: string
         author:
-          $ref:  "#/components/schemas/user_GET"
+          $ref: "#/components/schemas/user_GET"
         comment:
           type: string
         topic_guid:
