@@ -1850,17 +1850,21 @@ components:
       required:
         - id
         - name
+        - readonly
       properties:
         id:
           type: string
         name:
           type: string
+        readonly:
+          type: boolean
     topic_status_extension_item_GET:
       type: object
       required:
         - id
         - name
         - status_type
+        - readonly
       properties:
         id:
           type: string
@@ -1869,12 +1873,15 @@ components:
         status_type:
           type: string
           enum: [open, closed]
+        readonly:
+          type: boolean
     user_extension_item_GET:
       type: object
       required:
         - id
         - name
         - email
+        - readonly
       properties:
         id:
           type: string
@@ -1882,6 +1889,8 @@ components:
           type: string
         email:
           type: string
+        readonly:
+          type: boolean
     extension_item_SET:
       type: object
       required:
