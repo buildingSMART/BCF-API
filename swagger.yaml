@@ -1796,37 +1796,37 @@ components:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: '#/components/schemas/extension_item_GET'
             nullable: true
         topic_status:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: '#/components/schemas/topic_status_extension_item_GET'
             nullable: true
         topic_label:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: '#/components/schemas/extension_item_GET'
             nullable: true
         priority:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: '#/components/schemas/extension_item_GET'
             nullable: true   
         users:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: '#/components/schemas/user_extension_item_GET'
             nullable: true
         stage:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: '#/components/schemas/extension_item_GET'
             nullable: true
         project_actions:
           $ref: '#/components/schemas/project_actions'
@@ -1845,6 +1845,50 @@ components:
           nullable: true
           items:
             $ref: '#/components/schemas/project_custom_field_extension'
+    extension_item_GET:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    topic_status_extension_item_GET:
+      type: object
+      required:
+        - id
+        - name
+        - status_type
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status_type:
+          type: string
+          enum: [open, closed]
+    user_extension_item_GET:
+      type: object
+      required:
+        - id
+        - name
+        - email
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+    extension_item_SET:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
     project_GET:
       type: object
       description: Schema for single project GET, BCF REST API.
@@ -2196,10 +2240,10 @@ components:
         server_assigend_id:
           type: string
         topic_type:
-          type: string
+          $ref: "#/components/schemas/extension_item_GET"
           nullable: true
         topic_status:
-          type: string
+          $ref: "#/components/schemas/extension_item_GET"
           nullable: true
         reference_links:
           type: array
@@ -2209,7 +2253,7 @@ components:
         title:
           type: string
         priority:
-          type: string
+          $ref: "#/components/schemas/extension_item_GET"
           nullable: true
         index:
           type: integer
@@ -2218,23 +2262,23 @@ components:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: "#/components/schemas/extension_item_GET"
             nullable: true
         creation_date:
           type: string
         creation_author:
-          $ref:  "#/components/schemas/user_GET"
+          $ref: "#/components/schemas/user_GET"
         # shouldnt modified_date also be nullable?
         modified_date:
           type: string
         modified_author:
-          $ref:  "#/components/schemas/user_GET"
+          $ref: "#/components/schemas/user_GET"
           nullable: true
         assigned_to:
-          type: string
+          $ref: "#/components/schemas/user_GET"
           nullable: true
         stage:
-          type: string
+          $ref: "#/components/schemas/extension_item_GET"
           nullable: true
         description:
           type: string
@@ -2271,10 +2315,10 @@ components:
           type: string
           nullable: true
         topic_type:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         topic_status:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         reference_links:
           type: array
@@ -2284,7 +2328,7 @@ components:
         title:
           type: string
         priority:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         index:
           type: integer
@@ -2293,13 +2337,13 @@ components:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: "#/components/schemas/extension_item_SET"
             nullable: true
         assigned_to:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         stage:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         description:
           type: string
@@ -2318,10 +2362,10 @@ components:
         - title
       properties:
         topic_type:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         topic_status:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         reference_links:
           type: array
@@ -2331,7 +2375,7 @@ components:
         title:
           type: string
         priority:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         index:
           type: integer
@@ -2340,13 +2384,13 @@ components:
           type: array
           nullable: true
           items:
-            type: string
+            $ref: "#/components/schemas/extension_item_SET"
             nullable: true
         assigned_to:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         stage:
-          type: string
+          $ref: "#/components/schemas/extension_item_SET"
           nullable: true
         description:
           type: string
