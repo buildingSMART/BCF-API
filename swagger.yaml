@@ -2081,7 +2081,6 @@ components:
           nullable: true
     document_reference_PUT:
       type: object
-      required:
       properties:
         document_guid:
           type: string
@@ -2846,11 +2845,9 @@ components:
       schema:
         type: string
       required: true
-    # Has document_reference_id been dropped while renaming guids?
-    # https://github.com/buildingSMART/BCF-API/commit/d92ce0deb550173b204d7c46d83428ee09b098a0
-    document_reference_id:
+    document_reference_guid:
       in: path
-      name: document_reference_id
+      name: document_reference_guid
       schema:
         type: string
       required: true
