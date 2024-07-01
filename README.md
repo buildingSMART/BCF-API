@@ -555,15 +555,15 @@ JSON encoded body using the "application/json" content type.
 |Parameter|Type|Description|Required|
 |---------|----|-----------|--------|
 |guid|string|The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system.|false|
-|topic_type|[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET)|The type of a topic (value from extension.xsd)|false|
-|topic_status|[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET)|The status of a topic (value from extension.xsd)|false|
+|topic_type|[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET) |The type of a topic (value from extension.xsd)|false|
+|topic_status|[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET) |The status of a topic (value from extension.xsd)|false|
 |reference_links|array (string)|Reference links, i.e. links to referenced resources|false|
 |title|string|The title of a topic|true|
-|priority|[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET)|The priority of a topic (value from extension.xsd)|false|
+|priority|[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET) |The priority of a topic (value from extension.xsd)|false|
 |index|integer|The index of a topic **This property is deprecated and will be removed in a future release**|false|
-|labels|array of[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET)|The labels of a topic (value from extension.xsd)|false|
-|assigned_to|[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET)|The user assigned to a topic (value from extension.xsd).|false|
-|stage|[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET)|The stage of a topic (value from extension.xsd)|false|
+|labels|array of[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET) |The labels of a topic (value from extension.xsd)|false|
+|assigned_to|[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET) |The user assigned to a topic (value from extension.xsd).|false|
+|stage|[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET) |The stage of a topic (value from extension.xsd)|false|
 |description|string|Description of a topic|false|
 |due_date|string|Until when the topics issue needs to be resolved|false|
 |custom_fields| array (object) | Custom fields of a topic | false |
@@ -1305,7 +1305,7 @@ Perspective and Orthogonal cameras are explained in detail in [BCF-XML](https://
 | direction | [Direction](#3522-direction) | direction of the clipping plane, points in the invisible direction meaning the half-space that is clipped | mandatory |
 
 #### 3.5.2.7 Bitmap
-[bitmap](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/bitmap)
+[bitmap_POST](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/bitmap_POST)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
@@ -1317,7 +1317,7 @@ Perspective and Orthogonal cameras are explained in detail in [BCF-XML](https://
 | height | number | height of bitmap in the scene | mandatory |
 
 #### 3.5.2.8 Snapshot
-[snapshot](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/snapshot)
+[snapshot_POST](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/snapshot_POST)
 
 |parameter|type|description|required|
 |---------|----|-----------|--------|
