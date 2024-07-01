@@ -1775,7 +1775,7 @@ components:
     # error
     error:
       type: object
-      description: Schema for error, BCF REST API.
+      description: Schema for error, BCF REST API. This is defined in the Foundation API and represents the body format of any error responses.
       required:
         - message
       properties:
@@ -1797,37 +1797,31 @@ components:
           nullable: true
           items:
             $ref: '#/components/schemas/extension_item_GET'
-            nullable: true
         topic_status:
           type: array
           nullable: true
           items:
             $ref: '#/components/schemas/topic_status_extension_item_GET'
-            nullable: true
         topic_label:
           type: array
           nullable: true
           items:
             $ref: '#/components/schemas/extension_item_GET'
-            nullable: true
         priority:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/extension_item_GET'
-            nullable: true   
+            $ref: '#/components/schemas/extension_item_GET'  
         users:
           type: array
           nullable: true
           items:
             $ref: '#/components/schemas/user_extension_item_GET'
-            nullable: true
         stage:
           type: array
           nullable: true
           items:
             $ref: '#/components/schemas/extension_item_GET'
-            nullable: true
         project_actions:
           $ref: '#/components/schemas/project_actions'
         topic_actions:
@@ -1970,7 +1964,6 @@ components:
           type: string
         value:
           $ref: "#/components/schemas/event_action_value"
-          nullable: true
     event_action_value:
       type: object
       properties:
@@ -2010,7 +2003,6 @@ components:
           format: date-time
           nullable: true
         modified_author:
-          type: string
           $ref:  "#/components/schemas/user_GET"
         authorization:
           type: object
@@ -2204,9 +2196,9 @@ components:
       properties:
         display_information:
           type: array
+          default: []
           items:
             $ref:  "#/components/schemas/project_file_display_information"
-            default: []
         file:
           $ref:  "#/components/schemas/file_GET"
     project_files_information_GET:
@@ -2255,10 +2247,8 @@ components:
           type: string
         topic_type:
           $ref: "#/components/schemas/extension_item_GET"
-          nullable: true
         topic_status:
           $ref: "#/components/schemas/extension_item_GET"
-          nullable: true
         reference_links:
           type: array
           nullable: true
@@ -2268,7 +2258,6 @@ components:
           type: string
         priority:
           $ref: "#/components/schemas/extension_item_GET"
-          nullable: true
         index:
           type: integer
           nullable: true
@@ -2277,7 +2266,6 @@ components:
           nullable: true
           items:
             $ref: "#/components/schemas/extension_item_GET"
-            nullable: true
         creation_date:
           type: string
           format: date-time
@@ -2289,13 +2277,10 @@ components:
           format: date-time
         modified_author:
           $ref: "#/components/schemas/user_GET"
-          nullable: true
         assigned_to:
           $ref: "#/components/schemas/user_GET"
-          nullable: true
         stage:
           $ref: "#/components/schemas/extension_item_GET"
-          nullable: true
         description:
           type: string
           nullable: true
@@ -2333,10 +2318,8 @@ components:
           nullable: true
         topic_type:
           $ref: "#/components/schemas/extension_item_SET"
-          nullable: true
         topic_status:
           $ref: "#/components/schemas/extension_item_SET"
-          nullable: true
         reference_links:
           type: array
           nullable: true
@@ -2346,7 +2329,6 @@ components:
           type: string
         priority:
           $ref: "#/components/schemas/extension_item_SET"
-          nullable: true
         index:
           type: integer
           nullable: true
@@ -2355,13 +2337,10 @@ components:
           nullable: true
           items:
             $ref: "#/components/schemas/extension_item_SET"
-            nullable: true
         assigned_to:
           $ref: "#/components/schemas/extension_item_SET"
-          nullable: true
         stage:
           $ref: "#/components/schemas/extension_item_SET"
-          nullable: true
         description:
           type: string
           nullable: true
@@ -2381,10 +2360,8 @@ components:
       properties:
         topic_type:
           $ref: "#/components/schemas/extension_item_SET"
-          nullable: true
         topic_status:
           $ref: "#/components/schemas/extension_item_SET"
-          nullable: true
         reference_links:
           type: array
           nullable: true
@@ -2394,7 +2371,6 @@ components:
           type: string
         priority:
           $ref: "#/components/schemas/extension_item_SET"
-          nullable: true
         index:
           type: integer
           nullable: true
@@ -2403,13 +2379,10 @@ components:
           nullable: true
           items:
             $ref: "#/components/schemas/extension_item_SET"
-            nullable: true
         assigned_to:
           $ref: "#/components/schemas/extension_item_SET"
-          nullable: true
         stage:
           $ref: "#/components/schemas/extension_item_SET"
-          nullable: true
         description:
           type: string
           nullable: true
