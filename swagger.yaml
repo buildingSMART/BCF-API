@@ -2521,6 +2521,8 @@ components:
           $ref: '#/components/schemas/point'
         end_point:
           $ref: '#/components/schemas/point'
+        color:
+          type: string
     location:
       type: object
       nullable: true

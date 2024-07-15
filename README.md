@@ -1295,6 +1295,7 @@ Perspective and Orthogonal cameras are explained in detail in [BCF-XML](https://
 |---------|----|-----------|--------|
 | start_point | [Point](#3521-point) | start point of the line | mandatory |
 | end_point | [Point](#3521-point) | end point of the line (Treated as point if start_point and end_point is the same | mandatory |
+| color | string | Lines may specify the color in which they should be displayed | optional |
 
 #### 3.5.2.6 Clipping plane
 [clipping_plane.json](Schemas/Collaboration/Viewpoint/clipping_plane.json)
