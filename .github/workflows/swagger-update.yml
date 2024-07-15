@@ -1,0 +1,18 @@
+name: swagger-update
+
+on: [push]
+
+jobs:
+  ubuntu-latest:
+    name: ubuntu-latest
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: Install SwaggerHub CLI
+        run: 'npm i -g swaggerhub-cli'
+      - name: Push Swagger API to Swagger Hub
+        run: 'swaggerhub api:update buildingSMART/BCF/4.0 -f swagger.yaml'
+        env:
+          SWAGGERHUB_API_KEY: ${{ secrets.SWAGGER_HUB_API_KEY }}

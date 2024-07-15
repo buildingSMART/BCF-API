@@ -1,0 +1,2871 @@
+openapi: '3.0.2'
+info:
+  title: BCF API
+  version: '4.0'
+servers:
+# Relative URLs
+# https://swagger.io/docs/specification/api-host-and-base-path/
+# The server URL defaults to / 
+# Test
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/opencde/BCF-OpenAPI-3.0/3.0
+  - url: /
+paths:
+  /bcf/{version}/projects:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    get:
+      description: Retrieve a collection of projects where the currently logged on user has access to.
+      summary: Get Projects
+      tags:
+        - Project
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/projects'
+              example:
+                [{
+                    "project_id": "F445F4F2-4D02-4B2A-B612-5E456BEF9137",
+                    "name": "Example project 1",
+                    "authorization": {
+                        "project_actions": [
+                            "createTopic",
+                            "createDocument"
+                        ]
+                    }
+                }, {
+                    "project_id": "A233FBB2-3A3B-EFF4-C123-DE22ABC8414",
+                    "name": "Example project 2",
+                    "authorization": {
+                        "project_actions": []
+                    }
+                }]
+  /bcf/{version}/projects/{project_id}:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    get:
+      summary: Get Project
+      description: Retrieve a specific project.
+      tags:
+        - Project
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/project_GET'
+              example:
+                {
+                    "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
+                    "name": "Example project 3",
+                    "authorization": {
+                        "project_actions": [
+                            "update"
+                        ]
+                    }
+                }
+    put:
+      summary: Update Project
+      description: Modify a specific project. This operation is only possible when the server returns the update flag in the Project authorization, see section 3.1.5
+      tags:
+        - Project        
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/project_PUT'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/project_GET'
+              example:
+                {
+                    "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
+                    "name": "Example project 3 - Second Section",
+                    "authorization": {
+                        "project_actions": [
+                            "update"
+                        ]
+                    }
+                }
+  /bcf/{version}/projects/{project_id}/extensions:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    get:
+      summary: Get Project Extensions
+      description:  |
+        Retrieve a specific projects extensions. Project extensions are used to define possible values that can be used in topics and comments, for example topic labels and priorities.
+        They may change during the course of a project. The most recent extensions state which values are valid at a given moment for newly created topics and comments.
+      tags:
+          - Project      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/extensions_GET'
+              example:
+                {
+                    "topic_type": [
+                        "Information",
+                        "Error"
+                    ],
+                    "topic_status": [
+                        "Open",
+                        "Closed",
+                        "ReOpened"
+                    ],
+                    "topic_label": [
+                        "Architecture",
+                        "Structural",
+                        "MEP"
+                    ],
+                    "priority": [
+                        "Low",
+                        "Medium",
+                        "High"
+                    ],
+                    "users": [
+                        "Architect@example.com",
+                        "BIM-Manager@example.com",
+                        "bob_heater@example.com"
+                    ],
+                    "stage": [
+                        "Preliminary Planning End",
+                        "Construction Start",
+                        "Construction End"
+                    ],
+                    "project_actions": [
+                        "update",
+                        "createTopic",
+                        "createDocument"
+                    ],
+                    "topic_actions": [
+                        "update",
+                        "updateRelatedTopics",
+                        "updateDocumentReferences",
+                        "updateFiles",
+                        "createComment",
+                        "createViewpoint"
+                    ],
+                    "comment_actions": [
+                        "update"
+                    ]
+                }
+  /bcf/{version}/projects/{project_id}/topics:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    get:
+      summary: Get Topics
+      description: Retrieve a collection of topics related to a project (default sort order is creation_date).
+      parameters:
+        - in: query
+          name: $filter
+          example: assigned_to eq 'Architect@example.com' and topic_status eq 'Open' and creation_date gt 2015-12-05T00:00:00+01:00
+          schema:
+            type: string
+          description: |
+            Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)
+            
+            |parameter|type|description|
+            |---------|----|-----------|
+            |creation_author|string|userId of the creation author (value from extensions)|
+            |modified_author|string|userId of the modified author (value from extensions)|
+            |assigned_to|string|userId of the assigned person (value from extensions)|
+            |stage|string|stage this topic is part of (value from extensions)|
+            |topic_status|string|status of a topic (value from extensions)|
+            |topic_type|string|type of a topic (value from extensions)|
+            |creation_date|datetime|creation date of a topic|
+            |modified_date|datetime|modification date of a topic|
+            |labels|array (string)|labels of a topic (value from extensions)|
+            |priority|string|priority of a topic (value from extensions)|
+        - in: query
+          name: $orderby
+          example: modified_date desc
+          schema:
+            type: string
+          description: |
+            Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)
+
+            |parameter|description|
+            |---------|-----------|
+            |creation_date|creation date of a topic|
+            |modified_date|modification date of a topic|
+            |server_assigned_id|the server_assigned_id of the topic|
+            |index|index of a topic|   
+        - $ref: "#/components/parameters/top"
+        - $ref: "#/components/parameters/skip"
+      tags:
+        - Topics      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/topic_GET'
+              example:
+                [{
+                    "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                    "server_assigned_id": "ISSUE-00001",
+                    "creation_author": "Architect@example.com",
+                    "title": "Example topic 1",
+                    "labels": [
+                        "Architecture",
+                        "Structural"
+                    ],
+                    "creation_date": "2013-10-21T17:34:22.409Z"
+                }, {
+                    "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+                    "server_assigned_id": "ISSUE-00078",
+                    "creation_author": "Architect@example.com",
+                    "title": "Example topic 2",
+                    "labels": [
+                        "Architecture",
+                        "Heating",
+                        "Electrical"
+                    ],
+                    "creation_date": "2014-11-19T14:24:11.316Z"
+                }]        
+    post:
+      summary: Create Topic
+      description:  Add a new topic. This operation is only possible when the server returns the createTopic flag in the Project authorization, see section 3.1.5
+      tags:
+        - Topics       
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/topic_POST'
+              example: 
+                {
+                    "topic_type": "Clash",
+                    "topic_status": "open",
+                    "title": "Example topic 3",
+                    "priority": "high",
+                    "labels": [
+                        "Architecture",
+                        "Heating"
+                    ],
+                    "assigned_to": "harry.muster@example.com"
+                }              
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/topic_GET'
+              example:   
+                {
+                    "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                    "server_assigned_id": "ISSUE-01462",
+                    "creation_author": "Architect@example.com",
+                    "creation_date": "2016-08-01T17:34:22.409Z",
+                    "topic_type": "Clash",
+                    "topic_status": "open",
+                    "title": "Example topic 3",
+                    "priority": "high",
+                    "labels": [
+                        "Architecture",
+                        "Heating"
+                    ],
+                    "assigned_to": "harry.muster@example.com"
+                }
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    get:
+      summary: Get Topic
+      description: Retrieve a specific topic.
+      tags:
+        - Topics       
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/topic_GET'
+              example:
+                {
+                    "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+                    "server_assigned_id": "ISSUE-00549",
+                    "creation_author": "Architect@example.com",
+                    "creation_date": "2016-08-01T17:34:22.409Z",
+                    "topic_type": "Clash",
+                    "topic_status": "open",
+                    "title": "Example topic 3",
+                    "priority": "high",
+                    "labels": [
+                        "Architecture",
+                        "Heating"
+                    ],
+                    "assigned_to": "harry.muster@example.com",
+                    "authorization": {
+                        "topic_actions": [
+                            "createComment",
+                            "createViewpoint"
+                        ]
+                    }
+                }  
+    put:
+      summary: Update Topic
+      description:  | 
+        Modify a specific topic, description similar to POST. This operation is only possible when the server returns
+        the update flag in the Topic authorization, see section 3.2.8
+      tags:
+        - Topics       
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/topic_PUT'      
+              example:
+                {
+                    "topic_type": "Clash",
+                    "topic_status": "open",
+                    "title": "Example topic 3 - Changed Title",
+                    "priority": "high",
+                    "labels": [
+                        "Architecture",
+                        "Heating"
+                    ],
+                    "assigned_to": "harry.muster@example.com"
+                }           
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/topic_GET'
+              example:  
+                {
+                    "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+                    "server_assigned_id": "ISSUE-00037",
+                    "creation_author": "Architect@example.com",
+                    "creation_date": "2016-08-01T17:34:22.409Z",
+                    "modified_author": "Architect@example.com",
+                    "modified_date": "2016-08-02T13:22:22.409Z",
+                    "topic_type": "Clash",
+                    "topic_status": "open",
+                    "title": "Example topic 3 - Changed Title",
+                    "priority": "high",
+                    "labels": [
+                        "Architecture",
+                        "Heating"
+                    ],
+                    "assigned_to": "harry.muster@example.com"
+                }
+    delete:
+      summary: Delete Topic
+      description: Deletes a single topic. This operation is only possible when the server returns the delete flag in the Topic authorization, see section 3.2.8
+      tags:
+        - Topics       
+      responses:
+        '200':
+          description: OK
+  /bcf/{version}/projects/{project_id}/files_information:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    get:
+      summary: Get Files Information
+      description:  | 
+        Retrieve a collection of project_file_informations to support allowing users to choose which Files (models)
+        to reference in the header of topics created on the server.
+      tags:
+        - Files       
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref:  "#/components/schemas/project_files_information_GET"
+              example:
+                [{
+                    "display_information": [{
+                        "field_display_name": "Model Name",
+                        "field_value": "ARCH-Z100-051"
+                    }, {
+                        "field_display_name": "Revision Date",
+                        "field_value": "May 3 2020"
+                    }],
+                    "file": {
+                        "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+                        "file_name": "OfficeBuilding_Architecture_0001.ifc",
+                        "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+                    }
+                }, {
+                    "display_information": [{
+                        "field_display_name": "Model Name",
+                        "field_value": "MEP-Z100-015"
+                    }, {
+                        "field_display_name": "Revision Date",
+                        "field_value": "Apr 30 2020"
+                    }],        
+                    "file": {
+                        "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+                        "file_name": "OfficeBuilding_Heating_0003.ifc",
+                        "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
+                    }
+                }]
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/files:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    get:
+      summary: Get Files
+      description:  |
+        Retrieve a collection of file references as topic header. 
+        Implementer Note: The reference property can either be an Uri or a server specific id.
+        Uris are given as absolute paths to the model files while ids reference a custom id of the model file and require custom logic per server to retrieve it.
+        This allows referencing of files on the server but requires clients to know how to retrieve files in a specific implementation.
+      tags:
+        - Files       
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/file_GET'
+              example:  
+                [{
+                    "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+                    "file_name": "OfficeBuilding_Architecture_0001.ifc",
+                    "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+                }, {
+                    "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+                    "file_name": "OfficeBuilding_Heating_0003.ifc",
+                    "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
+                }]                
+    put:
+      summary: Update File
+      description:  |
+        Update a collection of file references on the topic header. This operation is only possible when the server returns the updateFiles flag in the Topic authorization,
+        see section 3.2.8
+      tags:
+        - Files     
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/file_PUT'
+            example:
+              [{
+                  "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+                  "filename": "OfficeBuilding_Architecture_0001.ifc",
+                  "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+              }, {
+                  "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+                  "filename": "OfficeBuilding_Heating_0003.ifc",
+                  "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
+              }]              
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/file_GET'
+              example:  
+                [{
+                    "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+                    "file_name": "OfficeBuilding_Architecture_0001.ifc",
+                    "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
+                }, {
+                    "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+                    "file_name": "OfficeBuilding_Heating_0003.ifc",
+                    "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
+                }]
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    get:
+      summary: Get Comments
+      description: Retrieve a collection of all comments related to a topic (default ordering is date).
+      parameters:
+        - in: query
+          name: $filter
+          example: assigned_to eq 'Architect@example.com' and topic_status eq 'Open' and creation_date gt 2015-12-05T00:00:00+01:00
+          schema:
+            type: string
+          description: |
+            Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)
+            
+            |parameter|type|description|
+            |---------|----|-----------|
+            |author|string|userId of the author (value from extensions)|
+            |date|datetime|creation date of a comment|
+        - in: query
+          name: $orderby
+          example: modified_date desc
+          schema:
+            type: string
+          description: |
+            Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)
+
+            |parameter|description|
+            |---------|-----------|
+            |date|creation date of a comment|
+      tags:
+        - Comments          
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/comment_GET'
+              example:
+                [{
+                    "guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+                    "date": "2016-08-01T12:34:22.409Z",
+                    "author": "max.muster@example.com",
+                    "comment": "Clash found",
+                    "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+                    "authorization": {
+                        "comment_actions": [
+                            "update"
+                        ]
+                    }
+                }, {
+                    "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+                    "date": "2016-08-01T14:24:11.316Z",
+                    "author": "bob.heater@example.com",
+                    "comment": "will rework the heating model",
+                    "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
+                }]
+    post:
+      summary: Create Comment
+      description: Add a new comment to a topic. This operation is only possible when the server returns the createComment flag in the Topic authorization, see section 3.2.8
+      tags:
+        - Comments       
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/comment_POST'
+            example:
+              {
+                  "comment": "will rework the heating model"
+              }
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/comment_GET'
+              example:       
+                {
+                  "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+                  "date": "2016-08-01T14:24:11.316Z",
+                  "author": "bob.heater@example.com",
+                  "comment": "will rework the heating model",
+                  "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
+                }
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}:
+    parameters:
+    - $ref:  "#/components/parameters/version"  
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/comment_guid"
+    get:
+      summary: Get Comment
+      description: Get a single comment.
+      tags:
+        - Comments       
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/comment_GET'
+              example:
+                {
+                  "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+                  "date": "2016-08-01T14:24:11.316Z",
+                  "author": "bob.heater@example.com",
+                  "comment": "will rework the heating model",
+                  "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
+                }
+    put:
+      summary: Update Comment
+      description:  |
+        Update a single comment, description similar to POST. This operation is only possible when the server returns the update
+        flag in the Comment authorization, see section 3.4.6
+      tags:
+        - Comments       
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/comment_PUT'
+            example:
+              {
+                  "comment": "will rework the heating model and fix the ventilation"
+              }              
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/comment_GET'
+              example:
+                {
+                  "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+                  "date": "2016-08-01T14:24:11.316Z",
+                  "author": "bob.heater@example.com",
+                  "comment": "will rework the heating model",
+                  "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
+                }
+    delete:
+      summary: Delete Comment
+      description:  Deletes a single comment. This operation is only possible when the server returns the delete flag in the Comment authorization, see section 3.4.6
+      tags:
+        - Comments       
+      responses:
+        '200':
+          description: OK
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    get:
+      summary: Get Viewpoints
+      description: Retrieve a collection of all viewpoints related to a topic.
+      tags:
+        - Viewpoints       
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/viewpoint_GET'
+              example:
+                [{
+                    "guid": "b24a82e9-f67b-43b8-bda0-4946abf39624",
+                    "perspective_camera": {
+                        "camera_view_point": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "camera_direction": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 2.0
+                        },
+                        "camera_up_vector": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 1.0
+                        },
+                        "field_of_view": 90.0,
+                        "aspect_ratio": 1.33
+                    },
+                    "lines": [{
+                        "start_point": {
+                            "x": 2.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "end_point": {
+                            "x": 0.0,
+                            "y": 1.0,
+                            "z": 0.7
+                        }
+                    }],
+                    "clipping_planes": [{
+                        "location": {
+                            "x": 0.7,
+                            "y": 0.3,
+                            "z": -0.2
+                        },
+                        "direction": {
+                            "x": 1.0,
+                            "y": 0.4,
+                            "z": 0.1
+                        }
+                    }]
+                }, {
+                    "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+                    "perspective_camera": {
+                        "camera_view_point": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "camera_direction": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 2.0
+                        },
+                        "camera_up_vector": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 1.0
+                        },
+                        "field_of_view": 90.0,
+                        "aspect_ratio": 1.33
+                    },
+                    "lines": [{
+                        "start_point": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "end_point": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    }],
+                    "clipping_planes": [{
+                        "location": {
+                            "x": 0.5,
+                            "y": 0.5,
+                            "z": 0.5
+                        },
+                        "direction": {
+                            "x": 1.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    }]
+                }]
+    post:
+      summary: Create Viewpoint
+      description:  |
+        Add a new viewpoint. Viewpoints are immutable, meaning that they should never change. Requirements for different visualizations should be handled by
+        creating new viewpoint elements. This operation is only possible when the server returns the createViewpoint flag in the Topic authorization, see section 3.2.8
+      tags:
+        - Viewpoints      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/viewpoint_POST'
+            example:
+              {
+                  "index": 10,
+                  "perspective_camera": {
+                      "camera_view_point": {
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": 0.0
+                      },
+                      "camera_direction": {
+                          "x": 1.0,
+                          "y": 1.0,
+                          "z": 2.0
+                      },
+                      "camera_up_vector": {
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": 1.0
+                      },
+                      "field_of_view": 90.0,
+                      "aspect_ratio": 1.33
+                  },
+                  "lines": [{
+                      "start_point": {
+                          "x": 1.0,
+                          "y": 1.0,
+                          "z": 1.0
+                      },
+                      "end_point": {
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": 0.0
+                      }
+                  }],
+                  "clipping_planes": [{
+                      "location": {
+                          "x": 0.5,
+                          "y": 0.5,
+                          "z": 0.5
+                      },
+                      "direction": {
+                          "x": 1.0,
+                          "y": 0.0,
+                          "z": 0.0
+                      }
+                  }],
+                  "bitmaps": [{
+                      "bitmap_type": "jpg",
+                      "bitmap_data": "SGVsbG8gV29ybGQh",
+                      "location": {
+                          "x": 10.0,
+                          "y": -10.0,
+                          "z": 7.0
+                      },
+                      "normal": {
+                          "x": -1.0,
+                          "y": 1.25,
+                          "z": 0.0
+                      },
+                      "up": {
+                          "x": -5.4,
+                          "y": -4.3,
+                          "z": 1.0
+                      },
+                      "height": 1666
+                  }],
+                  "snapshot": {
+                      "snapshot_type": "png",
+                      "snapshot_data": "SGVsbG8gV29ybGQh"
+                  },
+                  "components": {
+                      "selection": [{
+                          "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                          "originating_system": "Example CAD Application",
+                          "authoring_tool_id": "EXCAD/v1.0"
+                      }],
+                      "coloring": [{
+                          "color": "ff0000",
+                          "components": [{
+                              "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
+                          }]
+                      }],
+                      "visibility": {
+                          "default_visibility": false,
+                          "exceptions": [{
+                              "ifc_guid": "4$cshxZO9AJBebsni$z9Yk"
+                          }],
+                          "view_setup_hints": {
+                              "spaces_visible": true,
+                              "space_boundaries_visible": false,
+                              "openings_visible": true
+                          }
+                      }
+                  }
+              }
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/viewpoint_GET'
+              example:       
+                {
+                    "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+                    "index": 10,
+                    "perspective_camera": {
+                        "camera_view_point": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "camera_direction": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 2.0
+                        },
+                        "camera_up_vector": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 1.0
+                        },
+                        "field_of_view": 90.0,
+                        "aspect_ratio": 1.33
+                    },
+                    "lines": [{
+                        "start_point": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "end_point": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    }],
+                    "clipping_planes": [{
+                        "location": {
+                            "x": 0.5,
+                            "y": 0.5,
+                            "z": 0.5
+                        },
+                        "direction": {
+                            "x": 1.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    }],
+                    "bitmaps": [{
+                        "guid": "20c1cb56-315f-4a0a-922d-ed7a4a8edf55",
+                        "bitmap_type": "jpg",
+                        "location": {
+                            "x": 10.0,
+                            "y": -10.0,
+                            "z": 7.0
+                        },
+                        "normal": {
+                            "x": -1.0,
+                            "y": 1.25,
+                            "z": 0.0
+                        },
+                        "up": {
+                            "x": -5.4,
+                            "y": -4.3,
+                            "z": 1.0
+                        },
+                        "height": 1666
+                    }],
+                    "snapshot": {
+                        "snapshot_type": "png"
+                    }
+                }
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/viewpoint_guid"
+    get:
+      summary: Get Viewpoint
+      description:  Retrieve a specific viewpoint.
+      tags:
+        - Viewpoints      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/viewpoint_GET'
+              example:
+                {
+                    "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+                    "index": 10,
+                    "perspective_camera": {
+                        "camera_view_point": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "camera_direction": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 2.0
+                        },
+                        "camera_up_vector": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 1.0
+                        },
+                        "field_of_view": 90.0,
+                        "aspect_ratio": 1.33
+                    },
+                    "lines": [{
+                        "start_point": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "end_point": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    }],
+                    "clipping_planes": [{
+                        "location": {
+                            "x": 0.5,
+                            "y": 0.5,
+                            "z": 0.5
+                        },
+                        "direction": {
+                            "x": 1.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    }],
+                    "bitmaps": [{
+                        "guid": "20c1cb56-315f-4a0a-922d-ed7a4a8edf55",
+                        "bitmap_type": "jpg",
+                        "location": {
+                            "x": 10.0,
+                            "y": -10.0,
+                            "z": 7.0
+                        },
+                        "normal": {
+                            "x": -1.0,
+                            "y": 1.25,
+                            "z": 0.0
+                        },
+                        "up": {
+                            "x": -5.4,
+                            "y": -4.3,
+                            "z": 1.0
+                        },
+                        "height": 1666
+                    }],
+                    "snapshot": {
+                        "snapshot_type": "png"
+                    }
+                }
+    delete:
+      summary: Delete Viewpoint
+      description: Deletes a single viewpoint. This operation is only possible when the server returns the delete flag in the Viewpoint authorization, see section 3.5.10
+      tags:
+        - Viewpoints       
+      responses:
+        '200':
+          description: OK
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/snapshot:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/viewpoint_guid"
+    get:
+      summary: Get Snapshot
+      description: Retrieve a viewpoints snapshot (png or jpg) as image file. A viewpoint contains a snapshot if viewpoint.snapshot != null.
+      tags:
+        - Viewpoints      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/bitmaps/{bitmap_guid}:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/viewpoint_guid"
+    - $ref:  "#/components/parameters/bitmap_guid"
+    get:
+      summary: Get Bitmap
+      description: Retrieve a specific viewpoints bitmap image file (png or jpg).
+      tags:
+        - Viewpoints      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/selection:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/viewpoint_guid"
+    get:
+      summary: Get Selection
+      description: Retrieve a collection of all selected components in a viewpoint.
+      tags:
+        - Viewpoints      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/selection_GET'
+              example:
+                {
+                  "selection": [
+                      {
+                          "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                          "originating_system": "Example CAD Application",
+                          "authoring_tool_id": "EXCAD/v1.0"
+                      }, {
+                          "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
+                      }
+                  ]
+              }
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/coloring:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/viewpoint_guid"
+    get:
+      summary: Get Coloring
+      description: Retrieve a collection of all colored components in a viewpoint.
+      tags:
+        - Viewpoints      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coloring_GET'
+              example:
+                {
+                    "coloring": [
+                        {
+                            "color": "#ff0000",
+                            "components": [
+                                {
+                                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                                    "originating_system": "Example CAD Application",
+                                    "authoring_tool_id": "EXCAD/v1.0"
+                                }, {
+                                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
+                                }
+                            ]
+                        }
+                    ]
+                }
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/visibility:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/viewpoint_guid"
+    get:
+      summary: Get Visibility
+      description: Retrieve visibility of components in a viewpoint.
+      tags:
+        - Viewpoints      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/visibility_GET'
+              example:
+                {
+                    "visibility": {
+                            "default_visibility": true,
+                        "exceptions": [
+                            {
+                                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                                "originating_system": "Example CAD Application",
+                                "authoring_tool_id": "EXCAD/v1.0"
+                            }, {
+                                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+                            }
+                        ],
+                        "view_setup_hints": {
+                            "spaces_visible": true,
+                            "space_boundaries_visible": false,
+                            "openings_visible": true
+                        }
+                    }
+                }
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/translucency:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/viewpoint_guid"
+    get:
+      summary: Get Translucency
+      description: Retrieve translucency of components in a viewpoint.
+      tags:
+        - Viewpoints      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/translucency_GET'
+              example:
+                    {
+                      "translucency": {
+                        "default_translucency": true,
+                        "exceptions": [
+                            {
+                                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                                "originating_system": "Example CAD Application",
+                                "authoring_tool_id": "EXCAD/v1.0"
+                            }, {
+                                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
+                            }
+                        ],
+                        "translucency_setup_hints": {
+                            "spaces_translucent": true,
+                            "space_boundaries_translucent": false,
+                            "openings_translucent": true
+                        }
+                      }
+                    }
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/related_topics:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    get:
+      summary: Get Related Topics
+      description: Retrieve a collection of all related topics to a topic.
+      tags:
+        - Related Topics      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/related_topic_GET'
+              example:
+                [{
+                    "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4"
+                }, {
+                    "related_topic_guid": "6963a846-54d1-4050-954d-607cd5e48aa3"
+                }]
+    put:
+      summary: Update Related Topics
+      description:  |
+        Add or update a collection of all related topics to a topic. This operation is only possible when the server returns the updateRelatedTopics
+        flag in the Topic authorization, see section 3.2.8.
+        Throws "409 Conflict" if requesting to add a parent-child relation causing an infinite loop. Example: TopicA is already the parent of TopicB. Making TopicB the parent of TopicA is not allowed.
+      tags:
+        - Related Topics        
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref:  "#/components/schemas/related_topic_PUT"
+              example:
+                [{
+                    "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4"
+                }, {
+                    "related_topic_guid": "6963a846-54d1-4050-954d-607cd5e48aa3"
+                }, {
+                    "related_topic_guid": "bac66ab4-331e-4f21-a28e-083d2cf2e796"
+                }]                
+      responses:
+        '409':
+          description: Conflict
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/related_topic_GET'
+              example:
+                [{
+                    "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4"
+                }, {
+                    "related_topic_guid": "6963a846-54d1-4050-954d-607cd5e48aa3"
+                }, {
+                    "related_topic_guid": "bac66ab4-331e-4f21-a28e-083d2cf2e796"
+                }]
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/document_references:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    get:
+      summary: Get Document References
+      description:  |
+        Add a document reference to a topic. This operation is only possible when the server returns the updateDocumentReferences
+        flag in the Topic authorization, see section 3.2.8
+      tags:
+        - Document References      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/document_reference_GET'
+              example:
+                [{
+                    "guid": "212ab37a-6122-448e-86fc-86503183b520",
+                    "url": "http://example.com/files/LegalRequirements.pdf",
+                    "description": "The legal requirements for buildings."
+                }, {
+                    "guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
+                    "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
+                    "description": "The building owners global design parameters for buildings."
+                }]
+    post:
+      summary: Create Document Reference
+      description:  |
+        Add a document reference to a topic. This operation is only possible when the server returns the updateDocumentReferences flag in the Topic authorization, see section 4.2.8
+
+        Should either reference an internal or an external document.
+
+        Internal
+        document_guid must match an existing document in the project
+        url must be null
+        External
+        document_guid must be null
+        url must be the url to the external resource
+      tags:
+        - Document References      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref:  "#/components/schemas/document_reference_POST"
+            example:
+              {
+                  "url": "http://example.com/files/LegalRequirements.pdf",
+                  "description": "The legal requirements for buildings."
+              }
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document_reference_GET'
+              example:
+                {
+                    "guid": "275ab37a-6122-448e-86fc-86503183b520",
+                    "url": "http://example.com/files/LegalRequirements.pdf",
+                    "description": "The legal requirements for buildings."
+                }
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/document_references/{document_reference_guid}:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/document_reference_guid" 
+    put:
+      summary: Update Document Reference
+      description:  |
+        Update an existing document reference identified by guid. Uses the same rules as POST Document Reference Service.
+        This operation is only possible when the server returns the updateDocumentReferences flag in the Topic authorization, see section 4.2.8
+      tags:
+        - Document References      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref:  "#/components/schemas/document_reference_PUT"
+            example:
+              {
+                  "url": "http://example.com/files/LegalRequirements_Update.pdf",
+                  "description": "The legal requirements for buildings."
+              }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document_reference_GET'
+              example:
+                {
+                    "guid": "135ab37a-6122-448e-86fc-86503183b520",
+                    "url": "http://example.com/files/LegalRequirements_Update.pdf",
+                    "description": "The legal requirements for buildings."
+                }
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/documents:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    get:
+      summary: Get Documents
+      description: |
+        Retrieve a collection of all documents uploaded to a project.
+      tags:
+        - Documents     
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/document_GET'
+              example:
+                [{
+                    "guid": "472ab37a-6122-448e-86fc-86503183b520",
+                    "filename": "LegalRequirements.pdf"
+                }, {
+                    "guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
+                    "filename": "DesignParameters.pdf"
+                }]
+    post:
+      summary: Create Document
+      description: |
+        Upload a document (binary file) to a project. This operation is only possible when the server returns the createDocument
+        flag in the Project authorization, see section 4.1.5
+      tags:
+        - Documents        
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document_GET'
+              example:
+                {
+                    "guid": "472ab37a-6122-448e-86fc-86503183b520",
+                    "filename": "Official_Building_Permission.pdf"
+                }
+  /bcf/{version}/projects/{project_id}/documents/{document_guid}:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/document_guid"
+    get:
+      summary: Get Document
+      description:  |
+        Retrieves a document as binary file.
+      tags:
+        - Documents        
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /bcf/{version}/projects/{project_id}/topics/events:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref: "#/components/parameters/top"
+    - $ref: "#/components/parameters/skip"
+    get:
+      summary: Get Topics Events
+      description:  |
+        Retrieves a document as binary file.
+      parameters:
+        - in: query
+          name: $filter
+          example: author eq 'Architect@example.com' and type eq 'status_updated' and date gt 2015-12-05T00:00:00+01:00&
+          schema:
+            type: string
+          description: |
+            Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)
+
+            |parameter|type|description|
+            |---------|----|-----------|
+            |topic_guid|string|guid of the topic |
+            |author|string|userId of the author (value from extensions)|
+            |type|string|type of the event (value from Topic event types, table above)|
+            |date|datetime|date of the event|    
+        - in: query
+          name: $orderby
+          example: date asc
+          schema:
+            type: string
+          description: |
+            Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)
+
+            |parameter|description|
+            |---------|-----------|
+            |date|date of the event|
+      tags:
+        - Events        
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/topic_event_GET'
+              example:
+                [{
+                    "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+                    "date": "2014-11-19T14:24:11.316Z",
+                    "author": "Architect@example.com",
+                    "events": [
+                        {
+                            "type": "status_updated",
+                            "value": "Closed"
+                        }
+                    ]
+                }, {
+                    "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                    "date": "2013-10-21T17:34:22.409Z",
+                    "author": "Architect@example.com",
+                    "events": [
+                        {
+                            "type": "type_updated",
+                            "value": "Warning"
+                        }
+                    ]
+                }] 
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/events:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref: "#/components/parameters/top"
+    - $ref: "#/components/parameters/skip"
+    get:
+      summary: Get Topic Events
+      description: |
+        Retrieve a collection of topic events related to a project (default sort order is date).
+      parameters:
+        - in: query
+          name: $filter
+          example: author eq 'Architect@example.com' and type eq 'status_updated' and date gt 2015-12-05T00:00:00+01:00&
+          schema:
+            type: string
+          description: |
+            Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)
+
+            |parameter|type|description|
+            |---------|----|-----------|
+            |author|string|userId of the author (value from extensions)|
+            |type|string|type of the event (value from Topic event types, table above)|
+            |date|datetime|date of the event|    
+        - in: query
+          name: $orderby
+          example: date asc
+          schema:
+            type: string
+          description: |
+            Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)
+
+            |parameter|description|
+            |---------|-----------|
+            |date|date of the event|
+      tags:
+        - Events       
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/topic_event_GET'
+              example:
+                [{
+                    "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                    "date": "2014-11-19T14:24:11.316Z",
+                    "author": "Architect@example.com",
+                    "events": [
+                        {
+                            "type": "type_updated",
+                            "value": "Error"
+                        }
+                    ]
+                }, {
+                    "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                    "date": "2013-10-21T17:34:22.409Z",
+                    "author": "Architect@example.com",
+                    "events": [
+                        {
+                            "type": "status_updated",
+                            "value": "Open"
+                        }
+                    ]
+                }]
+  /bcf/{version}/projects/{project_id}/topics/comments/events:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref: "#/components/parameters/top"
+    - $ref: "#/components/parameters/skip"
+    get:
+      summary: Get Comments Events
+      description: |
+        Retrieve a collection of comment events related to a project (default sort order is date).
+      parameters:
+        - in: query
+          name: $filter
+          example: author eq 'Architect@example.com' and date gt 2015-12-05T00:00:00+01:00 and type eq 'comment_created'
+          schema:
+            type: string
+          description: |
+            Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)
+
+            |parameter|type|description|
+            |---------|----|-----------|
+            |comment_guid|string|guid of the comment |
+            |topic_guid|string|guid of the topic |
+            |author|string|userId of the author (value from extensions)|
+            |date|datetime|date of the event|
+            |type|string|type of the event (value from Comment event types, table above)|
+        - in: query
+          name: $orderby
+          example: date asc
+          schema:
+            type: string
+          description: |
+            Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)
+
+            |parameter|description|
+            |---------|-----------|
+            |date|date of the event|
+      tags:
+        - Events       
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/comment_event_GET'
+              example:
+                [{
+                    "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+                    "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+                    "date": "2014-11-19T14:24:11.316Z",
+                    "author": "Architect@example.com",
+                    "events": [
+                        {
+                            "type": "comment_created",
+                            "value": null
+                        }
+                    ]
+                }, {
+                    "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+                    "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                    "date": "2013-10-21T17:34:22.409Z",
+                    "author": "Architect@example.com",
+                    "events": [
+                        {
+                            "type": "viewpoint_updated",
+                            "value": "b24a82e9-f67b-43b8-bda0-4946abf39624"
+                        }
+                    ]
+                }]
+  /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}/events:
+    parameters:
+    - $ref:  "#/components/parameters/version"
+    - $ref:  "#/components/parameters/project_id"
+    - $ref:  "#/components/parameters/topic_guid"
+    - $ref:  "#/components/parameters/comment_guid"
+    - $ref: "#/components/parameters/top"
+    - $ref: "#/components/parameters/skip"
+    get:
+      summary: Get Comment Event
+      description: |
+        Retrieve a collection of comment events related to a comment (default sort order is date).
+      parameters:
+        - in: query
+          name: $filter
+          example: author eq 'Architect@example.com' and date gt 2015-12-05T00:00:00+01:00 and type eq 'comment_created'
+          schema:
+            type: string
+          description: |
+            Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)
+
+            |parameter|type|description|
+            |---------|----|-----------|
+            |author|string|userId of the author (value from extensions)|
+            |date|datetime|date of the event|
+            |type|string|type of the event (value from Comment event types, table above)|
+        - in: query
+          name: $orderby
+          example: date asc
+          schema:
+            type: string
+          description: |
+            Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)
+
+            |parameter|description|
+            |---------|-----------|
+            |date|date of the event|
+      tags:
+        - Events       
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/comment_event_GET'
+              example:
+                [{
+                    "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+                    "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+                    "date": "2014-11-19T14:24:11.316Z",
+                    "author": "Architect@example.com",
+                    "events": [
+                        {
+                            "type": "comment_created",
+                            "value": null
+                        }
+                    ]
+                }, {
+                    "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+                    "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                    "date": "2013-10-21T17:34:22.409Z",
+                    "author": "Architect@example.com",
+                    "events": [
+                        {
+                            "type": "comment_text_updated",
+                            "value": "This is the updated comment"
+                        }
+                    ]
+                }]
+components:
+  schemas:
+    # error
+    error:
+      type: object
+      description: Schema for error, BCF REST API. This is defined in the Foundation API and represents the body format of any error responses.
+      required:
+        - message
+      properties:
+        message:
+          type: string
+    # project schemas
+    extensions_GET:
+      type: object
+      required:
+        - topic_type
+        - topic_status
+        - topic_label
+        - priority
+        - users
+        - stage
+      properties:
+        topic_type:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/extension_item_GET'
+        topic_status:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/topic_status_extension_item_GET'
+        topic_label:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/extension_item_GET'
+        priority:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/extension_item_GET'  
+        users:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/user_extension_item_GET'
+        stage:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/extension_item_GET'
+        project_actions:
+          $ref: '#/components/schemas/project_actions'
+        topic_actions:
+          $ref: '#/components/schemas/topic_actions'
+        comment_actions:
+          $ref: '#/components/schemas/comment_actions'
+        relation_types:
+          type: array
+          nullable: true
+          items:
+            type: string
+            enum: [relates, parent-child]
+        custom_fields:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/project_custom_field_extension'
+    extension_item_GET:
+      type: object
+      required:
+        - id
+        - name
+        - readonly
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        readonly:
+          type: boolean
+    topic_status_extension_item_GET:
+      type: object
+      required:
+        - id
+        - name
+        - status_type
+        - readonly
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status_type:
+          type: string
+          enum: [open, closed]
+        readonly:
+          type: boolean
+    user_extension_item_GET:
+      type: object
+      required:
+        - id
+        - name
+        - email
+        - readonly
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        readonly:
+          type: boolean
+    extension_item_SET:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+    project_GET:
+      type: object
+      description: Schema for single project GET, BCF REST API.
+      required:
+        - project_id
+        - name
+      properties:
+        project_id:
+          type: string
+        name:
+          type: string
+        authorization:
+          type: object
+          properties:
+            project_actions:
+              $ref: '#/components/schemas/project_actions'
+    project_PUT:
+      type: object
+      description: Schema for project PUT, BCF REST API.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+    projects:
+      type: array
+      items:
+        $ref: '#/components/schemas/project_GET'
+    # actions schemas
+    project_actions:
+      type: array
+      items:
+        type: string
+        enum:
+          - update
+          - createTopic
+          - createDocument
+    topic_actions:
+      type: array
+      items:
+        type: string
+        enum:
+          - update
+          - updateRelatedTopics
+          - updateDocumentReferences
+          - updateFiles
+          - createComment
+          - createViewpoint
+          - delete
+    comment_actions:
+      type: array
+      items:
+        type: string
+        enum:
+          - update
+          - delete
+    viewpoint_actions:
+      type: array
+      items:
+        type: string # Missing in https://github.com/buildingSMART/BCF-API/blob/release_3_0/Schemas_draft-03/Collaboration/Action/viewpoint_actions.json?
+        enum:
+          - delete
+    event_action:
+      type: object
+      nullable: true
+      required:
+        - type
+      properties:
+        type:
+          type: string
+        value:
+          $ref: "#/components/schemas/event_action_value"
+    event_action_value:
+      type: object
+      properties:
+        id:
+          type: string
+        displayValue:
+          type: string
+    # comment schemas
+    comment_GET:
+      type: object
+      required:
+        - comment_guid
+        - date
+        - author
+        - comment
+        - topic_guid
+      properties:
+        comment_guid:
+          type: string
+        date:
+          type: string
+          format: date-time
+        author:
+          $ref: "#/components/schemas/user_GET"
+        comment:
+          type: string
+        topic_guid:
+          type: string
+        viewpoint_guid:
+          type: string
+          nullable: true
+        reply_to_comment_guid:
+          type: string
+          nullable: true
+        modified_date:
+          type: string
+          format: date-time
+          nullable: true
+        modified_author:
+          $ref:  "#/components/schemas/user_GET"
+        authorization:
+          type: object
+          properties:
+            comment_actions:
+              $ref:  "#/components/schemas/comment_actions"
+    comment_POST:
+      type: object
+      required:
+        - comment
+      properties:
+        comment:
+          type: string
+        viewpoint_guid:
+          type: string
+          nullable: true
+        reply_to_comment_guid:
+          type: string
+          nullable: true
+    # comment_PUT seems to be the same as comment_POST?
+    comment_PUT:
+      type: object
+      required:
+        - comment
+      properties:
+        comment:
+          type: string
+        viewpoint_guid:
+          type: string
+          nullable: true
+        # Not part of 3_0?
+        # reply_to_comment_guid:
+        #   type: string
+        #   nullable: true        
+    # document schemas
+    document_GET:
+      type: object
+      required:
+        - document_guid
+        - filename
+      properties:
+        document_guid:
+          type: string
+        filename:
+          type: string
+    # document references schemas
+    document_reference_GET:
+      description: Schema for a single document reference GET, BCF REST API.
+      type: object
+      required:
+        - guid
+      properties:
+        guid:
+          type: string
+        document_guid:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+    document_reference_POST:
+      type: object
+      properties:
+        # should be document_reference_guid ?
+        document_reference_guid:
+          type: string
+          nullable: true
+        document_guid:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+    document_reference_PUT:
+      type: object
+      properties:
+        document_guid:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+    # events schemas
+    comment_event_GET:
+      type: object
+      required:
+        - comment_guid
+        - topic_guid
+        - date
+        - author
+      properties:
+        comment_guid:
+          type: string
+        topic_guid:
+          type: string
+        date:
+          type: string
+          format: date-time
+        author:
+          $ref:  "#/components/schemas/user_GET"
+        actions:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/event_action'
+    topic_event_GET:
+      type: object
+      required:
+        - topic_guid
+        - date
+        - author
+      properties:
+        topic_guid:
+          type: string
+        date:
+          type: string
+          format: date-time
+        author:
+          $ref:  "#/components/schemas/user_GET"
+        actions:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/event_action'
+    # file schemas
+    file_GET:
+      description: Schema for a single file GET, BCF REST API.
+      type: object
+      properties:
+        ifc_project:
+          type: string
+          nullable: true
+        ifc_spatial_structure_element:
+          type: string
+          nullable: true
+        filename:
+          type: string
+          nullable: true
+        date:
+          type: string
+          format: date-time
+          nullable: true
+        reference:
+          type: string
+          nullable: true
+        id:
+          type: string
+          nullable: true
+    file_PUT:
+      type: object
+      properties:
+        ifc_project:
+          type: string
+          nullable: true
+        ifc_spatial_structure_element:
+          type: string
+          nullable: true
+        filename:
+          type: string
+          nullable: true
+        date:
+          type: string
+          format: date-time
+          nullable: true
+        reference:
+          type: string
+          nullable: true
+    project_file_display_information:
+      type: object
+      description: Schema for the display information of a project file, BCF REST API.
+      required:
+        - field_display_name
+        - field_value
+      properties:
+        field_display_name:
+          type: string
+        field_value:
+          type: string
+    project_file_information:
+      type: object
+      description: Schema for a single project file information, BCF REST API.
+      properties:
+        display_information:
+          type: array
+          default: []
+          items:
+            $ref:  "#/components/schemas/project_file_display_information"
+        file:
+          $ref:  "#/components/schemas/file_GET"
+    project_files_information_GET:
+      type: array
+      description: Schema for the listing the response of the GET project files information service
+      items:
+        $ref:  "#/components/schemas/project_file_information"
+    # related topic schemas
+    related_topic_GET:
+      description: Schema for single related topic GET, BCF REST API.
+      type: object
+      required:
+        - related_topic_guid
+        - relation_type
+      properties:
+        related_topic_guid:
+          type: string
+        relation_type:
+          type: string
+          enum: [relates, parent, child]
+    related_topic_PUT:
+      description: Schema for related topic PUT, BCF REST API.
+      type: object
+      required:
+        - related_topic_guid
+        - relation_type
+      properties:
+        related_topic_guid:
+          type: string
+        relation_type:
+          type: string
+          enum: [relates, parent, child]
+    # topic schemas
+    topic_GET:
+      type: object
+      required:
+        - topic_guid
+        - title
+        - server_assigned_id
+        - creation_date
+        - creation_author
+      properties:
+        topic_guid:
+          type: string
+        server_assigend_id:
+          type: string
+        topic_type:
+          $ref: "#/components/schemas/extension_item_GET"
+        topic_status:
+          $ref: "#/components/schemas/extension_item_GET"
+        reference_links:
+          type: array
+          nullable: true
+          items:
+            type: string
+        title:
+          type: string
+        priority:
+          $ref: "#/components/schemas/extension_item_GET"
+        index:
+          type: integer
+          nullable: true
+        labels:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/extension_item_GET"
+        creation_date:
+          type: string
+          format: date-time
+        creation_author:
+          $ref: "#/components/schemas/user_GET"
+        # shouldnt modified_date also be nullable?
+        modified_date:
+          type: string
+          format: date-time
+        modified_author:
+          $ref: "#/components/schemas/user_GET"
+        assigned_to:
+          $ref: "#/components/schemas/user_GET"
+        stage:
+          $ref: "#/components/schemas/extension_item_GET"
+        description:
+          type: string
+          nullable: true
+        due_date:
+          type: string
+          format: date
+          nullable: true
+        related_topics:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/related_topic_GET'
+        authorization:
+          type: object
+          properties:
+            topic_actions:
+              $ref: '#/components/schemas/topic_actions'
+            topic_status:
+              type: array
+              nullable: true
+              items:
+                type: string
+        default_viewpoint_guid:
+          type: string
+          nullable: true
+        custom_fields:
+          $ref: '#/components/schemas/topic_custom_fields'
+    topic_POST:
+      type: object
+      required:
+        - title
+      properties:
+        topic_guid:
+          type: string
+          nullable: true
+        topic_type:
+          $ref: "#/components/schemas/extension_item_SET"
+        topic_status:
+          $ref: "#/components/schemas/extension_item_SET"
+        reference_links:
+          type: array
+          nullable: true
+          items:
+            type: string
+        title:
+          type: string
+        priority:
+          $ref: "#/components/schemas/extension_item_SET"
+        index:
+          type: integer
+          nullable: true
+        labels:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/extension_item_SET"
+        assigned_to:
+          $ref: "#/components/schemas/extension_item_SET"
+        stage:
+          $ref: "#/components/schemas/extension_item_SET"
+        description:
+          type: string
+          nullable: true
+        due_date:
+          type: string
+          format: date
+          nullable: true
+        default_viewpoint_guid:
+          type: string
+          nullable: true
+        custom_fields:
+          $ref: '#/components/schemas/topic_custom_fields'
+    topic_PUT:
+      type: object
+      required:
+        - title
+      properties:
+        topic_type:
+          $ref: "#/components/schemas/extension_item_SET"
+        topic_status:
+          $ref: "#/components/schemas/extension_item_SET"
+        reference_links:
+          type: array
+          nullable: true
+          items:
+            type: string
+        title:
+          type: string
+        priority:
+          $ref: "#/components/schemas/extension_item_SET"
+        index:
+          type: integer
+          nullable: true
+        labels:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/extension_item_SET"
+        assigned_to:
+          $ref: "#/components/schemas/extension_item_SET"
+        stage:
+          $ref: "#/components/schemas/extension_item_SET"
+        description:
+          type: string
+          nullable: true
+        due_date:
+          type: string
+          format: date
+          nullable: true
+        default_viewpoint_guid:
+          type: string
+          nullable: true
+        custom_fields:
+          $ref: '#/components/schemas/topic_custom_fields'
+    # topic custom fields schemas
+    topic_custom_fields:
+      type: array
+      items:
+        $ref: '#/components/schemas/topic_custom_field'
+    topic_custom_field:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+          description: 'Refers to the id of the custom field in the project extensions.'
+        value:
+          type: string
+          nullable: true
+    # viewpoint schemas
+    bitmap_GET:
+      type: object
+      properties:
+        bitmap_guid:
+          type: string
+        bitmap_type:
+          type: string
+          enum:
+            - jpg
+            - png
+        location:
+          $ref: '#/components/schemas/location'
+        normal:
+          $ref: '#/components/schemas/direction'
+        up:
+          $ref: '#/components/schemas/direction'
+        height:
+          type: number
+    bitmap_POST:
+      type: object
+      properties:
+        bitmap_type:
+          type: string
+          enum:
+            - jpg
+            - png
+        bitmap_data:
+          type: string
+          format: base64
+        location:
+          $ref: '#/components/schemas/location'
+        normal:
+          $ref: '#/components/schemas/direction'
+        up:
+          $ref: '#/components/schemas/direction'
+        height:
+          type: number
+    clipping_plane:
+      type: object
+      nullable: true
+      properties:
+        location:
+          $ref: '#/components/schemas/location'     
+        direction:
+          $ref: '#/components/schemas/direction'             
+    coloring:
+      type: object
+      properties:
+        color:
+          type: string
+        components:
+          $ref: '#/components/schemas/component_list'
+    coloring_GET:
+      description: Schema for coloring GET, BCF REST API.
+      type: object
+      properties:
+        coloring:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/coloring'
+    component:
+      type: object
+      properties:
+        ifc_guid:
+          type: string
+          nullable: true
+        originating_system:
+          type: string
+          nullable: true
+        authoring_tool_id:
+          type: string
+          nullable: true
+    component_list:
+      type: array
+      nullable: true
+      items:
+        $ref: '#/components/schemas/component'
+    components:
+      type: object
+      nullable: true
+      properties:
+        selection:
+          $ref: '#/components/schemas/component_list'
+        coloring:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/coloring'
+        visibility:
+          $ref: '#/components/schemas/visibility'
+        translucency:
+          $ref: '#/components/schemas/translucency'
+    direction:
+      type: object
+      properties:
+        x:
+          type: number
+        y:
+          type: number
+        z:
+          type: number
+    line:
+      type: object
+      nullable: true
+      properties:
+        start_point:
+          $ref: '#/components/schemas/point'
+        end_point:
+          $ref: '#/components/schemas/point'
+        color:
+          type: string
+    location:
+      type: object
+      nullable: true
+      properties:
+        x:
+          type: number
+        y:
+          type: number
+        z:
+          type: number    
+    orthogonal_camera:
+      type: object
+      nullable: true
+      properties:
+        camera_view_point:
+          $ref: '#/components/schemas/point'
+        camera_direction:
+          $ref: '#/components/schemas/direction'
+        camera_up_vector:
+          $ref:  "#/components/schemas/direction"
+        view_to_world_scale:
+          type: number
+        aspect_ratio:
+          type: number
+    perspective_camera:
+      type: object
+      nullable: true
+      properties:
+        camera_view_point:
+          $ref: '#/components/schemas/point'
+        camera_direction:
+          $ref: '#/components/schemas/direction'
+        camera_up_vector:
+          $ref: '#/components/schemas/direction'
+        field_of_view:
+          type: number
+        aspect_ratio:
+          type: number
+    point:
+      type: object
+      properties:
+        x:
+          type: number
+        y:
+          type: number
+        z:
+          type: number
+    selection_GET:
+      description: Schema for selection GET, BCF REST API.
+      type: object
+      properties:
+        selection:
+          $ref: '#/components/schemas/component_list'
+    snapshot_GET:
+      type: object
+      nullable: true
+      properties:
+        snapshot_type:
+          type: string
+          enum:
+            - jpg
+            - png
+    snapshot_POST:
+      type: object
+      nullable: true
+      properties:
+        snapshot_type:
+          type: string
+          enum:
+            - jpg
+            - png
+        snapshot_data:
+          type: string
+          format: base64
+    view_setup_hints:
+      type: object
+      nullable: true
+      properties:
+        spaces_visible:
+          type: boolean
+          default: false
+        space_boundaries_visible:
+          type: boolean
+          default: false
+        openings_visible:
+          type: boolean
+          default: false
+    translucency_setup_hints:
+      type: object
+      nullable: true
+      properties:
+        spaces_translucent:
+          type: boolean
+          default: true
+        space_boundaries_translucent:
+          type: boolean
+          default: true
+        openings_translucent:
+          type: boolean
+          default: true
+    translucency_GET:
+      type: object
+      properties:
+        translucency:
+          $ref: '#/components/schemas/translucency'
+    viewpoint_GET:
+      type: object
+      required:
+        - viewpoint_guid
+        - creation_date
+        - creation_author
+      properties:
+        index:
+          type: integer
+          nullable: true
+        viewpoint_guid:
+          type: string
+        orthogonal_camera:
+          $ref: '#/components/schemas/orthogonal_camera'
+        perspective_camera:
+          $ref: '#/components/schemas/perspective_camera'
+        lines:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/line'
+        markers:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/marker'
+        clipping_planes:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/clipping_plane'
+        bitmaps:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/bitmap_GET'
+        snapshot:
+          $ref: '#/components/schemas/snapshot_GET'
+        creation_date:
+          type: string
+          format: date-time
+        creation_author:
+          $ref:  "#/components/schemas/user_GET"
+        authorization:
+          type: object
+          properties:
+            viewpoint_actions:
+              $ref:  "#/components/schemas/viewpoint_actions"
+        topic_file_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
+    viewpoint_POST:
+      type: object
+      properties:
+        viewpoint_guid:
+          type: string
+          nullable: true
+        index:
+          type: integer
+          nullable: true
+        orthogonal_camera:
+          $ref: '#/components/schemas/orthogonal_camera'
+        perspective_camera:
+          $ref: '#/components/schemas/perspective_camera'
+        lines:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/line'
+        markers:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/marker'
+        clipping_planes:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/clipping_plane'
+        bitmaps:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/bitmap_POST'
+        snapshot:
+          $ref: '#/components/schemas/snapshot_POST'
+        # Why cant we get components?
+        components:
+          $ref: '#/components/schemas/components'
+        topic_file_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
+    visibility:
+      type: object
+      properties:
+        default_visibility:
+          type: boolean
+          default: false
+        exceptions:
+          $ref: '#/components/schemas/component_list'
+        view_setup_hints:
+          $ref: '#/components/schemas/view_setup_hints'
+    visibility_GET:
+      type: object
+      properties:
+        visibility:
+          $ref: '#/components/schemas/visibility'      
+    translucency:
+      type: object
+      properties:
+        default_translucency:
+          type: boolean
+          default: false
+        exceptions:
+          $ref: '#/components/schemas/component_list'
+        view_setup_hints:
+          $ref: '#/components/schemas/translucency_setup_hints'
+    project_custom_field_extension:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string  
+        type:
+          type: string
+          enum:
+            - integer
+            - decimal
+            - string
+            - boolean
+            - enum
+            - date
+            - date-time
+        readonly:
+          type: boolean
+        minArraySize:
+          type: integer
+        maxArraySize:
+          type: integer
+        defaultValue:
+          type: array
+          items:
+            type: string
+        enumValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/project_custom_field_enum_value'
+    project_custom_field_enum_value:
+      type: object
+      properties:
+        value:
+          type: string
+        displayValue:
+          type: string  
+        readonly:
+          type: boolean
+    marker:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/point'
+    user_GET:
+      type: object
+      required:
+        - id
+      oneOf:
+        - required: ['name']
+        - required: ['email']
+      properties:
+        id:
+          type: string
+          description: 'This is a string that uniquely identifies the user in the server, often it is an email address or an internal id'
+        name:
+          type: string
+        email:
+          type: string
+  parameters:
+    version:
+      in: path
+      name: version
+      schema:
+        type: string
+        default: "3.0"
+      required: true
+    project_id:
+      in: path
+      name: project_id
+      schema:
+        type: string
+      required: true   
+    topic_guid:
+      in: path
+      name: topic_guid
+      schema:
+        type: string
+      required: true 
+    comment_guid:
+      in: path
+      name: comment_guid
+      schema:
+        type: string
+      required: true 
+    viewpoint_guid:
+      in: path
+      name: viewpoint_guid
+      schema:
+        type: string
+      required: true
+    document_reference_guid:
+      in: path
+      name: document_reference_guid
+      schema:
+        type: string
+      required: true
+    bitmap_guid:
+      in: path
+      name: bitmap_guid
+      schema:
+        type: string
+      required: true
+    document_guid:
+      in: path
+      name: document_guid
+      schema:
+        type: string
+      required: true
+    top:
+      in: query
+      name: $top
+      schema:
+        type: string
+    skip: 
+      in: query
+      name: $skip
+      schema:
+        type: string

@@ -1,7 +1,0 @@
-{
-    "title": "custom_fields",
-    "type": ["array"],
-    "items": {
-        "$ref": "custom_field.json"
-    }
-}
