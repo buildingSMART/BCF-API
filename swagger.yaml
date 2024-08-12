@@ -26,9 +26,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/projects'
+                $ref: '#/components/schemas/projects_GET'
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "project_id": "F445F4F2-4D02-4B2A-B612-5E456BEF9137",
                     "name": "Example project 1",
                     "authorization": {
@@ -37,13 +42,14 @@ paths:
                             "createDocument"
                         ]
                     }
-                }, {
-                    "project_id": "A233FBB2-3A3B-EFF4-C123-DE22ABC8414",
-                    "name": "Example project 2",
-                    "authorization": {
-                        "project_actions": []
-                    }
-                }]
+                    }, {
+                        "project_id": "A233FBB2-3A3B-EFF4-C123-DE22ABC8414",
+                        "name": "Example project 2",
+                        "authorization": {
+                            "project_actions": []
+                        }
+                    }]
+                  }
   /bcf/{version}/projects/{project_id}:
     parameters:
     - $ref:  "#/components/parameters/version"
@@ -1916,6 +1922,24 @@ components:
       properties:
         name:
           type: string
+    projects_GET:
+      type: object
+      required:
+        - skip
+        - top
+        - totalCount
+        - data
+      properties:
+        skip:
+          type: integer
+        top:
+          type: integer
+        totalCount:
+          type: integer
+        nextLink:
+          type: string
+        data: 
+          $ref: '#/components/schemas/projects'
     projects:
       type: array
       items:
