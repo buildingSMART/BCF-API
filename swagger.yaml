@@ -622,28 +622,55 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/comment_GET'
+                type: object
+                required:
+                  skip
+                  top
+                  totalCount
+                  data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/comment_GET"
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
                     "date": "2016-08-01T12:34:22.409Z",
                     "author": "max.muster@example.com",
                     "comment": "Clash found",
                     "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
                     "authorization": {
-                        "comment_actions": [
-                            "update"
-                        ]
+                      "comment_actions": [
+                        "update"
+                      ]
                     }
-                }, {
+                  }, {
                     "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
                     "date": "2016-08-01T14:24:11.316Z",
                     "author": "bob.heater@example.com",
                     "comment": "will rework the heating model",
-                    "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
-                }]
+                    "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+                    "authorization": {
+                      "comment_actions": [
+                        "update"
+                      ]
+                    }
+                  }]
+                }
     post:
       summary: Create Comment
       description: Add a new comment to a topic. This operation is only possible when the server returns the createComment flag in the Topic authorization, see section 3.2.8
