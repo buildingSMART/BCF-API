@@ -430,35 +430,59 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  "#/components/schemas/project_files_information_GET"
+                type: object
+                required:
+                  skip
+                  top
+                  totalCount
+                  data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/project_files_information_GET"
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "display_information": [{
-                        "field_display_name": "Model Name",
-                        "field_value": "ARCH-Z100-051"
+                      "field_display_name": "Model Name",
+                      "field_value": "ARCH-Z100-051"
                     }, {
-                        "field_display_name": "Revision Date",
-                        "field_value": "May 3 2020"
+                      "field_display_name": "Revision Date",
+                      "field_value": "May 3 2020"
                     }],
                     "file": {
                         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
                         "file_name": "OfficeBuilding_Architecture_0001.ifc",
                         "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
                     }
-                }, {
+                  }, {
                     "display_information": [{
-                        "field_display_name": "Model Name",
-                        "field_value": "MEP-Z100-015"
+                      "field_display_name": "Model Name",
+                      "field_value": "MEP-Z100-015"
                     }, {
-                        "field_display_name": "Revision Date",
-                        "field_value": "Apr 30 2020"
+                      "field_display_name": "Revision Date",
+                      "field_value": "Apr 30 2020"
                     }],        
                     "file": {
                         "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
                         "file_name": "OfficeBuilding_Heating_0003.ifc",
                         "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
                     }
-                }]
+                  }]
+                }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/files:
     parameters:
     - $ref:  "#/components/parameters/version"
