@@ -503,19 +503,41 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/file_GET'
-              example:  
-                [{
+                type: object
+                required:
+                  skip
+                  top
+                  totalCount
+                  data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/file_GET"
+              example:
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
                     "file_name": "OfficeBuilding_Architecture_0001.ifc",
                     "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
-                }, {
+                  }, {
                     "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
                     "file_name": "OfficeBuilding_Heating_0003.ifc",
                     "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
-                }]                
+                  }]
+                }
     put:
       summary: Update File
       description:  |
