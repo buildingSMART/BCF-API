@@ -26,7 +26,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/projects_GET'
+                type: object
+                required:
+                  - skip
+                  - top
+                  - totalCount
+                  - data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data: 
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/project_GET'
               example:
                 {
                   "skip": 0,
@@ -2193,28 +2211,6 @@ components:
       properties:
         name:
           type: string
-    projects_GET:
-      type: object
-      required:
-        - skip
-        - top
-        - totalCount
-        - data
-      properties:
-        skip:
-          type: integer
-        top:
-          type: integer
-        totalCount:
-          type: integer
-        nextLink:
-          type: string
-        data: 
-          $ref: '#/components/schemas/projects'
-    projects:
-      type: array
-      items:
-        $ref: '#/components/schemas/project_GET'
     # actions schemas
     project_actions:
       type: array
