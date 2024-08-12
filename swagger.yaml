@@ -1599,17 +1599,39 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/document_GET'
+                type: object
+                required:
+                  skip
+                  top
+                  totalCount
+                  data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/document_GET"
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "guid": "472ab37a-6122-448e-86fc-86503183b520",
                     "filename": "LegalRequirements.pdf"
-                }, {
+                  }, {
                     "guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
                     "filename": "DesignParameters.pdf"
-                }]
+                  }]
+                }
     post:
       summary: Create Document
       description: |
