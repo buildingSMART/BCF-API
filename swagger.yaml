@@ -222,11 +222,32 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/topic_GET'
+                type: object
+                required:
+                  skip
+                  top
+                  totalCount
+                  data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/topic_GET'
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
                     "server_assigned_id": "ISSUE-00001",
                     "creation_author": "Architect@example.com",
@@ -236,7 +257,7 @@ paths:
                         "Structural"
                     ],
                     "creation_date": "2013-10-21T17:34:22.409Z"
-                }, {
+                  }, {
                     "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
                     "server_assigned_id": "ISSUE-00078",
                     "creation_author": "Architect@example.com",
@@ -247,12 +268,13 @@ paths:
                         "Electrical"
                     ],
                     "creation_date": "2014-11-19T14:24:11.316Z"
-                }]        
+                  }]
+                }
     post:
       summary: Create Topic
       description:  Add a new topic. This operation is only possible when the server returns the createTopic flag in the Project authorization, see section 3.1.5
       tags:
-        - Topics       
+        - Topics
       requestBody:
           required: true
           content:
