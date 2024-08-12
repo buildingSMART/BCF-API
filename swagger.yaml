@@ -783,101 +783,123 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/viewpoint_GET'
+                type: object
+                required:
+                  skip
+                  top
+                  totalCount
+                  data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/viewpoint_GET"
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "guid": "b24a82e9-f67b-43b8-bda0-4946abf39624",
                     "perspective_camera": {
-                        "camera_view_point": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "camera_direction": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 2.0
-                        },
-                        "camera_up_vector": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 1.0
-                        },
-                        "field_of_view": 90.0,
-                        "aspect_ratio": 1.33
+                      "camera_view_point": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                      },
+                      "camera_direction": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 2.0
+                      },
+                      "camera_up_vector": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 1.0
+                      },
+                      "field_of_view": 90.0,
+                      "aspect_ratio": 1.33
                     },
                     "lines": [{
                         "start_point": {
-                            "x": 2.0,
-                            "y": 1.0,
-                            "z": 1.0
+                          "x": 2.0,
+                          "y": 1.0,
+                          "z": 1.0
                         },
                         "end_point": {
-                            "x": 0.0,
-                            "y": 1.0,
-                            "z": 0.7
+                          "x": 0.0,
+                          "y": 1.0,
+                          "z": 0.7
                         }
                     }],
                     "clipping_planes": [{
-                        "location": {
-                            "x": 0.7,
-                            "y": 0.3,
-                            "z": -0.2
-                        },
-                        "direction": {
-                            "x": 1.0,
-                            "y": 0.4,
-                            "z": 0.1
-                        }
+                      "location": {
+                        "x": 0.7,
+                        "y": 0.3,
+                        "z": -0.2
+                      },
+                      "direction": {
+                        "x": 1.0,
+                        "y": 0.4,
+                        "z": 0.1
+                      }
                     }]
-                }, {
+                  }, {
                     "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
                     "perspective_camera": {
-                        "camera_view_point": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "camera_direction": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 2.0
-                        },
-                        "camera_up_vector": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 1.0
-                        },
-                        "field_of_view": 90.0,
-                        "aspect_ratio": 1.33
+                      "camera_view_point": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                      },
+                      "camera_direction": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 2.0
+                      },
+                      "camera_up_vector": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 1.0
+                      },
+                      "field_of_view": 90.0,
+                      "aspect_ratio": 1.33
                     },
                     "lines": [{
-                        "start_point": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        },
-                        "end_point": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        }
+                      "start_point": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                      },
+                      "end_point": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                      }
                     }],
                     "clipping_planes": [{
-                        "location": {
-                            "x": 0.5,
-                            "y": 0.5,
-                            "z": 0.5
-                        },
-                        "direction": {
-                            "x": 1.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        }
+                      "location": {
+                        "x": 0.5,
+                        "y": 0.5,
+                        "z": 0.5
+                      },
+                      "direction": {
+                        "x": 1.0,
+                        "y": 0.0,
+                        "z": 0.0
+                      }
                     }]
-                }]
+                  }]
+                }
     post:
       summary: Create Viewpoint
       description:  |
