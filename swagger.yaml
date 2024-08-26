@@ -26,9 +26,32 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/projects'
+                type: object
+                required:
+                  - skip
+                  - top
+                  - totalCount
+                  - data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data: 
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/project_GET'
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "project_id": "F445F4F2-4D02-4B2A-B612-5E456BEF9137",
                     "name": "Example project 1",
                     "authorization": {
@@ -37,13 +60,14 @@ paths:
                             "createDocument"
                         ]
                     }
-                }, {
-                    "project_id": "A233FBB2-3A3B-EFF4-C123-DE22ABC8414",
-                    "name": "Example project 2",
-                    "authorization": {
-                        "project_actions": []
-                    }
-                }]
+                    }, {
+                        "project_id": "A233FBB2-3A3B-EFF4-C123-DE22ABC8414",
+                        "name": "Example project 2",
+                        "authorization": {
+                            "project_actions": []
+                        }
+                    }]
+                  }
   /bcf/{version}/projects/{project_id}:
     parameters:
     - $ref:  "#/components/parameters/version"
@@ -216,11 +240,32 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/topic_GET'
+                type: object
+                required:
+                  - skip
+                  - top
+                  - totalCount
+                  - data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/topic_GET'
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
                     "server_assigned_id": "ISSUE-00001",
                     "creation_author": "Architect@example.com",
@@ -230,7 +275,7 @@ paths:
                         "Structural"
                     ],
                     "creation_date": "2013-10-21T17:34:22.409Z"
-                }, {
+                  }, {
                     "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
                     "server_assigned_id": "ISSUE-00078",
                     "creation_author": "Architect@example.com",
@@ -241,12 +286,13 @@ paths:
                         "Electrical"
                     ],
                     "creation_date": "2014-11-19T14:24:11.316Z"
-                }]        
+                  }]
+                }
     post:
       summary: Create Topic
       description:  Add a new topic. This operation is only possible when the server returns the createTopic flag in the Project authorization, see section 3.1.5
       tags:
-        - Topics       
+        - Topics
       requestBody:
           required: true
           content:
@@ -402,35 +448,59 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  "#/components/schemas/project_files_information_GET"
+                type: object
+                required:
+                  - skip
+                  - top
+                  - totalCount
+                  - data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/project_files_information_GET"
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "display_information": [{
-                        "field_display_name": "Model Name",
-                        "field_value": "ARCH-Z100-051"
+                      "field_display_name": "Model Name",
+                      "field_value": "ARCH-Z100-051"
                     }, {
-                        "field_display_name": "Revision Date",
-                        "field_value": "May 3 2020"
+                      "field_display_name": "Revision Date",
+                      "field_value": "May 3 2020"
                     }],
                     "file": {
                         "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
                         "file_name": "OfficeBuilding_Architecture_0001.ifc",
                         "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
                     }
-                }, {
+                  }, {
                     "display_information": [{
-                        "field_display_name": "Model Name",
-                        "field_value": "MEP-Z100-015"
+                      "field_display_name": "Model Name",
+                      "field_value": "MEP-Z100-015"
                     }, {
-                        "field_display_name": "Revision Date",
-                        "field_value": "Apr 30 2020"
+                      "field_display_name": "Revision Date",
+                      "field_value": "Apr 30 2020"
                     }],        
                     "file": {
                         "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
                         "file_name": "OfficeBuilding_Heating_0003.ifc",
                         "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
                     }
-                }]
+                  }]
+                }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/files:
     parameters:
     - $ref:  "#/components/parameters/version"
@@ -451,19 +521,41 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/file_GET'
-              example:  
-                [{
+                type: object
+                required:
+                  - skip
+                  - top
+                  - totalCount
+                  - data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/file_GET"
+              example:
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
                     "file_name": "OfficeBuilding_Architecture_0001.ifc",
                     "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
-                }, {
+                  }, {
                     "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
                     "file_name": "OfficeBuilding_Heating_0003.ifc",
                     "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
-                }]                
+                  }]
+                }
     put:
       summary: Update File
       description:  |
@@ -548,28 +640,55 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/comment_GET'
+                type: object
+                required:
+                  - skip
+                  - top
+                  - totalCount
+                  - data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/comment_GET"
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
                     "date": "2016-08-01T12:34:22.409Z",
                     "author": "max.muster@example.com",
                     "comment": "Clash found",
                     "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
                     "authorization": {
-                        "comment_actions": [
-                            "update"
-                        ]
+                      "comment_actions": [
+                        "update"
+                      ]
                     }
-                }, {
+                  }, {
                     "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
                     "date": "2016-08-01T14:24:11.316Z",
                     "author": "bob.heater@example.com",
                     "comment": "will rework the heating model",
-                    "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
-                }]
+                    "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+                    "authorization": {
+                      "comment_actions": [
+                        "update"
+                      ]
+                    }
+                  }]
+                }
     post:
       summary: Create Comment
       description: Add a new comment to a topic. This operation is only possible when the server returns the createComment flag in the Topic authorization, see section 3.2.8
@@ -682,101 +801,123 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/viewpoint_GET'
+                type: object
+                required:
+                  - skip
+                  - top
+                  - totalCount
+                  - data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/viewpoint_GET"
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "guid": "b24a82e9-f67b-43b8-bda0-4946abf39624",
                     "perspective_camera": {
-                        "camera_view_point": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "camera_direction": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 2.0
-                        },
-                        "camera_up_vector": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 1.0
-                        },
-                        "field_of_view": 90.0,
-                        "aspect_ratio": 1.33
+                      "camera_view_point": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                      },
+                      "camera_direction": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 2.0
+                      },
+                      "camera_up_vector": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 1.0
+                      },
+                      "field_of_view": 90.0,
+                      "aspect_ratio": 1.33
                     },
                     "lines": [{
                         "start_point": {
-                            "x": 2.0,
-                            "y": 1.0,
-                            "z": 1.0
+                          "x": 2.0,
+                          "y": 1.0,
+                          "z": 1.0
                         },
                         "end_point": {
-                            "x": 0.0,
-                            "y": 1.0,
-                            "z": 0.7
+                          "x": 0.0,
+                          "y": 1.0,
+                          "z": 0.7
                         }
                     }],
                     "clipping_planes": [{
-                        "location": {
-                            "x": 0.7,
-                            "y": 0.3,
-                            "z": -0.2
-                        },
-                        "direction": {
-                            "x": 1.0,
-                            "y": 0.4,
-                            "z": 0.1
-                        }
+                      "location": {
+                        "x": 0.7,
+                        "y": 0.3,
+                        "z": -0.2
+                      },
+                      "direction": {
+                        "x": 1.0,
+                        "y": 0.4,
+                        "z": 0.1
+                      }
                     }]
-                }, {
+                  }, {
                     "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
                     "perspective_camera": {
-                        "camera_view_point": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "camera_direction": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 2.0
-                        },
-                        "camera_up_vector": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 1.0
-                        },
-                        "field_of_view": 90.0,
-                        "aspect_ratio": 1.33
+                      "camera_view_point": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                      },
+                      "camera_direction": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 2.0
+                      },
+                      "camera_up_vector": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 1.0
+                      },
+                      "field_of_view": 90.0,
+                      "aspect_ratio": 1.33
                     },
                     "lines": [{
-                        "start_point": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        },
-                        "end_point": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        }
+                      "start_point": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                      },
+                      "end_point": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                      }
                     }],
                     "clipping_planes": [{
-                        "location": {
-                            "x": 0.5,
-                            "y": 0.5,
-                            "z": 0.5
-                        },
-                        "direction": {
-                            "x": 1.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        }
+                      "location": {
+                        "x": 0.5,
+                        "y": 0.5,
+                        "z": 0.5
+                      },
+                      "direction": {
+                        "x": 1.0,
+                        "y": 0.0,
+                        "z": 0.0
+                      }
                     }]
-                }]
+                  }]
+                }
     post:
       summary: Create Viewpoint
       description:  |
@@ -1256,15 +1397,37 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/related_topic_GET'
+                type: object
+                required:
+                  - skip
+                  - top
+                  - totalCount
+                  - data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/related_topic_GET"
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4"
-                }, {
+                  }, {
                     "related_topic_guid": "6963a846-54d1-4050-954d-607cd5e48aa3"
-                }]
+                  }]
+                }
     put:
       summary: Update Related Topics
       description:  |
@@ -1326,19 +1489,41 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/document_reference_GET'
+                type: object
+                required:
+                  - skip
+                  - top
+                  - totalCount
+                  - data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/document_reference_GET"
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "guid": "212ab37a-6122-448e-86fc-86503183b520",
                     "url": "http://example.com/files/LegalRequirements.pdf",
                     "description": "The legal requirements for buildings."
-                }, {
+                  }, {
                     "guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
                     "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
                     "description": "The building owners global design parameters for buildings."
-                }]
+                  }]
+                }
     post:
       summary: Create Document Reference
       description:  |
@@ -1432,17 +1617,39 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/document_GET'
+                type: object
+                required:
+                  - skip
+                  - top
+                  - totalCount
+                  - data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/document_GET"
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "guid": "472ab37a-6122-448e-86fc-86503183b520",
                     "filename": "LegalRequirements.pdf"
-                }, {
+                  }, {
                     "guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
                     "filename": "DesignParameters.pdf"
-                }]
+                  }]
+                }
     post:
       summary: Create Document
       description: |
@@ -1532,31 +1739,53 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/topic_event_GET'
+                type: object
+                required:
+                  - skip
+                  - top
+                  - totalCount
+                  - data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/topic_event_GET"
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
                     "date": "2014-11-19T14:24:11.316Z",
                     "author": "Architect@example.com",
                     "events": [
-                        {
-                            "type": "status_updated",
-                            "value": "Closed"
-                        }
+                      {
+                        "type": "status_updated",
+                        "value": "Closed"
+                      }
                     ]
-                }, {
+                  }, {
                     "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
                     "date": "2013-10-21T17:34:22.409Z",
                     "author": "Architect@example.com",
                     "events": [
-                        {
-                            "type": "type_updated",
-                            "value": "Warning"
-                        }
+                      {
+                        "type": "type_updated",
+                        "value": "Warning"
+                      }
                     ]
-                }] 
+                  }]
+                }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/events:
     parameters:
     - $ref:  "#/components/parameters/version"
@@ -1601,31 +1830,53 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/topic_event_GET'
+                type: object
+                required:
+                  - skip
+                  - top
+                  - totalCount
+                  - data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/topic_event_GET"
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
                     "date": "2014-11-19T14:24:11.316Z",
                     "author": "Architect@example.com",
                     "events": [
-                        {
-                            "type": "type_updated",
-                            "value": "Error"
-                        }
+                      {
+                        "type": "type_updated",
+                        "value": "Error"
+                      }
                     ]
-                }, {
+                  }, {
                     "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
                     "date": "2013-10-21T17:34:22.409Z",
                     "author": "Architect@example.com",
                     "events": [
-                        {
-                            "type": "status_updated",
-                            "value": "Open"
-                        }
+                      {
+                        "type": "status_updated",
+                        "value": "Open"
+                      }
                     ]
-                }]
+                  }]
+                }
   /bcf/{version}/projects/{project_id}/topics/comments/events:
     parameters:
     - $ref:  "#/components/parameters/version"
@@ -1671,33 +1922,55 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/comment_event_GET'
+                type: object
+                required:
+                  - skip
+                  - top
+                  - totalCount
+                  - data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/comment_event_GET"
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
                     "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
                     "date": "2014-11-19T14:24:11.316Z",
                     "author": "Architect@example.com",
                     "events": [
-                        {
-                            "type": "comment_created",
-                            "value": null
-                        }
+                      {
+                        "type": "comment_created",
+                        "value": null
+                      }
                     ]
-                }, {
+                  }, {
                     "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
                     "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
                     "date": "2013-10-21T17:34:22.409Z",
                     "author": "Architect@example.com",
                     "events": [
-                        {
-                            "type": "viewpoint_updated",
-                            "value": "b24a82e9-f67b-43b8-bda0-4946abf39624"
-                        }
+                      {
+                        "type": "viewpoint_updated",
+                        "value": "b24a82e9-f67b-43b8-bda0-4946abf39624"
+                      }
                     ]
-                }]
+                  }]
+                }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}/events:
     parameters:
     - $ref:  "#/components/parameters/version"
@@ -1743,33 +2016,55 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/comment_event_GET'
+                type: object
+                required:
+                  - skip
+                  - top
+                  - totalCount
+                  - data
+                properties:
+                  skip:
+                    type: integer
+                  top:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  nextLink:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref:  "#/components/schemas/comment_event_GET"
               example:
-                [{
+                {
+                  "skip": 0,
+                  "top": 1000,
+                  "totalCount": 2,
+                  "nextLink": null,
+                  "data": [{
                     "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
                     "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
                     "date": "2014-11-19T14:24:11.316Z",
                     "author": "Architect@example.com",
                     "events": [
-                        {
-                            "type": "comment_created",
-                            "value": null
-                        }
+                      {
+                        "type": "comment_created",
+                        "value": null
+                      }
                     ]
-                }, {
+                  }, {
                     "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
                     "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
                     "date": "2013-10-21T17:34:22.409Z",
                     "author": "Architect@example.com",
                     "events": [
-                        {
-                            "type": "comment_text_updated",
-                            "value": "This is the updated comment"
-                        }
+                      {
+                        "type": "comment_text_updated",
+                        "value": "This is the updated comment"
+                      }
                     ]
-                }]
+                  }]
+                }
 components:
   schemas:
     # error
@@ -1916,10 +2211,6 @@ components:
       properties:
         name:
           type: string
-    projects:
-      type: array
-      items:
-        $ref: '#/components/schemas/project_GET'
     # actions schemas
     project_actions:
       type: array
