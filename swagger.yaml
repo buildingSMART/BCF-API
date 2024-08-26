@@ -242,10 +242,10 @@ paths:
               schema:
                 type: object
                 required:
-                  skip
-                  top
-                  totalCount
-                  data
+                  - skip
+                  - top
+                  - totalCount
+                  - data
                 properties:
                   skip:
                     type: integer
@@ -450,10 +450,10 @@ paths:
               schema:
                 type: object
                 required:
-                  skip
-                  top
-                  totalCount
-                  data
+                  - skip
+                  - top
+                  - totalCount
+                  - data
                 properties:
                   skip:
                     type: integer
@@ -523,10 +523,10 @@ paths:
               schema:
                 type: object
                 required:
-                  skip
-                  top
-                  totalCount
-                  data
+                  - skip
+                  - top
+                  - totalCount
+                  - data
                 properties:
                   skip:
                     type: integer
@@ -642,10 +642,10 @@ paths:
               schema:
                 type: object
                 required:
-                  skip
-                  top
-                  totalCount
-                  data
+                  - skip
+                  - top
+                  - totalCount
+                  - data
                 properties:
                   skip:
                     type: integer
@@ -803,10 +803,10 @@ paths:
               schema:
                 type: object
                 required:
-                  skip
-                  top
-                  totalCount
-                  data
+                  - skip
+                  - top
+                  - totalCount
+                  - data
                 properties:
                   skip:
                     type: integer
@@ -1399,10 +1399,10 @@ paths:
               schema:
                 type: object
                 required:
-                  skip
-                  top
-                  totalCount
-                  data
+                  - skip
+                  - top
+                  - totalCount
+                  - data
                 properties:
                   skip:
                     type: integer
@@ -1491,10 +1491,10 @@ paths:
               schema:
                 type: object
                 required:
-                  skip
-                  top
-                  totalCount
-                  data
+                  - skip
+                  - top
+                  - totalCount
+                  - data
                 properties:
                   skip:
                     type: integer
@@ -1619,10 +1619,10 @@ paths:
               schema:
                 type: object
                 required:
-                  skip
-                  top
-                  totalCount
-                  data
+                  - skip
+                  - top
+                  - totalCount
+                  - data
                 properties:
                   skip:
                     type: integer
@@ -1741,10 +1741,10 @@ paths:
               schema:
                 type: object
                 required:
-                  skip
-                  top
-                  totalCount
-                  data
+                  - skip
+                  - top
+                  - totalCount
+                  - data
                 properties:
                   skip:
                     type: integer
@@ -1832,10 +1832,10 @@ paths:
               schema:
                 type: object
                 required:
-                  skip
-                  top
-                  totalCount
-                  data
+                  - skip
+                  - top
+                  - totalCount
+                  - data
                 properties:
                   skip:
                     type: integer
@@ -1924,10 +1924,10 @@ paths:
               schema:
                 type: object
                 required:
-                  skip
-                  top
-                  totalCount
-                  data
+                  - skip
+                  - top
+                  - totalCount
+                  - data
                 properties:
                   skip:
                     type: integer
@@ -2018,10 +2018,10 @@ paths:
               schema:
                 type: object
                 required:
-                  skip
-                  top
-                  totalCount
-                  data
+                  - skip
+                  - top
+                  - totalCount
+                  - data
                 properties:
                   skip:
                     type: integer
