@@ -32,7 +32,7 @@ paths:
                   - data
                 properties:
                   pagination:
-                    $ref: '#/components/schemas/project_GET'
+                    $ref: '#/components/schemas/pagination'
                   data: 
                     type: array
                     items:
