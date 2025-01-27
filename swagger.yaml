@@ -28,19 +28,11 @@ paths:
               schema:
                 type: object
                 required:
-                  - skip
-                  - top
-                  - totalCount
+                  - pagination
                   - data
                 properties:
-                  skip:
-                    type: integer
-                  top:
-                    type: integer
-                  totalCount:
-                    type: integer
-                  nextLink:
-                    type: string
+                  pagination:
+                    $ref: '#/components/schemas/project_GET'
                   data: 
                     type: array
                     items:
@@ -2067,6 +2059,22 @@ paths:
                 }
 components:
   schemas:
+    pagination:
+      type: object
+      required:
+        - skip
+        - top
+        - totalCount
+        - data
+      properties:
+        skip:
+          type: integer
+        top:
+          type: integer
+        totalCount:
+          type: integer
+        nextLink:
+          type: string
     # error
     error:
       type: object
