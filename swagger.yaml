@@ -234,9 +234,7 @@ paths:
               schema:
                 type: object
                 required:
-                  - skip
-                  - top
-                  - totalCount
+                  - pagination
                   - data
                 properties:
                   skip:
@@ -442,9 +440,7 @@ paths:
               schema:
                 type: object
                 required:
-                  - skip
-                  - top
-                  - totalCount
+                  - pagination
                   - data
                 properties:
                   skip:
@@ -515,9 +511,7 @@ paths:
               schema:
                 type: object
                 required:
-                  - skip
-                  - top
-                  - totalCount
+                  - pagination
                   - data
                 properties:
                   skip:
@@ -634,9 +628,7 @@ paths:
               schema:
                 type: object
                 required:
-                  - skip
-                  - top
-                  - totalCount
+                  - pagination
                   - data
                 properties:
                   skip:
@@ -795,9 +787,7 @@ paths:
               schema:
                 type: object
                 required:
-                  - skip
-                  - top
-                  - totalCount
+                  - pagination
                   - data
                 properties:
                   skip:
@@ -1391,9 +1381,7 @@ paths:
               schema:
                 type: object
                 required:
-                  - skip
-                  - top
-                  - totalCount
+                  - pagination
                   - data
                 properties:
                   skip:
@@ -1483,9 +1471,7 @@ paths:
               schema:
                 type: object
                 required:
-                  - skip
-                  - top
-                  - totalCount
+                  - pagination
                   - data
                 properties:
                   skip:
@@ -1611,9 +1597,7 @@ paths:
               schema:
                 type: object
                 required:
-                  - skip
-                  - top
-                  - totalCount
+                  - pagination
                   - data
                 properties:
                   skip:
@@ -1733,9 +1717,7 @@ paths:
               schema:
                 type: object
                 required:
-                  - skip
-                  - top
-                  - totalCount
+                  - pagination
                   - data
                 properties:
                   skip:
@@ -1824,9 +1806,7 @@ paths:
               schema:
                 type: object
                 required:
-                  - skip
-                  - top
-                  - totalCount
+                  - pagination
                   - data
                 properties:
                   skip:
@@ -1916,9 +1896,7 @@ paths:
               schema:
                 type: object
                 required:
-                  - skip
-                  - top
-                  - totalCount
+                  - pagination
                   - data
                 properties:
                   skip:
@@ -2010,9 +1988,7 @@ paths:
               schema:
                 type: object
                 required:
-                  - skip
-                  - top
-                  - totalCount
+                  - pagination
                   - data
                 properties:
                   skip:
