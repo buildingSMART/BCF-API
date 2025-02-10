@@ -39,10 +39,12 @@ paths:
                       $ref: '#/components/schemas/project_GET'
               example:
                 {
-                  "skip": 0,
-                  "top": 1000,
-                  "totalCount": 2,
-                  "nextLink": null,
+                  "pagination": {
+                    "skip": 0,
+                    "top": 1000,
+                    "totalCount": 2,
+                    "nextLink": null
+                  },
                   "data": [{
                     "project_id": "F445F4F2-4D02-4B2A-B612-5E456BEF9137",
                     "name": "Example project 1",
@@ -245,10 +247,12 @@ paths:
                       $ref: '#/components/schemas/topic_GET'
               example:
                 {
-                  "skip": 0,
-                  "top": 1000,
-                  "totalCount": 2,
-                  "nextLink": null,
+                  "pagination": {
+                    "skip": 0,
+                    "top": 1000,
+                    "totalCount": 2,
+                    "nextLink": null
+                  },
                   "data": [{
                     "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
                     "server_assigned_id": "ISSUE-00001",
@@ -445,10 +449,12 @@ paths:
                       $ref:  "#/components/schemas/project_files_information_GET"
               example:
                 {
-                  "skip": 0,
-                  "top": 1000,
-                  "totalCount": 2,
-                  "nextLink": null,
+                  "pagination": {
+                    "skip": 0,
+                    "top": 1000,
+                    "totalCount": 2,
+                    "nextLink": null
+                  },
                   "data": [{
                     "display_information": [{
                       "field_display_name": "Model Name",
@@ -510,10 +516,12 @@ paths:
                       $ref:  "#/components/schemas/file_GET"
               example:
                 {
-                  "skip": 0,
-                  "top": 1000,
-                  "totalCount": 2,
-                  "nextLink": null,
+                  "pagination": {
+                    "skip": 0,
+                    "top": 1000,
+                    "totalCount": 2,
+                    "nextLink": null
+                  },
                   "data": [{
                     "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
                     "file_name": "OfficeBuilding_Architecture_0001.ifc",
@@ -621,10 +629,12 @@ paths:
                       $ref:  "#/components/schemas/comment_GET"
               example:
                 {
-                  "skip": 0,
-                  "top": 1000,
-                  "totalCount": 2,
-                  "nextLink": null,
+                  "pagination": {
+                    "skip": 0,
+                    "top": 1000,
+                    "totalCount": 2,
+                    "nextLink": null
+                  },
                   "data": [{
                     "guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
                     "date": "2016-08-01T12:34:22.409Z",
@@ -774,10 +784,12 @@ paths:
                       $ref:  "#/components/schemas/viewpoint_GET"
               example:
                 {
-                  "skip": 0,
-                  "top": 1000,
-                  "totalCount": 2,
-                  "nextLink": null,
+                  "pagination": {
+                    "skip": 0,
+                    "top": 1000,
+                    "totalCount": 2,
+                    "nextLink": null
+                  },
                   "data": [{
                     "guid": "b24a82e9-f67b-43b8-bda0-4946abf39624",
                     "perspective_camera": {
@@ -1362,10 +1374,12 @@ paths:
                       $ref:  "#/components/schemas/related_topic_GET"
               example:
                 {
-                  "skip": 0,
-                  "top": 1000,
-                  "totalCount": 2,
-                  "nextLink": null,
+                  "pagination": {
+                    "skip": 0,
+                    "top": 1000,
+                    "totalCount": 2,
+                    "nextLink": null
+                  },
                   "data": [{
                     "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4"
                   }, {
@@ -1446,10 +1460,12 @@ paths:
                       $ref:  "#/components/schemas/document_reference_GET"
               example:
                 {
-                  "skip": 0,
-                  "top": 1000,
-                  "totalCount": 2,
-                  "nextLink": null,
+                  "pagination": {
+                    "skip": 0,
+                    "top": 1000,
+                    "totalCount": 2,
+                    "nextLink": null
+                  },
                   "data": [{
                     "guid": "212ab37a-6122-448e-86fc-86503183b520",
                     "url": "http://example.com/files/LegalRequirements.pdf",
@@ -1566,10 +1582,12 @@ paths:
                       $ref:  "#/components/schemas/document_GET"
               example:
                 {
-                  "skip": 0,
-                  "top": 1000,
-                  "totalCount": 2,
-                  "nextLink": null,
+                  "pagination": {
+                    "skip": 0,
+                    "top": 1000,
+                    "totalCount": 2,
+                    "nextLink": null
+                  },
                   "data": [{
                     "guid": "472ab37a-6122-448e-86fc-86503183b520",
                     "filename": "LegalRequirements.pdf"
@@ -1680,10 +1698,12 @@ paths:
                       $ref:  "#/components/schemas/topic_event_GET"
               example:
                 {
-                  "skip": 0,
-                  "top": 1000,
-                  "totalCount": 2,
-                  "nextLink": null,
+                  "pagination": {
+                    "skip": 0,
+                    "top": 1000,
+                    "totalCount": 2,
+                    "nextLink": null
+                  },
                   "data": [{
                     "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
                     "date": "2014-11-19T14:24:11.316Z",
@@ -1763,10 +1783,12 @@ paths:
                       $ref:  "#/components/schemas/topic_event_GET"
               example:
                 {
-                  "skip": 0,
-                  "top": 1000,
-                  "totalCount": 2,
-                  "nextLink": null,
+                  "pagination": {
+                    "skip": 0,
+                    "top": 1000,
+                    "totalCount": 2,
+                    "nextLink": null
+                  },
                   "data": [{
                     "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
                     "date": "2014-11-19T14:24:11.316Z",
@@ -1847,10 +1869,12 @@ paths:
                       $ref:  "#/components/schemas/comment_event_GET"
               example:
                 {
-                  "skip": 0,
-                  "top": 1000,
-                  "totalCount": 2,
-                  "nextLink": null,
+                  "pagination": {
+                    "skip": 0,
+                    "top": 1000,
+                    "totalCount": 2,
+                    "nextLink": null
+                  },
                   "data": [{
                     "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
                     "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
@@ -1933,10 +1957,12 @@ paths:
                       $ref:  "#/components/schemas/comment_event_GET"
               example:
                 {
-                  "skip": 0,
-                  "top": 1000,
-                  "totalCount": 2,
-                  "nextLink": null,
+                  "pagination": {
+                    "skip": 0,
+                    "top": 1000,
+                    "totalCount": 2,
+                    "nextLink": null
+                  },
                   "data": [{
                     "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
                     "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
