@@ -237,14 +237,8 @@ paths:
                   - pagination
                   - data
                 properties:
-                  skip:
-                    type: integer
-                  top:
-                    type: integer
-                  totalCount:
-                    type: integer
-                  nextLink:
-                    type: string
+                  pagination:
+                    $ref: '#/components/schemas/pagination'
                   data:
                     type: array
                     items:
@@ -443,14 +437,8 @@ paths:
                   - pagination
                   - data
                 properties:
-                  skip:
-                    type: integer
-                  top:
-                    type: integer
-                  totalCount:
-                    type: integer
-                  nextLink:
-                    type: string
+                  pagination:
+                    $ref: '#/components/schemas/pagination'
                   data:
                     type: array
                     items:
@@ -514,14 +502,8 @@ paths:
                   - pagination
                   - data
                 properties:
-                  skip:
-                    type: integer
-                  top:
-                    type: integer
-                  totalCount:
-                    type: integer
-                  nextLink:
-                    type: string
+                  pagination:
+                    $ref: '#/components/schemas/pagination'
                   data:
                     type: array
                     items:
@@ -631,14 +613,8 @@ paths:
                   - pagination
                   - data
                 properties:
-                  skip:
-                    type: integer
-                  top:
-                    type: integer
-                  totalCount:
-                    type: integer
-                  nextLink:
-                    type: string
+                  pagination:
+                    $ref: '#/components/schemas/pagination'
                   data:
                     type: array
                     items:
@@ -790,14 +766,8 @@ paths:
                   - pagination
                   - data
                 properties:
-                  skip:
-                    type: integer
-                  top:
-                    type: integer
-                  totalCount:
-                    type: integer
-                  nextLink:
-                    type: string
+                  pagination:
+                    $ref: '#/components/schemas/pagination'
                   data:
                     type: array
                     items:
@@ -1384,14 +1354,8 @@ paths:
                   - pagination
                   - data
                 properties:
-                  skip:
-                    type: integer
-                  top:
-                    type: integer
-                  totalCount:
-                    type: integer
-                  nextLink:
-                    type: string
+                  pagination:
+                    $ref: '#/components/schemas/pagination'
                   data:
                     type: array
                     items:
@@ -1474,14 +1438,8 @@ paths:
                   - pagination
                   - data
                 properties:
-                  skip:
-                    type: integer
-                  top:
-                    type: integer
-                  totalCount:
-                    type: integer
-                  nextLink:
-                    type: string
+                  pagination:
+                    $ref: '#/components/schemas/pagination'
                   data:
                     type: array
                     items:
@@ -1600,14 +1558,8 @@ paths:
                   - pagination
                   - data
                 properties:
-                  skip:
-                    type: integer
-                  top:
-                    type: integer
-                  totalCount:
-                    type: integer
-                  nextLink:
-                    type: string
+                  pagination:
+                    $ref: '#/components/schemas/pagination'
                   data:
                     type: array
                     items:
@@ -1720,14 +1672,8 @@ paths:
                   - pagination
                   - data
                 properties:
-                  skip:
-                    type: integer
-                  top:
-                    type: integer
-                  totalCount:
-                    type: integer
-                  nextLink:
-                    type: string
+                  pagination:
+                    $ref: '#/components/schemas/pagination'
                   data:
                     type: array
                     items:
@@ -1809,14 +1755,8 @@ paths:
                   - pagination
                   - data
                 properties:
-                  skip:
-                    type: integer
-                  top:
-                    type: integer
-                  totalCount:
-                    type: integer
-                  nextLink:
-                    type: string
+                  pagination:
+                    $ref: '#/components/schemas/pagination'
                   data:
                     type: array
                     items:
@@ -1899,14 +1839,8 @@ paths:
                   - pagination
                   - data
                 properties:
-                  skip:
-                    type: integer
-                  top:
-                    type: integer
-                  totalCount:
-                    type: integer
-                  nextLink:
-                    type: string
+                  pagination:
+                    $ref: '#/components/schemas/pagination'
                   data:
                     type: array
                     items:
@@ -1991,14 +1925,8 @@ paths:
                   - pagination
                   - data
                 properties:
-                  skip:
-                    type: integer
-                  top:
-                    type: integer
-                  totalCount:
-                    type: integer
-                  nextLink:
-                    type: string
+                  pagination:
+                    $ref: '#/components/schemas/pagination'
                   data:
                     type: array
                     items:
