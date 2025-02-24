@@ -2016,7 +2016,6 @@ components:
           type: string
         authorization:
           type: object
-          additionalProperties: true
           properties:
             project_actions:
               $ref: '#/components/schemas/project_actions'
