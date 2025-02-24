@@ -26,17 +26,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - pagination
-                  - data
-                properties:
-                  pagination:
-                    $ref: '#/components/schemas/pagination'
-                  data: 
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/project_GET'
+                $ref: '#/components/schemas/projects_GET'
               example:
                 {
                   "pagination": {
@@ -234,17 +224,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - pagination
-                  - data
-                properties:
-                  pagination:
-                    $ref: '#/components/schemas/pagination'
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/topic_GET'
+                $ref: '#/components/schemas/topics_GET'
               example:
                 {
                   "pagination": {
@@ -436,17 +416,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - pagination
-                  - data
-                properties:
-                  pagination:
-                    $ref: '#/components/schemas/pagination'
-                  data:
-                    type: array
-                    items:
-                      $ref:  "#/components/schemas/project_files_information_GET"
+                $ref:  "#/components/schemas/project_files_informations_GET"
               example:
                 {
                   "pagination": {
@@ -503,17 +473,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - pagination
-                  - data
-                properties:
-                  pagination:
-                    $ref: '#/components/schemas/pagination'
-                  data:
-                    type: array
-                    items:
-                      $ref:  "#/components/schemas/file_GET"
+                $ref:  "#/components/schemas/files_GET"
               example:
                 {
                   "pagination": {
@@ -616,17 +576,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - pagination
-                  - data
-                properties:
-                  pagination:
-                    $ref: '#/components/schemas/pagination'
-                  data:
-                    type: array
-                    items:
-                      $ref:  "#/components/schemas/comment_GET"
+                $ref:  "#/components/schemas/comments_GET"
               example:
                 {
                   "pagination": {
@@ -771,17 +721,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - pagination
-                  - data
-                properties:
-                  pagination:
-                    $ref: '#/components/schemas/pagination'
-                  data:
-                    type: array
-                    items:
-                      $ref:  "#/components/schemas/viewpoint_GET"
+                $ref:  "#/components/schemas/viewpoints_GET"
               example:
                 {
                   "pagination": {
@@ -1361,17 +1301,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - pagination
-                  - data
-                properties:
-                  pagination:
-                    $ref: '#/components/schemas/pagination'
-                  data:
-                    type: array
-                    items:
-                      $ref:  "#/components/schemas/related_topic_GET"
+                $ref:  "#/components/schemas/related_topics_GET"
               example:
                 {
                   "pagination": {
@@ -1447,17 +1377,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - pagination
-                  - data
-                properties:
-                  pagination:
-                    $ref: '#/components/schemas/pagination'
-                  data:
-                    type: array
-                    items:
-                      $ref:  "#/components/schemas/document_reference_GET"
+                $ref:  "#/components/schemas/document_references_GET"
               example:
                 {
                   "pagination": {
@@ -1569,17 +1489,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - pagination
-                  - data
-                properties:
-                  pagination:
-                    $ref: '#/components/schemas/pagination'
-                  data:
-                    type: array
-                    items:
-                      $ref:  "#/components/schemas/document_GET"
+                $ref:  "#/components/schemas/documents_GET"
               example:
                 {
                   "pagination": {
@@ -1685,17 +1595,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - pagination
-                  - data
-                properties:
-                  pagination:
-                    $ref: '#/components/schemas/pagination'
-                  data:
-                    type: array
-                    items:
-                      $ref:  "#/components/schemas/topic_event_GET"
+                $ref:  "#/components/schemas/topic_events_GET"
               example:
                 {
                   "pagination": {
@@ -1770,17 +1670,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - pagination
-                  - data
-                properties:
-                  pagination:
-                    $ref: '#/components/schemas/pagination'
-                  data:
-                    type: array
-                    items:
-                      $ref:  "#/components/schemas/topic_event_GET"
+                $ref:  "#/components/schemas/topic_events_GET"
               example:
                 {
                   "pagination": {
@@ -1856,17 +1746,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - pagination
-                  - data
-                properties:
-                  pagination:
-                    $ref: '#/components/schemas/pagination'
-                  data:
-                    type: array
-                    items:
-                      $ref:  "#/components/schemas/comment_event_GET"
+                $ref:  "#/components/schemas/comment_events_GET"
               example:
                 {
                   "pagination": {
@@ -1944,17 +1824,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - pagination
-                  - data
-                properties:
-                  pagination:
-                    $ref: '#/components/schemas/pagination'
-                  data:
-                    type: array
-                    items:
-                      $ref:  "#/components/schemas/comment_event_GET"
+                $ref:  "#/components/schemas/comment_events_GET"
               example:
                 {
                   "pagination": {
@@ -3038,6 +2908,150 @@ components:
           type: string
         email:
           type: string
+
+    topics_GET: 
+      type: object
+      required:
+        - pagination
+        - data
+      properties:
+        pagination:
+          $ref: '#/components/schemas/pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/topic_GET'
+
+    projects_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      properties:
+        pagination:
+          $ref: '#/components/schemas/pagination'
+        data: 
+          type: array
+          items:
+            $ref: '#/components/schemas/project_GET'
+
+    project_files_informations_GET:				  
+      type: object
+      required:
+        - pagination
+        - data
+      properties:
+        pagination:
+          $ref: '#/components/schemas/pagination'
+        data:
+          type: array
+          items:
+            $ref:  "#/components/schemas/project_files_information_GET"
+
+    files_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      properties:
+        pagination:
+          $ref: '#/components/schemas/pagination'
+        data:
+          type: array
+          items:
+            $ref:  "#/components/schemas/file_GET"
+
+    comments_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      properties:
+        pagination:
+          $ref: '#/components/schemas/pagination'
+        data:
+          type: array
+          items:
+            $ref:  "#/components/schemas/comment_GET"
+
+    viewpoints_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      properties:
+        pagination:
+          $ref: '#/components/schemas/pagination'
+        data:
+          type: array
+          items:
+            $ref:  "#/components/schemas/viewpoint_GET"
+
+    related_topics_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      properties:
+        pagination:
+          $ref: '#/components/schemas/pagination'
+        data:
+          type: array
+          items:
+            $ref:  "#/components/schemas/related_topic_GET"
+
+    document_references_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      properties:
+        pagination:
+          $ref: '#/components/schemas/pagination'
+        data:
+          type: array
+          items:
+            $ref:  "#/components/schemas/document_reference_GET"
+
+    documents_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      properties:
+        pagination:
+          $ref: '#/components/schemas/pagination'
+        data:
+          type: array
+          items:
+            $ref:  "#/components/schemas/document_GET"
+
+    topic_events_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      properties:
+        pagination:
+          $ref: '#/components/schemas/pagination'
+        data:
+          type: array
+          items:
+            $ref:  "#/components/schemas/topic_event_GET"
+
+    comment_events_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      properties:
+        pagination:
+          $ref: '#/components/schemas/pagination'
+        data:
+          type: array
+          items:
+            $ref:  "#/components/schemas/comment_event_GET"
+
   parameters:
     version:
       in: path
