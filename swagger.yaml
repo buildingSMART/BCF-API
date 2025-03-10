@@ -1859,9 +1859,6 @@ paths:
                 }
 components:
   schemas:
-    additionalProperties:
-      type: object
-      additionalProperties: true
     pagination:
       type: object
       required:
@@ -1869,9 +1866,8 @@ components:
         - top
         - totalCount
         - data
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         skip:
           type: integer
         top:
@@ -1886,9 +1882,8 @@ components:
       description: Schema for error, BCF REST API. This is defined in the Foundation API and represents the body format of any error responses.
       required:
         - message
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         message:
           type: string
     # project schemas
@@ -1901,9 +1896,8 @@ components:
         - priority
         - users
         - stage
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         topic_type:
           type: array
           nullable: true
@@ -1957,9 +1951,8 @@ components:
         - id
         - name
         - readonly
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         id:
           type: string
         name:
@@ -1973,9 +1966,8 @@ components:
         - name
         - status_type
         - readonly
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         id:
           type: string
         name:
@@ -1992,9 +1984,8 @@ components:
         - name
         - email
         - readonly
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         id:
           type: string
         name:
@@ -2007,9 +1998,8 @@ components:
       type: object
       required:
         - id
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         id:
           type: string
     project_GET:
@@ -2018,18 +2008,16 @@ components:
       required:
         - project_id
         - name
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         project_id:
           type: string
         name:
           type: string
         authorization:
           type: object
+          additionalProperties: true
           properties:
-            additionalProperties:
-              $ref: '#/components/schemas/additionalProperties'
             project_actions:
               $ref: '#/components/schemas/project_actions'
     project_PUT:
@@ -2037,9 +2025,8 @@ components:
       description: Schema for project PUT, BCF REST API.
       required:
         - name
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         name:
           type: string
     # actions schemas
@@ -2081,18 +2068,16 @@ components:
       nullable: true
       required:
         - type
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         type:
           type: string
         value:
           $ref: "#/components/schemas/event_action_value"
     event_action_value:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         id:
           type: string
         displayValue:
@@ -2106,9 +2091,8 @@ components:
         - author
         - comment
         - topic_guid
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         comment_guid:
           type: string
         date:
@@ -2134,18 +2118,16 @@ components:
           $ref:  "#/components/schemas/user_GET"
         authorization:
           type: object
+          additionalProperties: true
           properties:
-            additionalProperties:
-              $ref: '#/components/schemas/additionalProperties'
             comment_actions:
               $ref:  "#/components/schemas/comment_actions"
     comment_POST:
       type: object
       required:
         - comment
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         comment:
           type: string
         viewpoint_guid:
@@ -2159,9 +2141,8 @@ components:
       type: object
       required:
         - comment
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         comment:
           type: string
         viewpoint_guid:
@@ -2177,9 +2158,8 @@ components:
       required:
         - document_guid
         - filename
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         document_guid:
           type: string
         filename:
@@ -2190,9 +2170,8 @@ components:
       type: object
       required:
         - guid
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         guid:
           type: string
         document_guid:
@@ -2206,9 +2185,8 @@ components:
           nullable: true
     document_reference_POST:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         # should be document_reference_guid ?
         document_reference_guid:
           type: string
@@ -2224,9 +2202,8 @@ components:
           nullable: true
     document_reference_PUT:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         document_guid:
           type: string
           nullable: true
@@ -2244,9 +2221,8 @@ components:
         - topic_guid
         - date
         - author
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         comment_guid:
           type: string
         topic_guid:
@@ -2267,9 +2243,8 @@ components:
         - topic_guid
         - date
         - author
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         topic_guid:
           type: string
         date:
@@ -2286,9 +2261,8 @@ components:
     file_GET:
       description: Schema for a single file GET, BCF REST API.
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         ifc_project:
           type: string
           nullable: true
@@ -2310,9 +2284,8 @@ components:
           nullable: true
     file_PUT:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         ifc_project:
           type: string
           nullable: true
@@ -2335,9 +2308,8 @@ components:
       required:
         - field_display_name
         - field_value
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         field_display_name:
           type: string
         field_value:
@@ -2345,9 +2317,8 @@ components:
     project_file_information:
       type: object
       description: Schema for a single project file information, BCF REST API.
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         display_information:
           type: array
           default: []
@@ -2367,9 +2338,8 @@ components:
       required:
         - related_topic_guid
         - relation_type
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         related_topic_guid:
           type: string
         relation_type:
@@ -2381,9 +2351,8 @@ components:
       required:
         - related_topic_guid
         - relation_type
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         related_topic_guid:
           type: string
         relation_type:
@@ -2398,9 +2367,8 @@ components:
         - server_assigned_id
         - creation_date
         - creation_author
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         topic_guid:
           type: string
         server_assigend_id:
@@ -2455,9 +2423,8 @@ components:
             $ref: '#/components/schemas/related_topic_GET'
         authorization:
           type: object
+          additionalProperties: true
           properties:
-            additionalProperties:
-              $ref: '#/components/schemas/additionalProperties'
             topic_actions:
               $ref: '#/components/schemas/topic_actions'
             topic_status:
@@ -2474,9 +2441,8 @@ components:
       type: object
       required:
         - title
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         topic_guid:
           type: string
           nullable: true
@@ -2521,9 +2487,8 @@ components:
       type: object
       required:
         - title
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         topic_type:
           $ref: "#/components/schemas/extension_item_SET"
         topic_status:
@@ -2568,9 +2533,8 @@ components:
         $ref: '#/components/schemas/topic_custom_field'
     topic_custom_field:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         id:
           type: string
           nullable: true
@@ -2581,9 +2545,8 @@ components:
     # viewpoint schemas
     bitmap_GET:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         bitmap_guid:
           type: string
         bitmap_type:
@@ -2601,9 +2564,8 @@ components:
           type: number
     bitmap_POST:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         bitmap_type:
           type: string
           enum:
@@ -2623,18 +2585,16 @@ components:
     clipping_plane:
       type: object
       nullable: true
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         location:
           $ref: '#/components/schemas/location'     
         direction:
           $ref: '#/components/schemas/direction'             
     coloring:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         color:
           type: string
         components:
@@ -2642,9 +2602,8 @@ components:
     coloring_GET:
       description: Schema for coloring GET, BCF REST API.
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         coloring:
           type: array
           nullable: true
@@ -2652,9 +2611,8 @@ components:
             $ref: '#/components/schemas/coloring'
     component:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         ifc_guid:
           type: string
           nullable: true
@@ -2672,9 +2630,8 @@ components:
     components:
       type: object
       nullable: true
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         selection:
           $ref: '#/components/schemas/component_list'
         coloring:
@@ -2688,9 +2645,8 @@ components:
           $ref: '#/components/schemas/translucency'
     direction:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         x:
           type: number
         y:
@@ -2700,9 +2656,8 @@ components:
     line:
       type: object
       nullable: true
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         start_point:
           $ref: '#/components/schemas/point'
         end_point:
@@ -2712,9 +2667,8 @@ components:
     location:
       type: object
       nullable: true
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         x:
           type: number
         y:
@@ -2724,9 +2678,8 @@ components:
     orthogonal_camera:
       type: object
       nullable: true
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         camera_view_point:
           $ref: '#/components/schemas/point'
         camera_direction:
@@ -2740,9 +2693,8 @@ components:
     perspective_camera:
       type: object
       nullable: true
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         camera_view_point:
           $ref: '#/components/schemas/point'
         camera_direction:
@@ -2755,9 +2707,8 @@ components:
           type: number
     point:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         x:
           type: number
         y:
@@ -2767,17 +2718,15 @@ components:
     selection_GET:
       description: Schema for selection GET, BCF REST API.
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         selection:
           $ref: '#/components/schemas/component_list'
     snapshot_GET:
       type: object
       nullable: true
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         snapshot_type:
           type: string
           enum:
@@ -2786,9 +2735,8 @@ components:
     snapshot_POST:
       type: object
       nullable: true
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         snapshot_type:
           type: string
           enum:
@@ -2800,9 +2748,8 @@ components:
     view_setup_hints:
       type: object
       nullable: true
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         spaces_visible:
           type: boolean
           default: false
@@ -2815,9 +2762,8 @@ components:
     translucency_setup_hints:
       type: object
       nullable: true
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         spaces_translucent:
           type: boolean
           default: true
@@ -2829,9 +2775,8 @@ components:
           default: true
     translucency_GET:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         translucency:
           $ref: '#/components/schemas/translucency'
     viewpoint_GET:
@@ -2840,9 +2785,8 @@ components:
         - viewpoint_guid
         - creation_date
         - creation_author
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         index:
           type: integer
           nullable: true
@@ -2881,9 +2825,8 @@ components:
           $ref:  "#/components/schemas/user_GET"
         authorization:
           type: object
+          additionalProperties: true
           properties:
-            additionalProperties:
-              $ref: '#/components/schemas/additionalProperties'
             viewpoint_actions:
               $ref:  "#/components/schemas/viewpoint_actions"
         topic_file_ids:
@@ -2893,9 +2836,8 @@ components:
             type: string
     viewpoint_POST:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         viewpoint_guid:
           type: string
           nullable: true
@@ -2938,9 +2880,8 @@ components:
             type: string
     visibility:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         default_visibility:
           type: boolean
           default: false
@@ -2950,16 +2891,14 @@ components:
           $ref: '#/components/schemas/view_setup_hints'
     visibility_GET:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         visibility:
           $ref: '#/components/schemas/visibility'      
     translucency:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         default_translucency:
           type: boolean
           default: false
@@ -2969,9 +2908,8 @@ components:
           $ref: '#/components/schemas/translucency_setup_hints'
     project_custom_field_extension:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         id:
           type: string
         name:
@@ -3002,9 +2940,8 @@ components:
             $ref: '#/components/schemas/project_custom_field_enum_value'
     project_custom_field_enum_value:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         value:
           type: string
         displayValue:
@@ -3013,9 +2950,8 @@ components:
           type: boolean
     marker:
       type: object
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         location:
           $ref: '#/components/schemas/point'
     user_GET:
@@ -3025,9 +2961,8 @@ components:
       oneOf:
         - required: ['name']
         - required: ['email']
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         id:
           type: string
           description: 'This is a string that uniquely identifies the user in the server, often it is an email address or an internal id'
@@ -3041,9 +2976,8 @@ components:
       required:
         - pagination
         - data
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         pagination:
           $ref: '#/components/schemas/pagination'
         data:
@@ -3056,9 +2990,8 @@ components:
       required:
         - pagination
         - data
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         pagination:
           $ref: '#/components/schemas/pagination'
         data: 
@@ -3071,9 +3004,8 @@ components:
       required:
         - pagination
         - data
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         pagination:
           $ref: '#/components/schemas/pagination'
         data:
@@ -3086,9 +3018,8 @@ components:
       required:
         - pagination
         - data
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         pagination:
           $ref: '#/components/schemas/pagination'
         data:
@@ -3101,9 +3032,8 @@ components:
       required:
         - pagination
         - data
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         pagination:
           $ref: '#/components/schemas/pagination'
         data:
@@ -3116,9 +3046,8 @@ components:
       required:
         - pagination
         - data
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         pagination:
           $ref: '#/components/schemas/pagination'
         data:
@@ -3131,9 +3060,8 @@ components:
       required:
         - pagination
         - data
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         pagination:
           $ref: '#/components/schemas/pagination'
         data:
@@ -3146,9 +3074,8 @@ components:
       required:
         - pagination
         - data
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         pagination:
           $ref: '#/components/schemas/pagination'
         data:
@@ -3161,9 +3088,8 @@ components:
       required:
         - pagination
         - data
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         pagination:
           $ref: '#/components/schemas/pagination'
         data:
@@ -3176,9 +3102,8 @@ components:
       required:
         - pagination
         - data
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         pagination:
           $ref: '#/components/schemas/pagination'
         data:
@@ -3191,9 +3116,8 @@ components:
       required:
         - pagination
         - data
+      additionalProperties: true
       properties:
-        additionalProperties:
-          $ref: '#/components/schemas/additionalProperties'
         pagination:
           $ref: '#/components/schemas/pagination'
         data:
