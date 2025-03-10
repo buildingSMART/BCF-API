@@ -5,7 +5,7 @@ info:
 servers:
 # Relative URLs
 # https://swagger.io/docs/specification/api-host-and-base-path/
-# The server URL defaults to / 
+# The server URL defaults to /
 # Test
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
@@ -82,7 +82,7 @@ paths:
       summary: Update Project
       description: Modify a specific project. This operation is only possible when the server returns the update flag in the Project authorization, see section 3.1.5
       tags:
-        - Project        
+        - Project
       requestBody:
         required: true
         content:
@@ -116,7 +116,7 @@ paths:
         Retrieve a specific projects extensions. Project extensions are used to define possible values that can be used in topics and comments, for example topic labels and priorities.
         They may change during the course of a project. The most recent extensions state which values are valid at a given moment for newly created topics and comments.
       tags:
-          - Project      
+          - Project
       responses:
         '200':
           description: OK
@@ -187,7 +187,7 @@ paths:
             type: string
           description: |
             Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)
-            
+
             |parameter|type|description|
             |---------|----|-----------|
             |creation_author|string|userId of the creation author (value from extensions)|
@@ -213,11 +213,11 @@ paths:
             |creation_date|creation date of a topic|
             |modified_date|modification date of a topic|
             |server_assigned_id|the server_assigned_id of the topic|
-            |index|index of a topic|   
+            |index|index of a topic|
         - $ref: "#/components/parameters/top"
         - $ref: "#/components/parameters/skip"
       tags:
-        - Topics      
+        - Topics
       responses:
         '200':
           description: OK
@@ -267,7 +267,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/topic_POST'
-              example: 
+              example:
                 {
                     "topic_type": "Clash",
                     "topic_status": "open",
@@ -278,7 +278,7 @@ paths:
                         "Heating"
                     ],
                     "assigned_to": "harry.muster@example.com"
-                }              
+                }
       responses:
         '201':
           description: Created
@@ -286,7 +286,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/topic_GET'
-              example:   
+              example:
                 {
                     "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
                     "server_assigned_id": "ISSUE-01462",
@@ -311,7 +311,7 @@ paths:
       summary: Get Topic
       description: Retrieve a specific topic.
       tags:
-        - Topics       
+        - Topics
       responses:
         '200':
           description: OK
@@ -340,20 +340,20 @@ paths:
                             "createViewpoint"
                         ]
                     }
-                }  
+                }
     put:
       summary: Update Topic
-      description:  | 
+      description:  |
         Modify a specific topic, description similar to POST. This operation is only possible when the server returns
         the update flag in the Topic authorization, see section 3.2.8
       tags:
-        - Topics       
+        - Topics
       requestBody:
           required: true
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/topic_PUT'      
+                $ref: '#/components/schemas/topic_PUT'
               example:
                 {
                     "topic_type": "Clash",
@@ -365,7 +365,7 @@ paths:
                         "Heating"
                     ],
                     "assigned_to": "harry.muster@example.com"
-                }           
+                }
       responses:
         '200':
           description: OK
@@ -373,7 +373,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/topic_GET'
-              example:  
+              example:
                 {
                     "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
                     "server_assigned_id": "ISSUE-00037",
@@ -395,7 +395,7 @@ paths:
       summary: Delete Topic
       description: Deletes a single topic. This operation is only possible when the server returns the delete flag in the Topic authorization, see section 3.2.8
       tags:
-        - Topics       
+        - Topics
       responses:
         '200':
           description: OK
@@ -405,11 +405,11 @@ paths:
     - $ref:  "#/components/parameters/project_id"
     get:
       summary: Get Files Information
-      description:  | 
+      description:  |
         Retrieve a collection of project_file_informations to support allowing users to choose which Files (models)
         to reference in the header of topics created on the server.
       tags:
-        - Files       
+        - Files
       responses:
         '200':
           description: OK
@@ -445,7 +445,7 @@ paths:
                     }, {
                       "field_display_name": "Revision Date",
                       "field_value": "Apr 30 2020"
-                    }],        
+                    }],
                     "file": {
                         "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
                         "file_name": "OfficeBuilding_Heating_0003.ifc",
@@ -461,12 +461,12 @@ paths:
     get:
       summary: Get Files
       description:  |
-        Retrieve a collection of file references as topic header. 
+        Retrieve a collection of file references as topic header.
         Implementer Note: The reference property can either be an Uri or a server specific id.
         Uris are given as absolute paths to the model files while ids reference a custom id of the model file and require custom logic per server to retrieve it.
         This allows referencing of files on the server but requires clients to know how to retrieve files in a specific implementation.
       tags:
-        - Files       
+        - Files
       responses:
         '200':
           description: OK
@@ -498,7 +498,7 @@ paths:
         Update a collection of file references on the topic header. This operation is only possible when the server returns the updateFiles flag in the Topic authorization,
         see section 3.2.8
       tags:
-        - Files     
+        - Files
       requestBody:
         required: true
         content:
@@ -516,7 +516,7 @@ paths:
                   "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
                   "filename": "OfficeBuilding_Heating_0003.ifc",
                   "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
-              }]              
+              }]
       responses:
         '200':
           description: OK
@@ -526,7 +526,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/file_GET'
-              example:  
+              example:
                 [{
                     "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
                     "file_name": "OfficeBuilding_Architecture_0001.ifc",
@@ -552,7 +552,7 @@ paths:
             type: string
           description: |
             Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)
-            
+
             |parameter|type|description|
             |---------|----|-----------|
             |author|string|userId of the author (value from extensions)|
@@ -569,7 +569,7 @@ paths:
             |---------|-----------|
             |date|creation date of a comment|
       tags:
-        - Comments          
+        - Comments
       responses:
         '200':
           description: OK
@@ -613,7 +613,7 @@ paths:
       summary: Create Comment
       description: Add a new comment to a topic. This operation is only possible when the server returns the createComment flag in the Topic authorization, see section 3.2.8
       tags:
-        - Comments       
+        - Comments
       requestBody:
         required: true
         content:
@@ -631,7 +631,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/comment_GET'
-              example:       
+              example:
                 {
                   "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
                   "date": "2016-08-01T14:24:11.316Z",
@@ -641,7 +641,7 @@ paths:
                 }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}:
     parameters:
-    - $ref:  "#/components/parameters/version"  
+    - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
     - $ref:  "#/components/parameters/topic_guid"
     - $ref:  "#/components/parameters/comment_guid"
@@ -649,7 +649,7 @@ paths:
       summary: Get Comment
       description: Get a single comment.
       tags:
-        - Comments       
+        - Comments
       responses:
         '200':
           description: OK
@@ -671,7 +671,7 @@ paths:
         Update a single comment, description similar to POST. This operation is only possible when the server returns the update
         flag in the Comment authorization, see section 3.4.6
       tags:
-        - Comments       
+        - Comments
       requestBody:
         required: true
         content:
@@ -681,7 +681,7 @@ paths:
             example:
               {
                   "comment": "will rework the heating model and fix the ventilation"
-              }              
+              }
       responses:
         '200':
           description: OK
@@ -701,7 +701,7 @@ paths:
       summary: Delete Comment
       description:  Deletes a single comment. This operation is only possible when the server returns the delete flag in the Comment authorization, see section 3.4.6
       tags:
-        - Comments       
+        - Comments
       responses:
         '200':
           description: OK
@@ -714,7 +714,7 @@ paths:
       summary: Get Viewpoints
       description: Retrieve a collection of all viewpoints related to a topic.
       tags:
-        - Viewpoints       
+        - Viewpoints
       responses:
         '200':
           description: OK
@@ -828,7 +828,7 @@ paths:
         Add a new viewpoint. Viewpoints are immutable, meaning that they should never change. Requirements for different visualizations should be handled by
         creating new viewpoint elements. This operation is only possible when the server returns the createViewpoint flag in the Topic authorization, see section 3.2.8
       tags:
-        - Viewpoints      
+        - Viewpoints
       requestBody:
         required: true
         content:
@@ -937,7 +937,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/viewpoint_GET'
-              example:       
+              example:
                 {
                     "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
                     "index": 10,
@@ -1018,7 +1018,7 @@ paths:
       summary: Get Viewpoint
       description:  Retrieve a specific viewpoint.
       tags:
-        - Viewpoints      
+        - Viewpoints
       responses:
         '200':
           description: OK
@@ -1101,7 +1101,7 @@ paths:
       summary: Delete Viewpoint
       description: Deletes a single viewpoint. This operation is only possible when the server returns the delete flag in the Viewpoint authorization, see section 3.5.10
       tags:
-        - Viewpoints       
+        - Viewpoints
       responses:
         '200':
           description: OK
@@ -1115,7 +1115,7 @@ paths:
       summary: Get Snapshot
       description: Retrieve a viewpoints snapshot (png or jpg) as image file. A viewpoint contains a snapshot if viewpoint.snapshot != null.
       tags:
-        - Viewpoints      
+        - Viewpoints
       responses:
         '200':
           description: OK
@@ -1135,7 +1135,7 @@ paths:
       summary: Get Bitmap
       description: Retrieve a specific viewpoints bitmap image file (png or jpg).
       tags:
-        - Viewpoints      
+        - Viewpoints
       responses:
         '200':
           description: OK
@@ -1154,7 +1154,7 @@ paths:
       summary: Get Selection
       description: Retrieve a collection of all selected components in a viewpoint.
       tags:
-        - Viewpoints      
+        - Viewpoints
       responses:
         '200':
           description: OK
@@ -1184,7 +1184,7 @@ paths:
       summary: Get Coloring
       description: Retrieve a collection of all colored components in a viewpoint.
       tags:
-        - Viewpoints      
+        - Viewpoints
       responses:
         '200':
           description: OK
@@ -1219,7 +1219,7 @@ paths:
       summary: Get Visibility
       description: Retrieve visibility of components in a viewpoint.
       tags:
-        - Viewpoints      
+        - Viewpoints
       responses:
         '200':
           description: OK
@@ -1257,7 +1257,7 @@ paths:
       summary: Get Translucency
       description: Retrieve translucency of components in a viewpoint.
       tags:
-        - Viewpoints      
+        - Viewpoints
       responses:
         '200':
           description: OK
@@ -1294,7 +1294,7 @@ paths:
       summary: Get Related Topics
       description: Retrieve a collection of all related topics to a topic.
       tags:
-        - Related Topics      
+        - Related Topics
       responses:
         '200':
           description: OK
@@ -1323,7 +1323,7 @@ paths:
         flag in the Topic authorization, see section 3.2.8.
         Throws "409 Conflict" if requesting to add a parent-child relation causing an infinite loop. Example: TopicA is already the parent of TopicB. Making TopicB the parent of TopicA is not allowed.
       tags:
-        - Related Topics        
+        - Related Topics
       requestBody:
         required: true
         content:
@@ -1339,7 +1339,7 @@ paths:
                     "related_topic_guid": "6963a846-54d1-4050-954d-607cd5e48aa3"
                 }, {
                     "related_topic_guid": "bac66ab4-331e-4f21-a28e-083d2cf2e796"
-                }]                
+                }]
       responses:
         '409':
           description: Conflict
@@ -1370,7 +1370,7 @@ paths:
         Add a document reference to a topic. This operation is only possible when the server returns the updateDocumentReferences
         flag in the Topic authorization, see section 3.2.8
       tags:
-        - Document References      
+        - Document References
       responses:
         '200':
           description: OK
@@ -1410,7 +1410,7 @@ paths:
         document_guid must be null
         url must be the url to the external resource
       tags:
-        - Document References      
+        - Document References
       requestBody:
         required: true
         content:
@@ -1440,14 +1440,14 @@ paths:
     - $ref:  "#/components/parameters/version"
     - $ref:  "#/components/parameters/project_id"
     - $ref:  "#/components/parameters/topic_guid"
-    - $ref:  "#/components/parameters/document_reference_guid" 
+    - $ref:  "#/components/parameters/document_reference_guid"
     put:
       summary: Update Document Reference
       description:  |
         Update an existing document reference identified by guid. Uses the same rules as POST Document Reference Service.
         This operation is only possible when the server returns the updateDocumentReferences flag in the Topic authorization, see section 4.2.8
       tags:
-        - Document References      
+        - Document References
       requestBody:
         required: true
         content:
@@ -1482,7 +1482,7 @@ paths:
       description: |
         Retrieve a collection of all documents uploaded to a project.
       tags:
-        - Documents     
+        - Documents
       responses:
         '200':
           description: OK
@@ -1512,7 +1512,7 @@ paths:
         Upload a document (binary file) to a project. This operation is only possible when the server returns the createDocument
         flag in the Project authorization, see section 4.1.5
       tags:
-        - Documents        
+        - Documents
       requestBody:
         required: true
         content:
@@ -1542,7 +1542,7 @@ paths:
       description:  |
         Retrieves a document as binary file.
       tags:
-        - Documents        
+        - Documents
       responses:
         '200':
           description: OK
@@ -1575,7 +1575,7 @@ paths:
             |topic_guid|string|guid of the topic |
             |author|string|userId of the author (value from extensions)|
             |type|string|type of the event (value from Topic event types, table above)|
-            |date|datetime|date of the event|    
+            |date|datetime|date of the event|
         - in: query
           name: $orderby
           example: date asc
@@ -1588,7 +1588,7 @@ paths:
             |---------|-----------|
             |date|date of the event|
       tags:
-        - Events        
+        - Events
       responses:
         '200':
           description: OK
@@ -1650,7 +1650,7 @@ paths:
             |---------|----|-----------|
             |author|string|userId of the author (value from extensions)|
             |type|string|type of the event (value from Topic event types, table above)|
-            |date|datetime|date of the event|    
+            |date|datetime|date of the event|
         - in: query
           name: $orderby
           example: date asc
@@ -1663,7 +1663,7 @@ paths:
             |---------|-----------|
             |date|date of the event|
       tags:
-        - Events       
+        - Events
       responses:
         '200':
           description: OK
@@ -1739,7 +1739,7 @@ paths:
             |---------|-----------|
             |date|date of the event|
       tags:
-        - Events       
+        - Events
       responses:
         '200':
           description: OK
@@ -1817,7 +1817,7 @@ paths:
             |---------|-----------|
             |date|date of the event|
       tags:
-        - Events       
+        - Events
       responses:
         '200':
           description: OK
@@ -1950,7 +1950,7 @@ components:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/extension_item_GET'  
+            $ref: '#/components/schemas/extension_item_GET'
         users:
           type: array
           nullable: true
@@ -2176,7 +2176,7 @@ components:
         # Not part of 3_0?
         # reply_to_comment_guid:
         #   type: string
-        #   nullable: true        
+        #   nullable: true
     # document schemas
     document_GET:
       type: object
@@ -2604,9 +2604,9 @@ components:
       additionalProperties: true
       properties:
         location:
-          $ref: '#/components/schemas/location'     
+          $ref: '#/components/schemas/location'
         direction:
-          $ref: '#/components/schemas/direction'             
+          $ref: '#/components/schemas/direction'
     coloring:
       type: object
       additionalProperties: true
@@ -2690,7 +2690,7 @@ components:
         y:
           type: number
         z:
-          type: number    
+          type: number
     orthogonal_camera:
       type: object
       nullable: true
@@ -2906,7 +2906,7 @@ components:
       additionalProperties: true
       properties:
         visibility:
-          $ref: '#/components/schemas/visibility'      
+          $ref: '#/components/schemas/visibility'
     translucency:
       type: object
       additionalProperties: true
@@ -2925,7 +2925,7 @@ components:
         id:
           type: string
         name:
-          type: string  
+          type: string
         type:
           type: string
           enum:
@@ -2957,7 +2957,7 @@ components:
         value:
           type: string
         displayValue:
-          type: string  
+          type: string
         readonly:
           type: boolean
     marker:
@@ -2983,7 +2983,7 @@ components:
         email:
           type: string
 
-    topics_GET: 
+    topics_GET:
       type: object
       required:
         - pagination
@@ -3006,7 +3006,7 @@ components:
       properties:
         pagination:
           $ref: '#/components/schemas/pagination'
-        data: 
+        data:
           type: array
           items:
             $ref: '#/components/schemas/project_GET'
@@ -3150,19 +3150,19 @@ components:
       name: project_id
       schema:
         type: string
-      required: true   
+      required: true
     topic_guid:
       in: path
       name: topic_guid
       schema:
         type: string
-      required: true 
+      required: true
     comment_guid:
       in: path
       name: comment_guid
       schema:
         type: string
-      required: true 
+      required: true
     viewpoint_guid:
       in: path
       name: viewpoint_guid
@@ -3192,7 +3192,7 @@ components:
       name: $top
       schema:
         type: string
-    skip: 
+    skip:
       in: query
       name: $skip
       schema:
