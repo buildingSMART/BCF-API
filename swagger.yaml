@@ -1887,6 +1887,39 @@ components:
         message:
           type: string
     # project schemas
+    viewpoint_authorization:
+      type: object
+      additionalProperties: true
+      properties:
+        viewpoint_actions:
+          $ref:  "#/components/schemas/viewpoint_actions"
+
+    project_authorization:
+      type: object
+      additionalProperties: true
+      properties:
+        project_actions:
+          $ref: '#/components/schemas/project_actions'
+
+    comment_authorization:
+      type: object
+      additionalProperties: true
+      properties:
+        comment_actions:
+          $ref:  "#/components/schemas/comment_actions"
+
+    topic_authorization:
+      type: object
+      additionalProperties: true
+      properties:
+        topic_actions:
+          $ref: '#/components/schemas/topic_actions'
+        topic_status:
+          type: array
+          nullable: true
+          items:
+            type: string
+
     extensions_GET:
       type: object
       required:
@@ -2015,11 +2048,7 @@ components:
         name:
           type: string
         authorization:
-          type: object
-          additionalProperties: true
-          properties:
-            project_actions:
-              $ref: '#/components/schemas/project_actions'
+          $ref: "#/components/schemas/project_authorization"
     project_PUT:
       type: object
       description: Schema for project PUT, BCF REST API.
@@ -2117,11 +2146,7 @@ components:
         modified_author:
           $ref:  "#/components/schemas/user_GET"
         authorization:
-          type: object
-          additionalProperties: true
-          properties:
-            comment_actions:
-              $ref:  "#/components/schemas/comment_actions"
+          $ref: "#/components/schemas/comment_authorization"
     comment_POST:
       type: object
       required:
@@ -2422,16 +2447,7 @@ components:
           items:
             $ref: '#/components/schemas/related_topic_GET'
         authorization:
-          type: object
-          additionalProperties: true
-          properties:
-            topic_actions:
-              $ref: '#/components/schemas/topic_actions'
-            topic_status:
-              type: array
-              nullable: true
-              items:
-                type: string
+          $ref: "#/components/schemas/topic_authorization"
         default_viewpoint_guid:
           type: string
           nullable: true
@@ -2824,11 +2840,7 @@ components:
         creation_author:
           $ref:  "#/components/schemas/user_GET"
         authorization:
-          type: object
-          additionalProperties: true
-          properties:
-            viewpoint_actions:
-              $ref:  "#/components/schemas/viewpoint_actions"
+          $ref: "#/components/schemas/viewpoint_authorization"
         topic_file_ids:
           type: array
           nullable: true
@@ -2999,7 +3011,7 @@ components:
           items:
             $ref: '#/components/schemas/project_GET'
 
-    project_files_informations_GET:				  
+    project_files_informations_GET:          
       type: object
       required:
         - pagination
