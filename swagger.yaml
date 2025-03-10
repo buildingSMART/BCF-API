@@ -3011,7 +3011,7 @@ components:
           items:
             $ref: '#/components/schemas/project_GET'
 
-    project_files_informations_GET:          
+    project_files_informations_GET:
       type: object
       required:
         - pagination
