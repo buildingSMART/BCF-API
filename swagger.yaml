@@ -2970,9 +2970,6 @@ components:
       type: object
       required:
         - id
-      oneOf:
-        - required: ['name']
-        - required: ['email']
       additionalProperties: true
       properties:
         id:
@@ -2980,8 +2977,10 @@ components:
           description: 'This is a string that uniquely identifies the user in the server, often it is an email address or an internal id'
         name:
           type: string
+          description: 'Must be provided if email is null'
         email:
           type: string
+          description: 'Must be provided if name is null'
 
     topics_GET:
       type: object
