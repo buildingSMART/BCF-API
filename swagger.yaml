@@ -1,12 +1,12 @@
-openapi: '3.0.2'
+openapi: "3.0.2"
 info:
   title: BCF API
-  version: '4.0'
+  version: "4.0"
 servers:
-# Relative URLs
-# https://swagger.io/docs/specification/api-host-and-base-path/
-# The server URL defaults to /
-# Test
+  # Relative URLs
+  # https://swagger.io/docs/specification/api-host-and-base-path/
+  # The server URL defaults to /
+  # Test
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/opencde/BCF-OpenAPI-3.0/3.0
@@ -14,69 +14,67 @@ servers:
 paths:
   /bcf/{version}/projects:
     parameters:
-    - $ref:  "#/components/parameters/version"
+      - $ref: "#/components/parameters/version"
     get:
       description: Retrieve a collection of projects where the currently logged on user has access to.
       summary: Get Projects
       tags:
         - Project
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/projects_GET'
+                $ref: "#/components/schemas/projects_GET"
               example:
                 {
-                  "pagination": {
-                    "skip": 0,
-                    "top": 1000,
-                    "totalCount": 2,
-                    "nextLink": null
-                  },
-                  "data": [{
-                    "project_id": "F445F4F2-4D02-4B2A-B612-5E456BEF9137",
-                    "name": "Example project 1",
-                    "authorization": {
-                        "project_actions": [
-                            "createTopic",
-                            "createDocument"
-                        ]
-                    }
-                    }, {
+                  "pagination":
+                    {
+                      "skip": 0,
+                      "top": 1000,
+                      "totalCount": 2,
+                      "nextLink": null,
+                    },
+                  "data":
+                    [
+                      {
+                        "project_id": "F445F4F2-4D02-4B2A-B612-5E456BEF9137",
+                        "name": "Example project 1",
+                        "authorization":
+                          {
+                            "project_actions":
+                              ["createTopic", "createDocument"],
+                          },
+                      },
+                      {
                         "project_id": "A233FBB2-3A3B-EFF4-C123-DE22ABC8414",
                         "name": "Example project 2",
-                        "authorization": {
-                            "project_actions": []
-                        }
-                    }]
-                  }
+                        "authorization": { "project_actions": [] },
+                      },
+                    ],
+                }
   /bcf/{version}/projects/{project_id}:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
     get:
       summary: Get Project
       description: Retrieve a specific project.
       tags:
         - Project
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/project_GET'
+                $ref: "#/components/schemas/project_GET"
               example:
                 {
-                    "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
-                    "name": "Example project 3",
-                    "authorization": {
-                        "project_actions": [
-                            "update"
-                        ]
-                    }
+                  "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
+                  "name": "Example project 3",
+                  "authorization": { "project_actions": ["update"] },
                 }
     put:
       summary: Update Project
@@ -88,94 +86,73 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/project_PUT'
+              $ref: "#/components/schemas/project_PUT"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/project_GET'
+                $ref: "#/components/schemas/project_GET"
               example:
                 {
-                    "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
-                    "name": "Example project 3 - Second Section",
-                    "authorization": {
-                        "project_actions": [
-                            "update"
-                        ]
-                    }
+                  "project_id": "B724AAC3-5B2A-234A-D143-AE33CC18414",
+                  "name": "Example project 3 - Second Section",
+                  "authorization": { "project_actions": ["update"] },
                 }
   /bcf/{version}/projects/{project_id}/extensions:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
     get:
       summary: Get Project Extensions
-      description:  |
+      description: |
         Retrieve a specific projects extensions. Project extensions are used to define possible values that can be used in topics and comments, for example topic labels and priorities.
         They may change during the course of a project. The most recent extensions state which values are valid at a given moment for newly created topics and comments.
       tags:
-          - Project
+        - Project
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/extensions_GET'
+                $ref: "#/components/schemas/extensions_GET"
               example:
                 {
-                    "topic_type": [
-                        "Information",
-                        "Error"
+                  "topic_type": ["Information", "Error"],
+                  "topic_status": ["Open", "Closed", "ReOpened"],
+                  "topic_label": ["Architecture", "Structural", "MEP"],
+                  "priority": ["Low", "Medium", "High"],
+                  "users":
+                    [
+                      "Architect@example.com",
+                      "BIM-Manager@example.com",
+                      "bob_heater@example.com",
                     ],
-                    "topic_status": [
-                        "Open",
-                        "Closed",
-                        "ReOpened"
+                  "stage":
+                    [
+                      "Preliminary Planning End",
+                      "Construction Start",
+                      "Construction End",
                     ],
-                    "topic_label": [
-                        "Architecture",
-                        "Structural",
-                        "MEP"
+                  "project_actions":
+                    ["update", "createTopic", "createDocument"],
+                  "topic_actions":
+                    [
+                      "update",
+                      "updateRelatedTopics",
+                      "updateDocumentReferences",
+                      "updateFiles",
+                      "createComment",
+                      "createViewpoint",
                     ],
-                    "priority": [
-                        "Low",
-                        "Medium",
-                        "High"
-                    ],
-                    "users": [
-                        "Architect@example.com",
-                        "BIM-Manager@example.com",
-                        "bob_heater@example.com"
-                    ],
-                    "stage": [
-                        "Preliminary Planning End",
-                        "Construction Start",
-                        "Construction End"
-                    ],
-                    "project_actions": [
-                        "update",
-                        "createTopic",
-                        "createDocument"
-                    ],
-                    "topic_actions": [
-                        "update",
-                        "updateRelatedTopics",
-                        "updateDocumentReferences",
-                        "updateFiles",
-                        "createComment",
-                        "createViewpoint"
-                    ],
-                    "comment_actions": [
-                        "update"
-                    ]
+                  "comment_actions": ["update"],
                 }
   /bcf/{version}/projects/{project_id}/topics:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
     get:
       summary: Get Topics
       description: Retrieve a collection of topics related to a project (default sort order is creation_date).
@@ -219,177 +196,156 @@ paths:
       tags:
         - Topics
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/topics_GET'
+                $ref: "#/components/schemas/topics_GET"
               example:
                 {
-                  "pagination": {
-                    "skip": 0,
-                    "top": 1000,
-                    "totalCount": 2,
-                    "nextLink": null
-                  },
-                  "data": [{
-                    "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
-                    "server_assigned_id": "ISSUE-00001",
-                    "creation_author": "Architect@example.com",
-                    "title": "Example topic 1",
-                    "labels": [
-                        "Architecture",
-                        "Structural"
+                  "pagination":
+                    {
+                      "skip": 0,
+                      "top": 1000,
+                      "totalCount": 2,
+                      "nextLink": null,
+                    },
+                  "data":
+                    [
+                      {
+                        "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                        "server_assigned_id": "ISSUE-00001",
+                        "creation_author": "Architect@example.com",
+                        "title": "Example topic 1",
+                        "labels": ["Architecture", "Structural"],
+                        "creation_date": "2013-10-21T17:34:22.409Z",
+                      },
+                      {
+                        "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+                        "server_assigned_id": "ISSUE-00078",
+                        "creation_author": "Architect@example.com",
+                        "title": "Example topic 2",
+                        "labels": ["Architecture", "Heating", "Electrical"],
+                        "creation_date": "2014-11-19T14:24:11.316Z",
+                      },
                     ],
-                    "creation_date": "2013-10-21T17:34:22.409Z"
-                  }, {
-                    "guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
-                    "server_assigned_id": "ISSUE-00078",
-                    "creation_author": "Architect@example.com",
-                    "title": "Example topic 2",
-                    "labels": [
-                        "Architecture",
-                        "Heating",
-                        "Electrical"
-                    ],
-                    "creation_date": "2014-11-19T14:24:11.316Z"
-                  }]
                 }
     post:
       summary: Create Topic
-      description:  Add a new topic. This operation is only possible when the server returns the createTopic flag in the Project authorization, see section 3.1.5
+      description: Add a new topic. This operation is only possible when the server returns the createTopic flag in the Project authorization, see section 3.1.5
       tags:
         - Topics
       requestBody:
-          required: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/topic_POST'
-              example:
-                {
-                    "topic_type": "Clash",
-                    "topic_status": "open",
-                    "title": "Example topic 3",
-                    "priority": "high",
-                    "labels": [
-                        "Architecture",
-                        "Heating"
-                    ],
-                    "assigned_to": "harry.muster@example.com"
-                }
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/topic_POST"
+            example:
+              {
+                "topic_type": "Clash",
+                "topic_status": "open",
+                "title": "Example topic 3",
+                "priority": "high",
+                "labels": ["Architecture", "Heating"],
+                "assigned_to": "harry.muster@example.com",
+              }
       responses:
-        '201':
+        "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/topic_GET'
+                $ref: "#/components/schemas/topic_GET"
               example:
                 {
-                    "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
-                    "server_assigned_id": "ISSUE-01462",
-                    "creation_author": "Architect@example.com",
-                    "creation_date": "2016-08-01T17:34:22.409Z",
-                    "topic_type": "Clash",
-                    "topic_status": "open",
-                    "title": "Example topic 3",
-                    "priority": "high",
-                    "labels": [
-                        "Architecture",
-                        "Heating"
-                    ],
-                    "assigned_to": "harry.muster@example.com"
+                  "guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                  "server_assigned_id": "ISSUE-01462",
+                  "creation_author": "Architect@example.com",
+                  "creation_date": "2016-08-01T17:34:22.409Z",
+                  "topic_type": "Clash",
+                  "topic_status": "open",
+                  "title": "Example topic 3",
+                  "priority": "high",
+                  "labels": ["Architecture", "Heating"],
+                  "assigned_to": "harry.muster@example.com",
                 }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
     get:
       summary: Get Topic
       description: Retrieve a specific topic.
       tags:
         - Topics
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/topic_GET'
+                $ref: "#/components/schemas/topic_GET"
               example:
                 {
-                    "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
-                    "server_assigned_id": "ISSUE-00549",
-                    "creation_author": "Architect@example.com",
-                    "creation_date": "2016-08-01T17:34:22.409Z",
-                    "topic_type": "Clash",
-                    "topic_status": "open",
-                    "title": "Example topic 3",
-                    "priority": "high",
-                    "labels": [
-                        "Architecture",
-                        "Heating"
-                    ],
-                    "assigned_to": "harry.muster@example.com",
-                    "authorization": {
-                        "topic_actions": [
-                            "createComment",
-                            "createViewpoint"
-                        ]
-                    }
+                  "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+                  "server_assigned_id": "ISSUE-00549",
+                  "creation_author": "Architect@example.com",
+                  "creation_date": "2016-08-01T17:34:22.409Z",
+                  "topic_type": "Clash",
+                  "topic_status": "open",
+                  "title": "Example topic 3",
+                  "priority": "high",
+                  "labels": ["Architecture", "Heating"],
+                  "assigned_to": "harry.muster@example.com",
+                  "authorization":
+                    { "topic_actions": ["createComment", "createViewpoint"] },
                 }
     put:
       summary: Update Topic
-      description:  |
+      description: |
         Modify a specific topic, description similar to POST. This operation is only possible when the server returns
         the update flag in the Topic authorization, see section 3.2.8
       tags:
         - Topics
       requestBody:
-          required: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/topic_PUT'
-              example:
-                {
-                    "topic_type": "Clash",
-                    "topic_status": "open",
-                    "title": "Example topic 3 - Changed Title",
-                    "priority": "high",
-                    "labels": [
-                        "Architecture",
-                        "Heating"
-                    ],
-                    "assigned_to": "harry.muster@example.com"
-                }
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/topic_PUT"
+            example:
+              {
+                "topic_type": "Clash",
+                "topic_status": "open",
+                "title": "Example topic 3 - Changed Title",
+                "priority": "high",
+                "labels": ["Architecture", "Heating"],
+                "assigned_to": "harry.muster@example.com",
+              }
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/topic_GET'
+                $ref: "#/components/schemas/topic_GET"
               example:
                 {
-                    "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
-                    "server_assigned_id": "ISSUE-00037",
-                    "creation_author": "Architect@example.com",
-                    "creation_date": "2016-08-01T17:34:22.409Z",
-                    "modified_author": "Architect@example.com",
-                    "modified_date": "2016-08-02T13:22:22.409Z",
-                    "topic_type": "Clash",
-                    "topic_status": "open",
-                    "title": "Example topic 3 - Changed Title",
-                    "priority": "high",
-                    "labels": [
-                        "Architecture",
-                        "Heating"
-                    ],
-                    "assigned_to": "harry.muster@example.com"
+                  "guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+                  "server_assigned_id": "ISSUE-00037",
+                  "creation_author": "Architect@example.com",
+                  "creation_date": "2016-08-01T17:34:22.409Z",
+                  "modified_author": "Architect@example.com",
+                  "modified_date": "2016-08-02T13:22:22.409Z",
+                  "topic_type": "Clash",
+                  "topic_status": "open",
+                  "title": "Example topic 3 - Changed Title",
+                  "priority": "high",
+                  "labels": ["Architecture", "Heating"],
+                  "assigned_to": "harry.muster@example.com",
                 }
     delete:
       summary: Delete Topic
@@ -397,70 +353,85 @@ paths:
       tags:
         - Topics
       responses:
-        '200':
+        "200":
           description: OK
   /bcf/{version}/projects/{project_id}/files_information:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
     get:
       summary: Get Files Information
-      description:  |
+      description: |
         Retrieve a collection of project_file_informations to support allowing users to choose which Files (models)
         to reference in the header of topics created on the server.
       tags:
         - Files
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref:  "#/components/schemas/project_files_informations_GET"
+                $ref: "#/components/schemas/project_files_informations_GET"
               example:
                 {
-                  "pagination": {
-                    "skip": 0,
-                    "top": 1000,
-                    "totalCount": 2,
-                    "nextLink": null
-                  },
-                  "data": [{
-                    "display_information": [{
-                      "field_display_name": "Model Name",
-                      "field_value": "ARCH-Z100-051"
-                    }, {
-                      "field_display_name": "Revision Date",
-                      "field_value": "May 3 2020"
-                    }],
-                    "file": {
-                        "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
-                        "file_name": "OfficeBuilding_Architecture_0001.ifc",
-                        "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
-                    }
-                  }, {
-                    "display_information": [{
-                      "field_display_name": "Model Name",
-                      "field_value": "MEP-Z100-015"
-                    }, {
-                      "field_display_name": "Revision Date",
-                      "field_value": "Apr 30 2020"
-                    }],
-                    "file": {
-                        "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
-                        "file_name": "OfficeBuilding_Heating_0003.ifc",
-                        "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
-                    }
-                  }]
+                  "pagination":
+                    {
+                      "skip": 0,
+                      "top": 1000,
+                      "totalCount": 2,
+                      "nextLink": null,
+                    },
+                  "data":
+                    [
+                      {
+                        "display_information":
+                          [
+                            {
+                              "field_display_name": "Model Name",
+                              "field_value": "ARCH-Z100-051",
+                            },
+                            {
+                              "field_display_name": "Revision Date",
+                              "field_value": "May 3 2020",
+                            },
+                          ],
+                        "file":
+                          {
+                            "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+                            "file_name": "OfficeBuilding_Architecture_0001.ifc",
+                            "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc",
+                          },
+                      },
+                      {
+                        "display_information":
+                          [
+                            {
+                              "field_display_name": "Model Name",
+                              "field_value": "MEP-Z100-015",
+                            },
+                            {
+                              "field_display_name": "Revision Date",
+                              "field_value": "Apr 30 2020",
+                            },
+                          ],
+                        "file":
+                          {
+                            "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+                            "file_name": "OfficeBuilding_Heating_0003.ifc",
+                            "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a",
+                          },
+                      },
+                    ],
                 }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/files:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
     get:
       summary: Get Files
-      description:  |
+      description: |
         Retrieve a collection of file references as topic header.
         Implementer Note: The reference property can either be an Uri or a server specific id.
         Uris are given as absolute paths to the model files while ids reference a custom id of the model file and require custom logic per server to retrieve it.
@@ -468,33 +439,38 @@ paths:
       tags:
         - Files
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref:  "#/components/schemas/files_GET"
+                $ref: "#/components/schemas/files_GET"
               example:
                 {
-                  "pagination": {
-                    "skip": 0,
-                    "top": 1000,
-                    "totalCount": 2,
-                    "nextLink": null
-                  },
-                  "data": [{
-                    "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
-                    "file_name": "OfficeBuilding_Architecture_0001.ifc",
-                    "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
-                  }, {
-                    "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
-                    "file_name": "OfficeBuilding_Heating_0003.ifc",
-                    "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
-                  }]
+                  "pagination":
+                    {
+                      "skip": 0,
+                      "top": 1000,
+                      "totalCount": 2,
+                      "nextLink": null,
+                    },
+                  "data":
+                    [
+                      {
+                        "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
+                        "file_name": "OfficeBuilding_Architecture_0001.ifc",
+                        "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc",
+                      },
+                      {
+                        "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
+                        "file_name": "OfficeBuilding_Heating_0003.ifc",
+                        "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a",
+                      },
+                    ],
                 }
     put:
       summary: Update File
-      description:  |
+      description: |
         Update a collection of file references on the topic header. This operation is only possible when the server returns the updateFiles flag in the Topic authorization,
         see section 3.2.8
       tags:
@@ -506,41 +482,47 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/file_PUT'
+                $ref: "#/components/schemas/file_PUT"
             example:
-              [{
+              [
+                {
                   "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
                   "filename": "OfficeBuilding_Architecture_0001.ifc",
-                  "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
-              }, {
+                  "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc",
+                },
+                {
                   "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
                   "filename": "OfficeBuilding_Heating_0003.ifc",
-                  "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
-              }]
+                  "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc",
+                },
+              ]
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/file_GET'
+                  $ref: "#/components/schemas/file_GET"
               example:
-                [{
+                [
+                  {
                     "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
                     "file_name": "OfficeBuilding_Architecture_0001.ifc",
-                    "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
-                }, {
+                    "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc",
+                  },
+                  {
                     "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
                     "file_name": "OfficeBuilding_Heating_0003.ifc",
-                    "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc"
-                }]
+                    "reference": "https://example.com/files/3hwBHP91jBRwPsmyf$3Hea_0003.ifc",
+                  },
+                ]
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
     get:
       summary: Get Comments
       description: Retrieve a collection of all comments related to a topic (default ordering is date).
@@ -571,43 +553,40 @@ paths:
       tags:
         - Comments
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref:  "#/components/schemas/comments_GET"
+                $ref: "#/components/schemas/comments_GET"
               example:
                 {
-                  "pagination": {
-                    "skip": 0,
-                    "top": 1000,
-                    "totalCount": 2,
-                    "nextLink": null
-                  },
-                  "data": [{
-                    "guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
-                    "date": "2016-08-01T12:34:22.409Z",
-                    "author": "max.muster@example.com",
-                    "comment": "Clash found",
-                    "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
-                    "authorization": {
-                      "comment_actions": [
-                        "update"
-                      ]
-                    }
-                  }, {
-                    "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
-                    "date": "2016-08-01T14:24:11.316Z",
-                    "author": "bob.heater@example.com",
-                    "comment": "will rework the heating model",
-                    "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
-                    "authorization": {
-                      "comment_actions": [
-                        "update"
-                      ]
-                    }
-                  }]
+                  "pagination":
+                    {
+                      "skip": 0,
+                      "top": 1000,
+                      "totalCount": 2,
+                      "nextLink": null,
+                    },
+                  "data":
+                    [
+                      {
+                        "guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+                        "date": "2016-08-01T12:34:22.409Z",
+                        "author": "max.muster@example.com",
+                        "comment": "Clash found",
+                        "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+                        "authorization": { "comment_actions": ["update"] },
+                      },
+                      {
+                        "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
+                        "date": "2016-08-01T14:24:11.316Z",
+                        "author": "bob.heater@example.com",
+                        "comment": "will rework the heating model",
+                        "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
+                        "authorization": { "comment_actions": ["update"] },
+                      },
+                    ],
                 }
     post:
       summary: Create Comment
@@ -619,55 +598,52 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/comment_POST'
-            example:
-              {
-                  "comment": "will rework the heating model"
-              }
+              $ref: "#/components/schemas/comment_POST"
+            example: { "comment": "will rework the heating model" }
       responses:
-        '201':
+        "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/comment_GET'
+                $ref: "#/components/schemas/comment_GET"
               example:
                 {
                   "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
                   "date": "2016-08-01T14:24:11.316Z",
                   "author": "bob.heater@example.com",
                   "comment": "will rework the heating model",
-                  "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
+                  "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
                 }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
-    - $ref:  "#/components/parameters/comment_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/comment_guid"
     get:
       summary: Get Comment
       description: Get a single comment.
       tags:
         - Comments
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/comment_GET'
+                $ref: "#/components/schemas/comment_GET"
               example:
                 {
                   "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
                   "date": "2016-08-01T14:24:11.316Z",
                   "author": "bob.heater@example.com",
                   "comment": "will rework the heating model",
-                  "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
+                  "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
                 }
     put:
       summary: Update Comment
-      description:  |
+      description: |
         Update a single comment, description similar to POST. This operation is only possible when the server returns the update
         flag in the Comment authorization, see section 3.4.6
       tags:
@@ -677,154 +653,123 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/comment_PUT'
+              $ref: "#/components/schemas/comment_PUT"
             example:
               {
-                  "comment": "will rework the heating model and fix the ventilation"
+                "comment": "will rework the heating model and fix the ventilation",
               }
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/comment_GET'
+                $ref: "#/components/schemas/comment_GET"
               example:
                 {
                   "guid": "A333FCA8-1A31-CAAC-A321-BB33ABC8414",
                   "date": "2016-08-01T14:24:11.316Z",
                   "author": "bob.heater@example.com",
                   "comment": "will rework the heating model",
-                  "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228"
+                  "topic_guid": "B345F4F2-3A04-B43B-A713-5E456BEF8228",
                 }
     delete:
       summary: Delete Comment
-      description:  Deletes a single comment. This operation is only possible when the server returns the delete flag in the Comment authorization, see section 3.4.6
+      description: Deletes a single comment. This operation is only possible when the server returns the delete flag in the Comment authorization, see section 3.4.6
       tags:
         - Comments
       responses:
-        '200':
+        "200":
           description: OK
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
     get:
       summary: Get Viewpoints
       description: Retrieve a collection of all viewpoints related to a topic.
       tags:
         - Viewpoints
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref:  "#/components/schemas/viewpoints_GET"
+                $ref: "#/components/schemas/viewpoints_GET"
               example:
                 {
-                  "pagination": {
-                    "skip": 0,
-                    "top": 1000,
-                    "totalCount": 2,
-                    "nextLink": null
-                  },
-                  "data": [{
-                    "guid": "b24a82e9-f67b-43b8-bda0-4946abf39624",
-                    "perspective_camera": {
-                      "camera_view_point": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0
-                      },
-                      "camera_direction": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 2.0
-                      },
-                      "camera_up_vector": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 1.0
-                      },
-                      "field_of_view": 90.0,
-                      "aspect_ratio": 1.33
+                  "pagination":
+                    {
+                      "skip": 0,
+                      "top": 1000,
+                      "totalCount": 2,
+                      "nextLink": null,
                     },
-                    "lines": [{
-                        "start_point": {
-                          "x": 2.0,
-                          "y": 1.0,
-                          "z": 1.0
-                        },
-                        "end_point": {
-                          "x": 0.0,
-                          "y": 1.0,
-                          "z": 0.7
-                        }
-                    }],
-                    "clipping_planes": [{
-                      "location": {
-                        "x": 0.7,
-                        "y": 0.3,
-                        "z": -0.2
+                  "data":
+                    [
+                      {
+                        "guid": "b24a82e9-f67b-43b8-bda0-4946abf39624",
+                        "perspective_camera":
+                          {
+                            "camera_view_point":
+                              { "x": 0.0, "y": 0.0, "z": 0.0 },
+                            "camera_direction":
+                              { "x": 1.0, "y": 1.0, "z": 2.0 },
+                            "camera_up_vector":
+                              { "x": 0.0, "y": 0.0, "z": 1.0 },
+                            "field_of_view": 90.0,
+                            "aspect_ratio": 1.33,
+                          },
+                        "lines":
+                          [
+                            {
+                              "start_point": { "x": 2.0, "y": 1.0, "z": 1.0 },
+                              "end_point": { "x": 0.0, "y": 1.0, "z": 0.7 },
+                            },
+                          ],
+                        "clipping_planes":
+                          [
+                            {
+                              "location": { "x": 0.7, "y": 0.3, "z": -0.2 },
+                              "direction": { "x": 1.0, "y": 0.4, "z": 0.1 },
+                            },
+                          ],
                       },
-                      "direction": {
-                        "x": 1.0,
-                        "y": 0.4,
-                        "z": 0.1
-                      }
-                    }]
-                  }, {
-                    "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
-                    "perspective_camera": {
-                      "camera_view_point": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0
+                      {
+                        "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+                        "perspective_camera":
+                          {
+                            "camera_view_point":
+                              { "x": 0.0, "y": 0.0, "z": 0.0 },
+                            "camera_direction":
+                              { "x": 1.0, "y": 1.0, "z": 2.0 },
+                            "camera_up_vector":
+                              { "x": 0.0, "y": 0.0, "z": 1.0 },
+                            "field_of_view": 90.0,
+                            "aspect_ratio": 1.33,
+                          },
+                        "lines":
+                          [
+                            {
+                              "start_point": { "x": 1.0, "y": 1.0, "z": 1.0 },
+                              "end_point": { "x": 0.0, "y": 0.0, "z": 0.0 },
+                            },
+                          ],
+                        "clipping_planes":
+                          [
+                            {
+                              "location": { "x": 0.5, "y": 0.5, "z": 0.5 },
+                              "direction": { "x": 1.0, "y": 0.0, "z": 0.0 },
+                            },
+                          ],
                       },
-                      "camera_direction": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 2.0
-                      },
-                      "camera_up_vector": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 1.0
-                      },
-                      "field_of_view": 90.0,
-                      "aspect_ratio": 1.33
-                    },
-                    "lines": [{
-                      "start_point": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                      },
-                      "end_point": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0
-                      }
-                    }],
-                    "clipping_planes": [{
-                      "location": {
-                        "x": 0.5,
-                        "y": 0.5,
-                        "z": 0.5
-                      },
-                      "direction": {
-                        "x": 1.0,
-                        "y": 0.0,
-                        "z": 0.0
-                      }
-                    }]
-                  }]
+                    ],
                 }
     post:
       summary: Create Viewpoint
-      description:  |
+      description: |
         Add a new viewpoint. Viewpoints are immutable, meaning that they should never change. Requirements for different visualizations should be handled by
         creating new viewpoint elements. This operation is only possible when the server returns the createViewpoint flag in the Topic authorization, see section 3.2.8
       tags:
@@ -834,268 +779,182 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/viewpoint_POST'
+              $ref: "#/components/schemas/viewpoint_POST"
             example:
               {
-                  "index": 10,
-                  "perspective_camera": {
-                      "camera_view_point": {
-                          "x": 0.0,
-                          "y": 0.0,
-                          "z": 0.0
-                      },
-                      "camera_direction": {
-                          "x": 1.0,
-                          "y": 1.0,
-                          "z": 2.0
-                      },
-                      "camera_up_vector": {
-                          "x": 0.0,
-                          "y": 0.0,
-                          "z": 1.0
-                      },
-                      "field_of_view": 90.0,
-                      "aspect_ratio": 1.33
+                "index": 10,
+                "perspective_camera":
+                  {
+                    "camera_view_point": { "x": 0.0, "y": 0.0, "z": 0.0 },
+                    "camera_direction": { "x": 1.0, "y": 1.0, "z": 2.0 },
+                    "camera_up_vector": { "x": 0.0, "y": 0.0, "z": 1.0 },
+                    "field_of_view": 90.0,
+                    "aspect_ratio": 1.33,
                   },
-                  "lines": [{
-                      "start_point": {
-                          "x": 1.0,
-                          "y": 1.0,
-                          "z": 1.0
-                      },
-                      "end_point": {
-                          "x": 0.0,
-                          "y": 0.0,
-                          "z": 0.0
-                      }
-                  }],
-                  "clipping_planes": [{
-                      "location": {
-                          "x": 0.5,
-                          "y": 0.5,
-                          "z": 0.5
-                      },
-                      "direction": {
-                          "x": 1.0,
-                          "y": 0.0,
-                          "z": 0.0
-                      }
-                  }],
-                  "bitmaps": [{
+                "lines":
+                  [
+                    {
+                      "start_point": { "x": 1.0, "y": 1.0, "z": 1.0 },
+                      "end_point": { "x": 0.0, "y": 0.0, "z": 0.0 },
+                    },
+                  ],
+                "clipping_planes":
+                  [
+                    {
+                      "location": { "x": 0.5, "y": 0.5, "z": 0.5 },
+                      "direction": { "x": 1.0, "y": 0.0, "z": 0.0 },
+                    },
+                  ],
+                "bitmaps":
+                  [
+                    {
                       "bitmap_type": "jpg",
                       "bitmap_data": "SGVsbG8gV29ybGQh",
-                      "location": {
-                          "x": 10.0,
-                          "y": -10.0,
-                          "z": 7.0
-                      },
-                      "normal": {
-                          "x": -1.0,
-                          "y": 1.25,
-                          "z": 0.0
-                      },
-                      "up": {
-                          "x": -5.4,
-                          "y": -4.3,
-                          "z": 1.0
-                      },
-                      "height": 1666
-                  }],
-                  "snapshot": {
-                      "snapshot_type": "png",
-                      "snapshot_data": "SGVsbG8gV29ybGQh"
+                      "location": { "x": 10.0, "y": -10.0, "z": 7.0 },
+                      "normal": { "x": -1.0, "y": 1.25, "z": 0.0 },
+                      "up": { "x": -5.4, "y": -4.3, "z": 1.0 },
+                      "height": 1666,
+                    },
+                  ],
+                "snapshot":
+                  {
+                    "snapshot_type": "png",
+                    "snapshot_data": "SGVsbG8gV29ybGQh",
                   },
-                  "components": {
-                      "selection": [{
+                "components":
+                  {
+                    "selection":
+                      [
+                        {
                           "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
                           "originating_system": "Example CAD Application",
-                          "authoring_tool_id": "EXCAD/v1.0"
-                      }],
-                      "coloring": [{
+                          "authoring_tool_id": "EXCAD/v1.0",
+                        },
+                      ],
+                    "coloring":
+                      [
+                        {
                           "color": "ff0000",
-                          "components": [{
-                              "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
-                          }]
-                      }],
-                      "visibility": {
-                          "default_visibility": false,
-                          "exceptions": [{
-                              "ifc_guid": "4$cshxZO9AJBebsni$z9Yk"
-                          }],
-                          "view_setup_hints": {
-                              "spaces_visible": true,
-                              "space_boundaries_visible": false,
-                              "openings_visible": true
-                          }
-                      }
-                  }
+                          "components":
+                            [{ "ifc_guid": "3$cshxZO9AJBebsni$z9Yk" }],
+                        },
+                      ],
+                    "visibility":
+                      {
+                        "default_visibility": false,
+                        "exceptions":
+                          [{ "ifc_guid": "4$cshxZO9AJBebsni$z9Yk" }],
+                        "view_setup_hints":
+                          {
+                            "spaces_visible": true,
+                            "space_boundaries_visible": false,
+                            "openings_visible": true,
+                          },
+                      },
+                  },
               }
       responses:
-        '201':
+        "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/viewpoint_GET'
+                $ref: "#/components/schemas/viewpoint_GET"
               example:
                 {
-                    "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
-                    "index": 10,
-                    "perspective_camera": {
-                        "camera_view_point": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "camera_direction": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 2.0
-                        },
-                        "camera_up_vector": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 1.0
-                        },
-                        "field_of_view": 90.0,
-                        "aspect_ratio": 1.33
+                  "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+                  "index": 10,
+                  "perspective_camera":
+                    {
+                      "camera_view_point": { "x": 0.0, "y": 0.0, "z": 0.0 },
+                      "camera_direction": { "x": 1.0, "y": 1.0, "z": 2.0 },
+                      "camera_up_vector": { "x": 0.0, "y": 0.0, "z": 1.0 },
+                      "field_of_view": 90.0,
+                      "aspect_ratio": 1.33,
                     },
-                    "lines": [{
-                        "start_point": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        },
-                        "end_point": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        }
-                    }],
-                    "clipping_planes": [{
-                        "location": {
-                            "x": 0.5,
-                            "y": 0.5,
-                            "z": 0.5
-                        },
-                        "direction": {
-                            "x": 1.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        }
-                    }],
-                    "bitmaps": [{
+                  "lines":
+                    [
+                      {
+                        "start_point": { "x": 1.0, "y": 1.0, "z": 1.0 },
+                        "end_point": { "x": 0.0, "y": 0.0, "z": 0.0 },
+                      },
+                    ],
+                  "clipping_planes":
+                    [
+                      {
+                        "location": { "x": 0.5, "y": 0.5, "z": 0.5 },
+                        "direction": { "x": 1.0, "y": 0.0, "z": 0.0 },
+                      },
+                    ],
+                  "bitmaps":
+                    [
+                      {
                         "guid": "20c1cb56-315f-4a0a-922d-ed7a4a8edf55",
                         "bitmap_type": "jpg",
-                        "location": {
-                            "x": 10.0,
-                            "y": -10.0,
-                            "z": 7.0
-                        },
-                        "normal": {
-                            "x": -1.0,
-                            "y": 1.25,
-                            "z": 0.0
-                        },
-                        "up": {
-                            "x": -5.4,
-                            "y": -4.3,
-                            "z": 1.0
-                        },
-                        "height": 1666
-                    }],
-                    "snapshot": {
-                        "snapshot_type": "png"
-                    }
+                        "location": { "x": 10.0, "y": -10.0, "z": 7.0 },
+                        "normal": { "x": -1.0, "y": 1.25, "z": 0.0 },
+                        "up": { "x": -5.4, "y": -4.3, "z": 1.0 },
+                        "height": 1666,
+                      },
+                    ],
+                  "snapshot": { "snapshot_type": "png" },
                 }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
-    - $ref:  "#/components/parameters/viewpoint_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/viewpoint_guid"
     get:
       summary: Get Viewpoint
-      description:  Retrieve a specific viewpoint.
+      description: Retrieve a specific viewpoint.
       tags:
         - Viewpoints
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/viewpoint_GET'
+                $ref: "#/components/schemas/viewpoint_GET"
               example:
                 {
-                    "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
-                    "index": 10,
-                    "perspective_camera": {
-                        "camera_view_point": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "camera_direction": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 2.0
-                        },
-                        "camera_up_vector": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 1.0
-                        },
-                        "field_of_view": 90.0,
-                        "aspect_ratio": 1.33
+                  "guid": "a11a82e7-e66c-34b4-ada1-5846abf39133",
+                  "index": 10,
+                  "perspective_camera":
+                    {
+                      "camera_view_point": { "x": 0.0, "y": 0.0, "z": 0.0 },
+                      "camera_direction": { "x": 1.0, "y": 1.0, "z": 2.0 },
+                      "camera_up_vector": { "x": 0.0, "y": 0.0, "z": 1.0 },
+                      "field_of_view": 90.0,
+                      "aspect_ratio": 1.33,
                     },
-                    "lines": [{
-                        "start_point": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        },
-                        "end_point": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        }
-                    }],
-                    "clipping_planes": [{
-                        "location": {
-                            "x": 0.5,
-                            "y": 0.5,
-                            "z": 0.5
-                        },
-                        "direction": {
-                            "x": 1.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        }
-                    }],
-                    "bitmaps": [{
+                  "lines":
+                    [
+                      {
+                        "start_point": { "x": 1.0, "y": 1.0, "z": 1.0 },
+                        "end_point": { "x": 0.0, "y": 0.0, "z": 0.0 },
+                      },
+                    ],
+                  "clipping_planes":
+                    [
+                      {
+                        "location": { "x": 0.5, "y": 0.5, "z": 0.5 },
+                        "direction": { "x": 1.0, "y": 0.0, "z": 0.0 },
+                      },
+                    ],
+                  "bitmaps":
+                    [
+                      {
                         "guid": "20c1cb56-315f-4a0a-922d-ed7a4a8edf55",
                         "bitmap_type": "jpg",
-                        "location": {
-                            "x": 10.0,
-                            "y": -10.0,
-                            "z": 7.0
-                        },
-                        "normal": {
-                            "x": -1.0,
-                            "y": 1.25,
-                            "z": 0.0
-                        },
-                        "up": {
-                            "x": -5.4,
-                            "y": -4.3,
-                            "z": 1.0
-                        },
-                        "height": 1666
-                    }],
-                    "snapshot": {
-                        "snapshot_type": "png"
-                    }
+                        "location": { "x": 10.0, "y": -10.0, "z": 7.0 },
+                        "normal": { "x": -1.0, "y": 1.25, "z": 0.0 },
+                        "up": { "x": -5.4, "y": -4.3, "z": 1.0 },
+                        "height": 1666,
+                      },
+                    ],
+                  "snapshot": { "snapshot_type": "png" },
                 }
     delete:
       summary: Delete Viewpoint
@@ -1103,21 +962,21 @@ paths:
       tags:
         - Viewpoints
       responses:
-        '200':
+        "200":
           description: OK
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/snapshot:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
-    - $ref:  "#/components/parameters/viewpoint_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/viewpoint_guid"
     get:
       summary: Get Snapshot
       description: Retrieve a viewpoints snapshot (png or jpg) as image file. A viewpoint contains a snapshot if viewpoint.snapshot != null.
       tags:
         - Viewpoints
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/octet-stream:
@@ -1126,18 +985,18 @@ paths:
                 format: binary
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/bitmaps/{bitmap_guid}:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
-    - $ref:  "#/components/parameters/viewpoint_guid"
-    - $ref:  "#/components/parameters/bitmap_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/viewpoint_guid"
+      - $ref: "#/components/parameters/bitmap_guid"
     get:
       summary: Get Bitmap
       description: Retrieve a specific viewpoints bitmap image file (png or jpg).
       tags:
         - Viewpoints
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/octet-stream:
@@ -1146,179 +1005,189 @@ paths:
                 format: binary
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/selection:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
-    - $ref:  "#/components/parameters/viewpoint_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/viewpoint_guid"
     get:
       summary: Get Selection
       description: Retrieve a collection of all selected components in a viewpoint.
       tags:
         - Viewpoints
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/selection_GET'
+                $ref: "#/components/schemas/selection_GET"
               example:
                 {
-                  "selection": [
+                  "selection":
+                    [
                       {
-                          "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                          "originating_system": "Example CAD Application",
-                          "authoring_tool_id": "EXCAD/v1.0"
-                      }, {
-                          "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
-                      }
-                  ]
-              }
+                        "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                        "originating_system": "Example CAD Application",
+                        "authoring_tool_id": "EXCAD/v1.0",
+                      },
+                      { "ifc_guid": "3$cshxZO9AJBebsni$z9Yk" },
+                    ],
+                }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/coloring:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
-    - $ref:  "#/components/parameters/viewpoint_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/viewpoint_guid"
     get:
       summary: Get Coloring
       description: Retrieve a collection of all colored components in a viewpoint.
       tags:
         - Viewpoints
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/coloring_GET'
+                $ref: "#/components/schemas/coloring_GET"
               example:
                 {
-                    "coloring": [
-                        {
-                            "color": "#ff0000",
-                            "components": [
-                                {
-                                    "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                                    "originating_system": "Example CAD Application",
-                                    "authoring_tool_id": "EXCAD/v1.0"
-                                }, {
-                                    "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
-                                }
-                            ]
-                        }
-                    ]
+                  "coloring":
+                    [
+                      {
+                        "color": "#ff0000",
+                        "components":
+                          [
+                            {
+                              "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                              "originating_system": "Example CAD Application",
+                              "authoring_tool_id": "EXCAD/v1.0",
+                            },
+                            { "ifc_guid": "3$cshxZO9AJBebsni$z9Yk" },
+                          ],
+                      },
+                    ],
                 }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/visibility:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
-    - $ref:  "#/components/parameters/viewpoint_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/viewpoint_guid"
     get:
       summary: Get Visibility
       description: Retrieve visibility of components in a viewpoint.
       tags:
         - Viewpoints
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/visibility_GET'
+                $ref: "#/components/schemas/visibility_GET"
               example:
                 {
-                    "visibility": {
-                            "default_visibility": true,
-                        "exceptions": [
-                            {
-                                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                                "originating_system": "Example CAD Application",
-                                "authoring_tool_id": "EXCAD/v1.0"
-                            }, {
-                                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-                            }
+                  "visibility":
+                    {
+                      "default_visibility": true,
+                      "exceptions":
+                        [
+                          {
+                            "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                            "originating_system": "Example CAD Application",
+                            "authoring_tool_id": "EXCAD/v1.0",
+                          },
+                          { "ifc_guid": "3$cshxZO9AJBebsni$z9Yk" },
                         ],
-                        "view_setup_hints": {
-                            "spaces_visible": true,
-                            "space_boundaries_visible": false,
-                            "openings_visible": true
-                        }
-                    }
+                      "view_setup_hints":
+                        {
+                          "spaces_visible": true,
+                          "space_boundaries_visible": false,
+                          "openings_visible": true,
+                        },
+                    },
                 }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/translucency:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
-    - $ref:  "#/components/parameters/viewpoint_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/viewpoint_guid"
     get:
       summary: Get Translucency
       description: Retrieve translucency of components in a viewpoint.
       tags:
         - Viewpoints
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/translucency_GET'
+                $ref: "#/components/schemas/translucency_GET"
               example:
+                {
+                  "translucency":
                     {
-                      "translucency": {
-                        "default_translucency": true,
-                        "exceptions": [
-                            {
-                                "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                                "originating_system": "Example CAD Application",
-                                "authoring_tool_id": "EXCAD/v1.0"
-                            }, {
-                                "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
-                            }
+                      "default_translucency": true,
+                      "exceptions":
+                        [
+                          {
+                            "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
+                            "originating_system": "Example CAD Application",
+                            "authoring_tool_id": "EXCAD/v1.0",
+                          },
+                          { "ifc_guid": "3$cshxZO9AJBebsni$z9Yk" },
                         ],
-                        "translucency_setup_hints": {
-                            "spaces_translucent": true,
-                            "space_boundaries_translucent": false,
-                            "openings_translucent": true
-                        }
-                      }
-                    }
+                      "translucency_setup_hints":
+                        {
+                          "spaces_translucent": true,
+                          "space_boundaries_translucent": false,
+                          "openings_translucent": true,
+                        },
+                    },
+                }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/related_topics:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
     get:
       summary: Get Related Topics
       description: Retrieve a collection of all related topics to a topic.
       tags:
         - Related Topics
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref:  "#/components/schemas/related_topics_GET"
+                $ref: "#/components/schemas/related_topics_GET"
               example:
                 {
-                  "pagination": {
-                    "skip": 0,
-                    "top": 1000,
-                    "totalCount": 2,
-                    "nextLink": null
-                  },
-                  "data": [{
-                    "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4"
-                  }, {
-                    "related_topic_guid": "6963a846-54d1-4050-954d-607cd5e48aa3"
-                  }]
+                  "pagination":
+                    {
+                      "skip": 0,
+                      "top": 1000,
+                      "totalCount": 2,
+                      "nextLink": null,
+                    },
+                  "data":
+                    [
+                      {
+                        "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4",
+                      },
+                      {
+                        "related_topic_guid": "6963a846-54d1-4050-954d-607cd5e48aa3",
+                      },
+                    ],
                 }
     put:
       summary: Update Related Topics
-      description:  |
+      description: |
         Add or update a collection of all related topics to a topic. This operation is only possible when the server returns the updateRelatedTopics
         flag in the Topic authorization, see section 3.2.8.
         Throws "409 Conflict" if requesting to add a parent-child relation causing an infinite loop. Example: TopicA is already the parent of TopicB. Making TopicB the parent of TopicA is not allowed.
@@ -1331,74 +1200,87 @@ paths:
             schema:
               type: array
               items:
-                $ref:  "#/components/schemas/related_topic_PUT"
+                $ref: "#/components/schemas/related_topic_PUT"
               example:
-                [{
-                    "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4"
-                }, {
-                    "related_topic_guid": "6963a846-54d1-4050-954d-607cd5e48aa3"
-                }, {
-                    "related_topic_guid": "bac66ab4-331e-4f21-a28e-083d2cf2e796"
-                }]
+                [
+                  {
+                    "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4",
+                  },
+                  {
+                    "related_topic_guid": "6963a846-54d1-4050-954d-607cd5e48aa3",
+                  },
+                  {
+                    "related_topic_guid": "bac66ab4-331e-4f21-a28e-083d2cf2e796",
+                  },
+                ]
       responses:
-        '409':
+        "409":
           description: Conflict
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/related_topic_GET'
+                  $ref: "#/components/schemas/related_topic_GET"
               example:
-                [{
-                    "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4"
-                }, {
-                    "related_topic_guid": "6963a846-54d1-4050-954d-607cd5e48aa3"
-                }, {
-                    "related_topic_guid": "bac66ab4-331e-4f21-a28e-083d2cf2e796"
-                }]
+                [
+                  {
+                    "related_topic_guid": "db49df2b-0e42-473b-a3ee-f7b785d783c4",
+                  },
+                  {
+                    "related_topic_guid": "6963a846-54d1-4050-954d-607cd5e48aa3",
+                  },
+                  {
+                    "related_topic_guid": "bac66ab4-331e-4f21-a28e-083d2cf2e796",
+                  },
+                ]
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/document_references:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
     get:
       summary: Get Document References
-      description:  |
+      description: |
         Add a document reference to a topic. This operation is only possible when the server returns the updateDocumentReferences
         flag in the Topic authorization, see section 3.2.8
       tags:
         - Document References
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref:  "#/components/schemas/document_references_GET"
+                $ref: "#/components/schemas/document_references_GET"
               example:
                 {
-                  "pagination": {
-                    "skip": 0,
-                    "top": 1000,
-                    "totalCount": 2,
-                    "nextLink": null
-                  },
-                  "data": [{
-                    "guid": "212ab37a-6122-448e-86fc-86503183b520",
-                    "url": "http://example.com/files/LegalRequirements.pdf",
-                    "description": "The legal requirements for buildings."
-                  }, {
-                    "guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
-                    "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
-                    "description": "The building owners global design parameters for buildings."
-                  }]
+                  "pagination":
+                    {
+                      "skip": 0,
+                      "top": 1000,
+                      "totalCount": 2,
+                      "nextLink": null,
+                    },
+                  "data":
+                    [
+                      {
+                        "guid": "212ab37a-6122-448e-86fc-86503183b520",
+                        "url": "http://example.com/files/LegalRequirements.pdf",
+                        "description": "The legal requirements for buildings.",
+                      },
+                      {
+                        "guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
+                        "document_guid": "472ab37a-6122-448e-86fc-86503183b520",
+                        "description": "The building owners global design parameters for buildings.",
+                      },
+                    ],
                 }
     post:
       summary: Create Document Reference
-      description:  |
+      description: |
         Add a document reference to a topic. This operation is only possible when the server returns the updateDocumentReferences flag in the Topic authorization, see section 4.2.8
 
         Should either reference an internal or an external document.
@@ -1416,34 +1298,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref:  "#/components/schemas/document_reference_POST"
+              $ref: "#/components/schemas/document_reference_POST"
             example:
               {
-                  "url": "http://example.com/files/LegalRequirements.pdf",
-                  "description": "The legal requirements for buildings."
+                "url": "http://example.com/files/LegalRequirements.pdf",
+                "description": "The legal requirements for buildings.",
               }
       responses:
-        '201':
+        "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/document_reference_GET'
+                $ref: "#/components/schemas/document_reference_GET"
               example:
                 {
-                    "guid": "275ab37a-6122-448e-86fc-86503183b520",
-                    "url": "http://example.com/files/LegalRequirements.pdf",
-                    "description": "The legal requirements for buildings."
+                  "guid": "275ab37a-6122-448e-86fc-86503183b520",
+                  "url": "http://example.com/files/LegalRequirements.pdf",
+                  "description": "The legal requirements for buildings.",
                 }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/document_references/{document_reference_guid}:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
-    - $ref:  "#/components/parameters/document_reference_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/document_reference_guid"
     put:
       summary: Update Document Reference
-      description:  |
+      description: |
         Update an existing document reference identified by guid. Uses the same rules as POST Document Reference Service.
         This operation is only possible when the server returns the updateDocumentReferences flag in the Topic authorization, see section 4.2.8
       tags:
@@ -1453,30 +1335,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref:  "#/components/schemas/document_reference_PUT"
+              $ref: "#/components/schemas/document_reference_PUT"
             example:
               {
-                  "url": "http://example.com/files/LegalRequirements_Update.pdf",
-                  "description": "The legal requirements for buildings."
+                "url": "http://example.com/files/LegalRequirements_Update.pdf",
+                "description": "The legal requirements for buildings.",
               }
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/document_reference_GET'
+                $ref: "#/components/schemas/document_reference_GET"
               example:
                 {
-                    "guid": "135ab37a-6122-448e-86fc-86503183b520",
-                    "url": "http://example.com/files/LegalRequirements_Update.pdf",
-                    "description": "The legal requirements for buildings."
+                  "guid": "135ab37a-6122-448e-86fc-86503183b520",
+                  "url": "http://example.com/files/LegalRequirements_Update.pdf",
+                  "description": "The legal requirements for buildings.",
                 }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/documents:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
     get:
       summary: Get Documents
       description: |
@@ -1484,27 +1366,32 @@ paths:
       tags:
         - Documents
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref:  "#/components/schemas/documents_GET"
+                $ref: "#/components/schemas/documents_GET"
               example:
                 {
-                  "pagination": {
-                    "skip": 0,
-                    "top": 1000,
-                    "totalCount": 2,
-                    "nextLink": null
-                  },
-                  "data": [{
-                    "guid": "472ab37a-6122-448e-86fc-86503183b520",
-                    "filename": "LegalRequirements.pdf"
-                  }, {
-                    "guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
-                    "filename": "DesignParameters.pdf"
-                  }]
+                  "pagination":
+                    {
+                      "skip": 0,
+                      "top": 1000,
+                      "totalCount": 2,
+                      "nextLink": null,
+                    },
+                  "data":
+                    [
+                      {
+                        "guid": "472ab37a-6122-448e-86fc-86503183b520",
+                        "filename": "LegalRequirements.pdf",
+                      },
+                      {
+                        "guid": "6cbfe31d-95c3-4f4d-92a6-420c23698721",
+                        "filename": "DesignParameters.pdf",
+                      },
+                    ],
                 }
     post:
       summary: Create Document
@@ -1521,30 +1408,30 @@ paths:
               type: string
               format: binary
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/document_GET'
+                $ref: "#/components/schemas/document_GET"
               example:
                 {
-                    "guid": "472ab37a-6122-448e-86fc-86503183b520",
-                    "filename": "Official_Building_Permission.pdf"
+                  "guid": "472ab37a-6122-448e-86fc-86503183b520",
+                  "filename": "Official_Building_Permission.pdf",
                 }
   /bcf/{version}/projects/{project_id}/documents/{document_guid}:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/document_guid"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/document_guid"
     get:
       summary: Get Document
-      description:  |
+      description: |
         Retrieves a document as binary file.
       tags:
         - Documents
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/octet-stream:
@@ -1553,13 +1440,13 @@ paths:
                 format: binary
   /bcf/{version}/projects/{project_id}/topics/events:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref: "#/components/parameters/top"
-    - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/top"
+      - $ref: "#/components/parameters/skip"
     get:
       summary: Get Topics Events
-      description:  |
+      description: |
         Retrieves a document as binary file.
       parameters:
         - in: query
@@ -1590,49 +1477,46 @@ paths:
       tags:
         - Events
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref:  "#/components/schemas/topic_events_GET"
+                $ref: "#/components/schemas/topic_events_GET"
               example:
                 {
-                  "pagination": {
-                    "skip": 0,
-                    "top": 1000,
-                    "totalCount": 2,
-                    "nextLink": null
-                  },
-                  "data": [{
-                    "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
-                    "date": "2014-11-19T14:24:11.316Z",
-                    "author": "Architect@example.com",
-                    "events": [
+                  "pagination":
+                    {
+                      "skip": 0,
+                      "top": 1000,
+                      "totalCount": 2,
+                      "nextLink": null,
+                    },
+                  "data":
+                    [
                       {
-                        "type": "status_updated",
-                        "value": "Closed"
-                      }
-                    ]
-                  }, {
-                    "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
-                    "date": "2013-10-21T17:34:22.409Z",
-                    "author": "Architect@example.com",
-                    "events": [
+                        "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+                        "date": "2014-11-19T14:24:11.316Z",
+                        "author": "Architect@example.com",
+                        "events":
+                          [{ "type": "status_updated", "value": "Closed" }],
+                      },
                       {
-                        "type": "type_updated",
-                        "value": "Warning"
-                      }
-                    ]
-                  }]
+                        "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                        "date": "2013-10-21T17:34:22.409Z",
+                        "author": "Architect@example.com",
+                        "events":
+                          [{ "type": "type_updated", "value": "Warning" }],
+                      },
+                    ],
                 }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/events:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
-    - $ref: "#/components/parameters/top"
-    - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/top"
+      - $ref: "#/components/parameters/skip"
     get:
       summary: Get Topic Events
       description: |
@@ -1665,48 +1549,45 @@ paths:
       tags:
         - Events
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref:  "#/components/schemas/topic_events_GET"
+                $ref: "#/components/schemas/topic_events_GET"
               example:
                 {
-                  "pagination": {
-                    "skip": 0,
-                    "top": 1000,
-                    "totalCount": 2,
-                    "nextLink": null
-                  },
-                  "data": [{
-                    "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
-                    "date": "2014-11-19T14:24:11.316Z",
-                    "author": "Architect@example.com",
-                    "events": [
+                  "pagination":
+                    {
+                      "skip": 0,
+                      "top": 1000,
+                      "totalCount": 2,
+                      "nextLink": null,
+                    },
+                  "data":
+                    [
                       {
-                        "type": "type_updated",
-                        "value": "Error"
-                      }
-                    ]
-                  }, {
-                    "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
-                    "date": "2013-10-21T17:34:22.409Z",
-                    "author": "Architect@example.com",
-                    "events": [
+                        "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                        "date": "2014-11-19T14:24:11.316Z",
+                        "author": "Architect@example.com",
+                        "events":
+                          [{ "type": "type_updated", "value": "Error" }],
+                      },
                       {
-                        "type": "status_updated",
-                        "value": "Open"
-                      }
-                    ]
-                  }]
+                        "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                        "date": "2013-10-21T17:34:22.409Z",
+                        "author": "Architect@example.com",
+                        "events":
+                          [{ "type": "status_updated", "value": "Open" }],
+                      },
+                    ],
                 }
   /bcf/{version}/projects/{project_id}/topics/comments/events:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref: "#/components/parameters/top"
-    - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/top"
+      - $ref: "#/components/parameters/skip"
     get:
       summary: Get Comments Events
       description: |
@@ -1741,52 +1622,54 @@ paths:
       tags:
         - Events
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref:  "#/components/schemas/comment_events_GET"
+                $ref: "#/components/schemas/comment_events_GET"
               example:
                 {
-                  "pagination": {
-                    "skip": 0,
-                    "top": 1000,
-                    "totalCount": 2,
-                    "nextLink": null
-                  },
-                  "data": [{
-                    "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
-                    "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
-                    "date": "2014-11-19T14:24:11.316Z",
-                    "author": "Architect@example.com",
-                    "events": [
+                  "pagination":
+                    {
+                      "skip": 0,
+                      "top": 1000,
+                      "totalCount": 2,
+                      "nextLink": null,
+                    },
+                  "data":
+                    [
                       {
-                        "type": "comment_created",
-                        "value": null
-                      }
-                    ]
-                  }, {
-                    "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
-                    "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
-                    "date": "2013-10-21T17:34:22.409Z",
-                    "author": "Architect@example.com",
-                    "events": [
+                        "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+                        "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+                        "date": "2014-11-19T14:24:11.316Z",
+                        "author": "Architect@example.com",
+                        "events":
+                          [{ "type": "comment_created", "value": null }],
+                      },
                       {
-                        "type": "viewpoint_updated",
-                        "value": "b24a82e9-f67b-43b8-bda0-4946abf39624"
-                      }
-                    ]
-                  }]
+                        "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+                        "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                        "date": "2013-10-21T17:34:22.409Z",
+                        "author": "Architect@example.com",
+                        "events":
+                          [
+                            {
+                              "type": "viewpoint_updated",
+                              "value": "b24a82e9-f67b-43b8-bda0-4946abf39624",
+                            },
+                          ],
+                      },
+                    ],
                 }
   /bcf/{version}/projects/{project_id}/topics/{topic_guid}/comments/{comment_guid}/events:
     parameters:
-    - $ref:  "#/components/parameters/version"
-    - $ref:  "#/components/parameters/project_id"
-    - $ref:  "#/components/parameters/topic_guid"
-    - $ref:  "#/components/parameters/comment_guid"
-    - $ref: "#/components/parameters/top"
-    - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/version"
+      - $ref: "#/components/parameters/project_id"
+      - $ref: "#/components/parameters/topic_guid"
+      - $ref: "#/components/parameters/comment_guid"
+      - $ref: "#/components/parameters/top"
+      - $ref: "#/components/parameters/skip"
     get:
       summary: Get Comment Event
       description: |
@@ -1819,43 +1702,45 @@ paths:
       tags:
         - Events
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref:  "#/components/schemas/comment_events_GET"
+                $ref: "#/components/schemas/comment_events_GET"
               example:
                 {
-                  "pagination": {
-                    "skip": 0,
-                    "top": 1000,
-                    "totalCount": 2,
-                    "nextLink": null
-                  },
-                  "data": [{
-                    "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
-                    "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
-                    "date": "2014-11-19T14:24:11.316Z",
-                    "author": "Architect@example.com",
-                    "events": [
+                  "pagination":
+                    {
+                      "skip": 0,
+                      "top": 1000,
+                      "totalCount": 2,
+                      "nextLink": null,
+                    },
+                  "data":
+                    [
                       {
-                        "type": "comment_created",
-                        "value": null
-                      }
-                    ]
-                  }, {
-                    "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
-                    "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
-                    "date": "2013-10-21T17:34:22.409Z",
-                    "author": "Architect@example.com",
-                    "events": [
+                        "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+                        "topic_guid": "A211FCC2-3A3B-EAA4-C321-DE22ABC8414",
+                        "date": "2014-11-19T14:24:11.316Z",
+                        "author": "Architect@example.com",
+                        "events":
+                          [{ "type": "comment_created", "value": null }],
+                      },
                       {
-                        "type": "comment_text_updated",
-                        "value": "This is the updated comment"
-                      }
-                    ]
-                  }]
+                        "comment_guid": "C4215F4D-AC45-A43A-D615-AA456BEF832B",
+                        "topic_guid": "A245F4F2-2C01-B43B-B612-5E456BEF8116",
+                        "date": "2013-10-21T17:34:22.409Z",
+                        "author": "Architect@example.com",
+                        "events":
+                          [
+                            {
+                              "type": "comment_text_updated",
+                              "value": "This is the updated comment",
+                            },
+                          ],
+                      },
+                    ],
                 }
 components:
   schemas:
@@ -1892,28 +1777,28 @@ components:
       additionalProperties: true
       properties:
         viewpoint_actions:
-          $ref:  "#/components/schemas/viewpoint_actions"
+          $ref: "#/components/schemas/viewpoint_actions"
 
     project_authorization:
       type: object
       additionalProperties: true
       properties:
         project_actions:
-          $ref: '#/components/schemas/project_actions'
+          $ref: "#/components/schemas/project_actions"
 
     comment_authorization:
       type: object
       additionalProperties: true
       properties:
         comment_actions:
-          $ref:  "#/components/schemas/comment_actions"
+          $ref: "#/components/schemas/comment_actions"
 
     topic_authorization:
       type: object
       additionalProperties: true
       properties:
         topic_actions:
-          $ref: '#/components/schemas/topic_actions'
+          $ref: "#/components/schemas/topic_actions"
         topic_status:
           type: array
           nullable: true
@@ -1935,38 +1820,38 @@ components:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/extension_item_GET'
+            $ref: "#/components/schemas/extension_item_GET"
         topic_status:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/topic_status_extension_item_GET'
+            $ref: "#/components/schemas/topic_status_extension_item_GET"
         topic_label:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/extension_item_GET'
+            $ref: "#/components/schemas/extension_item_GET"
         priority:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/extension_item_GET'
+            $ref: "#/components/schemas/extension_item_GET"
         users:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/user_extension_item_GET'
+            $ref: "#/components/schemas/user_extension_item_GET"
         stage:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/extension_item_GET'
+            $ref: "#/components/schemas/extension_item_GET"
         project_actions:
-          $ref: '#/components/schemas/project_actions'
+          $ref: "#/components/schemas/project_actions"
         topic_actions:
-          $ref: '#/components/schemas/topic_actions'
+          $ref: "#/components/schemas/topic_actions"
         comment_actions:
-          $ref: '#/components/schemas/comment_actions'
+          $ref: "#/components/schemas/comment_actions"
         relation_types:
           type: array
           nullable: true
@@ -1977,7 +1862,7 @@ components:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/project_custom_field_extension'
+            $ref: "#/components/schemas/project_custom_field_extension"
     extension_item_GET:
       type: object
       required:
@@ -2144,7 +2029,7 @@ components:
           format: date-time
           nullable: true
         modified_author:
-          $ref:  "#/components/schemas/user_GET"
+          $ref: "#/components/schemas/user_GET"
         authorization:
           $ref: "#/components/schemas/comment_authorization"
     comment_POST:
@@ -2256,12 +2141,12 @@ components:
           type: string
           format: date-time
         author:
-          $ref:  "#/components/schemas/user_GET"
+          $ref: "#/components/schemas/user_GET"
         actions:
           type: array
           minItems: 1
           items:
-            $ref: '#/components/schemas/event_action'
+            $ref: "#/components/schemas/event_action"
     topic_event_GET:
       type: object
       required:
@@ -2276,12 +2161,12 @@ components:
           type: string
           format: date-time
         author:
-          $ref:  "#/components/schemas/user_GET"
+          $ref: "#/components/schemas/user_GET"
         actions:
           type: array
           minItems: 1
           items:
-            $ref: '#/components/schemas/event_action'
+            $ref: "#/components/schemas/event_action"
     # file schemas
     file_GET:
       description: Schema for a single file GET, BCF REST API.
@@ -2348,14 +2233,14 @@ components:
           type: array
           default: []
           items:
-            $ref:  "#/components/schemas/project_file_display_information"
+            $ref: "#/components/schemas/project_file_display_information"
         file:
-          $ref:  "#/components/schemas/file_GET"
+          $ref: "#/components/schemas/file_GET"
     project_files_information_GET:
       type: array
       description: Schema for the listing the response of the GET project files information service
       items:
-        $ref:  "#/components/schemas/project_file_information"
+        $ref: "#/components/schemas/project_file_information"
     # related topic schemas
     related_topic_GET:
       description: Schema for single related topic GET, BCF REST API.
@@ -2445,14 +2330,14 @@ components:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/related_topic_GET'
+            $ref: "#/components/schemas/related_topic_GET"
         authorization:
           $ref: "#/components/schemas/topic_authorization"
         default_viewpoint_guid:
           type: string
           nullable: true
         custom_fields:
-          $ref: '#/components/schemas/topic_custom_fields'
+          $ref: "#/components/schemas/topic_custom_fields"
     topic_POST:
       type: object
       required:
@@ -2498,7 +2383,7 @@ components:
           type: string
           nullable: true
         custom_fields:
-          $ref: '#/components/schemas/topic_custom_fields'
+          $ref: "#/components/schemas/topic_custom_fields"
     topic_PUT:
       type: object
       required:
@@ -2541,12 +2426,12 @@ components:
           type: string
           nullable: true
         custom_fields:
-          $ref: '#/components/schemas/topic_custom_fields'
+          $ref: "#/components/schemas/topic_custom_fields"
     # topic custom fields schemas
     topic_custom_fields:
       type: array
       items:
-        $ref: '#/components/schemas/topic_custom_field'
+        $ref: "#/components/schemas/topic_custom_field"
     topic_custom_field:
       type: object
       additionalProperties: true
@@ -2554,7 +2439,7 @@ components:
         id:
           type: string
           nullable: true
-          description: 'Refers to the id of the custom field in the project extensions.'
+          description: "Refers to the id of the custom field in the project extensions."
         value:
           type: string
           nullable: true
@@ -2571,11 +2456,11 @@ components:
             - jpg
             - png
         location:
-          $ref: '#/components/schemas/location'
+          $ref: "#/components/schemas/location"
         normal:
-          $ref: '#/components/schemas/direction'
+          $ref: "#/components/schemas/direction"
         up:
-          $ref: '#/components/schemas/direction'
+          $ref: "#/components/schemas/direction"
         height:
           type: number
     bitmap_POST:
@@ -2591,11 +2476,11 @@ components:
           type: string
           format: base64
         location:
-          $ref: '#/components/schemas/location'
+          $ref: "#/components/schemas/location"
         normal:
-          $ref: '#/components/schemas/direction'
+          $ref: "#/components/schemas/direction"
         up:
-          $ref: '#/components/schemas/direction'
+          $ref: "#/components/schemas/direction"
         height:
           type: number
     clipping_plane:
@@ -2604,9 +2489,9 @@ components:
       additionalProperties: true
       properties:
         location:
-          $ref: '#/components/schemas/location'
+          $ref: "#/components/schemas/location"
         direction:
-          $ref: '#/components/schemas/direction'
+          $ref: "#/components/schemas/direction"
     coloring:
       type: object
       additionalProperties: true
@@ -2614,7 +2499,7 @@ components:
         color:
           type: string
         components:
-          $ref: '#/components/schemas/component_list'
+          $ref: "#/components/schemas/component_list"
     coloring_GET:
       description: Schema for coloring GET, BCF REST API.
       type: object
@@ -2624,7 +2509,7 @@ components:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/coloring'
+            $ref: "#/components/schemas/coloring"
     component:
       type: object
       additionalProperties: true
@@ -2642,23 +2527,23 @@ components:
       type: array
       nullable: true
       items:
-        $ref: '#/components/schemas/component'
+        $ref: "#/components/schemas/component"
     components:
       type: object
       nullable: true
       additionalProperties: true
       properties:
         selection:
-          $ref: '#/components/schemas/component_list'
+          $ref: "#/components/schemas/component_list"
         coloring:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/coloring'
+            $ref: "#/components/schemas/coloring"
         visibility:
-          $ref: '#/components/schemas/visibility'
+          $ref: "#/components/schemas/visibility"
         translucency:
-          $ref: '#/components/schemas/translucency'
+          $ref: "#/components/schemas/translucency"
     direction:
       type: object
       additionalProperties: true
@@ -2675,9 +2560,9 @@ components:
       additionalProperties: true
       properties:
         start_point:
-          $ref: '#/components/schemas/point'
+          $ref: "#/components/schemas/point"
         end_point:
-          $ref: '#/components/schemas/point'
+          $ref: "#/components/schemas/point"
         color:
           type: string
     location:
@@ -2697,11 +2582,11 @@ components:
       additionalProperties: true
       properties:
         camera_view_point:
-          $ref: '#/components/schemas/point'
+          $ref: "#/components/schemas/point"
         camera_direction:
-          $ref: '#/components/schemas/direction'
+          $ref: "#/components/schemas/direction"
         camera_up_vector:
-          $ref:  "#/components/schemas/direction"
+          $ref: "#/components/schemas/direction"
         view_to_world_scale:
           type: number
         aspect_ratio:
@@ -2712,11 +2597,11 @@ components:
       additionalProperties: true
       properties:
         camera_view_point:
-          $ref: '#/components/schemas/point'
+          $ref: "#/components/schemas/point"
         camera_direction:
-          $ref: '#/components/schemas/direction'
+          $ref: "#/components/schemas/direction"
         camera_up_vector:
-          $ref: '#/components/schemas/direction'
+          $ref: "#/components/schemas/direction"
         field_of_view:
           type: number
         aspect_ratio:
@@ -2737,7 +2622,7 @@ components:
       additionalProperties: true
       properties:
         selection:
-          $ref: '#/components/schemas/component_list'
+          $ref: "#/components/schemas/component_list"
     snapshot_GET:
       type: object
       nullable: true
@@ -2794,7 +2679,7 @@ components:
       additionalProperties: true
       properties:
         translucency:
-          $ref: '#/components/schemas/translucency'
+          $ref: "#/components/schemas/translucency"
     viewpoint_GET:
       type: object
       required:
@@ -2809,36 +2694,36 @@ components:
         viewpoint_guid:
           type: string
         orthogonal_camera:
-          $ref: '#/components/schemas/orthogonal_camera'
+          $ref: "#/components/schemas/orthogonal_camera"
         perspective_camera:
-          $ref: '#/components/schemas/perspective_camera'
+          $ref: "#/components/schemas/perspective_camera"
         lines:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/line'
+            $ref: "#/components/schemas/line"
         markers:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/marker'
+            $ref: "#/components/schemas/marker"
         clipping_planes:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/clipping_plane'
+            $ref: "#/components/schemas/clipping_plane"
         bitmaps:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/bitmap_GET'
+            $ref: "#/components/schemas/bitmap_GET"
         snapshot:
-          $ref: '#/components/schemas/snapshot_GET'
+          $ref: "#/components/schemas/snapshot_GET"
         creation_date:
           type: string
           format: date-time
         creation_author:
-          $ref:  "#/components/schemas/user_GET"
+          $ref: "#/components/schemas/user_GET"
         authorization:
           $ref: "#/components/schemas/viewpoint_authorization"
         topic_file_ids:
@@ -2857,34 +2742,34 @@ components:
           type: integer
           nullable: true
         orthogonal_camera:
-          $ref: '#/components/schemas/orthogonal_camera'
+          $ref: "#/components/schemas/orthogonal_camera"
         perspective_camera:
-          $ref: '#/components/schemas/perspective_camera'
+          $ref: "#/components/schemas/perspective_camera"
         lines:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/line'
+            $ref: "#/components/schemas/line"
         markers:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/marker'
+            $ref: "#/components/schemas/marker"
         clipping_planes:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/clipping_plane'
+            $ref: "#/components/schemas/clipping_plane"
         bitmaps:
           type: array
           nullable: true
           items:
-            $ref: '#/components/schemas/bitmap_POST'
+            $ref: "#/components/schemas/bitmap_POST"
         snapshot:
-          $ref: '#/components/schemas/snapshot_POST'
+          $ref: "#/components/schemas/snapshot_POST"
         # Why cant we get components?
         components:
-          $ref: '#/components/schemas/components'
+          $ref: "#/components/schemas/components"
         topic_file_ids:
           type: array
           nullable: true
@@ -2898,15 +2783,15 @@ components:
           type: boolean
           default: false
         exceptions:
-          $ref: '#/components/schemas/component_list'
+          $ref: "#/components/schemas/component_list"
         view_setup_hints:
-          $ref: '#/components/schemas/view_setup_hints'
+          $ref: "#/components/schemas/view_setup_hints"
     visibility_GET:
       type: object
       additionalProperties: true
       properties:
         visibility:
-          $ref: '#/components/schemas/visibility'
+          $ref: "#/components/schemas/visibility"
     translucency:
       type: object
       additionalProperties: true
@@ -2915,9 +2800,9 @@ components:
           type: boolean
           default: false
         exceptions:
-          $ref: '#/components/schemas/component_list'
+          $ref: "#/components/schemas/component_list"
         view_setup_hints:
-          $ref: '#/components/schemas/translucency_setup_hints'
+          $ref: "#/components/schemas/translucency_setup_hints"
     project_custom_field_extension:
       type: object
       additionalProperties: true
@@ -2949,7 +2834,7 @@ components:
         enumValues:
           type: array
           items:
-            $ref: '#/components/schemas/project_custom_field_enum_value'
+            $ref: "#/components/schemas/project_custom_field_enum_value"
     project_custom_field_enum_value:
       type: object
       additionalProperties: true
@@ -2965,7 +2850,7 @@ components:
       additionalProperties: true
       properties:
         location:
-          $ref: '#/components/schemas/point'
+          $ref: "#/components/schemas/point"
     user_GET:
       type: object
       required:
@@ -2974,13 +2859,13 @@ components:
       properties:
         id:
           type: string
-          description: 'This is a string that uniquely identifies the user in the server, often it is an email address or an internal id'
+          description: "This is a string that uniquely identifies the user in the server, often it is an email address or an internal id"
         name:
           type: string
-          description: 'Must be provided if email is null'
+          description: "Must be provided if email is null"
         email:
           type: string
-          description: 'Must be provided if name is null'
+          description: "Must be provided if name is null"
 
     topics_GET:
       type: object
@@ -2990,11 +2875,11 @@ components:
       additionalProperties: true
       properties:
         pagination:
-          $ref: '#/components/schemas/pagination'
+          $ref: "#/components/schemas/pagination"
         data:
           type: array
           items:
-            $ref: '#/components/schemas/topic_GET'
+            $ref: "#/components/schemas/topic_GET"
 
     projects_GET:
       type: object
@@ -3004,11 +2889,11 @@ components:
       additionalProperties: true
       properties:
         pagination:
-          $ref: '#/components/schemas/pagination'
+          $ref: "#/components/schemas/pagination"
         data:
           type: array
           items:
-            $ref: '#/components/schemas/project_GET'
+            $ref: "#/components/schemas/project_GET"
 
     project_files_informations_GET:
       type: object
@@ -3018,11 +2903,11 @@ components:
       additionalProperties: true
       properties:
         pagination:
-          $ref: '#/components/schemas/pagination'
+          $ref: "#/components/schemas/pagination"
         data:
           type: array
           items:
-            $ref:  "#/components/schemas/project_files_information_GET"
+            $ref: "#/components/schemas/project_files_information_GET"
 
     files_GET:
       type: object
@@ -3032,11 +2917,11 @@ components:
       additionalProperties: true
       properties:
         pagination:
-          $ref: '#/components/schemas/pagination'
+          $ref: "#/components/schemas/pagination"
         data:
           type: array
           items:
-            $ref:  "#/components/schemas/file_GET"
+            $ref: "#/components/schemas/file_GET"
 
     comments_GET:
       type: object
@@ -3046,11 +2931,11 @@ components:
       additionalProperties: true
       properties:
         pagination:
-          $ref: '#/components/schemas/pagination'
+          $ref: "#/components/schemas/pagination"
         data:
           type: array
           items:
-            $ref:  "#/components/schemas/comment_GET"
+            $ref: "#/components/schemas/comment_GET"
 
     viewpoints_GET:
       type: object
@@ -3060,11 +2945,11 @@ components:
       additionalProperties: true
       properties:
         pagination:
-          $ref: '#/components/schemas/pagination'
+          $ref: "#/components/schemas/pagination"
         data:
           type: array
           items:
-            $ref:  "#/components/schemas/viewpoint_GET"
+            $ref: "#/components/schemas/viewpoint_GET"
 
     related_topics_GET:
       type: object
@@ -3074,11 +2959,11 @@ components:
       additionalProperties: true
       properties:
         pagination:
-          $ref: '#/components/schemas/pagination'
+          $ref: "#/components/schemas/pagination"
         data:
           type: array
           items:
-            $ref:  "#/components/schemas/related_topic_GET"
+            $ref: "#/components/schemas/related_topic_GET"
 
     document_references_GET:
       type: object
@@ -3088,11 +2973,11 @@ components:
       additionalProperties: true
       properties:
         pagination:
-          $ref: '#/components/schemas/pagination'
+          $ref: "#/components/schemas/pagination"
         data:
           type: array
           items:
-            $ref:  "#/components/schemas/document_reference_GET"
+            $ref: "#/components/schemas/document_reference_GET"
 
     documents_GET:
       type: object
@@ -3102,11 +2987,11 @@ components:
       additionalProperties: true
       properties:
         pagination:
-          $ref: '#/components/schemas/pagination'
+          $ref: "#/components/schemas/pagination"
         data:
           type: array
           items:
-            $ref:  "#/components/schemas/document_GET"
+            $ref: "#/components/schemas/document_GET"
 
     topic_events_GET:
       type: object
@@ -3116,11 +3001,11 @@ components:
       additionalProperties: true
       properties:
         pagination:
-          $ref: '#/components/schemas/pagination'
+          $ref: "#/components/schemas/pagination"
         data:
           type: array
           items:
-            $ref:  "#/components/schemas/topic_event_GET"
+            $ref: "#/components/schemas/topic_event_GET"
 
     comment_events_GET:
       type: object
@@ -3130,11 +3015,11 @@ components:
       additionalProperties: true
       properties:
         pagination:
-          $ref: '#/components/schemas/pagination'
+          $ref: "#/components/schemas/pagination"
         data:
           type: array
           items:
-            $ref:  "#/components/schemas/comment_event_GET"
+            $ref: "#/components/schemas/comment_event_GET"
 
   parameters:
     version:
