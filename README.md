@@ -1311,7 +1311,7 @@ BCF is suitable for selecting a few components. A huge list of selected componen
 |---------|----|-----------|--------|
 | ifc_guid | string | IFC guid of the component | optional, if authoring_tool_id is provided |
 | originating_system | string | originating system of the component | optional |
-| authoring_tool_id | string | internal id for the authoring tool of the component | optional, if ifc_guid is provided |
+| authoring_tool_id | string | system specific identifier of the component in the originating BIM tool | optional, if ifc_guid is provided |
 
 Note that `ifc_guid` must be provided, if possible. The `authoring_tool_id` can be used as a fallback when an `ifc_guid` is not available.
 
@@ -1429,8 +1429,8 @@ BCF is suitable for hiding/showing a few components. A huge list of hidden/shown
         "components": {
             "selection": [{
                 "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                "originating_system": "Example CAD Application",
-                "authoring_tool_id": "EXCAD/v1.0"
+                "originating_system": "ExampleCAD/v1.0",
+                "authoring_tool_id": "example:entity:12345"
             }],
             "coloring": [{
                 "color": "ff0000",
@@ -1660,8 +1660,8 @@ Retrieve a **collection** of all selected components in a viewpoint.
         "selection": [
             {
                 "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                "originating_system": "Example CAD Application",
-                "authoring_tool_id": "EXCAD/v1.0"
+                "originating_system": "ExampleCAD/v1.0",
+                "authoring_tool_id": "example:entity:12345"
             }, {
                 "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
             }
@@ -1693,8 +1693,8 @@ Retrieve a **collection** of all colored components in a viewpoint.
                 "components": [
                     {
                         "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                        "originating_system": "Example CAD Application",
-                        "authoring_tool_id": "EXCAD/v1.0"
+                        "originating_system": "ExampleCAD/v1.0",
+                        "authoring_tool_id": "example:entity:12345"
                     }, {
                         "ifc_guid": "3$cshxZO9AJBebsni$z9Yk"
                     }
@@ -1727,8 +1727,8 @@ Retrieve visibility of components in a viewpoint.
             "exceptions": [
                 {
                     "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                    "originating_system": "Example CAD Application",
-                    "authoring_tool_id": "EXCAD/v1.0"
+                    "originating_system": "ExampleCAD/v1.0",
+                    "authoring_tool_id": "example:entity:12345"
                 }, {
                     "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
                 }
