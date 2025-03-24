@@ -1894,8 +1894,8 @@ Retrieve translucency of components in a viewpoint.
             "exceptions": [
                 {
                     "ifc_guid": "2MF28NhmDBiRVyFakgdbCT",
-                    "originating_system": "Example CAD Application",
-                    "authoring_tool_id": "EXCAD/v1.0"
+                    "originating_system": "ExampleCAD/v1.0",
+                    "authoring_tool_id": "example:entity:12345"
                 }, {
                     "ifc_guid": "3$cshxZO9AJBebsni$z9Yk",
                 }
