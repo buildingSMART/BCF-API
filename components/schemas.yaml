@@ -1,0 +1,1339 @@
+components:
+  schemas:
+    pagination:
+      type: object
+      required:
+        - skip
+        - top
+        - totalCount
+        - data
+      additionalProperties: true
+      properties:
+        skip:
+          type: integer
+        top:
+          type: integer
+        totalCount:
+          type: integer
+        nextLink:
+          type: string
+    # error
+    error:
+      type: object
+      description: Schema for error, BCF REST API. This is defined in the Foundation API and represents the body format of any error responses.
+      required:
+        - message
+      additionalProperties: true
+      properties:
+        message:
+          type: string
+    # project schemas
+    viewpoint_authorization:
+      type: object
+      additionalProperties: true
+      properties:
+        viewpoint_actions:
+          $ref: "#/components/schemas/viewpoint_actions"
+
+    project_authorization:
+      type: object
+      additionalProperties: true
+      properties:
+        project_actions:
+          $ref: "#/components/schemas/project_actions"
+
+    comment_authorization:
+      type: object
+      additionalProperties: true
+      properties:
+        comment_actions:
+          $ref: "#/components/schemas/comment_actions"
+
+    topic_authorization:
+      type: object
+      additionalProperties: true
+      properties:
+        topic_actions:
+          $ref: "#/components/schemas/topic_actions"
+        topic_status:
+          type: array
+          nullable: true
+          items:
+            type: string
+
+    extensions_GET:
+      type: object
+      required:
+        - topic_type
+        - topic_status
+        - topic_label
+        - priority
+        - users
+        - stage
+      additionalProperties: true
+      properties:
+        topic_type:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/extension_item_GET"
+        topic_status:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/topic_status_extension_item_GET"
+        topic_label:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/extension_item_GET"
+        priority:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/extension_item_GET"
+        users:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/user_extension_item_GET"
+        stage:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/extension_item_GET"
+        project_actions:
+          $ref: "#/components/schemas/project_actions"
+        topic_actions:
+          $ref: "#/components/schemas/topic_actions"
+        comment_actions:
+          $ref: "#/components/schemas/comment_actions"
+        relation_types:
+          type: array
+          nullable: true
+          items:
+            type: string
+            enum: [relates, parent-child]
+        custom_fields:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/project_custom_field_extension"
+    extension_item_GET:
+      type: object
+      required:
+        - id
+        - name
+        - readonly
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        readonly:
+          type: boolean
+    topic_status_extension_item_GET:
+      type: object
+      required:
+        - id
+        - name
+        - status_type
+        - readonly
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status_type:
+          type: string
+          enum: [open, closed]
+        readonly:
+          type: boolean
+    user_extension_item_GET:
+      type: object
+      required:
+        - id
+        - name
+        - email
+        - readonly
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        readonly:
+          type: boolean
+    extension_item_SET:
+      type: object
+      required:
+        - id
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+    project_GET:
+      type: object
+      description: Schema for single project GET, BCF REST API.
+      required:
+        - project_id
+        - name
+      additionalProperties: true
+      properties:
+        project_id:
+          type: string
+        name:
+          type: string
+        authorization:
+          $ref: "#/components/schemas/project_authorization"
+    project_PUT:
+      type: object
+      description: Schema for project PUT, BCF REST API.
+      required:
+        - name
+      additionalProperties: true
+      properties:
+        name:
+          type: string
+    # actions schemas
+    project_actions:
+      type: array
+      items:
+        type: string
+        enum:
+          - update
+          - createTopic
+          - createDocument
+    topic_actions:
+      type: array
+      items:
+        type: string
+        enum:
+          - update
+          - updateRelatedTopics
+          - updateDocumentReferences
+          - updateFiles
+          - createComment
+          - createViewpoint
+          - delete
+    comment_actions:
+      type: array
+      items:
+        type: string
+        enum:
+          - update
+          - delete
+    viewpoint_actions:
+      type: array
+      items:
+        type: string # Missing in https://github.com/buildingSMART/BCF-API/blob/release_3_0/Schemas_draft-03/Collaboration/Action/viewpoint_actions.json?
+        enum:
+          - delete
+    event_action:
+      type: object
+      nullable: true
+      required:
+        - type
+      additionalProperties: true
+      properties:
+        type:
+          type: string
+        value:
+          $ref: "#/components/schemas/event_action_value"
+    event_action_value:
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        displayValue:
+          type: string
+    # comment schemas
+    comment_GET:
+      type: object
+      required:
+        - comment_guid
+        - date
+        - author
+        - comment
+        - topic_guid
+      additionalProperties: true
+      properties:
+        comment_guid:
+          type: string
+        date:
+          type: string
+          format: date-time
+        author:
+          $ref: "#/components/schemas/user_GET"
+        comment:
+          type: string
+        topic_guid:
+          type: string
+        viewpoint_guid:
+          type: string
+          nullable: true
+        reply_to_comment_guid:
+          type: string
+          nullable: true
+        modified_date:
+          type: string
+          format: date-time
+          nullable: true
+        modified_author:
+          $ref: "#/components/schemas/user_GET"
+        authorization:
+          $ref: "#/components/schemas/comment_authorization"
+    comment_POST:
+      type: object
+      required:
+        - comment
+      additionalProperties: true
+      properties:
+        comment:
+          type: string
+        viewpoint_guid:
+          type: string
+          nullable: true
+        reply_to_comment_guid:
+          type: string
+          nullable: true
+    # comment_PUT seems to be the same as comment_POST?
+    comment_PUT:
+      type: object
+      required:
+        - comment
+      additionalProperties: true
+      properties:
+        comment:
+          type: string
+        viewpoint_guid:
+          type: string
+          nullable: true
+        # Not part of 3_0?
+        # reply_to_comment_guid:
+        #   type: string
+        #   nullable: true
+    # document schemas
+    document_GET:
+      type: object
+      required:
+        - document_guid
+        - filename
+      additionalProperties: true
+      properties:
+        document_guid:
+          type: string
+        filename:
+          type: string
+    # document references schemas
+    document_reference_GET:
+      description: Schema for a single document reference GET, BCF REST API.
+      type: object
+      required:
+        - guid
+      additionalProperties: true
+      properties:
+        guid:
+          type: string
+        document_guid:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+    document_reference_POST:
+      type: object
+      additionalProperties: true
+      properties:
+        # should be document_reference_guid ?
+        document_reference_guid:
+          type: string
+          nullable: true
+        document_guid:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+    document_reference_PUT:
+      type: object
+      additionalProperties: true
+      properties:
+        document_guid:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+    # events schemas
+    comment_event_GET:
+      type: object
+      required:
+        - comment_guid
+        - topic_guid
+        - date
+        - author
+      additionalProperties: true
+      properties:
+        comment_guid:
+          type: string
+        topic_guid:
+          type: string
+        date:
+          type: string
+          format: date-time
+        author:
+          $ref: "#/components/schemas/user_GET"
+        actions:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/event_action"
+    topic_event_GET:
+      type: object
+      required:
+        - topic_guid
+        - date
+        - author
+      additionalProperties: true
+      properties:
+        topic_guid:
+          type: string
+        date:
+          type: string
+          format: date-time
+        author:
+          $ref: "#/components/schemas/user_GET"
+        actions:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/event_action"
+    # file schemas
+    file_GET:
+      description: Schema for a single file GET, BCF REST API.
+      type: object
+      additionalProperties: true
+      properties:
+        ifc_project:
+          type: string
+          nullable: true
+        ifc_spatial_structure_element:
+          type: string
+          nullable: true
+        filename:
+          type: string
+          nullable: true
+        date:
+          type: string
+          format: date-time
+          nullable: true
+        reference:
+          type: string
+          nullable: true
+        id:
+          type: string
+          nullable: true
+    file_PUT:
+      type: object
+      additionalProperties: true
+      properties:
+        ifc_project:
+          type: string
+          nullable: true
+        ifc_spatial_structure_element:
+          type: string
+          nullable: true
+        filename:
+          type: string
+          nullable: true
+        date:
+          type: string
+          format: date-time
+          nullable: true
+        reference:
+          type: string
+          nullable: true
+    project_file_display_information:
+      type: object
+      description: Schema for the display information of a project file, BCF REST API.
+      required:
+        - field_display_name
+        - field_value
+      additionalProperties: true
+      properties:
+        field_display_name:
+          type: string
+        field_value:
+          type: string
+    project_file_information:
+      type: object
+      description: Schema for a single project file information, BCF REST API.
+      additionalProperties: true
+      properties:
+        display_information:
+          type: array
+          default: []
+          items:
+            $ref: "#/components/schemas/project_file_display_information"
+        file:
+          $ref: "#/components/schemas/file_GET"
+    project_files_information_GET:
+      type: array
+      description: Schema for the listing the response of the GET project files information service
+      items:
+        $ref: "#/components/schemas/project_file_information"
+    # related topic schemas
+    related_topic_GET:
+      description: Schema for single related topic GET, BCF REST API.
+      type: object
+      required:
+        - related_topic_guid
+        - relation_type
+      additionalProperties: true
+      properties:
+        related_topic_guid:
+          type: string
+        relation_type:
+          type: string
+          enum: [relates, parent, child]
+    related_topic_PUT:
+      description: Schema for related topic PUT, BCF REST API.
+      type: object
+      required:
+        - related_topic_guid
+        - relation_type
+      additionalProperties: true
+      properties:
+        related_topic_guid:
+          type: string
+        relation_type:
+          type: string
+          enum: [relates, parent, child]
+    # topic schemas
+    topic_GET:
+      type: object
+      required:
+        - topic_guid
+        - title
+        - server_assigned_id
+        - creation_date
+        - creation_author
+      additionalProperties: true
+      properties:
+        topic_guid:
+          type: string
+        server_assigend_id:
+          type: string
+        topic_type:
+          $ref: "#/components/schemas/extension_item_GET"
+        topic_status:
+          $ref: "#/components/schemas/extension_item_GET"
+        reference_links:
+          type: array
+          nullable: true
+          items:
+            type: string
+        title:
+          type: string
+        priority:
+          $ref: "#/components/schemas/extension_item_GET"
+        index:
+          type: integer
+          nullable: true
+        labels:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/extension_item_GET"
+        creation_date:
+          type: string
+          format: date-time
+        creation_author:
+          $ref: "#/components/schemas/user_GET"
+        # shouldnt modified_date also be nullable?
+        modified_date:
+          type: string
+          format: date-time
+        modified_author:
+          $ref: "#/components/schemas/user_GET"
+        assigned_to:
+          $ref: "#/components/schemas/user_GET"
+        stage:
+          $ref: "#/components/schemas/extension_item_GET"
+        description:
+          type: string
+          nullable: true
+        due_date:
+          type: string
+          format: date
+          nullable: true
+        related_topics:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/related_topic_GET"
+        authorization:
+          $ref: "#/components/schemas/topic_authorization"
+        default_viewpoint_guid:
+          type: string
+          nullable: true
+        custom_fields:
+          $ref: "#/components/schemas/topic_custom_fields"
+    topic_POST:
+      type: object
+      required:
+        - title
+      additionalProperties: true
+      properties:
+        topic_guid:
+          type: string
+          nullable: true
+        topic_type:
+          $ref: "#/components/schemas/extension_item_SET"
+        topic_status:
+          $ref: "#/components/schemas/extension_item_SET"
+        reference_links:
+          type: array
+          nullable: true
+          items:
+            type: string
+        title:
+          type: string
+        priority:
+          $ref: "#/components/schemas/extension_item_SET"
+        index:
+          type: integer
+          nullable: true
+        labels:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/extension_item_SET"
+        assigned_to:
+          $ref: "#/components/schemas/extension_item_SET"
+        stage:
+          $ref: "#/components/schemas/extension_item_SET"
+        description:
+          type: string
+          nullable: true
+        due_date:
+          type: string
+          format: date
+          nullable: true
+        default_viewpoint_guid:
+          type: string
+          nullable: true
+        custom_fields:
+          $ref: "#/components/schemas/topic_custom_fields"
+    topic_PUT:
+      type: object
+      required:
+        - title
+      additionalProperties: true
+      properties:
+        topic_type:
+          $ref: "#/components/schemas/extension_item_SET"
+        topic_status:
+          $ref: "#/components/schemas/extension_item_SET"
+        reference_links:
+          type: array
+          nullable: true
+          items:
+            type: string
+        title:
+          type: string
+        priority:
+          $ref: "#/components/schemas/extension_item_SET"
+        index:
+          type: integer
+          nullable: true
+        labels:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/extension_item_SET"
+        assigned_to:
+          $ref: "#/components/schemas/extension_item_SET"
+        stage:
+          $ref: "#/components/schemas/extension_item_SET"
+        description:
+          type: string
+          nullable: true
+        due_date:
+          type: string
+          format: date
+          nullable: true
+        default_viewpoint_guid:
+          type: string
+          nullable: true
+        custom_fields:
+          $ref: "#/components/schemas/topic_custom_fields"
+    # topic custom fields schemas
+    topic_custom_fields:
+      type: array
+      items:
+        $ref: "#/components/schemas/topic_custom_field"
+    topic_custom_field:
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+          nullable: true
+          description: "Refers to the id of the custom field in the project extensions."
+        value:
+          type: string
+          nullable: true
+    # viewpoint schemas
+    bitmap_GET:
+      type: object
+      additionalProperties: true
+      properties:
+        bitmap_guid:
+          type: string
+        bitmap_type:
+          type: string
+          enum:
+            - jpg
+            - png
+        location:
+          $ref: "#/components/schemas/location"
+        normal:
+          $ref: "#/components/schemas/direction"
+        up:
+          $ref: "#/components/schemas/direction"
+        height:
+          type: number
+    bitmap_POST:
+      type: object
+      additionalProperties: true
+      properties:
+        bitmap_type:
+          type: string
+          enum:
+            - jpg
+            - png
+        bitmap_data:
+          type: string
+          format: base64
+        location:
+          $ref: "#/components/schemas/location"
+        normal:
+          $ref: "#/components/schemas/direction"
+        up:
+          $ref: "#/components/schemas/direction"
+        height:
+          type: number
+    clipping_plane:
+      type: object
+      nullable: true
+      additionalProperties: true
+      properties:
+        location:
+          $ref: "#/components/schemas/location"
+        direction:
+          $ref: "#/components/schemas/direction"
+    coloring:
+      type: object
+      additionalProperties: true
+      properties:
+        color:
+          type: string
+        components:
+          $ref: "#/components/schemas/component_list"
+    coloring_GET:
+      description: Schema for coloring GET, BCF REST API.
+      type: object
+      additionalProperties: true
+      properties:
+        coloring:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/coloring"
+    component:
+      type: object
+      additionalProperties: true
+      properties:
+        ifc_guid:
+          type: string
+          nullable: true
+        originating_system:
+          type: string
+          nullable: true
+        authoring_tool_id:
+          type: string
+          nullable: true
+    component_list:
+      type: array
+      nullable: true
+      items:
+        $ref: "#/components/schemas/component"
+    components:
+      type: object
+      nullable: true
+      additionalProperties: true
+      properties:
+        selection:
+          $ref: "#/components/schemas/component_list"
+        coloring:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/coloring"
+        visibility:
+          $ref: "#/components/schemas/visibility"
+        translucency:
+          $ref: "#/components/schemas/translucency"
+    direction:
+      type: object
+      additionalProperties: true
+      properties:
+        x:
+          type: number
+        y:
+          type: number
+        z:
+          type: number
+    line:
+      type: object
+      nullable: true
+      additionalProperties: true
+      properties:
+        start_point:
+          $ref: "#/components/schemas/point"
+        end_point:
+          $ref: "#/components/schemas/point"
+        color:
+          type: string
+    location:
+      type: object
+      nullable: true
+      additionalProperties: true
+      properties:
+        x:
+          type: number
+        y:
+          type: number
+        z:
+          type: number
+    orthogonal_camera:
+      type: object
+      nullable: true
+      additionalProperties: true
+      properties:
+        camera_view_point:
+          $ref: "#/components/schemas/point"
+        camera_direction:
+          $ref: "#/components/schemas/direction"
+        camera_up_vector:
+          $ref: "#/components/schemas/direction"
+        view_to_world_scale:
+          type: number
+        aspect_ratio:
+          type: number
+    perspective_camera:
+      type: object
+      nullable: true
+      additionalProperties: true
+      properties:
+        camera_view_point:
+          $ref: "#/components/schemas/point"
+        camera_direction:
+          $ref: "#/components/schemas/direction"
+        camera_up_vector:
+          $ref: "#/components/schemas/direction"
+        field_of_view:
+          type: number
+        aspect_ratio:
+          type: number
+    point:
+      type: object
+      additionalProperties: true
+      properties:
+        x:
+          type: number
+        y:
+          type: number
+        z:
+          type: number
+    selection_GET:
+      description: Schema for selection GET, BCF REST API.
+      type: object
+      additionalProperties: true
+      properties:
+        selection:
+          $ref: "#/components/schemas/component_list"
+    snapshot_GET:
+      type: object
+      nullable: true
+      additionalProperties: true
+      properties:
+        snapshot_type:
+          type: string
+          enum:
+            - jpg
+            - png
+    snapshot_POST:
+      type: object
+      nullable: true
+      additionalProperties: true
+      properties:
+        snapshot_type:
+          type: string
+          enum:
+            - jpg
+            - png
+        snapshot_data:
+          type: string
+          format: base64
+    view_setup_hints:
+      type: object
+      nullable: true
+      additionalProperties: true
+      properties:
+        spaces_visible:
+          type: boolean
+          default: false
+        space_boundaries_visible:
+          type: boolean
+          default: false
+        openings_visible:
+          type: boolean
+          default: false
+    translucency_setup_hints:
+      type: object
+      nullable: true
+      additionalProperties: true
+      properties:
+        spaces_translucent:
+          type: boolean
+          default: true
+        space_boundaries_translucent:
+          type: boolean
+          default: true
+        openings_translucent:
+          type: boolean
+          default: true
+    translucency_GET:
+      type: object
+      additionalProperties: true
+      properties:
+        translucency:
+          $ref: "#/components/schemas/translucency"
+    viewpoint_GET:
+      type: object
+      required:
+        - viewpoint_guid
+        - creation_date
+        - creation_author
+      additionalProperties: true
+      properties:
+        index:
+          type: integer
+          nullable: true
+        viewpoint_guid:
+          type: string
+        orthogonal_camera:
+          $ref: "#/components/schemas/orthogonal_camera"
+        perspective_camera:
+          $ref: "#/components/schemas/perspective_camera"
+        lines:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/line"
+        markers:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/marker"
+        clipping_planes:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/clipping_plane"
+        bitmaps:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/bitmap_GET"
+        snapshot:
+          $ref: "#/components/schemas/snapshot_GET"
+        creation_date:
+          type: string
+          format: date-time
+        creation_author:
+          $ref: "#/components/schemas/user_GET"
+        authorization:
+          $ref: "#/components/schemas/viewpoint_authorization"
+        topic_file_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
+    viewpoint_POST:
+      type: object
+      additionalProperties: true
+      properties:
+        viewpoint_guid:
+          type: string
+          nullable: true
+        index:
+          type: integer
+          nullable: true
+        orthogonal_camera:
+          $ref: "#/components/schemas/orthogonal_camera"
+        perspective_camera:
+          $ref: "#/components/schemas/perspective_camera"
+        lines:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/line"
+        markers:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/marker"
+        clipping_planes:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/clipping_plane"
+        bitmaps:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/bitmap_POST"
+        snapshot:
+          $ref: "#/components/schemas/snapshot_POST"
+        # Why cant we get components?
+        components:
+          $ref: "#/components/schemas/components"
+        topic_file_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
+    visibility:
+      type: object
+      additionalProperties: true
+      properties:
+        default_visibility:
+          type: boolean
+          default: false
+        exceptions:
+          $ref: "#/components/schemas/component_list"
+        view_setup_hints:
+          $ref: "#/components/schemas/view_setup_hints"
+    visibility_GET:
+      type: object
+      additionalProperties: true
+      properties:
+        visibility:
+          $ref: "#/components/schemas/visibility"
+    translucency:
+      type: object
+      additionalProperties: true
+      properties:
+        default_translucency:
+          type: boolean
+          default: false
+        exceptions:
+          $ref: "#/components/schemas/component_list"
+        view_setup_hints:
+          $ref: "#/components/schemas/translucency_setup_hints"
+    project_custom_field_extension:
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - integer
+            - decimal
+            - string
+            - boolean
+            - enum
+            - date
+            - date-time
+        readonly:
+          type: boolean
+        minArraySize:
+          type: integer
+        maxArraySize:
+          type: integer
+        defaultValue:
+          type: array
+          items:
+            type: string
+        enumValues:
+          type: array
+          items:
+            $ref: "#/components/schemas/project_custom_field_enum_value"
+    project_custom_field_enum_value:
+      type: object
+      additionalProperties: true
+      properties:
+        value:
+          type: string
+        displayValue:
+          type: string
+        readonly:
+          type: boolean
+    marker:
+      type: object
+      additionalProperties: true
+      properties:
+        location:
+          $ref: "#/components/schemas/point"
+    user_GET:
+      type: object
+      required:
+        - id
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+          description: "This is a string that uniquely identifies the user in the server, often it is an email address or an internal id"
+        name:
+          type: string
+          description: "Must be provided if email is null"
+        email:
+          type: string
+          description: "Must be provided if name is null"
+
+    topics_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      additionalProperties: true
+      properties:
+        pagination:
+          $ref: "#/components/schemas/pagination"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/topic_GET"
+
+    projects_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      additionalProperties: true
+      properties:
+        pagination:
+          $ref: "#/components/schemas/pagination"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/project_GET"
+
+    project_files_informations_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      additionalProperties: true
+      properties:
+        pagination:
+          $ref: "#/components/schemas/pagination"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/project_files_information_GET"
+
+    files_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      additionalProperties: true
+      properties:
+        pagination:
+          $ref: "#/components/schemas/pagination"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/file_GET"
+
+    comments_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      additionalProperties: true
+      properties:
+        pagination:
+          $ref: "#/components/schemas/pagination"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/comment_GET"
+
+    viewpoints_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      additionalProperties: true
+      properties:
+        pagination:
+          $ref: "#/components/schemas/pagination"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/viewpoint_GET"
+
+    related_topics_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      additionalProperties: true
+      properties:
+        pagination:
+          $ref: "#/components/schemas/pagination"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/related_topic_GET"
+
+    document_references_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      additionalProperties: true
+      properties:
+        pagination:
+          $ref: "#/components/schemas/pagination"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/document_reference_GET"
+
+    documents_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      additionalProperties: true
+      properties:
+        pagination:
+          $ref: "#/components/schemas/pagination"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/document_GET"
+
+    topic_events_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      additionalProperties: true
+      properties:
+        pagination:
+          $ref: "#/components/schemas/pagination"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/topic_event_GET"
+
+    comment_events_GET:
+      type: object
+      required:
+        - pagination
+        - data
+      additionalProperties: true
+      properties:
+        pagination:
+          $ref: "#/components/schemas/pagination"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/comment_event_GET"
+
+  parameters:
+    version:
+      in: path
+      name: version
+      schema:
+        type: string
+        default: "3.0"
+      required: true
+    project_id:
+      in: path
+      name: project_id
+      schema:
+        type: string
+      required: true
+    topic_guid:
+      in: path
+      name: topic_guid
+      schema:
+        type: string
+      required: true
+    comment_guid:
+      in: path
+      name: comment_guid
+      schema:
+        type: string
+      required: true
+    viewpoint_guid:
+      in: path
+      name: viewpoint_guid
+      schema:
+        type: string
+      required: true
+    document_reference_guid:
+      in: path
+      name: document_reference_guid
+      schema:
+        type: string
+      required: true
+    bitmap_guid:
+      in: path
+      name: bitmap_guid
+      schema:
+        type: string
+      required: true
+    document_guid:
+      in: path
+      name: document_guid
+      schema:
+        type: string
+      required: true
+    top:
+      in: query
+      name: $top
+      schema:
+        type: string
+    skip:
+      in: query
+      name: $skip
+      schema:
+        type: string
