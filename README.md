@@ -1958,7 +1958,7 @@ Note: If there is a comment associated to the viewpoint, the server might reject
 
 ### 3.5.11 Determining allowed Viewpoint modifications
 
-The global default viewpoint authorizations are expressed in the project schema and when viewpoint(s) are requested, they will include an "authorization" field containing any local permissions for each viewpoint.  
+The global default viewpoint authorizations are expressed in the project schema (`topic_actions` will list whether or not it's possible to perform the `createViewpoint` action) and when viewpoint(s) are requested, they will include an "authorization" field containing any local permissions for each viewpoint.  
 You can get the `createViewpoint` authorization from the parent topic, and the `deleteViewpoint` authorization from a viewpoint itself.
 
 ## 3.6 Related Topics Services
