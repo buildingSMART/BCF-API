@@ -424,6 +424,7 @@ The following types are supported:
 - string: Any string
 - boolean: The values 'true' or 'false'
 - enum: A value from the predefined enumValues array
+- date: ISO 8601 compliant date where only the date portion is intended to be used
 - date-time: ISO 8601 compliant date: https://github.com/buildingSMART/foundation-API#17-datetime-format
 
 ### 3.1.5 Expressing User Authorization Through Project Extensions

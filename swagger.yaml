@@ -2807,6 +2807,8 @@ components:
     project_custom_field_extension:
       type: object
       additionalProperties: true
+      required:
+        - minArraySize
       properties:
         id:
           type: string
