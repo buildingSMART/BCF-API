@@ -452,6 +452,7 @@ level by default (i.e. unless overridden by specific topics) The available actio
 - _updateFiles_ - The ability to update the file header (see [3.3.3 PUT Files (Header) Service](#333-put-files-header-service))
 - _createComment_ - The ability to create a comment (see [3.4.2 POST Comment Service](#342-post-comment-service))
 - _createViewpoint_ - The ability to create a new viewpoint (see [3.5.2 POST Viewpoint Service](#352-post-viewpoint-service))
+- _delete_ - The ability to delete a topic (see [3.2.5 DELETE Topic Service](#325-delete-topic-service))
 
 #### 3.1.5.3 Comment
 
@@ -707,7 +708,7 @@ Modify a specific topic, description similar to POST. This operation is only pos
 
     DELETE /bcf/{version}/projects/{project_id}/topics/{topic_guid}
 
-Deletes a single topic. This operation is only possible when the server returns the `delete` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications)
+Deletes a single topic. This operation is only possible when the server returns the `delete` flag in the Topic authorization, see section [3.2.6](#326-determining-allowed-topic-modifications)
 
 **Example Request**
 
@@ -1957,9 +1958,8 @@ Note: If there is a comment associated to the viewpoint, the server might reject
 
 ### 3.5.11 Determining allowed Viewpoint modifications
 
-The global default Viewpoint authorizations are expressed in the project schema and when Viewpoint(s) are requested with the
-query parameter "includeAuthorization" equal to "true" Viewpoints will include an "authorization" field containing any local
-overrides for each Viewpoint.
+The global default viewpoint authorizations are expressed in the project schema and when viewpoint(s) are requested, they will include an "authorization" field containing any local permissions for each viewpoint.  
+You can get the `createViewpoint` authorization from the parent topic, and the `deleteViewpoint` authorization from a viewpoint itself.
 
 ## 3.6 Related Topics Services
 
