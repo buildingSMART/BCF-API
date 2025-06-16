@@ -32,6 +32,7 @@ The Open CDE workgroup develops the BCF standard. The group meets every second M
 - [Contributing](#contributing)
 - [1. Introduction](#1-introduction)
   - [1.1 OpenCDE Foundation API](#11-opencde-foundation-api)
+    - [1.1.1 Paging, Sorting and Filtering](#111-paging-sorting-and-filtering)
   - [1.2 Authorization](#12-authorization)
     - [1.2.1 Per-Entity Authorization](#121-per-entity-authorization)
     - [1.2.2 Determining Authorized Entity Actions](#122-determining-authorized-entity-actions)
@@ -138,6 +139,10 @@ An example of a client implementation in C# can be found here:
 BCF API is a member of the OpenCDE API family. All OpenCDE APIs are united by a shared common API called [OpenCDE Foundation API](https://github.com/buildingSMART/foundation-API).
 The foundation API specifies a small number of services and a few conventions that are common to all OpenCDE APIs. All BCF API implementations must implement the Foundation API and follow its conventions and guidelines.
 Implementers should start by implementing the Foundation API and only then continue to implement the BCF API.
+
+### 1.1.1 Paging, Sorting and Filtering
+
+Resources in the BCF API that return lists can be paged, sorted and filtered according to the Foundation API: https://github.com/buildingSMART/foundation-API?tab=readme-ov-file#11-paging-sorting-and-filtering
 
 ## 1.2 Authorization
 
