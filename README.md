@@ -2,6 +2,7 @@
 [![This repo is managed by the BCF Implementers Group](https://img.shields.io/badge/-BCF%20Implementers%20Group-blue.svg)](https://img.shields.io/badge/-BCF%20Implementers%20Group-blue.svg)
 
 # BCF REST API
+
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
 **BCFv3.0** is based on BCFv2.1.
@@ -15,12 +16,13 @@
 [Version 2.1 of the BCF API specification is available here](https://github.com/BuildingSMART/BCF-API/tree/v2.1)
 
 **Swagger / OpenAPI Specification**  
-[BCF-API on SwaggerHub](https://app.swaggerhub.com/apis/buildingSMART/BCF/3.0)  
+[BCF-API on SwaggerHub](https://app.swaggerhub.com/apis/buildingSMART/BCF/3.0)
+
 > The Swagger / OpenAPI specification is offered as a reference for implementers. The BCF group may update it and fix issues as necessary at any time.
 
 # Contributing
 
-The Open CDE workgroup develops the BCF standard. The group meets every second Monday at 11am CET. To join the fortnightly meeting please email [opencde@buildingsmart.org](mailto:opencde@buildingsmart.org). 
+The Open CDE workgroup develops the BCF standard. The group meets every second Monday at 11am CET. To join the fortnightly meeting please email [opencde@buildingsmart.org](mailto:opencde@buildingsmart.org).
 
 **Table of Contents**
 
@@ -133,8 +135,8 @@ An example of a client implementation in C# can be found here:
 
 ## 1.1 OpenCDE Foundation API
 
-BCF API is a member of the OpenCDE API family. All OpenCDE APIs are united by a shared common API called [OpenCDE Foundation API](https://github.com/buildingSMART/foundation-API). 
-The foundation API specifies a small number of services and a few conventions that are common to all OpenCDE APIs. All BCF API implementations must implement the Foundation API and follow its conventions and guidelines. 
+BCF API is a member of the OpenCDE API family. All OpenCDE APIs are united by a shared common API called [OpenCDE Foundation API](https://github.com/buildingSMART/foundation-API).
+The foundation API specifies a small number of services and a few conventions that are common to all OpenCDE APIs. All BCF API implementations must implement the Foundation API and follow its conventions and guidelines.
 Implementers should start by implementing the Foundation API and only then continue to implement the BCF API.
 
 ## 1.2 Authorization
@@ -148,8 +150,8 @@ be locally overridden in the entities themselves.
 Whenever a user requests an update-able entity with the query parameter `includeAuthorization` equal to `true` the
 server should include an `authorization` field in the entity containing any local variations from the global
 authorization defaults for that entity. Using this information clients can decide whether to, for example, include an
-"Edit" button in the UI displaying the entity depending on the actions permitted for the user or suggest only the 
-options available to the user for choice fields such as topic status. 
+"Edit" button in the UI displaying the entity depending on the actions permitted for the user or suggest only the
+options available to the user for choice fields such as topic status.
 
 ### 1.2.2 Determining Authorized Entity Actions
 
@@ -175,8 +177,8 @@ _In the Project Extensions_
 
 Indicating that by default:
 
-* no modifications can be made to Topics
-* Topics can be placed in `open`, `closed` or `confirmed` status
+- no modifications can be made to Topics
+- Topics can be placed in `open`, `closed` or `confirmed` status
 
 _In the Topic_
 
@@ -196,15 +198,15 @@ _In the Topic_
 
 Indicating that for this topic, the current user can:
 
-* update the Topic, or add comments or viewpoints
-* place the Topic into `closed` status
-* leave the Topic `open` or place the topic back into `open` status after closing it
+- update the Topic, or add comments or viewpoints
+- place the Topic into `closed` status
+- leave the Topic `open` or place the topic back into `open` status after closing it
 
 ### 1.3 Units of Numeric Values
 
 Numeric values in this specification are all in fixed units - meters for length and degrees for angle.
 
-----------
+---
 
 # 2. Topologies
 
@@ -220,7 +222,7 @@ BCF and model server are co-located on the same hosts.
 
 ![Topology3](Images/Topology3.png)
 
-----------
+---
 
 # 3. BCF Services
 
@@ -407,22 +409,22 @@ Project extensions are used to define possible values that can be used in topics
 
 Custom field values are always represented as arrays of strings. The type of the custom field indicates how its values should be parsed. Since all custom fields are expressed as arrays, the `minArraySize` and `maxArraySize` properties are used to describe the required cardinality of the field. For example:
 
-|`minArraySize`|  `maxArraySize` | Description | Example |
-|-|-|-|-|
-| `1` | `1` | Single required item | `["My Custom Value"]` |
-| `0` | `1` | Single optional item | `[]` or `["My Custom Value"]` |
-| `1` | `null` | Multiple required items | `["My Custom Value"]` or `["My Custom Value", "My Other Value"]` |
-| `0` | `null` | Multiple optional items | `[]` or `["My Custom Value"]` or `["My Custom Value", "My Other Value"]` |
-| `2` | `2` | Two required items | `["My Custom Value", "My Other Value"]` |
+| `minArraySize` | `maxArraySize` | Description             | Example                                                                  |
+| -------------- | -------------- | ----------------------- | ------------------------------------------------------------------------ |
+| `1`            | `1`            | Single required item    | `["My Custom Value"]`                                                    |
+| `0`            | `1`            | Single optional item    | `[]` or `["My Custom Value"]`                                            |
+| `1`            | `null`         | Multiple required items | `["My Custom Value"]` or `["My Custom Value", "My Other Value"]`         |
+| `0`            | `null`         | Multiple optional items | `[]` or `["My Custom Value"]` or `["My Custom Value", "My Other Value"]` |
+| `2`            | `2`            | Two required items      | `["My Custom Value", "My Other Value"]`                                  |
 
 The following types are supported:
+
 - integer: A number that does not contain decimals
 - decimal: A number than can contain decimals
 - string: Any string
 - boolean: The values 'true' or 'false'
 - enum: A value from the predefined enumValues array
 - date-time: ISO 8601 compliant date: https://github.com/buildingSMART/foundation-API#17-datetime-format
-
 
 ### 3.1.5 Expressing User Authorization Through Project Extensions
 
@@ -435,30 +437,30 @@ listed below.
 The 'project_actions' entry in the project extensions defines what actions are allowed to be performed
 at the project level. The available actions include:
 
-* *update* - The ability to update the project details (see [3.1.3 PUT Project Service](#313-put-project-service))
-* *createTopic* - The ability to create a new topic (see [3.2.2 POST Topic Service](#322-post-topic-service))
-* *createDocument* - The ability to create a new document (see [3.8.2 POST Document Service](#382-post-document-service))
+- _update_ - The ability to update the project details (see [3.1.3 PUT Project Service](#313-put-project-service))
+- _createTopic_ - The ability to create a new topic (see [3.2.2 POST Topic Service](#322-post-topic-service))
+- _createDocument_ - The ability to create a new document (see [3.8.2 POST Document Service](#382-post-document-service))
 
 #### 3.1.5.2 Topic
 
 The 'topic_actions' entry in the project extensions defines what actions are allowed to be performed at the topic
 level by default (i.e. unless overridden by specific topics) The available actions include:
 
-* *update* - The ability to update the topic (see [3.2.4 PUT Topic Service](#324-put-topic-service))
-* *updateRelatedTopics* - The ability to update the collection of related topics (see [3.6.2 PUT Related Topics Service](#362-put-related-topics-service))
-* *updateDocumentReferences* - The ability to update the collection of document references (see [3.7.3 PUT Document Reference Service](#373-put-document-reference-service))
-* *updateFiles* - The ability to update the file header (see [3.3.3 PUT Files (Header) Service](#333-put-files-header-service))
-* *createComment* - The ability to create a comment (see [3.4.2 POST Comment Service](#342-post-comment-service))
-* *createViewpoint* - The ability to create a new viewpoint (see [3.5.2 POST Viewpoint Service](#352-post-viewpoint-service))
+- _update_ - The ability to update the topic (see [3.2.4 PUT Topic Service](#324-put-topic-service))
+- _updateRelatedTopics_ - The ability to update the collection of related topics (see [3.6.2 PUT Related Topics Service](#362-put-related-topics-service))
+- _updateDocumentReferences_ - The ability to update the collection of document references (see [3.7.3 PUT Document Reference Service](#373-put-document-reference-service))
+- _updateFiles_ - The ability to update the file header (see [3.3.3 PUT Files (Header) Service](#333-put-files-header-service))
+- _createComment_ - The ability to create a comment (see [3.4.2 POST Comment Service](#342-post-comment-service))
+- _createViewpoint_ - The ability to create a new viewpoint (see [3.5.2 POST Viewpoint Service](#352-post-viewpoint-service))
 
 #### 3.1.5.3 Comment
 
 The 'comment_actions' entry in the project extensions defines what actions are allowed to be performed at the comment level by
 default (i.e unless overridden by specific comments). The available actions include:
 
-* *update* - The ability to update the comment (see [3.4.4 PUT Comment Service](#344-put-comment-service))
+- _update_ - The ability to update the comment (see [3.4.4 PUT Comment Service](#344-put-comment-service))
 
----------
+---
 
 ## 3.2 Topic Services
 
@@ -474,27 +476,27 @@ Retrieve a **collection** of topics related to a project (default sort order is 
 
 **Odata filter parameters**
 
-|parameter|type|description|
-|---------|----|-----------|
-|creation_author|string|id of the creation author (value from extensions)|
-|modified_author|string|id of the modified author (value from extensions)|
-|assigned_to|string|id of the assigned person (value from extensions)|
-|stage|string|id of a stage (value from extensions)|
-|topic_status|string|id of a topic_status (value from extensions)|
-|topic_type|string|id of a topic_type (value from extensions)|
-|creation_date|datetime|creation date of a topic|
-|modified_date|datetime|modification date of a topic. The modification date of a server's topic should be the latest value of when the topic has been modified or when the latest [comment](#34-comment-services) has been updated or when a "floating viewpoint" (a [viewpoint](#35-viewpoint-services) which is not associated with a comment) is added|
-|labels|array (string)|ids of labels (value from extensions)|
-|priority|string|id of a priority (value from extensions)|
+| parameter       | type           | description                                                                                                                                                                                                                                                                                                                       |
+| --------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| creation_author | string         | id of the creation author (value from extensions)                                                                                                                                                                                                                                                                                 |
+| modified_author | string         | id of the modified author (value from extensions)                                                                                                                                                                                                                                                                                 |
+| assigned_to     | string         | id of the assigned person (value from extensions)                                                                                                                                                                                                                                                                                 |
+| stage           | string         | id of a stage (value from extensions)                                                                                                                                                                                                                                                                                             |
+| topic_status    | string         | id of a topic_status (value from extensions)                                                                                                                                                                                                                                                                                      |
+| topic_type      | string         | id of a topic_type (value from extensions)                                                                                                                                                                                                                                                                                        |
+| creation_date   | datetime       | creation date of a topic                                                                                                                                                                                                                                                                                                          |
+| modified_date   | datetime       | modification date of a topic. The modification date of a server's topic should be the latest value of when the topic has been modified or when the latest [comment](#34-comment-services) has been updated or when a "floating viewpoint" (a [viewpoint](#35-viewpoint-services) which is not associated with a comment) is added |
+| labels          | array (string) | ids of labels (value from extensions)                                                                                                                                                                                                                                                                                             |
+| priority        | string         | id of a priority (value from extensions)                                                                                                                                                                                                                                                                                          |
 
 **Odata sort parameters**
 
-|parameter|description|
-|---------|-----------|
-|creation_date|creation date of a topic|
-|modified_date|modification date of a topic|
-|server_assigned_id|the [server_assigned_id](#329-topic-identifiers) of the topic|
-|index|index of a topic **This property is deprecated and will be removed in a future release**|
+| parameter          | description                                                                              |
+| ------------------ | ---------------------------------------------------------------------------------------- |
+| creation_date      | creation date of a topic                                                                 |
+| modified_date      | modification date of a topic                                                             |
+| server_assigned_id | the [server_assigned_id](#329-topic-identifiers) of the topic                            |
+| index              | index of a topic **This property is deprecated and will be removed in a future release** |
 
 **Example Request with odata**
 
@@ -552,21 +554,21 @@ Add a new topic. This operation is only possible when the server returns the `cr
 
 JSON encoded body using the "application/json" content type.
 
-|Parameter|Type|Description|Required|
-|---------|----|-----------|--------|
-|guid|string|The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system.|false|
-|topic_type|[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET) |The type of a topic (value from extension.xsd)|false|
-|topic_status|[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET) |The status of a topic (value from extension.xsd)|false|
-|reference_links|array (string)|Reference links, i.e. links to referenced resources|false|
-|title|string|The title of a topic|true|
-|priority|[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET) |The priority of a topic (value from extension.xsd)|false|
-|index|integer|The index of a topic **This property is deprecated and will be removed in a future release**|false|
-|labels|array of[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET) |The labels of a topic (value from extension.xsd)|false|
-|assigned_to|[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET) |The user assigned to a topic (value from extension.xsd).|false|
-|stage|[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET) |The stage of a topic (value from extension.xsd)|false|
-|description|string|Description of a topic|false|
-|due_date|string|Until when the topics issue needs to be resolved|false|
-|custom_fields| array (object) | Custom fields of a topic | false |
+| Parameter       | Type                                                                                                    | Description                                                                                                                                                                   | Required |
+| --------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| guid            | string                                                                                                  | The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system. | false    |
+| topic_type      | [extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET)         | The type of a topic (value from extension.xsd)                                                                                                                                | false    |
+| topic_status    | [extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET)         | The status of a topic (value from extension.xsd)                                                                                                                              | false    |
+| reference_links | array (string)                                                                                          | Reference links, i.e. links to referenced resources                                                                                                                           | false    |
+| title           | string                                                                                                  | The title of a topic                                                                                                                                                          | true     |
+| priority        | [extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET)         | The priority of a topic (value from extension.xsd)                                                                                                                            | false    |
+| index           | integer                                                                                                 | The index of a topic **This property is deprecated and will be removed in a future release**                                                                                  | false    |
+| labels          | array of[extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET) | The labels of a topic (value from extension.xsd)                                                                                                                              | false    |
+| assigned_to     | [extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET)         | The user assigned to a topic (value from extension.xsd).                                                                                                                      | false    |
+| stage           | [extension_item_SET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/extension_item_SET)         | The stage of a topic (value from extension.xsd)                                                                                                                               | false    |
+| description     | string                                                                                                  | Description of a topic                                                                                                                                                        | false    |
+| due_date        | string                                                                                                  | Until when the topics issue needs to be resolved                                                                                                                              | false    |
+| custom_fields   | array (object)                                                                                          | Custom fields of a topic                                                                                                                                                      | false    |
 
 > `custom_fields` are an optional array property that can be used by clients to attach custom data to a topic. The server should return the same array in the response. The array may be empty. It should contain the custom fields as defined in the project extensions.  
 > The `id` property of each custom field object is used to identify a field within a project. When creating or updating a topic, the `id` property from the extensions must be provided.
@@ -727,48 +729,50 @@ The topic relations are defined in the schema and when Topic(s) are requested wi
 
 ### 3.2.8 Topic Identifiers
 
-Each topic has two identifiers: 
-1. `guid` - machine-friendly, randomly generated and universally unique identifier. Both clients and servers must generate 
-    a `guid` when creating a topic using an RFC 4122 compliant UUID generator. The `guid` should be used in all client-server 
-    interactions to identify topics. <br> 
-    
-    `guid` examples: 420b24db-921c-46d6-9629-d529d130307f, 5139a00f-5cbd-4760-9e44-16cc4826aa5a 
-2. `server_assigned_id` - a human-friendly identifier which is generated and controlled by the server. A `server_assigned_id` is project-unique: 
-    No two topics in a given server and project may have the same `server_assigned_id`. However, topics in different projects on a 
-    given server may have identical `server_assigned_id`s. `server_assigned_id`s can't be changed using the API; BCF clients should display 
-    `server_assigned_id`s to users to make it easier to locate and discuss topics.<br>
-    
-    `server_assigned_id` examples: 003490, ISSUE-01  
+Each topic has two identifiers:
+
+1. `guid` - machine-friendly, randomly generated and universally unique identifier. Both clients and servers must generate
+   a `guid` when creating a topic using an RFC 4122 compliant UUID generator. The `guid` should be used in all client-server
+   interactions to identify topics. <br>
+
+   `guid` examples: 420b24db-921c-46d6-9629-d529d130307f, 5139a00f-5cbd-4760-9e44-16cc4826aa5a
+
+2. `server_assigned_id` - a human-friendly identifier which is generated and controlled by the server. A `server_assigned_id` is project-unique:
+   No two topics in a given server and project may have the same `server_assigned_id`. However, topics in different projects on a
+   given server may have identical `server_assigned_id`s. `server_assigned_id`s can't be changed using the API; BCF clients should display
+   `server_assigned_id`s to users to make it easier to locate and discuss topics.<br>
+
+   `server_assigned_id` examples: 003490, ISSUE-01
 
 ## 3.3 File Services
 
-This group of services corresponds to the BCF-XML [header](https://github.com/buildingSMART/BCF-XML/tree/release_3_0/Documentation#header) `Files` element. The files associated with a topic are the models that should be loaded when displaying the topic's viewpoints. 
+This group of services corresponds to the BCF-XML [header](https://github.com/buildingSMART/BCF-XML/tree/release_3_0/Documentation#header) `Files` element. The files associated with a topic are the models that should be loaded when displaying the topic's viewpoints.
 
 ### 3.3.1 GET Project Files Information Service
 
 **Resource URL**
 
     GET /bcf/{version}/projects/{project_id}/files_information
-    
+
 [project_files_information_GET](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/project_files_information_GET)
 
-Retrieve a **collection** of `project_file_information`s to support allowing users to choose which `File`s (models) 
-to reference in the header of topics created on the server. 
+Retrieve a **collection** of `project_file_information`s to support allowing users to choose which `File`s (models)
+to reference in the header of topics created on the server.
 
-Each [project_file_information](Schemas/Collaboration/File/project_file_information.json) record contains 
-`display_information` to allow users to associate the `File` with a server model. 
+Each [project_file_information](Schemas/Collaboration/File/project_file_information.json) record contains
+`display_information` to allow users to associate the `File` with a server model.
 The `display_information` object is designed to support user interface rendering in tabular format. The
-servers are required to provide a consistent list of fields across all 
-[project_file_information](Schemas/Collaboration/File/project_file_information.json) objects. The following 
+servers are required to provide a consistent list of fields across all
+[project_file_information](Schemas/Collaboration/File/project_file_information.json) objects. The following
 table demonstrates tabular rendering of the **Example Response** (below):
 
-| Model Name | Revision Date |
-|------------|---------------|
-| ARCH-Z100-051 | May 3 2020 |
-| MEP-Z100-015 | Apr 30 2020 |
- 
+| Model Name    | Revision Date |
+| ------------- | ------------- |
+| ARCH-Z100-051 | May 3 2020    |
+| MEP-Z100-015  | Apr 30 2020   |
+
 Each [project_file_information](Schemas/Collaboration/File/project_file_information.json) also contains a
-[file_GET](Schemas/Collaboration/File/file_GET.json) object that will be accepted by the server should the 
+[file_GET](Schemas/Collaboration/File/file_GET.json) object that will be accepted by the server should the
 user choose to associate a topic with that `File`.
 
 **Example Request**
@@ -789,7 +793,7 @@ user choose to associate a topic with that `File`.
         }],
         "file": {
             "ifc_project": "0J$yPqHBD12v72y4qF6XcD",
-            "file_name": "OfficeBuilding_Architecture_0001.ifc",
+            "filename": "OfficeBuilding_Architecture_0001.ifc",
             "reference": "https://example.com/files/0J$yPqHBD12v72y4qF6XcD_0001.ifc"
         }
     }, {
@@ -799,14 +803,13 @@ user choose to associate a topic with that `File`.
         }, {
              "field_display_name": "Revision Date",
              "field_value": "Apr 30 2020"
-        }],        
+        }],
         "file": {
             "ifc_project": "3hwBHP91jBRwPsmyf$3Hea",
-            "file_name": "OfficeBuilding_Heating_0003.ifc",
+            "filename": "OfficeBuilding_Heating_0003.ifc",
             "reference": "cf37bae6-0900-46be-b37f-b34754fe0b4a"
         }
     }]
-
 
 ### 3.3.2 GET Files (Header) Service
 
@@ -818,7 +821,7 @@ user choose to associate a topic with that `File`.
 
 Retrieve a **collection** of file references as topic header.
 
-*Implementer Note*: The `reference` property can either be an **Uri** or a **server specific id**. Uris are given as absolute paths to the model files while ids reference a custom id of the model file and require custom logic per server to retrieve it. This allows referencing of files on the server but requires clients to know how to retrieve files in a specific implementation.
+_Implementer Note_: The `reference` property can either be an **Uri** or a **server specific id**. Uris are given as absolute paths to the model files while ids reference a custom id of the model file and require custom logic per server to retrieve it. This allows referencing of files on the server but requires clients to know how to retrieve files in a specific implementation.
 
 **Example Request**
 
@@ -896,16 +899,16 @@ Retrieve a **collection** of all comments related to a topic (default ordering i
 
 **Odata filter parameters**
 
-|parameter|type|description|
-|---------|----|-----------|
-|author|string|id of the user (value from extensions)|
-|date|datetime|creation date of a comment|
+| parameter | type     | description                            |
+| --------- | -------- | -------------------------------------- |
+| author    | string   | id of the user (value from extensions) |
+| date      | datetime | creation date of a comment             |
 
 **Odata sort parameters**
 
-|parameter|description|
-|---------|-----------|
-|date|creation date of a comment|
+| parameter | description                |
+| --------- | -------------------------- |
+| date      | creation date of a comment |
 
 **Example Request with odata**
 
@@ -954,11 +957,11 @@ Add a new comment to a topic. This operation is only possible when the server re
 
 JSON encoded body using the "application/json" content type.
 
-|Parameter|Type|Description|Required|
-|---------|----|-----------|--------|
-|guid|string|The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system.|false|
-|comment|string|The comment text. Must not be blank or empty if provided|true, unless `viewpoint_guid` is provided|
-|viewpoint_guid|string|The GUID of the related viewpoint|true, unless `comment` is provided|
+| Parameter      | Type   | Description                                                                                                                                                                   | Required                                  |
+| -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| guid           | string | The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system. | false                                     |
+| comment        | string | The comment text. Must not be blank or empty if provided                                                                                                                      | true, unless `viewpoint_guid` is provided |
+| viewpoint_guid | string | The GUID of the related viewpoint                                                                                                                                             | true, unless `comment` is provided        |
 
 **Example Request**
 
@@ -1082,7 +1085,6 @@ Note: For viewpoints without audit information (For example viewpoints created i
 
 - If comments are linked to this viewpoint, return audit information of the oldest linked comment
 - If no comments are linked to the viewpoint, return audit information of the issue
-
 
 **Example Response**
 
@@ -1219,19 +1221,19 @@ Add a new viewpoint. Viewpoints are immutable, meaning that they should never ch
 
 JSON encoded body using the "application/json" content type.
 
-|parameter|type|description|required|
-|---------|----|-----------|--------|
-| guid | string | The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system. | optional |
-| index | integer | parameter for sorting | optional |
-| orthogonal_camera | [Orthogonal camera](#3523-orthogonal-camera) | orthogonal camera view | see viewpoint optional/mandatory fields clarification |
-| perspective_camera | [Perspective camera](#3524-perspective-camera) | perspective view of the camera |  see viewpoint optional/mandatory fields clarification |
-| lines | array of [Line](#3525-line) | graphical line | optional |
-| markers | array of [Marker](#35217-marker) | highlight specific locations | optional |
-| clipping_planes | array of [Clipping Plane](#3526-clipping-plane) | clipping planes for the model view | optional |
-| bitmaps | array of [Bitmap](#3527-bitmap) | embedded pictures in the viewpoint | optional |
-| snapshot | [Snapshot](#3528-snapshot) | snapshot image of the viewpoint. Note: The longest dimension of should not exceed 1500 px, length or width. |  see viewpoint optional/mandatory fields clarification |
-| components | [Components](#3529-components) | Components in the viewpoint | optional |
-| topic_file_ids | array of strings | List of file ids that are referenced in the viewpoint | required, but can be an empty list |
+| parameter          | type                                            | description                                                                                                                                                                   | required                                              |
+| ------------------ | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| guid               | string                                          | The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system. | optional                                              |
+| index              | integer                                         | parameter for sorting                                                                                                                                                         | optional                                              |
+| orthogonal_camera  | [Orthogonal camera](#3523-orthogonal-camera)    | orthogonal camera view                                                                                                                                                        | see viewpoint optional/mandatory fields clarification |
+| perspective_camera | [Perspective camera](#3524-perspective-camera)  | perspective view of the camera                                                                                                                                                | see viewpoint optional/mandatory fields clarification |
+| lines              | array of [Line](#3525-line)                     | graphical line                                                                                                                                                                | optional                                              |
+| markers            | array of [Marker](#35217-marker)                | highlight specific locations                                                                                                                                                  | optional                                              |
+| clipping_planes    | array of [Clipping Plane](#3526-clipping-plane) | clipping planes for the model view                                                                                                                                            | optional                                              |
+| bitmaps            | array of [Bitmap](#3527-bitmap)                 | embedded pictures in the viewpoint                                                                                                                                            | optional                                              |
+| snapshot           | [Snapshot](#3528-snapshot)                      | snapshot image of the viewpoint. Note: The longest dimension of should not exceed 1500 px, length or width.                                                                   | see viewpoint optional/mandatory fields clarification |
+| components         | [Components](#3529-components)                  | Components in the viewpoint                                                                                                                                                   | optional                                              |
+| topic_file_ids     | array of strings                                | List of file ids that are referenced in the viewpoint                                                                                                                         | required, but can be an empty list                    |
 
 **Viewpoint optional/mandatory fields clarification**
 
@@ -1241,24 +1243,26 @@ JSON encoded body using the "application/json" content type.
 4. A viewpoint containing _visualization information_ must also contain a _camera definition_
 
 #### 3.5.2.1 Point
+
 [point](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/point)
 
-|parameter|type|description|required|
-|---------|----|-----------|--------|
-| x | number | x point | mandatory |
-| y | number | y point | mandatory |
-| z | number | z point | mandatory |
+| parameter | type   | description | required  |
+| --------- | ------ | ----------- | --------- |
+| x         | number | x point     | mandatory |
+| y         | number | y point     | mandatory |
+| z         | number | z point     | mandatory |
 
 #### 3.5.2.2 Direction
+
 [direction](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/direction)
 
 Direction must not be a zero vector.
 
-|parameter|type|description|required|
-|---------|----|-----------|--------|
-| x | number | x direction | mandatory |
-| y | number | y direction | mandatory |
-| z | number | z direction | mandatory |
+| parameter | type   | description | required  |
+| --------- | ------ | ----------- | --------- |
+| x         | number | x direction | mandatory |
+| y         | number | y direction | mandatory |
+| z         | number | z direction | mandatory |
 
 ### Camera
 
@@ -1267,128 +1271,146 @@ Perspective and Orthogonal cameras are explained in detail in [BCF-XML](https://
 ![Camera Illustration](https://github.com/buildingSMART/BCF-XML/blob/release_3_0/Documentation/Graphics/Cameras.png)
 
 #### 3.5.2.3 Orthogonal camera
+
 [orthogonal_camera](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/orthogonal_camera)
 
-|parameter|type|description|required|
-|---------|----|-----------|--------|
-| camera_view_point | [Point](#3521-point) | camera location | mandatory |
-| camera_direction | [Direction](#3522-direction) | camera direction | mandatory |
-| camera_up_vector | [Direction](#3522-direction) | camera up vector | mandatory |
-| view_to_world_scale | number | the entire vertical scaling from view to world | mandatory |
-| aspect_ratio | number | proportional relationship between the width and the height of the view (w/h) | mandatory |
+| parameter           | type                         | description                                                                  | required  |
+| ------------------- | ---------------------------- | ---------------------------------------------------------------------------- | --------- |
+| camera_view_point   | [Point](#3521-point)         | camera location                                                              | mandatory |
+| camera_direction    | [Direction](#3522-direction) | camera direction                                                             | mandatory |
+| camera_up_vector    | [Direction](#3522-direction) | camera up vector                                                             | mandatory |
+| view_to_world_scale | number                       | the entire vertical scaling from view to world                               | mandatory |
+| aspect_ratio        | number                       | proportional relationship between the width and the height of the view (w/h) | mandatory |
 
 #### 3.5.2.4 Perspective camera
+
 [perspective_camera](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/perspective_camera)
 
-|parameter|type|description|required|
-|---------|----|-----------|--------|
-| camera_view_point | [Point](#3521-point) | camera location  | mandatory |
-| camera_direction | [Direction](#3522-direction) | camera direction | mandatory |
-| camera_up_vector | [Direction](#3522-direction) | camera up vector | mandatory |
-| field_of_view | number | the entire vertical field of view angle of the camera, expressed in degrees | mandatory |
-| aspect_ratio | number | proportional relationship between the width and the height of the view (w/h) | mandatory |
+| parameter         | type                         | description                                                                  | required  |
+| ----------------- | ---------------------------- | ---------------------------------------------------------------------------- | --------- |
+| camera_view_point | [Point](#3521-point)         | camera location                                                              | mandatory |
+| camera_direction  | [Direction](#3522-direction) | camera direction                                                             | mandatory |
+| camera_up_vector  | [Direction](#3522-direction) | camera up vector                                                             | mandatory |
+| field_of_view     | number                       | the entire vertical field of view angle of the camera, expressed in degrees  | mandatory |
+| aspect_ratio      | number                       | proportional relationship between the width and the height of the view (w/h) | mandatory |
 
 #### 3.5.2.5 Line
+
 [line](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/line)
 
-|parameter|type|description|required|
-|---------|----|-----------|--------|
-| start_point | [Point](#3521-point) | start point of the line | mandatory |
-| end_point | [Point](#3521-point) | end point of the line (Treated as point if start_point and end_point is the same | mandatory |
-| color | string | Lines may specify the color in which they should be displayed | optional |
+| parameter   | type                 | description                                                                      | required  |
+| ----------- | -------------------- | -------------------------------------------------------------------------------- | --------- |
+| start_point | [Point](#3521-point) | start point of the line                                                          | mandatory |
+| end_point   | [Point](#3521-point) | end point of the line (Treated as point if start_point and end_point is the same | mandatory |
+| color       | string               | Lines may specify the color in which they should be displayed                    | optional  |
 
 #### 3.5.2.6 Clipping plane
+
 [clipping_plane](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/clipping_plane)
 
-|parameter|type|description|required|
-|---------|----|-----------|--------|
-| location | [Point](#3521-point) | origin of the clipping plane | mandatory |
+| parameter | type                         | description                                                                                               | required  |
+| --------- | ---------------------------- | --------------------------------------------------------------------------------------------------------- | --------- |
+| location  | [Point](#3521-point)         | origin of the clipping plane                                                                              | mandatory |
 | direction | [Direction](#3522-direction) | direction of the clipping plane, points in the invisible direction meaning the half-space that is clipped | mandatory |
 
 #### 3.5.2.7 Bitmap
+
 [bitmap_POST](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/bitmap_POST)
 
-|parameter|type|description|required|
-|---------|----|-----------|--------|
-| bitmap_type | enum (string) | format of the bitmap. Predefined values `png` or `jpg` | mandatory |
-| bitmap_data | base64 encoded string | The bitmap image data | mandatory |
-| location | [Point](#3521-point) | location of the center of the bitmap in world coordinates (point) | mandatory |
-| normal | [Direction](#3522-direction) | normal vector of the bitmap (vector) | mandatory |
-| up | [Direction](#3522-direction) | up vector of the bitmap (vector) | mandatory |
-| height | number | height of bitmap in the scene | mandatory |
+| parameter   | type                         | description                                                       | required  |
+| ----------- | ---------------------------- | ----------------------------------------------------------------- | --------- |
+| bitmap_type | enum (string)                | format of the bitmap. Predefined values `png` or `jpg`            | mandatory |
+| bitmap_data | base64 encoded string        | The bitmap image data                                             | mandatory |
+| location    | [Point](#3521-point)         | location of the center of the bitmap in world coordinates (point) | mandatory |
+| normal      | [Direction](#3522-direction) | normal vector of the bitmap (vector)                              | mandatory |
+| up          | [Direction](#3522-direction) | up vector of the bitmap (vector)                                  | mandatory |
+| height      | number                       | height of bitmap in the scene                                     | mandatory |
 
 #### 3.5.2.8 Snapshot
+
 [snapshot_POST](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/snapshot_POST)
 
-|parameter|type|description|required|
-|---------|----|-----------|--------|
-| snapshot_type | enum (string) | format of the snapshot. Predefined values `png` or `jpg` | mandatory |
-| snapshot_data | base64 encoded string | The snapshot image data | mandatory |
+| parameter     | type                  | description                                              | required  |
+| ------------- | --------------------- | -------------------------------------------------------- | --------- |
+| snapshot_type | enum (string)         | format of the snapshot. Predefined values `png` or `jpg` | mandatory |
+| snapshot_data | base64 encoded string | The snapshot image data                                  | mandatory |
 
 #### 3.5.2.9 Components
+
 [components](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/components)
 
 | parameter    | type                                   | description                | required  |
-|--------------|----------------------------------------|----------------------------|-----------|
+| ------------ | -------------------------------------- | -------------------------- | --------- |
 | selection    | array of [Component](#35210-component) | Selected components        | optional  |
 | coloring     | array of [Coloring](#35211-coloring)   | Colored components         | optional  |
 | visibility   | [Visibility](#35212-visibility)        | Visibility of components   | mandatory |
 | translucency | [Translucency](#35214-translucency)    | Translucency of components | optional  |
 
 #### 3.5.2.10 Component
+
 [component](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/component)
 
 ##### Optimization rules
+
 BCF is suitable for selecting a few components. A huge list of selected components causes poor performance. All clients should follow this rule:
+
 - If the size of the selected components is huge (approximately 1000 components), alert the user and give him the opportunity to modify the visibility.
 
-|parameter|type|description|required|
-|---------|----|-----------|--------|
-| ifc_guid | string | IFC guid of the component | optional, if authoring_tool_id is provided |
-| originating_system | string | originating system of the component | optional |
-| authoring_tool_id | string | system specific identifier of the component in the originating BIM tool | optional, if ifc_guid is provided |
+| parameter          | type   | description                                                             | required                                   |
+| ------------------ | ------ | ----------------------------------------------------------------------- | ------------------------------------------ |
+| ifc_guid           | string | IFC guid of the component                                               | optional, if authoring_tool_id is provided |
+| originating_system | string | originating system of the component                                     | optional                                   |
+| authoring_tool_id  | string | system specific identifier of the component in the originating BIM tool | optional, if ifc_guid is provided          |
 
 Note that `ifc_guid` must be provided, if possible. The `authoring_tool_id` can be used as a fallback when an `ifc_guid` is not available.
 
 #### 3.5.2.11 Coloring
+
 [coloring](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/coloring)
 
 ##### Optimization rules
+
 BCF is suitable for coloring a few components. A huge list of components causes poor performance. All clients should follow this rule:
+
 - If the size of colored components is huge (approximately 1000 components), alert the user and give him the opportunity to modify the coloring.
 
 The color is given in ARGB format. Colors are represented as 6 or 8 hexadecimal digits. If 8 digits are present, the first two represent the alpha (transparency) channel. For example, `40E0D0` would be the color Turquoise. [More information about the color format can be found on Wikipedia.](https://en.wikipedia.org/wiki/RGBA_color_space)
 
-|parameter|type|description|required|
-|---------|----|-----------|--------|
-| color | string | Color of the components | mandatory |
-| components | array of [Component](#35210-component) | Colored components | mandatory |
+| parameter  | type                                   | description             | required  |
+| ---------- | -------------------------------------- | ----------------------- | --------- |
+| color      | string                                 | Color of the components | mandatory |
+| components | array of [Component](#35210-component) | Colored components      | mandatory |
 
 #### 3.5.2.12 Visibility
+
 [visibility](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/visibility)
 
 ##### Optimization rules
+
 BCF is suitable for hiding/showing a few components. A huge list of hidden/shown components causes poor performance. All clients should follow these rules:
+
 - If the list of hidden components is smaller than the list of visible components: set default_visibility to true and put the hidden components in exceptions.
-- If the list of visible components is smaller or equals the list of hidden components:  set default_visibility to false and put the visible components in exceptions.
+- If the list of visible components is smaller or equals the list of hidden components: set default_visibility to false and put the visible components in exceptions.
 - If the size of exceptions is huge (approximately 1000 components), alert the user and give him the opportunity to modify the visibility.
 
-|parameter|type|description|required|
-|---------|----|-----------|--------|
-| default_visibility | boolean | If true: Show all components, and hide the exceptions. If false: Hide all components and show exceptions | optional, default false |
-| exceptions | array of [Component](#35210-component) | Components to hide/show determined by default_visibility | optional |
-| view_setup_hints | [View setup hints](#35213-view-setup-hints) | Hints about the setup of the viewer | optional |
+| parameter          | type                                        | description                                                                                              | required                |
+| ------------------ | ------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------- |
+| default_visibility | boolean                                     | If true: Show all components, and hide the exceptions. If false: Hide all components and show exceptions | optional, default false |
+| exceptions         | array of [Component](#35210-component)      | Components to hide/show determined by default_visibility                                                 | optional                |
+| view_setup_hints   | [View setup hints](#35213-view-setup-hints) | Hints about the setup of the viewer                                                                      | optional                |
 
 #### 3.5.2.13 View setup hints
+
 [view_setup_hints](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/view_setup_hints)
 
-|parameter|type|description|required|
-|---------|----|-----------|--------|
-| spaces_visible | boolean | Visibility of spaces | optional, default false |
+| parameter                | type    | description                    | required                |
+| ------------------------ | ------- | ------------------------------ | ----------------------- |
+| spaces_visible           | boolean | Visibility of spaces           | optional, default false |
 | space_boundaries_visible | boolean | Visibility of space_boundaries | optional, default false |
-| openings_visible | boolean | Visibility of openings | optional, default false |
+| openings_visible         | boolean | Visibility of openings         | optional, default false |
 
 #### 3.5.2.14 Translucency
+
 [translucency](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/translucency)
 
 The `translucency` object decides which components are translucent and which are opaque. Visibility has a higher priority than translucency: A translucent component which is also resolved to be invisible should not be rendered.
@@ -1396,28 +1418,30 @@ The `translucency` object decides which components are translucent and which are
 Commonly, translucency is specified using a numeric value (alpha) ranging from 0 to 1 where a value of 0 indicates complete transparency and a value of 1 indicates complete opacity. This specification leaves the alpha value for translucent components to the vendor's discretion: when a component is resolved as 'translucent', it should rendered with an alpha greater than 0 but less than 1 in a manner consistent with the visual style of the rendering application.
 
 ##### Optimization rules
+
 BCF is suitable for controlling the translucency of a few components. A huge list of translucent/opaque components will cause poor performance. When encoding a viewpoint follow these rules:
+
 - Apply visibility optimization first and optimize translucency for visible components only.
 - Omit the translucency element altogether if all visible components are opaque.
 - If the list of translucent components is smaller than the list of opaque components: set `default_translucency` to false and put the translucent components in exceptions.
-- If the list of opaque components is smaller or equals the list of translucent components:  set `default_translucency` to true and put the opaque components in exceptions.
+- If the list of opaque components is smaller or equals the list of translucent components: set `default_translucency` to true and put the opaque components in exceptions.
 - If the size of exceptions is huge (over 1000 components), alert the user and ask them to alter the translucency setting to allow efficient encoding.
 
-| parameter                | type                                                | description                                                                                                                                             |required|
-|--------------------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+| parameter                | type                                                | description                                                                                                                                             | required                |
+| ------------------------ | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
 | default_translucency     | boolean                                             | If true: Make all components translucent, and make the exceptions opaque. If false: Make all components opaque and make all the exceptions translucent. | optional, default false |
-| exceptions               | array of [Component](#35210-component)              | Components to make translucent or opaque as determined by default_translucency                                                                          | optional |
-| translucency_setup_hints | [View setup hints](#35215-translucency-setup-hints) | Hints about the translucency of spaces, space boundaries and openings.                                                                                  | optional |
+| exceptions               | array of [Component](#35210-component)              | Components to make translucent or opaque as determined by default_translucency                                                                          | optional                |
+| translucency_setup_hints | [View setup hints](#35215-translucency-setup-hints) | Hints about the translucency of spaces, space boundaries and openings.                                                                                  | optional                |
 
 #### 3.5.2.15 Translucency setup hints
+
 [translucency_setup_hints](https://app.swaggerhub.com/apis/buildingSMART/BCF/4.0#/translucency_setup_hints)
 
-| parameter                    |type|description| required               |
-|------------------------------|----|-----------|------------------------|
-| spaces_translucent           | boolean | Translucency of spaces | optional, default true |
+| parameter                    | type    | description                      | required               |
+| ---------------------------- | ------- | -------------------------------- | ---------------------- |
+| spaces_translucent           | boolean | Translucency of spaces           | optional, default true |
 | space_boundaries_translucent | boolean | Translucency of space_boundaries | optional, default true |
-| openings_translucent         | boolean | Translucency of openings | optional, default true |
-
+| openings_translucent         | boolean | Translucency of openings         | optional, default true |
 
 #### 3.5.2.16 Topic File Ids
 
@@ -1631,6 +1655,7 @@ Viewpoints are immutable, while topics may be changed later. To ensure that view
     }
 
 #### 3.5.2.17 Marker
+
 A marker is a way to pinpoint a location in the 3D model. Each vendor can decide how these markers should be rendered.
 
 **Best practice**
@@ -1639,9 +1664,9 @@ Example: Red markers for open topics, and green markers for closed topics
 
 [marker.json](Schemas_draft-03/Collaboration/Viewpoint/marker.json)
 
-|parameter|type|description|required|
-|---------|----|-----------|--------|
-| location | [Point](#3521-point) | Location of the marker | mandatory |
+| parameter | type                 | description            | required  |
+| --------- | -------------------- | ---------------------- | --------- |
+| location  | [Point](#3521-point) | Location of the marker | mandatory |
 
 ### 3.5.3 GET Viewpoint Service
 
@@ -1769,6 +1794,7 @@ Retrieve a specific viewpoints bitmap image file (png or jpg).
     GET /bcf/3.0/projects/F445F4F2-4D02-4B2A-B612-5E456BEF9137/topics/B345F4F2-3A04-B43B-A713-5E456BEF8228/viewpoints/a11a82e7-e66c-34b4-ada1-5846abf39133/bitmaps/20c1cb56-315f-4a0a-922d-ed7a4a8edf55
 
 ### 3.5.6 GET selected Components Service
+
 **Resource URL**
 
     GET /bcf/{version}/projects/{project_id}/topics/{topic_guid}/viewpoints/{viewpoint_guid}/selection
@@ -1917,6 +1943,7 @@ Retrieve translucency of components in a viewpoint.
 Deletes a single viewpoint. This operation is only possible when the server returns the `delete` flag in the Viewpoint authorization, see section [3.5.10](#3510-determining-allowed-viewpoint-modifications)
 
 Note: If there is a comment associated to the viewpoint, the server might reject this request:
+
 - The server should return the http response status code 409
 - The client needs to delete or unlink this comment, before trying again.
 
@@ -2044,23 +2071,24 @@ Retrieve a **collection** of all document references to a topic.
 Add a document reference to a topic. This operation is only possible when the server returns the `updateDocumentReferences` flag in the Topic authorization, see section [3.2.8](#328-determining-allowed-topic-modifications)
 
 Should either reference an internal or an external document.
+
 - Internal
-  * **document_guid** must match an existing **document** in the project
-  * **url** must be null
+  - **document_guid** must match an existing **document** in the project
+  - **url** must be null
 - External
-  * **document_guid** must be null
-  * **url** must be the url to the external resource
+  - **document_guid** must be null
+  - **url** must be the url to the external resource
 
 **Parameters**
 
 JSON encoded body using the "application/json" content type.
 
-|Parameter|Type|Description|Required|
-|---------|----|-----------|--------|
-|guid|string|The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system.|false|
-|document_guid|string|The guid of the document (Internal document)|false|
-|url|The url (External document)|false|
-|description|string|The description of the document reference|false|
+| Parameter     | Type                        | Description                                                                                                                                                                   | Required |
+| ------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| guid          | string                      | The desired guid. See OpenCDE Foundation section [1.5.1](https://github.com/buildingSMART/foundation-API#151-conflict-on-creation) when GUID already exists in target system. | false    |
+| document_guid | string                      | The guid of the document (Internal document)                                                                                                                                  | false    |
+| url           | The url (External document) | false                                                                                                                                                                         |
+| description   | string                      | The description of the document reference                                                                                                                                     | false    |
 
 **Example Request**
 
@@ -2214,40 +2242,40 @@ Retrieve a **collection** of topic events related to a project (default sort ord
 
 **Topic event types**
 
-|type|value|
-|---------|-----------|
-|topic_created|null|
-|title_updated|The title (limit: 128 characters)|
-|description_updated|The description (limit: 1024 characters)|
-|description_removed|null|
-|status_updated|The status (value from extensions) |
-|type_updated|The type (value from extensions)|
-|priority_updated|The priority (value from extensions)|
-|priority_removed|null|
-|due_date_updated|The due date|
-|due_date_removed|null|
-|assigned_to_updated|The assigned user (value from extensions)|
-|assigned_to_removed|null|
-|label_added|The label added (value from extensions)|
-|label_removed|The label removed (value from extensions)|
-|stage_added|The stage was added (value from extensions)| 
-|stage_updated|The stage was updated (value from extensions)| 
-|stage_removed|The stage was removed (value from extensions)| 
+| type                | value                                         |
+| ------------------- | --------------------------------------------- |
+| topic_created       | null                                          |
+| title_updated       | The title (limit: 128 characters)             |
+| description_updated | The description (limit: 1024 characters)      |
+| description_removed | null                                          |
+| status_updated      | The status (value from extensions)            |
+| type_updated        | The type (value from extensions)              |
+| priority_updated    | The priority (value from extensions)          |
+| priority_removed    | null                                          |
+| due_date_updated    | The due date                                  |
+| due_date_removed    | null                                          |
+| assigned_to_updated | The assigned user (value from extensions)     |
+| assigned_to_removed | null                                          |
+| label_added         | The label added (value from extensions)       |
+| label_removed       | The label removed (value from extensions)     |
+| stage_added         | The stage was added (value from extensions)   |
+| stage_updated       | The stage was updated (value from extensions) |
+| stage_removed       | The stage was removed (value from extensions) |
 
 **Odata filter parameters**
 
-|parameter|type|description|
-|---------|----|-----------|
-|topic_guid|string|guid of the topic |
-|author|string|userId of the author (value from extensions)|
-|type|string|type of the event (value from Topic event types, table above)|
-|date|datetime|date of the event|
+| parameter  | type     | description                                                   |
+| ---------- | -------- | ------------------------------------------------------------- |
+| topic_guid | string   | guid of the topic                                             |
+| author     | string   | userId of the author (value from extensions)                  |
+| type       | string   | type of the event (value from Topic event types, table above) |
+| date       | datetime | date of the event                                             |
 
 **Odata sort parameters**
 
-|parameter|description|
-|---------|-----------|
-|date|date of the event|
+| parameter | description       |
+| --------- | ----------------- |
+| date      | date of the event |
 
 **Example Request with odata**
 
@@ -2315,39 +2343,39 @@ Retrieve a **collection** of topic events related to a project (default sort ord
 
 **Topic event types**
 
-|type|value|
-|---------|-----------|
-|topic_created|null|
-|title_updated|The title (limit: 128 characters)|
-|description_updated|The description (limit: 1024 characters)|
-|description_removed|null|
-|status_updated|The status (value from extensions) |
-|type_updated|The type (value from extensions)|
-|priority_updated|The priority (value from extensions)|
-|priority_removed|null|
-|due_date_updated|The due date|
-|due_date_removed|null|
-|assigned_to_updated|The assigned user (value from extensions)|
-|assigned_to_removed|null|
-|label_added|The label added (value from extensions)|
-|label_removed|The label removed (value from extensions)|
-|stage_added|The stage was added (value from extensions)| 
-|stage_updated|The stage was updated (value from extensions)| 
-|stage_removed|The stage was removed (value from extensions)| 
+| type                | value                                         |
+| ------------------- | --------------------------------------------- |
+| topic_created       | null                                          |
+| title_updated       | The title (limit: 128 characters)             |
+| description_updated | The description (limit: 1024 characters)      |
+| description_removed | null                                          |
+| status_updated      | The status (value from extensions)            |
+| type_updated        | The type (value from extensions)              |
+| priority_updated    | The priority (value from extensions)          |
+| priority_removed    | null                                          |
+| due_date_updated    | The due date                                  |
+| due_date_removed    | null                                          |
+| assigned_to_updated | The assigned user (value from extensions)     |
+| assigned_to_removed | null                                          |
+| label_added         | The label added (value from extensions)       |
+| label_removed       | The label removed (value from extensions)     |
+| stage_added         | The stage was added (value from extensions)   |
+| stage_updated       | The stage was updated (value from extensions) |
+| stage_removed       | The stage was removed (value from extensions) |
 
 **Odata filter parameters**
 
-|parameter|type|description|
-|---------|----|-----------|
-|author|string|userId of the author (value from extensions)|
-|type|string|type of the event (value from Topic event types, table above)|
-|date|datetime|date of the event|
+| parameter | type     | description                                                   |
+| --------- | -------- | ------------------------------------------------------------- |
+| author    | string   | userId of the author (value from extensions)                  |
+| type      | string   | type of the event (value from Topic event types, table above) |
+| date      | datetime | date of the event                                             |
 
 **Odata sort parameters**
 
-|parameter|description|
-|---------|-----------|
-|date|date of the event|
+| parameter | description       |
+| --------- | ----------------- |
+| date      | date of the event |
 
 **Example Request with odata**
 
@@ -2422,28 +2450,28 @@ Retrieve a **collection** of comment events related to a project (default sort o
 
 **Comment event types**
 
-|type|value|
-|---------|-----------|
-|comment_created|null|
-|comment_text_updated|The comment text(limit: 1024 characters)|
-|viewpoint_updated|The viewpoint guid|
-|viewpoint_removed|null|
+| type                 | value                                    |
+| -------------------- | ---------------------------------------- |
+| comment_created      | null                                     |
+| comment_text_updated | The comment text(limit: 1024 characters) |
+| viewpoint_updated    | The viewpoint guid                       |
+| viewpoint_removed    | null                                     |
 
 **Odata filter parameters**
 
-|parameter|type|description|
-|---------|----|-----------|
-|comment_guid|string|guid of the comment |
-|topic_guid|string|guid of the topic |
-|author|string|userId of the author (value from extensions)|
-|date|datetime|date of the event|
-|type|string|type of the event (value from Comment event types, table above)|
+| parameter    | type     | description                                                     |
+| ------------ | -------- | --------------------------------------------------------------- |
+| comment_guid | string   | guid of the comment                                             |
+| topic_guid   | string   | guid of the topic                                               |
+| author       | string   | userId of the author (value from extensions)                    |
+| date         | datetime | date of the event                                               |
+| type         | string   | type of the event (value from Comment event types, table above) |
 
 **Odata sort parameters**
 
-|parameter|description|
-|---------|-----------|
-|date|date of the event|
+| parameter | description       |
+| --------- | ----------------- |
+| date      | date of the event |
 
 **Example Request with odata**
 
@@ -2503,26 +2531,26 @@ Retrieve a **collection** of comment events related to a single comment (default
 
 **Comment event types**
 
-|type|value|
-|---------|-----------|
-|comment_created|null|
-|comment_text_updated|The comment text(limit: 1024 characters)|
-|viewpoint_updated|The viewpoint guid|
-|viewpoint_removed|null|
+| type                 | value                                    |
+| -------------------- | ---------------------------------------- |
+| comment_created      | null                                     |
+| comment_text_updated | The comment text(limit: 1024 characters) |
+| viewpoint_updated    | The viewpoint guid                       |
+| viewpoint_removed    | null                                     |
 
 **Odata filter parameters**
 
-|parameter|type|description|
-|---------|----|-----------|
-|author|string|userId of the author (value from extensions)|
-|date|datetime|date of the event|
-|type|string|type of the event (value from Comment event types, table above)|
+| parameter | type     | description                                                     |
+| --------- | -------- | --------------------------------------------------------------- |
+| author    | string   | userId of the author (value from extensions)                    |
+| date      | datetime | date of the event                                               |
+| type      | string   | type of the event (value from Comment event types, table above) |
 
 **Odata sort parameters**
 
-|parameter|description|
-|---------|-----------|
-|date|date of the event|
+| parameter | description       |
+| --------- | ----------------- |
+| date      | date of the event |
 
 **Example Request with odata**
 
