@@ -142,7 +142,7 @@ Implementers should start by implementing the Foundation API and only then conti
 
 ### 1.1.1 Paging, Sorting and Filtering
 
-Responses in the BCF API that return lists can be paged, sorted and filtered according to the Foundation API: https://github.com/buildingSMART/foundation-API?tab=readme-ov-file#11-paging-sorting-and-filtering
+Resources in the BCF API that return lists can be paged, sorted and filtered according to the Foundation API: https://github.com/buildingSMART/foundation-API?tab=readme-ov-file#11-paging-sorting-and-filtering
 
 ## 1.2 Authorization
 
