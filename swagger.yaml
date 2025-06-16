@@ -1520,7 +1520,7 @@ paths:
     get:
       summary: Get Topic Events
       description: |
-        Retrieve a collection of topic events related to a project (default sort order is date).
+        Retrieve a collection of events related to a topic (default sort order is date).
       parameters:
         - in: query
           name: $filter
